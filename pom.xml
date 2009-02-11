@@ -18,15 +18,6 @@ This project concerns K-MADe (Kernel of Model for Activity Description environme
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<configuration>
-					<username>baronm</username>
-					<password>!baron!</password>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>1.5</source>
@@ -123,4 +114,16 @@ This project concerns K-MADe (Kernel of Model for Activity Description environme
 		<developerConnection>scm:svn:http://lisi-oracle/svn/KMADe/trunk</developerConnection>
 		<url>http://lisi-oracle/svn/KMADe</url>
 	</scm>
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>Internal Releases</name>
+			<url>http://lisi-oracle:8080/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Internal Snapshots</name>
+			<url>http://lisi-oracle:8080/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
