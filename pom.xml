@@ -98,7 +98,7 @@ This project concerns K-MADe (Kernel of Model for Activity Description environme
 	</dependencies>
 	<ciManagement>
 		<system>Hudson</system>
-		<url>http://lisi-oracle:8080/hudson</url>
+		<url>http://s-lisi-locforge.w.ensma.fr:8080/hudson</url>
 	</ciManagement>
 	<developers>
 		<developer>
@@ -110,20 +110,20 @@ This project concerns K-MADe (Kernel of Model for Activity Description environme
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:http://lisi-oracle/svn/KMADe/trunk</connection>
-		<developerConnection>scm:svn:http://lisi-oracle/svn/KMADe/trunk</developerConnection>
-		<url>http://lisi-oracle/svn/KMADe</url>
+		<connection>scm:svn:http://s-lisi-locforge.w.ensma.fr/svn/KMADe/trunk</connection>
+		<developerConnection>scm:svn:http://s-lisi-locforge.w.ensma.fr/svn/KMADe/trunk</developerConnection>
+		<url>http://s-lisi-locforge.w.ensma.fr/svn/KMADe</url>
 	</scm>
 	<distributionManagement>
 		<repository>
 			<id>releases</id>
 			<name>Internal Releases</name>
-			<url>http://lisi-oracle:8080/nexus/content/repositories/releases</url>
+			<url>http://s-lisi-locforge.w.ensma.fr:8080/nexus/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>Internal Snapshots</name>
-			<url>http://lisi-oracle:8080/nexus/content/repositories/snapshots</url>
+			<url>http://s-lisi-locforge.w.ensma.fr:8080/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
