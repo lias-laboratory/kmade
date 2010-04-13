@@ -98,7 +98,7 @@ This project concerns K-MADe (Kernel of Model for Activity Description environme
 	</dependencies>
 	<ciManagement>
 		<system>Hudson</system>
-		<url>http://s-lisi-locforge.w.ensma.fr:8080/hudson</url>
+		<url>http://s-lisi-locforge.w.ensma.fr:8080/hudson/job/KMADe/</url>
 	</ciManagement>
 	<developers>
 		<developer>
