@@ -10,8 +10,9 @@ import kmade.kmade.KMADEConstant;
 import kmade.nmda.schema.expression.ExpressionConstant;
 import kmade.nmda.schema.expression.UserBoolean;
 import kmade.nmda.schema.expression.UserExpression;
-import kmade.nmda.schema.expression.UserInteger;
+import kmade.nmda.schema.expression.UserNumber;
 import kmade.nmda.schema.expression.UserString;
+import kmade.nmda.schema.metaobjet.NumberValue;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -32,7 +33,7 @@ import kmade.nmda.schema.expression.UserString;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEUserExpressionField extends JTextField {
     private static final long serialVersionUID = -7138413572029624691L;
@@ -85,9 +86,9 @@ public class KMADEUserExpressionField extends JTextField {
             myUserExpression.setNodeValue(Boolean.valueOf(myText));
         } else if (myUserExpression instanceof UserString) {
             myUserExpression.setNodeValue(myText);
-        } else if (myUserExpression instanceof UserInteger) {
+        } else if (myUserExpression instanceof UserNumber) {
             try {
-                myUserExpression.setNodeValue(new Integer(myText));
+                myUserExpression.setNodeValue(new NumberValue(myText));
             } catch (NumberFormatException nfe) {
                 System.out.println(KMADEConstant.STRING_TO_INTEGER + " : " + myText);
                 myUserExpression.setStateToError();

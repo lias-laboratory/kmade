@@ -51,7 +51,7 @@ import org.jgraph.graph.DefaultGraphModel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEPreviewPanel extends JPanel implements GraphLayoutCacheListener, GraphModelListener, PropertyChangeListener, AdjustmentListener {
 
@@ -69,9 +69,9 @@ public class KMADEPreviewPanel extends JPanel implements GraphLayoutCacheListene
 
 	protected static final Cursor CLASSIQUE = new Cursor(12);
 
-	private final JGraph overviewGraph = new JGraph();
+	private final KMADEGraph overviewGraph = new KMADEGraph();
 
-	private JGraph currentGraph;
+	private KMADEGraph currentGraph;
 
 	public KMADEPreviewPanel() {
 		super(new BorderLayout());
@@ -97,7 +97,7 @@ public class KMADEPreviewPanel extends JPanel implements GraphLayoutCacheListene
 		addComponentListener(componentListener);
 	}
 
-	public JGraph getOverviewGraph() {
+	public KMADEGraph getOverviewGraph() {
 		return overviewGraph;
 	}
 
@@ -105,7 +105,7 @@ public class KMADEPreviewPanel extends JPanel implements GraphLayoutCacheListene
 		overviewGraph.setModel(pModel);
 	}
 
-	public void setOverviewGraph(JGraph jgraph) {
+	public void setOverviewGraph(KMADEGraph jgraph) {
 		this.currentGraph = jgraph;
 		if (jgraph != null) {
 			jgraph.getModel().addGraphModelListener(this);
@@ -142,7 +142,7 @@ public class KMADEPreviewPanel extends JPanel implements GraphLayoutCacheListene
 		SwingUtilities.invokeLater(new Runnable() {
 
 			public void run() {
-				JGraph jgraph = currentGraph;
+				KMADEGraph jgraph = currentGraph;
 				if (jgraph != null) {
 					Dimension dimension = jgraph.getPreferredSize();
 					Dimension dimension1 = jgraph.getBounds().getSize();

@@ -2,6 +2,7 @@ package kmade.nmda.schema.expression;
 
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.schema.metaobjet.AttributConcret;
+import kmade.nmda.schema.metaobjet.NumberValue;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
 
 /**
@@ -23,40 +24,54 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class Assignment extends AssignmentOperator {
- 
-    private static final long serialVersionUID = 4204749580312652874L;
 
-    public Assignment(AttributExpressExpression left) {
-        super(false,left);
-        this.name = ExpressConstant.ASSIGNMENT_EXPRESSION;
-    }   
-    
-    
-    public void checkNode() throws SemanticException {
-        super.checkNode();        
-        
+	private static final long serialVersionUID = 4204749580312652874L;
+
+	public Assignment(AttributExpressExpression left) {
+		super(false,left);
+		this.name = ExpressConstant.ASSIGNMENT_EXPRESSION;
+	}   
+
+
+	public void checkNode() throws SemanticException {
+		super.checkNode();        
+
+
+
+
+		if (getLeftNode().isString() && getRightNode().isString()) {
+			this.setNodeValue("");
+			this.setStateToUnknown();
+			return;
+		} 
+
+		if (getLeftNode().isBoolean() && getRightNode().isBoolean()) {                          
+			this.setNodeValue(false);
+			this.setStateToUnknown();
+			return;
+		}
+		if (getLeftNode().isNumber() && getRightNode().isNumber()) {                          
+			this.setNodeValue(new NumberValue()); 
+			this.setStateToUnknown();
+			return;
+		}       
+
+		// L'ensemble des if commentés correspond à  des cast que l'on ne souhaite plus
+		/*
         if (getLeftNode().isString() && getRightNode().isBoolean()) {
             this.setNodeValue("");
             this.setStateToUnknown();
             return;
         }
-        
-        if (getLeftNode().isString() && getRightNode().isString()) {
-            this.setNodeValue("");
-            this.setStateToUnknown();
-            return;
-        }       
-        
-        if (getLeftNode().isString() && getRightNode().isInteger()) {
+        if (getLeftNode().isString() && getRightNode().isNumber()) {
             this.setNodeValue("");
             this.setStateToUnknown();
             return;
         }
-
-        if (getLeftNode().isBoolean() && getRightNode().isString()) {
+       if (getLeftNode().isBoolean() && getRightNode().isString()) {
             try {
                 new Boolean((String)getRightNode().getNodeValue()).booleanValue();
                 this.setNodeValue(false);
@@ -68,65 +83,56 @@ public class Assignment extends AssignmentOperator {
                 throw new SemanticException();
             }
         }
-
-        if (getLeftNode().isBoolean() && getRightNode().isBoolean()) {                          
-            this.setNodeValue(false);
-            this.setStateToUnknown();
-            return;
-        }       
-        
-        if (getLeftNode().isBoolean() && getRightNode().isInteger()) {                          
+        if (getLeftNode().isBoolean() && getRightNode().isNumber()) {                          
             this.setNodeValue(false); 
             this.setStateToUnknown();
             return;
-        }       
-
-        if (getLeftNode().isInteger() && getRightNode().isString()) {
-            try {
-                new Integer((String)getRightNode().getNodeValue());
-                this.setNodeValue(0);
-                this.setStateToUnknown();
-                return;
-            }
-            catch (NumberFormatException e) {
-                this.setStateToError();
-                throw new SemanticException();
-            }
-        }       
-
-        if (getLeftNode().isInteger() && getRightNode().isBoolean()) {                          
-            this.setNodeValue(new Integer(0)); 
+        //Si on a un nombre et une chaÃ®ne de caractÃ¨res, on essaye de construire un NumberValue avec la chaÃ®ne
+        //L'utilisateur ne pourra pas rentrer de nombre avec ?STR
+        if (getLeftNode().isNumber() && getRightNode().isString()) {
+        	try {
+        		new NumberValue((String)getRightNode().getNodeValue());
+        		this.setNodeValue(0);
+        		this.setStateToUnknown();
+        		return;
+        	}
+        	catch (NumberFormatException e) {
+        			this.setStateToError();
+        			throw new SemanticException();
+        		}
+        	}
+        if (getLeftNode().isNumber() && getRightNode().isBoolean()) {                          
+            this.setNodeValue(new NumberValue()); 
             this.setStateToUnknown();
             return;
         }       
-  
+		 */
 
-        if (getLeftNode().isInteger() && getRightNode().isInteger()) {                          
-            this.setNodeValue(new Integer(0)); 
-            this.setStateToUnknown();
-            return;
-        }       
-        
-        this.setStateToError();
-        throw new SemanticException();
-    }
-    
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-        super.evaluateNode(ref);
-        
+
+		this.setStateToError();
+		throw new SemanticException(ExpressConstant.TYPAGE_ERROR);
+	}
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+
 		if (this.isErrorState()) {
 			throw new SemanticErrorException();
-    		}
-    
-    		if (this.isUnknownState()) {
+		}
+
+		if (this.isUnknownState()) {
 			throw new SemanticUnknownException();
 		}
-        
-        AttributConcret refConcret = ref.getAttribut(((AttributExpressExpression)this.leftNode).getAbstractAttribut());
-        boolean error = refConcret.setValeur(this.rightNode.getNodeValue().toString());
-        if (error) {      
-            this.setStateToError();
-            throw new SemanticErrorException();
-        }
-    }
+		// dans certains cas un java null pointer exception peut être lever ce qui correspond à une semanticunknownException
+		try{
+			AttributConcret refConcret = ref.getAttribut(((AttributExpressExpression)this.leftNode).getAbstractAttribut());
+			boolean error = refConcret.setValeur(this.rightNode.getNodeValue().toString());
+			if (error) {      
+				this.setStateToError();
+				throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
+			}
+		}catch( Exception e){
+			throw new SemanticUnknownException();
+		}
+	}
 }

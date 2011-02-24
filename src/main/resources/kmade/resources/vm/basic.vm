@@ -1,28 +1,32 @@
-<h1>G&eacute;n&eacute;rales</h1>
-Num&eacute;ro : ${NUM}<br>
-Nom : ${NAME}<br>
-Sous-taches : ${SUBTASKS}<br>
-Dur&eacute;e : ${DURATION}<br>
-But : ${PURPOSE}<br>
-Multim&eacute;dia : ${MEDIA}<br>
-Libell&eacute; : ${LABEL}<br>
-Affichage : ${DISPLAY}<br>
-Observation : ${OBSERVATION}<br>
-Ex&eacute;cutant : ${EXECUTANT}<br>
-Modalit&eacute; : ${MODALITY}<br>
-Fr&eacute;quence : ${FREQUENCY}<br>
-Valeur Fr&eacute;quence : ${FREQUENCYVALUE}<br>
-Importance : ${IMPORTANCE}<br>
+<h1>${GENERAL_TITLE}</h1>
+${NUM_TITLE} : ${NUM}<br>
+${SUBTASK_TITLE} : ${SUBTASKS}<br>
+${NAME_TITLE} : ${NAME}<br>
+${LABEL_TITLE} : ${LABEL}<br>
+${EXECUTANT_TITLE} : ${EXECUTANT}<br>
+${MODALITY_TITLE} : ${MODALITY}<br>
+${FREQUENCY_TITLE} : ${FREQUENCY}<br>
+${FREQUENCYVALUE_TITLE} : ${FREQUENCYVALUE}<br>
+${IMPORTANCE_TITLE} : ${IMPORTANCE}<br>
+${DURATION_TITLE} : ${DURATION}<br>
+${PURPOSE_TITLE} : ${PURPOSE}<br>
+${DISPLAY_TITLE} : ${DISPLAY}<br>
+${OBSERVATION_TITLE} : ${OBSERVATION}<br>
+${MEDIA_TITLE} : ${MEDIA}<br>
 
-<h1>Ordonnancement</h1>
-N&eacute;cessit&eacute; : Optionnelle <input name="necessiy" type="radio" #if (${OPTIONAL} == true) checked #end > Obligatoire <input name="necessiy" type="radio" #if (${OPTIONAL} == false) checked #end ><br>
-Interruptible : Interruptible <input name="interruptible" type="radio" #if (${INTERRUPTIBLE} == true) checked #end > Non Interruptible <input name="interruptible" type="radio" #if (${INTERRUPTIBLE} == false) checked #end ><br>
-D&eacute;clenchement : ${EVENTTRIGGER}<br>
-D&eacute;composition : ${DECOMPOSITION}<br>
-Acteur(s) : ${ACTORS}<br>
-Pr&eacute;condition : ${PRECONDITION}<br>
-It&eacute;ration : ${ITERATION}<br>
 
-<h1>Actions</h1>
-Ev&eacute;nement : ${GENERATEDEVENTS}<br>
-Postcondition : ${POSTCONDITION}
+
+
+<h1>${ORDO_TITLE}</h1>
+${NECESSITE_TITLE} : ${OPTIONAL}<br>
+${INTERRUPTIBLE_TITLE} : ${INTERRUPTIBLE}<br>
+${DECLENCHEMENT_TITLE} : ${EVENTTRIGGER}<br>
+${SCHEDULE_TITLE} : ${DECOMPOSITION}<br>
+${UTILISATEUR_TITLE} : ${ACTORS}<br>
+${SYSTEM_USER_TITLE} : ${ACTORSYSTEM}<br>
+${PRECONDITION_TITLE} : ${PRECONDITION}<br>
+${ITERATION_TITLE}: ${ITERATION}<br>
+
+<h1>${POSTCONDITION__TITLE}</h1>
+${EFFETSDEBORD_TITLE} : ${EFFETSDEBORD}<br>
+${EVENT_TITLE} : ${GENERATEDEVENTS}<br>

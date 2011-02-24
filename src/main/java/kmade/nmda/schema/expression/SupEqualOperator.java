@@ -1,5 +1,6 @@
 package kmade.nmda.schema.expression;
 
+import kmade.nmda.schema.metaobjet.NumberValue;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
 
 /**
@@ -21,7 +22,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class SupEqualOperator extends RelationalOperator {
 
@@ -32,9 +33,8 @@ public class SupEqualOperator extends RelationalOperator {
         this.name = ">=";
     }
     
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {    
+    public void evaluateNode(ObjetConcret ref) throws SemanticException { 
 		super.evaluateNode(ref);
-
 		if (this.isErrorState()) {
 			throw new SemanticErrorException();
 		}
@@ -43,26 +43,26 @@ public class SupEqualOperator extends RelationalOperator {
 			throw new SemanticUnknownException();
 		}
         
-        if (getLeftNode().isInteger() && getRightNode().isString()) {
-            this.setNodeValue(new Boolean(((Integer)getLeftNode().getNodeValue()).intValue() >= (new Integer((String)getRightNode().getNodeValue())).intValue()));
-            return;
-        }
-        
-        if (getLeftNode().isString() && getRightNode().isInteger()) {
-            this.setNodeValue(new Boolean(((new Integer((String)getLeftNode().getNodeValue())).intValue()) >= (((Integer)getRightNode().getNodeValue()).intValue())));
-            return;
-        }
-        
-        // �galement � prendre en compte : Comparaison entre deux string � valeurs enti�res ou double
-        if (getLeftNode().isString() && getRightNode().isString()) {
-            this.setNodeValue(new Boolean(((new Integer((String)getLeftNode().getNodeValue())).intValue()) >= ((new Integer((String)getRightNode().getNodeValue())).intValue())));
-            return;
-        }                    
-        
-        if (getLeftNode().isInteger() && getRightNode().isInteger()) {
-            this.setNodeValue(new Boolean(((Integer)getLeftNode().getNodeValue()).intValue() >= ((Integer)getRightNode().getNodeValue()).intValue()));
-            return;
-        }
+		if (getLeftNode().isNumber() && getRightNode().isString()) {
+			this.setNodeValue(new Boolean(((NumberValue)getLeftNode().getNodeValue()).supEqualOperator( (new NumberValue((String)getRightNode().getNodeValue())))));
+			return;
+		}
+
+		if (getLeftNode().isString() && getRightNode().isNumber()) {
+			this.setNodeValue(new Boolean(((new NumberValue((String)getLeftNode().getNodeValue())).supEqualOperator(((NumberValue)getRightNode().getNodeValue())))));
+			return;
+		}
+
+		// uniquement ordre lexicographique
+		if (getLeftNode().isString() && getRightNode().isString()) {
+			this.setNodeValue(new Boolean( ((String)getLeftNode().getNodeValue()).toLowerCase().compareTo(((String)getRightNode().getNodeValue()).toLowerCase()) >= 0  ) );
+			return;
+		}                    
+
+		if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+			this.setNodeValue(new Boolean(((NumberValue)getLeftNode().getNodeValue()).supEqualOperator((NumberValue)getRightNode().getNodeValue())));
+			return;
+		}
     }    
     
     public String toString() {

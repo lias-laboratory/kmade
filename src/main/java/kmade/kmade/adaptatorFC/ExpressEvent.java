@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.Oid;
+import kmade.nmda.schema.tache.CurrentEvents.CurrentEvent;
 import kmade.nmda.schema.tache.Evenement;
 import kmade.nmda.schema.tache.Tache;
-import kmade.nmda.schema.tache.CurrentEvents.CurrentEvent;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -27,7 +27,7 @@ import kmade.nmda.schema.tache.CurrentEvents.CurrentEvent;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class ExpressEvent {
     public static String createEvent() {

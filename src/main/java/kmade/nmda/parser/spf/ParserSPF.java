@@ -26,7 +26,7 @@ import java.util.List;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class ParserSPF {
     private static final char[] lettre = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
@@ -44,13 +44,13 @@ public final class ParserSPF {
 	 * @return
 	 * @throws IOException
 	 */
-	public ArrayList<List> readSPFFile(File file) throws Exception {
+	public ArrayList<List<?>> readSPFFile(File file) throws Exception {
 		FileReader in = new FileReader(file);        
 		BufferedReader lecture = new BufferedReader(in);
 
 		String ligne = "";
 
-		ArrayList<List> arrayList = new ArrayList<List>();
+		ArrayList<List<?>> arrayList = new ArrayList<List<?>>();
 
 		while (ligne != null) {
 			if (ligne.length() > 0) {

@@ -24,11 +24,13 @@ import kmade.nmda.schema.Oid;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public abstract class TypeAbs implements Entity {
 
-    public Oid oid = null;
+	private static final long serialVersionUID = -1691961187731708342L;
+
+	public Oid oid = null;
 
     protected String name = null;
 
@@ -46,7 +48,7 @@ public abstract class TypeAbs implements Entity {
         inverseAttributAbs.remove(attributabs);
     }
 
-    public ArrayList getInverseAttributAbs() {
+    public ArrayList<AttributAbstrait> getInverseAttributAbs() {
         return this.inverseAttributAbs;
     }
 

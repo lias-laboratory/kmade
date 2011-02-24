@@ -31,7 +31,7 @@
 			<outputDirectory>lib</outputDirectory>
 			<excludes>
 				<exclude>
-					KMADe:KMADe
+					KMADe_ExtUI:KMADe_ExtUI
 				</exclude>
 			</excludes>
 		</dependencySet>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.metaobjet.EnsembleAg;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
+import kmade.nmda.schema.metaobjet.TableauAg;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -25,7 +26,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class SetFunction extends BinaryFunction implements ConcreteObjectType {
 
@@ -41,6 +42,10 @@ public class SetFunction extends BinaryFunction implements ConcreteObjectType {
     // V�rifie si le groupe a un type set
     public boolean isGroupSetType() {
         return (((GroupExpressExpression)this.leftNode).getGroup().getEnsemble() instanceof EnsembleAg);
+    }
+    
+    public boolean isGroupArrayType() {
+        return (((GroupExpressExpression)this.leftNode).getGroup().getEnsemble() instanceof TableauAg);
     }
     
     // R�cup�re la liste compl�te des objets concrets
@@ -86,9 +91,11 @@ public class SetFunction extends BinaryFunction implements ConcreteObjectType {
     }
     
     public void evaluateNode(ObjetConcret ref) throws SemanticException {
-        if (!this.isGroupSetType()) {
+
+    	if (!this.isGroupSetType()&& !this.isGroupArrayType()) {
             refUserObjetConcret = this.getConcreteObject();
         }
+    	
         super.evaluateNode(refUserObjetConcret);
         if (this.isValueState()) {
             InterfaceExpressJava.appendHistoryMessage(this.name);

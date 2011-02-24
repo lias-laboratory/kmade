@@ -31,7 +31,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEReadConcreteObjectTable extends JScrollPane {
 
@@ -100,7 +100,7 @@ public class KMADEReadConcreteObjectTable extends JScrollPane {
                 return children;
             }
 
-            ArrayList listChildren = null;
+            ArrayList<?> listChildren = null;
 
             if (myEntity instanceof CurrentAbstractObjectDataBase) {
                 listChildren = ((CurrentAbstractObjectDataBase) myEntity).getAbstractObjects();
@@ -132,7 +132,7 @@ public class KMADEReadConcreteObjectTable extends JScrollPane {
     static class ReadConcreteTreeTableModel extends AbstractTreeTableModel implements TreeTableModel {
         protected String[] cNames = { "Nom", "Type", "Valeur" };
 
-        protected Class[] cTypes = { TreeTableModel.class, String.class, String.class };
+        protected Class<?>[] cTypes = { TreeTableModel.class, String.class, String.class };
 
         protected Object[] getChildren(Object node) {
             NodeObject fileNode = ((NodeObject) node);
@@ -147,7 +147,7 @@ public class KMADEReadConcreteObjectTable extends JScrollPane {
             return cNames[column];
         }
 
-        public Class getColumnClass(int column) {
+        public Class<?> getColumnClass(int column) {
             return cTypes[column];
         }
 

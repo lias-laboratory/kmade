@@ -1,11 +1,8 @@
 package kmade.kmade.adaptatorUI;
 
-import java.util.ArrayList;
-
 import kmade.kmade.UI.KMADEMainFrame;
 import kmade.kmade.UI.taskproperties.readworldobject.KMADEReadUserObjectTable;
 import kmade.kmade.adaptatorFC.ExpressUser;
-import kmade.nmda.schema.tache.User;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -26,17 +23,28 @@ import kmade.nmda.schema.tache.User;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
+
 public final class UserAdaptator {
 	private static final KMADEReadUserObjectTable userPanel = new KMADEReadUserObjectTable();
-    
+   
 	public static String addUser() {
 		return ExpressUser.createUser();
 	}
 
     public static String[] getUsersName() {
         return ExpressUser.getUsersName();
+    }
+    
+    /**
+     * Retourne la liste des noms des acteurs potentiels de la tâche qui ne sont pas déjà acteur de la tâche
+     * @param oidtask
+     * @param oidTask 
+     * @return
+     */
+    public static String[] getUsersNoActorName( String oidTask){
+    	return ExpressUser.getUsersNoActorName(oidTask);
     }
     
 	public static void removeUser(String oid) {
@@ -47,9 +55,9 @@ public final class UserAdaptator {
         ExpressUser.affRemoveUser(oid);
 	}
 
-	public static void removeAllUser() {
-		KMADEMainFrame.getProjectPanel().tableUtil().removeAllUser();
-	}
+	//public static void removeAllUser() {
+	//	KMADEMainFrame.getProjectPanel().tableUtil().removeAllUser();
+	//}
 
 	public static String setUserName(String oid, String name) {
 		return ExpressUser.setUserName(oid, name);
@@ -70,25 +78,38 @@ public final class UserAdaptator {
     }
     
     public static void refreshReadUserTable() {
-		Object[][] temp = new Object[KMADEMainFrame.getProjectPanel().tableUtil().getModel().getRowCount() -1][5];
-		for (int i = 0 ; i < KMADEMainFrame.getProjectPanel().tableUtil().getModel().getRowCount() - 1; i++) {
-			temp[i][0] = KMADEMainFrame.getProjectPanel().tableUtil().getModel().getValueAt(i,0);
-			temp[i][1] = KMADEMainFrame.getProjectPanel().tableUtil().getModel().getValueAt(i,1);
-			temp[i][2] = KMADEMainFrame.getProjectPanel().tableUtil().getModel().getValueAt(i,2);
-			temp[i][3] = KMADEMainFrame.getProjectPanel().tableUtil().getModel().getValueAt(i,3);
-			temp[i][4] = KMADEMainFrame.getProjectPanel().tableUtil().getModel().getValueAt(i,4);
+    	int temporg = KMADEMainFrame.getProjectPanel().getOrganisationPanel().getOrganizationObjectTable().getModel().getRowCount() -1;
+    	int tempind = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel().getRowCount() -1;
+    	
+		Object[][] temp = new Object[temporg+tempind][6];
+		for (int i = 0 ; i < temporg; i++) {
+			temp[i][0] = KMADEMainFrame.getProjectPanel().getOrganisationPanel().getOrganizationObjectTable().getModel().getValueAt(i,0);
+			temp[i][1] = KMADEMainFrame.getProjectPanel().getOrganisationPanel().getOrganizationObjectTable().getModel().getValueAt(i,1);
+			temp[i][2] = KMADEMainFrame.getProjectPanel().getOrganisationPanel().getOrganizationObjectTable().getModel().getValueAt(i,2);
+			temp[i][3] = KMADEMainFrame.getProjectPanel().getOrganisationPanel().getOrganizationObjectTable().getModel().getValueAt(i,3);
+			temp[i][4] = KMADEMainFrame.getProjectPanel().getOrganisationPanel().getOrganizationObjectTable().getModel().getValueAt(i,4);
+			temp[i][5] = KMADEMainFrame.getProjectPanel().getOrganisationPanel().getOrganizationObjectTable().getModel().getValueAt(i,5);
+		}
+		for(int i = temporg; i < temporg+tempind; i++){
+			temp[i][0] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel().getValueAt(i-temporg,0);
+			temp[i][1] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel().getValueAt(i-temporg,1);
+			temp[i][2] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel().getValueAt(i-temporg,2);
+			temp[i][3] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel().getValueAt(i-temporg,3);
+			temp[i][4] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel().getValueAt(i-temporg,4);
+			temp[i][5] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel().getValueAt(i-temporg,5);
 		}
         userPanel.setData(temp);
     }
     
-    public static void updateUserView() {
+    /*public static void updateUserView() {
         ArrayList<User> myList = ExpressUser.getUsers();
         for (int i = 0; i < myList.size(); i++) {
             KMADEMainFrame.getProjectPanel().tableUtil().addUser(myList.get(i).getName(), myList.get(i).getStatut(), myList.get(i).getRole(), myList.get(i).getImage(), myList.get(i).getOid().get());
         }        
-    }
+    }*/
 
     public static KMADEReadUserObjectTable getUserPanel() {
         return userPanel;
     }
+
 }

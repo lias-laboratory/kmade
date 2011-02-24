@@ -30,7 +30,7 @@ import org.jgraph.graph.GraphConstants;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADETreeLayoutAlgorithm extends KMADEGraphLayoutAlgorithm {
 	protected class PolyLine {
@@ -375,6 +375,7 @@ public class KMADETreeLayoutAlgorithm extends KMADEGraphLayoutAlgorithm {
 				layout(treenode1);
 				treenode1.leftContour.dx = (treenode1.width - treenode.width) / 2;
 				treenode1.rightContour.dx = (treenode1.width - treenode.width) / 2;
+				
 				treenode.leftContour.next = treenode1.leftContour;
 				treenode.rightContour.next = treenode1.rightContour;
 			} else {

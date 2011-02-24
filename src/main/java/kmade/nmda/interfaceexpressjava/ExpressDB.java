@@ -27,7 +27,7 @@ import kmade.nmda.schema.Oid;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @authors Vincent Lucquiaud and Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @authors Vincent Lucquiaud and Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class ExpressDB extends TreeMap<Oid, Object> implements Serializable {
 
@@ -105,8 +105,8 @@ public class ExpressDB extends TreeMap<Oid, Object> implements Serializable {
     }
 	
 	public void out() {
-		Set set = this.keySet();
-		Iterator i;
+		Set<Oid> set = this.keySet();
+		Iterator<Oid> i;
 		for (i = set.iterator(); i.hasNext();) {
 			Oid oid = (Oid) i.next();
 			Object o = this.prendre(oid);

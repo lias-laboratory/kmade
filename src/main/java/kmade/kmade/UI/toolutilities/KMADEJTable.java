@@ -24,7 +24,7 @@ import kmade.kmade.KMADEConstant;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEJTable extends JTable {
 
@@ -38,6 +38,8 @@ public class KMADEJTable extends JTable {
         super(dm);
         this.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         this.setSelectionBackground(KMADEConstant.ACTIVE_SELECTION);
+        
+        this.setSelectionForeground(KMADEConstant.ACTIVE_SELECTION_FONT_COLOR);
         this.setRowHeight(KMADEConstant.ROW_HEIGHT);
         this.setRowSelectionAllowed(true);
     }

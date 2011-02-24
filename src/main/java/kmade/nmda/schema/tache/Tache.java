@@ -2,6 +2,7 @@ package kmade.nmda.schema.tache;
 
 import java.util.ArrayList;
 
+import kmade.kmade.KMADEConstant;
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.Entity;
@@ -30,7 +31,7 @@ import org.w3c.dom.NodeList;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Vincent Lucquiaud and Micka√´l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Vincent Lucquiaud and Micka√´l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class Tache implements Entity {
 
@@ -64,7 +65,7 @@ public class Tache implements Entity {
 
     private Boolean facultatif = false;
 
-    private Boolean interruptible = false; 
+    private Boolean interruptible = true; 
 
     private Decomposition decomposition;
 
@@ -78,11 +79,13 @@ public class Tache implements Entity {
     
     private PreExpression preExpression;
     
-    private PostExpression postExpression;
+    private EffetsDeBordExpression effetsDeBordExpression;
     
     private ArrayList<Evenement> lstEvent = new ArrayList<Evenement>();
     
     private ArrayList<Acteur> acteurs = new ArrayList<Acteur>();
+    
+    private ArrayList<ActeurSysteme> acteurSysteme = new ArrayList<ActeurSysteme>();
 
     private ArrayList<Tache> fils = new ArrayList<Tache>();
         
@@ -92,20 +95,20 @@ public class Tache implements Entity {
     
     private Media idMedia = null;
     
-    // Ces trois attributs sont r√©serv√©s pour la copie
+    // Ces trois attributs sont reserves pour la copie
     private Tache taskCloned = null;
     
     private Tache newTask = null;
     
     private boolean motherUsed = false;
     
-    // Cet attribut permet de retrouver plus rapidement la t√¢che graphique.
+    // Cet attribut permet de retrouver plus rapidement la ta¢che graphique.
     private Object refJTask = null;
         
     private StateSimulation stateSimulation;
     
     /**
-     * Cr√©ation d'une t√¢che avec des valeurs par d√©faut.
+     * Creation d'une tache avec des valeurs par defaut.
      */
     public Tache() {
         this.name = ExpressConstant.NEW_NAME_TASK;
@@ -121,7 +124,7 @@ public class Tache implements Entity {
         this.compFreq = "";
         this.lstEvent = new ArrayList<Evenement>();
         this.facultatif = false;
-        this.interruptible = false; 
+        this.interruptible = true; 
         this.decomposition = Decomposition.ELE;
         this.fils = new ArrayList<Tache>();
         this.mere = null;
@@ -131,9 +134,11 @@ public class Tache implements Entity {
         this.declencheur = null;
         this.label = null;
         this.preExpression = new PreExpression();
-        this.postExpression = new PostExpression();
+        this.effetsDeBordExpression = new EffetsDeBordExpression();
         this.iteExpression = new IterExpression();
         this.stateSimulation = new StateSimulation();
+        this.stateSimulation = new StateSimulation();
+        
     }
 
     /**
@@ -162,7 +167,8 @@ public class Tache implements Entity {
      * @param it
      * @param oid
      */
-    public Tache(
+    
+    /*public Tache(
             String name, String but, String res, String f, String duree, String obs, String exe,
             String freq, String comp, String imp, String mod, Evenement dec, ArrayList<Evenement> events,
             Boolean facultatif, Boolean interruptible, String decomposition, ArrayList<Acteur> act,
@@ -191,7 +197,7 @@ public class Tache implements Entity {
         this.setActeurs(act);
         this.decomposition = Decomposition.getValue(decomposition);
         this.preExpression = new PreExpression(prec);
-        this.postExpression = new PostExpression(post);
+        this.effetsDeBordExpression = new EffetsDeBordExpression(post);
         this.iteExpression = new IterExpression(it);
         this.oid = oid;
         this.fils = new ArrayList<Tache>();
@@ -208,7 +214,7 @@ public class Tache implements Entity {
 		idMedia  = null;
         
         this.stateSimulation = new StateSimulation();
-    }
+    }*/
 
     public Media getMedia() {
     	return this.idMedia;
@@ -225,6 +231,13 @@ public class Tache implements Entity {
         }
     }
 
+    public void setActeurSystem(ArrayList<ActeurSysteme> e) {
+        acteurSysteme = e;
+        for (int i = 0; i < acteurs.size(); i++) {
+            acteurs.get(i).setInverseTache(this);
+        }
+    }
+    
     public boolean addActeur(Acteur a) {
         for (int i = 0; i < acteurs.size(); i++) {
             Acteur act = acteurs.get(i);
@@ -237,12 +250,30 @@ public class Tache implements Entity {
         return true;
 
     }
+    
+    public boolean addActeurSystem(ActeurSysteme a) {
+        for (int i = 0; i < acteurSysteme.size(); i++) {
+            ActeurSysteme act = acteurSysteme.get(i);
+            if (act.getMaterielRef().getOid().equals(a.getMaterielRef().getOid())) {
+                return false;
+            }
+        }
+        acteurSysteme.add(a);
+        a.setInverseTache(this);
+        return true;
+
+    }
 
     public void removeActeur(Acteur a) {
         acteurs.remove(a);
         a = null;
     }
 
+    public void removeActeurSysteme(ActeurSysteme a) {
+        acteurSysteme.remove(a);
+        a = null;
+    }
+    
     public void setEvents(ArrayList<Evenement> e) {
         lstEvent = e;
         for (int i = 0; i < lstEvent.size(); i++) {
@@ -352,13 +383,10 @@ public class Tache implements Entity {
         return acteurs;
     }
 
-    public ArrayList<String> getActeursOid() {
-        ArrayList<String> lst = new ArrayList<String>();
-        for (int i = 0; i < acteurs.size(); i++) {
-            lst.add(acteurs.get(i).oid.get());
-        }
-        return lst;
+    public ArrayList<ActeurSysteme> getActeurSysteme() {
+        return acteurSysteme;
     }
+
 
     public ArrayList<String> getActeursName() {
         ArrayList<String> lst = new ArrayList<String>();
@@ -368,6 +396,14 @@ public class Tache implements Entity {
         return lst;
     }
 
+    public ArrayList<String> getActeurSystemeOid() {
+        ArrayList<String> lst = new ArrayList<String>();
+        for (int i = 0; i < acteurSysteme.size(); i++) {
+            lst.add(acteurSysteme.get(i).oid.get());
+        }
+        return lst;
+    }
+    
     public ArrayList<User> getUsers() {
         ArrayList<User> lst = new ArrayList<User>();
         for (int i = 0; i < acteurs.size(); i++) {
@@ -375,11 +411,28 @@ public class Tache implements Entity {
         }
         return lst;
     }
+    
+    public ArrayList<Materiel> getMateriels() {
+        ArrayList<Materiel> lst = new ArrayList<Materiel>();
+        for (int i = 0; i < acteurSysteme.size(); i++) {
+            lst.add(acteurSysteme.get(i).getMaterielRef());
+        }
+        return lst;
+    }
+    
 
     public ArrayList<String> getActeursExp() {
         ArrayList<String> lst = new ArrayList<String>();
         for (int i = 0; i < acteurs.size(); i++) {
             lst.add(acteurs.get(i).getExperience().getValue());
+        }
+        return lst;
+    }
+    
+    public ArrayList<String> getActeurSystemeExp() {
+        ArrayList<String> lst = new ArrayList<String>();
+        for (int i = 0; i < acteurSysteme.size(); i++) {
+            lst.add(acteurSysteme.get(i).getExperience().getValue());
         }
         return lst;
     }
@@ -391,7 +444,14 @@ public class Tache implements Entity {
         }
         return lst;
     }
-
+    
+    public ArrayList<String> getActeurSystemeComp() {
+        ArrayList<String> lst = new ArrayList<String>();
+        for (int i = 0; i < acteurSysteme.size(); i++) {
+            lst.add(acteurSysteme.get(i).getCompetence());
+        }
+        return lst;
+    }
     public ArrayList<Evenement> getEvents() {
         return this.lstEvent;
     }
@@ -448,7 +508,7 @@ public class Tache implements Entity {
 
     public String getMotherTaskName() {
     	if (this.mere == null) {
-    		return ExpressConstant.NO_MOTHER_TASK_NAME_MESSAGE;
+    		return KMADEConstant.NO_MOTHER_TASK_NAME_MESSAGE;
     	} else {
     		return this.getMotherTask().getName();
     	}
@@ -705,7 +765,11 @@ public class Tache implements Entity {
         return this.numero + " - " + name;
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {        
+    
+	 // attention il ne faut pas utilisÈ le tag postcondition pour les postcondition de la V2 !
+    // ils sont rÈserver aux effets de bord de la v1!
+    public org.w3c.dom.Element toXML(Document doc) {
+    	
         Element racine = doc.createElement("task");
         racine.setAttribute("classkmad", "tache.Tache");
         racine.setAttribute("idkmad", oid.get());
@@ -830,6 +894,16 @@ public class Tache implements Entity {
             }
             racine.appendChild(actorsList);
         }
+     // Actors system
+        if (this.acteurSysteme.size() != 0) {
+            Element actorSystemList = doc.createElement("id-task-actorSystem-list");
+            for (int i = 0 ; i < this.acteurSysteme.size(); i++) {
+                Element idActor = doc.createElement("id-task-actorSystem");
+                idActor.setTextContent(this.acteurSysteme.get(i).getOid().get());
+                actorSystemList.appendChild(idActor);
+            }
+            racine.appendChild(actorSystemList);
+        }
         
         // Sub-tasks
         if (this.fils.size() != 0) {
@@ -866,15 +940,17 @@ public class Tache implements Entity {
             racine.appendChild(kmadElement);        		
         }
         
-        // Postcondition
-        kmadElement = doc.createElement("task-postcondition");
-        kmadElement.setTextContent(this.postExpression.getName());
+        // attention il ne faut pas utilisÈ le tag postcondition pour les postcondition de la V2 !
+        // ils sont rÈserver aux effets de bord de la v1!    
+        // EffetsDeBord
+        kmadElement = doc.createElement("task-effetsdebord");
+        kmadElement.setTextContent(this.effetsDeBordExpression.getName());
         racine.appendChild(kmadElement);
         
-        // Postcondition Description
-        if (!this.getPostExpression().getDescription().equals("")) {
-            kmadElement = doc.createElement("task-descriptionpostcondition");
-            kmadElement.setTextContent(this.postExpression.getDescription());
+        // EffetsDeBord Description
+        if (!this.getEffetsDeBordExpression().getDescription().equals("")) {
+            kmadElement = doc.createElement("task-descriptioneffetsdebord");
+            kmadElement.setTextContent(this.effetsDeBordExpression.getDescription());
             racine.appendChild(kmadElement);        		
         }
         
@@ -908,6 +984,7 @@ public class Tache implements Entity {
     		}
         }
         
+        
         nodeList = p.getElementsByTagName("id-task-events-list");
         if (nodeList.getLength() != 0) {
             NodeList nodeListEvents = nodeList.item(0).getChildNodes();
@@ -931,7 +1008,22 @@ public class Tache implements Entity {
                 }
             }
         }
-        
+
+
+        nodeList = p.getElementsByTagName("id-task-actorSystem-list");
+        if (nodeList.getLength() != 0) {
+        	NodeList nodeListActors = nodeList.item(0).getChildNodes();
+        	for (int i = 0 ; i < nodeListActors.getLength() ; i++) {
+        		if (nodeListActors.item(i).getNodeType() == Element.ELEMENT_NODE) {
+        			if (InterfaceExpressJava.bdd.prendre(new Oid(((Element)nodeListActors.item(i)).getTextContent())) == null) {
+        				return true;
+        			}
+        		}
+        	}
+        }    
+            
+            
+            
         nodeList = p.getElementsByTagName("id-task-subtasks-list");
         if (nodeList.getLength() != 0) {
             NodeList nodeListSubTasks = nodeList.item(0).getChildNodes();
@@ -1067,6 +1159,18 @@ public class Tache implements Entity {
             }
         }   
         
+        // Actors System
+        nodeList = p.getElementsByTagName("id-task-actorSystem-list");
+        if (nodeList.getLength() != 0) {
+            NodeList nodeListActors = nodeList.item(0).getChildNodes();
+            for (int i = 0 ; i < nodeListActors.getLength() ; i++) {
+                if (nodeListActors.item(i).getNodeType() == Element.ELEMENT_NODE) {
+                	ActeurSysteme acteurSysteme = (ActeurSysteme)InterfaceExpressJava.bdd.prendre(new Oid(nodeListActors.item(i).getTextContent()));
+                	this.acteurSysteme.add(acteurSysteme);
+                	acteurSysteme.setInverseTache(this);
+                }
+            }
+        }   
         // Subtasks
         nodeList = p.getElementsByTagName("id-task-subtasks-list");
         if (nodeList.getLength() != 0) {
@@ -1090,7 +1194,9 @@ public class Tache implements Entity {
         
         // Precondition
         nodeList = p.getElementsByTagName("task-precondition");
-        this.preExpression = new PreExpression(nodeList.item(0).getTextContent());
+        if (nodeList.item(0) != null) {
+        	this.preExpression = new PreExpression(nodeList.item(0).getTextContent());
+        }
         
         // Precondition Description
         nodeList = p.getElementsByTagName("task-descriptionprecondition");
@@ -1098,14 +1204,26 @@ public class Tache implements Entity {
         		this.preExpression.setDescription(nodeList.item(0).getTextContent());
         }
         
-        // Postcondition
-        nodeList = p.getElementsByTagName("task-postcondition");
-        this.postExpression = new PostExpression(nodeList.item(0).getTextContent());
-
-        // Postcondition Description
+        // EffetsDeBord
+        nodeList = p.getElementsByTagName("task-effetsdebord");
+        if (nodeList.item(0) != null) {
+        this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList.item(0).getTextContent());
+        }
+        // attention il ne faut pas utilisÈ le tag postcondition pour les postcondition de la V2 !
+        nodeList =  p.getElementsByTagName("task-postcondition");
+        if (nodeList.item(0) != null) {
+        	this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList.item(0).getTextContent());
+        }
+       
+        // attention il ne faut pas utilisÈ le tag postcondition pour les postcondition de la V2 !
         nodeList = p.getElementsByTagName("task-descriptionpostcondition");
         if (nodeList.item(0) != null) {
-        		this.postExpression.setDescription(nodeList.item(0).getTextContent());
+        		this.effetsDeBordExpression.setDescription(nodeList.item(0).getTextContent());
+        }
+        // EffetsDeBord Description
+        nodeList = p.getElementsByTagName("task-descriptioneffetsdebord");
+        if (nodeList.item(0) != null) {
+        		this.effetsDeBordExpression.setDescription(nodeList.item(0).getTextContent());
         }
         
         // Iteration
@@ -1160,6 +1278,14 @@ public class Tache implements Entity {
                 SPF = SPF + ",";
         }
         SPF = SPF + "),";
+        //acteurs System
+        SPF = SPF + "(";
+        for (int i = 0; i < acteurSysteme.size(); i++) {
+            SPF = SPF + acteurSysteme.get(i).oid.get();
+            if (i != acteurSysteme.size())
+                SPF = SPF + ",";
+        }
+        SPF = SPF + "),";
         // fils
         SPF = SPF + "(";
         for (int i = 0; i < fils.size(); i++) {
@@ -1180,7 +1306,7 @@ public class Tache implements Entity {
         } else {
             SPF = SPF + point.oid.get() + ",";
         }
-        SPF = SPF + ",'" + preExpression.getName().replaceAll("'","\\\\'") + "'," + "'" + postExpression.getName().replaceAll("'","\\\\'") + "',"
+        SPF = SPF + ",'" + preExpression.getName().replaceAll("'","\\\\'") + "'," + "'" + effetsDeBordExpression.getName().replaceAll("'","\\\\'") + "',"
                 + "'" + iteExpression.getName().replaceAll("'","\\\\'") + "')";
         return SPF;
     }
@@ -1372,12 +1498,12 @@ public class Tache implements Entity {
         this.preExpression = preExpression;
     }
 
-    public PostExpression getPostExpression() {
-        return postExpression;
+    public EffetsDeBordExpression getEffetsDeBordExpression() {
+        return effetsDeBordExpression;
     }
     
-    public void setPostExpression(PostExpression postExpression) {
-        this.postExpression = postExpression;
+    public void setEffetsDeBordExpression(EffetsDeBordExpression effetsDeBordExpression) {
+        this.effetsDeBordExpression = effetsDeBordExpression;
     }
     
     public IterExpression getIteExpression() {
@@ -1403,4 +1529,24 @@ public class Tache implements Entity {
     public boolean isRoot() {
         return (this.mere == null);
     }
+
+    public static boolean canHaveActor(Executant ex){
+		if(ex == Executant.SYS){
+			return false;
+		}else{
+			return true;
+		}
+    }
+    
+	public boolean canHaveActor() {
+		return canHaveActor(executant);
+	}
+	
+	 public static boolean canHaveActorSystem(Executant ex){
+			if(ex == Executant.USER){
+				return false;
+			}else{
+				return true;
+			}
+	    }
 }

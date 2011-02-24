@@ -51,7 +51,7 @@ import org.jgraph.graph.GraphModel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEClipBoardDialog extends JDialog implements LanguageFactory {
     
@@ -61,6 +61,9 @@ public class KMADEClipBoardDialog extends JDialog implements LanguageFactory {
     
     private JGraph myGraph = new JGraph();
     
+    
+    
+    
     private JScrollPane myScrollPane;
     
     private DefaultGraphModel refModel;
@@ -69,17 +72,18 @@ public class KMADEClipBoardDialog extends JDialog implements LanguageFactory {
         super(owner,KMADEConstant.CLIPBOARD_TITLE_NAME);
         componentListener = new ComponentAdapter() {
             public void componentResized(ComponentEvent componentevent) {
+            	
                updateScale();               
             }
         };
-        
+        refModel = new DefaultGraphModel();
+        myGraph.setModel(refModel);
         myGraph.setOpaque(true);
         myGraph.setScale(1);
         myGraph.setEnabled(false);
         myGraph.setFocusable(false);
         myGraph.setGridEnabled(false); 
-        refModel = new DefaultGraphModel();
-        myGraph.setModel(refModel);
+        
         myGraph.getGraphLayoutCache().setFactory(new DefaultCellViewFactory() {
 
 			private static final long serialVersionUID = -733364299084085305L;
@@ -104,6 +108,7 @@ public class KMADEClipBoardDialog extends JDialog implements LanguageFactory {
         this.pack();
         KMADEToolUtilities.setCenteredInScreen(this);
         this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
+        this.setGlassPane(new InDevelopmentGlassPanel("", Color.RED));
         this.setVisible(false);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {

@@ -1,5 +1,7 @@
 package kmade.kmade.UI.taskproperties;
 
+//� revoir
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -48,7 +50,7 @@ import kmade.kmade.adaptatorUI.PrePostIterExpressionAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEEditorEventDialog extends JPropertiesEditorDialog {
     private static final long serialVersionUID = -6348137983085333000L;
@@ -171,7 +173,7 @@ public class KMADEEditorEventDialog extends JPropertiesEditorDialog {
         listOfEvent = EventAdaptator.getEventsName();
 
         // Récupère l'ensemble des événements de la tâche.
-        ArrayList myEventList = (ArrayList) (refModel.getValue(row));
+        ArrayList<?> myEventList = (ArrayList<?>) (refModel.getValue(row));
         myTableListModel.getListTableData().clear();
         for (int i = 0; i < myEventList.size(); i++) {
             Object[] tempo = { myEventList.get(i), false };
@@ -182,7 +184,7 @@ public class KMADEEditorEventDialog extends JPropertiesEditorDialog {
                 myTableListModel.getRowCount() - 1,
                 myTableListModel.getRowCount() - 1);
 
-        PrePostIterExpressionAdaptator.disabledFrame();  
+        PrePostIterExpressionAdaptator.disabledFrame();
         super.showPropertiesEditor(refModel, row);
     }
 

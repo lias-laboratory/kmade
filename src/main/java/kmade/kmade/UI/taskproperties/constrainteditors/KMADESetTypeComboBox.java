@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 
 import kmade.kmade.KMADEConstant;
 import kmade.nmda.schema.expression.ConcreteObjectType;
@@ -30,9 +29,9 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
-public class KMADESetTypeComboBox extends JComboBox {
+public class KMADESetTypeComboBox extends KMADEGroupTypeComboBox{
 	private static final long serialVersionUID = -5106570507739645552L;
 
 	private ArrayList<ObjetConcret> refObjetConcret;

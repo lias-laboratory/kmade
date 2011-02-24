@@ -28,14 +28,15 @@ import kmade.kmade.UI.preferences.KMADEPreferencesTaskTreePanel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class PreferencesAdaptator {
 	
 	private static Properties prop;
 
+
 	/**
-	 * MÃ©thode qui initialise les composants de l'outil prÃ©fÃ©rences
+	 * Méthode qui initialise les composants de l'outil préférences
 	 */
 	public static void initComponent() {
 		prop = new Properties();
@@ -45,7 +46,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * MÃ©thode qui enregistre des paramÃ¨tres dans le fichier config.ini
+	 * Méthode qui enregistre des paramètres dans le fichier config.ini
 	 */
 	private static void save() {
 		try {
@@ -53,14 +54,16 @@ public final class PreferencesAdaptator {
 			prop.store(out, "KMADe Parameters");
 			out.close();
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * MÃ©thode qui charge des paramÃ¨tres Ã  partir du fichier config.ini dans le
+	 * Méthode qui charge des paramètres à partir du fichier config.ini dans le
 	 * logiciel
 	 */
 	private static void load() {
+		// une partie de cette fonction est en dur dans KMADeMain
 		try {
 			FileInputStream in = new FileInputStream("config.ini");
 			prop.load(in);
@@ -75,16 +78,16 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * MÃ©thode qui crÃ©e un property et le config.ini avec des valeurs par dÃ©faut
+	 * Méthode qui crée un property et le config.ini avec des valeurs par défaut
 	 */
 	private static void setDefaultProperties() {
 		// Tasks Tree Parameters
-		prop.setProperty(KMADEConstant.LEVEL_DISTANCE_NAME, "2");
+		prop.setProperty(KMADEConstant.LEVEL_DISTANCE_NAME, KMADEConstant.LEVEL_DISTANCE+"");
 		prop.setProperty(KMADEConstant.TASK_MODEL_ORIENTATION_NAME, "3");
-		prop.setProperty(KMADEConstant.TASK_DISTANCE_NAME, "2");
+		prop.setProperty(KMADEConstant.TASK_DISTANCE_NAME, KMADEConstant.TASK_DISTANCE+"");
 		prop.setProperty(KMADEConstant.TASK_SELECTION_COLOR_NAME, "Green");
 		prop.setProperty(KMADEConstant.ORTHOGONAL_EDGE_NAME, "true");
-		
+		prop.setProperty(KMADEConstant.WHEEL_ZOOM_NAME, "1");
 		prop.setProperty(KMADEConstant.TASK_FONT_NAME, "Arial");
 		prop.setProperty(KMADEConstant.TASK_FONT_SIZE_NAME, "15");
 		prop.setProperty(KMADEConstant.TASK_FONT_COLOR_NAME, "Black");
@@ -106,18 +109,18 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * MÃ©thode qui rÃ©cupÃ¨re les paramÃ¨tres (nom et valeur) du composant modifiÃ©
+	 * Méthode qui récupère les paramètres (nom et valeur) du composant modifié
 	 */
 	private static void getParametersFromPreferenceUI() {
 		// Tasks Tree Parameters 
 		KMADEPreferencesTaskTreePanel treePanel = GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().getTree();
 		prop.setProperty(KMADEConstant.LEVEL_DISTANCE_NAME,(String) (treePanel.getHauteurArbre().getSelectedItem()));
 		prop.setProperty(KMADEConstant.TASK_MODEL_ORIENTATION_NAME,	(String) (treePanel.getOrientationArbre().getSelectedItem()));
-		prop.setProperty(KMADEConstant.TASK_DISTANCE_NAME,(String) (treePanel.getHauteurArbre().getSelectedItem()));
+		prop.setProperty(KMADEConstant.TASK_DISTANCE_NAME,(String) (treePanel.getDistanceNodale().getSelectedItem()));
 		prop.setProperty(KMADEConstant.TASK_SELECTION_COLOR_NAME, translateColorUIToConfig(treePanel.getCouleurSelectionTache().getSelectedItem()));		
 		prop.setProperty(KMADEConstant.ORTHOGONAL_EDGE_NAME, Boolean.toString(treePanel.getOrthogonaliteArbre().isSelected()));
 
-		/* ParamÃ¨tres du panel Tache */
+		/* Paramètres du panel Tache */
 		prop.setProperty(KMADEConstant.TASK_FONT_NAME,
 				(String) (GraphicEditorAdaptator.getMainFrame()
 						.getPreferencesDialog().getTask().getFontTask()
@@ -172,7 +175,7 @@ public final class PreferencesAdaptator {
 						.getPreferencesDialog().getTask().getActorTask()
 						.isSelected()));
 
-		/* ParamÃ¨tres du panel gÃ©nÃ©ral */
+		/* Paramètres du panel général */
 		prop.setProperty(KMADEConstant.AUTOMATIC_SAVE_NAME,
 				Boolean.toString(GraphicEditorAdaptator.getMainFrame()
 						.getPreferencesDialog().getGeneral().getAutomaticSave()
@@ -189,18 +192,22 @@ public final class PreferencesAdaptator {
 				Boolean.toString(GraphicEditorAdaptator.getMainFrame()
 						.getPreferencesDialog().getGeneral().getEnvoiBug()
 						.isSelected()));
-		prop.setProperty(KMADEConstant.BUG_MESSAGE_NAME,
+		prop.setProperty(KMADEConstant.LANGUAGE_NAME,
 				(String) (GraphicEditorAdaptator.getMainFrame()
 						.getPreferencesDialog().getGeneral().getLanguage()
+						.getSelectedItem()));
+		prop.setProperty(KMADEConstant.WHEEL_ZOOM_NAME,
+				(String) (GraphicEditorAdaptator.getMainFrame()
+						.getPreferencesDialog().getGeneral().getWheelZoom()
 						.getSelectedItem()));
 
 	}
 
 	/**
-	 * MÃ©thode qui initialise les composants selon les paramÃ¨tres du fichier config.ini 
+	 * Méthode qui initialise les composants selon les paramètres du fichier config.ini 
 	 */
 	private static void setParametersToPreferenceUI() {
-		/* ParamÃ¨tres de la partie Arbre */
+		/* Paramètres de la partie Arbre */
 		KMADEPreferencesTaskTreePanel treePanel = GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().getTree();
 		treePanel.setHauteurArbre(prop.getProperty(KMADEConstant.LEVEL_DISTANCE_NAME));
 		treePanel.setOrientationArbre(prop.getProperty(KMADEConstant.TASK_MODEL_ORIENTATION_NAME));
@@ -208,7 +215,7 @@ public final class PreferencesAdaptator {
 		treePanel.setCouleurSelectionTache(translateColorConfigToUI(prop.getProperty(KMADEConstant.TASK_SELECTION_COLOR_NAME)));
 		treePanel.setOrthogonaliteArbre(prop.getProperty(KMADEConstant.ORTHOGONAL_EDGE_NAME));
 
-		/* ParamÃ¨tres de la partie Tache */
+		/* Paramètres de la partie Tache */
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().getTask()
 				.setFontTask(prop.getProperty(KMADEConstant.TASK_FONT_NAME));
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().getTask()
@@ -273,7 +280,7 @@ public final class PreferencesAdaptator {
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().getTask()
 				.setActorTask(prop.getProperty(KMADEConstant.ACTOR_TASK_NAME));
 
-		/* ParamÃ¨tres de la partie GÃ©nÃ©ral */
+		/* Paramètres de la partie Général */
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog()
 				.getGeneral().setAutomaticSave(
 						prop.getProperty(KMADEConstant.AUTOMATIC_SAVE_NAME));
@@ -289,6 +296,9 @@ public final class PreferencesAdaptator {
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog()
 				.getGeneral().setLanguage(
 						prop.getProperty(KMADEConstant.LANGUAGE_NAME));
+		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog()
+		.getGeneral().setWheelZoom(
+				prop.getProperty(KMADEConstant.WHEEL_ZOOM_NAME));
 	}
 
 	/**
@@ -310,7 +320,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Sauvegarde les prÃ©fÃ©rences
+	 * Sauvegarde les préférences
 	 */
 	public static void savePreferences() {
 		getParametersFromPreferenceUI();
@@ -318,7 +328,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Action du bouton annuler de l'outil prÃ©fÃ©rences
+	 * Action du bouton annuler de l'outil préférences
 	 */
 	public static void cancelPreferences() {
 		load();
@@ -333,18 +343,18 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Ferme la fenÃªtre de dialogue de l'outil prÃ©fÃ¨rences
+	 * Ferme la fenêtre de dialogue de l'outil préfèrences
 	 */
 	public static void closePreferencesDialog() {
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().setVisible(false);
 	}
 
 	/* //////////////////////////////////////////////////// */
-	/* ProcÃ©dures concernants les paramÃ¨tres gÃ©nÃ©raux /// */
+	/* Procédures concernants les paramètres généraux /// */
 	/* //////////////////////////////////////////////////// */
 
 	/**
-	 * MÃ©thode qui force le garbage collector
+	 * Méthode qui force le garbage collector
 	 * 
 	 */
 	public static void forceGarbage() {
@@ -353,7 +363,7 @@ public final class PreferencesAdaptator {
 
 	
 	/**
-	 * MÃ©thode renvoyant le choix de l'utilisateur pour l'affichage du
+	 * Méthode renvoyant le choix de l'utilisateur pour l'affichage du
 	 * splashscreen
 	 * 
 	 * @return boolean
@@ -370,7 +380,7 @@ public final class PreferencesAdaptator {
 	//
 	
 	/**
-	 * Modifie la couleur de sÃ©lection d'une tÃ¢che
+	 * Modifie la couleur de sélection d'une tâche
 	 */
 	private static void setSelectedTaskColor() {
 		Color selectedColor = getColorFromString(prop.getProperty(KMADEConstant.TASK_SELECTION_COLOR_NAME));
@@ -401,14 +411,24 @@ public final class PreferencesAdaptator {
 		KMADEConstant.ORTHOGONAL_EDGES = Boolean.parseBoolean(prop.getProperty(KMADEConstant.ORTHOGONAL_EDGE_NAME));
 	}
 	
+	private static void setWheelZoom() {
+		try {
+			KMADEConstant.WHEEL_ZOOM = Double.parseDouble(prop.getProperty(KMADEConstant.WHEEL_ZOOM_NAME));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+		
 	/**
-	 * MÃ©thode qui applique les changements de paramÃ¨tres de police, taille...
+	 * Méthode qui applique les changements de paramètres de police, taille...
 	 */
 	public static void applyTaskParameters () {
+		System.out.println();
 		PreferencesAdaptator.setSelectedTaskColor();
 		PreferencesAdaptator.setNodeDistance();
 		PreferencesAdaptator.setLevelDistance();
 		PreferencesAdaptator.setOrthogonalEdgesOption();
+		PreferencesAdaptator.setWheelZoom();
 		setTaskNameFont();
 		setTaskOperatorFont();
 		
@@ -417,7 +437,7 @@ public final class PreferencesAdaptator {
 	}
 	
 	/**
-	 * MÃ©thode qui modifie la police et la couleur du nom de la tache
+	 * Méthode qui modifie la police et la couleur du nom de la tache
 	 */
 	private static void setTaskNameFont() {
 		String font = prop.getProperty(KMADEConstant.TASK_FONT_NAME);
@@ -431,7 +451,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * MÃ©thode qui modifie la police et la couleur de l'operateur de la tache
+	 * Méthode qui modifie la police et la couleur de l'operateur de la tache
 	 */
 	private static void setTaskOperatorFont() {
 		String font = prop.getProperty(KMADEConstant.DECOMPOSITION_FONT_NAME);
@@ -443,9 +463,10 @@ public final class PreferencesAdaptator {
 				.getProperty(KMADEConstant.DECOMPOSITION_FONT_COLOR_NAME));
 		KMADEConstant.setTaskOperatorFont(font, style, size, fontColor);
 	}
+	
 
 	/**
-	 * MÃ©thode qui convertit le string du style en type integer
+	 * Méthode qui convertit le string du style en type integer
 	 */
 	public static int getStyleFromString(String fontStyle) {
 		if (fontStyle.equals(KMADEConstant.STYLE_PLAIN))
@@ -459,7 +480,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * MÃ©thode qui convertit le string du style en type integer
+	 * Méthode qui convertit le string du style en type integer
 	 */
 	public static String translateFontStyleUIToConfig(Object isFontStyle) {
 		String fontStyle = (String) (isFontStyle);
@@ -491,7 +512,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * MÃ©thode qui convertie le string de la couleur en type Color
+	 * Méthode qui convertie le string de la couleur en type Color
 	 * @return Color
 	 */
 	private static Color getColorFromString(String fontColor) {
@@ -553,4 +574,7 @@ public final class PreferencesAdaptator {
 		else
 			return "Green";
 	}
+
+
 }
+

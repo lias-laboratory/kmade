@@ -21,7 +21,7 @@ import kmade.nmda.schema.expression.BooleanConstant;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class PreExpression extends Expression {
 
@@ -29,7 +29,7 @@ public class PreExpression extends Expression {
 
     public PreExpression() {
         refNode = new BooleanConstant();
-        this.chaine = refNode.getName();
+        this.chaine =refNode.getName();
     }
     
     public PreExpression(String pre) {

@@ -7,12 +7,14 @@ import kmade.kmade.UI.taskproperties.KMADEEditorPrePostIterDialog;
 import kmade.kmade.adaptatorFC.ExpressIteration;
 import kmade.kmade.adaptatorFC.ExpressTask;
 import kmade.kmade.adaptatorFC.parserExpression.Iteration;
+import kmade.kmade.adaptatorFC.parserExpression.MyIteration;
 import kmade.kmade.adaptatorFC.parserExpression.ParseException;
 import kmade.kmade.adaptatorFC.parserExpression.TokenMgrError;
 import kmade.nmda.schema.expression.NodeExpression;
 import kmade.nmda.schema.expression.SemanticErrorException;
 import kmade.nmda.schema.expression.SemanticException;
 import kmade.nmda.schema.expression.SemanticUnknownException;
+import kmade.nmda.schema.metaobjet.NumberValue;
 import kmade.nmda.schema.metaobjet.TypeStructure;
 import kmade.nmda.schema.tache.Tache;
 
@@ -35,7 +37,7 @@ import kmade.nmda.schema.tache.Tache;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class IterationAdaptator {
    
@@ -83,7 +85,7 @@ public final class IterationAdaptator {
         java.io.StringReader sr = new java.io.StringReader(s);
         java.io.Reader r = new java.io.BufferedReader(sr);
         
-        Iteration parser = new Iteration(r);
+        Iteration parser = new MyIteration(r);
         try{
             NodeExpression ref = parser.expression();
             if (ref == null) {
@@ -120,7 +122,7 @@ public final class IterationAdaptator {
     
     public static void addLoopVariant(String l) {
         try {
-            Integer.parseInt(l);
+        	new NumberValue(l);
         } catch(NumberFormatException e) {
             System.out.println(KMADEConstant.STRING_TO_INTEGER);
             return;                
@@ -131,9 +133,9 @@ public final class IterationAdaptator {
     public static void addNewLiteral(String l, String t) {
         if (l.equals(TypeStructure.BOOLEAN_STRUCT.getValue())) {
             t = Boolean.valueOf(Boolean.parseBoolean(t)).toString();
-        } else if (l.equals(TypeStructure.INTEGER_STRUCT.getValue())) {
+        } else if (l.equals(TypeStructure.NUMBER_STRUCT.getValue())) {
             try {
-                Integer.parseInt(t);
+                new NumberValue(t);
             } catch(NumberFormatException e) {
                 System.out.println(KMADEConstant.STRING_TO_INTEGER);
                 return;                
@@ -149,7 +151,7 @@ public final class IterationAdaptator {
         Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask().getTask();
         try {
             myCurrentTask.getIteExpression().getNodeExpression().evaluateNode(null);
-            KMADEEditorPrePostIterDialog.getIterationPanel().giveResult((myCurrentTask.getIteExpression().isLoopProgress() ? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE : KMADEConstant.STOP_LOOP_ITERATION_MESSAGE) + " =");
+            KMADEEditorPrePostIterDialog.getIterationPanel().giveResult((myCurrentTask.getIteExpression().isFinished() ? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE : KMADEConstant.STOP_LOOP_ITERATION_MESSAGE) + " =");
             System.out.println(KMADEConstant.ITERATION_EVAL_OK_MESSAGE);
             System.out.println(KMADEConstant.VALUE_MESSAGE + " = " + myCurrentTask.getIteExpression().getNodeExpression().getNodeValue() + " , " + (myCurrentTask.getIteExpression().isLoopProgress() ? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE : KMADEConstant.STOP_LOOP_ITERATION_MESSAGE));
         } catch(SemanticErrorException e) {

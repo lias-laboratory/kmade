@@ -30,7 +30,7 @@ import org.jgraph.graph.VertexView;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public abstract class KMADEGraphLayoutAlgorithm {
 
@@ -108,6 +108,51 @@ public abstract class KMADEGraphLayoutAlgorithm {
 
 			if (!hashtable.isEmpty()) {
 				jgraph.getGraphLayoutCache().edit(hashtable, null, null, null);
+				
+				//modifi�/////
+				/*CellView[] roots =  graphlayoutcache.getRoots();
+				
+				for (int i = 0; i<roots.length; i++)
+				{
+					double min = Double.POSITIVE_INFINITY;
+					double max= Double.NEGATIVE_INFINITY;
+					if (roots[i] instanceof VertexView)
+					{
+						VertexView root = (VertexView) roots[i];
+						
+						CellView[] listeFils = root.getChildViews();
+						
+						for (int j=0; j<listeFils.length; j++)
+						{
+							if (listeFils[i] instanceof VertexView)
+							{
+								VertexView fils = (VertexView) listeFils[i];
+								
+								if (fils.getBounds().getX()<min)
+								{
+									min = fils.getBounds().getX();
+								}
+								
+								if ((fils.getBounds().getX()+fils.getBounds().getWidth())>max)
+								{
+									max = fils.getBounds().getX()+fils.getBounds().getWidth();
+								}
+																
+							}
+						}
+						
+						double milieu = (max-min)/2;
+						double distXMilieu = root.getBounds().getWidth()/2;
+						int nouvX =(int) (milieu - distXMilieu);
+						Rectangle rect = new Rectangle(nouvX, (int)root.getBounds().getY(), (int)root.getBounds().getWidth(), (int)root.getBounds().getHeight());
+						root.setBounds(rect);
+					}
+					
+					
+					
+					
+				}*/
+				
 			}
 		}
 	}

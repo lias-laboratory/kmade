@@ -23,8 +23,8 @@ import kmade.kmade.KMADEConstant;
 import kmade.kmade.UI.toolutilities.JTextAreaOutputStream;
 import kmade.kmade.UI.toolutilities.KMADEToolUtilities;
 import kmade.kmade.UI.toolutilities.LanguageFactory;
+import kmade.kmade.adaptatorFC.ExpressEffetsDeBord;
 import kmade.kmade.adaptatorFC.ExpressIteration;
-import kmade.kmade.adaptatorFC.ExpressPostcondition;
 import kmade.kmade.adaptatorFC.ExpressPrecondition;
 import kmade.kmade.adaptatorFC.parserKMAD.ExpressKMADXML;
 import kmade.kmade.adaptatorUI.AbstractObjectAdaptator;
@@ -32,10 +32,13 @@ import kmade.kmade.adaptatorUI.ConcreteObjectPanelAdaptator;
 import kmade.kmade.adaptatorUI.EnumAdaptator;
 import kmade.kmade.adaptatorUI.EventAdaptator;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
+import kmade.kmade.adaptatorUI.IndividuAdaptator;
 import kmade.kmade.adaptatorUI.IntervalAdaptator;
 import kmade.kmade.adaptatorUI.KMADeAdaptator;
 import kmade.kmade.adaptatorUI.LabelAdaptator;
-import kmade.kmade.adaptatorUI.UserAdaptator;
+import kmade.kmade.adaptatorUI.MachineAdaptator;
+import kmade.kmade.adaptatorUI.OrganisationAdaptator;
+import kmade.kmade.adaptatorUI.ParcMachinesAdaptator;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 
 /**
@@ -57,7 +60,7 @@ import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
     private static final long serialVersionUID = -1757807085591845144L;
@@ -150,7 +153,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
     public void initWriteKMADModelFromXMLFile() {
         this.setTitle(KMADEConstant.SAVE_MONITOR_TITLE_NAME);
-   		System.setOut(new PrintStream(myOutputStream));
+        System.setOut(new PrintStream(myOutputStream));
    		myTextArea.setText("");
     		
         panelSouth.removeAll();
@@ -185,6 +188,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
     public void writeKMADModelFromXMLFile() {
         this.setTitle(KMADEConstant.SAVE_MONITOR_TITLE_NAME);
    		System.setOut(new PrintStream(myOutputStream));
+		
    		myTextArea.setText("");
     		
         panelSouth.removeAll();
@@ -274,7 +278,9 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
     
     public void readKMADModelFromXMLFile() {
         this.setTitle(KMADEConstant.LOAD_MONITOR_TITLE_NAME);
-        System.setOut(new PrintStream(myOutputStream));
+
+			System.setOut(new PrintStream(myOutputStream));
+
         myTextArea.setText("");
 
         panelSouth.removeAll();
@@ -284,7 +290,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
                 ExpressKMADXML.setCanceled(true);
                 GraphicEditorAdaptator.setCanceled(true);
                 ExpressPrecondition.setCanceled(true);
-                ExpressPostcondition.setCanceled(true);
+                ExpressEffetsDeBord.setCanceled(true);
             }
         });
 
@@ -309,7 +315,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
                     myProgressBar.setValue(2);
                 } else if (!ExpressPrecondition.isDone()) {
                     myProgressBar.setValue(3);
-                } else if (!ExpressPostcondition.isDone()) {
+                } else if (!ExpressEffetsDeBord.isDone()) {
                     myProgressBar.setValue(4);
                 } else if (!ExpressIteration.isDone()) {
                     myProgressBar.setValue(5);
@@ -320,7 +326,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
                 if (ExpressKMADXML.isDone()
                         && GraphicEditorAdaptator.isBegining()
                         && ExpressPrecondition.isBegining()
-                        && ExpressPostcondition.isBegining()
+                        && ExpressEffetsDeBord.isBegining()
                         && ExpressIteration.isBegining()) {
                     myProgressBar.setString(KMADEConstant.GRAPHICAL_OBJECTS_MESSAGE);
                     GraphicEditorAdaptator.setBegining(false);
@@ -329,7 +335,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
                 if (ExpressKMADXML.isDone() && GraphicEditorAdaptator.isDone()
                         && ExpressPrecondition.isBegining()
-                        && ExpressPostcondition.isBegining()
+                        && ExpressEffetsDeBord.isBegining()
                         && ExpressIteration.isBegining()) {
                     myProgressBar.setString(KMADEConstant.PRECONDITION_PROGRESSBAR_MESSAGE);
                     ExpressPrecondition.setBegining(false);
@@ -338,16 +344,16 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
                 if (ExpressKMADXML.isDone() && GraphicEditorAdaptator.isDone()
                         && ExpressPrecondition.isDone()
-                        && ExpressPostcondition.isBegining()
+                        && ExpressEffetsDeBord.isBegining()
                         && ExpressIteration.isBegining()) {
-                    myProgressBar.setString(KMADEConstant.POSTCONDITION_PROGRESSBAR_MESSAGE);
-                    ExpressPostcondition.setBegining(false);
-                    ExpressPostcondition.makeAndCheckPostconditionOpenSPFFile();
+                    myProgressBar.setString(KMADEConstant.EFFETSDEBORD_PROGRESSBAR_MESSAGE);
+                    ExpressEffetsDeBord.setBegining(false);
+                    ExpressEffetsDeBord.makeAndCheckEffetsDeBordOpenSPFFile();
                 }
 
                 if (ExpressKMADXML.isDone() && GraphicEditorAdaptator.isDone()
                         && ExpressPrecondition.isDone()
-                        && ExpressPostcondition.isDone()
+                        && ExpressEffetsDeBord.isDone()
                         && ExpressIteration.isBegining()) {
                     myProgressBar.setString(KMADEConstant.ITERATION_PROGRESSBAR_MESSAGE);
                     ExpressIteration.setBegining(false);
@@ -368,7 +374,10 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
                     AbstractObjectAdaptator.updateAbstractObjectView();
                     IntervalAdaptator.updateIntervalView();
                     EnumAdaptator.updateEnumView();
-                    UserAdaptator.updateUserView();
+                    IndividuAdaptator.updateIndividuView();
+                    OrganisationAdaptator.updateOrganisationView();
+                    MachineAdaptator.updateMachineView();
+                    ParcMachinesAdaptator.updateParcMachinesView();
                     EventAdaptator.updateEventView();
                     LabelAdaptator.updateLabelView();
                     // A voir si c'est utile?
@@ -433,7 +442,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
                 if (ExpressKMADXML.isDone() && GraphicEditorAdaptator.isDone()
                         && ExpressPrecondition.isCanceled()
-                        && ExpressPostcondition.isBegining()) {
+                        && ExpressEffetsDeBord.isBegining()) {
                     System.out.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
                     cancelButton.setEnabled(false);
                     retourButton.setEnabled(true);
@@ -451,7 +460,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
                 if (ExpressKMADXML.isDone() && GraphicEditorAdaptator.isDone()
                         && ExpressPrecondition.isDone()
-                        && ExpressPostcondition.isCanceled()
+                        && ExpressEffetsDeBord.isCanceled()
                         && ExpressIteration.isBegining()) {
                     System.out.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
                     cancelButton.setEnabled(false);
@@ -471,7 +480,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
                 if (ExpressKMADXML.isDone() && GraphicEditorAdaptator.isDone()
                         && ExpressPrecondition.isDone()
-                        && ExpressPostcondition.isDone()
+                        && ExpressEffetsDeBord.isDone()
                         && ExpressIteration.isCanceled()) {
                     System.out.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
                     cancelButton.setEnabled(false);
@@ -503,9 +512,9 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
         ExpressPrecondition.setDone(false);
         ExpressPrecondition.setCanceled(false);
 
-        ExpressPostcondition.setBegining(true);
-        ExpressPostcondition.setDone(false);
-        ExpressPostcondition.setCanceled(false);
+        ExpressEffetsDeBord.setBegining(true);
+        ExpressEffetsDeBord.setDone(false);
+        ExpressEffetsDeBord.setCanceled(false);
 
         ExpressIteration.setBegining(true);
         ExpressIteration.setDone(false);
@@ -535,7 +544,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
                     InterfaceExpressJava.setCanceled(true);
                     GraphicEditorAdaptator.setCanceled(true);
                     ExpressPrecondition.setCanceled(true);
-                    ExpressPostcondition.setCanceled(true);
+                    ExpressEffetsDeBord.setCanceled(true);
                 }
             });
         
@@ -560,7 +569,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
                         myProgressBar.setValue(2);                        
                     } else if (!ExpressPrecondition.isDone()) {
                         myProgressBar.setValue(3);
-                    } else if (!ExpressPostcondition.isDone()) {
+                    } else if (!ExpressEffetsDeBord.isDone()) {
                         myProgressBar.setValue(4);
                     } else if (!ExpressIteration.isDone()) {
                         myProgressBar.setValue(5);
@@ -568,25 +577,25 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
                     myTextArea.setCaretPosition(myTextArea.getDocument().getLength());
                     
-                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isBegining() && ExpressPrecondition.isBegining() && ExpressPostcondition.isBegining() && ExpressIteration.isBegining()) {
+                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isBegining() && ExpressPrecondition.isBegining() && ExpressEffetsDeBord.isBegining() && ExpressIteration.isBegining()) {
                         myProgressBar.setString(KMADEConstant.GRAPHICAL_OBJECTS_MESSAGE);
                         GraphicEditorAdaptator.setBegining(false);
                         GraphicEditorAdaptator.makeAllGraphElements();
                     }
     
-                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isBegining() && ExpressPostcondition.isBegining() && ExpressIteration.isBegining()) {
+                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isBegining() && ExpressEffetsDeBord.isBegining() && ExpressIteration.isBegining()) {
                         myProgressBar.setString(KMADEConstant.PRECONDITION_PROGRESSBAR_MESSAGE);
                         ExpressPrecondition.setBegining(false);
                         ExpressPrecondition.makeAndCheckPreconditionOpenSPFFile();
                     }
                     
-                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isDone() && ExpressPostcondition.isBegining() && ExpressIteration.isBegining()) {
-                        myProgressBar.setString(KMADEConstant.POSTCONDITION_PROGRESSBAR_MESSAGE);
-                        ExpressPostcondition.setBegining(false);
-                        ExpressPostcondition.makeAndCheckPostconditionOpenSPFFile();
+                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isDone() && ExpressEffetsDeBord.isBegining() && ExpressIteration.isBegining()) {
+                        myProgressBar.setString(KMADEConstant.EFFETSDEBORD_PROGRESSBAR_MESSAGE);
+                        ExpressEffetsDeBord.setBegining(false);
+                        ExpressEffetsDeBord.makeAndCheckEffetsDeBordOpenSPFFile();
                     }
                     
-                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isDone() && ExpressPostcondition.isDone() && ExpressIteration.isBegining()) {
+                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isDone() && ExpressEffetsDeBord.isDone() && ExpressIteration.isBegining()) {
                         myProgressBar.setString(KMADEConstant.ITERATION_PROGRESSBAR_MESSAGE);
                         ExpressIteration.setBegining(false);
                         ExpressIteration.makeAndCheckIterationOpenSPFFile();
@@ -606,7 +615,11 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
                         AbstractObjectAdaptator.updateAbstractObjectView();     
                         IntervalAdaptator.updateIntervalView();
                         EnumAdaptator.updateEnumView();
-                        UserAdaptator.updateUserView();
+                        //UserAdaptator.updateUserView();
+                        IndividuAdaptator.updateIndividuView();
+                        OrganisationAdaptator.updateOrganisationView();
+                        MachineAdaptator.updateMachineView();
+                        ParcMachinesAdaptator.updateParcMachinesView();
                         EventAdaptator.updateEventView();
                         // A voir si c'est utile?
                         ConcreteObjectPanelAdaptator.updateConcreteObjectView();
@@ -646,7 +659,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
                         myTimer = null;
                     }
     
-                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isCanceled() && ExpressPostcondition.isBegining()) {
+                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isCanceled() && ExpressEffetsDeBord.isBegining()) {
                         System.out.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
                         cancelButton.setEnabled(false);
                         retourButton.setEnabled(true);
@@ -657,7 +670,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
                         myTimer = null;
                     }
                     
-                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isDone() && ExpressPostcondition.isCanceled() && ExpressIteration.isBegining()) {
+                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isDone() && ExpressEffetsDeBord.isCanceled() && ExpressIteration.isBegining()) {
                         System.out.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
                         cancelButton.setEnabled(false);
                         retourButton.setEnabled(true);
@@ -668,7 +681,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
                         myTimer = null;
                     }
                     
-                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isDone() && ExpressPostcondition.isDone() && ExpressIteration.isCanceled()) {
+                    if (InterfaceExpressJava.isDone() && GraphicEditorAdaptator.isDone() && ExpressPrecondition.isDone() && ExpressEffetsDeBord.isDone() && ExpressIteration.isCanceled()) {
                         System.out.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
                         cancelButton.setEnabled(false);
                         retourButton.setEnabled(true);
@@ -694,9 +707,9 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
             ExpressPrecondition.setDone(false);
             ExpressPrecondition.setCanceled(false);
             
-            ExpressPostcondition.setBegining(true);
-            ExpressPostcondition.setDone(false);
-            ExpressPostcondition.setCanceled(false);
+            ExpressEffetsDeBord.setBegining(true);
+            ExpressEffetsDeBord.setDone(false);
+            ExpressEffetsDeBord.setCanceled(false);
             
             ExpressIteration.setBegining(true);
             ExpressIteration.setDone(false);
@@ -705,7 +718,9 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
             myScrollPane.setBorder(BorderFactory.createTitledBorder(KMADEConstant.LOAD_CONSOLE_TITLE_NAME));            
         }
         
+      
         System.setOut(new PrintStream(myOutputStream));
+	
         System.out.println(message);
         
         GraphicEditorAdaptator.disabledMainFrameBeforeLoadAndSaveProcess();

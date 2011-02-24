@@ -2,6 +2,7 @@ package kmade.nmda.schema.expression;
 
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.schema.metaobjet.AttributConcret;
+import kmade.nmda.schema.metaobjet.NumberValue;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
 
 /**
@@ -23,7 +24,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class MinusAssignment extends AssignmentOperator {
 
@@ -37,14 +38,14 @@ public class MinusAssignment extends AssignmentOperator {
     public void checkNode() throws SemanticException {
         super.checkNode();        
         
-        if (getLeftNode().isInteger() && getRightNode().isInteger()) {                          
-            this.setNodeValue(new Integer(0)); 
+        if (getLeftNode().isNumber() && getRightNode().isNumber()) {                          
+            this.setNodeValue(new NumberValue()); 
             this.setStateToUnknown();
             return;
         }       
         
         this.setStateToError();
-        throw new SemanticException();
+        throw new SemanticException(ExpressConstant.TYPE_NOT_A_NUMBER);
     }
     
     public void evaluateNode(ObjetConcret ref) throws SemanticException {
@@ -57,17 +58,22 @@ public class MinusAssignment extends AssignmentOperator {
 		if (this.isUnknownState()) {
 			throw new SemanticUnknownException();
 		}
-
-    		AttributConcret refConcret = ref.getAttribut(((AttributExpressExpression)this.leftNode).getAbstractAttribut());
+			
+			// dans certains cas un java null pointer exception peut être lever ce qui correspond à une semanticunknownException
+    		try{
+    			AttributConcret refConcret = ref.getAttribut(((AttributExpressExpression)this.leftNode).getAbstractAttribut());
     		boolean error = false;
         	
-        	if (getLeftNode().isInteger() && getRightNode().isInteger()) {
-        		error = refConcret.setValeur(new Integer(((Integer)getLeftNode().getNodeValue()) + ((Integer)getRightNode().getNodeValue())).toString());
+        	if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+         		error = refConcret.setValeur(((NumberValue) refConcret.getValue()).minusComputing((NumberValue)getRightNode().getNodeValue()).toString());
         	}
         	
         	if (error) {
         		this.setStateToError();
     			throw new SemanticErrorException();
         	}
+    	}catch (Exception e) {
+    		throw new SemanticUnknownException();
+		}
     }
 }

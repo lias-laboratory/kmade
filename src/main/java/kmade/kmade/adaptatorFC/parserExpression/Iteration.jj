@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 
 options {
@@ -32,16 +32,15 @@ PARSER_BEGIN(Iteration)
 
 package kmade.kmade.adaptatorFC.parserExpression;
 
-import kmade.nmda.schema.expression.NodeExpression;
 import kmade.kmade.KMADEConstant;
-import kmade.nmda.schema.expression.IntegerVariant;
-import kmade.nmda.schema.expression.WhileUnaryFunction;
+import kmade.nmda.schema.expression.NodeExpression;
 import kmade.nmda.schema.expression.NotWhileUnaryFunction;
+import kmade.nmda.schema.expression.NumberVariant;
+import kmade.nmda.schema.expression.WhileUnaryFunction;
+import kmade.nmda.schema.metaobjet.NumberValue;
 
 @SuppressWarnings({"all"})
 public class Iteration {
-
-  public ParseException generateParseException() {      Token errortok = token.next;      int line = errortok.beginLine, column = errortok.beginColumn;      String mess = (errortok.kind == 0) ? tokenImage[0] : errortok.image;      return new ParseException(KMADEConstant.COLUMN_MESSAGE + " " + column + ", " + KMADEConstant.ENCOUNTERED_TOKEN_MESSAGE + " \"" + mess + " \"");  }
 }
 
 PARSER_END(Iteration)
@@ -68,9 +67,9 @@ TOKEN:
 
 TOKEN:
 {
-  	< #DIGIT : ["0"-"9"] >	
-|	< #LETTER : ["A"-"Z","a"-"z"] >
-|   < INTEGER : (<DIGIT>)+ >
+< #DIGIT : ["0"-"9"] >	
+|	< #LETTER : ["A"-"Z","a"-"z"," ","é","è", "-", "_", "ç", "à", "@", "$","*","µ","£","§","%", "~", "#","{","}","|","`","²"] >
+|	< NUMBER : ("-")* ((<DIGIT>)+ | (<DIGIT>)+ "."(<DIGIT>)*) >
 |   < STRING_LITERAL : "(" ( < LETTER > 
 	| < DIGIT > 
 	| "'" 
@@ -103,8 +102,8 @@ NodeExpression iterationExpression() : {
 NodeExpression iterationNatural() : {
 	Token myToken;
 } {
-	< CROO > myToken = < INTEGER > < CROF > {
-		return new IntegerVariant(Integer.parseInt(myToken.image));
+	< CROO > myToken = < NUMBER > < CROF > {
+		return new NumberVariant(new NumberValue(myToken.image));
 	}
 }
 

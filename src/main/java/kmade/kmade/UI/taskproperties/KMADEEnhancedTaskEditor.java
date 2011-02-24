@@ -53,6 +53,7 @@ import kmade.kmade.KMADEConstant;
 import kmade.kmade.UI.toolutilities.KMADEToolUtilities;
 import kmade.kmade.UI.toolutilities.LanguageFactory;
 import kmade.kmade.adaptatorUI.ActorAdaptator;
+import kmade.kmade.adaptatorUI.ActorSystemAdaptator;
 import kmade.kmade.adaptatorUI.EventAdaptator;
 import kmade.kmade.adaptatorUI.PrePostIterExpressionAdaptator;
 import kmade.kmade.adaptatorUI.TaskPropertiesEnhancedEditorAdaptator;
@@ -61,6 +62,7 @@ import kmade.nmda.schema.tache.Executant;
 import kmade.nmda.schema.tache.Frequence;
 import kmade.nmda.schema.tache.Importance;
 import kmade.nmda.schema.tache.Modalite;
+import kmade.nmda.schema.tache.Tache;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -81,7 +83,7 @@ import kmade.nmda.schema.tache.Modalite;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, KeyListener, MouseListener, LanguageFactory {
 
@@ -125,6 +127,10 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
     private JPanel acteurPanel;
 
     private JTable acteurTable;
+    
+    private JPanel acteurSystemePanel;
+    
+    private JTable acteurSystemeTable;
 
     private JRadioButton averageFrequence;
 
@@ -195,6 +201,8 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
     private JScrollPane jScrollPane7;
 
     private JScrollPane jScrollPane8;
+    
+    private JScrollPane jScrollPane16;
 
     private JTextArea fireEvents;
 
@@ -246,7 +254,7 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 
     private JPanel panelWest;
 
-    private JPanel postconditionPanel;
+    private JPanel effetsdebordPanel;
 
     private JPanel preconditionPanel;
 
@@ -279,6 +287,8 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
     private JLabel valeurFrequenceLabel;
     
     private MyActorTableModel refTableModel;
+    
+    private MyActorSystemeTableModel refTableModelSys;
        
     private JButton myButton;
     
@@ -297,7 +307,7 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         nameField.addKeyListener(this);
         numField.setEditable(false);
         dureeField.addKeyListener(this);
-        
+        /*
         purposeField.setEditable(false);
         purposeField.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
@@ -306,7 +316,8 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         });
         purposeField.addMouseListener(this);
         purposeField.setBackground(nameField.getBackground());
-
+		*/
+        /*
         feedbackField.setEditable(false);
         feedbackField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -315,10 +326,11 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         });
         feedbackField.addMouseListener(this);
         feedbackField.setBackground(nameField.getBackground());
-        
+        */
+        /*
         observationArea.setEditable(false);
         observationArea.addMouseListener(this);
-
+		*/
         unkModalite.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                TaskPropertiesEnhancedEditorAdaptator.setUnknownModalite();
@@ -490,11 +502,19 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         
         acteurTable.addMouseListener(this);
         acteurTable.getTableHeader().addMouseListener(this);
+        
         refTableModel = new MyActorTableModel();
         acteurTable.setModel(refTableModel);
         
+        acteurSystemeTable.addMouseListener(this);
+        acteurSystemeTable.getTableHeader().addMouseListener(this);
+        
+        refTableModelSys = new MyActorSystemeTableModel();
+        acteurSystemeTable.setModel(refTableModelSys);
+        
+        
         objetsListPanel.setEditable(false);
-        this.setSize(new Dimension(900,750));
+        this.setPreferredSize(new Dimension(900,900));
         KMADEToolUtilities.setCenteredInScreen(this);
     }
 
@@ -600,7 +620,7 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
             String name, String but, String res, String feed, String duree,
             String obs, Executant exec, Modalite mod, Frequence freq, String compFreq,Importance imp,
             String events, boolean facultatif,
-            boolean interruptible, String[] allevents, String dec, ArrayList<String[]> actRef,
+            boolean interruptible, String[] allevents, String dec, ArrayList<String[]> actRef,ArrayList<String[]> actRefSys,
             String prec, String post,Decomposition decomposition, String it) {
         this.numField.setText(numero);
         // tacheMere
@@ -682,6 +702,17 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         
         this.fireEvents.setText(events);     
         this.refTableModel.setData(actRef);
+        this.refTableModelSys.setData(actRefSys);
+        if(Tache.canHaveActor(exec)){
+        	this.acteurPanel.setVisible(true);
+        }else{
+        	this.acteurPanel.setVisible(false);
+        }
+        if(Tache.canHaveActorSystem(exec)){
+        	 this.acteurSystemePanel.setVisible(true);
+        }else{
+        	this.acteurSystemePanel.setVisible(false);
+        }
 
         // Précondition, itération et liste des objets
         this.executionArea.setText(prec);
@@ -893,18 +924,20 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         leafOperateur = new javax.swing.JRadioButton();
         choiceOperateur = new javax.swing.JRadioButton();
         oiOperateur = new javax.swing.JRadioButton();
-        postconditionPanel = new javax.swing.JPanel();
+        effetsdebordPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         usedObjects = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         fireEvents = new javax.swing.JTextArea();
         acteurPanel = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
+        jScrollPane16 = new javax.swing.JScrollPane();
         acteurTable = new javax.swing.JTable();
         panelNorth = new javax.swing.JPanel();
         panelEast = new javax.swing.JPanel();
         panelSouth = new javax.swing.JPanel();
-
+        acteurSystemePanel = new javax.swing.JPanel();
+        acteurSystemeTable = new javax.swing.JTable();
         JPanel panelDuCentre = new JPanel(new BorderLayout(1,1));
         
         gaucheLabel = new KMADEEnhancedTaskLabel(KMADEEnhancedTaskLabel.LEFT);
@@ -1376,8 +1409,8 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        postconditionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("activeCaptionBorder"), 2, true), KMADEConstant.SIDE_EFFECT_TITLE_NAME));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(KMADEConstant.POSTCONDITION_LABEL_VALUE));
+        effetsdebordPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("activeCaptionBorder"), 2, true), KMADEConstant.EFFETSDEBORD_TITLE_NAME));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(KMADEConstant.EFFETSDEBORD_LABEL_VALUE));
         jScrollPane1.setOpaque(false);
         usedObjects.setColumns(20);
         usedObjects.setRows(5);
@@ -1393,24 +1426,28 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         fireEvents.setOpaque(true);
         jScrollPane2.setViewportView(fireEvents);
 
-        org.jdesktop.layout.GroupLayout postconditionPanelLayout = new org.jdesktop.layout.GroupLayout(postconditionPanel);
-        postconditionPanel.setLayout(postconditionPanelLayout);
-        postconditionPanelLayout.setHorizontalGroup(
-            postconditionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+        org.jdesktop.layout.GroupLayout effetsdebordPanelLayout = new org.jdesktop.layout.GroupLayout(effetsdebordPanel);
+        effetsdebordPanel.setLayout(effetsdebordPanelLayout);
+        effetsdebordPanelLayout.setHorizontalGroup(
+            effetsdebordPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
             .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
         );
-        postconditionPanelLayout.setVerticalGroup(
-            postconditionPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.LEADING, postconditionPanelLayout.createSequentialGroup()
+        effetsdebordPanelLayout.setVerticalGroup(
+            effetsdebordPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.LEADING, effetsdebordPanelLayout.createSequentialGroup()
                 .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 70, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
         );
 
         acteurPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("activeCaptionBorder"), 2, true), KMADEConstant.UTILISATEUR_LABEL_NAME));
+        acteurSystemePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("activeCaptionBorder"), 2, true), KMADEConstant.MATERIEL_LABEL_NAME));
+
         jScrollPane6.setBorder(null);        
         jScrollPane6.setViewportView(acteurTable);
+        jScrollPane16.setBorder(null);
+        jScrollPane16.setViewportView(acteurSystemeTable);
 
         org.jdesktop.layout.GroupLayout acteurPanelLayout = new org.jdesktop.layout.GroupLayout(acteurPanel);
         acteurPanel.setLayout(acteurPanelLayout);
@@ -1421,6 +1458,17 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         acteurPanelLayout.setVerticalGroup(
             acteurPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jScrollPane6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+        
+        org.jdesktop.layout.GroupLayout acteurSystemePanelLayout = new org.jdesktop.layout.GroupLayout(acteurSystemePanel);
+        acteurSystemePanel.setLayout(acteurSystemePanelLayout);
+        acteurSystemePanelLayout.setHorizontalGroup(
+            acteurSystemePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane16, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+        );
+        acteurSystemePanelLayout.setVerticalGroup(
+            acteurSystemePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jScrollPane16, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         org.jdesktop.layout.GroupLayout panelCenterLayout = new org.jdesktop.layout.GroupLayout(panelCenter);
@@ -1439,10 +1487,11 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(panelCenterLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(acteurPanel)
+                            .add(acteurSystemePanel)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, panelCenterLayout.createSequentialGroup()
                                 .add(ordonnancementPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(postconditionPanel)))))
+                                .add(effetsdebordPanel)))))
                 .add(2, 2, 2))
         );
         panelCenterLayout.setVerticalGroup(
@@ -1455,10 +1504,12 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
                 .add(caracteristiquePanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(2, 2, 2)
                 .add(panelCenterLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(postconditionPanel)
+                    .add(effetsdebordPanel)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, ordonnancementPanel))
                 .add(2, 2, 2)
                 .add(acteurPanel)
+                .add(2, 2, 2)
+                .add(acteurSystemePanel)
                 .add(2, 2, 2))
         );
         jScrollPane8.setViewportView(panelCenter);
@@ -1521,9 +1572,10 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         if (keyEvent.getSource() == nameField) {
             TaskPropertiesEnhancedEditorAdaptator.setNameInTaskProperties(nameField.getText());
         }
-        if (keyEvent.getSource() == dureeField) {
+       /* if (keyEvent.getSource() == dureeField) {
             TaskPropertiesEnhancedEditorAdaptator.setDureeInTaskProperties(dureeField.getText());
         }
+       */
         if (keyEvent.getSource() == valeurFrequenceField) {
             TaskPropertiesEnhancedEditorAdaptator.setFrequencyValueInTaskProperties(valeurFrequenceField.getText());
         }
@@ -1538,7 +1590,7 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         } else {
             return;
         }
-        
+        /*
         if (e.getSource() == purposeField) {
             TaskPropertiesEnhancedEditorAdaptator.setPurpose();
         }        
@@ -1548,17 +1600,22 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         if (e.getSource() == observationArea) {
             TaskPropertiesEnhancedEditorAdaptator.setObservation();
         }
+        */
         if (e.getSource() == fireEvents) {
             EventAdaptator.editedFromEnhancedFrame();
             TaskPropertiesEnhancedEditorAdaptator.setFiredEvents();
         }
         if (e.getSource() == usedObjects) {
             PrePostIterExpressionAdaptator.editedFromEnhancedFrame();
-            TaskPropertiesEnhancedEditorAdaptator.setPostcondition();
+            TaskPropertiesEnhancedEditorAdaptator.setEffetsDeBord();
         }
         if ((e.getSource() == acteurTable) || (e.getSource() == acteurTable.getTableHeader())) {
             ActorAdaptator.editedFromEnhancedFrame();
             TaskPropertiesEnhancedEditorAdaptator.setActeur();
+        }
+        if ((e.getSource() == acteurSystemeTable) || (e.getSource() == acteurSystemeTable.getTableHeader())) {
+            ActorSystemAdaptator.editedFromEnhancedFrame();
+            TaskPropertiesEnhancedEditorAdaptator.setActeurSysteme();
         }
         if (e.getSource() == iterationArea) {
             PrePostIterExpressionAdaptator.editedFromEnhancedFrame();
@@ -1629,6 +1686,11 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         refTableModel.fireTableDataChanged();
     }
     
+    public void setActorSystemList(ArrayList<String[]> plist) {
+        refTableModelSys.setData(plist);
+        refTableModelSys.fireTableDataChanged();
+    }
+    
     static class MyActorTableModel extends AbstractTableModel {
         private static final long serialVersionUID = 6645822274038186940L;
 
@@ -1671,6 +1733,48 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         
     }
     
+    static class MyActorSystemeTableModel extends AbstractTableModel {
+
+		private static final long serialVersionUID = 7120094526807221960L;
+		private ArrayList<String[]> myList = new ArrayList<String[]>();
+        
+        public void setData(ArrayList<String[]> plist) {
+            this.myList = plist;
+        }
+        
+        public int getRowCount() {
+            return myList.size();
+        }
+
+        public int getColumnCount() {            
+            return 3;
+        }
+
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            return myList.get(rowIndex)[columnIndex];
+        }
+
+        public String getColumnName(int column) {
+            switch(column) {
+                case 0 : {
+                    return KMADEConstant.ACTORSYSTEM_NAME_TABLE;
+                }
+                case 1 : {
+                    return KMADEConstant.ACTORSYSTEM_EXPERIENCE_TABLE;
+                }
+                case 2 : {
+                    return KMADEConstant.ACTORSYSTEM_COMPETENCE_TABLE;
+                }
+            }
+            return "";
+        }
+
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return false;
+        }
+        
+    }
+    
     public void notifLocalisationModification() {
         this.setTitle(KMADEConstant.COMPLETE_EDITOR_TITLE_NAME);
         preconditionPanel.setBorder(BorderFactory.createTitledBorder(new LineBorder(UIManager.getDefaults().getColor("activeCaptionBorder"), 2, true), KMADEConstant.EXECUTION_CONDITION_TITLE_NAME));
@@ -1691,7 +1795,7 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         unkExecutant.setText(Executant.getEnumereIntoLocaleExecutant("UNK"));
         userExecutant.setText(Executant.getEnumereIntoLocaleExecutant("USER"));
         sysExecutant.setText(Executant.getEnumereIntoLocaleExecutant("SYS"));
-        intExecutant.setText(Executant.getEnumereIntoLocaleExecutant("INT"));
+        intExecutant.setText(Executant.getEnumereIntoLocaleExecutant("NUM"));
         absExecutant.setText(Executant.getEnumereIntoLocaleExecutant("ABS"));
         unkImportance.setText(Importance.getEnumereIntoLocaleImportance("UNK"));
         lowImportance.setText(Importance.getEnumereIntoLocaleImportance("LOW"));
@@ -1718,10 +1822,11 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         leafOperateur.setText(Decomposition.getEnumereIntoLocaleDecomposition("LEAF"));
         choiceOperateur.setText(Decomposition.getEnumereIntoLocaleDecomposition("ALT"));
         oiOperateur.setText(Decomposition.getEnumereIntoLocaleDecomposition("ENT"));
-        postconditionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("activeCaptionBorder"), 2, true), KMADEConstant.SIDE_EFFECT_TITLE_NAME));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(KMADEConstant.POSTCONDITION_LABEL_VALUE));
+        effetsdebordPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("activeCaptionBorder"), 2, true), KMADEConstant.EFFETSDEBORD_TITLE_NAME));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(KMADEConstant.EFFETSDEBORD_LABEL_VALUE));
         jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(KMADEConstant.EVENT_NAME_TITLE));
         acteurPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("activeCaptionBorder"), 2, true), KMADEConstant.UTILISATEUR_LABEL_NAME));
+        acteurSystemePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("activeCaptionBorder"), 2, true), KMADEConstant.MATERIEL_LABEL_NAME));
         myButton.setText(KMADEConstant.GO_BACK_MESSAGE);
     }
 
@@ -1729,8 +1834,8 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
         this.executionArea.setText(precondition);
     }
     
-    public void setPostcondition(String postcondition) {
-        this.usedObjects.setText(postcondition);
+    public void setEffetsDeBord(String effetsdebord) {
+        this.usedObjects.setText(effetsdebord);
     }
     
     public void setIteration(String iteration) {

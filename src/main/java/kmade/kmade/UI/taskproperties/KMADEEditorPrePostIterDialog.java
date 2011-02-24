@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import kmade.kmade.KMADEConstant;
+import kmade.kmade.UI.taskproperties.constrainteditors.KMADEEffetsDeBordPanel;
 import kmade.kmade.UI.taskproperties.constrainteditors.KMADEIterationPanel;
-import kmade.kmade.UI.taskproperties.constrainteditors.KMADEPostconditionPanel;
 import kmade.kmade.UI.taskproperties.constrainteditors.KMADEPreconditionPanel;
 import kmade.kmade.UI.taskproperties.readworldobject.KMADEReadAbstractObjectPanel;
 import kmade.kmade.UI.toolutilities.DefaultPropertiesTableModel;
@@ -18,8 +18,8 @@ import kmade.kmade.UI.toolutilities.KMADEEnhancedSplitPane;
 import kmade.kmade.UI.toolutilities.KMADEToolUtilities;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
 import kmade.kmade.adaptatorUI.PrePostIterExpressionAdaptator;
+import kmade.nmda.schema.tache.EffetsDeBordExpression;
 import kmade.nmda.schema.tache.IterExpression;
-import kmade.nmda.schema.tache.PostExpression;
 import kmade.nmda.schema.tache.PreExpression;
 
 /**
@@ -41,14 +41,14 @@ import kmade.nmda.schema.tache.PreExpression;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEEditorPrePostIterDialog extends JPropertiesEditorDialog {   
     private static final long serialVersionUID = 529537907422650640L;
 
     private static final KMADEPreconditionPanel refPreconditionPanel = new KMADEPreconditionPanel();
 
-    private static final KMADEPostconditionPanel refPostconditionPanel = new KMADEPostconditionPanel();
+    private static final KMADEEffetsDeBordPanel refEffetsDeBordPanel = new KMADEEffetsDeBordPanel();
 
     private static final KMADEIterationPanel refIterconditionPanel = new KMADEIterationPanel();
     
@@ -61,7 +61,7 @@ public class KMADEEditorPrePostIterDialog extends JPropertiesEditorDialog {
         this.setModal(false);
         cardPanel = new JPanel(new CardLayout());
         cardPanel.add(refPreconditionPanel,"PRECONDITION");
-        cardPanel.add(refPostconditionPanel,"POSTCONDITION");
+        cardPanel.add(refEffetsDeBordPanel,"EFFETSDEBORD");
         cardPanel.add(refIterconditionPanel, "ITERATION");
                      
         JSplitPane mySplitPane = KMADEEnhancedSplitPane.createStrippedSplitPane(
@@ -89,25 +89,25 @@ public class KMADEEditorPrePostIterDialog extends JPropertiesEditorDialog {
             // Sélection de l'onglet pour la précondition
             cl.show(cardPanel,"PRECONDITION");
             PrePostIterExpressionAdaptator.setToPreCondition();
-        } else if (refModel.getValue(row) instanceof PostExpression) {
+        } else if (refModel.getValue(row) instanceof EffetsDeBordExpression) {
         		this.setTitle(KMADEConstant.EDITOR_POST_TITLE_NAME + " : " + GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getName());
-            refPostconditionPanel.setOutputMessage();
-            refPostconditionPanel.textArea.setText(((PostExpression)refModel.getValue(row)).getName());
-            refPostconditionPanel.setDescriptionArea(((PostExpression)refModel.getValue(row)).getDescription());
-            // Sélection de l'onglet pour la postcondition
-            cl.show(cardPanel,"POSTCONDITION");
-            PrePostIterExpressionAdaptator.setToPostCondition();
+            refEffetsDeBordPanel.setOutputMessage();
+            refEffetsDeBordPanel.textArea.setText(((EffetsDeBordExpression)refModel.getValue(row)).getName());
+            refEffetsDeBordPanel.setDescriptionArea(((EffetsDeBordExpression)refModel.getValue(row)).getDescription());
+            // Sélection de l'onglet pour la effetsdebord
+            cl.show(cardPanel,"EFFETSDEBORD");
+            PrePostIterExpressionAdaptator.setToEffetsDeBord();
         } else if (refModel.getValue(row) instanceof IterExpression) {
             this.setTitle(KMADEConstant.EDITOR_ITER_TITLE_NAME + " : " + GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getName());
             refIterconditionPanel.setOutputMessage();
             refIterconditionPanel.textArea.setText(((IterExpression)refModel.getValue(row)).getName());
             refIterconditionPanel.setDescriptionArea(((IterExpression)refModel.getValue(row)).getDescription());
-            // Sélection de l'onglet pour l'itération
-            cl.show(cardPanel,"ITERATION");
+            // Selection de l'onglet pour l'iteration
+           cl.show(cardPanel,"ITERATION");
             PrePostIterExpressionAdaptator.setToIterationCondition();
         } 
         PrePostIterExpressionAdaptator.disabledFrame();    
-        // Va falloir identifier s'il s'agit d'une précondition, d'une itération ou d'une postcondition
+        // Va falloir identifier s'il s'agit d'une précondition, d'une itération ou d'une effetsdebord
         super.showPropertiesEditor(refModel, row);
     }   
 
@@ -119,8 +119,8 @@ public class KMADEEditorPrePostIterDialog extends JPropertiesEditorDialog {
         return refPreconditionPanel;
     }
     
-    public static KMADEPostconditionPanel getPostonditionPanel() {
-        return refPostconditionPanel;
+    public static KMADEEffetsDeBordPanel getPostonditionPanel() {
+        return refEffetsDeBordPanel;
     }
     
     public static KMADEIterationPanel getIterationPanel() {

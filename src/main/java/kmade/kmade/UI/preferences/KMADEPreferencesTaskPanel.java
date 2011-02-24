@@ -36,7 +36,7 @@ import kmade.nmda.schema.tache.Decomposition;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEPreferencesTaskPanel extends javax.swing.JPanel {
 
@@ -125,7 +125,7 @@ public class KMADEPreferencesTaskPanel extends javax.swing.JPanel {
     	  		PreferencesAdaptator.enableApplyButton();
     	  	}
         });
-        taskFontColorComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { KMADEConstant.COLOR_BLACK, KMADEConstant.COLOR_RED, KMADEConstant.COLOR_BLUE, KMADEConstant.COLOR_GREEN, KMADEConstant.COLOR_YELLOW}));
+        taskFontColorComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { KMADEConstant.COLOR_BLACK, KMADEConstant.COLOR_WHITE, KMADEConstant.COLOR_BLUE, KMADEConstant.COLOR_GREEN, KMADEConstant.COLOR_YELLOW}));
         
         this.taskFontStyleComboBox.addActionListener(new java.awt.event.ActionListener() {	
     	  	public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +139,7 @@ public class KMADEPreferencesTaskPanel extends javax.swing.JPanel {
     	  		PreferencesAdaptator.enableApplyButton();
     	  	}
         });
-        taskBackgroundColorComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {KMADEConstant.COLOR_NO_COLOR, KMADEConstant.COLOR_RED, KMADEConstant.COLOR_BLUE, KMADEConstant.COLOR_GREEN, KMADEConstant.COLOR_YELLOW}));
+        taskBackgroundColorComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {KMADEConstant.COLOR_NO_COLOR, /*KMADEConstant.COLOR_RED,*/ KMADEConstant.COLOR_BLUE, KMADEConstant.COLOR_GREEN, KMADEConstant.COLOR_YELLOW}));
         
         this.operatorFontComboBox.addActionListener(new java.awt.event.ActionListener() {	
     	  	public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +168,7 @@ public class KMADEPreferencesTaskPanel extends javax.swing.JPanel {
     	  		PreferencesAdaptator.enableApplyButton();
     	  	}
         });
-        operatorFontColorComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { KMADEConstant.COLOR_BLACK, KMADEConstant.COLOR_RED, KMADEConstant.COLOR_BLUE, KMADEConstant.COLOR_GREEN, KMADEConstant.COLOR_YELLOW }));
+        operatorFontColorComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { KMADEConstant.COLOR_BLACK, /*KMADEConstant.COLOR_RED,*/ KMADEConstant.COLOR_BLUE, KMADEConstant.COLOR_GREEN, KMADEConstant.COLOR_YELLOW }));
         
         this.modelComboBox.addActionListener(new java.awt.event.ActionListener() {	
     	  	public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,11 +210,11 @@ public class KMADEPreferencesTaskPanel extends javax.swing.JPanel {
 	        JPanel myPanel = new JPanel();              
 
 	        FontMetrics fname = myPanel.getFontMetrics(KMADEConstant.TASK_NAME_FONT);        
-	        String name = "Nom de la tâche";
+	        String name = "Nom de la t�che";
 	        
 	        FontMetrics fnum = myPanel.getFontMetrics(KMADEConstant.TASK_NUM_FONT);        
 	        String num = "N:1.1.2.2";
-	        String iteration = "I:prédicat";
+	        String iteration = KMADEConstant.VERTEX_STATE_LETTER+KMADEConstant.PREDICAT_ITERATION_VIEW_MESSAGE;
 	        int maxNumOrIter = Math.max(fnum.stringWidth(num), fnum.stringWidth(iteration));
 	        
 	        int width = 0;
@@ -252,14 +252,14 @@ public class KMADEPreferencesTaskPanel extends javax.swing.JPanel {
             Rectangle2D rnum = fm.getStringBounds(numero, f);
 
             // L'itération
-            String iteration = "I:prédicat";
+            String iteration = "I:pr�dicat";
                       
             Rectangle2D riter = fm.getStringBounds(iteration, f);
 
             this.paintStateCaract(f, width + 32 / 2 + 2, numero, iteration, rnum.getHeight(), riter.getHeight());
             
             // Le nom
-            String name = "Nom de la tâche";
+            String name = "Nom de la t�che";
             f.setFont(KMADEConstant.TASK_NAME_FONT);
             f.setColor(KMADEConstant.TASK_NAME_COLOR); 
             fm = f.getFontMetrics();
@@ -552,7 +552,13 @@ public class KMADEPreferencesTaskPanel extends javax.swing.JPanel {
     /*  modificateurs des valeurs des composants */
     /* ***************************************** */
     public void setFontTask(String value) {
-		taskFontComboBox.setSelectedItem(value);
+    	if(value == KMADEConstant.FRENCH_LANGUAGE_INFO){
+    		taskFontComboBox.setSelectedItem(KMADEConstant.FRENCH_LANGUAGE_INFO);
+    	}
+    	else if(value == KMADEConstant.ENGLISH_LANGUAGE_INFO){
+    		taskFontComboBox.setSelectedItem(KMADEConstant.ENGLISH_LANGUAGE_INFO);    		
+    	}
+		
 	}
 
 	public void setFontSizeTask(String value) {

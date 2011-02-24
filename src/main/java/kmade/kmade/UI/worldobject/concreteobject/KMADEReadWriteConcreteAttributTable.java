@@ -42,7 +42,7 @@ import kmade.nmda.schema.metaobjet.TypeStructure;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEReadWriteConcreteAttributTable extends JScrollPane implements LanguageFactory {
 

@@ -31,7 +31,7 @@ import kmade.kmade.adaptatorUI.PrePostIterExpressionAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEEditorTextDialog extends JPropertiesEditorDialog {
     private static final long serialVersionUID = -6348137983085333000L;

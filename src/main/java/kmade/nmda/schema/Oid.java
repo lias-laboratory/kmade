@@ -21,9 +21,9 @@ import java.io.Serializable;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @authors Vincent Lucquiaud and Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @authors Vincent Lucquiaud and Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
-public class Oid implements Comparable, Serializable {
+public class Oid implements Comparable<Object>, Serializable {
     private static final long serialVersionUID = -5084335304591633333L;
 
     public static final String OID_NULL = "null";

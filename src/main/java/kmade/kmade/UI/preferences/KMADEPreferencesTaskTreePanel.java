@@ -28,7 +28,7 @@ import kmade.kmade.adaptatorUI.PreferencesAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEPreferencesTaskTreePanel extends javax.swing.JPanel {
 
@@ -64,7 +64,7 @@ public class KMADEPreferencesTaskTreePanel extends javax.swing.JPanel {
         			PreferencesAdaptator.enableApplyButton();
 			}
 		});
-        	heightTreeComboBox.setModel(new DefaultComboBoxModel(new String[] {"90","100","110","120","130","140","160","180","200","220"})) ;
+        	heightTreeComboBox.setModel(new DefaultComboBoxModel(new String[] {/*"90","100","110","120",*/"130","140","160","180","200","220"})) ;
         
 		this.orientationtTreeComboBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,8 +79,13 @@ public class KMADEPreferencesTaskTreePanel extends javax.swing.JPanel {
 				PreferencesAdaptator.enableApplyButton();
 			}
 		});
-		distanceNodaleComboBox.setModel(new DefaultComboBoxModel(new String[] { "10","20","30","40","50","60","70"}));
+		//distanceNodaleComboBox.setModel(new DefaultComboBoxModel(new String[] { "10","20","30","40","50","60","70"}));
 
+		
+		////////////////modifi� /////////////////
+		distanceNodaleComboBox.setModel(new DefaultComboBoxModel(new String[] { "60","70", "80", "90", "100", "110", "120","150","200","250","500"}));
+		
+		
 		this.colorSelectTreeComboBox.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				PreferencesAdaptator.enableApplyButton();
@@ -215,7 +220,7 @@ public class KMADEPreferencesTaskTreePanel extends javax.swing.JPanel {
 	public void setOrthogonaliteArbre(String value) {
 		orthogonalityTreeCheckBox.setSelected(Boolean.parseBoolean(value));
 	}
-    
+	
     public JComboBox getHauteurArbre() {
 		return heightTreeComboBox;
 	}

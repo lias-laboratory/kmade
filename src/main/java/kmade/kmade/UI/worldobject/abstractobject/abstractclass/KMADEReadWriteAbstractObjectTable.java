@@ -3,6 +3,8 @@ package kmade.kmade.UI.worldobject.abstractobject.abstractclass;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -12,10 +14,12 @@ import kmade.kmade.KMADEConstant;
 import kmade.kmade.UI.toolutilities.DefaultListTableModel;
 import kmade.kmade.UI.toolutilities.JListTable;
 import kmade.kmade.UI.toolutilities.LanguageFactory;
+import kmade.kmade.adaptatorFC.parserExpression.RegularExpression;
 import kmade.kmade.adaptatorUI.AbstractObjectAdaptator;
 import kmade.kmade.adaptatorUI.AbstractObjectPanelAdaptator;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
 import kmade.nmda.schema.Oid;
+import kmade.nmda.schema.metaobjet.ObjetAbstrait;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -36,7 +40,7 @@ import kmade.nmda.schema.Oid;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEReadWriteAbstractObjectTable extends JScrollPane implements LanguageFactory {
     private static final long serialVersionUID = -7852657328634031613L;
@@ -51,7 +55,7 @@ public class KMADEReadWriteAbstractObjectTable extends JScrollPane implements La
         String[] columnNames = {KMADEConstant.ABSTRACT_OBJECT_NAME_TABLE, KMADEConstant.ABSTRACT_OBJECT_OBSERVATION_TABLE};
         myTableListModel = new MyTableListModel(columnNames,KMADEConstant.ABSTRACT_OBJECT_NEW_OBJECT_TABLE);
         myListTable = new JListTable(myTableListModel, myTableListModel.getListModel());
-        myListTable.setCellEditor(0, "String",null);
+        myListTable.setCellEditor(0, "SpecialString",null);
         myListTable.setCellEditor(1, "String",null);
         myListTable.addAllKeyListener(new MyKeyListener());
         this.setViewportView(myListTable);
@@ -114,13 +118,45 @@ public class KMADEReadWriteAbstractObjectTable extends JScrollPane implements La
             super(columnNames, nameDefault);
         }    
         
+		private String nameTest(String value){
+			String name =value;
+			boolean needVerif = true;
+			// un nom null annule l'édition, boucle tant que le nom n'est pas correct  
+			while (name != null && needVerif){
+				// vérification de l'expression régulière avec affichage d'un popUp
+				if( !RegularExpression.isGoodAbstractObjectName(name)){
+					name = (String) JOptionPane.showInputDialog(GraphicEditorAdaptator.getMainFrame(),KMADEConstant.BAD_CHARACTER_TEXT,
+							KMADEConstant.BAD_CARACTER_TITLE,JOptionPane.YES_NO_OPTION,
+							new ImageIcon(GraphicEditorAdaptator.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE))
+					,null,name
+					);
+				}else{ // l'expression est ok
+					if(ObjetAbstrait.isUniqueName(name)){
+						// si le nom est unique, le nom est correct et possible
+						needVerif = false;
+					} else {
+						name = (String)  JOptionPane.showInputDialog(GraphicEditorAdaptator.getMainFrame(),KMADEConstant.SAME_NAME_TEXT,
+								KMADEConstant.SAME_NAME_TITLE,JOptionPane.YES_NO_OPTION,
+								new ImageIcon(GraphicEditorAdaptator.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE))
+						,null,ObjetAbstrait.propositionNom(name)
+						);
+					}		
+				}
+			}
+			return name;
+		}
+        
         public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
             String value = (String)aValue;
       
             if (rowIndex + 1 == this.getRowCount()) {
                 if (value.equals("")) {
                     return;
-                }   
+                }
+                String name = nameTest(value);
+				if(name == null || name.equals("")){
+					return;	}
+				value = name;
                 // Ajouter une nouvelle ligne.
                 String newAbstractObject = AbstractObjectAdaptator.addAbstractObject();
                 value = AbstractObjectAdaptator.setAbstractObjectName(newAbstractObject,value);
@@ -136,6 +172,10 @@ public class KMADEReadWriteAbstractObjectTable extends JScrollPane implements La
                         String nameRow = (String)tempValue[0];
                         if (nameRow.equals(value) || value.equals(""))
                             return;
+                        String name = nameTest(value);
+        				if(name == null || name.equals("")|| nameRow.equals(name)){
+        					return;	}
+        				value = name;
                         value = AbstractObjectAdaptator.setAbstractObjectName(oidRow,value);
                         break;
                     }

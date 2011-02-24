@@ -1,5 +1,7 @@
 package kmade.nmda.schema.expression;
 
+import kmade.nmda.ExpressConstant;
+
 /**
  * K-MADe : Kernel of Model for Activity Description environment
  * Copyright (C) 2006  INRIA - MErLIn Project
@@ -19,7 +21,7 @@ package kmade.nmda.schema.expression;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class ConditionalOperator extends Operator {
 
@@ -33,16 +35,12 @@ public class ConditionalOperator extends Operator {
         super.checkNode();
         
         if (getLeftNode().isBoolean() && getRightNode().isBoolean()) {
-            try {                              
                 this.setNodeValue(false);
                 this.setStateToUnknown();
                 return;
-            } catch (NumberFormatException e) {
-            		this.setStateToError();
-            		throw new SemanticException();
-            }
         }
     
+        /* On n'autorise pas le cast d'un String en booléen
         if (getLeftNode().isBoolean() && getRightNode().isString()) {
             try 
             {
@@ -56,8 +54,8 @@ public class ConditionalOperator extends Operator {
                 throw new SemanticException();
             }
         }
-        
-                    
+        */
+        /* On n'autorise pas le cast d'un String en booléen           
         if (getLeftNode().isString() && getRightNode().isBoolean()) {
             try 
             {
@@ -71,7 +69,8 @@ public class ConditionalOperator extends Operator {
             		throw new SemanticException();
             }
         }           
-        
+        */
+        /*  On n'autorise pas le cast d'un String en booléen
         if (getLeftNode().isString() && getRightNode().isString()) {
             try 
             {
@@ -86,10 +85,10 @@ public class ConditionalOperator extends Operator {
                 throw new SemanticException();
             }
         }
-        
+        */
 
-        // Y a une erreur de type.
+        // Y a une erreur de type : pas deux booléens
         this.setStateToError();
-        throw new SemanticException();
+		throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
     }
 }

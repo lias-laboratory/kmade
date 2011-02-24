@@ -1,5 +1,6 @@
 package kmade;
 
+
 /**
  * K-MADe : Kernel of Model for Activity Description environment
  * Copyright (C) 2006  INRIA - MErLIn Project
@@ -19,7 +20,7 @@ package kmade;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEToolConstant {
     public static final String IMAGE_DIRECTORY_NAME = "/kmade/resources/images/";
@@ -28,13 +29,14 @@ public class KMADEToolConstant {
 
     public static final String VELOCITY_TEMPLATE_DIRECTORY_NAME = "/kmade/resources/vm/";
     
-    public static final String BUNDLE_FILE = "kmade/resources/languages/KMADeConstant";
+    public static final String BUNDLE_FILE = "kmade.resources.languages.KMADeConstant";
 
     public static final String DTD_DIRECTORY_NAME = "/kmade/resources/dtd";
     
     public static final String TOOL_NAME = "KMADe";
 
-    public static final String VERSION_VALUE = "0.1.7 Beta";
+    public static final String VERSION_VALUE = "1.0.0";
 
 	public static String PACKAGE_PATH_NAME = "kmade.nmda.schema.";
+		
 }

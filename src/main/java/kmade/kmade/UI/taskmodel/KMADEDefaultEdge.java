@@ -25,7 +25,7 @@ import org.jgraph.graph.GraphConstants;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEDefaultEdge extends DefaultEdge {
 	private static final long serialVersionUID = 2073946250698010718L;
@@ -36,7 +36,7 @@ public class KMADEDefaultEdge extends DefaultEdge {
     
 	public KMADEDefaultEdge() {
         super();
-		Map map = new Hashtable();
+		Map<Object, Object> map = new Hashtable<Object, Object>();
 		GraphConstants.setLineEnd(map, GraphConstants.ARROW_NONE);
 		GraphConstants.setLabelAlongEdge(map, false);
 		GraphConstants.setRouting(map, new KMADEEdgeView.NMDAEdgeRouting());

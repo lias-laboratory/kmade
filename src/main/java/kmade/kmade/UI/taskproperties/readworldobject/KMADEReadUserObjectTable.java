@@ -8,7 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -36,7 +35,7 @@ import kmade.nmda.schema.Oid;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEReadUserObjectTable extends JScrollPane {
     private static final long serialVersionUID = 4688187958637137151L;
@@ -73,7 +72,7 @@ public class KMADEReadUserObjectTable extends JScrollPane {
 	public KMADEReadUserObjectTable() {
         modele = new myModel();
         table = new KMADEJTable(modele);
-        table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+       // table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setViewportView(table);
         table.addMouseListener(new mouseHelpListener());
         table.getColumnModel().getColumn(3).setCellRenderer(new MyImageColumn());
@@ -90,7 +89,7 @@ public class KMADEReadUserObjectTable extends JScrollPane {
         private Object[][] data = new Object[0][];
         
 		public int getColumnCount() {
-			return 4;
+			return 5;
 		}
 
 		public int getRowCount() {
@@ -107,6 +106,7 @@ public class KMADEReadUserObjectTable extends JScrollPane {
                 case 1 : return KMADEConstant.USER_STATUS_TABLE;
                 case 2 : return KMADEConstant.USER_ROLE_TABLE;
                 case 3 : return KMADEConstant.USER_PHOTO_TABLE;
+                case 4 : return KMADEConstant.USER_MEMBERS;
                 default : return "";
             }
 		}
@@ -119,8 +119,8 @@ public class KMADEReadUserObjectTable extends JScrollPane {
 	class mouseHelpListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent mouseEvent) {
 			if (mouseEvent.getClickCount() == 2) {
-                String select = (String) table.getModel().getValueAt(table.getSelectedRow(), 4);
-                ActorAdaptator.addNewActor(new Oid(select));
+				String select = (String) modele.getValueAt(table.getSelectedRow(), 5);
+				ActorAdaptator.addNewActor(new Oid(select));
 			}
 		}
 	}    

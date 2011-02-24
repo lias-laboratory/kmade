@@ -49,7 +49,7 @@ import kmade.kmade.adaptatorUI.PrintAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEPrintingDialog extends JDialog implements LanguageFactory {
 	private static final long serialVersionUID = 4335454175244701286L;
@@ -58,7 +58,7 @@ public class KMADEPrintingDialog extends JDialog implements LanguageFactory {
     
     private static final ImageIcon PORTRAIT_IMAGE = new ImageIcon(GraphicEditorAdaptator.class.getResource(KMADEConstant.PORTRAIT_IMAGE));
     
-	private String[] myTable = {"10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%", "110%", "120%", "130%","Adapter au modèle", "Personnaliser..."};
+	private String[] myTable = {"10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%", "110%", "120%", "130%",KMADEConstant.PRINT_SCALE_ADAPT_MESSAGE, KMADEConstant.PRINT_SCALE_PERSONALIZE_MESSAGE};
     
     private AbstractAction printAction;
     

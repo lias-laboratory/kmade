@@ -43,7 +43,7 @@ import org.jgraph.graph.GraphContext;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEVertexSimulationView extends KMADEVertexView {
 	private static final float TRANSPARENCY_COEF = 0.70f;
@@ -135,7 +135,7 @@ public class KMADEVertexSimulationView extends KMADEVertexView {
         JPanel myPanel = new JPanel(); 
         
         FontMetrics fstate = myPanel.getFontMetrics(KMADEConstant.TASK_NUM_FONT);
-        String state = "S:" +  KMADEConstant.NO_RESUMED_STATE_TASK_SIMULATION_MESSAGE;
+        String state = KMADEConstant.VERTEX_STATE_LETTER +  KMADEConstant.NO_RESUMED_STATE_TASK_SIMULATION_MESSAGE;
 
         int newWidth = 16 + 32 + 4 + 4 * state.length() + fstate.stringWidth(state) + 10;
         
@@ -185,7 +185,7 @@ public class KMADEVertexSimulationView extends KMADEVertexView {
     }
     
     protected String getIterationName(KMADEDefaultGraphCell myGraphCell) {
-        String iteration = "I:";
+        String iteration = KMADEConstant.VERTEX_ITER_LETTER;
         if (myGraphCell.getTask().getIteExpression().isErrorInExpression()) {
             iteration += KMADEConstant.ERROR_ITERATION_VIEW_MESSAGE;
         } else {
@@ -229,27 +229,41 @@ public class KMADEVertexSimulationView extends KMADEVertexView {
             }
         }
         
+        /**
+         * permet l'affichage du texte et de la couleur concernant l'état de la tâche ainsi que les informations d'itération
+         * @param gr le graphix
+         * @param widthString - n'est plus utilisé
+         * @param numString - n'est plus utilisé
+         * @param iterString - la chaine pour itération
+         * @param num - la position horizontale du texte pour l'état
+         * @param iter - la position de la fin de la chaine pour l'itération
+         */
         protected void paintStateCaract(Graphics2D gr, int widthString, String numString, String iterString, double num, double iter) {
             gr.setFont(KMADEConstant.TASK_NUM_FONT);
             FontMetrics fm = gr.getFontMetrics();
-            Rectangle2D rState = fm.getStringBounds("S:", gr);
+            //Rectangle2D rState = fm.getStringBounds("S:", gr);
+            int height = fm.getAscent();
+            int iterWidth = fm.stringWidth(iterString);
             
-            int V_NUM_ITE_GAP = (int)(IMAGE_32_HEIGH - num - iter - rState.getHeight()) / 4;
-            gr.drawString(numString, widthString, BEGIN_V_GAP + V_NUM_ITE_GAP + (int)num);
-            gr.drawString(iterString, widthString, BEGIN_V_GAP + V_NUM_ITE_GAP + (int)num + V_NUM_ITE_GAP + (int)iter);
+           // int V_NUM_ITE_GAP = (int)(IMAGE_32_HEIGH - num - iter - rState.getHeight()) / 4;
+           // gr.drawString(numString, widthString, BEGIN_V_GAP + V_NUM_ITE_GAP + (int)num);
+            //gr.drawString(iterString, widthString, BEGIN_V_GAP + V_NUM_ITE_GAP + (int)num + V_NUM_ITE_GAP + (int)iter);
                         
             Color stateTaskColor = KMADEVertexSimulationView.this.getStateColor();
             String message = KMADEVertexSimulationView.this.getStateMessage();
             gr.setColor(Color.BLACK);
             
-            gr.drawString("S:" + message, widthString, BEGIN_V_GAP + V_NUM_ITE_GAP + (int)num + V_NUM_ITE_GAP + (int)iter + V_NUM_ITE_GAP + (int)rState.getHeight());           
+           //  gr.drawString("S:" + message, widthString, BEGIN_V_GAP + V_NUM_ITE_GAP + (int)num + V_NUM_ITE_GAP + (int)iter + V_NUM_ITE_GAP + (int)rState.getHeight());           
+           // gr.drawString("I:" + iterString, widthString, BEGIN_V_GAP + V_NUM_ITE_GAP + (int)num + V_NUM_ITE_GAP + (int)iter);
+            double marge = 2;
+            gr.drawString(KMADEConstant.VERTEX_STATE_LETTER + message, (int) (num + marge) ,height);           
+            gr.drawString(iterString,(int) (iter - iterWidth - marge), height);
 
             // Dessin pour visualiser l'Ã©tat de la tÃ¢che.
             if (stateTaskColor != null) {
                 gr.setColor(stateTaskColor);
                 gr.fillRect(((int) this.getBounds().getWidth() / 2) - 40, 1, 80, (int) this.getBounds().getHeight() - 1);
             }
-            gr.setColor(Color.BLACK);
         }
         
         public void paint(Graphics gr) {                
@@ -265,10 +279,13 @@ public class KMADEVertexSimulationView extends KMADEVertexView {
                     }
                 }
             }
-                
+            Rectangle2D rect = this.getBounds();
+            double widht = rect.getWidth();
             this.paintTask(gr);
-
+            String iter = getIterationName(myGraphCell);
             Graphics2D f = (Graphics2D) gr;
+            //permet l'ajout de la couleur et du texte du à l'état de la tache, f le graph, 0 position selon X, "" n'est plus utile,"",-5 et -20 permettent de determiner la position verticale de l'affichage du texte
+            paintStateCaract(f, 0, "", iter, 0,widht);
             if (selected) {
                 f.setStroke(GraphConstants.SELECTION_STROKE);
                 f.setColor(KMADEConstant.TASK_SELECTION_COLOR);

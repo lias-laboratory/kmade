@@ -37,7 +37,7 @@ import kmade.nmda.schema.metaobjet.TypeStructure;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEIterationExpressionPanel extends JPanel implements LanguageFactory {
 
@@ -265,10 +265,10 @@ public class KMADEIterationExpressionPanel extends JPanel implements LanguageFac
         this.uint.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 IterationAdaptator
-                        .setNewToken(PreconditionConstants.tokenImage[PreconditionConstants.UNKNOWN_INT]
+                        .setNewToken(PreconditionConstants.tokenImage[PreconditionConstants.UNKNOWN_NUMBER]
                                 .substring(
                                         1,
-                                        PreconditionConstants.tokenImage[PreconditionConstants.UNKNOWN_INT]
+                                        PreconditionConstants.tokenImage[PreconditionConstants.UNKNOWN_NUMBER]
                                                 .length() - 1));
             }
         });
@@ -413,7 +413,7 @@ public class KMADEIterationExpressionPanel extends JPanel implements LanguageFac
         ubool.setText("?BOOL");
         literalPanel.add(ubool);
 
-        uint.setText("?INT");
+        uint.setText("?NUM");
         literalPanel.add(uint);
 
         ustr.setText("?STR");

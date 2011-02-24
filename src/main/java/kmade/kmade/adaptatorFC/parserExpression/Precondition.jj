@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 
 options {
@@ -32,48 +32,42 @@ PARSER_BEGIN(Precondition)
 
 package kmade.kmade.adaptatorFC.parserExpression;
 
-import kmade.nmda.schema.expression.NodeExpression;
-import kmade.nmda.schema.expression.IntegerConstant;
-import kmade.nmda.schema.expression.StringConstant;
-import kmade.nmda.schema.expression.BooleanConstant;
-import kmade.nmda.schema.expression.RelationalOperator;
-import kmade.nmda.schema.expression.InfOperator;
-import kmade.nmda.schema.expression.SupOperator;
-import kmade.nmda.schema.expression.SupEqualOperator;
-import kmade.nmda.schema.expression.InfEqualOperator;
-import kmade.nmda.schema.expression.EqualityOperator;
+import kmade.kmade.KMADEConstant;
 import kmade.nmda.schema.expression.AndOperator;
-import kmade.nmda.schema.expression.OrOperator;
-import kmade.nmda.schema.expression.EqualOperator;
-import kmade.nmda.schema.expression.DiffOperator;
-import kmade.nmda.schema.expression.GroupExpressExpression;
 import kmade.nmda.schema.expression.AttributExpressExpression;
-import kmade.nmda.schema.expression.IsEmptyUnaryFunction;
-import kmade.nmda.schema.expression.IsExistFunction;
-import kmade.nmda.schema.expression.IsExistAtFunction;
-import kmade.nmda.schema.expression.NotUnaryFunction;
-import kmade.nmda.schema.expression.UserBoolean;
-import kmade.nmda.schema.expression.UserString;
-import kmade.nmda.schema.expression.UserInteger;
+import kmade.nmda.schema.expression.BooleanConstant;
+import kmade.nmda.schema.expression.DiffOperator;
+import kmade.nmda.schema.expression.EqualOperator;
+import kmade.nmda.schema.expression.EqualityOperator;
 import kmade.nmda.schema.expression.ExpressException;
-import kmade.nmda.schema.expression.LengthUnaryFunction;
-import kmade.nmda.schema.expression.LengthFunction;
-import kmade.nmda.schema.expression.ParenthesisExpression;
 import kmade.nmda.schema.expression.GetFunction;
 import kmade.nmda.schema.expression.GetUnaryFunction;
-import kmade.kmade.KMADEConstant;
-
+import kmade.nmda.schema.expression.GroupExpressExpression;
+import kmade.nmda.schema.expression.InfEqualOperator;
+import kmade.nmda.schema.expression.InfOperator;
+import kmade.nmda.schema.expression.IsEmptyUnaryFunction;
+import kmade.nmda.schema.expression.IsExistAtFunction;
+import kmade.nmda.schema.expression.IsExistFunction;
+import kmade.nmda.schema.expression.LengthFunction;
+import kmade.nmda.schema.expression.LengthUnaryFunction;
+import kmade.nmda.schema.expression.NodeExpression;
+import kmade.nmda.schema.expression.NotUnaryFunction;
+import kmade.nmda.schema.expression.NumberConstant;
+import kmade.nmda.schema.expression.OrOperator;
+import kmade.nmda.schema.expression.ParenthesisExpression;
+import kmade.nmda.schema.expression.RelationalOperator;
+import kmade.nmda.schema.expression.StringConstant;
+import kmade.nmda.schema.expression.SupEqualOperator;
+import kmade.nmda.schema.expression.SupOperator;
+import kmade.nmda.schema.expression.UserBoolean;
+import kmade.nmda.schema.expression.UserNumber;
+import kmade.nmda.schema.expression.UserString;
+import kmade.nmda.schema.metaobjet.NumberValue;
 @SuppressWarnings({"all"})
+
 public class Precondition {
 
-  public ParseException generateParseException() {
-      Token errortok = token.next;
-      int line = errortok.beginLine, column = errortok.beginColumn;
-      String mess = (errortok.kind == 0) ? tokenImage[0] : errortok.image;
-      return new ParseException(KMADEConstant.COLUMN_MESSAGE + " " + column + ", " + KMADEConstant.ENCOUNTERED_TOKEN_MESSAGE + " \"" + mess + " \"");
-  }
 }
-
 PARSER_END(Precondition)
 
 SKIP :
@@ -91,7 +85,7 @@ TOKEN :
 |	< EMPTY : "isEmpty" >
 |	< NOMBRE : "card" >
 |	< GETVALUE : "getValue" >
-|	< UNKNOWN_INT : "?INT" >
+|	< UNKNOWN_NUMBER : "?NUM" >
 |	< UNKNOWN_STRING : "?STR" >
 |	< UNKNOWN_BOOLEAN : "?BOOL" >
 }
@@ -115,17 +109,22 @@ TOKEN:
 
 TOKEN:
 {
-  	< #DIGIT : ["0"-"9"] >	
-|	< #LETTER : ["A"-"Z","a"-"z"] >
-|	< BOOLEAN : "true" | "false" >	
-|	< INTEGER : (<DIGIT>)+ >
-|	< IDENT : "$" <LETTER> (<LETTER> | <DIGIT>)* >
-|	< STRING : "'" <LETTER> (<LETTER> | <DIGIT>)* "'" >
+  	< #DIGIT     : ["0"-"9"] >	
+|	< #LETTER    : ["A"-"Z","a"-"z",".","é","è", "-", "_", "ç", "à", "@", "*","µ","£","§","%", "~", "#","{","}","|","`","²"] >
+|	< BOOLEAN    : "true" | "false" >	
+|	< NUMBER : ("-")* ((<DIGIT>)+ | (<DIGIT>)+ "."(<DIGIT>)*) >
+|   < NOSPACE    : (<LETTER>) | (<DIGIT>) >
+|   < WITHSPACE  : (<NOSPACE> | " ") >
+|   < MIDLESPACE : (<NOSPACE>)+ (<WITHSPACE>)* (<NOSPACE>)+ >
+|   < FINALSTR   :  <MIDLESPACE> | (<NOSPACE>)+ >
+|	< IDENT : "$" <FINALSTR>  >
+|	< STRING : "'" (<FINALSTR>)* "'" >
 }
 
-NodeExpression expression() : {	NodeExpression node; }{	< INTEGER > <EOF> { throw new ParseException(KMADEConstant.NO_FIRST_EXPRESSION_MESSAGE); }|   < STRING > <EOF> { throw new ParseException(KMADEConstant.NO_FIRST_EXPRESSION_MESSAGE); } 	|   < UNKNOWN_INT > <EOF> { throw new ParseException(KMADEConstant.NO_FIRST_EXPRESSION_MESSAGE); }|   < UNKNOWN_STRING > <EOF> { throw new ParseException(KMADEConstant.NO_FIRST_EXPRESSION_MESSAGE); }    |	node = conditionalOrExpression() <EOF> { 
-		if (node instanceof StringConstant || node instanceof IntegerConstant 
-		 		|| node instanceof UserInteger || node instanceof UserString 
+NodeExpression expression() : {	NodeExpression node; }{	< NUMBER > <EOF> { throw new ParseException(KMADEConstant.NO_FIRST_EXPRESSION_MESSAGE); }|   < STRING > <EOF> { throw new ParseException(KMADEConstant.NO_FIRST_EXPRESSION_MESSAGE); }
+|   < NUMBER > <NUMBER> { throw new ParseException(); } 	 	|   < UNKNOWN_NUMBER > <EOF> { throw new ParseException(KMADEConstant.NO_FIRST_EXPRESSION_MESSAGE); }|   < UNKNOWN_STRING > <EOF> { throw new ParseException(KMADEConstant.NO_FIRST_EXPRESSION_MESSAGE); }    |	node = conditionalOrExpression() <EOF> { 
+		if (node instanceof StringConstant || node instanceof NumberConstant 
+		 		|| node instanceof UserNumber || node instanceof UserString 
 				|| node instanceof LengthUnaryFunction || node instanceof LengthFunction) {
 			throw new ParseException(KMADEConstant.NO_FIRST_EXPRESSION_MESSAGE);
 		}
@@ -231,12 +230,12 @@ NodeExpression primaryExpression() :
 |   node = getValue() { return node; }
 |   myToken = < STRING > { 
 		return new StringConstant(myToken.image.substring(1,myToken.image.length() - 1));
-	}| 	myToken =  < INTEGER > { 
-		return new IntegerConstant(Integer.parseInt(myToken.image));
+	}| 	myToken =  < NUMBER > { 
+		return new NumberConstant(new NumberValue(myToken.image));
 	}
 |   myToken = < BOOLEAN > { 
 		return new BooleanConstant(Boolean.parseBoolean(myToken.image)); 
-	}|   < UNKNOWN_INT > { return new UserInteger(); }|   < UNKNOWN_STRING > { return new UserString(); }
+	}|   < UNKNOWN_NUMBER > { return new UserNumber(); }|   < UNKNOWN_STRING > { return new UserString(); }
 |   < UNKNOWN_BOOLEAN > { return new UserBoolean(); }
 |	<PARO> node = conditionalOrExpression() <PARF> { return new ParenthesisExpression(node); }
 }
@@ -449,13 +448,13 @@ NodeExpression primaryExpressionFunction(GroupExpressExpression ref) :
 |   myToken = < STRING > { 
 		return new StringConstant(myToken.image.substring(1,myToken.image.length() - 1));
 	}
-| 	myToken =  < INTEGER > { 
-		return new IntegerConstant(Integer.parseInt(myToken.image));
+| 	myToken =  < NUMBER > { 
+		return new NumberConstant(new NumberValue(myToken.image));
 	}
 |   myToken = < BOOLEAN > { 
 		return new BooleanConstant(Boolean.parseBoolean(myToken.image)); 
 	}
-|   < UNKNOWN_INT > { return new UserInteger(); }
+|   < UNKNOWN_NUMBER > { return new UserNumber(); }
 |   < UNKNOWN_STRING > { return new UserString(); }
 |   < UNKNOWN_BOOLEAN > { return new UserBoolean(); }
 |	<PARO> node = conditionalOrExpressionFunction(ref) <PARF> { return new ParenthesisExpression(node); }

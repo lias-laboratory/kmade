@@ -25,7 +25,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.taskproperties.constrainteditors.KMADESetTypeComboBox;
+import kmade.kmade.UI.taskproperties.constrainteditors.KMADEGroupTypeComboBox;
 import kmade.kmade.UI.taskproperties.constrainteditors.KMADEUserExpressionField;
 import kmade.kmade.UI.toolutilities.JTextAreaOutputStream;
 import kmade.kmade.UI.toolutilities.KMADEToolUtilities;
@@ -51,7 +51,7 @@ import kmade.kmade.adaptatorUI.SimulationAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
 
@@ -69,19 +69,19 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
     
     private ArrayList<KMADEUserExpressionField> myExpressionPreconditionFieldList = new ArrayList<KMADEUserExpressionField>();
 
-    private ArrayList<KMADESetTypeComboBox> myExpressionPreconditionComboList = new ArrayList<KMADESetTypeComboBox>();
+    private ArrayList<KMADEGroupTypeComboBox> myExpressionPreconditionComboList = new ArrayList<KMADEGroupTypeComboBox>();
 
-    private ArrayList<KMADEUserExpressionField> myExpressionPostconditionFieldList = new ArrayList<KMADEUserExpressionField>();
+    private ArrayList<KMADEUserExpressionField> myExpressionEffetsDeBordFieldList = new ArrayList<KMADEUserExpressionField>();
 
-    private ArrayList<KMADESetTypeComboBox> myExpressionPostconditionComboList = new ArrayList<KMADESetTypeComboBox>();
+    private ArrayList<KMADEGroupTypeComboBox> myExpressionEffetsDeBordComboList = new ArrayList<KMADEGroupTypeComboBox>();
 
     private ArrayList<KMADEUserExpressionField> myExpressionIterationFieldList = new ArrayList<KMADEUserExpressionField>();
 
-    private ArrayList<KMADESetTypeComboBox> myExpressionIterationComboList = new ArrayList<KMADESetTypeComboBox>();
+    private ArrayList<KMADEGroupTypeComboBox> myExpressionIterationComboList = new ArrayList<KMADEGroupTypeComboBox>();
     
     private JPanel panelPrecondition;
     
-    private JPanel panelPostcondition;
+    private JPanel panelEffetsDeBord;
     
     private JPanel panelIteration;
     
@@ -89,7 +89,7 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
     
     private JPanelUserTool panelPreconditionTool;
     
-    private JPanelUserTool panelPostconditionTool;
+    private JPanelUserTool panelEffetsDeBordTool;
     
     private JPanelUserTool panelIterationTool;
     
@@ -97,23 +97,23 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
         return myExpressionPreconditionFieldList;
     }
     
-    public ArrayList<KMADESetTypeComboBox> getExpressionPreconditionComboList() {
+    public ArrayList<KMADEGroupTypeComboBox> getExpressionPreconditionComboList() {
         return myExpressionPreconditionComboList;
     }
     
-    public ArrayList<KMADEUserExpressionField> getExpressionPostconditionFieldList() {
-        return myExpressionPostconditionFieldList;
+    public ArrayList<KMADEUserExpressionField> getExpressionEffetsDeBordFieldList() {
+        return myExpressionEffetsDeBordFieldList;
     }
     
-    public ArrayList<KMADESetTypeComboBox> getExpressionPostconditionComboList() {
-        return myExpressionPostconditionComboList;
+    public ArrayList<KMADEGroupTypeComboBox> getExpressionEffetsDeBordComboList() {
+        return myExpressionEffetsDeBordComboList;
     }
     
     public ArrayList<KMADEUserExpressionField> getExpressionIterationFieldList() {
         return myExpressionIterationFieldList;
     }
     
-    public ArrayList<KMADESetTypeComboBox> getExpressionIterationComboList() {
+    public ArrayList<KMADEGroupTypeComboBox> getExpressionIterationComboList() {
         return myExpressionIterationComboList;
     }
     
@@ -136,18 +136,18 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
             }
         });        
         
-        panelPostcondition = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JScrollPane scrollPanelPostcondition = new JScrollPane(panelPostcondition);
-        scrollPanelPostcondition.setPreferredSize(new Dimension(100,90));
-        scrollPanelPostcondition.setBorder(null);
-        JPanel panelPostconditionEdit = new JPanel(new BorderLayout(0,0));
-        panelPostconditionEdit.setBorder(BorderFactory.createTitledBorder(KMADEConstant.POSTCONDITION_USER_EDITION_MESSAGE));
-        panelPostconditionTool = new JPanelUserTool();
-        panelPostconditionEdit.add(BorderLayout.WEST,panelPostconditionTool);
-        panelPostconditionEdit.add(BorderLayout.CENTER,scrollPanelPostcondition);
-        panelPostconditionTool.getLockUnlockButton().addActionListener(new ActionListener() {
+        panelEffetsDeBord = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JScrollPane scrollPanelEffetsDeBord = new JScrollPane(panelEffetsDeBord);
+        scrollPanelEffetsDeBord.setPreferredSize(new Dimension(100,90));
+        scrollPanelEffetsDeBord.setBorder(null);
+        JPanel panelEffetsDeBordEdit = new JPanel(new BorderLayout(0,0));
+        panelEffetsDeBordEdit.setBorder(BorderFactory.createTitledBorder(KMADEConstant.EFFETSDEBORD_USER_EDITION_MESSAGE));
+        panelEffetsDeBordTool = new JPanelUserTool();
+        panelEffetsDeBordEdit.add(BorderLayout.WEST,panelEffetsDeBordTool);
+        panelEffetsDeBordEdit.add(BorderLayout.CENTER,scrollPanelEffetsDeBord);
+        panelEffetsDeBordTool.getLockUnlockButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                SimulationAdaptator.switchLockOrUnlockPostconditionUserValuesAndConcreteObjects();
+                SimulationAdaptator.switchLockOrUnlockEffetsDeBordUserValuesAndConcreteObjects();
             }
         });        
 
@@ -172,7 +172,7 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
         panelHaut.setLayout(new BoxLayout(panelHaut,BoxLayout.Y_AXIS));
         panelHaut.add(panelPreconditionEdit);
         panelHaut.add(Box.createRigidArea(new Dimension(0,10)));
-        panelHaut.add(panelPostconditionEdit);
+        panelHaut.add(panelEffetsDeBordEdit);
         panelHaut.add(Box.createRigidArea(new Dimension(0,10)));
         panelHaut.add(panelIterationEdit);
         
@@ -229,10 +229,10 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
         }
     }
 
-    public void setInputUserConcretePostconditionPanel(ArrayList<JComponent> p) {
-        panelPostcondition.removeAll();
+    public void setInputUserConcreteEffetsDeBordPanel(ArrayList<JComponent> p) {
+        panelEffetsDeBord.removeAll();
         for (JComponent current : p) {
-            panelPostcondition.add(current);
+            panelEffetsDeBord.add(current);
         }
     }
     
@@ -289,27 +289,27 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
             currentField.setEnabled(p);
         }
         
-        for (KMADESetTypeComboBox currentCombo : this.getExpressionPreconditionComboList()) {
+        for (KMADEGroupTypeComboBox currentCombo : this.getExpressionPreconditionComboList()) {
             currentCombo.setEnabled(p);
         }
     }
     
-	public void setEnabledPostconditionFieldAndComboComponents(boolean b) {
-        for (KMADEUserExpressionField currentField : this.getExpressionPostconditionFieldList()) {
+	public void setEnabledEffetsDeBordFieldAndComboComponents(boolean b) {
+        for (KMADEUserExpressionField currentField : this.getExpressionEffetsDeBordFieldList()) {
             currentField.setEnabled(b);
         }
         
-        for (KMADESetTypeComboBox currentCombo : this.getExpressionPostconditionComboList()) {
+        for (KMADEGroupTypeComboBox currentCombo : this.getExpressionEffetsDeBordComboList()) {
             currentCombo.setEnabled(b);
         }		
 	}
 
-	public void setPostconditionUnLockImage() {
-		panelPostconditionTool.getLockUnlockButton().setIcon(UNLOCK_USER);
+	public void setEffetsDeBordUnLockImage() {
+		panelEffetsDeBordTool.getLockUnlockButton().setIcon(UNLOCK_USER);
 	}
 	
-    public void setPostconditionLockImage() {
-    		panelPostconditionTool.getLockUnlockButton().setIcon(LOCK_USER);
+    public void setEffetsDeBordLockImage() {
+    		panelEffetsDeBordTool.getLockUnlockButton().setIcon(LOCK_USER);
     }
     
 	public void setEnabledIterationFieldAndComboComponents(boolean b) {
@@ -317,7 +317,7 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
             currentField.setEnabled(b);
         }
         
-        for (KMADESetTypeComboBox currentCombo : this.getExpressionIterationComboList()) {
+        for (KMADEGroupTypeComboBox currentCombo : this.getExpressionIterationComboList()) {
             currentCombo.setEnabled(b);
         }				
 	}

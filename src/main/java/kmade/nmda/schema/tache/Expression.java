@@ -25,10 +25,15 @@ import kmade.nmda.schema.expression.UserExpression;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public abstract class Expression implements Serializable {
-    protected transient NodeExpression refNode = null;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4742830993511833531L;
+
+	protected transient NodeExpression refNode = null;
 
     protected ArrayList<String> myObjectValues = new ArrayList<String>();
     

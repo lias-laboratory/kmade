@@ -48,7 +48,7 @@ import kmade.nmda.schema.tache.Experience;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEEditorActorDialog extends JPropertiesEditorDialog {
     private static final long serialVersionUID = -6348137983085333000L;
@@ -76,7 +76,8 @@ public class KMADEEditorActorDialog extends JPropertiesEditorDialog {
         JPanel panelCenter = new JPanel(new GridLayout(2,1));
         panelCenter.add(myScrollPane);
         panelCenter.add(UserAdaptator.getUserPanel());
-        myListTable.getMyTable().getColumnModel().getColumn(0).setCellEditor(new MyCustomListTableCellEditor());
+      //  myListTable.getMyTable().getColumnModel().getColumn(0).setCellEditor(new MyCustomListTableCellEditor());
+        //myListTable.setCellEditor(0, "List",Experience.getNameLocaleExperience());
         myListTable.setCellEditor(1, "List",Experience.getNameLocaleExperience());
         myListTable.setCellEditor(2, "String",null);
         this.getContentPane().add(BorderLayout.CENTER, panelCenter);
@@ -85,7 +86,7 @@ public class KMADEEditorActorDialog extends JPropertiesEditorDialog {
         KMADEToolUtilities.setCenteredInScreen(this);
     }
 
-    public void addNewActor(String name, String experience, String competence, String oidActor) {
+   public void addNewActor(String name, String experience, String competence, String oidActor) {
         Object[] myNewRow = {name, Experience.getEnumereIntoLocaleExperience(experience), competence, oidActor, false};
         myTableListModel.getListTableData().add(myNewRow);
         myTableListModel.fireTableDataChanged();
@@ -95,12 +96,12 @@ public class KMADEEditorActorDialog extends JPropertiesEditorDialog {
     public void showPropertiesEditor(DefaultPropertiesTableModel refModel, int row) {
         UserAdaptator.refreshReadUserTable();
         listOfUser = UserAdaptator.getUsersName();
-        
-        ArrayList myEventList = (ArrayList)(refModel.getValue(row)); 
+        ArrayList<?> myEventList = (ArrayList<?>)(refModel.getValue(row)); 
         myTableListModel.getListTableData().clear();
+        myListTable.setCellEditor(0, "List",listOfUser);
         for (int i = 0; i < myEventList.size(); i++) {
-            Acteur myRef = (Acteur)myEventList.get(i);           
-            Object[] myNew = {myRef.getName(), Experience.getEnumereIntoLocaleExperience(myRef.getExperience().getValue()), myRef.getCompetence(), myRef.getOid().get(), false};
+            Acteur myRef = (Acteur)myEventList.get(i);   
+        	Object[] myNew = {myRef.getName(), Experience.getEnumereIntoLocaleExperience(myRef.getExperience().getValue()), myRef.getCompetence(), myRef.getOid().get(), false};
             myTableListModel.getListTableData().add(myNew);
         }            
         myTableListModel.fireTableDataChanged();
@@ -114,14 +115,14 @@ public class KMADEEditorActorDialog extends JPropertiesEditorDialog {
         super.stopEditorDialog();
     }
     
-    class MyCustomListTableCellEditor extends AbstractCellEditor implements TableCellEditor {
+   class MyCustomListTableCellEditor extends AbstractCellEditor implements TableCellEditor {
         private static final long serialVersionUID = 7010635849574676271L;
 
         protected JComboBox myComboBox;
-
-        public Component getTableCellEditorComponent(JTable table,
-                Object value, boolean isSelected, int row, int column) {
-            myComboBox = new JComboBox(listOfUser);
+          
+        public Component getTableCellEditorComponent(JTable table,Object value, boolean isSelected, int row, int column) {
+            // enlever les users déjà enregistré
+        	myComboBox = new JComboBox(listOfUser);
             myComboBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     MyCustomListTableCellEditor.this.stopCellEditing();
@@ -135,6 +136,7 @@ public class KMADEEditorActorDialog extends JPropertiesEditorDialog {
         }
     }
     
+
     class MyTableListModel extends DefaultListTableModel {          
         private static final long serialVersionUID = 8733116037423605634L;
 
@@ -159,15 +161,18 @@ public class KMADEEditorActorDialog extends JPropertiesEditorDialog {
         }
         
         public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        	//les jcombobox peuvent faire qu'il y ai des valeurs null
+        	if (aValue == null){
+        		return;}
             String value = (String)aValue;
-                     
             if (rowIndex + 1 == this.getRowCount()) {
                 // Ajout d'une nouvelle ligne.
                 String[] myValue = ActorAdaptator.addNewActor(value);
-                if (myValue == null) {
+                if (myValue == null)	 {
                     return;
                 } else {
                     KMADEEditorActorDialog.this.addNewActor(myValue[0],myValue[1],myValue[2],myValue[3]);
+                   
                 }
             } else {
                 Object[] tempValue = (Object[])myTableListModel.getListTableData().get(rowIndex);
@@ -175,11 +180,18 @@ public class KMADEEditorActorDialog extends JPropertiesEditorDialog {
                 
                 switch(columnIndex) {
                     case 0 : {
+
                         if (((String)this.getValueAt(rowIndex,columnIndex)).equals(value)) {
-                            return;
+                       	return;
                         } else {
-                            if (!ActorAdaptator.setOldActorSelectedTask(oidRow,value)) {
-                                return;
+                        	String newOid =ActorAdaptator.setOldActorSelectedTask(oidRow,value);
+                            // s'il n'y a pas eu de modification de l'oid de l'acteur on ne fait rien
+                        	if (newOid==null) {
+                            	return;
+                            }else{
+                            	// si il y a eu une mise à jour de l'acteur : l'oid a changer, 
+                            	//il faut donc le mettre à jour !
+                            	myTableListModel.setValueAt(newOid, rowIndex, 3);
                             }
                         }
                         break;
@@ -205,8 +217,8 @@ public class KMADEEditorActorDialog extends JPropertiesEditorDialog {
                 boolean state = GraphicEditorAdaptator.removeSelectedItem("Actor",r,myTableListModel.getListTableData(),KMADEEditorActorDialog.this, KMADEConstant.ACTOR_REMOVE_NAME_TITLE);
                 
                 if (state) {
-                    myTableListModel.fireTableDataChanged();                                     
-                    myListTable.getListSelectionModel().setSelectionInterval(myTableListModel.getRowCount()-1,myTableListModel.getRowCount()-1);
+                    for(int i = 0 ; i< r.length ;i++)
+                    	myListTable.getListSelectionModel().setSelectionInterval(myTableListModel.getRowCount()-1,myTableListModel.getRowCount()-1);
                 }
             }
         }

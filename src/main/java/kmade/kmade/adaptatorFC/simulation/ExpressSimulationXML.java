@@ -17,6 +17,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import kmade.KMADEToolConstant;
+import kmade.kmade.KMADEConstant;
 import kmade.kmade.adaptatorFC.ExpressTask;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
 import kmade.nmda.schema.tache.Tache;
@@ -48,7 +49,7 @@ import org.xml.sax.SAXException;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class ExpressSimulationXML {
 	
@@ -64,7 +65,7 @@ public final class ExpressSimulationXML {
             TransformerFactory fabrique = TransformerFactory.newInstance();
             Transformer transformer = fabrique.newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "file:KMADEScenrio.dtd");
             
             // Transformation
@@ -235,14 +236,14 @@ public final class ExpressSimulationXML {
              ReplayScenarioModel myReplayScenarioModel = new ReplayScenarioModel(ref,rootTask);
              return myReplayScenarioModel;
 	    } catch(ParserConfigurationException pce){
-	         System.out.println("Erreur de configuration du parseur DOM");
-	         System.out.println("lors de l'appel à fabrique.newDocumentBuilder();");
+	         System.out.println(KMADEConstant.CONFIG_ERROR_DOM);
+	         System.out.println(KMADEConstant.CALL_NEW_DOCUMENT_BUILDER);
 	    } catch(SAXException se){
-	         System.out.println("Erreur lors du parsing du document");
-	         System.out.println("lors de l'appel à construteur.parse(xml)");
+	         System.out.println(KMADEConstant.SIMULATION_PARSING_ERROR);
+	         System.out.println(KMADEConstant.CALL_CONSTRUCTEUR_PARSE);
 	    } catch(IOException ioe){
-	         System.out.println("Erreur d'entrée/sortie");
-	         System.out.println("lors de l'appel à construteur.parse(xml)");
+	         System.out.println(KMADEConstant.SIMULATION_IO_ERROR);
+	         System.out.println(KMADEConstant.CALL_CONSTRUCTEUR_PARSE);
 	    }
         return new ReplayScenarioModel();
 	}

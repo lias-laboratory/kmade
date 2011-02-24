@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
@@ -47,7 +48,7 @@ import kmade.kmade.UI.toolutilities.DefaultListTableModel.MyTableListModel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class JListTable extends JPanel {
     private static final long serialVersionUID = -8795218850894222284L;
@@ -83,6 +84,9 @@ public class JListTable extends JPanel {
         panelHeader.add(BorderLayout.WEST,panelVide);
         panelHeader.add(BorderLayout.CENTER,myTable.getTableHeader());
         getMyTable().setRowHeight(KMADEConstant.ROW_HEIGHT);
+        
+        //permet de terminer l'edition d'une cellule lorsqu'on perd le focus : utile pour les combobox!
+        myTable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     }
 
     public JPanel getPanelHeader() {
@@ -110,6 +114,9 @@ public class JListTable extends JPanel {
         if (type.equals("List")) {   
             myTable.getColumnModel().getColumn(column).setCellEditor(new MyCustomListTableCellEditor(value));
             return;
+        }
+        if(type.equals("SpecialString")){
+        	myTable.getColumnModel().getColumn(column).setCellEditor(new MyCustomSpecialStringTableCellEditor(column,myTable));
         }
     }
 
@@ -196,6 +203,37 @@ public class JListTable extends JPanel {
 
         public MyCustomListTableCellEditor(String[] value) {
             myComboBox = new JComboBox(value);
+            myComboBox.addFocusListener(new FocusListener() {
+				
+				public void focusLost(FocusEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				public void focusGained(FocusEvent e) {
+					myComboBox.hidePopup();
+				}
+			});
+            myComboBox.addKeyListener(new KeyListener() {
+				
+				public void keyTyped(KeyEvent ek) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				public void keyReleased(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				public void keyPressed(KeyEvent ek) {
+						if(ek.getKeyCode() == KeyEvent.VK_ENTER){
+		                    MyCustomListTableCellEditor.this.stopCellEditing();
+						}else if(ek.getKeyCode() == KeyEvent.VK_ESCAPE){
+		                    MyCustomListTableCellEditor.this.cancelCellEditing();
+						}
+				}
+			});
             myComboBox.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     MyCustomListTableCellEditor.this.stopCellEditing();
@@ -203,6 +241,7 @@ public class JListTable extends JPanel {
             });
         }
 
+        
         public Object getCellEditorValue() {
             return myComboBox.getSelectedItem();
         }
@@ -213,4 +252,69 @@ public class JListTable extends JPanel {
             return myComboBox;
         }
     }
+    
+    class MyCustomSpecialStringTableCellEditor extends AbstractCellEditor implements
+	TableCellEditor {
+		private static final long serialVersionUID = 3769456455863168900L;
+
+		private JTextField myTextField;
+
+		private JTable ref;
+
+		private int newColumn = 0;
+		public MyCustomSpecialStringTableCellEditor(int newColumn, JTable t) {
+			ref = t;
+			this.newColumn = newColumn;
+			myTextField = new JTextField();
+			myTextField.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					stopCellEditing();
+				}
+			});
+			this.myTextField.addFocusListener(new FocusListener() {
+				public void focusGained(FocusEvent e) {
+				}
+
+				public void focusLost(FocusEvent e) {
+					// on regarde si le focus est perdu a cause d'une boite de dialogue, si c'est le cas la cellule est toujours en cours d'edition
+					// try/catch car il peut y avoir un pointeur null ( � l'initialisation )
+					try{
+						if(e.getOppositeComponent().getClass().getSimpleName().equals("MultiplexingTextField")){
+
+						}else{
+							stopCellEditing();
+						}
+					}catch(Exception exc){
+						// ne rien faire
+					}
+				}
+			});
+		}
+
+		public Object getCellEditorValue() {
+			return myTextField.getText();
+		}
+
+		public Component getTableCellEditorComponent(JTable table,
+				Object value, boolean isSelected, int row, int column) {
+			if (row + 1 == ref.getModel().getRowCount()) {
+				if (column == newColumn) {
+					myTextField.setText("");
+				}
+			} else {
+				myTextField.setText((String) value);
+			}
+			return myTextField;
+		}
+
+		public boolean isCellEditable(EventObject anEvent) {
+			if (anEvent instanceof MouseEvent) {
+				return ((MouseEvent) anEvent).getClickCount() >= 2;                                 
+			}
+			return true;
+		}
+	}
+
+
+
 }

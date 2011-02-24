@@ -38,7 +38,7 @@ import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEStartDialog extends JDialog implements LanguageFactory {
 
@@ -59,7 +59,7 @@ public class KMADEStartDialog extends JDialog implements LanguageFactory {
 
         editor_pane = new JEditorPane();
         editor_pane.setEditable(false);
-
+        editor_pane.setContentType("text/html");
         JScrollPane area_scroll_pane = new JScrollPane(editor_pane);
         area_scroll_pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         area_scroll_pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

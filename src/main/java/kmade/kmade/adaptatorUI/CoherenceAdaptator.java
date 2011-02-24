@@ -31,7 +31,7 @@ import kmade.nmda.schema.tache.Tache;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class CoherenceAdaptator {
     
@@ -85,7 +85,7 @@ public final class CoherenceAdaptator {
                 break;
             }
             case POST_CONDITION_DIALOG : {
-                TaskPropertiesAdaptator.setPostCondition();
+                TaskPropertiesAdaptator.setEffetsDeBord();
                 break;
             }
             case ITERATION_DIALOG : {
@@ -145,6 +145,7 @@ public final class CoherenceAdaptator {
     }
     
     public static void checkTaskModel() {
+
         if (worker != null) {
             worker.interrupt();
             worker = null;
@@ -164,7 +165,6 @@ public final class CoherenceAdaptator {
      */
     private static synchronized void checkTaskModels() {
         ArrayList<Tache> myTaskList = ExpressTask.getRootTasks();
-              
         for (Tache current : myTaskList) {
             // Règles : hiérarchie des tâches
             if (current.isRoot() && current.isLeaf()) {
@@ -188,8 +188,8 @@ public final class CoherenceAdaptator {
         		CoherenceAdaptator.addErrorMessage(KMADEConstant.PRECONDITION_EXPRESSION_MESSAGE_PROBLEM, EXPRESSION_TYPE, PRE_CONDITION_DIALOG, myTache);
         }
         
-        if (myTache.getPostExpression().getNodeExpression() == null) {
-        		CoherenceAdaptator.addErrorMessage(KMADEConstant.POSTCONDITION_EXPRESSION_MESSAGE_PROBLEM, EXPRESSION_TYPE, POST_CONDITION_DIALOG, myTache);
+        if (myTache.getEffetsDeBordExpression().getNodeExpression() == null) {
+        		CoherenceAdaptator.addErrorMessage(KMADEConstant.EFFETSDEBORD_EXPRESSION_MESSAGE_PROBLEM, EXPRESSION_TYPE, POST_CONDITION_DIALOG, myTache);
         }
 
         if (myTache.getIteExpression().getNodeExpression() == null) {

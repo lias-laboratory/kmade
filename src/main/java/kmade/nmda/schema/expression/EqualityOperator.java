@@ -1,5 +1,7 @@
 package kmade.nmda.schema.expression;
 
+import kmade.nmda.ExpressConstant;
+
 /**
  * K-MADe : Kernel of Model for Activity Description environment
  * Copyright (C) 2006  INRIA - MErLIn Project
@@ -19,22 +21,24 @@ package kmade.nmda.schema.expression;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class EqualityOperator extends ComparisonOperator {
 
-    private static final long serialVersionUID = 3907268708910997841L;
+	private static final long serialVersionUID = 3907268708910997841L;
 
-    public EqualityOperator(NodeExpression left) {
+	public EqualityOperator(NodeExpression left) {
 		super(false, left);
 	}    
-    
+
 	public void checkNode() throws SemanticException {
 		super.checkNode();
 
-        if (this.getLeftNode().isInteger() && this.getRightNode().isString()) {
+		/* cast d'un String en nombre autorisé en enlevant le commentaire
+        if (this.getLeftNode().isNumber() && this.getRightNode().isString()) {
+
             try {   
-                new Integer((String)this.getRightNode().getNodeValue()).intValue();
+                new NumberValue((String)this.getRightNode().getNodeValue());
                 this.setNodeType(true);
                 return;
             } catch (NumberFormatException e) {
@@ -42,10 +46,11 @@ public class EqualityOperator extends ComparisonOperator {
                 throw new SemanticException();
             }
         }
-        
-        if (this.getLeftNode().isString() && this.getRightNode().isInteger()) {
+		 */
+		/* cast d'un String en nombre autorisé en enlevant le commentaire
+        if (this.getLeftNode().isString() && this.getRightNode().isNumber()) {
             try {   
-                new Integer((String)this.getLeftNode().getNodeValue()).intValue();
+                new NumberValue((String)this.getLeftNode().getNodeValue());
                 this.setNodeType(true);
                 return;
             }
@@ -54,33 +59,34 @@ public class EqualityOperator extends ComparisonOperator {
                 throw new SemanticException();
             }
         }
-        
-        if (this.getLeftNode().isString() && this.getRightNode().isString()) {
-            this.setNodeType(true);
-            return;
-        }
-        
-        if (this.getLeftNode().isInteger() && this.getRightNode().isInteger()) {
-            this.setNodeType(true);
-            return;
-        }
+		 */
+		if (this.getLeftNode().isString() && this.getRightNode().isString()) {
+			this.setNodeType(true);
+			return;
+		}
 
-        if (this.getLeftNode().isBoolean() && this.getRightNode().isBoolean()) {
-            this.setNodeType(true);
-            return;
-        }
-               
-        if (this.getLeftNode().isBoolean() && this.getRightNode().isInteger()) {
-            this.setNodeType(true);
-            return;
-        }
+		if (this.getLeftNode().isNumber() && this.getRightNode().isNumber()) {
+			this.setNodeType(true);
+			return;
+		}
 
-        if (this.getLeftNode().isInteger() && this.getRightNode().isBoolean()) {
+		if (this.getLeftNode().isBoolean() && this.getRightNode().isBoolean()) {
+			this.setNodeType(true);
+			return;
+		}
+		/*  cast d'un Nombre en Boolean autorisé en enlevant le commentaire    
+        if (this.getLeftNode().isBoolean() && this.getRightNode().isNumber()) {
+            this.setNodeType(true);
+            return;
+        }
+		 */
+		/* cast d'un Nombre en Boolean autorisé en enlevant le commentaire 
+        if (this.getLeftNode().isNumber() && this.getRightNode().isBoolean()) {
             this.setNodeType(true);
             return;            
         }
-
+		 */
 		this.setStateToError();
-		throw new SemanticException();
+		throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
 	}
 }

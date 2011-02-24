@@ -25,7 +25,7 @@ import kmade.nmda.schema.Oid;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class WarningMessage implements AbstractMessage {
 
@@ -52,7 +52,9 @@ public class WarningMessage implements AbstractMessage {
         ExpressConstant.REMOVE_ELEMENT, // 11
         ExpressConstant.REMOVE_INTERVALLE, // 12
         ExpressConstant.REMOVE_LABEL, // 13
-        ExpressConstant.CHANGE_AGREGAT // 14
+        ExpressConstant.CHANGE_AGREGAT, // 14
+        ExpressConstant.REMOVE_ACTOR_SYSTEM, //15
+        ExpressConstant.REMOVE_MATERIEL //16
     };
 
     public void addMessage(Oid oid, int idWarning) {

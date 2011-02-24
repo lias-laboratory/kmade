@@ -3,6 +3,8 @@ package kmade.kmade.UI.worldobject.event;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
@@ -10,8 +12,10 @@ import kmade.kmade.KMADEConstant;
 import kmade.kmade.UI.toolutilities.DefaultListTableModel;
 import kmade.kmade.UI.toolutilities.JListTable;
 import kmade.kmade.UI.toolutilities.LanguageFactory;
+import kmade.kmade.adaptatorFC.parserExpression.RegularExpression;
 import kmade.kmade.adaptatorUI.EventAdaptator;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
+import kmade.nmda.schema.tache.Evenement;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -32,7 +36,7 @@ import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEReadWriteEventObjectPanel extends JScrollPane implements LanguageFactory {
     private static final long serialVersionUID = -1076733461644634625L;
@@ -50,7 +54,7 @@ public class KMADEReadWriteEventObjectPanel extends JScrollPane implements Langu
         myListTable.addAllKeyListener(new MyKeyListener());
         this.setViewportView(myListTable);
         this.setColumnHeaderView(myListTable.getPanelHeader());
-        myListTable.setCellEditor(0,"String",null);
+        myListTable.setCellEditor(0,"SpecialString",null);
         this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
         myTitledBorder = new TitledBorder(null, KMADEConstant.EVENT_TITLE_NAME, TitledBorder.CENTER, TitledBorder.TOP);
         this.setBorder(myTitledBorder);
@@ -79,12 +83,44 @@ public class KMADEReadWriteEventObjectPanel extends JScrollPane implements Langu
             super(columnNames, nameDefault);
         }    
         
+		private String nameTest(String value){
+			String name =value;
+			boolean needVerif = true;
+			// un nom null annule l'édition, boucle tant que le nom n'est pas correct  
+			while (name != null && needVerif){
+				// vérification de l'expression régulière avec affichage d'un popUp
+				if( !RegularExpression.isGoodEventObjectName(name)){
+					name = (String) JOptionPane.showInputDialog(GraphicEditorAdaptator.getMainFrame(),KMADEConstant.BAD_CHARACTER_TEXT,
+							KMADEConstant.BAD_CARACTER_TITLE,JOptionPane.YES_NO_OPTION,
+							new ImageIcon(GraphicEditorAdaptator.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE))
+					,null,name
+					);
+				}else{ // l'expression est ok
+					if(Evenement.isUniqueName(name)){
+						// si le nom est unique, le nom est correct et possible
+						needVerif = false;
+					} else {
+						name = (String)  JOptionPane.showInputDialog(GraphicEditorAdaptator.getMainFrame(),KMADEConstant.SAME_NAME_TEXT,
+								KMADEConstant.SAME_NAME_TITLE,JOptionPane.YES_NO_OPTION,
+								new ImageIcon(GraphicEditorAdaptator.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE))
+						,null,Evenement.propositionNom(name)
+						);
+					}		
+				}
+			}
+			return name;
+		}
+		
         public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
             if (rowIndex + 1 == this.getRowCount()) {                
                 String value = (String)aValue;
                 if (value.equals("")) {
                     return;
-                }                
+                }
+                String name = nameTest(value);
+				if(name == null || name.equals("")){
+					return;	}
+				value = name;
                 // Ajouter une nouvelle ligne.                
                 String newEventObject = EventAdaptator.addEvent();
                 value = EventAdaptator.setEventName(newEventObject, value);
@@ -103,7 +139,10 @@ public class KMADEReadWriteEventObjectPanel extends JScrollPane implements Langu
                         String nameRow = (String)tempValue[0];
                         if (nameRow.equals((String)aValue))
                             return;
-                        value = EventAdaptator.setEventName(oidRow, (String)value);
+                        String name = nameTest((String)value);
+        				if(name == null || name.equals("")){
+        					return;	}
+        				value = EventAdaptator.setEventName(oidRow, name);
                         break;
                     }
                     case 1 : {

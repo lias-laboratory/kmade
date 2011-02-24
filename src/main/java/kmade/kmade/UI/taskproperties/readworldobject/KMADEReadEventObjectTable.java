@@ -31,7 +31,7 @@ import kmade.kmade.adaptatorUI.EventAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEReadEventObjectTable extends JScrollPane {
     private static final long serialVersionUID = 465521L;
@@ -49,6 +49,22 @@ public class KMADEReadEventObjectTable extends JScrollPane {
         this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
     }
 
+    /**
+     * Constructeur avec deux paramètres qui permet de ne pas mettre le mouseListener qui ajout des événerments générés
+     * @param obj
+     * @param editable
+     */
+    public KMADEReadEventObjectTable(KMADEReadEventObjectTable obj, boolean editable) {
+        modele = obj.modele;
+        table = new KMADEJTable(obj.modele);
+        this.setViewportView(table);
+        if(editable){
+        	table.addMouseListener(new mouseHelpListener());
+        }
+        table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
+    }
+    
     public void setData(Object[][] tab) {
         modele.setData(tab);
         modele.fireTableDataChanged();

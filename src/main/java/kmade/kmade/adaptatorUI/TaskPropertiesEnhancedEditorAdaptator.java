@@ -8,6 +8,7 @@ import kmade.kmade.UI.taskproperties.KMADEEnhancedTaskEditor;
 import kmade.kmade.UI.taskproperties.KMADEEnhancedTaskLabel;
 import kmade.kmade.UI.toolutilities.InDevelopmentGlassPanel;
 import kmade.nmda.schema.tache.Acteur;
+import kmade.nmda.schema.tache.ActeurSysteme;
 import kmade.nmda.schema.tache.Executant;
 import kmade.nmda.schema.tache.Experience;
 import kmade.nmda.schema.tache.Frequence;
@@ -32,7 +33,7 @@ import kmade.nmda.schema.tache.Tache;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class TaskPropertiesEnhancedEditorAdaptator {
     private static KMADEEnhancedTaskEditor myRefTaskEditor = new KMADEEnhancedTaskEditor();
@@ -106,8 +107,9 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
                 TaskPropertiesAdaptator.getAllEvents(),
                 currentEditedTask.getDeclencheurName(),
                 TaskPropertiesEnhancedEditorAdaptator.getActorTable(),
+                TaskPropertiesEnhancedEditorAdaptator.getActorSystemTable(),
                 currentEditedTask.getPreExpression().getName(), 
-                currentEditedTask.getPostExpression().getName(), 
+                currentEditedTask.getEffetsDeBordExpression().getName(), 
                 currentEditedTask.getDecomposition(), 
                 currentEditedTask.getIteExpression().getName()
             );
@@ -167,7 +169,7 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
     }
 
     private static ArrayList<String[]> getActorTable() {
-        ArrayList myActorList = TaskPropertiesAdaptator.getActorList();
+        ArrayList<?> myActorList = TaskPropertiesAdaptator.getActorList();
         ArrayList<String[]> myStringActeurList = new ArrayList<String[]>();
         
         for (int i = 0; i < myActorList.size(); i++) {
@@ -179,6 +181,21 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
             myStringActeurList.add(myTab);
         }
         return myStringActeurList;
+    }
+    
+    private static ArrayList<String[]> getActorSystemTable() {
+        ArrayList<?> myActorSystemList = TaskPropertiesAdaptator.getActorSystemList();
+        ArrayList<String[]> myStringActeurSystemList = new ArrayList<String[]>();
+        
+        for (int i = 0; i < myActorSystemList.size(); i++) {
+            ActeurSysteme myActeurSysteme = (ActeurSysteme)(myActorSystemList.get(i));
+            String[] myTab = new String[3];
+            myTab[0] = myActeurSysteme.getName();
+            myTab[1] = Experience.getEnumereIntoLocaleExperience(myActeurSysteme.getExperience().getValue());
+            myTab[2] = myActeurSysteme.getCompetence();
+            myStringActeurSystemList.add(myTab);
+        }
+        return myStringActeurSystemList;
     }
     
     public static void switchToOtherTask(int position) {
@@ -213,26 +230,29 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
     public static void setNameInTaskProperties(String value) {
         TaskPropertiesAdaptator.updateNameRealTime(value);
     }
-
+    /*
     public static void setDureeInTaskProperties(String text) {
         TaskPropertiesAdaptator.updateDurationRealTime(text);        
     }
-    
+    */
+    /*
     public static void setPurpose() {
         TaskPropertiesAdaptator.setPurpose();
         myRefTaskEditor.setPurposeField(TaskPropertiesAdaptator.getPurpose());
     }
-
+	*/
+    /*
     public static void setFeedBack() {
         TaskPropertiesAdaptator.setFeedback();
         myRefTaskEditor.setFeedbackField(TaskPropertiesAdaptator.getFeedback());
     }
-
+	*/
+    /*
     public static void setObservation() {
         TaskPropertiesAdaptator.setObservation();
         myRefTaskEditor.setObservationArea(TaskPropertiesAdaptator.getObservation());        
     }
-
+	*/
     public static void setUnknownExecutant() {
         TaskPropertiesAdaptator.setUnknownExecutant();
         myRefTaskEditor.setEnabledModalityGroup();
@@ -330,7 +350,7 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
     public static void setFrequencyValueInTaskProperties(String text) {
         TaskPropertiesAdaptator.updateFrequencyRealTime(text); 
     }
-
+	
     public static void setUnknownOperator() {
         TaskPropertiesAdaptator.setUnknownOperator();
         if (TaskPropertiesAdaptator.isNecessityEnabled()) {
@@ -402,9 +422,9 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
         myRefTaskEditor.setFiredEventsField(TaskPropertiesAdaptator.getFiredEvents());
     }
 
-    public static void setPostcondition() {
-        TaskPropertiesAdaptator.setPostCondition();
-        myRefTaskEditor.setPostcondition(TaskPropertiesAdaptator.getPostCondition());
+    public static void setEffetsDeBord() {
+        TaskPropertiesAdaptator.setEffetsDeBord();
+        myRefTaskEditor.setEffetsDeBord(TaskPropertiesAdaptator.getEffetsDeBord());
     }
 
     public static void setActeur() {
@@ -412,6 +432,11 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
         myRefTaskEditor.setActorList(TaskPropertiesEnhancedEditorAdaptator.getActorTable());
     }
 
+    public static void setActeurSysteme() {
+        TaskPropertiesAdaptator.setActorSystemList();
+        myRefTaskEditor.setActorSystemList(TaskPropertiesEnhancedEditorAdaptator.getActorSystemTable());
+    }
+    
     public static void setIteration() {
         TaskPropertiesAdaptator.setIteration();
         myRefTaskEditor.setIteration(TaskPropertiesAdaptator.getIteration());

@@ -25,12 +25,12 @@ import org.w3c.dom.Element;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Vincent Lucquiaud and Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Vincent Lucquiaud and Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public enum TypeStructure implements Enumere {
     BOOLEAN_STRUCT("BoolValue"),
     ENUM_STRUCT("EnumValue"),
-    INTEGER_STRUCT("IntValue"),
+    NUMBER_STRUCT("NumberValue"),
     INTERVAL_STRUCT("IntervalleValue"),
     STRING_STRUCT("StrValue");
     
@@ -43,7 +43,7 @@ public enum TypeStructure implements Enumere {
     public static String[] getNameLocaleTypeStructureWithoutInterval() {
         String[] myEnumereIntervalStruct = new String[3];
         myEnumereIntervalStruct[0] = ExpressConstant.BOOLEAN_NAME;
-        myEnumereIntervalStruct[1] = ExpressConstant.INTEGER_NAME;
+        myEnumereIntervalStruct[1] = ExpressConstant.NUMBER_NAME;
         myEnumereIntervalStruct[2] = ExpressConstant.STRING_NAME;
         return myEnumereIntervalStruct; 
     }
@@ -51,7 +51,7 @@ public enum TypeStructure implements Enumere {
     public static String[] getNameLocaleTypeStructure() {
         String[] myEnumereIntervalStruct = new String[5];
         myEnumereIntervalStruct[0] = ExpressConstant.BOOLEAN_NAME;
-        myEnumereIntervalStruct[1] = ExpressConstant.INTEGER_NAME;
+        myEnumereIntervalStruct[1] = ExpressConstant.NUMBER_NAME;
         myEnumereIntervalStruct[2] = ExpressConstant.STRING_NAME;
         myEnumereIntervalStruct[3] = ExpressConstant.INTERVALLE_NAME;
         myEnumereIntervalStruct[4] = ExpressConstant.ENUMERATION_NAME;
@@ -65,8 +65,8 @@ public enum TypeStructure implements Enumere {
             return "BoolValue";
         else if (myStringDecomp.equals(ExpressConstant.ENUMERATION_NAME))
             return "EnumValue";
-        else if (myStringDecomp.equals(ExpressConstant.INTEGER_NAME))
-            return "IntValue";      
+        else if (myStringDecomp.equals(ExpressConstant.NUMBER_NAME))
+            return "NumberValue";      
         else if (myStringDecomp.equals(ExpressConstant.INTERVALLE_NAME))
             return "IntervalleValue";
         else if (myStringDecomp.equals(ExpressConstant.STRING_NAME))
@@ -81,12 +81,14 @@ public enum TypeStructure implements Enumere {
             return ExpressConstant.BOOLEAN_NAME;
         else if (myStringDecomp.equals("EnumValue"))
             return ExpressConstant.ENUMERATION_NAME;
-        else if (myStringDecomp.equals("IntValue"))
-            return ExpressConstant.INTEGER_NAME;      
+        else if (myStringDecomp.equals("NumberValue"))
+            return ExpressConstant.NUMBER_NAME;      
         else if (myStringDecomp.equals("IntervalleValue"))
             return ExpressConstant.INTERVALLE_NAME;
         else if (myStringDecomp.equals("StrValue"))
-            return ExpressConstant.STRING_NAME;        
+            return ExpressConstant.STRING_NAME;
+        else if (myStringDecomp.equals("IntValue"))
+            return ExpressConstant.NUMBER_NAME;    
         else
             return null;
     } 
@@ -102,6 +104,16 @@ public enum TypeStructure implements Enumere {
             if (s.equalsIgnoreCase(i.value)) {
                 return i;
             }
+        }
+       
+        // Uniquement pour l'ouverture d'ancien projet, 
+        if(s.equals("IntValue")){
+        	s = "NumberValue";
+        	for (TypeStructure i : TypeStructure.values()) {
+        		if (s.equalsIgnoreCase(i.value)) {
+        			return i;
+        		}
+        	}
         }
         return null;
     }

@@ -24,7 +24,7 @@ import kmade.kmade.KMADEConstant;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class PrePostIterExpressionAdaptator {
     public static int origine = 0;
@@ -62,30 +62,33 @@ public final class PrePostIterExpressionAdaptator {
     }
     
     public static void setToPreCondition() {
-        PRE_POST_ITER_STATE = 1;        
-        PreconditionAdaptator.initPrecondition();
+        PRE_POST_ITER_STATE = 1;
+        // iln'est pas necessaire d'initialisé la précondition à la réouverture de la fenêtre (surtout que les combo box ne sont pas mis à jour dans ce cas là
+      // PreconditionAdaptator.initPrecondition();
     }
     
-    public static void setToPostCondition() {
+    public static void setToEffetsDeBord() {
         PRE_POST_ITER_STATE = 2;
-        PostconditionAdaptator.initPostcondition();
-        PostconditionAdaptator.initHistory();
+       // cf setToPreCondition
+        // EffetsDeBordAdaptator.initEffetsDeBord();
+        EffetsDeBordAdaptator.initHistory();
     }
     
     public static void setToIterationCondition() {
+    	// cf setToPreCondition
         PRE_POST_ITER_STATE = 3;
-        IterationAdaptator.initIteration();
+       // IterationAdaptator.initIteration();
     }
     
     public static void finishExpressionEdition() {        
-        if (PRE_POST_ITER_STATE == 2 && PostconditionAdaptator.isAnyHistory()) {
+        if (PRE_POST_ITER_STATE == 2 && EffetsDeBordAdaptator.isAnyHistory()) {
             int value = JOptionPane.showConfirmDialog(GraphicEditorAdaptator.getPanelProp().getEditorPrePostIterDialog(), KMADEConstant.EXIT_WITHOUT_SAVE_MESSAGE,
                 KMADEConstant.CONFIRMATION_DIALOG_MESSAGE,
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, new ImageIcon(GraphicEditorAdaptator.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
             if (value == JOptionPane.NO_OPTION) {
                 return;
             } else {
-                PostconditionAdaptator.clearAllHistory();
+                EffetsDeBordAdaptator.clearAllHistory();
             }
         }
         
@@ -95,7 +98,7 @@ public final class PrePostIterExpressionAdaptator {
             	PreconditionAdaptator.setPrecondition(); break;
             }
             case 2 : {
-            	PostconditionAdaptator.setPostcondition(); break;
+            	EffetsDeBordAdaptator.setEffetsDeBord(); break;
             }
             case 3 : {
             	IterationAdaptator.setIteration(); break;
@@ -106,7 +109,7 @@ public final class PrePostIterExpressionAdaptator {
     public static void setNewToken(String value) {
         switch (PRE_POST_ITER_STATE) {
             case 1 : PreconditionAdaptator.setNewToken(value); break;
-            case 2 : PostconditionAdaptator.setNewToken(value); break;
+            case 2 : EffetsDeBordAdaptator.setNewToken(value); break;
             case 3 : IterationAdaptator.setNewToken(value); break;
         }
     }

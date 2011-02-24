@@ -28,7 +28,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class KMADEEnhancedSplitPane extends JSplitPane {
 
@@ -73,7 +73,9 @@ public final class KMADEEnhancedSplitPane extends JSplitPane {
              Component rightComponent) {
         KMADEEnhancedSplitPane split = new KMADEEnhancedSplitPane(orientation, leftComponent, rightComponent);
         split.setBorder(BorderFactory.createEmptyBorder());
+       
         split.setOneTouchExpandable(false);
+        split.setDividerLocation(1d);
         return split;
     }
     

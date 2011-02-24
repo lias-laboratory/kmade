@@ -10,6 +10,8 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 
 import kmade.kmade.KMADEConstant;
+import kmade.kmade.UI.KMADEMainFrame;
+import kmade.kmade.UI.KMADEProjectPanel;
 import kmade.kmade.UI.KMADEToolToolBar;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
 import kmade.kmade.adaptatorUI.KMADeAdaptator;
@@ -33,7 +35,7 @@ import kmade.kmade.adaptatorUI.KMADeAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADETaskModelToolBar extends JPanel {
 	private static final long serialVersionUID = 7064622303016526648L;
@@ -65,6 +67,9 @@ public class KMADETaskModelToolBar extends JPanel {
     public static final ImageIcon COLOR_LABEL_IMAGE_ICON = new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.LABEL_COLOR_IMAGE));
 
     public static final ImageIcon VISIBLE_LABEL_IMAGE_ICON = new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.LABEL_VISIBLE_IMAGE));
+    
+    /*** Image bouton lancement dialogue simulation ***/
+    public static final ImageIcon OPEN_SIMULATION_ICON = new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.GO_SIMULATION_SCENARIO_IMAGE));
     
     private JToggleButton unknownTask;
     
@@ -109,12 +114,17 @@ public class KMADETaskModelToolBar extends JPanel {
     private AbstractAction mySetGridAction;
 
     private AbstractAction myOverviewWindowAction;
-
+    
+    /*** Lancement simulation dialogue ***/
+    private AbstractAction openSimulationAction;
+    
     private JToggleButton myShowOrNotTaskLabelToggleButton;
     
     private JToggleButton myShowOrNotTaskColorLabelToggleButton;
     
     private JToggleButton myOverviewWindowToggleButton;
+    
+    private JToolBar toolbar;
        
     public void enabledButton() {
         unknownTask.setSelected(false);
@@ -122,7 +132,7 @@ public class KMADETaskModelToolBar extends JPanel {
         userTask.setSelected(false);
         systemTask.setSelected(false);
         interactionTask.setSelected(false);
-    }
+     }
     
     public void enabledUnknownButton() {
         abstractTask.setSelected(false);
@@ -163,15 +173,19 @@ public class KMADETaskModelToolBar extends JPanel {
         return magnetOption.isSelected();
     }
     
+
+    
 	public KMADETaskModelToolBar() {
-		JToolBar toolbar = new JToolBar();
+		toolbar = new JToolBar();
 		toolbar.setFloatable(false);
 
         // Ins�rer une t�che inconnue.
         unknownTaskAction = new AbstractAction("", UNKNOWN_TASK_IMAGE_ICON) {
             private static final long serialVersionUID = 838662422873173261L;
             public void actionPerformed(ActionEvent e) {
-                GraphicEditorAdaptator.addNewUnknownTask();
+            	if ( ! activeMenu()) {
+            		    GraphicEditorAdaptator.addNewUnknownTask();
+            	}
             }
         };
         unknownTaskAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.NEW_UNKNOWN_TASK_ACTION_MESSAGE);
@@ -183,7 +197,9 @@ public class KMADETaskModelToolBar extends JPanel {
 		abstractTaskAction = new AbstractAction("", ABSTRACT_TASK_IMAGE_ICON) {
 			private static final long serialVersionUID = 838662422873173261L;
 			public void actionPerformed(ActionEvent e) {
+				if ( ! activeMenu()) {
 				GraphicEditorAdaptator.addNewAbstractTask();
+				}
 			}
 		};
         abstractTaskAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.NEW_ABSTRACT_TASK_ACTION_MESSAGE);
@@ -194,7 +210,9 @@ public class KMADETaskModelToolBar extends JPanel {
         userTaskAction = new AbstractAction("", USER_TASK_IMAGE_ICON) {
             private static final long serialVersionUID = 838662422873173261L;
             public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
                 GraphicEditorAdaptator.addNewUserTask();
+            	}
             }
         };
         userTaskAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.NEW_USER_TASK_ACTION_MESSAGE);
@@ -205,7 +223,9 @@ public class KMADETaskModelToolBar extends JPanel {
         feedbackTaskAction = new AbstractAction("", FEEDBACK_TASK_IMAGE_ICON) {
             private static final long serialVersionUID = 838662422873173261L;
             public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
                 GraphicEditorAdaptator.addNewFeedbackTask();
+            	}
             }
         };
         feedbackTaskAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.NEW_FEEDBACK_TASK_ACTION_MESSAGE);
@@ -216,7 +236,9 @@ public class KMADETaskModelToolBar extends JPanel {
         interactionTaskAction = new AbstractAction("", INTERACTION_TASK_IMAGE_ICON) {
             private static final long serialVersionUID = 838662422873173261L;
             public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
                 GraphicEditorAdaptator.addNewInteractionTask();
+            	}
             }
         };
         interactionTaskAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.NEW_INTERACTION_TASK_ACTION_MESSAGE);
@@ -228,7 +250,9 @@ public class KMADETaskModelToolBar extends JPanel {
 		zoomInAction = new AbstractAction("", KMADETaskModelToolBar.ZOOMIN_IMAGE_ICON) {
 			private static final long serialVersionUID = 5128574049819721220L;
 			public void actionPerformed(ActionEvent e) {
+				if ( ! activeMenu()) {
 				GraphicEditorAdaptator.setPlusZoom();
+				}
 			}
 		};
         zoomInAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.ZOOM_IN_ACTION_MESSAGE);
@@ -238,7 +262,9 @@ public class KMADETaskModelToolBar extends JPanel {
 		zoomOutAction = new AbstractAction("", KMADETaskModelToolBar.ZOOMOUT_IMAGE_ICON) {
 			private static final long serialVersionUID = 5128574049819721220L;
 			public void actionPerformed(ActionEvent e) {
+				if ( ! activeMenu()) {
 				GraphicEditorAdaptator.setMinusZoom();
+				}
 			}
 		};
         zoomOutAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.ZOOM_OUT_ACTION_MESSAGE);
@@ -248,7 +274,9 @@ public class KMADETaskModelToolBar extends JPanel {
         zoomDefaultAction = new AbstractAction("", KMADETaskModelToolBar.ZOOM_IMAGE_ICON) {
 			private static final long serialVersionUID = 5128574049819721220L;
 			public void actionPerformed(ActionEvent e) {
+				if ( ! activeMenu()) {
 				GraphicEditorAdaptator.setDefaultZoom();
+				}
 			}
 		};
         zoomDefaultAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.ZOOM_DEFAULT_ACTION_MESSAGE);
@@ -258,7 +286,9 @@ public class KMADETaskModelToolBar extends JPanel {
         globalGraph = new AbstractAction("", KMADETaskModelToolBar.ZOOM_GLOBAL_ICON) {
             private static final long serialVersionUID = 4000465475546408455L;
             public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
                 GraphicEditorAdaptator.setGlobalTaskModel();
+            	}
             }
         };
         globalGraph.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.ZOOM_GLOBAL_ACTION_MESSAGE);
@@ -271,7 +301,9 @@ public class KMADETaskModelToolBar extends JPanel {
         myGridAction = new AbstractAction(KMADEConstant.HIDE_GRID_ACTION_MESSAGE, KMADEToolToolBar.SHOW_GRILLE) {
             private static final long serialVersionUID = -3565098144261030486L;
             public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
                 GraphicEditorAdaptator.showOrHideGrid();
+            	}
             }
         };
         myGridAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.HIDE_GRID_ACTION_MESSAGE);
@@ -281,7 +313,9 @@ public class KMADETaskModelToolBar extends JPanel {
         mySetGridAction = new AbstractAction(KMADEConstant.CHOICE_GRID_SIZE_MESSAGE, KMADEToolToolBar.CHOICE_GRID_SIZE) {
             private static final long serialVersionUID = -717649588461770417L;
             public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
                 GraphicEditorAdaptator.setGridSize();
+            	}
             }
         };
         mySetGridAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.CHOICE_GRID_SIZE_MESSAGE);
@@ -291,7 +325,9 @@ public class KMADETaskModelToolBar extends JPanel {
         myRuleAction = new AbstractAction(KMADEConstant.SHOW_RULE_ACTION_MESSAGE, KMADEToolToolBar.SHOW_RULE) {
             private static final long serialVersionUID = -7001694110308248140L;
             public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
                 GraphicEditorAdaptator.showOrHideRule();
+            	}
             }
         };
         myRuleAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.SHOW_RULE_ACTION_MESSAGE);
@@ -301,7 +337,9 @@ public class KMADETaskModelToolBar extends JPanel {
         myOverviewWindowAction = new AbstractAction(KMADEConstant.PREVIEW_WINDOW_ACTION_MESSAGE, KMADEToolToolBar.OVERVIEW_PREVIEW) {
             private static final long serialVersionUID = 5128574049819721220L;
             public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
                 KMADeAdaptator.showOverviewWindow();
+            	}
             }
         };
         myOverviewWindowAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.PREVIEW_WINDOW_ACTION_MESSAGE);
@@ -314,7 +352,11 @@ public class KMADETaskModelToolBar extends JPanel {
         // Magnetisme
         magnetismAction = new AbstractAction("", KMADETaskModelToolBar.MAGN_IMAGE_ICON) {
             private static final long serialVersionUID = -6700309108031818171L;
-            public void actionPerformed(ActionEvent e) {}
+            public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
+            		//TODO magnetismAction
+            	}
+            }
         };
         magnetismAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.MAGNET_OPTION_ACTION_MESSAGE);
         magnetOption = new JToggleButton(magnetismAction);
@@ -324,7 +366,9 @@ public class KMADETaskModelToolBar extends JPanel {
         justificationAction = new AbstractAction("", KMADETaskModelToolBar.JUSTIFY_IMAGE_ICON) {
             private static final long serialVersionUID = 4000465475546408455L;
             public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
                 GraphicEditorAdaptator.setJustifyTaskModel();
+            	}
             }
         };
         justificationAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.JUSTIFY_OPTION_ACTION_MESSAGE);
@@ -334,7 +378,9 @@ public class KMADETaskModelToolBar extends JPanel {
         sameExecutant = new AbstractAction("", KMADETaskModelToolBar.UNIFORM_IMAGE_ICON) {
             private static final long serialVersionUID = 4000465475546408455L;
             public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
                 GraphicEditorAdaptator.applySameExecutant();
+            	}
             }
         };
         sameExecutant.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.SAME_EXECUTANT_MESSAGE);
@@ -346,7 +392,9 @@ public class KMADETaskModelToolBar extends JPanel {
 			private static final long serialVersionUID = -9065303558600036445L;
 
 			public void actionPerformed(ActionEvent e) {
+				if ( ! activeMenu()) {
         		GraphicEditorAdaptator.refreshJGraphView();
+				}
         	}
         };
         myShowOrNotTaskLabelToggleAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.VISIBLE_LABEL_ACTION_MESSAGE);
@@ -359,12 +407,29 @@ public class KMADETaskModelToolBar extends JPanel {
 			private static final long serialVersionUID = -4598463136823680701L;
 
 			public void actionPerformed(ActionEvent e) {
+				if ( ! activeMenu()) {
         		GraphicEditorAdaptator.refreshJGraphView();
+				}
         	}
         };
         myShowOrNotTaskColorLabelToggleAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.COLOR_LABEL_ACTION_MESSAGE);
         myShowOrNotTaskColorLabelToggleButton = new JToggleButton(myShowOrNotTaskColorLabelToggleAction);
         toolbar.add(myShowOrNotTaskColorLabelToggleButton);
+        
+        /*** Boite de dialogue lancement de simulation ***/ 
+        toolbar.addSeparator();
+        openSimulationAction = new AbstractAction("", KMADETaskModelToolBar.OPEN_SIMULATION_ICON) {
+            private static final long serialVersionUID = 4000465475546408455L;
+            public void actionPerformed(ActionEvent e) {
+            	if ( ! activeMenu()) {
+            	KMADeAdaptator.openSimulationDialog();
+            	} 
+            }
+        };
+        openSimulationAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.OPEN_SIMULATION_MESSAGE);
+        toolbar.add(openSimulationAction);
+        
+        
     }
 
     public boolean isLabelSelected() {
@@ -437,4 +502,38 @@ public class KMADETaskModelToolBar extends JPanel {
         myRuleAction.putValue(AbstractAction.NAME, KMADEConstant.SHOW_RULE_ACTION_MESSAGE);         
         myRuleAction.putValue(AbstractAction.SMALL_ICON,KMADEToolToolBar.HIDE_RULE);
     }
+    
+    public void setVisible(boolean s) {
+    	toolbar.setVisible(s);
+    }
+    
+	/** teste si un des menus est actif */
+	private boolean activeMenu() {
+		KMADEProjectPanel projectPanel = KMADEMainFrame.getProjectPanel();
+		if( projectPanel.getTaskModelPanel().getMenuTask() != null ) {
+			if ( projectPanel.getTaskModelPanel().getMenuTask().isVisible()) {
+				return true;
+			}
+		}
+		
+		if( projectPanel.getTaskModelPanel().getMenuEditDecomposition() != null ) {
+			if ( projectPanel.getTaskModelPanel().getMenuEditDecomposition().isVisible()) {
+				return true;
+			}
+		}
+		
+		if( projectPanel.getTaskModelPanel().getMenuEditExecutant() != null ) {
+			if ( projectPanel.getTaskModelPanel().getMenuEditExecutant().isVisible()) {
+				return true;
+			}
+		}
+		
+		if( projectPanel.getTaskModelPanel().getMenuEdition() != null ) {
+			if ( projectPanel.getTaskModelPanel().getMenuEdition().isVisible()) {
+				return true;
+			}
+		}
+				
+		return false;
+	}
 }

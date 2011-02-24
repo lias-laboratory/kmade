@@ -26,6 +26,7 @@ import org.jgraph.graph.EdgeRenderer;
 import org.jgraph.graph.EdgeView;
 import org.jgraph.graph.GraphCellEditor;
 import org.jgraph.graph.GraphContext;
+import org.jgraph.graph.GraphLayoutCache;
 import org.jgraph.graph.PortView;
 import org.jgraph.graph.VertexView;
 
@@ -48,7 +49,7 @@ import org.jgraph.graph.VertexView;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEEdgeView extends EdgeView {
 	private static final long serialVersionUID = -9159952601479964935L;
@@ -175,7 +176,7 @@ public class KMADEEdgeView extends EdgeView {
      
     	private static final long serialVersionUID = 8644212784140976492L;
 
-    	private List orthogonal(EdgeView edge) {
+    	private List<Object> orthogonal(EdgeView edge) {
 	        List<Object> newPoints = new ArrayList<Object>();
 			int n = edge.getPointCount();
 			Point2D from = edge.getPoint(0);
@@ -229,7 +230,7 @@ public class KMADEEdgeView extends EdgeView {
             return null;
        	}
 
-		public List route(EdgeView edge) {
+		public List<Object> route(EdgeView edge) {
 			if (KMADEConstant.ORTHOGONAL_EDGES) {
 				return orthogonal(edge);
 			} else {
@@ -237,12 +238,20 @@ public class KMADEEdgeView extends EdgeView {
 			}
 		}
 
-		protected List linear(EdgeView edge) {
+		protected List<Object> linear(EdgeView edge) {
 			return null;
 		}
         
         public int getPreferredLineStyle(EdgeView edge) {
             return NO_PREFERENCE;
         }
+
+		public List<Object> route(GraphLayoutCache arg0, EdgeView edge) {
+			if (KMADEConstant.ORTHOGONAL_EDGES) {
+				return orthogonal(edge);
+			} else {
+				return linear(edge);
+			}
+		}
     }
 }

@@ -26,10 +26,12 @@ import org.w3c.dom.Element;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @authors Vincent Lucquiaud and Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @authors Vincent Lucquiaud and Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public abstract class ValeurType implements Entity, Cloneable {
-    public Oid oid;
+	private static final long serialVersionUID = 5673942188790701306L;
+	
+	public Oid oid;
 
     public ValeurType() { }
 

@@ -46,10 +46,11 @@ import kmade.nmda.schema.expression.UserExpression;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEIterationPanel extends JPanel implements LanguageFactory {
     private static final long serialVersionUID = 7010453287411415235L;
+   // private JGraph graph;
 
     public JTextArea textArea;
 
@@ -81,7 +82,7 @@ public class KMADEIterationPanel extends JPanel implements LanguageFactory {
     
     private ArrayList<KMADEUserExpressionField> myExpressionFieldList = new ArrayList<KMADEUserExpressionField>();
 
-    private ArrayList<KMADESetTypeComboBox> myExpressionComboList = new ArrayList<KMADESetTypeComboBox>();
+    private ArrayList<KMADEGroupTypeComboBox> myExpressionComboList = new ArrayList<KMADEGroupTypeComboBox>();
 
     public void setDescriptionArea(String p) {
 		this.descriptionTextuelArea.setText(p);
@@ -120,6 +121,7 @@ public class KMADEIterationPanel extends JPanel implements LanguageFactory {
                 IterationAdaptator.checkIteration(textArea.getText());
             }
         });
+        
         dbListButton = new JButton("Liste Objets");
         dbListButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -147,7 +149,7 @@ public class KMADEIterationPanel extends JPanel implements LanguageFactory {
                     current.setText("");
                     current.setPreferredSize(new Dimension(20,current.getPreferredSize().height));
                 }
-                for (KMADESetTypeComboBox currentCombo:myExpressionComboList) {
+                for (KMADEGroupTypeComboBox currentCombo:myExpressionComboList) {
                         currentCombo.getConcreteObjectType().setUserConcreteObject(null);
                         currentCombo.setSelectedIndex(0);
                 }
@@ -213,7 +215,7 @@ public class KMADEIterationPanel extends JPanel implements LanguageFactory {
         labelResultat.setText(value);
     }
     
-    public void enabledEvaluateControl(ArrayList myList) {
+    public void enabledEvaluateControl(ArrayList<?> myList) {
         validButton.setEnabled(true);
         panelEvaluationUser.removeAll();       
         
@@ -232,10 +234,14 @@ public class KMADEIterationPanel extends JPanel implements LanguageFactory {
                     panelEvaluationUser.add(new JLabel("["));
                     isUserExpression = true;
                     if (((ConcreteObjectType)tt).isGroupSetType()) {
-                        KMADESetTypeComboBox currentCombo = new KMADESetTypeComboBox((ConcreteObjectType)tt,((ConcreteObjectType)tt).getConcreteObjects());                       
-                        myExpressionComboList.add(currentCombo);
-                        panelEvaluationUser.add(currentCombo);
-                    } else {
+            			KMADEGroupTypeComboBox currentCombo = new KMADESetTypeComboBox((ConcreteObjectType)tt,((ConcreteObjectType)tt).getConcreteObjects());         				
+            			myExpressionComboList.add(currentCombo);
+            			panelEvaluationUser.add(currentCombo);
+            		} else if(((ConcreteObjectType)tt).isGroupArrayType()){
+            			KMADEGroupTypeComboBox currentCombo = new KMADEArrayTypeComboBox((ConcreteObjectType)tt,((ConcreteObjectType)tt).getConcreteObjects());         				
+            			myExpressionComboList.add(currentCombo);
+            			panelEvaluationUser.add(currentCombo);
+            		}else {
                         if (((ConcreteObjectType)tt).getConcreteObject() == null) {
                             panelEvaluationUser.add(new JLabel(KMADEConstant.NO_CONCRETE_OBJECT_GROUPE_NAME));
                         } else {

@@ -1,6 +1,7 @@
 package kmade.nmda.schema.expression;
 
 import kmade.nmda.ExpressConstant;
+import kmade.nmda.schema.metaobjet.NumberValue;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
 
 /**
@@ -22,7 +23,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class MinusComputing extends ComputingOperator {
     
@@ -36,13 +37,13 @@ public class MinusComputing extends ComputingOperator {
     public void checkNode() throws SemanticException {
         super.checkNode();
         
-        if (this.getLeftNode().isInteger() && this.getRightNode().isInteger()) {
-            this.setNodeType(new Integer(0));
+        if (this.getLeftNode().isNumber() && this.getRightNode().isNumber()) {
+            this.setNodeType(new NumberValue(0));
             return;
         }
 
         this.setStateToError();
-        throw new SemanticException();
+        throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
     }
     
     public void evaluateNode(ObjetConcret ref) throws SemanticException {
@@ -56,8 +57,8 @@ public class MinusComputing extends ComputingOperator {
 			throw new SemanticUnknownException();
 		}
 
-        	if (getLeftNode().isInteger() && getRightNode().isInteger()) {
-        		this.setNodeValue(new Integer(((Integer)getLeftNode().getNodeValue()) - ((Integer)getRightNode().getNodeValue())));
+        	if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+        		this.setNodeValue(((NumberValue)getLeftNode().getNodeValue()).minusComputing( (((NumberValue)getRightNode().getNodeValue()))));
         	}
     }
 }

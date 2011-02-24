@@ -9,11 +9,13 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
@@ -28,8 +30,10 @@ import kmade.kmade.KMADEConstant;
 import kmade.kmade.UI.toolutilities.DefaultListTableModel;
 import kmade.kmade.UI.toolutilities.JListTable;
 import kmade.kmade.UI.toolutilities.LanguageFactory;
+import kmade.kmade.adaptatorFC.parserExpression.RegularExpression;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
 import kmade.kmade.adaptatorUI.LabelAdaptator;
+import kmade.nmda.schema.tache.Label;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -50,7 +54,7 @@ import kmade.kmade.adaptatorUI.LabelAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADELabelPanel extends JScrollPane implements LanguageFactory {
 
@@ -76,7 +80,7 @@ public class KMADELabelPanel extends JScrollPane implements LanguageFactory {
         myListTable.getMyTable().setDefaultEditor(Color.class, new ColorEditor());
         myListTable.getMyTable().setDefaultRenderer(Color.class, new ColorRenderer(true));
         myListTable.getMyTable().setDefaultRenderer(Boolean.class, new BooleanRenderer());
-        myListTable.setCellEditor(1,"String",null);
+        myListTable.setCellEditor(1,"SpecialString",null);
         myListTable.getMyTable().getColumnModel().getColumn(0).setMaxWidth(40);
     }
     
@@ -138,6 +142,33 @@ public class KMADELabelPanel extends JScrollPane implements LanguageFactory {
 	            return maList.get(rowIndex)[columnIndex-1];
 	        }    
 		}		
+		private String nameTest(String value){
+			String name =value;
+			boolean needVerif = true;
+			// un nom null annule l'édition, boucle tant que le nom n'est pas correct  
+			while (name != null && needVerif){
+				// vérification de l'expression régulière avec affichage d'un popUp
+				if( !RegularExpression.isGoodLabelName(name)){
+					name = (String) JOptionPane.showInputDialog(GraphicEditorAdaptator.getMainFrame(),KMADEConstant.BAD_CHARACTER_TEXT,
+							KMADEConstant.BAD_CARACTER_TITLE,JOptionPane.YES_NO_OPTION,
+							new ImageIcon(GraphicEditorAdaptator.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE))
+					,null,name
+					);
+				}else{ // l'expression est ok
+					if(Label.isUniqueName(name)){
+						// si le nom est unique, le nom est correct et possible
+						needVerif = false;
+					} else {
+						name = (String)  JOptionPane.showInputDialog(GraphicEditorAdaptator.getMainFrame(),KMADEConstant.SAME_NAME_TEXT,
+								KMADEConstant.SAME_NAME_TITLE,JOptionPane.YES_NO_OPTION,
+								new ImageIcon(GraphicEditorAdaptator.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE))
+						,null,Label.propositionNom(name)
+						);
+					}		
+				}
+			}
+			return name;
+		}
 		
 	    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 	    		if (rowIndex + 1 == this.getRowCount()) {
@@ -145,9 +176,15 @@ public class KMADELabelPanel extends JScrollPane implements LanguageFactory {
 				if (value.equals("")) {
 					return;
 				}
+				
+				//verification du nom
+				String name = nameTest(value);
+				if(name == null || name.equals("")){
+					return;	}
+				value = name;
 				// Ajouter une nouvelle ligne.
 				String newLabelObject = LabelAdaptator.addLabel();
-                value = LabelAdaptator.setLabelName(newLabelObject, value);
+				value = LabelAdaptator.setLabelName(newLabelObject, value);
 				Object[] tempo = {value,"", Color.WHITE, true, true, newLabelObject, false };
 				myTableListModel.getListTableData().add(tempo);
 				this.fireTableRowsInserted(rowIndex, rowIndex + 1);
@@ -162,6 +199,13 @@ public class KMADELabelPanel extends JScrollPane implements LanguageFactory {
 					return;
 				}
 				case 1: {
+					 String nameRow = (String)tempValue[0];
+                     if (nameRow.equals((String)aValue))
+                         return;
+                     String name = nameTest((String)value);
+     				if(name == null || name.equals("")){
+     					return;	}
+     				value = LabelAdaptator.setLabelName(oidRow, name);
 					break;
 				}
 				case 2: {

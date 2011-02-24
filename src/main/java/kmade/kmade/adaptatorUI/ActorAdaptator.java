@@ -29,7 +29,7 @@ import kmade.nmda.schema.tache.User;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class ActorAdaptator {
     public static int origine = 0;
@@ -54,17 +54,19 @@ public class ActorAdaptator {
         origine = 0;
     }
     
-    public static boolean setOldActorSelectedTask(String oidActor, String newUser) {
+
+    public static String setOldActorSelectedTask(String oidActor, String newUser ) {
+    	
         Acteur m = (Acteur)InterfaceExpressJava.prendre(new Oid(oidActor));
         User myUser = ExpressUser.getUserWithName(newUser);
         if (!isUserInActors(myUser.getOid())) {
-            m.delete();
+        	m.delete();	
             Oid oidNewActor = ExpressActeur.createActor(myUser.getOid());
             if (ExpressTask.addActor(GraphicEditorAdaptator.getSelectedExpressTask(),oidNewActor.get())) {
-                return true;
+            	return oidNewActor.get();
             }
         }
-        return false;
+        return null;
     }
     
     public static void removeActeur(String oidAct) {

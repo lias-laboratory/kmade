@@ -1,5 +1,7 @@
 package kmade.nmda.schema.expression;
 
+import kmade.nmda.ExpressConstant;
+import kmade.nmda.schema.metaobjet.NumberValue;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
 
 /**
@@ -21,7 +23,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class PlusComputing extends ComputingOperator {
     private static final long serialVersionUID = -394810851362269302L;
@@ -34,27 +36,19 @@ public class PlusComputing extends ComputingOperator {
     public void checkNode() throws SemanticException {
         super.checkNode();
 
-        if (this.getLeftNode().isInteger() && this.getRightNode().isString()) {
-            this.setNodeType("");
-        }
-        
-        if (this.getLeftNode().isString() && this.getRightNode().isInteger()) {
-            this.setNodeType("");
-            return;
-        }
-        
+
         if (this.getLeftNode().isString() && this.getRightNode().isString()) {
             this.setNodeType("");
             return;
         }
         
-        if (this.getLeftNode().isInteger() && this.getRightNode().isInteger()) {
-            this.setNodeType(0);
+        if (this.getLeftNode().isNumber() && this.getRightNode().isNumber()) {
+            this.setNodeType(new NumberValue());
             return;
         }
 
         this.setStateToError();
-        throw new SemanticException();
+        throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
     }
 
     public void evaluateNode(ObjetConcret ref) throws SemanticException {
@@ -67,22 +61,18 @@ public class PlusComputing extends ComputingOperator {
 		if (this.isUnknownState()) {
 			throw new SemanticUnknownException();
 		}
-
-        	if (getLeftNode().isString() && getRightNode().isString()) {
-        		this.setNodeValue(new String(((String)getLeftNode().getNodeValue()) + ((String)getRightNode().getNodeValue())));
+			// les cas autres que String + String ou Nombre+ Nombre ne doivent pas arriver normalement
+        	if (getLeftNode().isNumber() && getRightNode().isString()) {
+        		this.setNodeValue(new String(((NumberValue)getLeftNode().getNodeValue()).toString() + ((String)getRightNode().getNodeValue())));
         	}
 
-        	if (getLeftNode().isString() && getRightNode().isInteger()) {
-        		this.setNodeValue(new String(((String)getLeftNode().getNodeValue()) + ((Integer)getRightNode().getNodeValue()).toString()));
+        	if (getLeftNode().isString() && getRightNode().isNumber()) {
+        		this.setNodeValue(new String(((String)getLeftNode().getNodeValue()) + ((NumberValue)getRightNode().getNodeValue()).toString()));
         	}
     		
-        	if (getLeftNode().isInteger() && getRightNode().isString()) {
-        		int temp = new Integer((String)getRightNode().getNodeValue());
-        		this.setNodeValue(new String(((Integer)getLeftNode().getNodeValue()).toString() + temp).toString());
-        	}
         	
-        	if (getLeftNode().isInteger() && getRightNode().isInteger()) {
-        		this.setNodeValue(Integer.valueOf(((Integer)getLeftNode().getNodeValue()) + ((Integer)getRightNode().getNodeValue())));
+        	if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+        		this.setNodeValue( ((NumberValue)getLeftNode().getNodeValue()).plusComputing(((NumberValue)getRightNode().getNodeValue())));
         	}
     }
 }

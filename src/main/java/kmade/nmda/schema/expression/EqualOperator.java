@@ -1,6 +1,7 @@
 package kmade.nmda.schema.expression;
 
 import kmade.nmda.ExpressConstant;
+import kmade.nmda.schema.metaobjet.NumberValue;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
 
 /**
@@ -22,7 +23,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class EqualOperator extends EqualityOperator {
 
@@ -35,7 +36,6 @@ public class EqualOperator extends EqualityOperator {
 	
     public void evaluateNode(ObjetConcret ref) throws SemanticException { 
 		super.evaluateNode(ref);
-
 		if (this.isErrorState()) {
 			throw new SemanticErrorException();
 		}
@@ -43,24 +43,24 @@ public class EqualOperator extends EqualityOperator {
 		if (this.isUnknownState()) {
 			throw new SemanticUnknownException();
 		}
-		
-		if (getLeftNode().isInteger() && getRightNode().isString()) {
-			this.setNodeValue(new Boolean(((Integer)getLeftNode().getNodeValue()).intValue() == (new Integer((String)getRightNode().getNodeValue())).intValue()));
+		// Certains tests ne doivent pas se présenter, le checkNode n'autorisant que le même type à gauche et à droite
+		if (getLeftNode().isNumber() && getRightNode().isString()) {
+			this.setNodeValue(new Boolean( ((NumberValue)(getLeftNode().getNodeValue())).equalOperator( (new NumberValue((String)getRightNode().getNodeValue())))));
 			return;
 		}
 		
-		if (getLeftNode().isString() && getRightNode().isInteger()) {
-			this.setNodeValue(new Boolean(((new Integer((String)getLeftNode().getNodeValue())).intValue()) == (((Integer)getRightNode().getNodeValue()).intValue())));
+		if (getLeftNode().isString() && getRightNode().isNumber()) {
+			this.setNodeValue(new Boolean(((new NumberValue((String)getLeftNode().getNodeValue()))).equalOperator(((NumberValue)getRightNode().getNodeValue()))));
 			return;
 		}
 		
 		if (getLeftNode().isString() && getRightNode().isString()) {
-			this.setNodeValue(new Boolean((((String)getLeftNode().getNodeValue()).equals((String)getRightNode().getNodeValue()))));
+			this.setNodeValue(new Boolean((((String)getLeftNode().getNodeValue()).toLowerCase().equals( ((String)getRightNode().getNodeValue()).toLowerCase()))));
 			return;
 		}
 		
-		if (getLeftNode().isInteger() && getRightNode().isInteger()) {
-			this.setNodeValue(new Boolean(((Integer)getLeftNode().getNodeValue()).intValue() == ((Integer)getRightNode().getNodeValue()).intValue()));
+		if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+			this.setNodeValue(new Boolean(((NumberValue)getLeftNode().getNodeValue()).equalOperator((NumberValue)getRightNode().getNodeValue())));
 			return;
 		}
         
@@ -69,13 +69,13 @@ public class EqualOperator extends EqualityOperator {
             return;
         }
                
-        if (this.getLeftNode().isBoolean() && this.getRightNode().isInteger()) {
-            this.setNodeValue(new Boolean(((Boolean)getLeftNode().getNodeValue()).booleanValue() == ((Integer)getRightNode().getNodeValue() == 0 ? false : true)));
+        if (this.getLeftNode().isBoolean() && this.getRightNode().isNumber()) {
+            this.setNodeValue(new Boolean(((Boolean)getLeftNode().getNodeValue()).booleanValue() == (((NumberValue) getRightNode().getNodeValue()).equalOperator(new NumberValue("0")) ? true : false)));
             return;
         }
 
-        if (this.getLeftNode().isInteger() && this.getRightNode().isBoolean()) {
-            this.setNodeValue(new Boolean(((Integer)getRightNode().getNodeValue() == 0 ? false : true) == ((Boolean)getLeftNode().getNodeValue()).booleanValue()));            
+        if (this.getLeftNode().isNumber() && this.getRightNode().isBoolean()) {
+            this.setNodeValue(new Boolean(((Boolean)getRightNode().getNodeValue()).booleanValue() == (((NumberValue) getLeftNode().getNodeValue()).equalOperator(new NumberValue("0")) ? true : false)));
             return;            
         }
     }

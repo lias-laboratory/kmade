@@ -30,37 +30,37 @@ import org.w3c.dom.NodeList;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class AttributAbstrait implements Entity {
 
-    private static final long serialVersionUID = 1128722637230479607L;
+	private static final long serialVersionUID = 1128722637230479607L;
 
-    public Oid oid;
-    
-    private String name;
+	public Oid oid;
+
+	private String name;
 
 	private String description = null;
 
-    private TypeStructure typeStruct = TypeStructure.STRING_STRUCT;
-    
+	private TypeStructure typeStruct = TypeStructure.STRING_STRUCT;
+
 	private TypeAbs typeref = null;
 
-    private ObjetAbstrait utiliseParClass = null;
-    
+	private ObjetAbstrait utiliseParClass = null;
+
 	private ArrayList<AttributConcret> utilisePar = null;
-   
+
 	public AttributAbstrait() {
 		this.name = "";
 		this.description = "";
-        this.typeStruct = TypeStructure.STRING_STRUCT;
+		this.typeStruct = TypeStructure.STRING_STRUCT;
 		this.utilisePar = new ArrayList<AttributConcret>();
 	}
 
 	public AttributAbstrait(String name, String description, String type, ObjetAbstrait classe, TypeAbs typeref, Oid oid) {
 		this.name = name;
 		this.description = description;
-        this.typeStruct = TypeStructure.getValue(type);
+		this.typeStruct = TypeStructure.getValue(type);
 		this.setUtiliseeparClass(classe);
 		if (typeref != null) {
 			this.setTypeRef(typeref);
@@ -72,7 +72,7 @@ public class AttributAbstrait implements Entity {
 	public AttributAbstrait(String name, String description, String type, ObjetAbstrait classe, Oid oid) {
 		this.name = name;
 		this.description = description;
-        this.typeStruct = TypeStructure.getValue(type);
+		this.typeStruct = TypeStructure.getValue(type);
 		this.setUtiliseeparClass(classe);
 		this.utilisePar = new ArrayList<AttributConcret>();
 		this.oid = oid;
@@ -83,7 +83,7 @@ public class AttributAbstrait implements Entity {
 		this.description = "";
 		this.setUtiliseeparClass(classe);
 		this.utilisePar = new ArrayList<AttributConcret>();
-        this.typeStruct = TypeStructure.getValue(type2);
+		this.typeStruct = TypeStructure.getValue(type2);
 		if (type != null) {
 			this.typeref = type;
 		}
@@ -104,7 +104,6 @@ public class AttributAbstrait implements Entity {
 		InterfaceExpressJava.getGestionWarning().addMessage(oid, 1, ExpressConstant.REMOVE_OF_THE_ABSTRACT_OBJECT_MESSAGE + " \"" + utiliseParClass.getName() + "\"");
 		for (int i = 0; i < this.utilisePar.size(); i++) {
 			AttributConcret a = this.utilisePar.get(i);
-            System.out.println(a);
 			a.affDelete();
 		}
 	}
@@ -122,28 +121,28 @@ public class AttributAbstrait implements Entity {
 		this.utilisePar.add(a);
 	}
 
-    public void removeUtiliseParAttr(AttributConcret a) {
-        this.utilisePar.remove(a);
-    }
-    
-    public void removeAllConcreteAttribut() {
-    	this.utilisePar = new ArrayList<AttributConcret>();
-    }
-    
+	public void removeUtiliseParAttr(AttributConcret a) {
+		this.utilisePar.remove(a);
+	}
+
+	public void removeAllConcreteAttribut() {
+		this.utilisePar = new ArrayList<AttributConcret>();
+	}
+
 	public TypeAbs getTypeRef() {
 		return this.typeref;
 	}
 
-	public ArrayList getUtiliseParAttr() {
+	public ArrayList<AttributConcret> getUtiliseParAttr() {
 		return this.utilisePar;
 	}
 
 	public void setTypeRef(TypeAbs ptyperef) {
-        this.delTypeRef();
-        if (ptyperef != null) {
-            this.typeref = ptyperef;
-            ptyperef.addInverseAttributAbs(this);
-        }
+		this.delTypeRef();
+		if (ptyperef != null) {
+			this.typeref = ptyperef;
+			ptyperef.addInverseAttributAbs(this);
+		}
 	}
 
 	public void delTypeRef() {
@@ -152,80 +151,80 @@ public class AttributAbstrait implements Entity {
 			this.typeref = null;
 		}
 	}
-    
-    public Element toXML(Document doc) {
-        Element racine = doc.createElement("abstractattribut");
-        racine.setAttribute("classkmad", "metaobjet.AttributAbstrait");
-        racine.setAttribute("idkmad", oid.get());
-        
-        Element element = doc.createElement("abstractattribut-name");
-        element.setTextContent(this.getName());
-        racine.appendChild(element);
-        
-        if (this.getDescription().equals("")) {
-            element = doc.createElement("abstractattribut-description");
-            element.setTextContent(this.getDescription());
-            racine.appendChild(element);
-        }
-        
-        racine.appendChild(typeStruct.toXML(doc));
-        
-        element = doc.createElement("id-abstractattribut-abstractobject");
-        element.setTextContent(this.utiliseParClass.getOid().get());
-        racine.appendChild(element);
 
-        if (this.typeref != null) {
-            element = doc.createElement("id-abstractattribut-type");
-            element.setTextContent(this.typeref.getOid().get());
-            racine.appendChild(element);
-        }
-        return racine;
-    }
-    
-    public boolean oidIsAnyMissing(Element p) {
-        NodeList userValue = p.getElementsByTagName("id-abstractattribut-abstractobject");
-        if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0).getTextContent())) == null) {
-            return true;
-        }
-        userValue = p.getElementsByTagName("id-abstractattribut-type");
-        if (userValue.item(0) != null) {
-            if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0).getTextContent())) == null) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public void createObjectFromXMLElement(Element p) {
-        this.oid = new Oid(p.getAttribute("idkmad"));        
-        
-        NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
-        this.name = nodeList.item(0).getTextContent();
-        
-        nodeList = p.getElementsByTagName("abstractattribut-description");
-        if (nodeList.item(0) != null) {
-            this.description = nodeList.item(0).getTextContent();
-        }
-        
-        nodeList = p.getElementsByTagName("abstractattribut-typestructure");
-        this.typeStruct = TypeStructure.getValue(nodeList.item(0).getTextContent());
-        
-        nodeList = p.getElementsByTagName("id-abstractattribut-abstractobject");
-        this.setUtiliseeparClass((ObjetAbstrait)InterfaceExpressJava.bdd.prendre(new Oid(nodeList.item(0).getTextContent())));
+	public Element toXML(Document doc) {
+		Element racine = doc.createElement("abstractattribut");
+		racine.setAttribute("classkmad", "metaobjet.AttributAbstrait");
+		racine.setAttribute("idkmad", oid.get());
 
-        nodeList = p.getElementsByTagName("id-abstractattribut-type");
-        if (nodeList.item(0) != null) {
-            TypeAbs ref = (TypeAbs)InterfaceExpressJava.bdd.prendre(new Oid(nodeList.item(0).getTextContent()));
-            if (ref != null) {
-                this.setTypeRef(ref);
-            }
-        }
-    }
-    
+		Element element = doc.createElement("abstractattribut-name");
+		element.setTextContent(this.getName());
+		racine.appendChild(element);
+
+		if (this.getDescription().equals("")) {
+			element = doc.createElement("abstractattribut-description");
+			element.setTextContent(this.getDescription());
+			racine.appendChild(element);
+		}
+
+		racine.appendChild(typeStruct.toXML(doc));
+
+		element = doc.createElement("id-abstractattribut-abstractobject");
+		element.setTextContent(this.utiliseParClass.getOid().get());
+		racine.appendChild(element);
+
+		if (this.typeref != null) {
+			element = doc.createElement("id-abstractattribut-type");
+			element.setTextContent(this.typeref.getOid().get());
+			racine.appendChild(element);
+		}
+		return racine;
+	}
+
+	public boolean oidIsAnyMissing(Element p) {
+		NodeList userValue = p.getElementsByTagName("id-abstractattribut-abstractobject");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0).getTextContent())) == null) {
+			return true;
+		}
+		userValue = p.getElementsByTagName("id-abstractattribut-type");
+		if (userValue.item(0) != null) {
+			if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0).getTextContent())) == null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void createObjectFromXMLElement(Element p) {
+		this.oid = new Oid(p.getAttribute("idkmad"));        
+
+		NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
+		this.name = nodeList.item(0).getTextContent();
+
+		nodeList = p.getElementsByTagName("abstractattribut-description");
+		if (nodeList.item(0) != null) {
+			this.description = nodeList.item(0).getTextContent();
+		}
+
+		nodeList = p.getElementsByTagName("abstractattribut-typestructure");
+		this.typeStruct = TypeStructure.getValue(nodeList.item(0).getTextContent());
+
+		nodeList = p.getElementsByTagName("id-abstractattribut-abstractobject");
+		this.setUtiliseeparClass((ObjetAbstrait)InterfaceExpressJava.bdd.prendre(new Oid(nodeList.item(0).getTextContent())));
+
+		nodeList = p.getElementsByTagName("id-abstractattribut-type");
+		if (nodeList.item(0) != null) {
+			TypeAbs ref = (TypeAbs)InterfaceExpressJava.bdd.prendre(new Oid(nodeList.item(0).getTextContent()));
+			if (ref != null) {
+				this.setTypeRef(ref);
+			}
+		}
+	}
+
 	public String toSPF() {
 		String SPF = oid.get() + "=" + "AttributAbstrait" + "(" + "'" + name
-				+ "'" + "," + "'" + description + "'" + "," + typeStruct.toSPF()
-				+ ",";
+		+ "'" + "," + "'" + description + "'" + "," + typeStruct.toSPF()
+		+ ",";
 		if (utiliseParClass != null)
 			SPF = SPF + utiliseParClass.getOid().get();
 		else
@@ -252,20 +251,6 @@ public class AttributAbstrait implements Entity {
 	}
 
 	public void setName(String n) {
-		boolean ok = false;
-		int cpt = 0;
-		n = n.replace(" ", "_");
-		while (!ok) {
-			if (cpt != 0) {
-				if (cpt == 1) {
-					n = n + "_" + String.valueOf(cpt);
-				} else {
-					n = n.substring(0, n.length() - 1) + String.valueOf(cpt);
-				}
-			}
-			ok = isUniqueName(n, oid.get());
-			cpt++;
-		}
 		name = n;
 	}
 
@@ -277,32 +262,50 @@ public class AttributAbstrait implements Entity {
 		description = d;
 	}
 
-    public TypeStructure getTypeStructure() {
-        return this.typeStruct;
-    }
-    
-    public void setTypeStructure(TypeStructure p) {
-        this.typeStruct = p;  
-        
-        for (AttributConcret current : utilisePar) {
-            current.setInitValeur();
-        }        
-    }
+	public TypeStructure getTypeStructure() {
+		return this.typeStruct;
+	}
 
-	public static boolean isUniqueName(String s, String oid) {
-		AttributAbstrait attr = (AttributAbstrait) InterfaceExpressJava.prendre(new Oid(oid));
-		ObjetAbstrait objAss = attr.utiliseParClass;
-		ArrayList<AttributAbstrait> attrsAbs = objAss.getInverseAttributsAbs();
-		for (int i = 0; i < attrsAbs.size(); i++) {
-			AttributAbstrait obj = attrsAbs.get(i);
-			if (s.equalsIgnoreCase(obj.name) && (!obj.oid.get().equals(oid))) {
-				return false;
-			}
-		}
-		return true;
+	public void setTypeStructure(TypeStructure p) {
+		this.typeStruct = p;  
+
+		for (AttributConcret current : utilisePar) {
+			current.setInitValeur();
+		}        
+	}
+
+	 public static String propositionNom(String n){
+	    	boolean ok = false;
+	    	int cpt = 0;
+	    	// n = n.replace(" ", "_");
+	    	while (!ok) {
+	    		if (cpt != 0) {
+	    			if (cpt == 1) {
+	    				n = n + "_" + String.valueOf(cpt);
+	    			} else {
+	    				n = n.substring(0, n.length() - 1) + String.valueOf(cpt);
+	    			}
+	    		}
+	    		ok = isUniqueName(n);
+	    		cpt++;
+	    	}
+	    	return n;
+	    }
+	 
+	public static boolean isUniqueName(String s) {
+        Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet", "AttributAbstrait");
+        for (int i = 0; i < objAbs.length; i++) {
+        	AttributAbstrait obj = (AttributAbstrait) objAbs[i];
+            if (s.equalsIgnoreCase(obj.name)) {
+                return false;
+            }
+        }
+        return true;
 	}
 
 	public boolean noSpace() {
 		return (name.indexOf(" ") == -1);
 	}
+
+
 }

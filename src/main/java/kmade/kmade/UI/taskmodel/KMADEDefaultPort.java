@@ -23,7 +23,7 @@ import org.jgraph.graph.DefaultPort;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEDefaultPort extends DefaultPort {
     private static final long serialVersionUID = 188384865875540612L;
@@ -69,7 +69,7 @@ public class KMADEDefaultPort extends DefaultPort {
         this.isSimulationExpanded = pIsSimulationExpanded;
         
         if (isMotherPort()) {        
-            Iterator i = this.edges();
+            Iterator<?> i = this.edges();
                 while (i.hasNext()) {
                     Object myObject = i.next();
                     if (myObject instanceof KMADEDefaultEdge) {
@@ -88,7 +88,7 @@ public class KMADEDefaultPort extends DefaultPort {
         this.isExpanded = isExpanded;
         
         if (isMotherPort()) {        
-            Iterator i = this.edges();
+            Iterator<?> i = this.edges();
                 while (i.hasNext()) {
                     Object myObject = i.next();
                     if (myObject instanceof KMADEDefaultEdge) {
@@ -106,7 +106,7 @@ public class KMADEDefaultPort extends DefaultPort {
      */
     public void setPoint(int dx, int dy) {
         if (isMotherPort()) {        
-            Iterator i = this.edges();
+            Iterator<?> i = this.edges();
                 while (i.hasNext()) {
                     Object myObject = i.next();
                     if (myObject instanceof KMADEDefaultEdge) {

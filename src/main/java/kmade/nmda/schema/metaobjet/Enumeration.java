@@ -28,7 +28,7 @@ import org.w3c.dom.Document;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Vincent Lucquiaud and Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Vincent Lucquiaud and Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class Enumeration extends TypeAbs {
 
@@ -94,14 +94,14 @@ public final class Enumeration extends TypeAbs {
 
     public void affDelete() {
         InterfaceExpressJava.getGestionWarning().addMessage(oid, 10);
-        Iterator i = inverseElementDe.iterator();
+        Iterator<Element> i = inverseElementDe.iterator();
         while (i.hasNext()) {
             Element g = (Element) i.next();
             g.affDelete();
         }
-        Iterator j = this.inverseAttributAbs.iterator();
+        Iterator<AttributAbstrait> j = this.inverseAttributAbs.iterator();
         while (j.hasNext()) {
-            AttributAbstrait attr = (AttributAbstrait) j.next();
+            AttributAbstrait attr = j.next();
             InterfaceExpressJava.getGestionWarning().addMessage(oid,10, ExpressConstant.REMOVE_OF_THE_ABSTRACT_ATTRIBUT_MESSAGE + " \"" + attr.getName() + "\"");
         }
     }
@@ -113,10 +113,10 @@ public final class Enumeration extends TypeAbs {
 
     public static String[] getInverseElementDe(Enumeration en) {
         String[] s = new String[en.inverseElementDe.size()];
-        Iterator i = en.inverseElementDe.iterator();
+        Iterator<Element> i = en.inverseElementDe.iterator();
         int j = 0;
         while (i.hasNext())
-            s[j++] = ((Element) i.next()).getName();
+            s[j++] =  i.next().getName();
         return s;
     }
 

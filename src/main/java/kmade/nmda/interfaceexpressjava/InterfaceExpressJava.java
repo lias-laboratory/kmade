@@ -43,7 +43,7 @@ import kmade.nmda.schema.tache.CurrentEvents;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class InterfaceExpressJava {  
     private static boolean done = false;
@@ -54,7 +54,7 @@ public class InterfaceExpressJava {
     
     private static boolean begining = true;
     
-    private static ArrayList<List> dataListFromSPF;
+    private static ArrayList<List<?>> dataListFromSPF;
        
     private static final ParserSPF PARSER_SPF = new ParserSPF();
 
@@ -126,7 +126,7 @@ public class InterfaceExpressJava {
     public static Object createEntityReferenceBackIntoClipBoard(String nameSchema, String typeEntity) {
         String classe = KMADEToolConstant.PACKAGE_PATH_NAME + nameSchema + "." + typeEntity;
 
-        Class entity = null;
+        Class<?> entity = null;
         try {
             entity = Class.forName(classe);
         } catch (ClassNotFoundException e) {
@@ -158,11 +158,11 @@ public class InterfaceExpressJava {
      * @return
      */
     public static Object[] getAllReferencesOfEntityFromClipBoard(String nameSchema, String typeEntity) {
-        Collection set = MY_CLIP_BOARD.values();
+        Collection<?> set = MY_CLIP_BOARD.values();
         Set<Object> setReturn = new HashSet<Object>();
         String classe = KMADEToolConstant.PACKAGE_PATH_NAME + nameSchema + "." + typeEntity;
 
-        Class entity = null;
+        Class<?> entity = null;
         try {
             entity = Class.forName(classe);
         } catch (ClassNotFoundException e) {
@@ -170,7 +170,7 @@ public class InterfaceExpressJava {
             System.err.println(e);
         }
 
-        Iterator i;
+        Iterator<?> i;
         for (i = set.iterator(); i.hasNext();) {
             Object o = (Object) i.next();
             String classO = o.getClass().toString();
@@ -193,7 +193,7 @@ public class InterfaceExpressJava {
     public static Object createEntityReferenceBack(String nameSchema, String typeEntity) {
         String classe = KMADEToolConstant.PACKAGE_PATH_NAME + nameSchema + "." + typeEntity;
 
-        Class entity = null;
+        Class<?> entity = null;
         try {
             entity = Class.forName(classe);
         } catch (ClassNotFoundException e) {
@@ -229,7 +229,7 @@ public class InterfaceExpressJava {
         // Creer l'objet puis assigner les valeurs suivants les attributs
         String classe = KMADEToolConstant.PACKAGE_PATH_NAME + nameSchema + "." + typeEntity;
 
-        Class entity = null;
+        Class<?> entity = null;
         try {
             entity = Class.forName(classe);
         } catch (ClassNotFoundException e) {
@@ -255,7 +255,7 @@ public class InterfaceExpressJava {
 
     private static void modifyOid(Object object, Object valeur) {
         Field widthField;
-        Class entity = object.getClass();
+        Class<?> entity = object.getClass();
         try {
             widthField = entity.getField("oid");
             widthField.set(object, (Oid) valeur);
@@ -294,11 +294,11 @@ public class InterfaceExpressJava {
      * @return
      */
     public static Object[] prendreAllOidOfEntity(String nameSchema, String typeEntity) {
-        Collection set = bdd.values();
+        Collection<?> set = bdd.values();
         Set<Object> setReturn = new HashSet<Object>();
         String classe = KMADEToolConstant.PACKAGE_PATH_NAME + nameSchema + "." + typeEntity;
 
-        Class entity = null;
+        Class<?> entity = null;
         try {
             entity = Class.forName(classe);
         } catch (ClassNotFoundException e) {
@@ -306,7 +306,7 @@ public class InterfaceExpressJava {
             System.err.println(e);
         }
 
-        Iterator i;
+        Iterator<?> i;
         for (i = set.iterator(); i.hasNext();) {
             Object o = (Object) i.next();
             String classO = o.getClass().toString();
@@ -319,10 +319,10 @@ public class InterfaceExpressJava {
     }
 
     public static void out() {
-        Set set = bdd.keySet();
-        Iterator i;
+        Set<Oid> set = bdd.keySet();
+        Iterator<Oid> i;
         for (i = set.iterator(); i.hasNext();) {
-            Oid oid = (Oid) i.next();
+            Oid oid = i.next();
             Object o = bdd.prendre(oid);
             System.out.println(((Entity) o).toSPF());
         }
@@ -345,7 +345,7 @@ public class InterfaceExpressJava {
         out.write("\n");
         out.write("// INRIA Rocquencourt / MErLIn Project");
         out.write("\n");
-        out.write("// Contacts : mickael.baron@inria.fr and dominique.scapin@inria.fr");
+        out.write("// Contacts : baron@ensma.fr and dominique.scapin@inria.fr");
         out.write("\n");
         out.write("// Date : " + "[" + calendar.get(Calendar.HOUR) + "-" + calendar.get(Calendar.MINUTE) + "], " + calendar.get(Calendar.YEAR) + "-"
                 + calendar.get(Calendar.MONTH) + "-"
@@ -355,10 +355,10 @@ public class InterfaceExpressJava {
         out.write("\n");
 
         // Ecriture des donn�es
-        Set set = bdd.keySet();
-        Iterator i;
+        Set<Oid> set = bdd.keySet();
+        Iterator<Oid> i;
         for (i = set.iterator(); i.hasNext();) {
-            Oid oid = (Oid) i.next();
+            Oid oid = i.next();
             Object o = bdd.prendre(oid);
             out.write(((Entity) o).toSPF());
             // Pour chaque OID on saute une ligne.
@@ -388,13 +388,13 @@ public class InterfaceExpressJava {
         SwingWorker worker = new SwingWorker() {
             public Object construct() {
                 while (dataListFromSPF.size() != 0 && !InterfaceExpressJava.canceled && !InterfaceExpressJava.error) {
-                    List list2 = dataListFromSPF.remove(0);
-                    Iterator j = list2.iterator();
+                    List<?> list2 = dataListFromSPF.remove(0);
+                    Iterator<?> j = list2.iterator();
                     String[] oid = (String[]) j.next();
                     String[] nameEntity = (String[]) j.next();
 
                     // Extraction du nom de l'entite : condition, tache, metaobject, project
-                    Class entity = null;
+                    Class<?> entity = null;
                     try {
                         entity = InterfaceExpressJava.getClassFromName(nameEntity[0]);
                     } catch(Exception e) {
@@ -418,7 +418,7 @@ public class InterfaceExpressJava {
                         lesArgs[lesArgs.length - 1] = new Oid(oid[0]);
 
                         Object object = null;
-                        Class[] tabClassArgs = new Class[lesArgs.length];
+                        Class<?>[] tabClassArgs = new Class[lesArgs.length];
                         for (int i = 0; i < lesArgs.length; i++) {
                             if (lesArgs[i] != null) {
                                 tabClassArgs[i] = lesArgs[i].getClass();
@@ -427,7 +427,7 @@ public class InterfaceExpressJava {
                             }
                         }
 
-                        Constructor constructeur = getConstructorMaxArgs(entity, lesArgs.length);
+                        Constructor<?> constructeur = getConstructorMaxArgs(entity, lesArgs.length);
 
                         if (constructeur == null) {
                         	InterfaceExpressJava.error = true;
@@ -460,7 +460,7 @@ public class InterfaceExpressJava {
         bdd.put(oid, entity);
     }
 
-    private static ArrayList recupererLst(String s) throws Exception {
+    private static ArrayList<?> recupererLst(String s) throws Exception {
         java.util.ArrayList<Object> vector = new java.util.ArrayList<Object>();
         String sub = s.substring(1, s.length() - 1);
         if (sub.length() == 0)
@@ -484,8 +484,8 @@ public class InterfaceExpressJava {
      * @param nameEntity
      * @return
      */
-    private static Class getClassFromName(String nameEntity) throws Exception {
-        Class entity = null;        
+    private static Class<?> getClassFromName(String nameEntity) throws Exception {
+        Class<?> entity = null;        
         try {
             entity = Class.forName(KMADEToolConstant.PACKAGE_PATH_NAME + "condition." + nameEntity);
         } catch (ClassNotFoundException c) {
@@ -506,7 +506,7 @@ public class InterfaceExpressJava {
         return entity;
     }
     
-    private static Object[] fournirListObjetParametre(int tailleArgs, java.util.Iterator j) throws Exception {
+    private static Object[] fournirListObjetParametre(int tailleArgs, java.util.Iterator<?> j) throws Exception {
         Object[] lesArgs = new Object[tailleArgs - 1]; // supprimer le nom
         // entity
         int compteur = 0; 
@@ -547,9 +547,9 @@ public class InterfaceExpressJava {
     }
 
     /** Utilisé pour choisr le constructeur avec le bon nombre d'arguments */
-    public static Constructor getConstructorMaxArgs(Class c, int size) {
-        Constructor[] cons = c.getConstructors();
-        Constructor keeped = null;
+    public static Constructor<?> getConstructorMaxArgs(Class<?> c, int size) {
+        Constructor<?>[] cons = c.getConstructors();
+        Constructor<?> keeped = null;
         for (int i = 0; i < cons.length; i++) {
             int taille = cons[i].getParameterTypes().length;
             if (taille == size) {

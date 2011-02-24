@@ -30,7 +30,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class AddUnaryFunction extends UnaryFunction {
 
@@ -51,6 +51,7 @@ public class AddUnaryFunction extends UnaryFunction {
     } 
     
     public void evaluateNode(ObjetConcret ref) throws SemanticException {
+    	
         ObjetConcret myRef = ref;
         if (InterfaceExpressJava.getCurrentObject().isExistCurrentEvaluateConcreteObject()) {
             myRef = InterfaceExpressJava.getCurrentObject().getCurrentEvaluateConcreteObject();

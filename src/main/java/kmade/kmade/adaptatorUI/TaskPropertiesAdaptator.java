@@ -31,7 +31,7 @@ import kmade.nmda.schema.tache.Tache;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class TaskPropertiesAdaptator {
 	protected static final KMADETaskPropertiesPanel fenetreTacheProp = GraphicEditorAdaptator.getPanelProp();
@@ -63,15 +63,16 @@ public final class TaskPropertiesAdaptator {
     public static void updateDecompositionRealTime(String localeDecompositionIntoEnumere) {
         KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setDecompositionRealTime(localeDecompositionIntoEnumere);
     }
-    
+    /*
     public static void updateDurationRealTime(String duree) {
         KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setDureeRealTime(duree);
     }
-    
+    */
     public static void updateFrequencyRealTime(String text) {
         KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setFrequencyRealTime(text);
     }
     
+    /*
     public static void setPurpose() {
         KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setPurpose();
     }
@@ -79,15 +80,17 @@ public final class TaskPropertiesAdaptator {
     public static String getPurpose() {
         return KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getPurpose();
     }
-    
+    */
+    /*
     public static void setFeedback() {
         KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setFeedback();
     }
-
+	
     public static String getFeedback() {
         return KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getFeedback();
     }
-    
+    */
+
     public static void setObservation() {
         KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setObservation();
     }
@@ -95,7 +98,7 @@ public final class TaskPropertiesAdaptator {
     public static String getObservation() {
         return KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getObservation();
     }
-    
+
     public static void setUnknownExecutant() {
         KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setExecutant(Executant.INCONNU);
     }
@@ -198,15 +201,15 @@ public final class TaskPropertiesAdaptator {
         return KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getFiredEvents();
     }
     
-    public static void setPostCondition() {
-        KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setPostCondition();
+    public static void setEffetsDeBord() {
+        KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setEffetsDeBord();
     }
 
-    public static String getPostCondition() {
-        return KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getPostcondition();
+    public static String getEffetsDeBord() {
+        return KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getEffetsDeBord();
     }
     
-    public static ArrayList getActorList() {
+    public static ArrayList<?> getActorList() {
         return KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getActorList();
     }
     
@@ -214,6 +217,14 @@ public final class TaskPropertiesAdaptator {
         KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setActorList();
     }
 
+    public static ArrayList<?> getActorSystemList() {
+        return KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getActorSystemList();
+    }
+    
+    public static void setActorSystemList() {
+        KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setActorSystemList();
+    }
+    
     public static void setIteration() {
         KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setIteration();
     }
@@ -249,12 +260,12 @@ public final class TaskPropertiesAdaptator {
     		tache.getNumero(), 
     		tache.getMotherTaskName(),
     		tache.getName(), 
-            tache.getBut(),
+           /* tache.getBut(),*/
     		tache.getRessources(),
-    		tache.getMedia(),
+    		/*tache.getMedia(),*/
             tache.getLabelName(),
-            tache.getFeedBack(),
-    		tache.getDuree(), 
+           /* tache.getFeedBack(),*/
+            /* tache.getDuree(), */
             tache.getObservation(),
     		tache.getExecutant(), 
             tache.getModalite().getValue(), 
@@ -267,7 +278,7 @@ public final class TaskPropertiesAdaptator {
             tache.getDeclencheurName(), 
             tache.getActeurs(),
     		tache.getPreExpression(), 
-            tache.getPostExpression(), 
+            tache.getEffetsDeBordExpression(), 
             tache.getDecomposition().getValue(), 
             tache.getIteExpression()
         );
@@ -301,6 +312,7 @@ public final class TaskPropertiesAdaptator {
                 newTabEvent, 
                 GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getEventsName(),
                 GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getActeurs(),
+                GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getActeurSysteme(),
                 newLabelArray);
     }
 	
@@ -308,28 +320,29 @@ public final class TaskPropertiesAdaptator {
         ExpressTask.setNameTask(GraphicEditorAdaptator.getSelectedExpressTask(), name);
         GraphicEditorAdaptator.updateSelectedTaskGraphModel();
     }
-    
+    /*
     public static void setButFromExpressTask(String but) {
         ExpressTask.setButTask(GraphicEditorAdaptator.getSelectedExpressTask(), but);
     }
-
+*/
     public static void setLabelExpressTask(String pcolor) {
         ExpressTask.setLabelTask(GraphicEditorAdaptator.getSelectedExpressTask(), pcolor);
         GraphicEditorAdaptator.updateSelectedTaskGraphModel();
     }
-    
+    /*
     public static void setFeedbackFromExpressTask(String res) {
         ExpressTask.setFeedbackTask(GraphicEditorAdaptator.getSelectedExpressTask(), res);
     }
+*/
 
     public static void setDurationFromExpressTask(String res) {
         ExpressTask.setDurationTask(GraphicEditorAdaptator.getSelectedExpressTask(), res);
     }
-    
+
     public static void setObservationFromExpressTask(String res) {
         ExpressTask.setObservationTask(GraphicEditorAdaptator.getSelectedExpressTask(), res);
     }
-    
+   
     public static void setExecutingUserFromExpressTask(Executant res) {
         ExpressTask.setExecutingUserTask(GraphicEditorAdaptator.getSelectedExpressTask(), res);
         GraphicEditorAdaptator.updateSelectedTaskGraphModel();
@@ -378,13 +391,13 @@ public final class TaskPropertiesAdaptator {
         GraphicEditorAdaptator.updateSelectedTaskGraphModel();
     }
     
-    // Partie liée aux précondition, postcondition et itération
+    // Partie liée aux précondition, effetsdebord et itération
     public static void setPreconditionInModel() {
         KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setPreconditionInModel(GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getPreExpression());
     }
 
-    public static void setPostConditionInModel() {
-        KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setPostConditionInModel(GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getPostExpression());
+    public static void setEffetsDeBordInModel() {
+        KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setEffetsDeBordInModel(GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getEffetsDeBordExpression());
     }
     
     public static void setIterationInModel() {

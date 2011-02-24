@@ -3,12 +3,13 @@
 	Document Type Definition of K-MAD (Kernel of Model for Activity Description)
 	INRIA Rocquencourt / MErLIn Project
 	Authors : 
-		- BARON Mickael (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+		- BARON Mickael (baron@ensma.fr ou baron.mickael@gmail.com)
 		- SCAPIN Dominique (dominique.scapin@inria.fr)
-	Version : 1.1
-	Date : September 05 2006
+	Version : 1.2
+	Date : September 09 2010
 -->
-<!ELEMENT kmad-model (project, projectinformation, projectinterviews*, (point | event | actor | user | task | abstractobject | abstractattribut | concreteobject | concreteattribut | group | agregat | typevalue | label)*) >
+<!ELEMENT kmad-model (project, projectinformation, projectinterviews*, (point | event | actor | user | actorSystem | Individu | Organisation | Machine | ParcMachines |  task | abstractobject | abstractattribut | concreteobject | concreteattribut | group | agregat | typevalue | label)*) >
+ <!ATTLIST version version CDATA "2.0"> 
 
 <!ELEMENT project (id-project-information, id-project-interviews-list?) >
 <!ATTLIST project idkmad CDATA #REQUIRED >
@@ -54,13 +55,19 @@
 <!ELEMENT event-description (#PCDATA) >
 
 
-<!ELEMENT actor (actorexperience, actorcompetence?, id-user) >
+<!ELEMENT actor (actor-experience, actor-competence?, id-user) >
 <!ATTLIST actor idkmad CDATA #REQUIRED >
 <!ATTLIST actor classkmad CDATA #REQUIRED >
 <!ELEMENT actor-experience (#PCDATA) >
 <!ELEMENT actor-competence (#PCDATA) >
 <!ELEMENT id-user (#PCDATA) >
 
+<!ELEMENT actorSystem (actorSystem-experience, actorSystem-competence?, id-user) >
+<!ATTLIST actorSystem idkmad CDATA #REQUIRED >
+<!ATTLIST actorSystem classkmad CDATA #REQUIRED >
+<!ELEMENT actorSystem-experience (#PCDATA) >
+<!ELEMENT actorSystem-competence (#PCDATA) >
+<!ELEMENT id-user (#PCDATA) >
 
 <!ELEMENT user (user-name, user-statut?, user-role?, user-imagepath?) >
 <!ATTLIST user idkmad CDATA #REQUIRED >
@@ -70,8 +77,41 @@
 <!ELEMENT user-role (#PCDATA) >
 <!ELEMENT user-imagepath (#PCDATA) >
 
+<!ELEMENT Individu (individu-name, individu-statut?, individu-role?, individu-imagepath?,id-organisation?) >
+<!ATTLIST Individu idkmad CDATA #REQUIRED >
+<!ATTLIST Individu classkmad CDATA #REQUIRED >
+<!ELEMENT individu-name (#PCDATA) >
+<!ELEMENT individu-statut (#PCDATA) >
+<!ELEMENT individu-role (#PCDATA) >
+<!ELEMENT individu-imagepath (#PCDATA) >
+<!ELEMENT id-organisation (#PCDATA) >
 
-<!ELEMENT task (task-name, task-purpose?, task-duration?, id-task-media?, task-resources?, task-feedback?, task-observation?, task-executant, task-frequency?, task-compfrequency?, task-importance?, task-modality?, id-task-eventtrigger?, id-task-events-list?, task-optional, task-interruptible, task-decomposition, id-task-actors-list?, id-task-subtasks-list?, id-task-point, id-task-label?, task-precondition, task-descriptionprecondition?, task-postcondition, task-descriptionpostcondition?, task-iteration, task-descriptioniteration?) >
+<!ELEMENT Organisation (organisation-name, organisation-statut?, organisation-role?, organisation-imagepath?) >
+<!ATTLIST Organisation idkmad CDATA #REQUIRED >
+<!ATTLIST Organisation classkmad CDATA #REQUIRED >
+<!ELEMENT organisation-name (#PCDATA) >
+<!ELEMENT organisation-statut (#PCDATA) >
+<!ELEMENT organisation-role (#PCDATA) >
+<!ELEMENT organisation-imagepath (#PCDATA) >
+
+<!ELEMENT Machine (machine-name, machine-description?, machine-isComputer,machine-imagepath?, id-parcMachine?) >
+<!ATTLIST Machine idkmad CDATA #REQUIRED >
+<!ATTLIST Machine classkmad CDATA #REQUIRED >
+<!ELEMENT machine-name (#PCDATA) >
+<!ELEMENT machine-description (#PCDATA) >
+<!ELEMENT machine-isComputer (#PCDATA) >
+<!ELEMENT machine-imagepath (#PCDATA) >
+<!ELEMENT id-parcMachine (#PCDATA) >
+
+<!ELEMENT ParcMachines (parcMachines-name, parcMachines-description?, parcMachines-imagepath?) >
+<!ATTLIST ParcMachines idkmad CDATA #REQUIRED >
+<!ATTLIST ParcMachines classkmad CDATA #REQUIRED >
+<!ELEMENT parcMachines-name (#PCDATA) >
+<!ELEMENT parcMachines-description (#PCDATA) >
+<!ELEMENT parcMachines-imagepath (#PCDATA) >
+
+
+<!ELEMENT task (task-name, task-purpose?, task-duration?, id-task-media?, task-resources?, task-feedback?, task-observation?, task-executant, task-frequency?, task-compfrequency?, task-importance?, task-modality?, id-task-eventtrigger?, id-task-events-list?, task-optional, task-interruptible, task-decomposition, id-task-actors-list?, id-task-subtasks-list?, id-task-point, id-task-label?, task-precondition, task-descriptionprecondition?, task-effetsdebord, task-descriptioneffetsdebord?, task-iteration, task-descriptioniteration?) >
 <!ATTLIST task idkmad CDATA #REQUIRED >
 <!ATTLIST task classkmad CDATA #REQUIRED >
 <!ELEMENT task-name (#PCDATA) >
@@ -100,8 +140,8 @@
 <!ELEMENT id-task-label (#PCDATA) >
 <!ELEMENT task-precondition (#PCDATA) >
 <!ELEMENT task-descriptionprecondition (#PCDATA) >
-<!ELEMENT task-postcondition (#PCDATA) >
-<!ELEMENT task-descriptionpostcondition (#PCDATA) >
+<!ELEMENT task-effetsdebord (#PCDATA) >
+<!ELEMENT task-descriptioneffetsdebord (#PCDATA) >
 <!ELEMENT task-iteration (#PCDATA) >
 <!ELEMENT task-descriptioniteration (#PCDATA) >
 

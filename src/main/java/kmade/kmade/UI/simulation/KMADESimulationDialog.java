@@ -36,6 +36,7 @@ import kmade.kmade.KMADEConstant;
 import kmade.kmade.UI.KMADEMainFrame;
 import kmade.kmade.UI.taskmodel.KMADEDefaultEdge;
 import kmade.kmade.UI.taskmodel.KMADEDefaultGraphCell;
+import kmade.kmade.UI.taskmodel.KMADEGraph;
 import kmade.kmade.UI.taskmodel.KMADEPortView;
 import kmade.kmade.UI.taskmodel.KMADEPreviewWindow;
 import kmade.kmade.UI.toolutilities.InDevelopmentGlassPanel;
@@ -47,8 +48,8 @@ import kmade.kmade.UI.toolutilities.VerticalTextIcon;
 import kmade.kmade.adaptatorFC.simulation.TokenSimulation;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
 import kmade.kmade.adaptatorUI.SimulationAdaptator;
-import kmade.nmda.schema.tache.Tache;
 import kmade.nmda.schema.tache.CurrentEvents.CurrentEvent;
+import kmade.nmda.schema.tache.Tache;
 
 import org.jgraph.JGraph;
 import org.jgraph.event.GraphSelectionEvent;
@@ -84,7 +85,7 @@ import org.jgraph.plaf.basic.BasicGraphUI;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADESimulationDialog extends JFrame {
 
@@ -94,7 +95,7 @@ public class KMADESimulationDialog extends JFrame {
     
     private JTabbedPane tabpaneProjet;
     
-    private JGraph mySimulationGraph;
+    private kmade.kmade.UI.taskmodel.KMADEGraph mySimulationGraph;
    
     private KMADEHistoryMessagePanel myHMP;
     
@@ -171,7 +172,7 @@ public class KMADESimulationDialog extends JFrame {
     public KMADESimulationDialog() {        
         super(KMADEConstant.SIMULATION_TITLE_MESSAGE);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        mySimulationGraph = new JGraph();
+        mySimulationGraph = new KMADEGraph();
         mySimulationGraph.setSelectionModel(new NMDASimulationGraphSelectionModel(mySimulationGraph));
         mySimulationGraph.setEditable(false);
         mySimulationGraph.setMoveable(false);
@@ -245,6 +246,7 @@ public class KMADESimulationDialog extends JFrame {
 
         JSplitPane myMainSplitPane = KMADEEnhancedSplitPane.createStrippedSplitPane(JSplitPane.VERTICAL_SPLIT, myCentralSplitPane, myConstraintsHistory);        
         myMainSplitPane.setOneTouchExpandable(true);
+        
         myMainSplitPane.setDividerLocation(425);
         myMainSplitPane.setResizeWeight(1);
                 
@@ -273,12 +275,12 @@ public class KMADESimulationDialog extends JFrame {
         // Le JPanel pour l'objet concret courant et les événements engendrés
         panelConcreteObject = new JPanel();
         panelConcreteObject.setLayout(this.cardCurrentObject);
-        this.myObjetConcretBorder = new TitledBorder(null, KMADEConstant.POSTCONDITION_CONCRETE_OBJECT_TITLE_MESSAGE, TitledBorder.CENTER, TitledBorder.TOP);
+        this.myObjetConcretBorder = new TitledBorder(null, KMADEConstant.EFFETSDEBORD_CONCRETE_OBJECT_TITLE_MESSAGE, TitledBorder.CENTER, TitledBorder.TOP);
         panelConcreteObject.setBorder(this.myObjetConcretBorder);
         panelConcreteObject.setPreferredSize(new Dimension(150,90));
         
         JPanel panelCurrentObjectEmpty = new JPanel(new BorderLayout());
-        panelCurrentObjectEmpty.add(new JLabel("Aucun Objet Concret Courant",JLabel.CENTER));
+        panelCurrentObjectEmpty.add(new JLabel(KMADEConstant.NO_CONCRETE_OBJECT,JLabel.CENTER));
         
         myLabelConcreteObject = new JLabel("", JLabel.CENTER);
         panelConcreteObject.add("EMPTY", panelCurrentObjectEmpty);

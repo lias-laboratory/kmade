@@ -25,7 +25,7 @@ import org.w3c.dom.NodeList;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @authors Delphine Autard and Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @authors Delphine Autard and Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public enum Modalite implements Enumere {
     INCONNU("UNK"), 

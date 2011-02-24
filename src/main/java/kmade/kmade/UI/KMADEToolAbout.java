@@ -38,7 +38,7 @@ import kmade.kmade.UI.toolutilities.LanguageFactory;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEToolAbout extends JDialog implements LanguageFactory {
 	private static final long serialVersionUID = -108735426633480605L;
@@ -74,8 +74,8 @@ public class KMADEToolAbout extends JDialog implements LanguageFactory {
 
 		panel_info.setBorder(BorderFactory.createRaisedBevelBorder());
 		panel_info.add(KMADEToolUtilities.getLabelCenter(KMADEToolConstant.TOOL_NAME + " " + KMADEConstant.VERSION_MESSAGE + " " + KMADEToolConstant.VERSION_VALUE));
-		panel_info.add(KMADEToolUtilities.getLabelCenter("2005 - 2006"));
-		panel_info.add(KMADEToolUtilities.getLabelCenter("INRIA Rocquencourt - Projet MErLIn"));
+		panel_info.add(KMADEToolUtilities.getLabelCenter("2005 - 2010"));
+		panel_info.add(KMADEToolUtilities.getLabelCenter("INRIA Rocquencourt - Projet MErLIn - LISI ENSMA"));
 		panel_info.add(KMADEToolUtilities.getLabelCenter("France"));
 		mySouthPanel.add(panel_info,BorderLayout.CENTER);		
 		
@@ -120,7 +120,7 @@ public class KMADEToolAbout extends JDialog implements LanguageFactory {
         participants.append(KMADEConstant.PROJECT_LEADER_MESSAGE + "\n");
         participants.append(" - Dominique Scapin (dominique.scapin@inria.fr) \n\n");
         participants.append(KMADEConstant.DEVELOPMENT_QUERING_TOOL_MESSAGE + "\n");
-        participants.append(" - Mickael Baron (mickael.baron@inria.fr ; baron.mickael@gmail.com)\n\n");
+        participants.append(" - Mickael Baron (mickael.baron@ensma.fr ; baron.mickael@gmail.com)\n\n");
         participants.append(KMADEConstant.KMAD_SPECIFY_MESSAGE + "\n");
         participants.append(" - Vincent Lucquiaud \n\n");
         participants.append(KMADEConstant.KMAD_ADAPTATOR_MESSAGE + "\n");
@@ -133,7 +133,7 @@ public class KMADEToolAbout extends JDialog implements LanguageFactory {
         librairies.append(" - QuickTime for Java (http://developer.apple.com/quicktime/qtjava)\n");
         librairies.append(" - Timingframework (http://timingframework.dev.java.net)\n");
         librairies.append(" - Velocity (http://jakarta.apache.org/velocity)\n");
-        
+        librairies.append(" - Swingstates (http://swingstates.sourceforge.net/)\n");
         myTabbedPane.setTitleAt(0,KMADEConstant.KMADE_TEAM_MESSAGE);
         myTabbedPane.setTitleAt(1,KMADEConstant.JAVA_LIBRARIES_MESSAGE);
     }

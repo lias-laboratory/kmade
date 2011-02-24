@@ -28,7 +28,7 @@ import kmade.nmda.schema.metaobjet.ValeurType;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class AttributExpressExpression extends ExpressExpression {
 
@@ -76,7 +76,7 @@ public class AttributExpressExpression extends ExpressExpression {
         } else if (typeStruct.equals(TypeStructure.STRING_STRUCT)){
             this.setNodeType("");
             return;
-        } else if (typeStruct.equals(TypeStructure.INTEGER_STRUCT)){
+        } else if (typeStruct.equals(TypeStructure.NUMBER_STRUCT)){
             this.setNodeType(0);
             return;
         }  
@@ -116,7 +116,8 @@ public class AttributExpressExpression extends ExpressExpression {
     }
     
     public void evaluateNode(ObjetConcret ref) throws SemanticException {        
-        if (ref == null) {
+
+    	if (ref == null) {
             this.setStateToUnknown();
             throw new SemanticUnknownException();
         } else {

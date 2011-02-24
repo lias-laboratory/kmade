@@ -1,7 +1,8 @@
 package kmade.nmda.schema.tache;
 
-import kmade.nmda.schema.expression.IntegerVariant;
+import kmade.nmda.schema.expression.NumberVariant;
 import kmade.nmda.schema.expression.VariableExpression;
+import kmade.nmda.schema.metaobjet.NumberValue;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -22,7 +23,7 @@ import kmade.nmda.schema.expression.VariableExpression;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class IterExpression extends Expression {
 
@@ -33,7 +34,7 @@ public class IterExpression extends Expression {
     private boolean moreOneIteration = false;
     
     public IterExpression() {
-        refNode = new IntegerVariant();
+        refNode = new NumberVariant();
         this.chaine = refNode.getName();
     }
     
@@ -59,8 +60,9 @@ public class IterExpression extends Expression {
     }
     
     public void setInitIterationVariant() {
-    	if (this.refNode instanceof IntegerVariant) {
-    		this.setIterationVariant((Integer)this.refNode.getNodeValue());
+    	if (this.refNode instanceof NumberVariant) {
+    		// cast en number, on prend que la partie entiÃ¨re en cas de nombre Ã  virgule
+    		this.setIterationVariant(   ((Number) ( (NumberValue) this.refNode.getNodeValue()).getValeur()).intValue());
     	} else {
     		this.setIterationVariant(1);
     	}
@@ -71,12 +73,29 @@ public class IterExpression extends Expression {
         this.currentValue = i;
     }
 
+    // a été remplacé par isFinish()
     public boolean isLoopProgress() {
-    	if (refNode instanceof IntegerVariant) {
-			return (Integer) (refNode.getNodeValue()) > 0;
+    	if (refNode instanceof NumberVariant) {
+			return ((NumberValue) (refNode.getNodeValue())).supOperator(new NumberValue(0));
 		} else {
 			return (Boolean) refNode.getNodeValue();
 		}
+    }
+    
+    public boolean isNumberVarient(){
+    	if (refNode instanceof NumberVariant) {
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
+    
+    public boolean isFinished(){
+    	if(this.isNumberVarient()){
+    		return (this.getIterationVariant()<=0);
+    	}else{
+    		return !((Boolean)refNode.getNodeValue());
+    	}
     }
     
     public boolean isVariableExpressionNode() {

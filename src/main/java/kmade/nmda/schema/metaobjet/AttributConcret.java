@@ -26,7 +26,7 @@ import org.w3c.dom.NodeList;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class AttributConcret implements Entity, Cloneable {
 
@@ -79,9 +79,9 @@ public class AttributConcret implements Entity, Cloneable {
             val.setValeur("");
             this.valeur = val;
 
-        } else if (typeStructure.equals(TypeStructure.INTEGER_STRUCT)) {
-            Oid oid = InterfaceExpressJava.createEntity("metaobjet", "IntValue");
-            IntValue val = (IntValue) InterfaceExpressJava.prendre(oid);
+        } else if (typeStructure.equals(TypeStructure.NUMBER_STRUCT)) {
+            Oid oid = InterfaceExpressJava.createEntity("metaobjet", "NumberValue");
+            NumberValue val = (NumberValue) InterfaceExpressJava.prendre(oid);
             val.setValeur("0");
             this.valeur = val;
         } else if (typeStructure.equals(TypeStructure.BOOLEAN_STRUCT)) {
@@ -105,19 +105,20 @@ public class AttributConcret implements Entity, Cloneable {
         		((StrValue)valeur).setValeur(v);
         	}
         		
-        } else if (typeStructure.equals(TypeStructure.INTEGER_STRUCT)) {
-            try {
-                new Integer(v);
-            } catch (NumberFormatException ee) {
-                return true;
-            }
+        } else if (typeStructure.equals(TypeStructure.NUMBER_STRUCT)) {
+            // Retourne true si la chaîne ne peut pas être un int ou un double
+        	try {
+        		new NumberValue(v);
+				} catch (NumberFormatException e) {
+					return true;
+				}
             if (this.valeur == null) {
-            	Oid oid = InterfaceExpressJava.createEntity("metaobjet", "IntValue");
-            	IntValue val = (IntValue)InterfaceExpressJava.prendre(oid);
+            	Oid oid = InterfaceExpressJava.createEntity("metaobjet", "NumberValue");
+            	NumberValue val = (NumberValue)InterfaceExpressJava.prendre(oid);
             	val.setValeur(v);
             	this.valeur = val;
             } else {
-            	((IntValue)valeur).setValeur(v);
+            	((NumberValue)valeur).setValeur(v);
             }
         } else if (typeStructure.equals(TypeStructure.ENUM_STRUCT)) {
        		Enumeration enu = (Enumeration) this.attributAbsDe.getTypeRef();

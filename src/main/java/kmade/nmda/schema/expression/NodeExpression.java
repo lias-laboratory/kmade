@@ -24,10 +24,12 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public abstract class NodeExpression implements Serializable {
-    private ObjectValue refValue;
+	private static final long serialVersionUID = 655075478603783412L;
+
+	private ObjectValue refValue;
 
     protected String name;
     
@@ -69,8 +71,8 @@ public abstract class NodeExpression implements Serializable {
         return (refValue.isStringType());
     }
     
-    public boolean isInteger() {
-        return (refValue.isIntegerType());
+    public boolean isNumber() {
+        return (refValue.isNumberType());
     }
     
     public boolean isBoolean() {

@@ -6,6 +6,7 @@ import kmade.kmade.KMADEConstant;
 import kmade.kmade.UI.toolutilities.KMADEObservable;
 import kmade.kmade.UI.toolutilities.SwingWorker;
 import kmade.kmade.adaptatorFC.parserExpression.Iteration;
+import kmade.kmade.adaptatorFC.parserExpression.MyIteration;
 import kmade.kmade.adaptatorFC.parserExpression.ParseException;
 import kmade.kmade.adaptatorFC.parserExpression.TokenMgrError;
 import kmade.nmda.schema.expression.NodeExpression;
@@ -31,7 +32,7 @@ import kmade.nmda.schema.tache.Tache;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class ExpressIteration {
     private static boolean done = false;
@@ -63,17 +64,23 @@ public final class ExpressIteration {
         return pTache.getIteExpression().getNodeExpression();
     }
     
-    public static boolean isFinished(Tache myTache) {        
-        if (myTache.getIteExpression().isVariableExpressionNode()) {
+    public static boolean isFinished(Tache myTache) {
+    	return myTache.getIteExpression().isFinished();
+       /* if (myTache.getIteExpression().isVariableExpressionNode()) {
             return (myTache.getIteExpression().getIterationVariant() <= 0); 
         } else {
-            return true;
-        }
+            return (Boolean) myTache.getIteExpression().getNodeExpression().getNodeValue();
+        }*/
     }
     
     public static void evaluateIteration(Tache myTache) {
     	// TODO : prendre en compte le prédicat pour l'expression itération.
-        myTache.getIteExpression().decreaseCounter();
+    	// si c'est un compteur il faut  d�cr�menter
+    	if(myTache.getIteExpression().isNumberVarient()){
+    	myTache.getIteExpression().decreaseCounter();
+    	}else{
+    		//on ne fait rien?
+    	}
     }
     
     public static void makeAndCheckIterationOpenSPFFile() {
@@ -87,7 +94,7 @@ public final class ExpressIteration {
                     // Transformation de la cha�ne de caract�res en flux de caract�res.
                     java.io.StringReader sr = new java.io.StringReader(iteration);
                     java.io.Reader r = new java.io.BufferedReader(sr);
-                    Iteration parser = new Iteration(r);
+                    Iteration parser = new MyIteration(r);
                     try{
                         NodeExpression ref = parser.expression();
                         if (ref == null) {

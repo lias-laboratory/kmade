@@ -27,7 +27,7 @@ import kmade.nmda.schema.Oid;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class EntityListAdaptator {
     private static SwingWorker worker;
@@ -58,11 +58,11 @@ public class EntityListAdaptator {
     }
     
     private static synchronized void displayEntityList() {
-        Set set = InterfaceExpressJava.bdd.keySet();
+        Set<Oid> set = InterfaceExpressJava.bdd.keySet();
         GraphicEditorAdaptator.getMainFrame().getEntityDialog().clearTextArea();
         
-        for (Iterator i = set.iterator(); i.hasNext();) {
-            Oid oid = (Oid) i.next();
+        for (Iterator<Oid> i = set.iterator(); i.hasNext();) {
+            Oid oid = i.next();
             Object o = InterfaceExpressJava.bdd.prendre(oid);
             GraphicEditorAdaptator.getMainFrame().getEntityDialog().writeInTextArea(((Entity)o).toSPF());
         }

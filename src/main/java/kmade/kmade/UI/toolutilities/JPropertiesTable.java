@@ -54,7 +54,7 @@ import kmade.kmade.KMADEConstant;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class JPropertiesTable extends JScrollPane implements MouseInputListener {
     private static final long serialVersionUID = 7430261370350224060L;

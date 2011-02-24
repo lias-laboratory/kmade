@@ -33,7 +33,7 @@ import org.jgraph.graph.GraphConstants;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	private static final long serialVersionUID = 1L;
@@ -86,14 +86,15 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
     public KMADEDefaultGraphCell(Tache currentTask) {
         this.myTask = currentTask;
         this.myTask.setJTask(this);
-        this.oid = this.myTask.getOid().get();               
+        this.oid = this.myTask.getOid().get();
         
         this.motherPort = new KMADEDefaultPort("mother");
         this.sonPort = new KMADEDefaultPort("son");        
         this.add(motherPort);
         this.add(sonPort);
+        //System.out.println("methode gettask"+getTask().getLabelName());
 
-        Map map = new Hashtable();
+        Map<Object, Object> map = new Hashtable<Object, Object>();
         Point p = this.myTask.getPoint();
         GraphConstants.setBounds(map, new Rectangle2D.Double(p.getX(), p.getY(), 0, 0));
         GraphConstants.setResize(map, true);
@@ -112,6 +113,10 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
     
 	public String getName() {
 		return myTask.getName();
+	}
+	
+	public void setName(String str) {
+		myTask.setName(str);
 	}
 
 	public String toString() {
@@ -146,6 +151,8 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 		return myTask.getNumero();
 	}
 
+		
+	
 	/**
 	 * @return Returns the oid.
 	 */
@@ -213,7 +220,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
     }
         
     public void setDeltaPoint(int dx, int dy) {
-        Map myAttributes = this.getAttributes();
+        Map<Object, Object> myAttributes = this.getAttributes();
         Rectangle2D myPosition = GraphConstants.getBounds(myAttributes);
         double nx = (myPosition.getX() - (double)dx < 0) ? 0 : myPosition.getX() - (double)dx;
         double ny = (myPosition.getY() - (double)dy < 0) ? 0 : myPosition.getY() - (double)dy;
@@ -223,7 +230,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
     }
     
     public void setPoint(double x, double y) {
-        Map myAttributes = this.getAttributes();
+        Map<Object, Object> myAttributes = this.getAttributes();
         GraphConstants.setBounds(myAttributes, new Rectangle2D.Double(x, y, 0, 0));
         ExpressTask.setTaskPoint((int)x, (int)y, this.myTask);
     }
@@ -275,5 +282,9 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 
     public void setFlagSearch(boolean flagSearch) {
         this.flagSearch = flagSearch;
+    }
+    
+    public String getToolTipString() {
+          		return null;
     }
 }

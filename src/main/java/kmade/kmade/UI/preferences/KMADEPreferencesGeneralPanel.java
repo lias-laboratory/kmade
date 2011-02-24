@@ -24,7 +24,7 @@ import kmade.kmade.adaptatorUI.PreferencesAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEPreferencesGeneralPanel extends javax.swing.JPanel {
 
@@ -41,10 +41,14 @@ public class KMADEPreferencesGeneralPanel extends javax.swing.JPanel {
 	private javax.swing.JComboBox languageComboBox;
 
 	private javax.swing.JComboBox timeSaveComboBox;
+	
+	private javax.swing.JComboBox zoomComboBox;
 
 	private javax.swing.JLabel languageLabel;
 
 	private javax.swing.JLabel forceGarbageLabel;
+	
+	private javax.swing.JLabel zoomLabel;
 
 	private javax.swing.JPanel configurationPanel;
 
@@ -78,6 +82,14 @@ public class KMADEPreferencesGeneralPanel extends javax.swing.JPanel {
         this.timeSaveComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "5", "15", "30","45","60" }));
         this.timeSaveComboBox.setEnabled(false);
         
+        this.zoomComboBox.addActionListener(new java.awt.event.ActionListener() {	
+    	  	public void actionPerformed(java.awt.event.ActionEvent evt) {
+    	  		PreferencesAdaptator.enableApplyButton();
+    	  	}
+        });
+        this.zoomComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"0.10", "0.25", "0.50", "0.75", "1" }));
+        this.zoomComboBox.setEditable(true);
+        
         this.forceGarbageJButton.addActionListener (new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PreferencesAdaptator.forceGarbage();
@@ -97,7 +109,7 @@ public class KMADEPreferencesGeneralPanel extends javax.swing.JPanel {
         			PreferencesAdaptator.enableApplyButton();
 			}
 		});
-        	this.languageComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { KMADEConstant.FRENCH_LANGUAGE, KMADEConstant.ENGLISH_LANGUAGE}));
+        	this.languageComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { KMADEConstant.FRENCH_LANGUAGE_INFO, KMADEConstant.ENGLISH_LANGUAGE_INFO}));
 
         	
         	// this.raccourcisJTable  
@@ -109,11 +121,13 @@ public class KMADEPreferencesGeneralPanel extends javax.swing.JPanel {
         splashScreenCheckBox = new javax.swing.JCheckBox();
         automaticSaveCheckBox = new javax.swing.JCheckBox();
         timeSaveComboBox = new javax.swing.JComboBox();
+        zoomComboBox = new javax.swing.JComboBox();
         forceGarbageLabel = new javax.swing.JLabel();
         forceGarbageJButton = new javax.swing.JButton();
         forceGarbageJButton.setMinimumSize(new Dimension(100,forceGarbageJButton.getMinimumSize().height));
         languagePanel = new javax.swing.JPanel();
         languageLabel = new javax.swing.JLabel();
+        zoomLabel = new javax.swing.JLabel();
         languageComboBox = new javax.swing.JComboBox();
         raccourcisPanel = new javax.swing.JPanel();
 
@@ -133,6 +147,8 @@ public class KMADEPreferencesGeneralPanel extends javax.swing.JPanel {
         forceGarbageLabel.setText(KMADEConstant.GENERAL_PANEL_GARBAGE_COLLECTOR_LABEL);
 
         forceGarbageJButton.setText(KMADEConstant.YES_MESSAGE);
+        
+        zoomLabel.setText(KMADEConstant.GENERAL_PANEL_ZOOM_LABEL);
 
         org.jdesktop.layout.GroupLayout configurationPanelLayout = new org.jdesktop.layout.GroupLayout(configurationPanel);
         configurationPanel.setLayout(configurationPanelLayout);
@@ -144,12 +160,14 @@ public class KMADEPreferencesGeneralPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .add(configurationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(automaticSaveCheckBox)
-                            .add(forceGarbageLabel))
+                            .add(forceGarbageLabel)
+                            .add(zoomLabel))
                         .add(9, 9, 9)
                         .add(configurationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(timeSaveComboBox, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(forceGarbageJButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .add(configurationPanelLayout.createSequentialGroup()
+                            .add(forceGarbageJButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(zoomComboBox, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .add(configurationPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .add(splashScreenCheckBox))
                     .add(configurationPanelLayout.createSequentialGroup()
@@ -167,11 +185,15 @@ public class KMADEPreferencesGeneralPanel extends javax.swing.JPanel {
                 .add(configurationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(forceGarbageJButton)
                     .add(forceGarbageLabel))
+                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(configurationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(zoomComboBox)
+                    .add(zoomLabel))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(envoiBugCheckBox)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 12, Short.MAX_VALUE)
                 .add(splashScreenCheckBox)
-                .add(9, 9, 9))
+                .add(9, 9, 9))              
         );
 
         languagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(KMADEConstant.GENERAL_PANEL_LANGUAGE_PANEL_NAME));
@@ -250,6 +272,10 @@ public class KMADEPreferencesGeneralPanel extends javax.swing.JPanel {
 		}
 	}
 
+    public void setWheelZoom(String value) {
+    	zoomComboBox.setSelectedItem(value);
+    }
+    
 	public void setEnvoiBug(String value) {
 		if (value.equals("true")) {
 			envoiBugCheckBox.setSelected(true);
@@ -290,5 +316,9 @@ public class KMADEPreferencesGeneralPanel extends javax.swing.JPanel {
 
 	public javax.swing.JTable getRaccourcis() {
 		return raccourcisJTable;
-	}  
+	}
+	
+	public javax.swing.JComboBox getWheelZoom() {
+		return zoomComboBox;
+	}
 }

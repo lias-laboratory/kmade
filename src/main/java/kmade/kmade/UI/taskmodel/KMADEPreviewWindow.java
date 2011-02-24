@@ -32,7 +32,7 @@ import org.jgraph.JGraph;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEPreviewWindow extends JDialog {
 	private static final long serialVersionUID = 1162975786596750565L;
@@ -51,7 +51,7 @@ public class KMADEPreviewWindow extends JDialog {
 		this.repaint();
 	}
 	
-	public void setOverviewGraph(JGraph graphModel) {
+	public void setOverviewGraph(KMADEGraph graphModel) {
 		myPreviewPanel.setOverviewGraph(graphModel);
 	}
 	

@@ -5,6 +5,7 @@ import java.util.Observer;
 import kmade.kmade.KMADEConstant;
 import kmade.kmade.UI.toolutilities.KMADEObservable;
 import kmade.kmade.UI.toolutilities.SwingWorker;
+import kmade.kmade.adaptatorFC.parserExpression.MyPrecondition;
 import kmade.kmade.adaptatorFC.parserExpression.ParseException;
 import kmade.kmade.adaptatorFC.parserExpression.Precondition;
 import kmade.kmade.adaptatorFC.parserExpression.TokenMgrError;
@@ -31,7 +32,7 @@ import kmade.nmda.schema.tache.Tache;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class ExpressPrecondition {
     private static boolean done = false;
@@ -82,7 +83,7 @@ public final class ExpressPrecondition {
                     // Transformation de la cha�ne de caract�res en flux de caract�res.
                     java.io.StringReader sr = new java.io.StringReader(precondtion);
                     java.io.Reader r = new java.io.BufferedReader(sr);
-                    Precondition parser = new Precondition(r);
+                    Precondition parser = new MyPrecondition(r);
                     try{
                         NodeExpression ref = parser.expression();
                         if (ref == null) {

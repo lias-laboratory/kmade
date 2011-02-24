@@ -29,7 +29,7 @@ import org.w3c.dom.NodeList;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Delphine Autard and Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Delphine Autard and Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class ObjetAbstrait implements Entity {
 
@@ -184,21 +184,7 @@ public class ObjetAbstrait implements Entity {
     }
 
     public void setName(String n) {
-        boolean ok = false;
-        int cpt = 0;
-        n = n.replace(" ", "_");
-        while (!ok) {
-            if (cpt != 0) {
-                if (cpt == 1) {
-                    n = n + "_" + String.valueOf(cpt);
-                } else {
-                    n = n.substring(0, n.length() - 1) + String.valueOf(cpt);
-                }
-            }
-            ok = isUniqueName(n);
-            cpt++;
-        }
-        name = n;
+              name = n;
     }
 
     public String getDescription() {
@@ -224,6 +210,24 @@ public class ObjetAbstrait implements Entity {
         return true;
     }
 
+    public static String propositionNom(String n){
+    	boolean ok = false;
+    	int cpt = 0;
+    	// n = n.replace(" ", "_");
+    	while (!ok) {
+    		if (cpt != 0) {
+    			if (cpt == 1) {
+    				n = n + "_" + String.valueOf(cpt);
+    			} else {
+    				n = n.substring(0, n.length() - 1) + String.valueOf(cpt);
+    			}
+    		}
+    		ok = isUniqueName(n);
+    		cpt++;
+    	}
+    	return n;
+    }
+    
     public boolean unGroupePresent() {
         return (inverseGroupe.size() != 0);
     }

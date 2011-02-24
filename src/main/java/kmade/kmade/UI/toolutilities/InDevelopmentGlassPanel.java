@@ -31,7 +31,7 @@ import javax.swing.SwingUtilities;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class InDevelopmentGlassPanel extends JComponent {
     private static final long serialVersionUID = -44200753178867628L;
@@ -53,7 +53,7 @@ public class InDevelopmentGlassPanel extends JComponent {
     }
     
     public static void plugWindowInDisabledGlassPanel(JFrame myFrame,String myString) {
-        ((InDevelopmentGlassPanel)myFrame.getGlassPane()).setText(myString);
+        //((InDevelopmentGlassPanel)myFrame.getGlassPane()).setText(myString);
         myFrame.getGlassPane().setVisible(true);
         myFrame.setEnabled(false);
     }
@@ -81,7 +81,7 @@ public class InDevelopmentGlassPanel extends JComponent {
         
     public static void unPlugWindowInDisabledGlassPanel(JFrame myFrame) {
         myFrame.getGlassPane().setVisible(false);
-        ((InDevelopmentGlassPanel)myFrame.getGlassPane()).setText("");
+        //((InDevelopmentGlassPanel)myFrame.getGlassPane()).setText("");
         myFrame.setEnabled(true);
     }
 

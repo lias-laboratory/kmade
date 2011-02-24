@@ -1,9 +1,9 @@
 package kmade.kmade.UI.taskmodel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -25,7 +25,6 @@ import javax.swing.ListCellRenderer;
 
 import kmade.kmade.KMADEConstant;
 import kmade.kmade.adaptatorUI.TaskPropertiesEditorAdaptator;
-import kmade.nmda.schema.tache.Decomposition;
 import kmade.nmda.schema.tache.Executant;
 
 import org.jgraph.JGraph;
@@ -50,7 +49,7 @@ import org.jgraph.graph.DefaultGraphCellEditor;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEGraphCellEditor extends DefaultGraphCellEditor implements ActionListener {
     private static final long serialVersionUID = -3486215513037506669L;
@@ -63,69 +62,73 @@ public class KMADEGraphCellEditor extends DefaultGraphCellEditor implements Acti
 
     private JCheckBox myInterEditor = new JCheckBox(KMADEConstant.INTERRUPTIBLE_VALUE);
 
-    private JTextField myNameEditor = new JTextField();
+    private JTextField myNameEditor = new JTextField(10);
 
     private JComboBox myDecompoEditor = new JComboBox();
 
-    private JButton valider = new JButton(KMADEConstant.GO_BACK_MESSAGE);
+    private JButton valider = new JButton(KMADEConstant.VALID_MESSAGE);
+   
 
-    private String[] executantName;
+    @SuppressWarnings("unused")
+	private String[] executantName;
 
     private ImageIcon[] executantImage;
 
     public KMADEGraphCellEditor() {
         super();
-        JPanel panelExterieur = new JPanel();
+       JPanel panelExterieur = new JPanel();
         JPanel panelSouth = new JPanel();
         panelSouth.setLayout(new BoxLayout(panelSouth,BoxLayout.Y_AXIS));
 
-        executantName = Executant.getNameLocaleExecutant();
-        executantImage = new ImageIcon[executantName.length];
-        String[] executantTempImage = Executant.getImageLocaleExecutant();
-        for (int i = 0; i < executantName.length; i++) {
-            executantImage[i] = new ImageIcon(KMADEGraphCellEditor.class.getResource(executantTempImage[i]));
-        }
+        //executantName = Executant.getNameLocaleExecutant();
+        //executantImage = new ImageIcon[executantName.length];
+       // String[] executantTempImage = Executant.getImageLocaleExecutant();
+       // for (int i = 0; i < executantName.length; i++) {
+       //     executantImage[i] = new ImageIcon(KMADEGraphCellEditor.class.getResource(executantTempImage[i]));
+       // }
 
-        JPanel panelExecutant = new JPanel(new BorderLayout());
-        myCategorieEditor = new JComboBox(executantName);
-        myCategorieEditor.addActionListener(this);
-        myCategorieEditor.setRenderer(new ComboBoxRenderer());
-        panelExecutant.add(BorderLayout.WEST, new JLabel(KMADEConstant.EDITOR_EXECUTANT_NAME + " "));
-        panelExecutant.add(BorderLayout.CENTER, myCategorieEditor);
-        panelSouth.add(panelExecutant);
+       // JPanel panelExecutant = new JPanel(new BorderLayout());
+       // myCategorieEditor = new JComboBox(executantName);
+       // myCategorieEditor.addActionListener(this);
+       // myCategorieEditor.setRenderer(new ComboBoxRenderer());
+       // panelExecutant.add(BorderLayout.WEST, new JLabel(KMADEConstant.EDITOR_EXECUTANT_NAME + " "));
+       // panelExecutant.add(BorderLayout.CENTER, myCategorieEditor);
+      //  panelSouth.add(panelExecutant);
 
-        JPanel panelFacInt = new JPanel(new GridLayout(1, 2));
-        myFaculEditor.addActionListener(this);
-        panelFacInt.add(myFaculEditor);
-        myInterEditor.addActionListener(this);
-        panelFacInt.add(myInterEditor);
-        panelSouth.add(panelFacInt);
-        panelSouth.add(Box.createRigidArea(new Dimension(0,10)));
+       // JPanel panelFacInt = new JPanel(new GridLayout(1, 2));
+       // myFaculEditor.addActionListener(this);
+       // panelFacInt.add(myFaculEditor);
+       // myInterEditor.addActionListener(this);
+       // panelFacInt.add(myInterEditor);
+       // panelSouth.add(panelFacInt);
+       // panelSouth.add(Box.createRigidArea(new Dimension(0,10)));
 
         JPanel panelNameEditor = new JPanel(new BorderLayout());
         panelNameEditor.add(BorderLayout.WEST, new JLabel(KMADEConstant.EDITOR_NAME_NAME + " "));
         panelNameEditor.add(BorderLayout.CENTER, myNameEditor);
+        myNameEditor.selectAll();
         myNameEditor.addActionListener(this);
         myNameEditor.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) { }
+            public void focusGained(FocusEvent e) { myNameEditor.selectAll();}
 
             public void focusLost(FocusEvent e) {
                 TaskPropertiesEditorAdaptator.setNameInTaskProperties(myNameEditor.getText());
             }
             
         });
+      
         panelSouth.add(panelNameEditor);
         panelSouth.add(Box.createRigidArea(new Dimension(0,10)));
 
-        JPanel panelNameDecompo = new JPanel(new BorderLayout());
-        panelNameDecompo.add(BorderLayout.WEST, new JLabel(KMADEConstant.EDITOR_OPERATOR_NAME + " "));
+        //JPanel panelNameDecompo = new JPanel(new BorderLayout());
+       // panelNameDecompo.add(BorderLayout.WEST, new JLabel(KMADEConstant.EDITOR_OPERATOR_NAME + " "));
  
-        myDecompoEditor = new JComboBox(Decomposition.getNameLocaleDecomposition());
-        myDecompoEditor.addActionListener(this);
-        panelNameDecompo.add(BorderLayout.CENTER, myDecompoEditor);
+       // myDecompoEditor = new JComboBox(Decomposition.getNameLocaleDecomposition());
+       // myDecompoEditor.addActionListener(this);
+       // panelNameDecompo.add(BorderLayout.CENTER, myDecompoEditor);
 
-        panelSouth.add(panelNameDecompo);
-        panelSouth.add(Box.createRigidArea(new Dimension(0,10)));
+       //panelSouth.add(panelNameDecompo);
+       // panelSouth.add(Box.createRigidArea(new Dimension(0,10)));
         
         panelSouth.add(valider);
         valider.addActionListener(this);
@@ -137,7 +140,11 @@ public class KMADEGraphCellEditor extends DefaultGraphCellEditor implements Acti
         myEditorPanel.setLayout(new BorderLayout());
         myEditorPanel.add(BorderLayout.CENTER, panelExterieur);
         myEditorPanel.setOpaque(false);
-        myEditorPanel.setBorder(BorderFactory.createTitledBorder(KMADEConstant.EDITOR_MESSAGE_TITLE));
+        myEditorPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        
+        //myEditorPanel.setBorder(BorderFactory.createTitledBorder(KMADEConstant.EDITOR_MESSAGE_TITLE));
+        //myEditorPanel.setBorder(BorderFactory.createTitledBorder("Nom de la t�che"));
+        
     }
 
     public Component getGraphCellEditorComponent(JGraph graph, Object cell, boolean isSelected) {
@@ -154,6 +161,8 @@ public class KMADEGraphCellEditor extends DefaultGraphCellEditor implements Acti
             }
             myInterEditor.setSelected(myCell.isInterruptible());
             myNameEditor.setText(myCell.getName());
+            
+            myNameEditor.selectAll();
             myCategorieEditor.setSelectedItem(Executant.getEnumereIntoLocaleExecutant(myCell.getExecutant().getValue()));
             myDecompoEditor.setSelectedItem(myCell.getDecomposition());
         }

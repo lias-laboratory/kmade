@@ -37,7 +37,7 @@ import kmade.kmade.UI.toolutilities.KMADEEnhancedSplitPane;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADETaskDescriptionPanel extends JPanel {
     private static final long serialVersionUID = 4329498250171579508L;
@@ -45,8 +45,6 @@ public class KMADETaskDescriptionPanel extends JPanel {
 	private static final KMADETaskModelPanel jgraphTaskPanel = new KMADETaskModelPanel();
 
 	private static final KMADETaskPropertiesPanel panelProprieteTache = new KMADETaskPropertiesPanel();
-
-    private final KMADETaskModelToolBar myToolBar = new KMADETaskModelToolBar();
     
 	private KMADERule columnView;
 
@@ -55,6 +53,9 @@ public class KMADETaskDescriptionPanel extends JPanel {
 	private JScrollPane scrollerPanelGraphTache;
 	
     private TitledBorder myTitledBorder;    
+    
+    
+    private JSplitPane jSplitPaneV;
     
 	public KMADETaskDescriptionPanel() {
 		columnView = new KMADERule(KMADERule.HORIZONTAL, true);
@@ -75,6 +76,8 @@ public class KMADETaskDescriptionPanel extends JPanel {
 		KMADECorner upperRight = new KMADECorner();
 
 		this.setLayout(new BorderLayout());
+		
+		
 
 		// Ajout des composants avec JSplitPane
 		
@@ -86,27 +89,23 @@ public class KMADETaskDescriptionPanel extends JPanel {
 		scrollerPanelGraphTache.setCorner(JScrollPane.UPPER_LEFT_CORNER, buttonCorner);
 		scrollerPanelGraphTache.setCorner(JScrollPane.LOWER_LEFT_CORNER, lowerLeft);
 		scrollerPanelGraphTache.setCorner(JScrollPane.UPPER_RIGHT_CORNER, upperRight);
-
+		
 		JPanel my_panel_central = new JPanel(new BorderLayout());
-        my_panel_central.setMinimumSize(new Dimension(400,400));
+        my_panel_central.setMinimumSize(new Dimension(600,600));
         myTitledBorder = new TitledBorder(null, KMADEConstant.TASK_MODEL_TITLE_NAME, TitledBorder.CENTER, TitledBorder.TOP);
 		my_panel_central.add(BorderLayout.CENTER, scrollerPanelGraphTache);
-		my_panel_central.add(BorderLayout.NORTH, myToolBar);
-
+        
 		// Initialisation des JSplitPane
-		JSplitPane jSplitPaneV = KMADEEnhancedSplitPane.createStrippedSplitPane(JSplitPane.HORIZONTAL_SPLIT, my_panel_central, panelProprieteTache);
+		jSplitPaneV = KMADEEnhancedSplitPane.createStrippedSplitPane(JSplitPane.HORIZONTAL_SPLIT, my_panel_central, panelProprieteTache);		
         jSplitPaneV.setOneTouchExpandable(true);
 		jSplitPaneV.setContinuousLayout(true);
-        jSplitPaneV.setResizeWeight(0.3);
-        jSplitPaneV.setDividerLocation(750);
+		jSplitPaneV.setResizeWeight(0.3);
+			
+        
 		this.setLayout(new BorderLayout());
 		this.add(jSplitPaneV, BorderLayout.CENTER);
 	}
 	
-    public KMADETaskModelToolBar getTaskModelToolBar() {
-        return myToolBar;
-    }
-    
 	public KMADETaskModelPanel getTaskModelPanel() {
 		return jgraphTaskPanel;
 	}
@@ -115,6 +114,11 @@ public class KMADETaskDescriptionPanel extends JPanel {
 		return panelProprieteTache;
 	}
     
+	public JScrollPane getScrollerPanelGraphTache()
+	{
+		return scrollerPanelGraphTache;
+	}
+	
 	public void showOrHideRule() {
 		boolean state = scrollerPanelGraphTache.getColumnHeader().isVisible();		
 		scrollerPanelGraphTache.getColumnHeader().setVisible(!state);
@@ -150,6 +154,13 @@ public class KMADETaskDescriptionPanel extends JPanel {
         
         jgraphTaskPanel.notifLocalisationModification(); // Aucune modification
         panelProprieteTache.notifLocalisationModification();
-        myToolBar.notifLocalisationModification();
     }
+
+	public JSplitPane getJSplitPaneV() {
+		return jSplitPaneV;
+	}
+
+	public void setJSplitPaneV(JSplitPane splitPaneV) {
+		jSplitPaneV = splitPaneV;
+	}
 }

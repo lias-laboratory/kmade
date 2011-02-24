@@ -19,10 +19,13 @@ package kmade.nmda.schema.expression;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public abstract class BinaryExpression extends NodeExpression {
-    protected NodeExpression leftNode;
+
+	private static final long serialVersionUID = 2346679206867201911L;
+
+	protected NodeExpression leftNode;
 
     protected NodeExpression rightNode;
 

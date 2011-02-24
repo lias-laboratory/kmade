@@ -28,11 +28,16 @@ import org.w3c.dom.Element;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public abstract class Agregat implements Entity {
 
-    public Oid oid = null;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3620717672270513861L;
+
+	public Oid oid = null;
 
     protected AgregatStructure agregatStruct;
     

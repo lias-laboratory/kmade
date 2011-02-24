@@ -55,7 +55,7 @@ import kmade.nmda.schema.tache.Tache;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADECoherenceDialog extends JDialog {
     
@@ -114,7 +114,7 @@ public class KMADECoherenceDialog extends JDialog {
                         break;
                     }
                     case CoherenceAdaptator.POST_CONDITION_DIALOG : {
-                        message = KMADEConstant.POSTCONDITION_LOCATION_MESSAGE;
+                        message = KMADEConstant.EFFETSDEBORD_LOCATION_MESSAGE;
                         break;
                     }
                     case CoherenceAdaptator.ITERATION_DIALOG : {

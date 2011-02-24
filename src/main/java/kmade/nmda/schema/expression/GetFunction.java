@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.schema.metaobjet.EnsembleAg;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
+import kmade.nmda.schema.metaobjet.TableauAg;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -25,7 +26,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class GetFunction extends BinaryFunction implements ConcreteObjectType {
 
@@ -49,6 +50,10 @@ public class GetFunction extends BinaryFunction implements ConcreteObjectType {
         return (((GroupExpressExpression)this.leftNode).getGroup().getEnsemble() instanceof EnsembleAg);
     }
     
+    public boolean isGroupArrayType() {
+        return (((GroupExpressExpression)this.leftNode).getGroup().getEnsemble() instanceof TableauAg);
+    }
+    
     // Récupère la liste complète des objets concrets
     public ArrayList<ObjetConcret> getConcreteObjects() {
         return (((GroupExpressExpression)this.leftNode).getGroup().getEnsemble().getLstObjConcrets());
@@ -60,7 +65,7 @@ public class GetFunction extends BinaryFunction implements ConcreteObjectType {
     }
     
     public void setUserConcreteObject(ObjetConcret p) {
-        this.refUserObjetConcret = p;
+    	this.refUserObjetConcret = p;
     }
     
     public ObjetConcret getUserConcreteObject() {
@@ -87,7 +92,7 @@ public class GetFunction extends BinaryFunction implements ConcreteObjectType {
     }
        
     public void evaluateNode(ObjetConcret ref) throws SemanticException {
-        if (!this.isGroupSetType()) {
+        if (!this.isGroupSetType()&& !this.isGroupArrayType()) {
             refUserObjetConcret = this.getConcreteObject();
         }
         this.rightNode.evaluateNode(refUserObjetConcret);

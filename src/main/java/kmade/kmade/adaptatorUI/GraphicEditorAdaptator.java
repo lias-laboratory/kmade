@@ -23,6 +23,7 @@ import kmade.kmade.UI.taskmodel.KMADEDefaultPort;
 import kmade.kmade.UI.taskmodel.KMADEGraphLayoutAlgorithm;
 import kmade.kmade.UI.taskmodel.KMADETaskModelPanel;
 import kmade.kmade.UI.taskmodel.KMADETreeLayoutAlgorithm;
+import kmade.kmade.UI.taskmodel.KMADEVertexView;
 import kmade.kmade.UI.taskproperties.KMADETaskPropertiesPanel;
 import kmade.kmade.UI.toolutilities.CustomOptionDialog;
 import kmade.kmade.UI.toolutilities.InDevelopmentGlassPanel;
@@ -58,7 +59,7 @@ import org.jgraph.graph.GraphLayoutCache;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author MickaÃ«l BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author MickaÃ«l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class GraphicEditorAdaptator {
     private static boolean done = false;
@@ -158,8 +159,8 @@ public final class GraphicEditorAdaptator {
         }
         }
 
-        // Mise Ã  jour de la prï¿½sentation concernant la barre d'outils.
-        KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().enabledButton();
+        // Mise à  jour de la présentation concernant la barre d'outils.
+        GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().getEditorsToolBar().enabledButton();
         if (currentNewTask != 0) {
             currentNewTask = 0;
             return true;
@@ -241,10 +242,10 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mÃ©thode permet l'impression du modÃ¨le de tÃ¢ches.
+     * Cette méthode permet l'impression du modèle de tâches.
      */
     public static void printCurrentTaskModel() {
-        // RÃ©cupÃ¨re le modÃ¨le actuel du JGraph.
+        // Récupère le modèle actuel du JGraph.
         DefaultGraphModel myGraphModel = TASK_MODEL_PANEL.getGraphModel();
         SearchAdaptator.closeFindReplaceDialog();
         TaskPropertiesEnhancedEditorAdaptator.closeNMDAEnhancedTaskEditor();
@@ -272,13 +273,13 @@ public final class GraphicEditorAdaptator {
     }
 
     public static void initMainFrame() {
-        KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().enabledButton();
+    	MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().enabledButton();
         currentNewTask = 0;
         KMADEMainFrame.getProjectPanel().initMainFrame();
     }
 
     public static void addNewAbstractTask() {
-        KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().enabledAbstractButton();
+    	MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().enabledAbstractButton();
         if (currentNewTask == 2) {
             currentNewTask = 0;
         } else {
@@ -287,7 +288,7 @@ public final class GraphicEditorAdaptator {
     }
 
     public static void addNewUserTask() {
-        KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().enabledUserButton();
+    	MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().enabledUserButton();
         if (currentNewTask == 3) {
             currentNewTask = 0;
         } else {
@@ -296,7 +297,7 @@ public final class GraphicEditorAdaptator {
     }
 
     public static void addNewFeedbackTask() {
-        KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().enabledSystemButton();
+    	MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().enabledSystemButton();
         if (currentNewTask == 4) {
             currentNewTask = 0;
         } else {
@@ -305,7 +306,7 @@ public final class GraphicEditorAdaptator {
     }
 
     public static void addNewInteractionTask() {
-        KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().enabledInteractionButton();
+    	MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().enabledInteractionButton();
         if (currentNewTask == 5) {
             currentNewTask = 0;
         } else {
@@ -314,7 +315,7 @@ public final class GraphicEditorAdaptator {
     }
 
     public static void addNewUnknownTask() {
-        KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().enabledUnknownButton();
+    	MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().enabledUnknownButton();
         if (currentNewTask == 1) {
             currentNewTask = 0;
         } else {
@@ -325,13 +326,19 @@ public final class GraphicEditorAdaptator {
     private static Point centeredTask(Point p) {
         FontMetrics fname = TASK_MODEL_PANEL
                 .getFontMetrics(KMADEConstant.TASK_NAME_FONT);
-        int width = SwingUtilities.computeStringWidth(fname,
-                ExpressConstant.NEW_NAME_TASK) + 10;
+        /* ancienne version du code -> int width = SwingUtilities.computeStringWidth(fname,
+                ExpressConstant.NEW_NAME_TASK) + 10;*/
+        int width = KMADEVertexView.widthView(ExpressConstant.NEW_NAME_TASK);
         int nx = p.x - (width / 2);
         if (nx < 0) {
             nx = 0;
         }
-        return new Point(nx, p.y);
+        int height = KMADEVertexView.heightView();
+        int ny = p.y - (height/2);
+        if (ny < 0) {
+            ny = 0;
+        }
+        return new Point(nx, ny);
     }
 
     public static void addNewUnknownTask(Point p) {
@@ -380,39 +387,57 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mï¿½thode est appelï¿½e ï¿½ la suite de l'action Ajouter Tï¿½che.
+     * Cette méthode est appelée à la suite de l'action Ajouter Tâche.
      */
     public static void addNewTask(Executant e, Point p) {
-        // A dï¿½terminer ici les coordonnï¿½es de crï¿½ation.
+        // A déterminer ici les coordonnées de création.
         Tache myTask = ExpressTask.addNewTask(p.x, p.y, e);
         GraphicEditorAdaptator.addNewTask(myTask);
     }
 
     /**
-     * Cette mï¿½thode est utilisï¿½e ï¿½ la fois ï¿½ la crï¿½ation d'une tï¿½che par
-     * l'utilisateur et ï¿½ la crï¿½ation d'une tï¿½che par l'application
+     * Cette méthode est utilisée à la fois à la création d'une tâche par
+     * l'utilisateur et à la création d'une tâche par l'application
      * (chargement).
      * 
      * @param pTask
      */
+    
+    
+    
     public static void addNewTask(Tache pTask) {
-        // Crï¿½ation de la tï¿½che de type graphique.
+        // Creation de la tache de type graphique.
         KMADEDefaultGraphCell tempTask = new KMADEDefaultGraphCell(pTask);
-        // Positionner la tï¿½che dans le graphique.
+        
+        
+        // Positionner la tache dans le graphique.
         GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().clearSelection();
         GraphicEditorAdaptator.getCurrentGraphLayoutCache().insert(tempTask);
     }
-
+    
+	/* Ajout */
+	    public static void addCopyTask(Tache pTask) {
+	        // Creation de la tache de type graphique.
+	        KMADEDefaultGraphCell tempTask = new KMADEDefaultGraphCell(pTask);
+	        
+	        // Positionner la tache dans le graphique.
+	        GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().clearSelection();
+	        GraphicEditorAdaptator.getCurrentGraphLayoutCache().insert(tempTask);
+	    }
+	    
+	    /****/
     /**
-     * Cette mï¿½thode permet de crï¿½er une tï¿½che dans le presse-papier.
+     * Cette méthode permet de créer une tâche dans le presse-papier.
      * 
      * @param pTask
      */
     public static void addNewTaskIntoClipBoard(Tache pTask) {
-        // Crï¿½ation de la tï¿½che de type graphique.
+        // Création de la tâche de type graphique.	
         KMADEDefaultGraphCell tempTask = new KMADEDefaultGraphCell(pTask);
-        // Positionner la tï¿½che dans le graphique.
-        MAIN_FRAME.getClipBoardDialog().getMyGraph().getGraphLayoutCache().insert(tempTask);
+        
+        //System.out.println("Nom "+tempTask.getName()+" "+tempTask.getExecutant()+" "+tempTask.getDecomposition());
+        // Positionner la tâche dans le graphique.
+		MAIN_FRAME.getClipBoardDialog().getMyGraph().getGraphLayoutCache().insert(tempTask);
     }
 
     public static void clearClipBoard() {
@@ -421,17 +446,17 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mï¿½thode permet la connection de toutes les tï¿½ches dans le
+     * Cette méthode permet la connection de toutes les tâches dans le
      * presse-papier.
      * 
      * @param taches
      */
     public static void connectAllTasksIntoClipBoard(Tache[] taches) {
-        // Crï¿½ation des liens.
+        // Création des liens.
         for (int i = 0; i < taches.length; i++) {
-            // OID de la tï¿½che (
+            // OID de la tâche (
             String oid = ((Tache) taches[i]).getOid().get();
-            // Rï¿½fï¿½rence de la tï¿½che mï¿½re.
+            // Référence de la tâche mère.
             Tache mere = ((Tache) taches[i]).getMotherTask();
             if (mere != null)
                 GraphicEditorAdaptator.addNewEdgeIntoClipBoard(mere.getOid().get(), oid);
@@ -439,7 +464,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mï¿½thode permet d'effectuer un lien graphique entre deux tï¿½ches dans
+     * Cette méthode permet d'effectuer un lien graphique entre deux tâches dans
      * le presse-papier.
      * 
      * @param oidMere
@@ -449,22 +474,22 @@ public final class GraphicEditorAdaptator {
         KMADEDefaultGraphCell mere = MAIN_FRAME.getClipBoardDialog().getTask(oidMere);
         KMADEDefaultGraphCell fils = MAIN_FRAME.getClipBoardDialog().getTask(oidFils);
 
-        // Crï¿½ation de la liaison dans la partie graphique.
+        // Création de la liaison dans la partie graphique.
         KMADEDefaultEdge edge = new KMADEDefaultEdge();
         MAIN_FRAME.getClipBoardDialog().getMyGraph().getGraphLayoutCache().insertEdge(edge, mere.getMotherPort(), fils.getSonPort());
     }
 
     /**
-     * Cette mï¿½thode permet la connection de toutes les tï¿½ches.
+     * Cette méthode permet la connection de toutes les tâches.
      * 
      * @param taches
      */
     public static void connectAllTasks(Tache[] taches) {
-        // Crï¿½ation des liens.
+        // Création des liens.
         for (int i = 0; i < taches.length; i++) {
-            // OID de la tï¿½che (
+            // OID de la tâche (
             String oid = ((Tache) taches[i]).getOid().get();
-            // Rï¿½fï¿½rence de la tï¿½che mï¿½re.
+            // Référence de la tâche mère.
             Tache mere = ((Tache) taches[i]).getMotherTask();
             if (mere != null)
                 GraphicEditorAdaptator.addNewEdge(mere.getOid().get(), oid);
@@ -472,7 +497,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mï¿½thode permet d'effectuer un lien graphique entre deux tï¿½ches.
+     * Cette méthode permet d'effectuer un lien graphique entre deux tâches.
      * 
      * @param oidMere
      * @param oidFils
@@ -487,7 +512,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mï¿½thode est appelï¿½e lors de la demande de crï¿½ation d'un lien.
+     * Cette méthode est appelée lors de la demande de création d'un lien.
      * 
      * @param source : le port source
      * @param target : le port destination
@@ -530,7 +555,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mï¿½thode permet de supprimer une tï¿½che et ses noeuds associï¿½s.
+     * Cette méthode permet de supprimer une tâche et ses noeuds associés.
      * 
      * @param currentCell
      */
@@ -546,8 +571,8 @@ public final class GraphicEditorAdaptator {
         for (int i = 0; i < cells.length; i++) {
             if (cells[i] instanceof KMADEDefaultPort) {
                 // Supprime tous les liens associï¿½s.
-                Set removeEdges = ((KMADEDefaultPort) cells[i]).getEdges();
-                Iterator iterator = removeEdges.iterator();
+                Set<?> removeEdges = ((KMADEDefaultPort) cells[i]).getEdges();
+                Iterator<?> iterator = removeEdges.iterator();
                 while (iterator.hasNext()) {
                     Object[] tempo = new Object[] { iterator.next() };
                     GraphicEditorAdaptator.getCurrentGraphLayoutCache()
@@ -563,7 +588,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mï¿½thode permet de supprimer un lien.
+     * Cette méthode permet de supprimer un lien.
      * 
      * @param currentEdge
      */
@@ -583,7 +608,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mï¿½thode permet la suppression de tï¿½ches et de liens.
+     * Cette méthode permet la suppression de tâches et de liens.
      */
     public static void removeTaskAndEdge() {
         Object[] cellSelected = GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().getSelectionCells();
@@ -623,7 +648,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mÃ©thode permet de mettre Ã  jour les points des tÃ¢ches dans l'express
+     * Cette méthode permet de mettre à  jour les points des tâches dans l'express
      */
     public static void fireMoveTasks() {
         if (GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().getSelectionCount() == 1) {
@@ -639,7 +664,7 @@ public final class GraphicEditorAdaptator {
                     int x = myCell.getPoint().x;
                     int y = myCell.getPoint().y;
                     ExpressTask.setTaskPoint((int) monPoint.getX(), (int) monPoint.getY(), myCell.getTask());
-                    if (!myCell.isSonExpanded() || KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().isMagnet()) {
+                    if (!myCell.isSonExpanded() || MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().isMagnet()) {
                         int dx = x - (int) monPoint.getX();
                         int dy = y - (int) monPoint.getY();
 
@@ -719,7 +744,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Retourne les nouvelles coordonnÃ©es de la cellule.
+     * Retourne les nouvelles coordonnées de la cellule.
      * 
      * @param pCell
      * @return
@@ -759,8 +784,8 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette mÃ©thode permet la sÃ©lection d'une tÃ¢che
-     * @param pDefaultGraphCell : tÃ¢che sÃ©lectionnÃ©e
+     * Cette méthode permet la sélection d'une tâche
+     * @param pDefaultGraphCell : tâche sélectionnée
      */
     public static void selectOneTask(Object defaultGraphCell) {
         if (defaultGraphCell instanceof KMADEDefaultGraphCell) {
@@ -771,13 +796,13 @@ public final class GraphicEditorAdaptator {
             // If ComplexTaskEditor is visible ...
             setSelectedTaskInEnhancedEditor();
             GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().selectedElementViewState();
-            KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().selectedElementViewState();
+            MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().selectedElementViewState();
         } else {
             // C'est un lien.
             myDefaultGraphCellRef = null;
             TaskPropertiesAdaptator.hideTaskProperties();
             GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().selectedEdgeViewState();
-            KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().noSelectedElementViewState();
+            MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().noSelectedElementViewState();
         }
     }
 
@@ -796,7 +821,7 @@ public final class GraphicEditorAdaptator {
         myDefaultGraphCellRef = null;
         TaskPropertiesAdaptator.hideTaskProperties();
         GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().selectedElementsViewState();
-        KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().selectedElementsViewState();
+        MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().selectedElementsViewState();
     }
 
     /**
@@ -807,7 +832,7 @@ public final class GraphicEditorAdaptator {
         myDefaultGraphCellRef = null;
         // Dï¿½sactivation des actions associï¿½es ï¿½ la non sï¿½lection d'une tï¿½che.
         GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().noSelectedElementViewState();
-        KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().noSelectedElementViewState();
+        MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().noSelectedElementViewState();
         TaskPropertiesAdaptator.hideTaskProperties();
     }
 
@@ -958,11 +983,11 @@ public final class GraphicEditorAdaptator {
         if (state) {
             // Pas ActivÃ©e
         	GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().setDisabledGrid();
-            KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().setDisabledGrid();
+        	MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().setDisabledGrid();
         } else {
             // ActivÃ©e
         	GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().setEnabledGrid();
-            KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().setEnabledGrid();
+        	MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().setEnabledGrid();
         }
     }
 
@@ -976,11 +1001,11 @@ public final class GraphicEditorAdaptator {
         if (state) {
             // Pas ActivÃ©e
         	GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().setDisabledRule();
-            KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().setDisabledRule();
+        	MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().setDisabledRule();
         } else {
             // ActivÃ©e
         	GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().setEnabledRule();
-            KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel().getTaskModelToolBar().setEnabledRule();
+        	MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().setEnabledRule();
         }
     }
 
@@ -1002,12 +1027,14 @@ public final class GraphicEditorAdaptator {
      */
     public static void copyAction() {
         Object[] cellSelected = GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().getSelectionCells();
-
+        
+        //System.out.println("Ajout d'une tâche dans le clipBord  "+ cellSelected.length);
         // Etape 1 : dissocier les taches et les liens au sens graphique.
         ArrayList<String[]> edgeOIDList = new ArrayList<String[]>();
         ArrayList<Tache> taskList = new ArrayList<Tache>();
 
         for (int i = 0; i < cellSelected.length; i++) {
+        	
             if (cellSelected[i] instanceof KMADEDefaultEdge) {
                 String[] couple = new String[2];
                 couple[0] = ((KMADEDefaultEdge) cellSelected[i]).getMotherCell().getOid();
@@ -1016,32 +1043,32 @@ public final class GraphicEditorAdaptator {
             } else if (cellSelected[i] instanceof KMADEDefaultGraphCell) {
                 taskList.add(((KMADEDefaultGraphCell) cellSelected[i]).getTask());
             }
-        }
+        }        
 
         MAIN_FRAME.getClipBoardDialog().removeAllEntities();
 
         Tache[] newTasks = ExpressTask.copyElementsIntoClipBoard(taskList,edgeOIDList);
-        for (int i = 0; i < newTasks.length; i++) {
-            GraphicEditorAdaptator.addNewTaskIntoClipBoard(newTasks[i]);
-        }
+		for (int i = 0; i < newTasks.length; i++) {			
+			GraphicEditorAdaptator.addNewTaskIntoClipBoard(newTasks[i]);
+		}
         GraphicEditorAdaptator.connectAllTasksIntoClipBoard(newTasks);
         GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().enablePasteActionViewState();
     }
 
     /**
-     * Cette mï¿½thode effectue un collage sur la partie graphique et express.
+     * Cette methode effectue un collage sur la partie graphique et express.
      */
     public static void pasteAction(Point pt) {
         Tache[] newTasks = ExpressTask.pasteElementsFromClipBoard(pt);
         for (int i = 0; i < newTasks.length; i++) {
             GraphicEditorAdaptator.addNewTask(newTasks[i]);
         }
-        GraphicEditorAdaptator.connectAllTasks(newTasks);
+        GraphicEditorAdaptator.connectAllTasks(newTasks); //connexion des tache entre elles
     }
 
     /**
      * @return Returns the done.
-     */
+     */ 
     public static boolean isDone() {
         return done;
     }
@@ -1117,6 +1144,14 @@ public final class GraphicEditorAdaptator {
                     EventAdaptator.affRemoveEvent(maValue);
                 } else if (type.equals("User")) {
                     UserAdaptator.affRemoveUser(maValue);
+                } else if (type.equals("Individu")){
+                	IndividuAdaptator.affRemoveIndividu(maValue);
+                } else if (type.equals("Organisation")){
+                	OrganisationAdaptator.affRemoveOrganisation(maValue);
+                } else if (type.equals("Machine")){
+                	MachineAdaptator.affRemoveMachine(maValue);
+                } else if (type.equals("ParcMachines")){
+                	ParcMachinesAdaptator.affRemoveParcMachines(maValue);
                 } else if (type.equals("Actor")) {
                     ActorAdaptator.affRemoveActeur(maValue);
                 } else if (type.equals("EventTask")) {
@@ -1127,6 +1162,8 @@ public final class GraphicEditorAdaptator {
                     ConcreteObjectAdaptator.affRemoveObjConc(maValue);
                 } else if (type.equals("Label")) {
                     LabelAdaptator.affRemoveLabel(maValue);
+                }else if(type.equals("ActorSystem")){
+                	ActorSystemAdaptator.affRemoveActeurSystem(maValue);
                 }
 
                 String[] lstWarning = InterfaceExpressJava.getGestionWarning().takeMessages();
@@ -1183,7 +1220,15 @@ public final class GraphicEditorAdaptator {
                         EventAdaptator.removeEvent(maValue);
                     } else if (type.equals("User")) {
                         UserAdaptator.removeUser(maValue);
-                    } else if (type.equals("Actor")) {
+                    } else if (type.equals("Individu")) {
+                        IndividuAdaptator.removeIndividu(maValue);
+                    } else if (type.equals("Organisation")) {
+                        OrganisationAdaptator.removeOrganisation(maValue);
+                    } else if (type.equals("Machine")){
+                    	MachineAdaptator.removeMachine(maValue);
+                    } else if (type.equals("ParcMachines")){
+                    	ParcMachinesAdaptator.removeParcMachines(maValue);
+                    }else if (type.equals("Actor")) {
                         ActorAdaptator.removeActeur(maValue);
                     } else if (type.equals("EventTask")) {
                         EventAdaptator.removeEventIntoSelectedTask((String) tempoValue[0]);
@@ -1193,6 +1238,8 @@ public final class GraphicEditorAdaptator {
                         ConcreteObjectAdaptator.removeObjConc(maValue);
                     } else if (type.equals("Label")) {
                         LabelAdaptator.removeLabel(maValue);
+                    }else if (type.equals("ActorSystem")){
+                    	ActorSystemAdaptator.removeActeurSystem(maValue);
                     }
                 }
             }

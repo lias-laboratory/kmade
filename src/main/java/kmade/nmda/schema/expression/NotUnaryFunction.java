@@ -22,7 +22,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class NotUnaryFunction extends UnaryFunction {
 
@@ -40,10 +40,9 @@ public class NotUnaryFunction extends UnaryFunction {
             this.setStateToUnknown();
             return;
         }
-        
         // Y a une erreur de type.
         this.setStateToError();
-        throw new SemanticException();
+        throw new SemanticException(ExpressConstant.TYPE_NEED_BOOLEAN);
     } 
     
     public void evaluateNode(ObjetConcret ref) throws SemanticException {

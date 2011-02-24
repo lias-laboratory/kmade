@@ -21,7 +21,7 @@ import kmade.nmda.ExpressConstant;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class RelationalOperator extends ComparisonOperator {
 
@@ -34,7 +34,10 @@ public class RelationalOperator extends ComparisonOperator {
     public void checkNode() throws SemanticException {  
     	super.checkNode();
     	
-        if (getLeftNode().isInteger() && getRightNode().isString()) {
+    	// on n'accepte aucun cast
+    	// il est possible de faire les tests en commentaire pour différencier les erreurs de typage
+     	/*
+        if (getLeftNode().isNumber() && getRightNode().isString()) {
             try {
                 	new Integer((String)getRightNode().getNodeValue()).intValue();
                 	this.setNodeValue(true);
@@ -44,9 +47,9 @@ public class RelationalOperator extends ComparisonOperator {
             		this.setStateToError();
             		throw new SemanticException(ExpressConstant.INTEGER_STRING_COMPARISON_OPERATOR_ERROR + " : " + this.name);
             }
-        }
-        
-        if (getLeftNode().isString() && getRightNode().isInteger()) {
+        }*/
+     /*   
+        if (getLeftNode().isString() && getRightNode().isNumber()) {
             try {
                 	new Integer((String)getLeftNode().getNodeValue()).intValue();
                 	this.setNodeValue(true);
@@ -57,21 +60,21 @@ public class RelationalOperator extends ComparisonOperator {
             		throw new SemanticException(ExpressConstant.INTEGER_STRING_COMPARISON_OPERATOR_ERROR + " : " + this.name);
             }
         }
-        
+        */
         if (getLeftNode().isString() && getRightNode().isString()) {
-            try {   
+        /*    try {   
                 	new Integer((String)getLeftNode().getNodeValue()).intValue();
-                	new Integer((String)getRightNode().getNodeValue()).intValue();              
+                	new Integer((String)getRightNode().getNodeValue()).intValue(); */             
                 	this.setNodeValue(true);
                 	this.setStateToUnknown();
                 	return;
-            } catch (NumberFormatException e) {
+         /*   } catch (NumberFormatException e) {
             		this.setStateToError();
             		throw new SemanticException(ExpressConstant.INTEGER_STRINGS_COMPARISON_OPERATOR_ERROR + " : " + this.name);
-            }
+            }*/
         }
         
-        if (getLeftNode().isInteger() && getRightNode().isInteger()) {
+        if (getLeftNode().isNumber() && getRightNode().isNumber()) {
             this.setNodeValue(true);
             this.setStateToUnknown();
             return;

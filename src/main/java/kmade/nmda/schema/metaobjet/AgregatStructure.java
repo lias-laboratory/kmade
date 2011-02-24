@@ -21,13 +21,14 @@ import kmade.nmda.ExpressConstant;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public enum AgregatStructure {
     SET_AGREGAT("Set"),
     STACK_AGREGAT("Stack"),
     SINGLETON_AGREGAT("Singleton"),
-    LIST_AGREGAT("List");
+    LIST_AGREGAT("List"),
+    ARRAY_AGREGAT("Array");
     
     private final String value;
     
@@ -45,11 +46,12 @@ public enum AgregatStructure {
     }
     
     public static String[] getLocaleAgregatStructures() {
-        String[] myEnumereIntervalStruct = new String[4];
+        String[] myEnumereIntervalStruct = new String[5];
         myEnumereIntervalStruct[0] = ExpressConstant.STACK_NAME;
         myEnumereIntervalStruct[1] = ExpressConstant.LIST_NAME;
         myEnumereIntervalStruct[2] = ExpressConstant.SINGLETON_NAME;
         myEnumereIntervalStruct[3] = ExpressConstant.SET_NAME;
+        myEnumereIntervalStruct[4] = ExpressConstant.ARRAY_NAME;
         return myEnumereIntervalStruct;        
     }
     
@@ -62,8 +64,10 @@ public enum AgregatStructure {
         else if (myStringDecomp.equals(ExpressConstant.SINGLETON_NAME))
             return "Singleton";      
         else if (myStringDecomp.equals(ExpressConstant.SET_NAME))
-            return "Set";        
-        else
+            return "Set";
+        else if (myStringDecomp.equals(ExpressConstant.ARRAY_NAME)){
+        	return("Array");
+        } else
             return "Stack";
     }
     
@@ -76,7 +80,9 @@ public enum AgregatStructure {
         else if (myStringDecomp.equals(SINGLETON_AGREGAT.getValue()))
             return ExpressConstant.SINGLETON_NAME;      
         else if (myStringDecomp.equals(SET_AGREGAT.getValue()))
-            return ExpressConstant.SET_NAME;                
+            return ExpressConstant.SET_NAME;
+        else if (myStringDecomp.equals(ARRAY_AGREGAT.getValue()))
+            return ExpressConstant.ARRAY_NAME;
         else
             return ExpressConstant.STACK_NAME;
     }

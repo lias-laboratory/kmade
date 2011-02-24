@@ -43,7 +43,7 @@ import com.l2fprod.common.swing.JButtonBar;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADEPreferencesDialog extends JDialog {
     private static final long serialVersionUID = -4761044457326457755L;

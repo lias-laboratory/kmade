@@ -28,7 +28,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class ExpressConcreteAttribut {
     public static ArrayList<AttributConcret> getConcreteAttr() {
@@ -75,6 +75,8 @@ public class ExpressConcreteAttribut {
     /**
      * Extrait à partir d'un objet concret la liste des attributs concrets et de ses valeurs.
      * @param ObjConcref
+     * @return
+     * 	pour chaque item {le nom de l'attribut abstrait , le type, la valeur(ou null), oid de l'attribut} 
      */
     public static ArrayList<Object[]> getConcreteAttribut(Oid ObjConcref) {
         ObjetConcret ObjConc = (ObjetConcret) InterfaceExpressJava.prendre(ObjConcref);
@@ -96,6 +98,14 @@ public class ExpressConcreteAttribut {
         return myConcreteAttribut;
     }
 
+    /**
+     * Change la valeur de l'attribut concret
+     * @param oid
+     * 			l'oid de l'attribut
+     * @param valeur
+     * 				la valeur de l'attribut
+     * @return
+     */
     public static boolean setConcreteAttributValue(String oid, String valeur) {
         AttributConcret m = (AttributConcret)InterfaceExpressJava.prendre(new Oid(oid));
         return m.setValeur(valeur);

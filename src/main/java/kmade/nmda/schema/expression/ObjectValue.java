@@ -2,6 +2,8 @@ package kmade.nmda.schema.expression;
 
 import java.io.Serializable;
 
+import kmade.nmda.schema.metaobjet.NumberValue;
+
 /**
  * K-MADe : Kernel of Model for Activity Description environment
  * Copyright (C) 2006  INRIA - MErLIn Project
@@ -21,7 +23,7 @@ import java.io.Serializable;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class ObjectValue implements Serializable {
 	private static final long serialVersionUID = 2135584525822886070L;
@@ -63,11 +65,18 @@ public class ObjectValue implements Serializable {
     }
     
     public boolean isStringType() {
-        return (objectValue instanceof String);
+         return (objectValue instanceof String);
     }
     
-    public boolean isIntegerType() {
-        return (objectValue instanceof Integer);
+    //Retourne si le type est NumberValue, si le type est Integer il le transforme en NumberValue
+    public boolean isNumberType() {
+    	if(objectValue instanceof Integer){
+    	objectValue = new NumberValue((Integer)objectValue);
+    	}
+      	if(objectValue instanceof Double){
+        	objectValue = new NumberValue((Double)objectValue);
+        	}
+    	return ( (objectValue instanceof NumberValue) );
     }
     
     public boolean isBooleanType() {

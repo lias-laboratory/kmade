@@ -33,7 +33,7 @@ import javax.swing.UIManager;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class VerticalTextIcon implements Icon, SwingConstants {
     private Font font = UIManager.getFont("Label.font");

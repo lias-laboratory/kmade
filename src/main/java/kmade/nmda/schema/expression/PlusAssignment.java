@@ -2,7 +2,9 @@ package kmade.nmda.schema.expression;
 
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.schema.metaobjet.AttributConcret;
+import kmade.nmda.schema.metaobjet.NumberValue;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
+import kmade.nmda.schema.metaobjet.StrValue;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -23,7 +25,7 @@ import kmade.nmda.schema.metaobjet.ObjetConcret;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class PlusAssignment extends AssignmentOperator {
 
@@ -36,29 +38,31 @@ public class PlusAssignment extends AssignmentOperator {
     
     public void checkNode() throws SemanticException {
         super.checkNode();        
-        
+       
+        // Les If commentés permettent les erreurs de typage que l'on souhaite avoir, le cast qu'ils autorisent sont traités dans evaluateNode mais n'arrivent pas normalement.
+        /*
         if (getLeftNode().isString() && getRightNode().isBoolean()) {
             this.setNodeValue("");
             this.setStateToUnknown();
             return;
         }
-        
+        */
         if (getLeftNode().isString() && getRightNode().isString()) {
             this.setNodeValue("");
             this.setStateToUnknown();
             return;
         }       
-        
-        if (getLeftNode().isString() && getRightNode().isInteger()) {
+        /*
+        if (getLeftNode().isString() && getRightNode().isNumber()) {
             this.setNodeValue("");
             this.setStateToUnknown();
             return;
         }    
-       
-        if (getLeftNode().isInteger() && getRightNode().isString()) {
+        */
+        /* if (getLeftNode().isNumber() && getRightNode().isString()) {
             try {
-                new Integer((String)getRightNode().getNodeValue());
-                this.setNodeValue(new Integer(0));
+                new NumberValue((String)getRightNode().getNodeValue());
+                this.setNodeValue(new NumberValue());
                 this.setStateToUnknown();
                 return;
             }
@@ -67,15 +71,15 @@ public class PlusAssignment extends AssignmentOperator {
                 throw new SemanticException();
             }
         }       
-
-        if (getLeftNode().isInteger() && getRightNode().isInteger()) {                          
-            this.setNodeValue(new Integer(0)); 
+        */
+        if (getLeftNode().isNumber() && getRightNode().isNumber()) {                          
+            this.setNodeValue(new NumberValue()); 
             this.setStateToUnknown();
             return;
         }       
         
         this.setStateToError();
-        throw new SemanticException();
+        throw new SemanticException(ExpressConstant.TYPE_PLUS_ASSIGNMENT);
     }
     
     public void evaluateNode(ObjetConcret ref) throws SemanticException {
@@ -88,34 +92,38 @@ public class PlusAssignment extends AssignmentOperator {
 		if (this.isUnknownState()) {
 			throw new SemanticUnknownException();
 		}
+		
+		// dans certains cas un java null pointer exception peut �tre lever ce qui correspond � une semanticunknownException
+    		try {
+				AttributConcret refConcret = ref.getAttribut(((AttributExpressExpression)this.leftNode).getAbstractAttribut());
+				boolean error = false;
 
-    		AttributConcret refConcret = ref.getAttribut(((AttributExpressExpression)this.leftNode).getAbstractAttribut());
-    		boolean error = false;
+				if (getLeftNode().isString() && getRightNode().isBoolean()) {
+					error = refConcret.setValeur(new String(((StrValue)refConcret.getValue()) + ((Boolean)getRightNode().getNodeValue()).toString()));
+				}
 
-        	if (getLeftNode().isString() && getRightNode().isBoolean()) {
-        		error = refConcret.setValeur(new String(((String)getLeftNode().getNodeValue()) + ((Boolean)getRightNode().getNodeValue()).toString()));
-        	}
+				if (getLeftNode().isString() && getRightNode().isString()) {
+					error = refConcret.setValeur(new String(((StrValue)refConcret.getValue()) + ((String)getRightNode().getNodeValue())));
+				}
 
-        	if (getLeftNode().isString() && getRightNode().isString()) {
-        		error = refConcret.setValeur(new String(((String)getLeftNode().getNodeValue()) + ((String)getRightNode().getNodeValue())));
-        	}
-
-        	if (getLeftNode().isString() && getRightNode().isInteger()) {
-        		error = refConcret.setValeur(new String(((String)getLeftNode().getNodeValue()) + ((Integer)getRightNode().getNodeValue()).toString()));
-        	}
-    		
-        	if (getLeftNode().isInteger() && getRightNode().isString()) {
-        		int temp = new Integer((String)getRightNode().getNodeValue());
-        		error = refConcret.setValeur(new Integer(((Integer)getLeftNode().getNodeValue()).intValue() + temp).toString());
-        	}
-        	
-        	if (getLeftNode().isInteger() && getRightNode().isInteger()) {
-        		error = refConcret.setValeur(new Integer(((Integer)getLeftNode().getNodeValue()) + ((Integer)getRightNode().getNodeValue())).toString());
-        	}
-        	
-        	if (error) {
-        		this.setStateToError();
-    			throw new SemanticErrorException();
-        	}
+				if (getLeftNode().isString() && getRightNode().isNumber()) {
+					error = refConcret.setValeur(new String((((StrValue)refConcret.getValue()) + ((NumberValue)getRightNode().getNodeValue()).toString())));
+				}
+				
+				if (getLeftNode().isNumber() && getRightNode().isString()) {
+					error = refConcret.setValeur( ((NumberValue)refConcret.getValue()).plusComputing(new NumberValue(((String)getRightNode().getNodeValue()))).toString());
+				}
+				
+				if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+					error = refConcret.setValeur(((NumberValue)refConcret.getValue()).plusComputing(((NumberValue)getRightNode().getNodeValue())).toString());
+				}
+				
+				if (error) {
+					this.setStateToError();
+					throw new SemanticErrorException();
+				}
+			} catch (Exception e) {
+				throw new SemanticUnknownException();
+			}
     }
 }

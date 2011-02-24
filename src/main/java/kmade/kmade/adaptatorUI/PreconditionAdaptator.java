@@ -6,6 +6,7 @@ import kmade.kmade.KMADEConstant;
 import kmade.kmade.UI.taskproperties.KMADEEditorPrePostIterDialog;
 import kmade.kmade.adaptatorFC.ExpressPrecondition;
 import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.adaptatorFC.parserExpression.MyPrecondition;
 import kmade.kmade.adaptatorFC.parserExpression.ParseException;
 import kmade.kmade.adaptatorFC.parserExpression.Precondition;
 import kmade.kmade.adaptatorFC.parserExpression.TokenMgrError;
@@ -13,6 +14,7 @@ import kmade.nmda.schema.expression.NodeExpression;
 import kmade.nmda.schema.expression.SemanticErrorException;
 import kmade.nmda.schema.expression.SemanticException;
 import kmade.nmda.schema.expression.SemanticUnknownException;
+import kmade.nmda.schema.metaobjet.NumberValue;
 import kmade.nmda.schema.metaobjet.TypeStructure;
 import kmade.nmda.schema.tache.Tache;
 
@@ -35,7 +37,7 @@ import kmade.nmda.schema.tache.Tache;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class PreconditionAdaptator {    
           
@@ -90,7 +92,7 @@ public final class PreconditionAdaptator {
         java.io.StringReader sr = new java.io.StringReader(s);
         java.io.Reader r = new java.io.BufferedReader(sr);
         
-        Precondition parser = new Precondition(r);
+        Precondition parser = new MyPrecondition(r);
         try{
             NodeExpression ref = parser.expression();
             if (ref == null) {
@@ -142,9 +144,9 @@ public final class PreconditionAdaptator {
     public static void addNewLiteral(String l, String t) {
         if (l.equals(TypeStructure.BOOLEAN_STRUCT.getValue())) {
             t = Boolean.valueOf(Boolean.parseBoolean(t)).toString();
-        } else if (l.equals(TypeStructure.INTEGER_STRUCT.getValue())) {
+        } else if (l.equals(TypeStructure.NUMBER_STRUCT.getValue())) {
             try {
-                Integer.parseInt(t);                
+               new NumberValue(t);                
             } catch(NumberFormatException e) {
                 System.out.println(KMADEConstant.STRING_TO_INTEGER);
                 return;                

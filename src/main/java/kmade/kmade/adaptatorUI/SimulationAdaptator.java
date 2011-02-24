@@ -16,15 +16,18 @@ import kmade.kmade.UI.KMADEMainFrame;
 import kmade.kmade.UI.simulation.KMADEInputUserExpressionAndConcreteObjectDialog;
 import kmade.kmade.UI.simulation.KMADESimulationToolBar;
 import kmade.kmade.UI.taskmodel.KMADEDefaultGraphCell;
+import kmade.kmade.UI.taskproperties.constrainteditors.KMADEArrayTypeComboBox;
+import kmade.kmade.UI.taskproperties.constrainteditors.KMADEGroupTypeComboBox;
 import kmade.kmade.UI.taskproperties.constrainteditors.KMADESetTypeComboBox;
 import kmade.kmade.UI.taskproperties.constrainteditors.KMADEUserExpressionField;
 import kmade.kmade.UI.toolutilities.InDevelopmentGlassPanel;
 import kmade.kmade.UI.toolutilities.KMADEFileChooser;
 import kmade.kmade.UI.toolutilities.KMADEToolUtilities;
 import kmade.kmade.adaptatorFC.ExpressActeur;
+import kmade.kmade.adaptatorFC.ExpressEffetsDeBord;
 import kmade.kmade.adaptatorFC.ExpressEvent;
 import kmade.kmade.adaptatorFC.ExpressHistory;
-import kmade.kmade.adaptatorFC.ExpressPostcondition;
+import kmade.kmade.adaptatorFC.ExpressIteration;
 import kmade.kmade.adaptatorFC.ExpressTask;
 import kmade.kmade.adaptatorFC.ExpressUser;
 import kmade.kmade.adaptatorFC.simulation.ExpressSimulation;
@@ -68,7 +71,7 @@ import org.jgraph.graph.DefaultGraphModel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class SimulationAdaptator {
 	private static KMADEInputUserExpressionAndConcreteObjectDialog refInputDialog = new KMADEInputUserExpressionAndConcreteObjectDialog(GraphicEditorAdaptator.getMainFrame().getSimulationDialog());
@@ -269,7 +272,7 @@ public final class SimulationAdaptator {
         }
         GraphicEditorAdaptator.getMainFrame().getSimulationDialog().getGraphSimulation().repaint();
         ExpressEvent.clearFiringEvent();
-        ExpressPostcondition.clearCurrentObject();
+        ExpressEffetsDeBord.clearCurrentObject();
         GraphicEditorAdaptator.getMainFrame().getSimulationDialog().hideEventsPanel();
         GraphicEditorAdaptator.getMainFrame().getSimulationDialog().hideCurrentObjectPanel();
         ExpressHistory.initStateHistory();
@@ -447,10 +450,10 @@ public final class SimulationAdaptator {
         ArrayList<JComponent> pCompoPre = new ArrayList<JComponent>();
         SimulationAdaptator.buildAnyUserExpressionOrConcreteObjectType(myListPre,refInputDialog.getExpressionPreconditionFieldList(), currentUserEditTask.getPreExpression().getObjectValues(), currentUserEditTask.getPreExpression().isLocked(), refInputDialog.getExpressionPreconditionComboList(),pCompoPre);
 
-        // Préparation pour les valeurs utilisateurs de la postcondition.
-        ArrayList<Object> myListPost = currentUserEditTask.getPostExpression().getNodeExpression().getLinearExpression();
+        // Préparation pour les valeurs utilisateurs de la effetsdebord.
+        ArrayList<Object> myListPost = currentUserEditTask.getEffetsDeBordExpression().getNodeExpression().getLinearExpression();
         ArrayList<JComponent> pCompoPost = new ArrayList<JComponent>();
-        SimulationAdaptator.buildAnyUserExpressionOrConcreteObjectType(myListPost,refInputDialog.getExpressionPostconditionFieldList(),currentUserEditTask.getPostExpression().getObjectValues(), currentUserEditTask.getPreExpression().isLocked(), refInputDialog.getExpressionPostconditionComboList(),pCompoPost);
+        SimulationAdaptator.buildAnyUserExpressionOrConcreteObjectType(myListPost,refInputDialog.getExpressionEffetsDeBordFieldList(),currentUserEditTask.getEffetsDeBordExpression().getObjectValues(), currentUserEditTask.getPreExpression().isLocked(), refInputDialog.getExpressionEffetsDeBordComboList(),pCompoPost);
         
         // Préparation pour les valeurs utilisateurs de l'itération.
         ArrayList<Object> myListIter = currentUserEditTask.getIteExpression().getNodeExpression().getLinearExpression();
@@ -459,7 +462,7 @@ public final class SimulationAdaptator {
         
         refInputDialog.setLockOrUnlockPreconditionUserValuesAndConcreteObjects(currentUserEditTask.getPreExpression().isLocked());
         refInputDialog.setInputUserConcretePreconditionPanel(pCompoPre);
-        refInputDialog.setInputUserConcretePostconditionPanel(pCompoPost);
+        refInputDialog.setInputUserConcreteEffetsDeBordPanel(pCompoPost);
         refInputDialog.setInputUserConcreteIterationPanel(pCompoIter);
         SimulationAdaptator.disabledMainFrameBeforeEdition();
             
@@ -497,20 +500,21 @@ public final class SimulationAdaptator {
     }
     
 	private static boolean launchAction(TokenSimulation tokenSimulation) {
-        // Verification par rapport a la precondition, la postcondition et l'iteration.
+        // Verification par rapport a la precondition, la effetsdebord et l'iteration.
         currentTokenSimulation = tokenSimulation;
         Tache myTask = currentTokenSimulation.getTask();
         
         ExpressHistory.saveStateHistory(tokenSimulation);
         if (currentTokenSimulation.isExecuterAction()) {
-        	if (GraphicEditorAdaptator.getMainFrame().getSimulationDialog().getSimulationToolBar().isPreSelected()) {
+        	if(!ExpressIteration.isFinished(myTask)){
+        		if (GraphicEditorAdaptator.getMainFrame().getSimulationDialog().getSimulationToolBar().isPreSelected()) {
         		boolean userValues = SimulationAdaptator.searchAnyUserExpressionOrConcreteObjectType(myTask);
 
                 if (userValues && !userValueOk) {
                     return false;
                 }
         	}
-        	
+        	}
             KMADESimulationToolBar toolbar = GraphicEditorAdaptator.getMainFrame().getSimulationDialog().getSimulationToolBar();
             int value = GraphicEditorAdaptator.getMainFrame().getSimulationDialog().getSelectionUserListCombo();
             boolean exe = toolbar.isExeSelected();
@@ -523,7 +527,7 @@ public final class SimulationAdaptator {
             		// Mise à jour de la partie événement.
             		GraphicEditorAdaptator.getMainFrame().getSimulationDialog().setEventListModel(ExpressEvent.getAllCurrentEvents());
             		// Mise à jour de la partie objet concret.
-            		CurrentObject temp = ExpressPostcondition.getCurrentObject();
+            		CurrentObject temp = ExpressEffetsDeBord.getCurrentObject();
             		if (temp.isExistCurrentEvaluateConcreteObject()) {
                 		GraphicEditorAdaptator.getMainFrame().getSimulationDialog().setCurrentObjectPanel(temp.toString());            			
             		} else {
@@ -593,12 +597,12 @@ public final class SimulationAdaptator {
                     tache.getNumero(), 
                     tache.getMotherTaskName(),
                     tache.getName(), 
-                    tache.getBut(),
+                    /*tache.getBut(),*/
                     tache.getRessources(), 
-                    tache.getMedia(),
+                    /*tache.getMedia(),*/
                     tache.getLabelName(),
-                    tache.getFeedBack(),
-                    tache.getDuree(), 
+                   /* tache.getFeedBack(),*/
+                   /* tache.getDuree(), */
                     tache.getObservation(),
                     tache.getExecutant(), 
                     tache.getModalite().getValue(), 
@@ -611,7 +615,7 @@ public final class SimulationAdaptator {
                     tache.getDeclencheurName(), 
                     tache.getActeurs(),
                     tache.getPreExpression(), 
-                    tache.getPostExpression(), 
+                    tache.getEffetsDeBordExpression(), 
                     tache.getDecomposition().getValue(), 
                     tache.getIteExpression()
                 );
@@ -651,18 +655,18 @@ public final class SimulationAdaptator {
         }
     }
     
-    public static void switchLockOrUnlockPostconditionUserValuesAndConcreteObjects() {
-        Expression myPostExpression = currentUserEditTask.getPostExpression();
-        if (myPostExpression.isLocked()) {
+    public static void switchLockOrUnlockEffetsDeBordUserValuesAndConcreteObjects() {
+        Expression myEffetsDeBordExpression = currentUserEditTask.getEffetsDeBordExpression();
+        if (myEffetsDeBordExpression.isLocked()) {
             // Débloquer le tout.
-            refInputDialog.setEnabledPostconditionFieldAndComboComponents(true);
-            myPostExpression.setLocked(false); 
-            refInputDialog.setPostconditionUnLockImage();
+            refInputDialog.setEnabledEffetsDeBordFieldAndComboComponents(true);
+            myEffetsDeBordExpression.setLocked(false); 
+            refInputDialog.setEffetsDeBordUnLockImage();
         } else {
             // Bloquer le tout.
-            refInputDialog.setEnabledPostconditionFieldAndComboComponents(false);
-            myPostExpression.setLocked(true);
-            refInputDialog.setPostconditionLockImage();
+            refInputDialog.setEnabledEffetsDeBordFieldAndComboComponents(false);
+            myEffetsDeBordExpression.setLocked(true);
+            refInputDialog.setEffetsDeBordLockImage();
         }
     }
     
@@ -694,7 +698,7 @@ public final class SimulationAdaptator {
     
 	public static void closeInputConcreteDialog() {
         // Avant tout chose, il faut vérifier si les valeurs sont correctes.
-        // On test donc la précondition, la postcondition et l'itération.
+        // On test donc la précondition, la effetsdebord et l'itération.
         
         boolean erreurUserExpression = false;        
         for (int i = 0; i < refInputDialog.getExpressionPreconditionFieldList().size() && !erreurUserExpression; i++) {
@@ -716,12 +720,12 @@ public final class SimulationAdaptator {
         if (message.equals("")) {
        		// Stocke les valeurs utilisateurs.
             SimulationAdaptator.storeUserValues(refInputDialog.getExpressionPreconditionFieldList(), currentUserEditTask.getPreExpression());
-            SimulationAdaptator.storeUserValues(refInputDialog.getExpressionPostconditionFieldList(), currentUserEditTask.getPostExpression());
+            SimulationAdaptator.storeUserValues(refInputDialog.getExpressionEffetsDeBordFieldList(), currentUserEditTask.getEffetsDeBordExpression());
             SimulationAdaptator.storeUserValues(refInputDialog.getExpressionIterationFieldList(), currentUserEditTask.getIteExpression());
 
             // Stocke les objets concrets choisis par l'utilisateur.
             SimulationAdaptator.storeUserConcreteObjects(refInputDialog.getExpressionPreconditionComboList(), currentUserEditTask.getPreExpression());
-            SimulationAdaptator.storeUserConcreteObjects(refInputDialog.getExpressionPostconditionComboList(), currentUserEditTask.getPostExpression());
+            SimulationAdaptator.storeUserConcreteObjects(refInputDialog.getExpressionEffetsDeBordComboList(), currentUserEditTask.getEffetsDeBordExpression());
             SimulationAdaptator.storeUserConcreteObjects(refInputDialog.getExpressionIterationComboList(), currentUserEditTask.getIteExpression());
             
             SimulationAdaptator.enabledMainFrameAfterEdition();
@@ -743,7 +747,7 @@ public final class SimulationAdaptator {
         myExpression.setObjectValues(myList);
     }
     
-    private static void storeUserConcreteObjects(ArrayList<KMADESetTypeComboBox> myFieldList, Expression myExpression) {
+    private static void storeUserConcreteObjects(ArrayList<KMADEGroupTypeComboBox> arrayList, Expression myExpression) {
 
     }
 	
@@ -753,10 +757,10 @@ public final class SimulationAdaptator {
         ArrayList<JComponent> pCompoPre = new ArrayList<JComponent>();
         boolean valeur = SimulationAdaptator.buildAnyUserExpressionOrConcreteObjectType(myListPre,refInputDialog.getExpressionPreconditionFieldList(), myTask.getPreExpression().getObjectValues(), myTask.getPreExpression().isLocked(), refInputDialog.getExpressionPreconditionComboList(),pCompoPre);
 
-        // Préparation pour les valeurs utilisateurs de la postcondition.
-        ArrayList<Object> myListPost = myTask.getPostExpression().getNodeExpression().getLinearExpression();
+        // Préparation pour les valeurs utilisateurs de la effetsdebord.
+        ArrayList<Object> myListPost = myTask.getEffetsDeBordExpression().getNodeExpression().getLinearExpression();
         ArrayList<JComponent> pCompoPost = new ArrayList<JComponent>();
-        valeur |= SimulationAdaptator.buildAnyUserExpressionOrConcreteObjectType(myListPost,refInputDialog.getExpressionPostconditionFieldList(),myTask.getPostExpression().getObjectValues(), myTask.getPreExpression().isLocked(), refInputDialog.getExpressionPostconditionComboList(),pCompoPost);
+        valeur |= SimulationAdaptator.buildAnyUserExpressionOrConcreteObjectType(myListPost,refInputDialog.getExpressionEffetsDeBordFieldList(),myTask.getEffetsDeBordExpression().getObjectValues(), myTask.getPreExpression().isLocked(), refInputDialog.getExpressionEffetsDeBordComboList(),pCompoPost);
         
         // Préparation pour les valeurs utilisateurs de l'itération.
         ArrayList<Object> myListIter = myTask.getIteExpression().getNodeExpression().getLinearExpression();
@@ -768,7 +772,7 @@ public final class SimulationAdaptator {
         if (valeur) {
             refInputDialog.setLockOrUnlockPreconditionUserValuesAndConcreteObjects(myTask.getPreExpression().isLocked());
             refInputDialog.setInputUserConcretePreconditionPanel(pCompoPre);
-            refInputDialog.setInputUserConcretePostconditionPanel(pCompoPost);
+            refInputDialog.setInputUserConcreteEffetsDeBordPanel(pCompoPost);
             refInputDialog.setInputUserConcreteIterationPanel(pCompoIter);
             SimulationAdaptator.disabledMainFrameBeforeEdition();
             
@@ -785,7 +789,7 @@ public final class SimulationAdaptator {
      * @param myfield : la référence à la liste des futurs champs de texte
      * @param value : les valeurs de l'utilisateur
      * @param isLocked : cadenas ou pas
-     * @param myCombo : ...
+     * @param arrayList : ...
      * @param myListComponent : ...
      * @return true y a des choses à modifier, false y a rien à modifier.
      */
@@ -794,15 +798,15 @@ public final class SimulationAdaptator {
             ArrayList<KMADEUserExpressionField> myfield, 
             ArrayList<String> value, 
             boolean isLocked, 
-            ArrayList<KMADESetTypeComboBox> myCombo, 
+            ArrayList<KMADEGroupTypeComboBox> arrayList, 
             ArrayList<JComponent> myListComponent) {
         // Nettoyage de la liste des champs pour les valeurs utilisateurs et les objets concrets utilisateurs.
    		myfield.clear();
-   		myCombo.clear();
+   		arrayList.clear();
 
         boolean isUserConcreteExpression = false;
         boolean isUserError = false;
-        Iterator myIte = value.iterator();
+        Iterator<String> myIte = value.iterator();
         for (Object tt:myList) {
             if (tt instanceof UserExpression) {   
                 KMADEUserExpressionField current = new KMADEUserExpressionField((UserExpression)tt);
@@ -823,7 +827,12 @@ public final class SimulationAdaptator {
                     if (((ConcreteObjectType)tt).isGroupSetType()) {
                         isUserConcreteExpression = true;
                         KMADESetTypeComboBox currentCombo = new KMADESetTypeComboBox((ConcreteObjectType)tt,((ConcreteObjectType)tt).getConcreteObjects());                       
-                        myCombo.add(currentCombo);
+                        arrayList.add(currentCombo);
+                        myListComponent.add(currentCombo);
+                    } else if (((ConcreteObjectType)tt).isGroupArrayType()) {
+                        isUserConcreteExpression = true;
+                        KMADEArrayTypeComboBox currentCombo = new KMADEArrayTypeComboBox((ConcreteObjectType)tt,((ConcreteObjectType)tt).getConcreteObjects());                       
+                        arrayList.add(currentCombo);
                         myListComponent.add(currentCombo);
                     } else {
                         myListComponent.add(new JLabel(((ConcreteObjectType)tt).getConcreteObject().getName()));
@@ -934,7 +943,7 @@ public final class SimulationAdaptator {
         	}
             // Injecter les valeurs utilisateurs dans la tâche (pre/post/iter).
             tokenSimulation.getTask().getPreExpression().setObjectValues(tokenSimulation.getUserValuePre());
-            tokenSimulation.getTask().getPostExpression().setObjectValues(tokenSimulation.getUserValuePost());
+            tokenSimulation.getTask().getEffetsDeBordExpression().setObjectValues(tokenSimulation.getUserValuePost());
             tokenSimulation.getTask().getIteExpression().setObjectValues(tokenSimulation.getUserValueIter());
         }
         

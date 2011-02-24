@@ -14,6 +14,7 @@ import kmade.nmda.schema.metaobjet.ListeAg;
 import kmade.nmda.schema.metaobjet.ObjetAbstrait;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
 import kmade.nmda.schema.metaobjet.PileAg;
+import kmade.nmda.schema.metaobjet.TableauAg;
 import kmade.nmda.schema.metaobjet.UniqAg;
 
 /**
@@ -35,7 +36,7 @@ import kmade.nmda.schema.metaobjet.UniqAg;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class ExpressGroup {
     public static String createGroup(Oid oidObjAbs) { 
@@ -86,6 +87,7 @@ public class ExpressGroup {
         Groupe m = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
         m.setName(name);
         return m.getName();
+
     }
 
     public static void setGroupDescription(String oid, String desc) {
@@ -146,6 +148,9 @@ public class ExpressGroup {
         } else if (ensemble.equals(AgregatStructure.SET_AGREGAT.getValue())) {
             Oid oidLst = InterfaceExpressJava.createEntity("metaobjet", "EnsembleAg");
             myAgregat = (EnsembleAg) InterfaceExpressJava.prendre(oidLst);
+        } else if (ensemble.equals(AgregatStructure.ARRAY_AGREGAT.getValue())) {
+            Oid oidLst = InterfaceExpressJava.createEntity("metaobjet", "TableauAg");
+            myAgregat = (TableauAg) InterfaceExpressJava.prendre(oidLst);
         }
         return myAgregat;
     }

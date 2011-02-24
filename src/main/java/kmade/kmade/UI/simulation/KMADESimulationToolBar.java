@@ -35,7 +35,7 @@ import kmade.kmade.adaptatorUI.SimulationAdaptator;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class KMADESimulationToolBar extends JPanel implements LanguageFactory {
 
@@ -182,7 +182,7 @@ public class KMADESimulationToolBar extends JPanel implements LanguageFactory {
         			SimulationAdaptator.constraintsEnablingAction();
         		}
         });
-        // Activer ou pas la prise en compte de la postcondition
+        // Activer ou pas la prise en compte de la effetsdebord
         this.postEnabledButton = new JToggleButton("Post", true);
         this.postEnabledButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

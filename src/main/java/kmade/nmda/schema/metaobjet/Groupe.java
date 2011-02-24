@@ -28,7 +28,7 @@ import org.w3c.dom.NodeList;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class Groupe implements Entity {
 
@@ -134,21 +134,25 @@ public class Groupe implements Entity {
     }
 
     public void setName(String n) {
-        boolean ok = false;
-        int cpt = 0;
-        n = n.replace(" ", "_");
-        while (!ok) {
-            if (cpt != 0) {
-                if (cpt == 1) {
-                    n = n + "_" + String.valueOf(cpt);
-                } else {
-                    n = n.substring(0, n.length() - 1) + String.valueOf(cpt);
-                }
-            }
-            ok = isUniqueName(n);
-            cpt++;
-        }
         name = n;
+    }
+
+    public static String propositionNom(String n){
+    	boolean ok = false;
+    	int cpt = 0;
+    	// n = n.replace(" ", "_");
+    	while (!ok) {
+    		if (cpt != 0) {
+    			if (cpt == 1) {
+    				n = n + "_" + String.valueOf(cpt);
+    			} else {
+    				n = n.substring(0, n.length() - 1) + String.valueOf(cpt);
+    			}
+    		}
+    		ok = isUniqueName(n);
+    		cpt++;
+    	}
+    	return n;
     }
 
     public Agregat getEnsemble() {

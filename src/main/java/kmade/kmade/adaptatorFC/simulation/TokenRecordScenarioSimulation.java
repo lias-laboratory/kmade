@@ -25,7 +25,7 @@ import kmade.nmda.schema.tache.User;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public class TokenRecordScenarioSimulation extends TokenSimulation {
 	protected ArrayList<String> myUserValuePre = new ArrayList<String>();
@@ -45,7 +45,7 @@ public class TokenRecordScenarioSimulation extends TokenSimulation {
 	public TokenRecordScenarioSimulation(TokenSimulation p) {
 		super(p.getTask(), p.getAction());
 		myUserValuePre = p.getTask().getPreExpression().getObjectValues();
-		myUserValuePost = p.getTask().getPostExpression().getObjectValues();
+		myUserValuePost = p.getTask().getEffetsDeBordExpression().getObjectValues();
 		myUserValueIter = p.getTask().getIteExpression().getObjectValues();
 		// TODO : les objets concrets ...
 	}

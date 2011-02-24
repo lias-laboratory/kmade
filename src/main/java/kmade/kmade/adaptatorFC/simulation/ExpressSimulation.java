@@ -39,7 +39,7 @@ import kmade.nmda.schema.tache.User;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (mickael.baron@inria.fr ou baron.mickael@gmail.com)
+ * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class ExpressSimulation {
     private static Tache currentTask;
@@ -90,7 +90,7 @@ public final class ExpressSimulation {
     }
     
     public static ArrayList<TokenSimulation> searchActivableTask(Tache myTache) {
-        ArrayList<TokenSimulation> myTacheList = new ArrayList<TokenSimulation>();  
+        ArrayList<TokenSimulation> myTacheList = new ArrayList<TokenSimulation>();
         
         // L'interruption est une affaire de parallélisme et d'entrelacement
         if (myTache.isInterruptible() && (!myTache.getStateSimulation().isTerminalState())) {            
@@ -102,7 +102,9 @@ public final class ExpressSimulation {
                 if (myTache.getExecutant().equals(Executant.SYS)) {
                     // Un exécutant système est interrompue automatiquement                    
                     // Vérifie avec la tache mere s'il existe une sous-tache de plus haute priorite
-                    Tache myMother = myTache.getMotherTask();
+                    
+                	// /!\ getMotherTask peut renvoy� null -> � modifier 
+                	Tache myMother = myTache.getMotherTask();
                     boolean etat = false;
                     for (int i = 0; i < myMother.getFils().size() && !etat; i++) {
                         // Etat Terminal
@@ -255,11 +257,17 @@ public final class ExpressSimulation {
         }
         return true;
     }
-
     
     public static boolean setExecuter(Tache myTask, boolean post, boolean iter, boolean trigevent, boolean event) {
         // Faire le traitement. Première catégorie, seconde catégorie et troisième catégorie.    
-        ExpressIteration.evaluateIteration(myTask);
+        
+        if(ExpressIteration.isFinished(myTask)){
+        	 myTask.getStateSimulation().setFinished();
+        	 System.out.println(" * " + KMADEConstant.ACTION_CONSTRAINT_MESSAGE);
+        	 System.out.println("  - " + KMADEConstant.ITERATION_FINISH_NO_ACTION);
+        	return true;
+        }else{
+        	ExpressIteration.evaluateIteration(myTask);
         myTask.getMotherTask().getStateSimulation().setActive();
         
         // Post-traitement ...
@@ -282,25 +290,25 @@ public final class ExpressSimulation {
         	System.out.println(KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
         }
         
-            // Traitement de la postcondition
+            // Traitement des effetsdebord
         if (post) {            
-            System.out.print("  - " + KMADEConstant.POSTCONDITION_CONSTRAINT_MESSAGE + " : " );
+            System.out.print("  - " + KMADEConstant.EFFETSDEBORD_CONSTRAINT_MESSAGE + " : " );
             
-			if (myTask.getPostExpression().getNodeExpression() == null) {
-				System.out.print(myTask.getPostExpression().getName());
+			if (myTask.getEffetsDeBordExpression().getNodeExpression() == null) {
+				System.out.print(myTask.getEffetsDeBordExpression().getName());
 			} else {
-				System.out.print(ExpressSimulation.getLinearExpressionWithUserValues(myTask.getPostExpression().getNodeExpression().getLinearExpression()));
+				System.out.print(ExpressSimulation.getLinearExpressionWithUserValues(myTask.getEffetsDeBordExpression().getNodeExpression().getLinearExpression()));
 			}   
 
         	try {
-        		myTask.getPostExpression().getNodeExpression().evaluateNode(null);
-        		System.out.println(" -> " + KMADEConstant.POSTCONDITION_EXECUTED_STATE_MESSAGE);
+        		myTask.getEffetsDeBordExpression().getNodeExpression().evaluateNode(null);
+        		System.out.println(" -> " + KMADEConstant.EFFETSDEBORD_EXECUTED_STATE_MESSAGE);
         	} catch (SemanticErrorException e) {
-        		System.out.println(" -> " + KMADEConstant.POSTCONDITION_NO_EXECUTED_STATE_MESSAGE + " , " + e.getMessage());
+        		System.out.println(" -> " + KMADEConstant.EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE + " , " + e.getMessage());
         		System.out.println("");
         		return false;
             } catch (SemanticUnknownException e) {
-            	System.out.println(" -> " + KMADEConstant.POSTCONDITION_NO_EXECUTED_STATE_MESSAGE + " , " + e.getMessage());
+            	System.out.println(" -> " + KMADEConstant.EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE + " , " + e.getMessage());
             	System.out.println("");
             	return false;
             } catch (SemanticException e) {
@@ -309,7 +317,7 @@ public final class ExpressSimulation {
             }
         	
         } else {
-        	System.out.println("  - " + KMADEConstant.POSTCONDITION_CONSTRAINT_MESSAGE + " : " + KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
+        	System.out.println("  - " + KMADEConstant.EFFETSDEBORD_CONSTRAINT_MESSAGE + " : " + KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
         }
         
         		// Etat de la tâche
@@ -317,6 +325,7 @@ public final class ExpressSimulation {
             myTask.getStateSimulation().setFinished();
         } else {
             myTask.getStateSimulation().setActive();
+        }
         }
         System.out.println("");
         return true;
@@ -656,7 +665,7 @@ public final class ExpressSimulation {
         }        
     }
     
-    public static String getLinearExpressionWithUserValues(ArrayList myList) {
+    public static String getLinearExpressionWithUserValues(ArrayList<?> myList) {
         String result = "";
         for (Object tt : myList) {
             if (tt instanceof UserExpression) {
