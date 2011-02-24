@@ -2,7 +2,7 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.adaptatorFC.ExpressInterval;
+import kmade.kmade.coreadaptator.ExpressInterval;
 import kmade.kmade.view.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
 import kmade.nmda.schema.metaobjet.Intervalle;
 

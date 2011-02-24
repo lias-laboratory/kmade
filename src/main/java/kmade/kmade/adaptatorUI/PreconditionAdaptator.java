@@ -3,12 +3,12 @@ package kmade.kmade.adaptatorUI;
 import java.util.ArrayList;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressPrecondition;
-import kmade.kmade.adaptatorFC.ExpressTask;
-import kmade.kmade.adaptatorFC.parserExpression.MyPrecondition;
-import kmade.kmade.adaptatorFC.parserExpression.ParseException;
-import kmade.kmade.adaptatorFC.parserExpression.Precondition;
-import kmade.kmade.adaptatorFC.parserExpression.TokenMgrError;
+import kmade.kmade.coreadaptator.ExpressPrecondition;
+import kmade.kmade.coreadaptator.ExpressTask;
+import kmade.kmade.coreadaptator.parserExpression.MyPrecondition;
+import kmade.kmade.coreadaptator.parserExpression.ParseException;
+import kmade.kmade.coreadaptator.parserExpression.Precondition;
+import kmade.kmade.coreadaptator.parserExpression.TokenMgrError;
 import kmade.kmade.view.taskproperties.KMADEEditorPrePostIterDialog;
 import kmade.nmda.schema.expression.NodeExpression;
 import kmade.nmda.schema.expression.SemanticErrorException;

@@ -1,8 +1,8 @@
 package kmade.kmade.adaptatorUI;
-import kmade.kmade.adaptatorFC.ExpressAbstractAttribut;
-import kmade.kmade.adaptatorFC.ExpressAbstractObject;
-import kmade.kmade.adaptatorFC.ExpressEnum;
-import kmade.kmade.adaptatorFC.ExpressInterval;
+import kmade.kmade.coreadaptator.ExpressAbstractAttribut;
+import kmade.kmade.coreadaptator.ExpressAbstractObject;
+import kmade.kmade.coreadaptator.ExpressEnum;
+import kmade.kmade.coreadaptator.ExpressInterval;
 import kmade.kmade.view.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
 import kmade.nmda.schema.Oid;
 

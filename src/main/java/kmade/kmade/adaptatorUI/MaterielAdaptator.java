@@ -1,6 +1,6 @@
 package kmade.kmade.adaptatorUI;
 
-import kmade.kmade.adaptatorFC.ExpressMateriel;
+import kmade.kmade.coreadaptator.ExpressMateriel;
 import kmade.kmade.view.KMADEMainFrame;
 import kmade.kmade.view.taskproperties.readworldobject.KMADEReadMaterielObjectTable;
 

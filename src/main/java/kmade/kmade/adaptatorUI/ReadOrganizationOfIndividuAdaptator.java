@@ -1,7 +1,7 @@
 
 package kmade.kmade.adaptatorUI;
 
-import kmade.kmade.adaptatorFC.ExpressIndividu;
+import kmade.kmade.coreadaptator.ExpressIndividu;
 import kmade.kmade.view.worldobject.user.KMADEReadOrganisationOfIndividu;
 
 public class ReadOrganizationOfIndividuAdaptator {

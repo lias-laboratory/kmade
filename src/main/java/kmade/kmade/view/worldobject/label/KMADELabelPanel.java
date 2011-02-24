@@ -27,9 +27,9 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.parserExpression.RegularExpression;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
 import kmade.kmade.adaptatorUI.LabelAdaptator;
+import kmade.kmade.coreadaptator.parserExpression.RegularExpression;
 import kmade.kmade.view.toolutilities.DefaultListTableModel;
 import kmade.kmade.view.toolutilities.JListTable;
 import kmade.kmade.view.toolutilities.LanguageFactory;

@@ -1,6 +1,6 @@
 package kmade.kmade.adaptatorUI;
 
-import kmade.kmade.adaptatorFC.ExpressEnumElement;
+import kmade.kmade.coreadaptator.ExpressEnumElement;
 import kmade.kmade.view.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
 import kmade.nmda.schema.Oid;
 

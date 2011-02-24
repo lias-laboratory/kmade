@@ -8,8 +8,8 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JViewport;
 
-import kmade.kmade.adaptatorFC.ExpressTask;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
+import kmade.kmade.coreadaptator.ExpressTask;
 import kmade.kmade.view.taskmodel.KMADEDefaultEdge;
 import kmade.kmade.view.taskmodel.KMADEDefaultGraphCell;
 import kmade.kmade.view.taskmodel.KMADEGraph;

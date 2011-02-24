@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
-import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.coreadaptator.ExpressTask;
 import kmade.nmda.schema.tache.Decomposition;
 import kmade.nmda.schema.tache.Executant;
 import kmade.nmda.schema.tache.Point;

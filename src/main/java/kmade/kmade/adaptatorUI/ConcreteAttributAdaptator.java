@@ -2,8 +2,8 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.adaptatorFC.ExpressAbstractAttribut;
-import kmade.kmade.adaptatorFC.ExpressConcreteAttribut;
+import kmade.kmade.coreadaptator.ExpressAbstractAttribut;
+import kmade.kmade.coreadaptator.ExpressConcreteAttribut;
 import kmade.kmade.view.worldobject.concreteobject.KMADEReadWriteConcreteAttributTable;
 import kmade.nmda.schema.Oid;
 

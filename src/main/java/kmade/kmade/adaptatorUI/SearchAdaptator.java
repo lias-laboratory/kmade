@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.coreadaptator.ExpressTask;
 import kmade.kmade.view.taskmodel.KMADEDefaultGraphCell;
 import kmade.kmade.view.toolutilities.KMADEFileChooser;
 import kmade.nmda.schema.tache.Decomposition;

@@ -10,10 +10,10 @@ import java.awt.geom.Point2D;
 import javax.swing.JViewport;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressTask;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
 import kmade.kmade.adaptatorUI.KMADeAdaptator;
 import kmade.kmade.adaptatorUI.TaskPropertiesEnhancedEditorAdaptator;
+import kmade.kmade.coreadaptator.ExpressTask;
 import kmade.kmade.view.taskmodel.KMADEDefaultEdge;
 import kmade.kmade.view.taskmodel.KMADEGraph;
 import kmade.kmade.view.taskmodel.KMADEVertexView;

@@ -16,7 +16,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.coreadaptator.ExpressTask;
 import kmade.kmade.view.KMADEMainFrame;
 import kmade.kmade.view.taskmodel.KMADEDefaultEdge;
 import kmade.kmade.view.taskmodel.KMADEDefaultGraphCell;

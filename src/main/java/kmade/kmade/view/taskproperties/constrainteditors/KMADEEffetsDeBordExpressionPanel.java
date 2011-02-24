@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.parserExpression.EffetsDeBordConstants;
 import kmade.kmade.adaptatorUI.EffetsDeBordAdaptator;
+import kmade.kmade.coreadaptator.parserExpression.EffetsDeBordConstants;
 import kmade.kmade.view.toolutilities.LanguageFactory;
 import kmade.nmda.schema.metaobjet.TypeStructure;
 

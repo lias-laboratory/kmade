@@ -1,6 +1,6 @@
 package kmade.kmade.adaptatorUI;
 
-import kmade.kmade.adaptatorFC.ExpressUser;
+import kmade.kmade.coreadaptator.ExpressUser;
 import kmade.kmade.view.KMADEMainFrame;
 import kmade.kmade.view.taskproperties.readworldobject.KMADEReadUserObjectTable;
 

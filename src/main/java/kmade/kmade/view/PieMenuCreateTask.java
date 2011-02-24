@@ -12,11 +12,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.JViewport;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressTask;
 import kmade.kmade.adaptatorUI.ConcreteObjectPanelAdaptator;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
 import kmade.kmade.adaptatorUI.KMADeAdaptator;
 import kmade.kmade.adaptatorUI.TaskPropertiesAdaptator;
+import kmade.kmade.coreadaptator.ExpressTask;
 import kmade.kmade.view.taskmodel.KMADEVertexView;
 import kmade.nmda.schema.tache.Tache;
 

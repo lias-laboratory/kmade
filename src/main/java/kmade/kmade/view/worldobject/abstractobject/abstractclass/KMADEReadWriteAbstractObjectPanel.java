@@ -4,9 +4,9 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-import kmade.kmade.adaptatorFC.ExpressEnum;
-import kmade.kmade.adaptatorFC.ExpressInterval;
 import kmade.kmade.adaptatorUI.AbstractObjectPanelAdaptator;
+import kmade.kmade.coreadaptator.ExpressEnum;
+import kmade.kmade.coreadaptator.ExpressInterval;
 import kmade.kmade.view.toolutilities.LanguageFactory;
 import kmade.nmda.schema.Oid;
 

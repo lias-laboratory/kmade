@@ -2,8 +2,8 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.adaptatorFC.ExpressEvent;
-import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.coreadaptator.ExpressEvent;
+import kmade.kmade.coreadaptator.ExpressTask;
 import kmade.kmade.view.KMADEMainFrame;
 import kmade.kmade.view.taskproperties.readworldobject.KMADEReadEventObjectTable;
 import kmade.nmda.schema.tache.Evenement;

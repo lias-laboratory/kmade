@@ -1,6 +1,6 @@
 package kmade.nmda.schema.expression;
 
-import kmade.kmade.adaptatorFC.ExpressGroup;
+import kmade.kmade.coreadaptator.ExpressGroup;
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.schema.metaobjet.Groupe;
 import kmade.nmda.schema.metaobjet.ObjetConcret;

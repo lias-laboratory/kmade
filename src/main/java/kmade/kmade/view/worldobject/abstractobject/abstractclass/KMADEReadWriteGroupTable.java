@@ -9,10 +9,10 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.parserExpression.RegularExpression;
 import kmade.kmade.adaptatorUI.AbstractObjectPanelAdaptator;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
 import kmade.kmade.adaptatorUI.GroupAdaptator;
+import kmade.kmade.coreadaptator.parserExpression.RegularExpression;
 import kmade.kmade.view.toolutilities.DefaultListTableModel;
 import kmade.kmade.view.toolutilities.JListTable;
 import kmade.kmade.view.toolutilities.LanguageFactory;

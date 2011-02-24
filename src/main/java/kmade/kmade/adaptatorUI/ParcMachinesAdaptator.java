@@ -3,7 +3,7 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.adaptatorFC.ExpressParcMachines;
+import kmade.kmade.coreadaptator.ExpressParcMachines;
 import kmade.kmade.view.KMADEMainFrame;
 import kmade.kmade.view.taskproperties.readworldobject.KMADEReadParcMachinesObjectTable;
 import kmade.nmda.schema.tache.ParcMachines;

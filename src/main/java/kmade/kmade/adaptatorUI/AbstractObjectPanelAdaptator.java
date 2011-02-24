@@ -1,6 +1,6 @@
 package kmade.kmade.adaptatorUI;
-import kmade.kmade.adaptatorFC.ExpressAbstractObject;
-import kmade.kmade.adaptatorFC.ExpressGroup;
+import kmade.kmade.coreadaptator.ExpressAbstractObject;
+import kmade.kmade.coreadaptator.ExpressGroup;
 import kmade.kmade.view.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
 import kmade.nmda.schema.Oid;
 

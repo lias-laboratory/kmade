@@ -11,11 +11,11 @@ import javax.swing.JOptionPane;
 
 import kmade.KMADeMain;
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressEffetsDeBord;
-import kmade.kmade.adaptatorFC.ExpressIteration;
-import kmade.kmade.adaptatorFC.ExpressPrecondition;
-import kmade.kmade.adaptatorFC.ExpressTask;
-import kmade.kmade.adaptatorFC.parserKMAD.ExpressKMADXML;
+import kmade.kmade.coreadaptator.ExpressEffetsDeBord;
+import kmade.kmade.coreadaptator.ExpressIteration;
+import kmade.kmade.coreadaptator.ExpressPrecondition;
+import kmade.kmade.coreadaptator.ExpressTask;
+import kmade.kmade.coreadaptator.parserKMAD.ExpressKMADXML;
 import kmade.kmade.view.KMADEMainFrame;
 import kmade.kmade.view.KMADEStartDialog;
 import kmade.kmade.view.KMADEToolProjectSplashScreenShadow;

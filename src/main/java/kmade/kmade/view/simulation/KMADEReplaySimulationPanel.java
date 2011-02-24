@@ -31,10 +31,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.simulation.TokenRecordScenarioSimulation;
-import kmade.kmade.adaptatorFC.simulation.TokenReplayScenarioSimulation;
-import kmade.kmade.adaptatorFC.simulation.TokenSimulation;
 import kmade.kmade.adaptatorUI.SimulationAdaptator;
+import kmade.kmade.coreadaptator.simulation.TokenRecordScenarioSimulation;
+import kmade.kmade.coreadaptator.simulation.TokenReplayScenarioSimulation;
+import kmade.kmade.coreadaptator.simulation.TokenSimulation;
 import kmade.kmade.view.KMADEToolToolBar;
 import kmade.kmade.view.taskmodel.KMADETaskModelToolBar;
 import kmade.kmade.view.toolutilities.LanguageFactory;

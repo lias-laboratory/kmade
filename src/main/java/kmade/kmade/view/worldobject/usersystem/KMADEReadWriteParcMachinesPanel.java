@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressParcMachines;
 import kmade.kmade.adaptatorUI.ParcMachinesPanelAdaptator;
+import kmade.kmade.coreadaptator.ExpressParcMachines;
 import kmade.kmade.view.toolutilities.LanguageFactory;
 import kmade.nmda.schema.Oid;
 

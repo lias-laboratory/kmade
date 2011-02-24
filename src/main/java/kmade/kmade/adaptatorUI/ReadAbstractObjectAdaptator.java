@@ -2,9 +2,9 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.adaptatorFC.ExpressAbstractAttribut;
-import kmade.kmade.adaptatorFC.ExpressAbstractObject;
-import kmade.kmade.adaptatorFC.ExpressGroup;
+import kmade.kmade.coreadaptator.ExpressAbstractAttribut;
+import kmade.kmade.coreadaptator.ExpressAbstractObject;
+import kmade.kmade.coreadaptator.ExpressGroup;
 import kmade.kmade.view.taskproperties.KMADEEditorPrePostIterDialog;
 import kmade.kmade.view.taskproperties.readworldobject.KMADEReadAbstractObjectPanel;
 import kmade.nmda.schema.metaobjet.AgregatStructure;

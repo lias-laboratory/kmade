@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressMachine;
 import kmade.kmade.adaptatorUI.MachinePanelAdaptator;
+import kmade.kmade.coreadaptator.ExpressMachine;
 import kmade.kmade.view.toolutilities.LanguageFactory;
 import kmade.nmda.schema.Oid;
 

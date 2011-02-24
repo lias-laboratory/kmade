@@ -25,10 +25,10 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.parserExpression.RegularExpression;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
 import kmade.kmade.adaptatorUI.IndividuAdaptator;
 import kmade.kmade.adaptatorUI.IndividuPanelAdaptator;
+import kmade.kmade.coreadaptator.parserExpression.RegularExpression;
 import kmade.kmade.view.toolutilities.DefaultListTableModel;
 import kmade.kmade.view.toolutilities.JListTable;
 import kmade.kmade.view.toolutilities.KMADEToolUtilities;

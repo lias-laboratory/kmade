@@ -11,10 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.parserExpression.IterationConstants;
-import kmade.kmade.adaptatorFC.parserExpression.PreconditionConstants;
 import kmade.kmade.adaptatorUI.IterationAdaptator;
 import kmade.kmade.adaptatorUI.PreconditionAdaptator;
+import kmade.kmade.coreadaptator.parserExpression.IterationConstants;
+import kmade.kmade.coreadaptator.parserExpression.PreconditionConstants;
 import kmade.kmade.view.toolutilities.LanguageFactory;
 import kmade.nmda.schema.metaobjet.TypeStructure;
 

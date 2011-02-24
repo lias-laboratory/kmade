@@ -1,6 +1,6 @@
 package kmade.nmda.schema.expression;
 
-import kmade.kmade.adaptatorFC.ExpressAbstractAttribut;
+import kmade.kmade.coreadaptator.ExpressAbstractAttribut;
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.metaobjet.AttributAbstrait;

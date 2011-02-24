@@ -24,9 +24,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.simulation.TokenRecordScenarioSimulation;
-import kmade.kmade.adaptatorFC.simulation.TokenSimulation;
 import kmade.kmade.adaptatorUI.SimulationAdaptator;
+import kmade.kmade.coreadaptator.simulation.TokenRecordScenarioSimulation;
+import kmade.kmade.coreadaptator.simulation.TokenSimulation;
 import kmade.kmade.view.taskmodel.KMADETaskModelToolBar;
 
 /**

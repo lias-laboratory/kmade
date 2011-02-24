@@ -1,5 +1,5 @@
 package kmade.kmade.adaptatorUI;
-import kmade.kmade.adaptatorFC.ExpressParcMachines;
+import kmade.kmade.coreadaptator.ExpressParcMachines;
 import kmade.kmade.view.KMADEMainFrame;
 import kmade.nmda.schema.Oid;
 

@@ -1,5 +1,5 @@
 package kmade.kmade.adaptatorUI;
-import kmade.kmade.adaptatorFC.ExpressMachine;
+import kmade.kmade.coreadaptator.ExpressMachine;
 import kmade.kmade.view.KMADEMainFrame;
 import kmade.nmda.schema.Oid;
 

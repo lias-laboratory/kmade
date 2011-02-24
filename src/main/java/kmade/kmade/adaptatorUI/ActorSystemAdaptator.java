@@ -2,9 +2,9 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.adaptatorFC.ExpressActeurSysteme;
-import kmade.kmade.adaptatorFC.ExpressMateriel;
-import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.coreadaptator.ExpressActeurSysteme;
+import kmade.kmade.coreadaptator.ExpressMateriel;
+import kmade.kmade.coreadaptator.ExpressTask;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.Oid;
 import kmade.nmda.schema.tache.ActeurSysteme;

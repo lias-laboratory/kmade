@@ -1,6 +1,6 @@
 package kmade.kmade.adaptatorUI;
 
-import kmade.kmade.adaptatorFC.ExpressAbstractObject;
+import kmade.kmade.coreadaptator.ExpressAbstractObject;
 import kmade.kmade.view.taskproperties.readworldobject.KMADEReadConcreteObjectDialog;
 
 /**

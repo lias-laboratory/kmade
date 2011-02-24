@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.coreadaptator.ExpressTask;
 import kmade.kmade.view.print.KMADEPrintingUserCardsPanel;
 import kmade.nmda.schema.tache.Tache;
 

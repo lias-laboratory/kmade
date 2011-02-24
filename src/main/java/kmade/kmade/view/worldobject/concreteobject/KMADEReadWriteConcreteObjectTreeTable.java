@@ -18,9 +18,9 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.parserExpression.RegularExpression;
 import kmade.kmade.adaptatorUI.ConcreteObjectAdaptator;
 import kmade.kmade.adaptatorUI.GraphicEditorAdaptator;
+import kmade.kmade.coreadaptator.parserExpression.RegularExpression;
 import kmade.kmade.view.toolutilities.JListTreeTable;
 import kmade.kmade.view.toolutilities.LanguageFactory;
 import kmade.kmade.view.toolutilities.JTreeTable.DefaultTreeTableModel;
