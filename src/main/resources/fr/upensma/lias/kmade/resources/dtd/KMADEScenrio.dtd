@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Document Type Definition of K-MAD Scenario (Kernel of Model for Activity Description)
+	INRIA Rocquencourt / MErLIn Project
+	Authors : 
+		- BARON Mickael (baron@ensma.fr ou baron.mickael@gmail.com)
+		- SCAPIN Dominique (dominique.scapin@inria.fr)
+	Version : 0.5 Beta
+	Date : 01 July 2006
+	
+	Comment : this version is not finished
+-->
+
+<!ELEMENT scenario (execute | pass | interrupt | resume | cancel)* >
+<!ATTLIST scenario name CDATA #REQUIRED >
+<!ATTLIST scenario date CDATA #IMPLIED >
+<!ATTLIST scenario comment CDATA #IMPLIED >
+<!ATTLIST scenario idTask CDATA #REQUIRED >
+<!ATTLIST scenario nameTask CDATA #REQUIRED >
+
+<!ELEMENT execute (userExecutingConstraint?, userPreValue*, userPreConcreteObject*, userPostValue*, userPostConcreteObject*, userIterValue*, userIterConcreteObject*) >
+<!ATTLIST execute idTask CDATA #REQUIRED >
+<!ATTLIST execute nameTask CDATA #REQUIRED >
+
+<!ELEMENT userExecutingConstraint EMPTY >
+<!ATTLIST userExecutingConstraint idUser CDATA #REQUIRED >
+<!ATTLIST userExecutingConstraint nameUser CDATA #REQUIRED >
+
+<!ELEMENT userPreValue (#PCDATA) >
+<!ELEMENT userPreConcreteObject (idUserConcreteObject, nameUserConcreteObject) >
+<!ELEMENT idUserConcreteObject (#PCDATA) >
+<!ELEMENT nameUserConcreteObject (#PCDATA) >
+
+<!ELEMENT userPostValue (#PCDATA) >
+<!ELEMENT userPostConcreteObject (idUserConcreteObject, nameUserConcreteObject) >
+
+<!ELEMENT userIterValue (#PCDATA) >
+<!ELEMENT userIterConcreteObject (idUserConcreteObject, nameUserConcreteObject) >
+
+<!ELEMENT pass EMPTY >
+<!ATTLIST pass idTask CDATA #REQUIRED >
+<!ATTLIST pass nameTask CDATA #REQUIRED >
+
+<!ELEMENT interrupt EMPTY >
+<!ATTLIST interrupt idTask CDATA #REQUIRED >
+<!ATTLIST interrupt nameTask CDATA #REQUIRED >
+
+<!ELEMENT resume EMPTY >
+<!ATTLIST resume idTask CDATA #REQUIRED >
+<!ATTLIST resume nameTask CDATA #REQUIRED >
+
+<!ELEMENT cancel EMPTY >
+<!ATTLIST cancel idTask CDATA #REQUIRED >
+<!ATTLIST cancel nameTask CDATA #REQUIRED >
