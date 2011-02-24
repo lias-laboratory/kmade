@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import kmade.kmade.coreadaptator.ExpressIndividu;
+import kmade.kmade.coreadaptator.ExpressOrganisation;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.tache.Organisation;
 
@@ -149,7 +151,7 @@ public class ExpressOrganisationTest {
 	public void getOtherOrganisationIntoTab(){
 		Object[][] m = ExpressIndividu.getOtherOrganisationIntoTab(oidIndividu1);
 		Object[][] n = ExpressIndividu.getOrganisationIntoTab(oidIndividu1);
-		// individu 1 à bien 1/2 orga 
+		// individu 1 ï¿½ bien 1/2 orga 
 		assertTrue(m.length == 1);
 		assertTrue(n.length ==2);
 	}

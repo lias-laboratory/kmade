@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import kmade.kmade.coreadaptator.ExpressIndividu;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.tache.Individu;
 

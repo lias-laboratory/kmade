@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import kmade.kmade.coreadaptator.parserExpression.RegularExpression;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,8 +26,8 @@ public class RegularExpressionTest {
 		s_true .add("a  aa");
 		s_true .add("a a");
 		s_true .add("azaeaz");
-		s_true .add("aéezé");
-		s_true .add("a é e z é");
+		s_true .add("aï¿½ezï¿½");
+		s_true .add("a ï¿½ e z ï¿½");
 		
 
 		s_false.add("a ");
@@ -35,7 +37,7 @@ public class RegularExpressionTest {
 		s_false.add(" ");
 		s_false.add(" (");
 		s_false.add("  a aa   ");
-		s_false .add("a é e z é ");
+		s_false .add("a ï¿½ e z ï¿½ ");
 		
 	}
 
