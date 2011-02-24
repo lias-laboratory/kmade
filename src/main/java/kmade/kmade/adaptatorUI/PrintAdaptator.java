@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.print.KMADEPrintingUserCardsPanel;
 import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.view.print.KMADEPrintingUserCardsPanel;
 import kmade.nmda.schema.tache.Tache;
 
 import org.apache.velocity.VelocityContext;

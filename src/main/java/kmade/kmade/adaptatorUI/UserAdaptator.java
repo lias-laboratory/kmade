@@ -1,8 +1,8 @@
 package kmade.kmade.adaptatorUI;
 
-import kmade.kmade.UI.KMADEMainFrame;
-import kmade.kmade.UI.taskproperties.readworldobject.KMADEReadUserObjectTable;
 import kmade.kmade.adaptatorFC.ExpressUser;
+import kmade.kmade.view.KMADEMainFrame;
+import kmade.kmade.view.taskproperties.readworldobject.KMADEReadUserObjectTable;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -38,7 +38,7 @@ public final class UserAdaptator {
     }
     
     /**
-     * Retourne la liste des noms des acteurs potentiels de la tâche qui ne sont pas déjà acteur de la tâche
+     * Retourne la liste des noms des acteurs potentiels de la tï¿½che qui ne sont pas dï¿½jï¿½ acteur de la tï¿½che
      * @param oidtask
      * @param oidTask 
      * @return

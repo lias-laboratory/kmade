@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 import kmade.KMADeMain;
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.taskproperties.KMADEEditorMultimediaDialog;
+import kmade.kmade.view.taskproperties.KMADEEditorMultimediaDialog;
 import kmade.nmda.schema.tache.Media;
 import quicktime.QTException;
 import quicktime.app.view.MoviePlayer;

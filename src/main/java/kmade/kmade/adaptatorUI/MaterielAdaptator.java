@@ -1,8 +1,8 @@
 package kmade.kmade.adaptatorUI;
 
-import kmade.kmade.UI.KMADEMainFrame;
-import kmade.kmade.UI.taskproperties.readworldobject.KMADEReadMaterielObjectTable;
 import kmade.kmade.adaptatorFC.ExpressMateriel;
+import kmade.kmade.view.KMADEMainFrame;
+import kmade.kmade.view.taskproperties.readworldobject.KMADEReadMaterielObjectTable;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -60,7 +60,7 @@ public final class MaterielAdaptator {
 		for (int i = 0 ; i < temporg; i++) {
 			temp[i][0] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel().getValueAt(i,0);
 			temp[i][1] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel().getValueAt(i,1);
-			temp[i][2] = "";//possibilité de mettre une fonction qui dit si le parc de machine possède que des machines informatisés, ou non, ou les deux!
+			temp[i][2] = "";//possibilitï¿½ de mettre une fonction qui dit si le parc de machine possï¿½de que des machines informatisï¿½s, ou non, ou les deux!
 			temp[i][3] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel().getValueAt(i,2);
 			temp[i][4] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel().getValueAt(i,3);
 			temp[i][5] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel().getValueAt(i,4);

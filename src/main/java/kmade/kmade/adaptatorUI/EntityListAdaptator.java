@@ -3,7 +3,7 @@ package kmade.kmade.adaptatorUI;
 import java.util.Iterator;
 import java.util.Set;
 
-import kmade.kmade.UI.toolutilities.SwingWorker;
+import kmade.kmade.view.toolutilities.SwingWorker;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.Entity;
 import kmade.nmda.schema.Oid;

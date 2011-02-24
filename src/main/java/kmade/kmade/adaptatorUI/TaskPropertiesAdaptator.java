@@ -2,9 +2,9 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.UI.KMADEMainFrame;
-import kmade.kmade.UI.taskproperties.KMADETaskPropertiesPanel;
 import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.view.KMADEMainFrame;
+import kmade.kmade.view.taskproperties.KMADETaskPropertiesPanel;
 import kmade.nmda.schema.tache.Decomposition;
 import kmade.nmda.schema.tache.Executant;
 import kmade.nmda.schema.tache.Frequence;

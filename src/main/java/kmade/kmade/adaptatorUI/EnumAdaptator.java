@@ -2,8 +2,8 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.UI.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
 import kmade.kmade.adaptatorFC.ExpressEnum;
+import kmade.kmade.view.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
 import kmade.nmda.schema.metaobjet.Enumeration;
 
 /**

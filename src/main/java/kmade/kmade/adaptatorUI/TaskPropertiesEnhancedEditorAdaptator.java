@@ -3,10 +3,10 @@ package kmade.kmade.adaptatorUI;
 import java.util.ArrayList;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.KMADEMainFrame;
-import kmade.kmade.UI.taskproperties.KMADEEnhancedTaskEditor;
-import kmade.kmade.UI.taskproperties.KMADEEnhancedTaskLabel;
-import kmade.kmade.UI.toolutilities.InDevelopmentGlassPanel;
+import kmade.kmade.view.KMADEMainFrame;
+import kmade.kmade.view.taskproperties.KMADEEnhancedTaskEditor;
+import kmade.kmade.view.taskproperties.KMADEEnhancedTaskLabel;
+import kmade.kmade.view.toolutilities.InDevelopmentGlassPanel;
 import kmade.nmda.schema.tache.Acteur;
 import kmade.nmda.schema.tache.ActeurSysteme;
 import kmade.nmda.schema.tache.Executant;

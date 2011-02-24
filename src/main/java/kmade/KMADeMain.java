@@ -14,8 +14,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.toolutilities.QuickTimeSessionCheck;
 import kmade.kmade.adaptatorUI.KMADeAdaptator;
+import kmade.kmade.view.toolutilities.QuickTimeSessionCheck;
 import kmade.nmda.ExpressConstant;
 import quicktime.QTException;
 

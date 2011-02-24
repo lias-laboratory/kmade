@@ -1,6 +1,6 @@
 package kmade.kmade.adaptatorUI;
 
-import kmade.kmade.UI.taskmodel.KMADEVertexView;
+import kmade.kmade.view.taskmodel.KMADEVertexView;
 import kmade.nmda.schema.tache.Executant;
 
 /**

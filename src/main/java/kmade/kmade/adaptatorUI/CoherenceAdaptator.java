@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.taskmodel.KMADEDefaultGraphCell;
-import kmade.kmade.UI.toolutilities.SwingWorker;
 import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.view.taskmodel.KMADEDefaultGraphCell;
+import kmade.kmade.view.toolutilities.SwingWorker;
 import kmade.nmda.schema.tache.Decomposition;
 import kmade.nmda.schema.tache.Executant;
 import kmade.nmda.schema.tache.Tache;
@@ -31,7 +31,7 @@ import kmade.nmda.schema.tache.Tache;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
+ * @author Mickaï¿½l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class CoherenceAdaptator {
     
@@ -161,19 +161,19 @@ public final class CoherenceAdaptator {
     }    
     
     /**
-     * Cette méthode devra être "threadée" pour plus d'efficacité
+     * Cette mï¿½thode devra ï¿½tre "threadï¿½e" pour plus d'efficacitï¿½
      */
     private static synchronized void checkTaskModels() {
         ArrayList<Tache> myTaskList = ExpressTask.getRootTasks();
         for (Tache current : myTaskList) {
-            // Règles : hiérarchie des tâches
+            // Rï¿½gles : hiï¿½rarchie des tï¿½ches
             if (current.isRoot() && current.isLeaf()) {
             	CoherenceAdaptator.addErrorMessage(KMADEConstant.NO_ALONE_MESSAGE_PROBLEM, HIERARCHICAL_TYPE, HIERARCHICAL_TASK_MODEL,current);
             } else {
             	CoherenceAdaptator.checkHiearchicalTaskModel(current);
             }
         
-            // Règles les objets du monde.
+            // Rï¿½gles les objets du monde.
             checkObjectsTaskModel(current);
         }
         SwingUtilities.invokeLater(new Runnable() {
@@ -202,7 +202,7 @@ public final class CoherenceAdaptator {
     }
     
     private static void checkHiearchicalTaskModel(Tache myTache) {
-        // Pas de tâche unique.
+        // Pas de tï¿½che unique.
         if (!myTache.isLeaf() && myTache.getFils().size() == 1) {
         	CoherenceAdaptator.addErrorMessage(KMADEConstant.NO_ONLY_ONE_SUBTASK_MESSAGE_PROBLEM, HIERARCHICAL_TYPE, HIERARCHICAL_TASK_MODEL, myTache);
         }
@@ -211,12 +211,12 @@ public final class CoherenceAdaptator {
         	CoherenceAdaptator.addErrorMessage(KMADEConstant.ELEMENTARY_DECOMPOSITION_FOR_LEAF_TASK, HIERARCHICAL_TYPE, HIERARCHICAL_TASK_MODEL, myTache);
         }
         
-        // Opérateur de décomposition non précisé.
+        // Opï¿½rateur de dï¿½composition non prï¿½cisï¿½.
         if (!myTache.isLeaf() && (myTache.getDecomposition() == Decomposition.ELE || myTache.getDecomposition() == Decomposition.INCONNU)) {
         	CoherenceAdaptator.addErrorMessage(KMADEConstant.NO_DECOMPOSITION_SPECIFIED_MESSAGE_PROBLEM, HIERARCHICAL_TYPE, HIERARCHICAL_TASK_MODEL, myTache);
         }
         
-        // Les sous-tâches doivent être de même catégorie que la tâche mère.
+        // Les sous-tï¿½ches doivent ï¿½tre de mï¿½me catï¿½gorie que la tï¿½che mï¿½re.
         if (!myTache.isLeaf()) {
             if (myTache.getExecutant() == Executant.INCONNU) {
             		CoherenceAdaptator.addWarningMessage(KMADEConstant.NO_EXECUTANT_SPECIFIED_MESSAGE_WARNING, HIERARCHICAL_TYPE, HIERARCHICAL_TASK_MODEL, myTache);

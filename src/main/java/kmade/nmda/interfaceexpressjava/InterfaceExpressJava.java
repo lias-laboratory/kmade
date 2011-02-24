@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import kmade.KMADEToolConstant;
-import kmade.kmade.UI.toolutilities.SwingWorker;
+import kmade.kmade.view.toolutilities.SwingWorker;
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.parser.spf.ParserSPF;
 import kmade.nmda.schema.Entity;

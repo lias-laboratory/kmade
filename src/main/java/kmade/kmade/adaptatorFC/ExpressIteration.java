@@ -3,12 +3,12 @@ package kmade.kmade.adaptatorFC;
 import java.util.Observer;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.toolutilities.KMADEObservable;
-import kmade.kmade.UI.toolutilities.SwingWorker;
 import kmade.kmade.adaptatorFC.parserExpression.Iteration;
 import kmade.kmade.adaptatorFC.parserExpression.MyIteration;
 import kmade.kmade.adaptatorFC.parserExpression.ParseException;
 import kmade.kmade.adaptatorFC.parserExpression.TokenMgrError;
+import kmade.kmade.view.toolutilities.KMADEObservable;
+import kmade.kmade.view.toolutilities.SwingWorker;
 import kmade.nmda.schema.expression.NodeExpression;
 import kmade.nmda.schema.expression.SemanticException;
 import kmade.nmda.schema.tache.Tache;
@@ -75,7 +75,7 @@ public final class ExpressIteration {
     
     public static void evaluateIteration(Tache myTache) {
     	// TODO : prendre en compte le prÃ©dicat pour l'expression itÃ©ration.
-    	// si c'est un compteur il faut  décrémenter
+    	// si c'est un compteur il faut  dï¿½crï¿½menter
     	if(myTache.getIteExpression().isNumberVarient()){
     	myTache.getIteExpression().decreaseCounter();
     	}else{

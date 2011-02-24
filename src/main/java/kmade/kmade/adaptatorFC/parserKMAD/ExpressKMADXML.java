@@ -20,7 +20,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import kmade.KMADEToolConstant;
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.toolutilities.SwingWorker;
+import kmade.kmade.view.toolutilities.SwingWorker;
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.Entity;
@@ -60,7 +60,7 @@ import org.xml.sax.SAXException;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
+ * @author Mickaï¿½l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class ExpressKMADXML {
 
@@ -153,10 +153,10 @@ public final class ExpressKMADXML {
 	// *
 	private static void transformerXml(Document document, String fichier) {
 		try {
-			// Création de la source DOM
+			// Crï¿½ation de la source DOM
 			Source source = new DOMSource(document);
 
-			// Création du fichier de sortie
+			// Crï¿½ation du fichier de sortie
 			Result resultat = new StreamResult(fichier);
 
 			// Configuration du transformer
@@ -244,9 +244,9 @@ public final class ExpressKMADXML {
 		SwingWorker worker = new SwingWorker() {
 			public Object construct() {
 				try {
-					// création d'une fabrique de documents
+					// crï¿½ation d'une fabrique de documents
 					DocumentBuilderFactory fabrique = DocumentBuilderFactory.newInstance();
-					// création d'un constructeur de documents
+					// crï¿½ation d'un constructeur de documents
 					DocumentBuilder constructeur = fabrique.newDocumentBuilder();
 
 					EntityResolver toto = new EntityResolver() {
@@ -303,7 +303,7 @@ public final class ExpressKMADXML {
 			System.out.println(KMADEConstant.NEW_SAVE_NEW_FORMAT);
 		}else{
 			if (!KMADEToolConstant.VERSION_VALUE.equals(node.getAttribute("version"))){
-				//la version du fichier charger n'est pas la même que celle de l'outil
+				//la version du fichier charger n'est pas la mï¿½me que celle de l'outil
 				System.out.println(KMADEConstant.NOT_SAME_VERSION);
 				System.out.println(KMADEConstant.VERSION_USE+ KMADEToolConstant.VERSION_VALUE);
 				System.out.println(KMADEConstant.VERSION_FILE + node.getAttribute("version"));
@@ -398,7 +398,7 @@ public final class ExpressKMADXML {
 		}        
 
 		if (noRemove) {
-			// Y a des entités en trop : explication un problème d'exception qui n'a pas permis de finaliser la création ...
+			// Y a des entitï¿½s en trop : explication un problï¿½me d'exception qui n'a pas permis de finaliser la crï¿½ation ...
 			while(notYetCreated.size() != 0) {
 				try {
 					notYetCreated.remove(0);
@@ -456,11 +456,11 @@ public final class ExpressKMADXML {
 		}
 		for(int i = 0; i< userObj.length;i++){
 	        // la version actuelle de KMADE ne permet l'utilisation d'User en tant que tel, il faut que ce soit un Individu ou une organisation
-	        // On créér un Individu à partir de l'user
+	        // On crï¿½ï¿½r un Individu ï¿½ partir de l'user
 	        Individu indi = new Individu(user[i].getName(),user[i].getStatut(),user[i].getRole(),user[i].getImage(),user[i].getOid());
 	        // on supprime l'User de la bdd
 	        InterfaceExpressJava.remove(user[i].getOid());
-	        // on met l'individu en précisant l'oid
+	        // on met l'individu en prï¿½cisant l'oid
 	        InterfaceExpressJava.mettre(indi.getOid(), indi);
 
 		}

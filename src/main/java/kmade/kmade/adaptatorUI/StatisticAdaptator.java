@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.toolutilities.SwingWorker;
 import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.view.toolutilities.SwingWorker;
 import kmade.nmda.schema.tache.Decomposition;
 import kmade.nmda.schema.tache.Executant;
 import kmade.nmda.schema.tache.Tache;

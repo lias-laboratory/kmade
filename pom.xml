@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>KMADe_ExtUI</groupId>
-	<artifactId>KMADe_ExtUI</artifactId>
-	<name>KMADe UI Project</name>
+	<groupId>KMADe</groupId>
+	<artifactId>KMADe</artifactId>
+	<name>KMADe Project</name>
 	<version>1.1.0-SNAPSHOT</version>
 	<description>KMADe (Kernel of Model for Activity Description environment) is an user task oriented editor. 
 
 This project concerns K-MADe (Kernel of Model for Activity Description environment), a tool for contributing to the incorporation of ergonomics into the interactive systems design process, through task and activity analysis. The originality of the tool is to be based on a model whose expressive power lies on a formal semantic. This facilitates task description and analysis, but also querying the model and migrating within models and software lifecycle steps.</description>
-	<url>http://kmade.sourceforge.net</url>
+	<url>http://www.kmade.org</url>
 	<build>
 		<resources>
 			<resource>
@@ -119,7 +119,7 @@ This project concerns K-MADe (Kernel of Model for Activity Description environme
 	</dependencies>
 	<ciManagement>
 		<system>Hudson</system>
-		<url>http://s-lisi-locforge.w.ensma.fr:8080/hudson/job/KMADe_ExtUI/</url>
+		<url>http://s-lisi-locforge.w.ensma.fr:8080/hudson/job/KMADe/</url>
 	</ciManagement>
 	<developers>
 		<developer>
@@ -131,9 +131,9 @@ This project concerns K-MADe (Kernel of Model for Activity Description environme
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:http://s-lisi-locforge.w.ensma.fr/svn/KMADe_ExtUI/trunk</connection>
-		<developerConnection>scm:svn:http://s-lisi-locforge.w.ensma.fr/svn/KMADe_ExtUI/trunk</developerConnection>
-		<url>http://s-lisi-locforge.w.ensma.fr/svn/KMADe_ExtUI/trunk</url>
+		<connection>scm:svn:http://s-lisi-locforge.w.ensma.fr/svn/KMADe/trunk</connection>
+		<developerConnection>scm:svn:http://s-lisi-locforge.w.ensma.fr/svn/KMADe/trunk</developerConnection>
+		<url>http://s-lisi-locforge.w.ensma.fr/svn/KMADe/trunk</url>
 	</scm>
 	<distributionManagement>
 		<repository>

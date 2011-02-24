@@ -1,6 +1,6 @@
 package kmade.kmade.adaptatorUI;
 
-import kmade.kmade.UI.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
+import kmade.kmade.view.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment

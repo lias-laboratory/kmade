@@ -3,12 +3,12 @@ package kmade.kmade.adaptatorFC;
 import java.util.Observer;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.toolutilities.KMADEObservable;
-import kmade.kmade.UI.toolutilities.SwingWorker;
 import kmade.kmade.adaptatorFC.parserExpression.MyPrecondition;
 import kmade.kmade.adaptatorFC.parserExpression.ParseException;
 import kmade.kmade.adaptatorFC.parserExpression.Precondition;
 import kmade.kmade.adaptatorFC.parserExpression.TokenMgrError;
+import kmade.kmade.view.toolutilities.KMADEObservable;
+import kmade.kmade.view.toolutilities.SwingWorker;
 import kmade.nmda.schema.expression.NodeExpression;
 import kmade.nmda.schema.expression.SemanticException;
 import kmade.nmda.schema.tache.Tache;

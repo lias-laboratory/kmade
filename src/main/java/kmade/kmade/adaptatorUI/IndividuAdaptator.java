@@ -3,9 +3,9 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.UI.KMADEMainFrame;
-import kmade.kmade.UI.taskproperties.readworldobject.KMADEReadIndividuObjectTable;
 import kmade.kmade.adaptatorFC.ExpressIndividu;
+import kmade.kmade.view.KMADEMainFrame;
+import kmade.kmade.view.taskproperties.readworldobject.KMADEReadIndividuObjectTable;
 import kmade.nmda.schema.tache.Individu;
 
 /**

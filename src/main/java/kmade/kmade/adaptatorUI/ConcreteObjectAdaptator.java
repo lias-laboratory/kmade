@@ -2,9 +2,9 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.UI.worldobject.concreteobject.KMADEReadWriteConcreteObjectTreeTable;
 import kmade.kmade.adaptatorFC.ExpressConcreteObject;
 import kmade.kmade.adaptatorFC.ExpressGroup;
+import kmade.kmade.view.worldobject.concreteobject.KMADEReadWriteConcreteObjectTreeTable;
 import kmade.nmda.schema.Oid;
 import kmade.nmda.schema.metaobjet.Groupe;
 import kmade.nmda.schema.metaobjet.ObjetAbstrait;

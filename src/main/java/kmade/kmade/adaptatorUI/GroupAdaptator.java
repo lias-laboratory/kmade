@@ -4,8 +4,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
 import kmade.kmade.adaptatorFC.ExpressGroup;
+import kmade.kmade.view.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.Oid;
 

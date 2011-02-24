@@ -11,15 +11,15 @@ import javax.swing.JOptionPane;
 
 import kmade.KMADeMain;
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.KMADEMainFrame;
-import kmade.kmade.UI.KMADEStartDialog;
-import kmade.kmade.UI.KMADEToolProjectSplashScreenShadow;
-import kmade.kmade.UI.toolutilities.KMADEFileChooser;
 import kmade.kmade.adaptatorFC.ExpressEffetsDeBord;
 import kmade.kmade.adaptatorFC.ExpressIteration;
 import kmade.kmade.adaptatorFC.ExpressPrecondition;
 import kmade.kmade.adaptatorFC.ExpressTask;
 import kmade.kmade.adaptatorFC.parserKMAD.ExpressKMADXML;
+import kmade.kmade.view.KMADEMainFrame;
+import kmade.kmade.view.KMADEStartDialog;
+import kmade.kmade.view.KMADEToolProjectSplashScreenShadow;
+import kmade.kmade.view.toolutilities.KMADEFileChooser;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import quicktime.QTSession;
 
@@ -42,7 +42,7 @@ import quicktime.QTSession;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
+ * @author Mickaï¿½l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class KMADeAdaptator {
 
@@ -168,13 +168,13 @@ public final class KMADeAdaptator {
 	}
 
 	public static void openSimulationDialog() {
-		// Avant d'ouvrir le module simulation il faut vérifier s'il n'existe pas d'erreur
-		// /!\ Problème la mise à jour des valeurs ne se fait que si la boite de dialogue de cohérence a été ouverte
+		// Avant d'ouvrir le module simulation il faut vï¿½rifier s'il n'existe pas d'erreur
+		// /!\ Problï¿½me la mise ï¿½ jour des valeurs ne se fait que si la boite de dialogue de cohï¿½rence a ï¿½tï¿½ ouverte
 		int erreur = CoherenceAdaptator.getErrorMessageCount();
 		int warning = CoherenceAdaptator.getWarningMessageCount();
 		if (erreur != 0) {
 			String message = KMADEConstant.COHERENCE_INTRO_ERROR +" ";
-			// Apparaître une boite de dialogue de danger.
+			// Apparaï¿½tre une boite de dialogue de danger.
 			message += erreur + " ";
 			message += (erreur ==1)? KMADEConstant.COHERENCE_ONE_ERROR : KMADEConstant.COHERENCE_SOME_ERROR;
 			message += " " +KMADEConstant.COHERENCE_INTER;
@@ -200,7 +200,7 @@ public final class KMADeAdaptator {
 		GraphicEditorAdaptator.hideGrid();
 		GraphicEditorAdaptator.hideRule();
 
-		// Montrer l'IHM du début.
+		// Montrer l'IHM du dï¿½but.
 		KMADEStartDialog ref = new KMADEStartDialog();
 		ref.showInfoAbout(KMADEConstant.UNDER_DEVELOPMENT_START_TITLE, KMADEConstant.UNDER_DEVELOPMENT_START_HTML);
 	}
@@ -232,7 +232,7 @@ public final class KMADeAdaptator {
 
 	public static void newProject() {
 		if (KMADeAdaptator.doSaveProjectBeforeClose(KMADEConstant.WRITE_BEFORE_NEW_PROJECT_MESSAGE)) {
-			// Remise à zero de l'outil K-MADe
+			// Remise ï¿½ zero de l'outil K-MADe
 			updateThread = true;
 			GraphicEditorAdaptator.initMainFrame();
 			GraphicEditorAdaptator.setDefaultZoom();
@@ -253,14 +253,14 @@ public final class KMADeAdaptator {
 	}
 
 	public static void loadProjectXML() {       
-		// Avant d'ouvrir demander si le projet courant doit être sauvegardé.
+		// Avant d'ouvrir demander si le projet courant doit ï¿½tre sauvegardï¿½.
 		if (InterfaceExpressJava.isBddSet()) {
 			int value = KMADeAdaptator.askToSaveBeforeAction(KMADEConstant.WRITE_BEFORE_OPEN_PROJECT_MESSAGE);
 			if (value == JOptionPane.YES_OPTION) {
 				// On peut sauvegarder avant
 				KMADeAdaptator.saveProjectXML();
 			} else if (value == JOptionPane.CANCEL_OPTION) {
-				// Pas de chargement on arrête
+				// Pas de chargement on arrï¿½te
 				System.out.println(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
 				return;
 			}
@@ -313,17 +313,17 @@ public final class KMADeAdaptator {
 	}
 
 	/**
-	 * Méthode qui consiste à ouvrir un projet.
+	 * Mï¿½thode qui consiste ï¿½ ouvrir un projet.
 	 */
 	public static void openProject() {
-		// Avant d'ouvrir demander si le projet courant doit être sauvegardé.
+		// Avant d'ouvrir demander si le projet courant doit ï¿½tre sauvegardï¿½.
 		if (InterfaceExpressJava.isBddSet()) {
 			int value = KMADeAdaptator.askToSaveBeforeAction(KMADEConstant.WRITE_BEFORE_OPEN_PROJECT_MESSAGE);
 			if (value == JOptionPane.YES_OPTION) {
 				// On peut sauvegarder avant.
 				KMADeAdaptator.saveProjectXML();
 			} else if (value == JOptionPane.CANCEL_OPTION) {
-				// Pas de chargement on arrête.
+				// Pas de chargement on arrï¿½te.
 				System.out.println(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
 				return;
 			}
@@ -336,7 +336,7 @@ public final class KMADeAdaptator {
 			try {
 				KMADeAdaptator.stopAllUpdateThread();
 				GraphicEditorAdaptator.cleanAllInterface();
-				// On nettoie le modèle et la partie graphique.
+				// On nettoie le modï¿½le et la partie graphique.
 				InterfaceExpressJava.clearCurrentProject();
 				KMADeAdaptator.cleanAllAdaptateur();
 
@@ -358,10 +358,10 @@ public final class KMADeAdaptator {
 	}
 
 	/**
-	 * Fermetture de l'application. A vérifier si un projet est en cours de le sauvegarder.
+	 * Fermetture de l'application. A vï¿½rifier si un projet est en cours de le sauvegarder.
 	 */
 	public static void closeApplication() {
-		// Avant d'ouvrir demander si le projet courant doit être sauvegardé.
+		// Avant d'ouvrir demander si le projet courant doit ï¿½tre sauvegardï¿½.
 		if (InterfaceExpressJava.isBddSet()) {
 			int value = KMADeAdaptator.askToSaveBeforeAction(KMADEConstant.WRITE_BEFORE_EXIT_TOOL_MESSAGE);
 			if (value == JOptionPane.YES_OPTION) {

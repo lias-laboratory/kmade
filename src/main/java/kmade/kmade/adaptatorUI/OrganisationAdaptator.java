@@ -3,9 +3,9 @@ package kmade.kmade.adaptatorUI;
 
 import java.util.ArrayList;
 
-import kmade.kmade.UI.KMADEMainFrame;
-import kmade.kmade.UI.taskproperties.readworldobject.KMADEReadOrganisationObjectTable;
 import kmade.kmade.adaptatorFC.ExpressOrganisation;
+import kmade.kmade.view.KMADEMainFrame;
+import kmade.kmade.view.taskproperties.readworldobject.KMADEReadOrganisationObjectTable;
 import kmade.nmda.schema.tache.Organisation;
 
 /**

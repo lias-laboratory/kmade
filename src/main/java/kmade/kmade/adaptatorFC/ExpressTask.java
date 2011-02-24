@@ -4,7 +4,7 @@ package kmade.kmade.adaptatorFC;
 import java.util.ArrayList;
 import java.util.Observer;
 
-import kmade.kmade.UI.toolutilities.KMADEObservable;
+import kmade.kmade.view.toolutilities.KMADEObservable;
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.Oid;
@@ -202,7 +202,7 @@ public final class ExpressTask {
             myNewTaskList[i] = refTache;
         }
         
-        // Créeation des liaisons.
+        // Crï¿½eation des liaisons.
         for (int i = 0; i< myTaskList.length;i ++) {
             ArrayList<Tache> mySubTasks = ((Tache)myTaskList[i]).getFils();
             if (mySubTasks.size() != 0) {

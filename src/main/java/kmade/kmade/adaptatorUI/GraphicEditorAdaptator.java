@@ -16,21 +16,21 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.KMADEMainFrame;
-import kmade.kmade.UI.taskmodel.KMADEDefaultEdge;
-import kmade.kmade.UI.taskmodel.KMADEDefaultGraphCell;
-import kmade.kmade.UI.taskmodel.KMADEDefaultPort;
-import kmade.kmade.UI.taskmodel.KMADEGraphLayoutAlgorithm;
-import kmade.kmade.UI.taskmodel.KMADETaskModelPanel;
-import kmade.kmade.UI.taskmodel.KMADETreeLayoutAlgorithm;
-import kmade.kmade.UI.taskmodel.KMADEVertexView;
-import kmade.kmade.UI.taskproperties.KMADETaskPropertiesPanel;
-import kmade.kmade.UI.toolutilities.CustomOptionDialog;
-import kmade.kmade.UI.toolutilities.InDevelopmentGlassPanel;
-import kmade.kmade.UI.toolutilities.SwingWorker;
-import kmade.kmade.UI.worldobject.concreteobject.KMADEReadWriteConcreteObjectPanel;
-import kmade.kmade.UI.worldobject.event.KMADEReadWriteEventObjectPanel;
 import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.view.KMADEMainFrame;
+import kmade.kmade.view.taskmodel.KMADEDefaultEdge;
+import kmade.kmade.view.taskmodel.KMADEDefaultGraphCell;
+import kmade.kmade.view.taskmodel.KMADEDefaultPort;
+import kmade.kmade.view.taskmodel.KMADEGraphLayoutAlgorithm;
+import kmade.kmade.view.taskmodel.KMADETaskModelPanel;
+import kmade.kmade.view.taskmodel.KMADETreeLayoutAlgorithm;
+import kmade.kmade.view.taskmodel.KMADEVertexView;
+import kmade.kmade.view.taskproperties.KMADETaskPropertiesPanel;
+import kmade.kmade.view.toolutilities.CustomOptionDialog;
+import kmade.kmade.view.toolutilities.InDevelopmentGlassPanel;
+import kmade.kmade.view.toolutilities.SwingWorker;
+import kmade.kmade.view.worldobject.concreteobject.KMADEReadWriteConcreteObjectPanel;
+import kmade.kmade.view.worldobject.event.KMADEReadWriteEventObjectPanel;
 import kmade.nmda.ExpressConstant;
 import kmade.nmda.interfaceexpressjava.InterfaceExpressJava;
 import kmade.nmda.schema.tache.Executant;
@@ -159,7 +159,7 @@ public final class GraphicEditorAdaptator {
         }
         }
 
-        // Mise à  jour de la présentation concernant la barre d'outils.
+        // Mise ï¿½ jour de la prï¿½sentation concernant la barre d'outils.
         GraphicEditorAdaptator.getMainFrame().getApplicationToolBar().getEditorsToolBar().enabledButton();
         if (currentNewTask != 0) {
             currentNewTask = 0;
@@ -242,10 +242,10 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode permet l'impression du modèle de tâches.
+     * Cette mï¿½thode permet l'impression du modï¿½le de tï¿½ches.
      */
     public static void printCurrentTaskModel() {
-        // Récupère le modèle actuel du JGraph.
+        // Rï¿½cupï¿½re le modï¿½le actuel du JGraph.
         DefaultGraphModel myGraphModel = TASK_MODEL_PANEL.getGraphModel();
         SearchAdaptator.closeFindReplaceDialog();
         TaskPropertiesEnhancedEditorAdaptator.closeNMDAEnhancedTaskEditor();
@@ -387,17 +387,17 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode est appelée à la suite de l'action Ajouter Tâche.
+     * Cette mï¿½thode est appelï¿½e ï¿½ la suite de l'action Ajouter Tï¿½che.
      */
     public static void addNewTask(Executant e, Point p) {
-        // A déterminer ici les coordonnées de création.
+        // A dï¿½terminer ici les coordonnï¿½es de crï¿½ation.
         Tache myTask = ExpressTask.addNewTask(p.x, p.y, e);
         GraphicEditorAdaptator.addNewTask(myTask);
     }
 
     /**
-     * Cette méthode est utilisée à la fois à la création d'une tâche par
-     * l'utilisateur et à la création d'une tâche par l'application
+     * Cette mï¿½thode est utilisï¿½e ï¿½ la fois ï¿½ la crï¿½ation d'une tï¿½che par
+     * l'utilisateur et ï¿½ la crï¿½ation d'une tï¿½che par l'application
      * (chargement).
      * 
      * @param pTask
@@ -427,16 +427,16 @@ public final class GraphicEditorAdaptator {
 	    
 	    /****/
     /**
-     * Cette méthode permet de créer une tâche dans le presse-papier.
+     * Cette mï¿½thode permet de crï¿½er une tï¿½che dans le presse-papier.
      * 
      * @param pTask
      */
     public static void addNewTaskIntoClipBoard(Tache pTask) {
-        // Création de la tâche de type graphique.	
+        // Crï¿½ation de la tï¿½che de type graphique.	
         KMADEDefaultGraphCell tempTask = new KMADEDefaultGraphCell(pTask);
         
         //System.out.println("Nom "+tempTask.getName()+" "+tempTask.getExecutant()+" "+tempTask.getDecomposition());
-        // Positionner la tâche dans le graphique.
+        // Positionner la tï¿½che dans le graphique.
 		MAIN_FRAME.getClipBoardDialog().getMyGraph().getGraphLayoutCache().insert(tempTask);
     }
 
@@ -446,17 +446,17 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode permet la connection de toutes les tâches dans le
+     * Cette mï¿½thode permet la connection de toutes les tï¿½ches dans le
      * presse-papier.
      * 
      * @param taches
      */
     public static void connectAllTasksIntoClipBoard(Tache[] taches) {
-        // Création des liens.
+        // Crï¿½ation des liens.
         for (int i = 0; i < taches.length; i++) {
-            // OID de la tâche (
+            // OID de la tï¿½che (
             String oid = ((Tache) taches[i]).getOid().get();
-            // Référence de la tâche mère.
+            // Rï¿½fï¿½rence de la tï¿½che mï¿½re.
             Tache mere = ((Tache) taches[i]).getMotherTask();
             if (mere != null)
                 GraphicEditorAdaptator.addNewEdgeIntoClipBoard(mere.getOid().get(), oid);
@@ -464,7 +464,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode permet d'effectuer un lien graphique entre deux tâches dans
+     * Cette mï¿½thode permet d'effectuer un lien graphique entre deux tï¿½ches dans
      * le presse-papier.
      * 
      * @param oidMere
@@ -474,22 +474,22 @@ public final class GraphicEditorAdaptator {
         KMADEDefaultGraphCell mere = MAIN_FRAME.getClipBoardDialog().getTask(oidMere);
         KMADEDefaultGraphCell fils = MAIN_FRAME.getClipBoardDialog().getTask(oidFils);
 
-        // Création de la liaison dans la partie graphique.
+        // Crï¿½ation de la liaison dans la partie graphique.
         KMADEDefaultEdge edge = new KMADEDefaultEdge();
         MAIN_FRAME.getClipBoardDialog().getMyGraph().getGraphLayoutCache().insertEdge(edge, mere.getMotherPort(), fils.getSonPort());
     }
 
     /**
-     * Cette méthode permet la connection de toutes les tâches.
+     * Cette mï¿½thode permet la connection de toutes les tï¿½ches.
      * 
      * @param taches
      */
     public static void connectAllTasks(Tache[] taches) {
-        // Création des liens.
+        // Crï¿½ation des liens.
         for (int i = 0; i < taches.length; i++) {
-            // OID de la tâche (
+            // OID de la tï¿½che (
             String oid = ((Tache) taches[i]).getOid().get();
-            // Référence de la tâche mère.
+            // Rï¿½fï¿½rence de la tï¿½che mï¿½re.
             Tache mere = ((Tache) taches[i]).getMotherTask();
             if (mere != null)
                 GraphicEditorAdaptator.addNewEdge(mere.getOid().get(), oid);
@@ -497,7 +497,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode permet d'effectuer un lien graphique entre deux tâches.
+     * Cette mï¿½thode permet d'effectuer un lien graphique entre deux tï¿½ches.
      * 
      * @param oidMere
      * @param oidFils
@@ -512,7 +512,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode est appelée lors de la demande de création d'un lien.
+     * Cette mï¿½thode est appelï¿½e lors de la demande de crï¿½ation d'un lien.
      * 
      * @param source : le port source
      * @param target : le port destination
@@ -555,7 +555,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode permet de supprimer une tâche et ses noeuds associés.
+     * Cette mï¿½thode permet de supprimer une tï¿½che et ses noeuds associï¿½s.
      * 
      * @param currentCell
      */
@@ -588,7 +588,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode permet de supprimer un lien.
+     * Cette mï¿½thode permet de supprimer un lien.
      * 
      * @param currentEdge
      */
@@ -608,7 +608,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode permet la suppression de tâches et de liens.
+     * Cette mï¿½thode permet la suppression de tï¿½ches et de liens.
      */
     public static void removeTaskAndEdge() {
         Object[] cellSelected = GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().getSelectionCells();
@@ -648,7 +648,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode permet de mettre à  jour les points des tâches dans l'express
+     * Cette mï¿½thode permet de mettre ï¿½ jour les points des tï¿½ches dans l'express
      */
     public static void fireMoveTasks() {
         if (GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().getSelectionCount() == 1) {
@@ -744,7 +744,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Retourne les nouvelles coordonnées de la cellule.
+     * Retourne les nouvelles coordonnï¿½es de la cellule.
      * 
      * @param pCell
      * @return
@@ -784,8 +784,8 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette méthode permet la sélection d'une tâche
-     * @param pDefaultGraphCell : tâche sélectionnée
+     * Cette mï¿½thode permet la sï¿½lection d'une tï¿½che
+     * @param pDefaultGraphCell : tï¿½che sï¿½lectionnï¿½e
      */
     public static void selectOneTask(Object defaultGraphCell) {
         if (defaultGraphCell instanceof KMADEDefaultGraphCell) {
@@ -1028,7 +1028,7 @@ public final class GraphicEditorAdaptator {
     public static void copyAction() {
         Object[] cellSelected = GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().getSelectionCells();
         
-        //System.out.println("Ajout d'une tâche dans le clipBord  "+ cellSelected.length);
+        //System.out.println("Ajout d'une tï¿½che dans le clipBord  "+ cellSelected.length);
         // Etape 1 : dissocier les taches et les liens au sens graphique.
         ArrayList<String[]> edgeOIDList = new ArrayList<String[]>();
         ArrayList<Tache> taskList = new ArrayList<Tache>();

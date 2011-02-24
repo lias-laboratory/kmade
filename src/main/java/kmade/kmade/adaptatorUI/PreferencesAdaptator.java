@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.UI.preferences.KMADEPreferencesTaskTreePanel;
+import kmade.kmade.view.preferences.KMADEPreferencesTaskTreePanel;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
@@ -28,7 +28,7 @@ import kmade.kmade.UI.preferences.KMADEPreferencesTaskTreePanel;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  *
- * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
+ * @author Mickaï¿½l BARON (baron@ensma.fr ou baron.mickael@gmail.com)
  **/
 public final class PreferencesAdaptator {
 	
@@ -36,7 +36,7 @@ public final class PreferencesAdaptator {
 
 
 	/**
-	 * Méthode qui initialise les composants de l'outil préférences
+	 * Mï¿½thode qui initialise les composants de l'outil prï¿½fï¿½rences
 	 */
 	public static void initComponent() {
 		prop = new Properties();
@@ -46,7 +46,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Méthode qui enregistre des paramètres dans le fichier config.ini
+	 * Mï¿½thode qui enregistre des paramï¿½tres dans le fichier config.ini
 	 */
 	private static void save() {
 		try {
@@ -59,7 +59,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Méthode qui charge des paramètres à partir du fichier config.ini dans le
+	 * Mï¿½thode qui charge des paramï¿½tres ï¿½ partir du fichier config.ini dans le
 	 * logiciel
 	 */
 	private static void load() {
@@ -78,7 +78,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Méthode qui crée un property et le config.ini avec des valeurs par défaut
+	 * Mï¿½thode qui crï¿½e un property et le config.ini avec des valeurs par dï¿½faut
 	 */
 	private static void setDefaultProperties() {
 		// Tasks Tree Parameters
@@ -109,7 +109,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Méthode qui récupère les paramètres (nom et valeur) du composant modifié
+	 * Mï¿½thode qui rï¿½cupï¿½re les paramï¿½tres (nom et valeur) du composant modifiï¿½
 	 */
 	private static void getParametersFromPreferenceUI() {
 		// Tasks Tree Parameters 
@@ -120,7 +120,7 @@ public final class PreferencesAdaptator {
 		prop.setProperty(KMADEConstant.TASK_SELECTION_COLOR_NAME, translateColorUIToConfig(treePanel.getCouleurSelectionTache().getSelectedItem()));		
 		prop.setProperty(KMADEConstant.ORTHOGONAL_EDGE_NAME, Boolean.toString(treePanel.getOrthogonaliteArbre().isSelected()));
 
-		/* Paramètres du panel Tache */
+		/* Paramï¿½tres du panel Tache */
 		prop.setProperty(KMADEConstant.TASK_FONT_NAME,
 				(String) (GraphicEditorAdaptator.getMainFrame()
 						.getPreferencesDialog().getTask().getFontTask()
@@ -175,7 +175,7 @@ public final class PreferencesAdaptator {
 						.getPreferencesDialog().getTask().getActorTask()
 						.isSelected()));
 
-		/* Paramètres du panel général */
+		/* Paramï¿½tres du panel gï¿½nï¿½ral */
 		prop.setProperty(KMADEConstant.AUTOMATIC_SAVE_NAME,
 				Boolean.toString(GraphicEditorAdaptator.getMainFrame()
 						.getPreferencesDialog().getGeneral().getAutomaticSave()
@@ -204,10 +204,10 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Méthode qui initialise les composants selon les paramètres du fichier config.ini 
+	 * Mï¿½thode qui initialise les composants selon les paramï¿½tres du fichier config.ini 
 	 */
 	private static void setParametersToPreferenceUI() {
-		/* Paramètres de la partie Arbre */
+		/* Paramï¿½tres de la partie Arbre */
 		KMADEPreferencesTaskTreePanel treePanel = GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().getTree();
 		treePanel.setHauteurArbre(prop.getProperty(KMADEConstant.LEVEL_DISTANCE_NAME));
 		treePanel.setOrientationArbre(prop.getProperty(KMADEConstant.TASK_MODEL_ORIENTATION_NAME));
@@ -215,7 +215,7 @@ public final class PreferencesAdaptator {
 		treePanel.setCouleurSelectionTache(translateColorConfigToUI(prop.getProperty(KMADEConstant.TASK_SELECTION_COLOR_NAME)));
 		treePanel.setOrthogonaliteArbre(prop.getProperty(KMADEConstant.ORTHOGONAL_EDGE_NAME));
 
-		/* Paramètres de la partie Tache */
+		/* Paramï¿½tres de la partie Tache */
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().getTask()
 				.setFontTask(prop.getProperty(KMADEConstant.TASK_FONT_NAME));
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().getTask()
@@ -280,7 +280,7 @@ public final class PreferencesAdaptator {
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().getTask()
 				.setActorTask(prop.getProperty(KMADEConstant.ACTOR_TASK_NAME));
 
-		/* Paramètres de la partie Général */
+		/* Paramï¿½tres de la partie Gï¿½nï¿½ral */
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog()
 				.getGeneral().setAutomaticSave(
 						prop.getProperty(KMADEConstant.AUTOMATIC_SAVE_NAME));
@@ -320,7 +320,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Sauvegarde les préférences
+	 * Sauvegarde les prï¿½fï¿½rences
 	 */
 	public static void savePreferences() {
 		getParametersFromPreferenceUI();
@@ -328,7 +328,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Action du bouton annuler de l'outil préférences
+	 * Action du bouton annuler de l'outil prï¿½fï¿½rences
 	 */
 	public static void cancelPreferences() {
 		load();
@@ -343,18 +343,18 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Ferme la fenêtre de dialogue de l'outil préfèrences
+	 * Ferme la fenï¿½tre de dialogue de l'outil prï¿½fï¿½rences
 	 */
 	public static void closePreferencesDialog() {
 		GraphicEditorAdaptator.getMainFrame().getPreferencesDialog().setVisible(false);
 	}
 
 	/* //////////////////////////////////////////////////// */
-	/* Procédures concernants les paramètres généraux /// */
+	/* Procï¿½dures concernants les paramï¿½tres gï¿½nï¿½raux /// */
 	/* //////////////////////////////////////////////////// */
 
 	/**
-	 * Méthode qui force le garbage collector
+	 * Mï¿½thode qui force le garbage collector
 	 * 
 	 */
 	public static void forceGarbage() {
@@ -363,7 +363,7 @@ public final class PreferencesAdaptator {
 
 	
 	/**
-	 * Méthode renvoyant le choix de l'utilisateur pour l'affichage du
+	 * Mï¿½thode renvoyant le choix de l'utilisateur pour l'affichage du
 	 * splashscreen
 	 * 
 	 * @return boolean
@@ -380,7 +380,7 @@ public final class PreferencesAdaptator {
 	//
 	
 	/**
-	 * Modifie la couleur de sélection d'une tâche
+	 * Modifie la couleur de sï¿½lection d'une tï¿½che
 	 */
 	private static void setSelectedTaskColor() {
 		Color selectedColor = getColorFromString(prop.getProperty(KMADEConstant.TASK_SELECTION_COLOR_NAME));
@@ -420,7 +420,7 @@ public final class PreferencesAdaptator {
 	}
 		
 	/**
-	 * Méthode qui applique les changements de paramètres de police, taille...
+	 * Mï¿½thode qui applique les changements de paramï¿½tres de police, taille...
 	 */
 	public static void applyTaskParameters () {
 		System.out.println();
@@ -437,7 +437,7 @@ public final class PreferencesAdaptator {
 	}
 	
 	/**
-	 * Méthode qui modifie la police et la couleur du nom de la tache
+	 * Mï¿½thode qui modifie la police et la couleur du nom de la tache
 	 */
 	private static void setTaskNameFont() {
 		String font = prop.getProperty(KMADEConstant.TASK_FONT_NAME);
@@ -451,7 +451,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Méthode qui modifie la police et la couleur de l'operateur de la tache
+	 * Mï¿½thode qui modifie la police et la couleur de l'operateur de la tache
 	 */
 	private static void setTaskOperatorFont() {
 		String font = prop.getProperty(KMADEConstant.DECOMPOSITION_FONT_NAME);
@@ -466,7 +466,7 @@ public final class PreferencesAdaptator {
 	
 
 	/**
-	 * Méthode qui convertit le string du style en type integer
+	 * Mï¿½thode qui convertit le string du style en type integer
 	 */
 	public static int getStyleFromString(String fontStyle) {
 		if (fontStyle.equals(KMADEConstant.STYLE_PLAIN))
@@ -480,7 +480,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Méthode qui convertit le string du style en type integer
+	 * Mï¿½thode qui convertit le string du style en type integer
 	 */
 	public static String translateFontStyleUIToConfig(Object isFontStyle) {
 		String fontStyle = (String) (isFontStyle);
@@ -512,7 +512,7 @@ public final class PreferencesAdaptator {
 	}
 
 	/**
-	 * Méthode qui convertie le string de la couleur en type Color
+	 * Mï¿½thode qui convertie le string de la couleur en type Color
 	 * @return Color
 	 */
 	private static Color getColorFromString(String fontColor) {

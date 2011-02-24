@@ -3,8 +3,8 @@ package kmade.kmade.adaptatorUI;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import kmade.kmade.UI.KMADEMainFrame;
 import kmade.kmade.adaptatorFC.ExpressLabel;
+import kmade.kmade.view.KMADEMainFrame;
 import kmade.nmda.schema.tache.Label;
 
 /**

@@ -1,7 +1,7 @@
 package kmade.kmade.adaptatorUI;
 
-import kmade.kmade.UI.taskproperties.readworldobject.KMADEReadConcreteObjectDialog;
 import kmade.kmade.adaptatorFC.ExpressAbstractObject;
+import kmade.kmade.view.taskproperties.readworldobject.KMADEReadConcreteObjectDialog;
 
 /**
  * K-MADe : Kernel of Model for Activity Description environment
