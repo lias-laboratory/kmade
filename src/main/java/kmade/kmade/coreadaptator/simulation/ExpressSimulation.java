@@ -1,10 +1,10 @@
-package kmade.kmade.adaptatorFC.simulation;
+package kmade.kmade.coreadaptator.simulation;
 
 import java.util.ArrayList;
 
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressEvent;
-import kmade.kmade.adaptatorFC.ExpressIteration;
+import kmade.kmade.coreadaptator.ExpressEvent;
+import kmade.kmade.coreadaptator.ExpressIteration;
 import kmade.nmda.schema.expression.ConcreteObjectType;
 import kmade.nmda.schema.expression.ExpressionConstant;
 import kmade.nmda.schema.expression.NodeExpression;
@@ -103,7 +103,7 @@ public final class ExpressSimulation {
                     // Un exÃ©cutant systÃ¨me est interrompue automatiquement                    
                     // VÃ©rifie avec la tache mere s'il existe une sous-tache de plus haute priorite
                     
-                	// /!\ getMotherTask peut renvoyé null -> à modifier 
+                	// /!\ getMotherTask peut renvoyï¿½ null -> ï¿½ modifier 
                 	Tache myMother = myTache.getMotherTask();
                     boolean etat = false;
                     for (int i = 0; i < myMother.getFils().size() && !etat; i++) {

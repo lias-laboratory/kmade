@@ -1,4 +1,4 @@
-package kmade.kmade.adaptatorFC.simulation;
+package kmade.kmade.coreadaptator.simulation;
 
 import kmade.nmda.schema.tache.StateSimulation;
 

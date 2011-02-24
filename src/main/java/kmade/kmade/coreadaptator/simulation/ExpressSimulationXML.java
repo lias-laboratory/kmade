@@ -1,4 +1,4 @@
-package kmade.kmade.adaptatorFC.simulation;
+package kmade.kmade.coreadaptator.simulation;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +18,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import kmade.KMADEToolConstant;
 import kmade.kmade.KMADEConstant;
-import kmade.kmade.adaptatorFC.ExpressTask;
+import kmade.kmade.coreadaptator.ExpressTask;
 import kmade.nmda.schema.metaobjet.ObjetConcret;
 import kmade.nmda.schema.tache.Tache;
 import kmade.nmda.schema.tache.User;
