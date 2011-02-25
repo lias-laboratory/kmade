@@ -1,3 +1,20 @@
+/*********************************************************************************
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.view.taskmodel;
 
 import java.util.HashSet;
@@ -12,148 +29,91 @@ import org.jgraph.graph.GraphLayoutCache;
 import org.jgraph.graph.VertexView;
 
 /**
- * K-MADe : Kernel of Model for Activity Description environment
- * Copyright (C) 2006  INRIA - MErLIn Project
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- *
- *
- * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
- **/
+ * @author Mickael BARON
+ */
 public abstract class KMADEGraphLayoutAlgorithm {
 
-	protected static Set<String> LAYOUT_ATTRIBUTES;
+    protected static Set<String> LAYOUT_ATTRIBUTES;
 
-	private boolean isAllowedToRun;
+    private boolean isAllowedToRun;
 
-	private int progress;
+    private int progress;
 
-	private int maximumProgress;
+    private int maximumProgress;
 
-	static {
-		LAYOUT_ATTRIBUTES = new HashSet<String>();
-		LAYOUT_ATTRIBUTES.add("bounds");
-		LAYOUT_ATTRIBUTES.add("points");
-		LAYOUT_ATTRIBUTES.add("labelposition");
-		LAYOUT_ATTRIBUTES.add("routing");
-	}
-	
-	public KMADEGraphLayoutAlgorithm() {
-		isAllowedToRun = true;
-		progress = 0;
-		maximumProgress = 0;
-	}
+    static {
+	LAYOUT_ATTRIBUTES = new HashSet<String>();
+	LAYOUT_ATTRIBUTES.add("bounds");
+	LAYOUT_ATTRIBUTES.add("points");
+	LAYOUT_ATTRIBUTES.add("labelposition");
+	LAYOUT_ATTRIBUTES.add("routing");
+    }
 
-	public abstract void run(JGraph jgraph, Object aobj[], Object aobj1[]);
+    public KMADEGraphLayoutAlgorithm() {
+	isAllowedToRun = true;
+	progress = 0;
+	maximumProgress = 0;
+    }
 
-	public boolean isAllowedToRun() {
-		return isAllowedToRun;
-	}
+    public abstract void run(JGraph jgraph, Object aobj[], Object aobj1[]);
 
-	public void setAllowedToRun(boolean flag) {
-		isAllowedToRun = flag;
-	}
+    public boolean isAllowedToRun() {
+	return isAllowedToRun;
+    }
 
-	public int getMaximumProgress() {
-		return maximumProgress;
-	}
+    public void setAllowedToRun(boolean flag) {
+	isAllowedToRun = flag;
+    }
 
-	public void setMaximumProgress(int i) {
-		maximumProgress = i;
-	}
+    public int getMaximumProgress() {
+	return maximumProgress;
+    }
 
-	public int getProgress() {
-		return progress;
-	}
+    public void setMaximumProgress(int i) {
+	maximumProgress = i;
+    }
 
-	public void setProgress(int i) {
-		progress = i;
-	}
+    public int getProgress() {
+	return progress;
+    }
 
-	public static void applyLayout(JGraph jgraph, KMADEGraphLayoutAlgorithm jgraphlayoutalgorithm, Object aobj[]) {
-		applyLayout(jgraph, jgraphlayoutalgorithm, aobj, null);
-	}
+    public void setProgress(int i) {
+	progress = i;
+    }
 
-	public static void applyLayout(JGraph jgraph,	KMADEGraphLayoutAlgorithm jgraphlayoutalgorithm, Object aobj[], Object aobj1[]) {
-		JGraph jgraph1 = new JGraph(jgraph.getModel());
-		jgraph1.setBounds(jgraph.getBounds());
-		GraphLayoutCache graphlayoutcache = jgraph1.getGraphLayoutCache();
-		graphlayoutcache.setLocalAttributes(LAYOUT_ATTRIBUTES);
-		jgraphlayoutalgorithm.run(jgraph1, aobj, aobj1);
-		if (jgraphlayoutalgorithm.isAllowedToRun()) {
-			Hashtable<Object,AttributeMap> hashtable = new Hashtable<Object,AttributeMap>();
-			CellView acellview[] = graphlayoutcache.getAllDescendants(graphlayoutcache.getRoots());
-			for (int i = 0; i < acellview.length; i++) {
-				AttributeMap attributemap = acellview[i].getAttributes();
-				java.awt.geom.Rectangle2D rectangle2d = GraphConstants.getBounds(attributemap);
-				if ((acellview[i] instanceof VertexView) && rectangle2d == null) {
-					GraphConstants.setBounds(attributemap, acellview[i].getBounds());
-				}
-				if (!attributemap.isEmpty()) {
-					hashtable.put(acellview[i].getCell(), attributemap);
-				}
-			}
+    public static void applyLayout(JGraph jgraph,
+	    KMADEGraphLayoutAlgorithm jgraphlayoutalgorithm, Object aobj[]) {
+	applyLayout(jgraph, jgraphlayoutalgorithm, aobj, null);
+    }
 
-			if (!hashtable.isEmpty()) {
-				jgraph.getGraphLayoutCache().edit(hashtable, null, null, null);
-				
-				//modifi�/////
-				/*CellView[] roots =  graphlayoutcache.getRoots();
-				
-				for (int i = 0; i<roots.length; i++)
-				{
-					double min = Double.POSITIVE_INFINITY;
-					double max= Double.NEGATIVE_INFINITY;
-					if (roots[i] instanceof VertexView)
-					{
-						VertexView root = (VertexView) roots[i];
-						
-						CellView[] listeFils = root.getChildViews();
-						
-						for (int j=0; j<listeFils.length; j++)
-						{
-							if (listeFils[i] instanceof VertexView)
-							{
-								VertexView fils = (VertexView) listeFils[i];
-								
-								if (fils.getBounds().getX()<min)
-								{
-									min = fils.getBounds().getX();
-								}
-								
-								if ((fils.getBounds().getX()+fils.getBounds().getWidth())>max)
-								{
-									max = fils.getBounds().getX()+fils.getBounds().getWidth();
-								}
-																
-							}
-						}
-						
-						double milieu = (max-min)/2;
-						double distXMilieu = root.getBounds().getWidth()/2;
-						int nouvX =(int) (milieu - distXMilieu);
-						Rectangle rect = new Rectangle(nouvX, (int)root.getBounds().getY(), (int)root.getBounds().getWidth(), (int)root.getBounds().getHeight());
-						root.setBounds(rect);
-					}
-					
-					
-					
-					
-				}*/
-				
-			}
+    public static void applyLayout(JGraph jgraph,
+	    KMADEGraphLayoutAlgorithm jgraphlayoutalgorithm, Object aobj[],
+	    Object aobj1[]) {
+	JGraph jgraph1 = new JGraph(jgraph.getModel());
+	jgraph1.setBounds(jgraph.getBounds());
+	GraphLayoutCache graphlayoutcache = jgraph1.getGraphLayoutCache();
+	graphlayoutcache.setLocalAttributes(LAYOUT_ATTRIBUTES);
+	jgraphlayoutalgorithm.run(jgraph1, aobj, aobj1);
+	if (jgraphlayoutalgorithm.isAllowedToRun()) {
+	    Hashtable<Object, AttributeMap> hashtable = new Hashtable<Object, AttributeMap>();
+	    CellView acellview[] = graphlayoutcache
+		    .getAllDescendants(graphlayoutcache.getRoots());
+	    for (int i = 0; i < acellview.length; i++) {
+		AttributeMap attributemap = acellview[i].getAttributes();
+		java.awt.geom.Rectangle2D rectangle2d = GraphConstants
+			.getBounds(attributemap);
+		if ((acellview[i] instanceof VertexView) && rectangle2d == null) {
+		    GraphConstants.setBounds(attributemap,
+			    acellview[i].getBounds());
 		}
+		if (!attributemap.isEmpty()) {
+		    hashtable.put(acellview[i].getCell(), attributemap);
+		}
+	    }
+
+	    if (!hashtable.isEmpty()) {
+		jgraph.getGraphLayoutCache().edit(hashtable, null, null, null);
+	    }
 	}
+    }
 }

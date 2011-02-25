@@ -1,110 +1,110 @@
+/*********************************************************************************
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator.simulation;
 
 import java.util.ArrayList;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
 
-
 /**
- * K-MADe : Kernel of Model for Activity Description environment
- * Copyright (C) 2006  INRIA - MErLIn Project
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- *
- *
- * @author Mickaël BARON (baron@ensma.fr ou baron.mickael@gmail.com)
- **/
+ * @author Mickael BARON
+ */
 public class TokenReplayScenarioSimulation extends TokenRecordScenarioSimulation {
-    
-	public static final int DONE_STATE = 0;
-	
-	public static final int NOT_DONE_STATE = 1;
-	
-	public static final int ERROR_STATE = 2;
-	
+
+    public static final int DONE_STATE = 0;
+
+    public static final int NOT_DONE_STATE = 1;
+
+    public static final int ERROR_STATE = 2;
+
     protected int state = 1;
-	
+
     protected ArrayList<Tache> myPossibleTasks = new ArrayList<Tache>();
-    
+
     protected boolean notFounded;
-    
+
     public TokenReplayScenarioSimulation(Tache p, int paction) {
-   		// La tâche trouvée est une tâche du modèle. Rien ne dit que c'est la bonne.
-        super(p,paction);
-        notFounded = (p == null);
+	// La tâche trouvée est une tâche du modèle. Rien ne dit que c'est la
+	// bonne.
+	super(p, paction);
+	notFounded = (p == null);
     }
-    
+
     public TokenReplayScenarioSimulation(Tache p) {
-        this(p, -1);
-        myPossibleTasks = new ArrayList<Tache>();
+	this(p, -1);
+	myPossibleTasks = new ArrayList<Tache>();
     }
-    
+
     public TokenReplayScenarioSimulation() {
-        this(null, -1);
-        myPossibleTasks = new ArrayList<Tache>();
+	this(null, -1);
+	myPossibleTasks = new ArrayList<Tache>();
     }
-    
+
     public TokenReplayScenarioSimulation(ArrayList<Tache> possibleTasks) {
-        this(null, -1);
-        myPossibleTasks = possibleTasks;
+	this(null, -1);
+	myPossibleTasks = possibleTasks;
     }
-    
+
     public boolean isNotFounded() {
-        return notFounded;
+	return notFounded;
     }
-    
+
     public void setAction(int p) {
-        this.action = p;
-    }    
-    
+	this.action = p;
+    }
+
     public boolean isDoneState() {
-        return this.state == TokenReplayScenarioSimulation.DONE_STATE;
+	return this.state == TokenReplayScenarioSimulation.DONE_STATE;
     }
-    
+
     public boolean isNotDoneState() {
-        return this.state == TokenReplayScenarioSimulation.NOT_DONE_STATE;
+	return this.state == TokenReplayScenarioSimulation.NOT_DONE_STATE;
     }
-    
+
     public boolean isErrorState() {
-        return this.state == TokenReplayScenarioSimulation.ERROR_STATE;
+	return this.state == TokenReplayScenarioSimulation.ERROR_STATE;
     }
-    
+
     public void setToDoneState() {
-        this.state = DONE_STATE;
+	this.state = DONE_STATE;
     }
-    
+
     public void setToNotDoneState() {
-        this.state = NOT_DONE_STATE;
+	this.state = NOT_DONE_STATE;
     }
-    
+
     public void setToErrorState() {
-        this.state = ERROR_STATE;
+	this.state = ERROR_STATE;
     }
-    
+
     /**
-     * Cette méthode permet de vérifier parmi la liste donnée s'il existe une tâche
-     * identique (Lia liste correspond à la liste des tâches actionables).
+     * Cette méthode permet de vérifier parmi la liste donnée s'il existe une
+     * tâche identique (Lia liste correspond à la liste des tâches actionables).
+     * 
      * @param p
      * @return
      */
     public boolean isActionable(ArrayList<Tache> p) {
-    	for (Tache current : p) {
-    		if (current.getOid().get().equals(myTask.getOid().get())) {
-    			return true;
-    		}
-    	}
-    	return false;
+	for (Tache current : p) {
+	    if (current.getOid().get().equals(myTask.getOid().get())) {
+		return true;
+	    }
+	}
+	return false;
     }
 }
