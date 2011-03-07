@@ -94,7 +94,8 @@
 						<configuration>
 							<descriptors>
 								<descriptor>src/main/assembly/KMADEAssemblyJAR.xml</descriptor>
-								<descriptor>src/main/assembly/KMADEAssemblyZIP.xml</descriptor>
+								<descriptor>src/main/assembly/KMADEAssemblyDIST.xml</descriptor>
+                                <descriptor>src/main/assembly/KMADEAssemblySRC.xml</descriptor>
 							</descriptors>
 							<archive>
 								<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>

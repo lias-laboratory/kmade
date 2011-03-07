@@ -1,0 +1,24 @@
+<assembly>
+	<id>src</id>
+	<formats>
+		<format>zip</format>
+	</formats>	
+	<fileSets>
+		<fileSet>
+	      <directory>src/main/java</directory>
+	      <outputDirectory>src</outputDirectory>
+    	</fileSet>
+    	<fileSet>
+	      <directory>src/main/resources</directory>
+	      <outputDirectory>src/fr/upensma/lias/kmade/resources</outputDirectory>
+    	</fileSet>		
+	</fileSets>
+	<files>
+		<file>
+			<source>${project.basedir}/src/main/license/lgpl.txt</source>
+		</file>
+		<file>
+            <source>${project.basedir}/src/main/license/gpl.txt</source>
+        </file>		
+	</files>
+</assembly>
