@@ -58,6 +58,7 @@ public class TableSorter extends AbstractTableModel {
     private static Directive EMPTY_DIRECTIVE = new Directive(-1, NOT_SORTED);
 
     public static final Comparator COMPARABLE_COMAPRATOR = new Comparator() {
+	@SuppressWarnings("unchecked")
 	public int compare(Object o1, Object o2) {
 	    return ((Comparable) o1).compareTo(o2);
 	}
@@ -69,13 +70,18 @@ public class TableSorter extends AbstractTableModel {
     };
 
     private Row[] viewToModel;
+    
     private int[] modelToView;
 
     private JTableHeader tableHeader;
+    
     private MouseListener mouseListener;
+    
     private TableModelListener tableModelListener;
+    
     private Map columnComparators = new HashMap();
-    private List sortingColumns = new ArrayList();
+    
+    private List<Directive> sortingColumns = new ArrayList<Directive>();
 
     public TableSorter() {
 	this.mouseListener = new MouseHandler();
@@ -190,6 +196,7 @@ public class TableSorter extends AbstractTableModel {
 	sortingStatusChanged();
     }
 
+    @SuppressWarnings("unchecked")
     public void setColumnComparator(Class type, Comparator comparator) {
 	if (comparator == null) {
 	    columnComparators.remove(type);
@@ -254,6 +261,7 @@ public class TableSorter extends AbstractTableModel {
 	return tableModel.getColumnName(column);
     }
 
+    @SuppressWarnings("unchecked")
     public Class getColumnClass(int column) {
 	return tableModel.getColumnClass(column);
     }
@@ -279,6 +287,7 @@ public class TableSorter extends AbstractTableModel {
 	    this.modelIndex = index;
 	}
 
+	@SuppressWarnings("unchecked")
 	public int compareTo(Object o) {
 	    int row1 = modelIndex;
 	    int row2 = ((Row) o).modelIndex;

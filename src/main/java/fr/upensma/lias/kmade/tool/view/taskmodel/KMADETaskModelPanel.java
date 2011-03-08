@@ -1323,6 +1323,7 @@ public class KMADETaskModelPanel extends JPanel {
 		}
 	    }
 
+	    @SuppressWarnings("unchecked")
 	    public void mouseReleased(MouseEvent event) {
 
 		graph.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -1444,7 +1445,6 @@ public class KMADETaskModelPanel extends JPanel {
     }
 
     public void notifLocalisationModification() {
-	// NMDATaskModelPanel
     }
 
     public PieMenuCreateTask getMenuTask() {

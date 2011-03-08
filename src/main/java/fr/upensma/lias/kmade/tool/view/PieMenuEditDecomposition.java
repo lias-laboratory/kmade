@@ -63,7 +63,7 @@ public class PieMenuEditDecomposition extends Menu {
 	menuLayout(items);
 	hideMenu();
 
-	/* machine qui g�re les �v�nements relatifs aux JComponent */
+	/* machine qui gère les événements relatifs aux JComponent */
 	smText = new JStateMachine() {
 
 	    public State initialState = new State() {

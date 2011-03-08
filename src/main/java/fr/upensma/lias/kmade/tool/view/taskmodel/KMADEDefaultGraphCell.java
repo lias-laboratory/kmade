@@ -222,6 +222,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	}
     }
 
+    @SuppressWarnings("unchecked")
     public void setDeltaPoint(int dx, int dy) {
 	Map<Object, Object> myAttributes = this.getAttributes();
 	Rectangle2D myPosition = GraphConstants.getBounds(myAttributes);
@@ -235,6 +236,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	ExpressTask.setTaskPoint((int) nx, (int) ny, this.myTask);
     }
 
+    @SuppressWarnings("unchecked")
     public void setPoint(double x, double y) {
 	Map<Object, Object> myAttributes = this.getAttributes();
 	GraphConstants.setBounds(myAttributes, new Rectangle2D.Double(x, y, 0,

@@ -92,7 +92,7 @@ public class Menu {
 		};
 	    };
 
-	    /* on sort d'un item, on le remet � sa couleur initial */
+	    /* on sort d'un item, on le remet à sa couleur initial */
 	    public State in = new State() {
 		Transition unhiliteItem = new LeaveOnTag(MenuItem.class,
 			">> out") {
