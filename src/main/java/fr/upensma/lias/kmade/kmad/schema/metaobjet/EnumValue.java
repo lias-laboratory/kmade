@@ -139,4 +139,17 @@ public class EnumValue extends ValeurType implements Entity {
 	clone.oid = this.oid;
 	return clone;
     }
+
+	@Override
+	public org.w3c.dom.Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(org.w3c.dom.Element p)
+			throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

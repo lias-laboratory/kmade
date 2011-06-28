@@ -151,4 +151,23 @@ public class Element implements Entity {
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 
     }
+
+	@Override
+	public org.w3c.dom.Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(org.w3c.dom.Element p)
+			throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

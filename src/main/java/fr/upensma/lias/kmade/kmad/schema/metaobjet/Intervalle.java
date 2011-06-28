@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
@@ -188,4 +189,22 @@ public final class Intervalle extends TypeAbs implements Entity {
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 
     }
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

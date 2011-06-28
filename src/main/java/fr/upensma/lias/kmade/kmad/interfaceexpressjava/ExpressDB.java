@@ -18,6 +18,7 @@
 package fr.upensma.lias.kmade.kmad.interfaceexpressjava;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
@@ -50,6 +51,19 @@ public class ExpressDB extends TreeMap<Oid, Object> implements Serializable {
 	ExpressDB.isSet = true;
 
 	return leoid;
+    }
+    /**
+     * @author Joachim TROUVERIE
+     * @return the maximum id in the DB
+     */
+    public int getMax(){
+    	int max = 0;
+    	for (Iterator<Oid> i = this.keySet().iterator(); i.hasNext();){
+    		Oid oid = i.next();
+    		if(oid.getValue()>max)
+    			max = oid.getValue();
+    	}
+    	return max;
     }
 
     public void mettre(Oid key, Object value) {
@@ -112,5 +126,23 @@ public class ExpressDB extends TreeMap<Oid, Object> implements Serializable {
 	    Object o = this.prendre(oid);
 	    System.out.println(((Entity) o).toSPF());
 	}
+    }
+    
+    /**
+     * @author Joachim TROUVERIE
+     * return the oid by classes
+     * @param className
+     * @return
+     */
+    public ArrayList<Oid> getByClassName(String className){
+    	ArrayList<Oid> list = new ArrayList<Oid>();
+    	for (Iterator<Oid> i = this.keySet().iterator(); i.hasNext();){
+    		Oid oid = i.next();
+    		Object o = this.prendre(oid);
+    		if(o.getClass().getName().equals(className)){
+    			list.add(oid);
+    		}
+    	}
+    	return list;
     }
 }

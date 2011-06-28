@@ -88,6 +88,7 @@ public abstract class Agregat implements Entity {
 
     public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("agregat");
+	racine.setAttribute("classkmad", "metaobjet.ListeAg");
 	racine.setAttribute("idkmad", oid.get());
 
 	if (lstObjConcrets.size() != 0) {
@@ -110,7 +111,7 @@ public abstract class Agregat implements Entity {
     }
 
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
-	this.oid = new Oid(p.getAttribute("idkmad"));
+    	this.oid = new Oid(p.getAttribute("idkmad"));
     }
 
     public void delete() {
@@ -121,4 +122,30 @@ public abstract class Agregat implements Entity {
 	lstObjConcrets = new ArrayList<ObjetConcret>();
 	lstObjConcrets.addAll(p);
     }
+    
+    @Override
+	public Element toXML2(Document doc){
+		// TODO Auto-generated method stub
+    	Element racine = doc.createElement("agregat");
+    	racine.setAttribute("idkmad", oid.get());
+
+    	if (!lstObjConcrets.isEmpty()) {
+    	    String list = new String("");
+    	    for (int i = 0; i < lstObjConcrets.size(); i++) {
+    	    	list += lstObjConcrets.get(i).getOid().get() + " ";
+    	    }
+    	    racine.setAttribute("id-agregat-concreteobjects-list", list);
+    	}
+    	return racine;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p){
+		// TODO Auto-generated method stub
+		createObjectFromXMLElement(p);
+	}
+	
+	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
+		return this.oidIsAnyMissing(p);
+	}
 }

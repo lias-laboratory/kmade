@@ -321,4 +321,62 @@ public class AttributConcret implements Entity, Cloneable {
 	clone.name = this.name;
 	return clone;
     }
+
+	@Override
+	public org.w3c.dom.Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		org.w3c.dom.Element racine = doc.createElement("concreteattribut");
+		racine.setAttribute("classkmad", "metaobjet.AttributConcret");
+		racine.setAttribute("idkmad", oid.get());
+
+		racine.setAttribute("id-concreteattribut-concreteobject",this.objConcDe.getOid().get());
+
+		racine.setAttribute("id-concreteattribut-abstractattribut",this.attributAbsDe.getOid().get());
+
+		racine.setAttribute("id-concreteattribut-value",this.valeur.getOid().get());
+		
+		racine.appendChild(this.valeur.toXML2(doc));
+
+		return racine;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(org.w3c.dom.Element p)
+			throws Exception {
+		// TODO Auto-generated method stub
+		this.oid = new Oid(p.getAttribute("idkmad"));
+
+		this.setObjConcDe((ObjetConcret) InterfaceExpressJava.bdd
+			.prendre(new Oid(p.getAttribute("id-concreteattribut-concreteobject"))));
+
+		this.setAttributDe((AttributAbstrait) InterfaceExpressJava.bdd
+			.prendre(new Oid(p.getAttribute("id-concreteattribut-abstractattribut"))));
+		this.name = this.attributAbsDe.getName();
+		
+	    this.valeur = (ValeurType) InterfaceExpressJava.bdd
+		    .prendre(new Oid(p.getAttribute("id-concreteattribut-value")));
+		
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) throws Exception {
+		// TODO Auto-generated method stub
+		String userValue = p
+		.getAttribute("id-concreteattribut-concreteobject");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+			return true;
+		}
+
+		userValue = p
+			.getAttribute("id-concreteattribut-abstractattribut");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+			return true;
+		}
+
+		userValue = p.getAttribute("id-concreteattribut-value");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+			return true;
+		}
+		return false;
+	}
 }

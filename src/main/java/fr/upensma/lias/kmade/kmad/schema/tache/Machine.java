@@ -218,4 +218,70 @@ public class Machine extends Materiel{
     public static int toArrayLenght() {
 	return 6;
     }
+    
+    public org.w3c.dom.Element toXML2(Document doc) {
+    	Element racine = doc.createElement("Machine");
+    	racine.setAttribute("classkmad", "tache.Machine");
+    	racine.setAttribute("idkmad", oid.get());
+    	String list = new String("");
+    	for (int i=0;i<this.memberOf.size();i++){
+    		list += this.memberOf.get(i).getOid().get() + " ";
+    	}
+    	racine.setAttribute("id-parc-machine", list);
+
+    	Element kmadMachineName = doc.createElement("machine-name");
+    	kmadMachineName.setTextContent(this.getName());
+    	racine.appendChild(kmadMachineName);
+
+    	if (!this.getDescription().equals("")) {
+    	    Element kmadMachineDescription = doc
+    		    .createElement("machine-description");
+    	    kmadMachineDescription.setTextContent(this.getDescription());
+    	    racine.appendChild(kmadMachineDescription);
+    	}
+
+    	Element kmadMachineDescription = doc
+    		.createElement("machine-isComputer");
+    	kmadMachineDescription.setTextContent(isComputer.toString());
+    	racine.appendChild(kmadMachineDescription);
+
+    	if (!super.getImage().equals("")) {
+    	    Element kmadMachineImagePath = doc
+    		    .createElement("machine-imagepath");
+    	    kmadMachineImagePath.setTextContent(super.getImage());
+    	    racine.appendChild(kmadMachineImagePath);
+    	}
+    	return racine;
+        }
+
+    public void createObjectFromXMLElement2(org.w3c.dom.Element p) {
+    	this.oid = new Oid(p.getAttribute("idkmad"));
+    	String[] parc = p.getAttribute("id-parcMachine").split(" ");
+    	for (int i = 0; i < parc.length; i++) {
+    		this.addToParc((ParcMachines) InterfaceExpressJava.bdd
+    			.prendre(new Oid(parc[i])));
+    	}
+    	
+    	NodeList kmadMachineName = p.getElementsByTagName("machine-name");
+    	if (kmadMachineName.item(0) != null)
+    	    super.setName(kmadMachineName.item(0).getTextContent());
+
+    	NodeList kmadMachineDescription = p
+    		.getElementsByTagName("machine-description");
+    	if (kmadMachineDescription.item(0) != null)
+    	    super.setDescription(kmadMachineDescription.item(0)
+    		    .getTextContent());
+
+    	NodeList kmadMachineIsComputer = p
+    		.getElementsByTagName("machine-isComputer");
+    	if (kmadMachineIsComputer.item(0) != null)
+    	    setIsComputer(kmadMachineIsComputer.item(0).getTextContent());
+
+    	NodeList kmadMachineImagePath = p
+    		.getElementsByTagName("machine-imagepath");
+    	if (kmadMachineImagePath.item(0) != null) {
+    	    super.setImage(kmadMachineImagePath.item(0).getTextContent());
+    	}
+    }
 }
+

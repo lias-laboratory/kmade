@@ -174,4 +174,49 @@ public class Acteur implements Entity {
     public Tache getInverseTache() {
 	return inverseTache;
     }
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		Element racine = doc.createElement("actor");
+		racine.setAttribute("classkmad", "tache.Acteur");
+		racine.setAttribute("idkmad", oid.get());
+		racine.setAttribute("id-user", this.userRef.getOid().get());
+		
+		racine.appendChild(experience.toXML(doc));
+		if (!this.competence.equals("")) {
+		    Element kmadActorCompetence = doc.createElement("actor-competence");
+		    kmadActorCompetence.setTextContent(this.competence);
+		    racine.appendChild(kmadActorCompetence);
+		}
+		
+		return racine;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		this.oid = new Oid(p.getAttribute("idkmad"));
+	
+		this.userRef = (User) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-user")));
+		this.experience = Experience.getXMLExperienceValue(p);
+
+		NodeList nodeList = p.getElementsByTagName("actor-competence");
+		if (nodeList.item(0) != null) {
+		    this.competence = nodeList.item(0).getTextContent();
+		}
+
+		
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		String nodeList = p.getAttribute("id-user");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
+		    return true;
+		}
+		
+		return false;
+	}
 }

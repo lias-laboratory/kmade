@@ -18,6 +18,7 @@
 package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
@@ -119,4 +120,16 @@ public class IntervalleValue extends ValeurType {
 	clone.oid = this.oid;
 	return clone;
     }
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -56,6 +56,19 @@ public class GeneralInformation implements Entity {
 	this.resources = "";
 	this.justification = "";
     }
+    
+    /**
+     * Added by Joachim TROUVERIE
+     * @return if the general information are empty
+     */
+    public boolean isEmpty(){
+    	return (this.entreprise.isEmpty() &&
+    	this.site.isEmpty() &&
+    	this.typePost.isEmpty() &&
+    	this.date.isEmpty() &&
+    	this.resources.isEmpty() &&
+    	this.justification.isEmpty());
+    }
 
     public GeneralInformation(String pentreprise, String psite,
 	    String ptypePost, String pdate, String presources,
@@ -274,4 +287,25 @@ public class GeneralInformation implements Entity {
     public void setJustification(String justification) {
 	this.justification = justification;
     }
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		if(!this.isEmpty())
+			return toXML(doc);
+		else return null;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		createObjectFromXMLElement(p);
+		
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

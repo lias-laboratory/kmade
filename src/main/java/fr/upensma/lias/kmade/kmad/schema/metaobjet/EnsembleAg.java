@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
@@ -80,4 +81,5 @@ public class EnsembleAg extends Agregat {
 		.getEnumereIntoLocaleAgregatStructure(AgregatStructure.SET_AGREGAT
 			.getValue());
     }
+
 }

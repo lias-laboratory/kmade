@@ -88,6 +88,18 @@ public class InterfaceExpressJava {
     public static void clearCurrentProject() {
 	bdd.clear();
     }
+    
+    /**
+     * Cette methode permet d'effacer les objets de la bdd
+     */
+    public static void clearCurrentItems() {
+    	for (Iterator<Oid> i = InterfaceExpressJava.bdd.keySet().iterator(); i.hasNext();){
+    		Oid oid = i.next();
+    		String ClassName = InterfaceExpressJava.bdd.prendre(oid).getClass().getName();
+    		if(ClassName.contains("metaobjet"))
+    			bdd.remove(InterfaceExpressJava.bdd.prendre(oid));
+    	}
+    }
 
     /**
      * Cette m�thode permet de supprimer le contenu du presse-papier (Express).

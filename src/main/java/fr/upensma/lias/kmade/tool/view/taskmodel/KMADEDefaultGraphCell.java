@@ -48,7 +48,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
     private final KMADEDefaultPort sonPort;
 
     private boolean isExpanded = true;
-
+    
     private boolean isSonExpanded = true;
 
     private boolean isSimulationExpanded = true;
@@ -98,9 +98,11 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	// System.out.println("methode gettask"+getTask().getLabelName());
 
 	Map<Object, Object> map = new Hashtable<Object, Object>();
+	
 	Point p = this.myTask.getPoint();
+		
 	GraphConstants.setBounds(map, new Rectangle2D.Double(p.getX(),
-		p.getY(), 0, 0));
+				p.getY(), 0, 0));
 	GraphConstants.setResize(map, true);
 	GraphConstants.setAutoSize(map, true);
 	GraphConstants.setOpaque(map, false);

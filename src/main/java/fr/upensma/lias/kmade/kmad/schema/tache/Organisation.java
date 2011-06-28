@@ -179,5 +179,15 @@ public class Organisation extends User {
     public static int toArrayLenght() {
 	return 5;
     }
+    
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return toXML(doc);
+	}
+
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		createObjectFromXMLElement(p);
+	}
 
 }

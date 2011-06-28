@@ -86,4 +86,10 @@ public class ListeAg extends Agregat implements Entity {
 	racine.setAttribute("classkmad", "metaobjet.ListeAg");
 	return racine;
     }
+    
+    public org.w3c.dom.Element toXML2(Document doc) {
+    	org.w3c.dom.Element racine = super.toXML2(doc);
+    	racine.setAttribute("classkmad", "metaobjet.ListeAg");
+    	return racine;
+    }
 }

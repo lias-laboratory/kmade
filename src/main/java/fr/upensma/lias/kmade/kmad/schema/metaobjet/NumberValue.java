@@ -275,6 +275,18 @@ public class NumberValue extends ValeurType {
 		    + ((Double) n.getValeur()).doubleValue());
 	}
     }
+
+    @Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return toXML(doc);
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		createObjectFromXMLElement(p);
+	}
 }
 
 

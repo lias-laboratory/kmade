@@ -62,11 +62,11 @@ public abstract class ValeurType implements Entity, Cloneable {
     public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("typevalue");
 	racine.setAttribute("idkmad", oid.get());
-
+		
 	Element valueElement = doc.createElement("typevalue-value");
 	valueElement.setTextContent(this.toString());
 	racine.appendChild(valueElement);
-
+	
 	return racine;
     }
 
@@ -81,4 +81,20 @@ public abstract class ValeurType implements Entity, Cloneable {
 	    return null;
 	}
     }
+    
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return toXML(doc);
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		createObjectFromXMLElement(p);
+	}
+	
+	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
+		return oidIsAnyMissing(p);
+	}
 }

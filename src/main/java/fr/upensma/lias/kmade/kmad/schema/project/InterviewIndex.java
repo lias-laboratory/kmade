@@ -340,4 +340,23 @@ public class InterviewIndex implements Entity {
     public void setInverseProject(Project inverseProject) {
 	this.inverseProject = inverseProject;
     }
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return toXML(doc);
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		createObjectFromXMLElement(p);
+		
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

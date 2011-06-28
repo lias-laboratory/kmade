@@ -205,4 +205,22 @@ public class Materiel implements Entity {
     public void setImage(String path) {
 	imagePath = path;
     }
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

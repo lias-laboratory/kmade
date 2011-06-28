@@ -27,7 +27,16 @@ public interface KMADXml {
     
     Element toXML(Document doc) throws Exception;
     
+    //Added by Joachim TROUVERIE
+    Element toXML2 (Document doc) throws Exception;
+    
     boolean oidIsAnyMissing(Element p) throws Exception;
     
+    //Added by Joachim TROUVERIE
+    boolean oidIsAnyMissing2(Element p) throws Exception;
+    
     void createObjectFromXMLElement(Element p) throws Exception;
+    
+    //Added by Joachim TROUVERIE
+    void createObjectFromXMLElement2(Element p) throws Exception;
 }

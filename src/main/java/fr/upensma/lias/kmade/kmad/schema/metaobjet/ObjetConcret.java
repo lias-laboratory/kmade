@@ -299,4 +299,71 @@ public class ObjetConcret implements Entity, Cloneable {
 	}
 	return n;
     }
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		Element racine = doc.createElement("concreteobject");
+		racine.setAttribute("classkmad", "metaobjet.ObjetConcret");
+		racine.setAttribute("idkmad", oid.get());
+		
+		racine.setAttribute("id-concreteobject-abstractobject",this.utiliseParClass.getOid().get());
+		
+		racine.setAttribute("id-concreteobject-group",this.appartientGroupe.getOid().get());
+
+		Element element = doc.createElement("concreteobject-name");
+		element.setTextContent(this.getName());
+		racine.appendChild(element);
+		
+		if (!this.description.equals("")) {
+		    element = doc.createElement("concreteobject-description");
+		    element.setTextContent(this.description);
+		    racine.appendChild(element);
+		}
+		
+		if(!this.inverseAttribut.isEmpty()){
+			for(int i =0; i<inverseAttribut.size(); i++){
+				racine.appendChild(inverseAttribut.get(i).toXML2(doc));
+			}
+		}
+
+		return racine;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		this.oid = new Oid(p.getAttribute("idkmad"));
+
+		this.setUtiliseParClass((ObjetAbstrait) InterfaceExpressJava.bdd
+			.prendre(new Oid(p.getAttribute("id-concreteobject-abstractobject"))));
+
+		
+		this.setAppartientGroupe((Groupe) InterfaceExpressJava.bdd
+			.prendre(new Oid(p.getAttribute("id-concreteobject-group"))));
+		
+		NodeList nodeList = p.getElementsByTagName("concreteobject-name");
+		this.name = nodeList.item(0).getTextContent();
+
+		nodeList = p.getElementsByTagName("concreteobject-description");
+		if (nodeList.item(0) != null) {
+		    this.description = nodeList.item(0).getTextContent();
+		}		
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		String userValue = p.getAttribute("id-concreteobject-abstractobject");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+			return true;
+		}
+
+		userValue = p.getAttribute("id-concreteobject-group");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+			return true;
+		}
+
+		return false;
+		}
 }

@@ -187,4 +187,58 @@ public class Media implements Entity {
     public void setStartMark(int startMark) {
 	this.startMark = startMark;
     }
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		if (this.isExisting) {
+			Element racine = doc.createElement("media");
+			racine.setAttribute("classkmad", "tache.Media");
+			racine.setAttribute("idkmad", oid.get());
+
+			Element currentElement = doc.createElement("media-existing");
+			currentElement.setTextContent(Boolean.toString(this.isExisting));
+			racine.appendChild(currentElement);
+		
+		    currentElement = doc.createElement("media-filename");
+		    currentElement.setTextContent(this.fileName);
+		    racine.appendChild(currentElement);
+
+		    if (!this.path.equals("")) {
+			currentElement = doc.createElement("media-path");
+			currentElement.setTextContent(this.path);
+			racine.appendChild(currentElement);
+		    }
+
+		    if (this.startMark != -1) {
+			currentElement = doc.createElement("media-startmark");
+			currentElement.setTextContent(Integer.toString(this.startMark));
+			racine.appendChild(currentElement);
+		    }
+
+		    if (this.finishMark != -1) {
+			currentElement = doc.createElement("media-finishmark");
+			currentElement
+				.setTextContent(Integer.toString(this.finishMark));
+			racine.appendChild(currentElement);
+		    }
+		    return racine;
+		}
+		
+		else return null;
+		
+    }
+
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		createObjectFromXMLElement(p);
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

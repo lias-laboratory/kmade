@@ -275,4 +275,63 @@ public class Groupe implements Entity {
     public boolean noSpace() {
 	return (name.indexOf(" ") == -1);
     }
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		Element racine = doc.createElement("group");
+		racine.setAttribute("classkmad", "metaobjet.Groupe");
+		racine.setAttribute("idkmad", oid.get());
+		
+		racine.setAttribute("id-group-agregat",this.ensemble.getOid().get());
+		racine.setAttribute("id-group-abstractobject",this.contientObj.getOid().get());
+		
+		Element element = doc.createElement("group-name");
+		element.setTextContent(this.getName());
+		racine.appendChild(element);
+
+		if (!this.description.equals("")) {
+		    element = doc.createElement("group-description");
+		    element.setTextContent(this.getDescription());
+		    racine.appendChild(element);
+		}
+
+		return racine;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		this.oid = new Oid(p.getAttribute("idkmad"));
+		this.setEnsemble((Agregat) InterfaceExpressJava.bdd.prendre(new Oid(
+			p.getAttribute("id-group-agregat"))));
+		
+		this.setContientObj((ObjetAbstrait) InterfaceExpressJava.bdd
+			.prendre(new Oid(p.getAttribute("id-group-abstractobject"))));
+		
+		NodeList nodeList = p.getElementsByTagName("group-name");
+		this.name = nodeList.item(0).getTextContent();
+
+		nodeList = p.getElementsByTagName("group-description");
+		if (nodeList.item(0) != null) {
+		    this.description = nodeList.item(0).getTextContent();
+		}
+		
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		String userValue = p.getAttribute("id-group-agregat");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+		    return true;
+		}
+
+		userValue = p.getAttribute("id-group-abstractobject");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+		    return true;
+		}
+
+		return false;
+	}
 }

@@ -240,4 +240,54 @@ public class ObjetAbstrait implements Entity {
     public String toString() {
 	return this.name;
     }
+
+    @Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+    	Element racine = doc.createElement("abstractobject");
+    	racine.setAttribute("classkmad", "metaobjet.ObjetAbstrait");
+    	racine.setAttribute("idkmad", oid.get());
+
+    	Element element = doc.createElement("abstractobject-name");
+    	element.setTextContent(this.getName());
+    	racine.appendChild(element);
+
+    	if (!this.description.equals("")) {
+    	    element = doc.createElement("abstractobject-description");
+    	    element.setTextContent(this.description);
+    	    racine.appendChild(element);
+    	}
+    	
+    	if(!this.inverseGroupe.isEmpty()){
+    		for(int i=0;i<this.inverseGroupe.size();i++){
+    			racine.appendChild(this.inverseGroupe.get(i).toXML2(doc));
+    		}
+    	}
+    	
+    	if(!this.inverseAttributsAbs.isEmpty()){
+    		for(int i=0;i<this.inverseAttributsAbs.size();i++){
+    			racine.appendChild(this.inverseAttributsAbs.get(i).toXML2(doc));
+    		}
+    	}
+    	
+    	if(!this.inverseObjConcDe.isEmpty()){
+    		for(int i=0; i<this.inverseObjConcDe.size();i++){
+    			racine.appendChild(this.inverseObjConcDe.get(i).toXML2(doc));
+    		}
+    	}
+
+    	return racine;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		createObjectFromXMLElement(p);
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -34,6 +34,7 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressIteration;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressPrecondition;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserkmad.ExpressKMADXML;
+import fr.upensma.lias.kmade.tool.coreadaptator.parserobjects.ExpressKMADItemsXML;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.KMADEStartDialog;
 import fr.upensma.lias.kmade.tool.view.KMADEToolProjectSplashScreenShadow;
@@ -333,6 +334,65 @@ public final class KMADeAdaptator {
 		    .writeKMADModelFromXMLFile();
 	}
     }
+    /**
+     * @author Joachim TROUVERIE
+     */
+    public static void loadItemsXML() {
+    	// Avant d'ouvrir demander si le projet courant doit ï¿½tre sauvegardï¿½.
+    	if (InterfaceExpressJava.isBddSet()) {
+    	    int value = KMADeAdaptator
+    		    .askToSaveBeforeAction(KMADEConstant.WRITE_BEFORE_OPEN_OBJECTS_MESSAGE);
+    	    if (value == JOptionPane.YES_OPTION) {
+    		// On peut sauvegarder avant
+    		KMADeAdaptator.saveItemsXML();
+    	    } else if (value == JOptionPane.CANCEL_OPTION) {
+    		// Pas de chargement on arrï¿½te
+    		System.out
+    			.println(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
+    		return;
+    	    }
+    	}
+
+    	File myCurrentFile = KMADEFileChooser.openKMADModelXMLFile();
+    	if (myCurrentFile != null) {
+    	    // Pre-loading : clean UI
+    	    InterfaceExpressJava.clearCurrentItems();
+    	    KMADeAdaptator.cleanItems();
+
+    	    // Loading
+    	    ExpressKMADItemsXML.loadKMADItems(myCurrentFile);
+    	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
+    		    .readKMADItemsFromXMLFile();
+    	}
+    	updateThread = true;
+        }
+    /**
+     * @author Joachim TROUVERIE
+     * To save the objects separately of the model
+     */
+    public static void saveItemsXML(){
+    	if (fileName == null | fileName.equals("")) {
+    	    saveItemsXMLAs();
+    	} else {
+    	    File myCurrentFile = new File(fileName);
+    	    if (myCurrentFile != null) {
+    		ExpressKMADItemsXML.saveKMADItems(myCurrentFile.getAbsolutePath());
+    		GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
+    			.writeKMADItemsFromXMLFile();
+    	    }
+    	}
+    }
+    /**
+     * @author Joachim TROUVERIE
+     */
+    public static void saveItemsXMLAs(){
+    	String myCurrentFile = KMADEFileChooser.saveKMADModelXMLFile();
+    	if (myCurrentFile != null) {
+    	    ExpressKMADItemsXML.saveKMADItems(myCurrentFile);
+    	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
+    		    .writeKMADItemsFromXMLFile();
+    	}
+    }
 
     /**
      * Mï¿½thode qui consiste ï¿½ ouvrir un projet.
@@ -545,6 +605,14 @@ public final class KMADeAdaptator {
 	LabelAdaptator.removeAllLabels();
 	ConcreteObjectPanelAdaptator.removeAllConcreteObject();
 	GraphicEditorAdaptator.getTaskModelPanel().emptyRootFromModel();
+    }
+    
+    /**
+     * Cette méthode sert à supprimer les objets
+     */
+    public static void cleanItems() {
+    	AbstractObjectAdaptator.removeAllAbstractObject();
+    	ConcreteObjectPanelAdaptator.removeAllConcreteObject();
     }
 
     public static void openCoherenceDialog() {

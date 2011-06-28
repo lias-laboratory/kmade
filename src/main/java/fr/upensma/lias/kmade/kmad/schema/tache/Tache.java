@@ -94,6 +94,9 @@ public class Tache implements Entity {
     private String media = "";
 
     private Media idMedia = null;
+    
+    //If the task has no point related
+    private boolean noPoint = false;
 
     // Ces trois attributs sont reserves pour la copie
     private Tache taskCloned = null;
@@ -201,6 +204,7 @@ public class Tache implements Entity {
      * this.stateSimulation = new StateSimulation(); }
      */
 
+    
     public Media getMedia() {
 	return this.idMedia;
     }
@@ -667,7 +671,7 @@ public class Tache implements Entity {
     }
 
     /*
-     * je sais plus Ã  quoi elle sert.
+     * Donne le numéro de la tache selon son positionnement dans les fils
      */
     private static int place(Tache leFils, Tache laMere) {
 	int pointX = (leFils.point.x).intValue();
@@ -1584,4 +1588,460 @@ public class Tache implements Entity {
 	    return true;
 	}
     }
+    /**
+     * Same as "toXML" method adapted to the new dtd
+     * @author Joachim TROUVERIE
+     */
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+	// Arguments
+		Element racine = doc.createElement("task");
+		racine.setAttribute("classkmad", "tache.Tache");
+		racine.setAttribute("idkmad", oid.get());
+		//Media
+		if (this.idMedia.isExisting()) 
+		    racine.setAttribute("id-task-media",this.idMedia.getOid().get());
+		//Event trigger
+		if (this.declencheur != null) 
+		    racine.setAttribute("id-task-eventtrigger",this.declencheur.getOid().get());
+		// Events
+		if (!this.lstEvent.isEmpty()) {
+			String list = new String("");
+		    for (int i = 0; i < this.lstEvent.size(); i++) {
+		    	list += lstEvent.get(i).getOid().get() + " ";
+		    }
+		    racine.setAttribute("id-task-events-list",list);
+		}
+		// Actors
+		if (!this.acteurs.isEmpty()) {
+			String list = new String("");
+		    for (int i = 0; i < this.acteurs.size(); i++) {
+		    	list += acteurs.get(i).getOid().get() + " ";
+		    }
+		    racine.setAttribute("id-task-actors-list",list);
+		}  
+		// Actors System
+		if (!this.acteurSysteme.isEmpty()) {
+			String list = new String("");
+		    for (int i = 0; i < this.acteurSysteme.size(); i++) {
+		    	list += acteurSysteme.get(i).getOid().get() + " ";
+		    }
+		    racine.setAttribute("id-task-actorSystem",list);
+		} 
+		//Subtasks
+		if (!this.fils.isEmpty()) {
+			String list = new String("");
+		    for (int i = 0; i < this.fils.size(); i++) {
+		    	list += fils.get(i).getOid().get() + " ";
+		    }
+		    racine.setAttribute("id-task-subtasks-list",list);
+		}
+		//Point
+		racine.setAttribute("id-task-point", this.point.getOid().get());
+		//Label
+		if(this.label != null)
+			racine.setAttribute("id-task-label", this.label.getOid().get());
+	
+	//Elements
+		// Name
+		Element kmadElement = doc.createElement("task-name");
+		kmadElement.setTextContent(this.name);
+		racine.appendChild(kmadElement);
+		//Numero
+		kmadElement = doc.createElement("task-numero");
+		kmadElement.setTextContent(this.numero);
+		racine.appendChild(kmadElement);
+		// But
+		if (!this.but.equals("")) {
+		    kmadElement = doc.createElement("task-purpose");
+		    kmadElement.setTextContent(this.but);
+		    racine.appendChild(kmadElement);
+		}
+		// Duration
+		if (!this.duree.equals("")) {
+		    kmadElement = doc.createElement("task-duration");
+		    kmadElement.setTextContent(this.duree);
+		    racine.appendChild(kmadElement);
+		}
+		// Resources
+		if (!this.ressources.equals("")) {
+		    kmadElement = doc.createElement("task-resources");
+		    kmadElement.setTextContent(this.ressources);
+		    racine.appendChild(kmadElement);
+		}
+		// Feedback
+		if (!this.feed.equals("")) {
+		    kmadElement = doc.createElement("task-feedback");
+		    kmadElement.setTextContent(this.feed);
+		    racine.appendChild(kmadElement);
+		}
+		// Observation
+		if (!this.observation.equals("")) {
+		    kmadElement = doc.createElement("task-observation");
+		    kmadElement.setTextContent(this.observation);
+		    racine.appendChild(kmadElement);
+		}
+		// Executant
+		racine.appendChild(this.executant.toXML(doc));
+		// Frequency
+		if (!this.frequence.equals(Frequence.INCONNU)) {
+		    racine.appendChild(this.frequence.toXML(doc));
+		}
+		// Frequency Value
+		if (!this.compFreq.equals("")) {
+		    kmadElement = doc.createElement("task-compfrequency");
+		    kmadElement.setTextContent(this.compFreq);
+		    racine.appendChild(kmadElement);
+		}
+		// Importance
+		if (!this.imp.equals(Importance.INCONNU)) {
+		    racine.appendChild(this.imp.toXML(doc));
+		}
+		// Modality
+		if (!this.modal.equals(Modalite.INCONNU)) {
+		    racine.appendChild(this.modal.toXML(doc));
+		}
+		// Optional
+		kmadElement = doc.createElement("task-optional");
+		kmadElement.setTextContent(this.facultatif.toString());
+		racine.appendChild(kmadElement);
+		// Interruptible
+		kmadElement = doc.createElement("task-interruptible");
+		kmadElement.setTextContent(this.interruptible.toString());
+		racine.appendChild(kmadElement);
+		// Decomposition
+		racine.appendChild(this.decomposition.toXML(doc));
+		// Precondition
+		kmadElement = doc.createElement("task-precondition");
+		kmadElement.setTextContent(this.preExpression.getName());
+		racine.appendChild(kmadElement);
+		// Precondition Description
+		if (!this.getPreExpression().getDescription().equals("")) {
+		    kmadElement = doc.createElement("task-descriptionprecondition");
+		    kmadElement.setTextContent(this.preExpression.getDescription());
+		    racine.appendChild(kmadElement);
+		}
+		// attention il ne faut pas utilise le tag postcondition pour les
+		// postcondition de la V2 !
+		// ils sont reserver aux effets de bord de la v1!
+		// EffetsDeBord
+		// ATTENTION optionnal in the v3
+		if(!this.effetsDeBordExpression.getName().equals("Void")){
+			kmadElement = doc.createElement("task-effetsdebord");
+			kmadElement.setTextContent(this.effetsDeBordExpression.getName());
+			racine.appendChild(kmadElement);
+		}
+		// EffetsDeBord Description
+		if (!this.getEffetsDeBordExpression().getDescription().equals("")) {
+		    kmadElement = doc.createElement("task-descriptioneffetsdebord");
+		    kmadElement.setTextContent(this.effetsDeBordExpression
+			    .getDescription());
+		    racine.appendChild(kmadElement);
+		}
+		// Iteration
+		kmadElement = doc.createElement("task-iteration");
+		kmadElement.setTextContent(this.iteExpression.getName());
+		racine.appendChild(kmadElement);
+		// Iteration Description
+		if (!this.getIteExpression().getDescription().equals("")) {
+		    kmadElement = doc.createElement("task-descriptioniteration");
+		    kmadElement.setTextContent(this.iteExpression.getDescription());
+		    racine.appendChild(kmadElement);
+		}
+		
+		//We call this method on the subtasks 
+		if(!this.fils.isEmpty()){
+			for(int i=0;i<fils.size();i++){
+				racine.appendChild(this.fils.get(i).toXML2(doc));
+			}
+		}
+		return racine;
+
+	}
+	/**
+	 * Same as "createObjectFromXMLElement" method adapted to the new dtd
+	 * @author Joachim TROUVERIE
+	 */
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		this.oid = new Oid(p.getAttribute("idkmad"));
+		// Media
+		if(p.hasAttribute("id-task-media)"))
+			this.idMedia = (Media) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-task-media")));
+		// Triggering Event
+		if (p.hasAttribute("id-task-eventtrigger")) 
+		    this.declencheur = (Evenement) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-task-eventtrigger")));
+		// Generated Events
+		if(p.hasAttribute("id-task-events-list")){
+			String[] events = p.getAttribute("id-task-events-list").split(" ");
+			for (int i = 0; i < events.length; i++) {
+				Evenement event = (Evenement) InterfaceExpressJava.bdd
+				    .prendre(new Oid(events[i]));
+			    this.lstEvent.add(event);
+			    event.addInverseTache(this);
+			}
+		}
+		//Actors
+		if(p.hasAttribute("id-task-actors-list")){
+			String[] actors = p.getAttribute("id-task-actors-list").split(" ");
+			for (int i = 0; i < actors.length; i++) {
+				this.addActeur((Acteur) InterfaceExpressJava.bdd
+				    .prendre(new Oid(actors[i])));
+				this.acteurs.get(i).setInverseTache(this);
+			}
+		}
+		//Actors system
+		if(p.hasAttribute("id-task-actorSystem-list")){
+			String[] actorSys = p.getAttribute("id-task-actorSystem-list").split(" ");
+			for (int i = 0; i < actorSys.length; i++) {
+				this.addActeurSystem((ActeurSysteme) InterfaceExpressJava.bdd
+				    .prendre(new Oid(actorSys[i])));
+				this.acteurSysteme.get(i).setInverseTache(this);
+			}
+		}		
+		// Point
+		if(p.hasAttribute("id-task-point"))
+			this.point = (Point) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-task-point")));
+		else{
+			this.setPoint(new Point(0,0,new Oid(InterfaceExpressJava.bdd.getMax()+1)));
+			InterfaceExpressJava.mettre(this.point.getOid(), this.point);
+			this.noPoint = true;
+		}
+		// Subtasks
+		if(p.hasAttribute("id-task-subtasks-list")){
+			String[] son = p.getAttribute("id-task-subtasks-list").split(" ");
+			for (int i = 0; i < son.length; i++) {
+				this.addSubTask((Tache) InterfaceExpressJava.bdd
+			    .prendre(new Oid(son[i])));
+			}
+		}
+		
+		// Label
+		if (p.hasAttribute("id-task-label"))
+		    this.label = (Label) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-task-label")));
+	
+	//Elements	
+		// Name
+		NodeList nodeList = p.getElementsByTagName("task-name");
+		this.name = nodeList.item(0).getTextContent();
+		//Numero
+		nodeList = p.getElementsByTagName("task-numero");
+		this.numero = nodeList.item(0).getTextContent();
+		
+		// Purpose
+		nodeList = p.getElementsByTagName("task-purpose");
+		if (nodeList.item(0) != null) {
+		    this.but = nodeList.item(0).getTextContent();
+		}
+		// Duration
+		nodeList = p.getElementsByTagName("task-duration");
+		if (nodeList.item(0) != null) {
+		    this.duree = nodeList.item(0).getTextContent();
+		}
+		// Resources
+		nodeList = p.getElementsByTagName("task-resources");
+		if (nodeList.item(0) != null) {
+		    this.ressources = nodeList.item(0).getTextContent();
+		}
+		// Feedback
+		nodeList = p.getElementsByTagName("task-feedback");
+		if (nodeList.item(0) != null) {
+		    this.feed = nodeList.item(0).getTextContent();
+		}
+		// Observation
+		nodeList = p.getElementsByTagName("task-observation");
+		if (nodeList.item(0) != null) {
+		    this.observation = nodeList.item(0).getTextContent();
+		}
+		// Executant
+		this.executant = Executant.getXMLExecutantValue(p);
+		// Frequence
+		this.frequence = Frequence.getXMLFrequenceValue(p);
+		// Valeur de la Frequence
+		nodeList = p.getElementsByTagName("task-compfrequency");
+		if (nodeList.item(0) != null) {
+		    this.compFreq = nodeList.item(0).getTextContent();
+		}
+		// Importance
+		this.imp = Importance.getXMLExecutantValue(p);
+		// Modality
+		this.modal = Modalite.getXMLModalityValue(p);
+		// Optional
+		nodeList = p.getElementsByTagName("task-optional");
+		this.facultatif = new Boolean(nodeList.item(0).getTextContent());
+		// Interruptible
+		nodeList = p.getElementsByTagName("task-interruptible");
+		this.interruptible = new Boolean(nodeList.item(0).getTextContent());
+		// Decomposition
+		this.decomposition = Decomposition.getXMLModalityValue(p);
+		// Precondition
+		nodeList = p.getElementsByTagName("task-precondition");
+		if (nodeList.item(0) != null) {
+		    this.preExpression = new PreExpression(nodeList.item(0)
+			    .getTextContent());
+		}
+		// Precondition Description
+		nodeList = p.getElementsByTagName("task-descriptionprecondition");
+		if (nodeList.item(0) != null) {
+		    this.preExpression
+			    .setDescription(nodeList.item(0).getTextContent());
+		}
+		// EffetsDeBord
+		nodeList = p.getElementsByTagName("task-effetsdebord");
+		if (nodeList.item(0) != null) {
+		    this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList
+			    .item(0).getTextContent());
+		}
+		// attention il ne faut pas utilisï¿½ le tag postcondition pour les
+		// postcondition de la V2 !
+		nodeList = p.getElementsByTagName("task-postcondition");
+		if (nodeList.item(0) != null) {
+		    this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList
+			    .item(0).getTextContent());
+		}
+		// attention il ne faut pas utilisï¿½ le tag postcondition pour les
+		// postcondition de la V2 !
+		nodeList = p.getElementsByTagName("task-descriptionpostcondition");
+		if (nodeList.item(0) != null) {
+		    this.effetsDeBordExpression.setDescription(nodeList.item(0)
+			    .getTextContent());
+		}
+		// EffetsDeBord Description
+		nodeList = p.getElementsByTagName("task-descriptioneffetsdebord");
+		if (nodeList.item(0) != null) {
+		    this.effetsDeBordExpression.setDescription(nodeList.item(0)
+			    .getTextContent());
+		}
+		// Iteration
+		nodeList = p.getElementsByTagName("task-iteration");
+		this.iteExpression = new IterExpression(nodeList.item(0)
+			.getTextContent());
+		// Iteration Description
+		nodeList = p.getElementsByTagName("task-descriptioniteration");
+		if (nodeList.item(0) != null) {
+		    this.iteExpression
+			    .setDescription(nodeList.item(0).getTextContent());
+		}
+		
+		createTreeStructure(this);
+	}
+	/**
+	 * Same as "oidIsAnyMissing" method adapted to the new dtd
+	 * @author Joachim TROUVERIE
+	 */
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		//Event Trigger
+		if(p.hasAttribute("id-task-eventtrigger")){
+			String nodeList = p.getAttribute("id-task-eventtrigger");
+		    if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null){
+		    	return true;
+		    }
+		}
+		//Media
+		if(p.hasAttribute("id-task-media")){
+			String nodeList = p.getAttribute("id-task-media");
+		    if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
+		    	return true;
+		    }
+		}
+		//Events list
+		if(p.hasAttribute("id-task-events-list")){
+			String[] list = p.getAttribute("id-task-events-list").split(" ");
+		    for (int i = 0; i < list.length; i++) {
+			    if (InterfaceExpressJava.bdd
+				    .prendre(new Oid(list[i])) == null) {
+			    	return true;
+			    }
+			}
+		}
+		//Actors list
+		if(p.hasAttribute("id-task-actors-list")){
+			String[] list = p.getAttribute("id-task-actors-list").split(" ");
+		    for (int i = 0; i < list.length; i++) {
+			    if (InterfaceExpressJava.bdd
+				    .prendre(new Oid(list[i])) == null) {
+			    	return true;
+			    }
+			}
+		}
+		//Actors System
+		if(p.hasAttribute("id-task-actorSystem")){
+			String[] list = p.getAttribute("id-task-actorSystem").split(" ");
+			for (int i = 0; i < list.length; i++) {
+			    if (InterfaceExpressJava.bdd
+				    .prendre(new Oid(list[i])) == null) {
+			    	return true;
+			    }
+			}
+		}
+		//Subtasks list
+		if(p.hasAttribute("id-task-subtasks-list")){
+			String[] list = p.getAttribute("id-task-subtasks-list").split(" ");
+		    for (int i = 0; i < list.length; i++) {
+			    if (InterfaceExpressJava.bdd
+				    .prendre(new Oid(list[i])) == null) {
+			    	return true;
+			    }
+			}
+		}
+		//Point
+		if(p.hasAttribute("id-task-point")){
+			String nodeList = p.getAttribute("id-task-point");
+		    if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null){
+		    	return true;
+		    }    	
+		}
+		//Label
+		if(p.hasAttribute("id-task-label")){
+			String nodeList = p.getAttribute("id-task-label");
+		    if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null){
+		    	return true;
+		    }
+		    	
+		}
+
+		return false;
+
+	}
+	
+	/**
+	 * @author Joachim TROUVERIE
+	 * Calculus of the task 's points to have a tree architecture
+	 */
+	public void createTreeStructure(Tache t){
+	//Create Tree Structure (set the position of the root)
+		if(t != null && t.noPoint){
+			if(t.numero.startsWith(ExpressConstant.ROOT_TASK_NAME)){
+				t.getPoint().setX(500);
+				t.getPoint().setY(25);			
+			}
+			//Y Point
+			if(t.mere != null)
+				t.getPoint().setY(t.mere.getPoint().getY() + 144);
+			//X Point
+			if(!t.fils.isEmpty()){
+				int xMother = t.getPoint().getX();
+				//First half on the left
+				for(int i=(t.fils.size()/2)-1;i>=0;i--){
+					xMother = xMother - 136;
+					System.out.println(fils.get(i).getNumero());
+					t.fils.get(i).getPoint().setX(xMother);
+					createTreeStructure(t.fils.get(i));
+				}
+				xMother = t.getPoint().getX();
+				//Second half on the right
+				for(int i=t.fils.size()/2;i<t.fils.size();i++){
+					xMother = xMother + 136;
+					System.out.println(xMother);
+					t.fils.get(i).getPoint().setX(xMother);
+					createTreeStructure(t.fils.get(i));
+				}
+			}
+			
+			
+		}
+	}
+	
 }

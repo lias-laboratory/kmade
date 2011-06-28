@@ -38,6 +38,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
@@ -77,7 +78,7 @@ public final class ExpressKMADXML {
     private static ArrayList<Element> notYetCreated = new ArrayList<Element>();
 
     private static File kmadeModelFile = null;
-
+    
     private static String fileName = "";
 
     public static String getCurrentFileName() {
@@ -167,9 +168,10 @@ public final class ExpressKMADXML {
 	    TransformerFactory fabrique = TransformerFactory.newInstance();
 	    Transformer transformer = fabrique.newTransformer();
 	    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+	    transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 	    transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 	    transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM,
-		    "file:KMADModel.dtd");
+		    "file:KMADModelJT.dtd");
 
 	    // Transformation
 	    transformer.transform(source, resultat);
@@ -225,29 +227,65 @@ public final class ExpressKMADXML {
     public static int getEntitySize() {
 	return InterfaceExpressJava.bdd.size();
     }
-
+   
+        /**
+     * @author Joachim TROUVERIE
+     * @param document
+     * @param racine
+     * @throws KMADXMLParserException
+     */
     private static void writeBodyXML(Document document, Element racine)
 	    throws KMADXMLParserException {
-	Set<Oid> set = InterfaceExpressJava.bdd.keySet();
-	currentEntity = 0;
-	for (Iterator<Oid> i = set.iterator(); i.hasNext()
-		&& !ExpressKMADXML.canceled && !ExpressKMADXML.error;) {
-	    Oid oid = i.next();
-	    Object o = InterfaceExpressJava.bdd.prendre(oid);
-	    try {
-		Element myElement = ((Entity) o).toXML(document);
-		System.out.println(((Entity) o).toSPF());
-		currentEntity++;
-		if (myElement != null) {
-		    racine.appendChild(myElement);
-		}
-	    } catch (Exception e) {
-		throw new KMADXMLParserException(
-			KMADEConstant.ELEMENT_PARSE_PROBLEM_MESSAGE + " : "
-				+ o.toString() + "(" + oid.get() + ")");
-	    }
-	}
+    	ArrayList<String> ClassNames = new ArrayList<String>();
+    	currentEntity = 0;
+    	for (Iterator<Oid> i = InterfaceExpressJava.bdd.keySet().iterator(); i.hasNext();){
+    		Oid oid = i.next();
+    		currentEntity++;
+    		Object o = InterfaceExpressJava.bdd.prendre(oid);
+    		String ClassName = o.getClass().getName();
+    		if(!ClassNames.contains(ClassName)
+    			&& !ClassName.contains("Attribut") 
+    			&& !ClassName.contains("Groupe")
+    			&& !ClassName.contains("ObjetConcret")
+    			&& !ClassName.contains("Value")){
+    			ClassNames.add(o.getClass().getName());
+    			writeBodyXMLByClass(o.getClass().getName(),document,racine);
+    		}
+    	}
     }
+    /**
+     * @author Joachim TROUVERIE
+     * Write all the elements in the xml by class
+     * @param ClassName
+     * @param document
+     * @param racine
+     * @throws KMADXMLParserException
+     */
+    private static void writeBodyXMLByClass(String ClassName,Document document, Element racine)
+    throws KMADXMLParserException {
+    	ArrayList<Oid> set = InterfaceExpressJava.bdd.getByClassName(ClassName);
+    	for (int i=0;i<set.size() && !ExpressKMADXML.canceled && !ExpressKMADXML.error;i++){
+    		Object o = InterfaceExpressJava.bdd.prendre(set.get(i));
+    	try {
+			Element myElement = null;
+    		//if the element is not a task or if it the root
+			if(!ClassName.contains("Tache")
+    			|| ((Tache) o).getNumero().startsWith(ExpressConstant.ROOT_TASK_NAME)){
+    			myElement = ((Entity) o).toXML2(document);
+        		System.out.println(((Entity) o).toSPF());
+    		}
+    		
+    		if (myElement != null) {
+    			racine.appendChild(myElement);
+    		}
+    	} catch (Exception e) {
+    		throw new KMADXMLParserException(
+    			KMADEConstant.ELEMENT_PARSE_PROBLEM_MESSAGE + " : "
+    			+ o.toString() + "(" + set.get(i).get() + ")");
+    		}
+    	}
+    }
+    
 
     // Partie pour le chargement du fichier XML
     public static void loadKMADModel(File kmadeModelFile) {
@@ -259,10 +297,10 @@ public final class ExpressKMADXML {
 	SwingWorker worker = new SwingWorker() {
 	    public Object construct() {
 		try {
-		    // cr�ation d'une fabrique de documents
+		    // creation d'une fabrique de documents
 		    DocumentBuilderFactory fabrique = DocumentBuilderFactory
 			    .newInstance();
-		    // cr�ation d'un constructeur de documents
+		    // creation d'un constructeur de documents
 		    DocumentBuilder constructeur = fabrique
 			    .newDocumentBuilder();
 
@@ -325,7 +363,7 @@ public final class ExpressKMADXML {
 	};
 	worker.start();
     }
-
+    
     private static void readHeadXML(Element node) {
 	if (!node.hasAttribute("version")) {
 	    System.out.println(KMADEConstant.NO_VERSION);
@@ -399,88 +437,136 @@ public final class ExpressKMADXML {
 		ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE + " : "
 			+ currentElement.getAttribute("classkmad"));
     }
-
+    /**
+     * @author Joachim TROUVERIE
+     * Create the objects from the kxml file
+     * @param racine
+     * @throws KMADXMLParserException 
+     */   	
     private static void readBodyXML(Element racine)
 	    throws KMADXMLParserException {
-	NodeList nodeList = racine.getChildNodes();
+    	NodeList nodeList = racine.getElementsByTagName("*");
+    	for (int i = 0; i < nodeList.getLength() && !ExpressKMADXML.canceled; i++) {
+    		if (nodeList.item(i).getNodeType() == Element.ELEMENT_NODE &&
+    				((Element) nodeList.item(i)).hasAttribute("idkmad")) {
+    			Element myElement = (Element) nodeList.item(i);
+    			String idTask = myElement.getAttribute("idkmad");
+    			if(idTask.charAt(0) == '#'){
+    				Entity newInstance = createOidInstance(myElement);
+    				try {
+    					if (newInstance.oidIsAnyMissing(myElement)) {
+    						notYetCreated.add(myElement);
+    					} else {
+    						newInstance.createObjectFromXMLElement(myElement);
+    						InterfaceExpressJava.bdd.mettre(new Oid(idTask),
+    								newInstance);
+    						System.out.println(newInstance.toSPF());
+    					}
+    				} catch (Exception e) {
+    					throw new KMADXMLParserException(
+    							KMADEConstant.ELEMENT_PARSE_PROBLEM_MESSAGE + " : "
+    							+ myElement.getAttribute("classkmad") + "("
+    							+	 myElement.getAttribute("idkmad") + ")");
+    				}
+    			}
+    			else if(idTask.charAt(0) == 'K'){
+    				Entity newInstance = createOidInstance(myElement);
+    				try {
+    					if (newInstance.oidIsAnyMissing2(myElement)) {
+    						notYetCreated.add(myElement);
+    					} else {
+    						newInstance.createObjectFromXMLElement2(myElement);
+    						InterfaceExpressJava.bdd.mettre(new Oid(idTask),
+    								newInstance);
+    						System.out.println(newInstance.toSPF());
+    					}
+    				} catch (Exception e) {
+    					throw new KMADXMLParserException(
+    							KMADEConstant.ELEMENT_PARSE_PROBLEM_MESSAGE + " : "
+    							+ myElement.getAttribute("classkmad") + "("
+    							+	 myElement.getAttribute("idkmad") + ")");
+    				}
+    			}
+    			
+    		}
+    	}
+    	
 
-	for (int i = 0; i < nodeList.getLength() && !ExpressKMADXML.canceled; i++) {
-	    if (nodeList.item(i).getNodeType() == Element.ELEMENT_NODE) {
-		Element myElement = (Element) nodeList.item(i);
-		String idTask = myElement.getAttribute("idkmad");
-		Entity newInstance = createOidInstance(myElement);
-		try {
-		    if (newInstance.oidIsAnyMissing(myElement)) {
-			notYetCreated.add(myElement);
-		    } else {
-			newInstance.createObjectFromXMLElement(myElement);
-			InterfaceExpressJava.bdd.mettre(new Oid(idTask),
-				newInstance);
-			System.out.println(newInstance.toSPF());
-		    }
-		} catch (Exception e) {
-		    throw new KMADXMLParserException(
-			    KMADEConstant.ELEMENT_PARSE_PROBLEM_MESSAGE + " : "
-				    + myElement.getAttribute("classkmad") + "("
-				    + myElement.getAttribute("idkmad") + ")");
-		}
-	    }
-	}
+    	boolean noRemove = false;
+    	while (notYetCreated.size() != 0 && !noRemove
+    			&& !ExpressKMADXML.canceled) {
+    		noRemove = true;
+    		for(int i=notYetCreated.size()-1;i>=0;) {
+    			Element current = notYetCreated.get(i);
+    			String idTask = current.getAttribute("idkmad");
+    			Entity newInstance = createOidInstance(current);
 
-	boolean noRemove = false;
-	while (notYetCreated.size() != 0 && !noRemove
-		&& !ExpressKMADXML.canceled) {
-	    Iterator<Element> it = notYetCreated.iterator();
-	    noRemove = true;
-	    while (it.hasNext()) {
-		Element current = it.next();
-		String idTask = current.getAttribute("idkmad");
-		Entity newInstance = createOidInstance(current);
+    			try {
+    				if(idTask.charAt(0) == '#'){
+    					if(newInstance.oidIsAnyMissing(current)){
+    						
+    					}else{
+    						newInstance.createObjectFromXMLElement(current);
+    						InterfaceExpressJava.bdd.mettre(new Oid(idTask),
+    								newInstance);
+    						notYetCreated.remove(i);
+    						noRemove = false;
+    						System.out.println(newInstance.toSPF());
+    						i--;
+    					}
+					}
+    				else if(idTask.charAt(0) == 'K'){
+    					if (newInstance.oidIsAnyMissing2(current)) {
+        					System.out.println(idTask);
+        					if(i!=0){
+        						notYetCreated.add(0,notYetCreated.get(i));
+        						notYetCreated.remove(i+1);
+        						noRemove = false;
+        					}
+    					}else{
+    						newInstance.createObjectFromXMLElement2(current);
+    						InterfaceExpressJava.bdd.mettre(new Oid(idTask),
+    								newInstance);
+    						notYetCreated.remove(i);
+    						noRemove = false;
+    						System.out.println(newInstance.toSPF());
+    						i--;
+    					}
+					}
+    				} catch (Exception e) {
+    				throw new KMADXMLParserException(
+    						KMADEConstant.ELEMENT_PARSE_PROBLEM_MESSAGE + " : "
+    						+ current.getAttribute("classkmad") + "("
+    						+ current.getAttribute("idkmad") + ")");
+    			}
+    		}
+    	}
 
-		try {
-		    if (newInstance.oidIsAnyMissing(current)) {
-			// Ne rien faire ...
-		    } else {
-			newInstance.createObjectFromXMLElement(current);
-			InterfaceExpressJava.bdd.mettre(new Oid(idTask),
-				newInstance);
-			it.remove();
-			noRemove = false;
-			System.out.println(newInstance.toSPF());
-		    }
-		} catch (Exception e) {
-		    throw new KMADXMLParserException(
-			    KMADEConstant.ELEMENT_PARSE_PROBLEM_MESSAGE + " : "
-				    + current.getAttribute("classkmad") + "("
-				    + current.getAttribute("idkmad") + ")");
-		}
-	    }
-	}
+    	if (noRemove) {
+    		// Y a des entit�s en trop : explication un probl�me d'exception qui
+    		// n'a pas permis de finaliser la cr�ation ...
+    		while (notYetCreated.size() != 0) {
+    			try {
+    				notYetCreated.remove(0);
+    			} catch (Exception e) {
+    				throw new KMADXMLParserException(
+    						KMADEConstant.XML_PARSER_PROBLEM_MESSAGE
+    						+ " : "
+    						+ KMADEConstant.XML_PARSER_MISSING_ELEMENT_PROBLEM_MESSAGE);
+    			}
+    		}
+    	}
+    	
+    	if (!ExpressKMADXML.canceled) {
+    		InterfaceExpressJava.bdd.loadSPFFinished();
 
-	if (noRemove) {
-	    // Y a des entit�s en trop : explication un probl�me d'exception qui
-	    // n'a pas permis de finaliser la cr�ation ...
-	    while (notYetCreated.size() != 0) {
-		try {
-		    notYetCreated.remove(0);
-		} catch (Exception e) {
-		    throw new KMADXMLParserException(
-			    KMADEConstant.XML_PARSER_PROBLEM_MESSAGE
-				    + " : "
-				    + KMADEConstant.XML_PARSER_MISSING_ELEMENT_PROBLEM_MESSAGE);
-		}
-	    }
-	}
-
-	if (!ExpressKMADXML.canceled) {
-	    InterfaceExpressJava.bdd.loadSPFFinished();
-
-	    // This code part allows to add new features from XML DTD v1.0
-	    ExpressKMADXML.addNewFeatures();
-	    ExpressKMADXML.done = true;
-	}
+    		// This code part allows to add new features from XML DTD v1.0
+    		ExpressKMADXML.addNewFeatures();
+    		ExpressKMADXML.done = true;
+    	}
+    	
     }
-
+    	  		
     private static void addNewFeatures() {
 	// Individu et organisation
 

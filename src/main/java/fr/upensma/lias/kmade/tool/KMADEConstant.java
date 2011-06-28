@@ -500,11 +500,17 @@ public class KMADEConstant {
     public static String XML_PARSER_PROBLEM_MESSAGE = "Problème avec le ParserXML";
     public static String XML_PARSER_MISSING_ELEMENT_PROBLEM_MESSAGE = "entités manquantes dans le fichier XML";
 
+    //Gestion des objets
+    public static String OPEN_OBJECT_ACTION_MESSAGE = "Charger des objets";
+    public static String SAVE_OBJECT_ACTION_MESSAGE = "Enregistrer les objets";
+    public static String SAVE_OBJECT_AS_ACTION_MESSAGE = "Enregistrer les objets sous ...";
+    public static String WRITE_BEFORE_OPEN_OBJECTS_MESSAGE = "Enregistrer les objets avant l'ouverture d'objets existant";
+    
     // Gestion du chargement
     public static String OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME = "Chargement d'un projet MDA annulé";
-    public static String OPEN_ERROR_FILE = "Erreur d'ouverture d'un projet K-MAD";
-    public static String OPEN_EXPRESS_OK_FILE = "Chargement du projet K-MAD réussi : ";
-    public static String OPEN_EXPRESS_NO_OK_FILE = "Chargement du projet K-MAD échoué : ";
+    public static String OPEN_ERROR_FILE = "Erreur d'ouverture";
+    public static String OPEN_EXPRESS_OK_FILE = "Chargement réussi : ";
+    public static String OPEN_EXPRESS_NO_OK_FILE = "Chargement échoué : ";
     public static String EXPRESS_OBJECTS_TITLE_MESSAGE = "Objets de l'utilisateur";
     public static String GRAPHICAL_OBJECTS_MESSAGE = "Objets graphiques";
     public static String CREATE_GRAPHICAL_TASKS_MESSAGE = "Création des tâches graphiques";
@@ -1350,7 +1356,7 @@ public class KMADEConstant {
 
     // Les erreurs d'ouverture KXML
     public static String NO_VERSION = "Aucune version précisée version n'est précisée dans le fichier chargé";
-
+    public static String NO_COMPATIBLE_ITEMS_DOCUMENT = "Ce fichier ne corresponf pas a un fichier d'objets KMADe";
     public static String NEW_SAVE_NEW_FORMAT = "Attention toute nouvelle sauvegarde se fera au nouveau format";
     public static String VERSION_USE = "Vous utilisez la version : ";
     public static String VERSION_FILE = "Vous chargez un fichier avec la version : ";

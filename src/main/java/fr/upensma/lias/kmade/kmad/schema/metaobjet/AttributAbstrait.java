@@ -320,4 +320,70 @@ public class AttributAbstrait implements Entity {
     public boolean noSpace() {
 	return (name.indexOf(" ") == -1);
     }
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		Element racine = doc.createElement("abstractattribut");
+		racine.setAttribute("classkmad", "metaobjet.AttributAbstrait");
+		racine.setAttribute("idkmad", oid.get());
+		racine.setAttribute("id-abstractattribut-abstractobject",this.utiliseParClass.getOid().get());
+		
+		if (this.typeref != null) 
+			racine.setAttribute("id-abstractattribut-type",this.typeref.getOid().get());
+
+		Element element = doc.createElement("abstractattribut-name");
+		element.setTextContent(this.getName());
+		racine.appendChild(element);
+
+		if (!this.getDescription().equals("")) {
+		    element = doc.createElement("abstractattribut-description");
+		    element.setTextContent(this.getDescription());
+		    racine.appendChild(element);
+		}
+
+		racine.appendChild(typeStruct.toXML(doc));
+		
+		return racine;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		this.oid = new Oid(p.getAttribute("idkmad"));
+		if (p.hasAttribute("id-abstractattribut-type")) 
+		    this.setTypeRef((TypeAbs) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-abstractattribut-type"))));
+
+		this.setUtiliseeparClass((ObjetAbstrait) InterfaceExpressJava.bdd
+			.prendre(new Oid(p.getAttribute("id-abstractattribut-abstractobject"))));
+
+		NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
+		this.name = nodeList.item(0).getTextContent();
+
+		nodeList = p.getElementsByTagName("abstractattribut-description");
+		if (nodeList.item(0) != null) {
+		    this.description = nodeList.item(0).getTextContent();
+		}
+
+		nodeList = p.getElementsByTagName("abstractattribut-typestructure");
+		this.typeStruct = TypeStructure.getValue(nodeList.item(0)
+			.getTextContent());
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		String userValue = p
+		.getAttribute("id-abstractattribut-abstractobject");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+			return true;
+		}
+		if (p.hasAttribute("id-abstractattribut-type")) {
+			userValue = p.getAttribute("id-abstractattribut-type");
+			if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

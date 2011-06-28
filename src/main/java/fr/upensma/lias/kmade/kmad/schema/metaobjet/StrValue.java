@@ -93,4 +93,16 @@ public class StrValue extends ValeurType {
 	clone.setValeur(this.valeur);
 	return clone;
     }
+
+    @Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return toXML(doc);
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		createObjectFromXMLElement(p);
+	}
 }
