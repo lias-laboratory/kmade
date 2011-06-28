@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Document Type Definition of K-MAD (Kernel of Model for Activity Description)
+	INRIA Rocquencourt / MErLIn Project
+	Authors : 
+		- BARON Mickael (baron@ensma.fr ou baron.mickael@gmail.com)
+		- SCAPIN Dominique (dominique.scapin@inria.fr)
+		- TROUVERIE Joachim (joachim.trouverie@gmail.com)
+	Version : 2.0
+	Date : June 2010
+-->
+
+<!ELEMENT kmad-model(project, project-information, projectinterviews*, (point | event | actor | user | actorSystem | Individu | Organisation | Machine | ParcMachines | task | abstractobject | abstractattribut | concreteobject | concreteattribut | group | agregat | typevalue | label)*>
+	<!ATTLIST kmad-model version CDATA "3.0.BETA">
+
+<!ELEMENT project(#PCDATA)>
+	<!ATTLIST project idkmad ID #REQUIRED
+					  classkmad CDATA #REQUIRED
+					  id-project-information IDREF #IMPLIED
+					  id-project-interviews-list IDREFS #IMPLIED >
+
+<!ELEMENT projectinformation (projectinformation-compagny?, projectinformation-place?,projectinformation-type?,projetcinformation-date?,projectinformation-resources?, projectinformation-motivation?) >
+	<!ATTLIST projectinformation idkmad ID #REQUIRED
+								 classkmad CDATA #REQUIRED >
+	<!ELEMENT projectinformation-compagny (#PCDATA)>
+	<!ELEMENT projectinformation-place (#PCDATA)>
+	<!ELEMENT projectinformation-type (#PCDATA)>
+	<!ELEMENT projectinformation-date (#PCDATA)>
+	<!ELEMENT projectinformation-resources (#PCDATA)>
+	<!ELEMENT projectinformation-motivation (#PCDATA)>
+
+<!ELEMENT projectinterview (projectinterview-actor, projectinterview-place?, projectinterview-statut?, projectinterview-seniority?, projectinterview-date?, projectinterview-type?, projectinterview-info?, projectinterview-director?)>
+	<!ATTLIST projectinterview idkmad ID #REQUIRED
+							   classkmad CDATA #REQUIRED >
+	<!ELEMENT projectinterview-actor (#PCDATA)>
+	<!ELEMENT projectinterview-place(#PCDATA)>
+	<!ELEMENT projectinterview-statut(#PCDATA)>
+	<!ELEMENT projectinterview-seniority(#PCDATA)>
+	<!ELEMENT projectinterview-date(#PCDATA)>
+	<!ELEMENT projectinterview-type(#PCDATA)>
+	<!ELEMENT projectinterview-info(#PCDATA)>
+	<!ELEMENT projectinterview-director(#PCDATA)>
+	
+<!ELEMENT task (task-name, task-numero, task-purpose?, task-duration?, task-resources?, task-feedback?,task-observation?, task-executant, task-frequency?, task-compfrequency?, task-importance?, task-modality?,task-optional, task-interruptible, task-decomposition, task-precondition, task-descriptionprecondition?, task-sideeffects?, task-descriptionsideeffects?, task-teration, task-descriptioniteration?)>
+	<!ATTLIST task idkmad ID #REQUIRED
+				   classkmad CDATA #REQUIRED
+				   id-task-media IDREF #IMPLIED
+				   id-task-eventtrigger IDREF #IMPLIED
+				   id-task-events-list IDREFS #IMPLIED
+				   id-task-actors-list IDREFS #IMPLIED
+				   id-task-actorSystem IDREFS #IMPLIED
+				   id-task-subtasks-list IDREFS #IMPLIED
+				   id-task-point IDREF #IMPLIED
+				   id-task-label IDREF #IMPLIED >
+	<!ELEMENT task-name (#PCDATA) >
+	<!ELEMENT task-numero(#PCDATA) >
+	<!ELEMENT task-purpose(#PCDATA)>
+	<!ELEMENT task-duration(#PCDATA) >
+	<!ELEMENT task-resources(#PCDATA) >
+	<!ELEMENT task-feedback(#PCDATA) >
+	<!ELEMENT task-observation(#PCDATA) >
+	<!ELEMENT task-executant(#PCDATA) >
+	<!ELEMENT task-frequency(#PCDATA) >
+	<!ELEMENT task-compfrequency(#PCDATA) >
+	<!ELEMENT task-importance(#PCDATA) >
+	<!ELEMENT task-modality(#PCDATA) >
+	<!ELEMENT task-optional(#PCDATA) >
+	<!ELEMENT task-interruptible(#PCDATA) >
+	<!ELEMENT task-decomposition(#PCDATA) >
+	<!ELEMENT task-precondition(#PCDATA) >
+	<!ELEMENT task-descriptionprecondition(#PCDATA) >
+	<!ELEMENT task-sideeffects(#PCDATA) >
+	<!ELEMENT task-descriptionsideeffects(#PCDATA) >
+	<!ELEMENT task-teration(#PCDATA) >
+	<!ELEMENT task-descriptioniteration(#PCDATA)>
+	
+<!ELEMENT point(point-x,point-y)>
+	<!ATTLIST point idkmad ID #REQUIRED
+					classkmad CDATA #REQUIRED >
+	<!ELEMENT point-x (#PCDATA)>
+	<!ELEMENT point-y (#PCDATA)>
+	
+<!ELEMENT media (media-existing, media-filename?, media-path?, media-startmark?,media-finishmark?)>
+	<!ATTLIST media idkmad ID #REQUIRED
+					classkmad CDATA #REQUIRED >
+	<!ELEMENT media-existing (#PCDATA) >
+	<!ELEMENT media-filename (#PCDATA) >
+	<!ELEMENT media-path (#PCDATA) >
+	<!ELEMENT media-startmark (#PCDATA) >
+	<!ELEMENT media-finishmark (#PCDATA) >
+	
+
+<!ELEMENT event(event-name, event-description?)>
+	<!ATTLIST event idkmad ID #REQUIRED
+					classkmad CDATA #REQUIRED >
+	<!ELEMENT event-name (#PCDATA)>
+	<!ELEMENT event-description (#PCDATA)>
+
+<!ELEMENT actor (actor-experience, actor-competence?)>
+	<!ATTLIST actor idkmad ID #REQUIRED
+					classkmad CDATA #REQUIRED 
+					id-user IDREF #REQUIRED >
+	<!ELEMENT actor-experience (#PCDATA)>
+	<!ELEMENT actor-competence (#PCDATA)>
+	
+<!ELEMENT actorSystem (actorSystem-experience, actorSystem-competence?) >
+	<!ATTLIST actorSytem idkmad ID #REQUIRED
+						 classkmad CDATA #REQUIRED 
+						 id-user IDREF #REQUIRED >
+	<!ELEMENT actorSystem-experience (#PCDATA)>
+	<!ELEMENT actorSystem-competence (#PCDATA)>
+	
+<!ELEMENT user (user-name, user-statut?, user-role?, user-imagepath?) >
+	<!ATTLIST user idkmad ID #REQUIRED
+				   classkmad CDATA #REQUIRED >
+	<!ELEMENT user-name (#PCDATA) >
+	<!ELEMENT user-statut (#PCDATA) >
+	<!ELEMENT user-role (#PCDATA) >
+	<!ELEMENT user-imagepath (#PCDATA) >
+
+<!ELEMENT Individu (individu-name, individu-statut?, individu-role?, individu-imagepath?)>
+	<!ATTLIST Individu idkmad ID #REQUIRED
+				   	   classkmad CDATA #REQUIRED >
+	<!ELEMENT individu-name (#PCDATA) >
+	<!ELEMENT individu-statut (#PCDATA) >
+	<!ELEMENT individu-role (#PCDATA) >
+	<!ELEMENT individu-imagepath (#PCDATA) >
+
+<!ELEMENT Organisation (organisation-name, organisation-statut?, organisation-role?, organisation-imagepath?)>
+	<!ATTLIST Organisation idkmad ID #REQUIRED
+				   	       classkmad CDATA #REQUIRED >
+	<!ELEMENT organisation-name (#PCDATA) >
+	<!ELEMENT organisation-statut (#PCDATA) >
+	<!ELEMENT organisation-role (#PCDATA) >
+	<!ELEMENT organisation-imagepath (#PCDATA) >
+	
+<!ELEMENT Machine (machine-name, machine-description?, machine-isComputer, machine-imagepath?)>
+	<!ATTLIST Machine idkmad ID #REQUIRED
+				   	  classkmad CDATA #REQUIRED
+				   	  id-parcMachine IDREF #IMPLIED >
+	<!ELEMENT machine-name (#PCDATA) >
+	<!ELEMENT machine-description (#PCDATA) >
+	<!ELEMENT machine-isComputer (#PCDATA) >
+	<!ELEMENT machine-imagepath (#PCDATA) >
+	
+<!ELEMENT ParcMachines (parcMachines-name, parcMachines-description?, parcMachines-imagepath?)>
+	<!ATTLIST ParcMachines idkmad ID #REQUIRED
+				   	  	   classkmad CDATA #REQUIRED >
+	<!ELEMENT parcMachines-name (#PCDATA)>
+	<!ELEMENT parcMachines-description (#PCDATA)>
+	<!ELEMENT parcMachines-imagepath (#PCDATA)>
+	
+<!ELEMENT abstractobject (abstractobject-name, abstractobject-description?) >
+	<!ATTLIST abstractobject idkmad ID #REQUIRED
+						 	 classkmad CDATA #REQUIRED >
+	<!ELEMENT abstractobject-name (#PCDATA) >
+	<!ELEMENT abstractobject-description (#PCDATA) >
+
+<!ELEMENT abstractattribut (abstractattribut-name, abstractattribut-description?, abstractattribut-typestructure) >
+	<!ATTLIST abstractattribut idkmad ID #REQUIRED
+							   classkmad CDATA #REQUIRED
+							   id-abstractattribut-abstractobject IDREF #REQUIRED
+							   id-abstractattribut-type IDREF #IMPLIED >
+	<!ELEMENT abstractattribut-name (#PCDATA) >
+	<!ELEMENT abstractattribut-description (#PCDATA) >
+	<!ELEMENT abstractattribut-typestructure (#PCDATA) >
+	
+<!ELEMENT concreteobject (concreteobject-name, concreteobject-description?) >
+	<!ATTLIST concreteobject idkmad ID #REQUIRED
+						 	 classkmad CDATA #REQUIRED
+						  	 id-concreteobject-abstractobject IDREF #REQUIRED
+						  	 id-concreteobject-group IDREF #REQUIRED>
+	<!ELEMENT concreteobject-name (#PCDATA) >
+	<!ELEMENT concreteobject-description (#PCDATA) >
+
+<!ELEMENT concreteattribut (#PCDATA) >
+	<!ATTLIST concreteattribut idkmad CDATA #REQUIRED
+							   classkmad CDATA #REQUIRED
+							   id-concreteattribut-concreteobject IDREF #REQUIRED
+							   id-concreteattribut-abstractattribut IDREF #REQUIRED 
+							   id-concreteattribut-value IDREF #REQUIRED >
+
+<!ELEMENT group (group-name, group-description?) >
+	<!ATTLIST group idkmad CDATA #REQUIRED 
+					classkmad CDATA #REQUIRED
+					id-group-agregat IDREF #REQUIRED
+					id-group-abstractobject IDREF #REQUIRED >
+	<!ELEMENT group-name (#PCDATA) >
+	<!ELEMENT group-description (#PCDATA) >
+	
+<!ELEMENT agregat (#PCDATA) >
+	<!ATTLIST agregat idkmad CDATA #REQUIRED
+				      classkmad CDATA #REQUIRED
+				      id-agregat-concreteobjects-list IDREFS #IMPLIED >
+				      
+<!ELEMENT typevalue (typevalue-value) >
+	<!ATTLIST typevalue idkmad CDATA #REQUIRED
+						classkmad CDATA #REQUIRED >
+	<!ELEMENT typevalue-value (#PCDATA) >
+
+<!ELEMENT label (label-name, label-description?, label-color?, label-visible?, label-colorvisible?) >
+	<!ATTLIST label idkmad CDATA #REQUIRED
+					classkmad CDATA #REQUIRED >
+	<!ELEMENT label-name (#PCDATA) >
+	<!ELEMENT label-description (#PCDATA) >
+	<!ELEMENT label-color (#PCDATA) >
+	<!ELEMENT label-visible (#PCDATA) >
+	<!ELEMENT label-colorvisible (#PCDATA) >
