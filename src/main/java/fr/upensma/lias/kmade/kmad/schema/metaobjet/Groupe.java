@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import org.w3c.dom.Document;
@@ -276,62 +276,63 @@ public class Groupe implements Entity {
 	return (name.indexOf(" ") == -1);
     }
 
-	@Override
-	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		Element racine = doc.createElement("group");
-		racine.setAttribute("classkmad", "metaobjet.Groupe");
-		racine.setAttribute("idkmad", oid.get());
-		
-		racine.setAttribute("id-group-agregat",this.ensemble.getOid().get());
-		racine.setAttribute("id-group-abstractobject",this.contientObj.getOid().get());
-		
-		Element element = doc.createElement("group-name");
-		element.setTextContent(this.getName());
-		racine.appendChild(element);
+    @Override
+    public Element toXML2(Document doc) throws Exception {
+	// TODO Auto-generated method stub
+	Element racine = doc.createElement("group");
+	racine.setAttribute("classkmad", "metaobjet.Groupe");
+	racine.setAttribute("idkmad", oid.get());
 
-		if (!this.description.equals("")) {
-		    element = doc.createElement("group-description");
-		    element.setTextContent(this.getDescription());
-		    racine.appendChild(element);
-		}
+	racine.setAttribute("id-group-agregat", this.ensemble.getOid().get());
+	racine.setAttribute("id-group-abstractobject", this.contientObj
+		.getOid().get());
 
-		return racine;
+	Element element = doc.createElement("group-name");
+	element.setTextContent(this.getName());
+	racine.appendChild(element);
+
+	if (!this.description.equals("")) {
+	    element = doc.createElement("group-description");
+	    element.setTextContent(this.getDescription());
+	    racine.appendChild(element);
 	}
 
-	@Override
-	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		this.oid = new Oid(p.getAttribute("idkmad"));
-		this.setEnsemble((Agregat) InterfaceExpressJava.bdd.prendre(new Oid(
-			p.getAttribute("id-group-agregat"))));
-		
-		this.setContientObj((ObjetAbstrait) InterfaceExpressJava.bdd
-			.prendre(new Oid(p.getAttribute("id-group-abstractobject"))));
-		
-		NodeList nodeList = p.getElementsByTagName("group-name");
-		this.name = nodeList.item(0).getTextContent();
+	return racine;
+    }
 
-		nodeList = p.getElementsByTagName("group-description");
-		if (nodeList.item(0) != null) {
-		    this.description = nodeList.item(0).getTextContent();
-		}
-		
+    @Override
+    public void createObjectFromXMLElement2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	this.oid = new Oid(p.getAttribute("idkmad"));
+	this.setEnsemble((Agregat) InterfaceExpressJava.bdd.prendre(new Oid(p
+		.getAttribute("id-group-agregat"))));
+
+	this.setContientObj((ObjetAbstrait) InterfaceExpressJava.bdd
+		.prendre(new Oid(p.getAttribute("id-group-abstractobject"))));
+
+	NodeList nodeList = p.getElementsByTagName("group-name");
+	this.name = nodeList.item(0).getTextContent();
+
+	nodeList = p.getElementsByTagName("group-description");
+	if (nodeList.item(0) != null) {
+	    this.description = nodeList.item(0).getTextContent();
 	}
 
-	@Override
-	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		String userValue = p.getAttribute("id-group-agregat");
-		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-		    return true;
-		}
+    }
 
-		userValue = p.getAttribute("id-group-abstractobject");
-		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-		    return true;
-		}
-
-		return false;
+    @Override
+    public boolean oidIsAnyMissing2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	String userValue = p.getAttribute("id-group-agregat");
+	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+	    return true;
 	}
+
+	userValue = p.getAttribute("id-group-abstractobject");
+	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+	    return true;
+	}
+
+	return false;
+    }
 }

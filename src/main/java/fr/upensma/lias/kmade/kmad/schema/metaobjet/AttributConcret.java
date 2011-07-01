@@ -1,22 +1,21 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.metaobjet;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -322,61 +321,65 @@ public class AttributConcret implements Entity, Cloneable {
 	return clone;
     }
 
-	@Override
-	public org.w3c.dom.Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		org.w3c.dom.Element racine = doc.createElement("concreteattribut");
-		racine.setAttribute("classkmad", "metaobjet.AttributConcret");
-		racine.setAttribute("idkmad", oid.get());
+    @Override
+    public org.w3c.dom.Element toXML2(Document doc) throws Exception {
+	// TODO Auto-generated method stub
+	org.w3c.dom.Element racine = doc.createElement("concreteattribut");
+	racine.setAttribute("classkmad", "metaobjet.AttributConcret");
+	racine.setAttribute("idkmad", oid.get());
 
-		racine.setAttribute("id-concreteattribut-concreteobject",this.objConcDe.getOid().get());
+	racine.setAttribute("id-concreteattribut-concreteobject",
+		this.objConcDe.getOid().get());
 
-		racine.setAttribute("id-concreteattribut-abstractattribut",this.attributAbsDe.getOid().get());
+	racine.setAttribute("id-concreteattribut-abstractattribut",
+		this.attributAbsDe.getOid().get());
 
-		racine.setAttribute("id-concreteattribut-value",this.valeur.getOid().get());
-		
-		racine.appendChild(this.valeur.toXML2(doc));
+	racine.setAttribute("id-concreteattribut-value", this.valeur.getOid()
+		.get());
+	
+	//To write the attribute's value as a child
+	racine.appendChild(this.valeur.toXML2(doc));
 
-		return racine;
+	return racine;
+    }
+
+    @Override
+    public void createObjectFromXMLElement2(org.w3c.dom.Element p)
+	    throws Exception {
+	// TODO Auto-generated method stub
+	this.oid = new Oid(p.getAttribute("idkmad"));
+
+	this.setObjConcDe((ObjetConcret) InterfaceExpressJava.bdd
+		.prendre(new Oid(p
+			.getAttribute("id-concreteattribut-concreteobject"))));
+
+	this.setAttributDe((AttributAbstrait) InterfaceExpressJava.bdd
+		.prendre(new Oid(p
+			.getAttribute("id-concreteattribut-abstractattribut"))));
+	this.name = this.attributAbsDe.getName();
+
+	this.valeur = (ValeurType) InterfaceExpressJava.bdd.prendre(new Oid(p
+		.getAttribute("id-concreteattribut-value")));
+
+    }
+
+    @Override
+    public boolean oidIsAnyMissing2(org.w3c.dom.Element p) throws Exception {
+	// TODO Auto-generated method stub
+	String userValue = p.getAttribute("id-concreteattribut-concreteobject");
+	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+	    return true;
 	}
 
-	@Override
-	public void createObjectFromXMLElement2(org.w3c.dom.Element p)
-			throws Exception {
-		// TODO Auto-generated method stub
-		this.oid = new Oid(p.getAttribute("idkmad"));
-
-		this.setObjConcDe((ObjetConcret) InterfaceExpressJava.bdd
-			.prendre(new Oid(p.getAttribute("id-concreteattribut-concreteobject"))));
-
-		this.setAttributDe((AttributAbstrait) InterfaceExpressJava.bdd
-			.prendre(new Oid(p.getAttribute("id-concreteattribut-abstractattribut"))));
-		this.name = this.attributAbsDe.getName();
-		
-	    this.valeur = (ValeurType) InterfaceExpressJava.bdd
-		    .prendre(new Oid(p.getAttribute("id-concreteattribut-value")));
-		
+	userValue = p.getAttribute("id-concreteattribut-abstractattribut");
+	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+	    return true;
 	}
 
-	@Override
-	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) throws Exception {
-		// TODO Auto-generated method stub
-		String userValue = p
-		.getAttribute("id-concreteattribut-concreteobject");
-		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-			return true;
-		}
-
-		userValue = p
-			.getAttribute("id-concreteattribut-abstractattribut");
-		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-			return true;
-		}
-
-		userValue = p.getAttribute("id-concreteattribut-value");
-		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-			return true;
-		}
-		return false;
+	userValue = p.getAttribute("id-concreteattribut-value");
+	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+	    return true;
 	}
+	return false;
+    }
 }

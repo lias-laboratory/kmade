@@ -42,7 +42,6 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressEffetsDeBord;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressIteration;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressPrecondition;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserkmad.ExpressKMADXML;
-import fr.upensma.lias.kmade.tool.coreadaptator.parserobjects.ExpressKMADItemsXML;
 import fr.upensma.lias.kmade.tool.view.toolutilities.JTextAreaOutputStream;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
 import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
@@ -189,7 +188,8 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 		this.pack();
 		KMADEToolUtilities.setCenteredInScreen(this);
 	}
-
+	
+	//Save the KMADModel
 	public void writeKMADModelFromXMLFile() {
 		this.setTitle(KMADEConstant.SAVE_MONITOR_TITLE_NAME);
 		System.setOut(new PrintStream(myOutputStream));
@@ -290,7 +290,8 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 		KMADEToolUtilities.setCenteredInScreen(this);
 		this.setVisible(true);
 	}
-
+	
+	//Save the KMAD Items
 	public void writeKMADItemsFromXMLFile() {
 		this.setTitle(KMADEConstant.SAVE_MONITOR_TITLE_NAME);
 		System.setOut(new PrintStream(myOutputStream));
@@ -302,7 +303,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ExpressKMADItemsXML.setCanceled(true);
+				ExpressKMADXML.setCanceled(true);
 			}
 		});
 
@@ -312,23 +313,23 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 		retourButton.setEnabled(false);
 		cancelButton.setEnabled(true);
 
-		myProgressBar.setMaximum(ExpressKMADItemsXML.getEntitySize());
+		myProgressBar.setMaximum(ExpressKMADXML.getEntitySize());
 
 		myTimer = new Timer(10, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				if (ExpressKMADItemsXML.isBegining()) {
+				if (ExpressKMADXML.isBegining()) {
 					myProgressBar
 							.setString(KMADEConstant.EXPRESS_OBJECTS_TITLE_MESSAGE);
 					myProgressBar.setValue(0);
-					ExpressKMADItemsXML.setBegining(false);
-					ExpressKMADItemsXML.saveKMADItemsProcess();
+					ExpressKMADXML.setBegining(false);
+					ExpressKMADXML.saveKMADItemsProcess();
 				}
 
-				myProgressBar.setValue(ExpressKMADItemsXML.getCurrentEntity());
+				myProgressBar.setValue(ExpressKMADXML.getCurrentEntity());
 				myTextArea.setCaretPosition(myTextArea.getDocument()
 						.getLength());
 
-				if (ExpressKMADItemsXML.isDone()) {
+				if (ExpressKMADXML.isDone()) {
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
 					myProgressBar
@@ -336,16 +337,16 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					myTimer.stop();
 					myTimer = null;
 
-					KMADeAdaptator.enableCurrentFileName(ExpressKMADItemsXML
+					KMADeAdaptator.enableCurrentFileName(ExpressKMADXML
 							.getCurrentFileName());
 
 					InterfaceExpressJava.setBddSetOff();
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
 					System.out.println(KMADEConstant.WRITE_EXPRESS_OK_FILE
-							+ ExpressKMADItemsXML.getCurrentFileName());
+							+ ExpressKMADXML.getCurrentFileName());
 				}
 
-				if (ExpressKMADItemsXML.isError()) {
+				if (ExpressKMADXML.isError()) {
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
 					System.out
@@ -357,10 +358,10 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
 					System.out.println(KMADEConstant.WRITE_EXPRESS_NO_OK_FILE
-							+ ExpressKMADItemsXML.getCurrentFileName());
+							+ ExpressKMADXML.getCurrentFileName());
 				}
 
-				if (ExpressKMADItemsXML.isCanceled()) {
+				if (ExpressKMADXML.isCanceled()) {
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
 					System.out
@@ -374,14 +375,14 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
 					System.out.println(KMADEConstant.WRITE_EXPRESS_NO_OK_FILE
-							+ ExpressKMADItemsXML.getCurrentFileName());
+							+ ExpressKMADXML.getCurrentFileName());
 				}
 			}
 		});
-		ExpressKMADItemsXML.setBegining(true);
-		ExpressKMADItemsXML.setCanceled(false);
-		ExpressKMADItemsXML.setDone(false);
-		ExpressKMADItemsXML.setError(false);
+		ExpressKMADXML.setBegining(true);
+		ExpressKMADXML.setCanceled(false);
+		ExpressKMADXML.setDone(false);
+		ExpressKMADXML.setError(false);
 
 		myScrollPane.setBorder(BorderFactory
 				.createTitledBorder(KMADEConstant.SAVE_CONSOLE_TITLE_NAME));
@@ -391,8 +392,9 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 		KMADEToolUtilities.setCenteredInScreen(this);
 		this.setVisible(true);
 	}
-
-	public void readKMADModelFromXMLFile() {
+	
+	//Load KMADModel or KMADItems
+	public void readKMADFromXMLFile() {
 		this.setTitle(KMADEConstant.LOAD_MONITOR_TITLE_NAME);
 
 		System.setOut(new PrintStream(myOutputStream));
@@ -423,7 +425,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					myProgressBar
 							.setString(KMADEConstant.EXPRESS_OBJECTS_TITLE_MESSAGE);
 					ExpressKMADXML.setBegining(false);
-					ExpressKMADXML.loadKMADModelProcess();
+					ExpressKMADXML.loadKMADProcess();
 				}
 
 				if (!ExpressKMADXML.isDone()) {
@@ -672,291 +674,6 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 		this.setVisible(true);
 	}
 
-	public void readKMADItemsFromXMLFile() {
-		this.setTitle(KMADEConstant.LOAD_MONITOR_TITLE_NAME);
-
-		System.setOut(new PrintStream(myOutputStream));
-
-		myTextArea.setText("");
-
-		panelSouth.removeAll();
-		cancelButton = new JButton(KMADEConstant.CANCEL_MESSAGE);
-		cancelButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ExpressKMADItemsXML.setCanceled(true);
-				GraphicEditorAdaptator.setCanceled(true);
-				ExpressPrecondition.setCanceled(true);
-				ExpressEffetsDeBord.setCanceled(true);
-			}
-		});
-
-		panelSouth.add(cancelButton);
-		panelSouth.add(retourButton);
-
-		retourButton.setEnabled(false);
-		cancelButton.setEnabled(true);
-
-		myProgressBar.setMaximum(6);
-		myTimer = new Timer(10, new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				if (ExpressKMADItemsXML.isBegining()) {
-					myProgressBar
-							.setString(KMADEConstant.EXPRESS_OBJECTS_TITLE_MESSAGE);
-					ExpressKMADItemsXML.setBegining(false);
-					ExpressKMADItemsXML.loadKMADModelProcess();
-				}
-
-				if (!ExpressKMADItemsXML.isDone()) {
-					myProgressBar.setValue(1);
-				} else if (!GraphicEditorAdaptator.isDone()) {
-					myProgressBar.setValue(2);
-				} else if (!ExpressPrecondition.isDone()) {
-					myProgressBar.setValue(3);
-				} else if (!ExpressEffetsDeBord.isDone()) {
-					myProgressBar.setValue(4);
-				} else if (!ExpressIteration.isDone()) {
-					myProgressBar.setValue(5);
-				}
-
-				myTextArea.setCaretPosition(myTextArea.getDocument()
-						.getLength());
-
-				if (ExpressKMADItemsXML.isDone()
-						&& GraphicEditorAdaptator.isBegining()
-						&& ExpressPrecondition.isBegining()
-						&& ExpressEffetsDeBord.isBegining()
-						&& ExpressIteration.isBegining()) {
-					myProgressBar
-							.setString(KMADEConstant.GRAPHICAL_OBJECTS_MESSAGE);
-					GraphicEditorAdaptator.setBegining(false);
-					GraphicEditorAdaptator.makeAllGraphElements();
-				}
-
-				if (ExpressKMADItemsXML.isDone()
-						&& GraphicEditorAdaptator.isDone()
-						&& ExpressPrecondition.isBegining()
-						&& ExpressEffetsDeBord.isBegining()
-						&& ExpressIteration.isBegining()) {
-					myProgressBar
-							.setString(KMADEConstant.PRECONDITION_PROGRESSBAR_MESSAGE);
-					ExpressPrecondition.setBegining(false);
-					ExpressPrecondition.makeAndCheckPreconditionOpenSPFFile();
-				}
-
-				if (ExpressKMADItemsXML.isDone()
-						&& GraphicEditorAdaptator.isDone()
-						&& ExpressPrecondition.isDone()
-						&& ExpressEffetsDeBord.isBegining()
-						&& ExpressIteration.isBegining()) {
-					myProgressBar
-							.setString(KMADEConstant.EFFETSDEBORD_PROGRESSBAR_MESSAGE);
-					ExpressEffetsDeBord.setBegining(false);
-					ExpressEffetsDeBord.makeAndCheckEffetsDeBordOpenSPFFile();
-				}
-
-				if (ExpressKMADItemsXML.isDone()
-						&& GraphicEditorAdaptator.isDone()
-						&& ExpressPrecondition.isDone()
-						&& ExpressEffetsDeBord.isDone()
-						&& ExpressIteration.isBegining()) {
-					myProgressBar
-							.setString(KMADEConstant.ITERATION_PROGRESSBAR_MESSAGE);
-					ExpressIteration.setBegining(false);
-					ExpressIteration.makeAndCheckIterationOpenSPFFile();
-				}
-
-				if (ExpressIteration.isDone()) {
-					cancelButton.setEnabled(false);
-					retourButton.setEnabled(true);
-					myTimer.stop();
-					myTimer = null;
-
-					myProgressBar.setValue(6);
-					myProgressBar
-							.setString(KMADEConstant.LOAD_PROJECT_FINISHED_MESSAGE);
-
-					GraphicEditorAdaptator.clearSelection();
-					// Afficher les nouvelles valeurs dans les Tables
-					// (Graphique)
-					AbstractObjectAdaptator.updateAbstractObjectView();
-					IntervalAdaptator.updateIntervalView();
-					EnumAdaptator.updateEnumView();
-					IndividuAdaptator.updateIndividuView();
-					OrganisationAdaptator.updateOrganisationView();
-					MachineAdaptator.updateMachineView();
-					ParcMachinesAdaptator.updateParcMachinesView();
-					EventAdaptator.updateEventView();
-					LabelAdaptator.updateLabelView();
-					// A voir si c'est utile?
-					ConcreteObjectPanelAdaptator.updateConcreteObjectView();
-					GraphicEditorAdaptator.setGlobalTaskModel();
-					GraphicEditorAdaptator.getMainFrame().showProjectPanel();
-					InterfaceExpressJava.setBddSetOff();
-
-					KMADeAdaptator.enableCurrentFileName(ExpressKMADItemsXML
-							.getCurrentFileName());
-
-					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_OK_FILE
-							+ ExpressKMADItemsXML.getCurrentFileName());
-				}
-
-				if (ExpressKMADItemsXML.isError()) {
-					System.out
-							.println(KMADEConstant.IMPLICIT_STOP_LOAD_SPF_FILE);
-					cancelButton.setEnabled(false);
-					retourButton.setEnabled(true);
-					InterfaceExpressJava.clearCurrentProject();
-					KMADeAdaptator.cleanAllAdaptateur();
-					myTimer.stop();
-					myTimer = null;
-
-					KMADeAdaptator.disableCurrentFileName();
-
-					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
-							+ ExpressKMADItemsXML.getCurrentFileName());
-				}
-
-				if (ExpressKMADItemsXML.isCanceled()
-						&& GraphicEditorAdaptator.isBegining()) {
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_OBJECT);
-					cancelButton.setEnabled(false);
-					retourButton.setEnabled(true);
-					InterfaceExpressJava.clearCurrentProject();
-					KMADeAdaptator.cleanAllAdaptateur();
-					myTimer.stop();
-					myTimer = null;
-
-					KMADeAdaptator.disableCurrentFileName();
-
-					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
-							+ ExpressKMADItemsXML.getCurrentFileName());
-				}
-
-				if (ExpressKMADItemsXML.isDone()
-						&& GraphicEditorAdaptator.isCanceled()
-						&& ExpressPrecondition.isBegining()) {
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
-					cancelButton.setEnabled(false);
-					retourButton.setEnabled(true);
-					InterfaceExpressJava.clearCurrentProject();
-					KMADeAdaptator.cleanAllAdaptateur();
-					GraphicEditorAdaptator.getTaskModelPanel()
-							.emptyRootFromModel();
-					myTimer.stop();
-					myTimer = null;
-
-					KMADeAdaptator.disableCurrentFileName();
-
-					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
-							+ ExpressKMADItemsXML.getCurrentFileName());
-				}
-
-				if (ExpressKMADItemsXML.isDone()
-						&& GraphicEditorAdaptator.isDone()
-						&& ExpressPrecondition.isCanceled()
-						&& ExpressEffetsDeBord.isBegining()) {
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
-					cancelButton.setEnabled(false);
-					retourButton.setEnabled(true);
-					InterfaceExpressJava.clearCurrentProject();
-					KMADeAdaptator.cleanAllAdaptateur();
-					GraphicEditorAdaptator.getTaskModelPanel()
-							.emptyRootFromModel();
-					myTimer.stop();
-					myTimer = null;
-
-					KMADeAdaptator.disableCurrentFileName();
-
-					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
-							+ ExpressKMADItemsXML.getCurrentFileName());
-				}
-
-				if (ExpressKMADItemsXML.isDone()
-						&& GraphicEditorAdaptator.isDone()
-						&& ExpressPrecondition.isDone()
-						&& ExpressEffetsDeBord.isCanceled()
-						&& ExpressIteration.isBegining()) {
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
-					cancelButton.setEnabled(false);
-					retourButton.setEnabled(true);
-					InterfaceExpressJava.clearCurrentProject();
-					KMADeAdaptator.cleanAllAdaptateur();
-					GraphicEditorAdaptator.getTaskModelPanel()
-							.emptyRootFromModel();
-					myTimer.stop();
-					myTimer = null;
-
-					KMADeAdaptator.disableCurrentFileName();
-
-					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
-							+ ExpressKMADItemsXML.getCurrentFileName());
-				}
-
-				if (ExpressKMADItemsXML.isDone()
-						&& GraphicEditorAdaptator.isDone()
-						&& ExpressPrecondition.isDone()
-						&& ExpressEffetsDeBord.isDone()
-						&& ExpressIteration.isCanceled()) {
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
-					cancelButton.setEnabled(false);
-					retourButton.setEnabled(true);
-					InterfaceExpressJava.clearCurrentProject();
-					KMADeAdaptator.cleanAllAdaptateur();
-					GraphicEditorAdaptator.getTaskModelPanel()
-							.emptyRootFromModel();
-					myTimer.stop();
-					myTimer = null;
-
-					KMADeAdaptator.disableCurrentFileName();
-
-					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
-							+ ExpressKMADItemsXML.getCurrentFileName());
-				}
-
-			}
-		});
-
-		ExpressKMADItemsXML.setBegining(true);
-		ExpressKMADItemsXML.setCanceled(false);
-		ExpressKMADItemsXML.setDone(false);
-		ExpressKMADItemsXML.setError(false);
-
-		GraphicEditorAdaptator.setBegining(true);
-		GraphicEditorAdaptator.setDone(false);
-		GraphicEditorAdaptator.setCanceled(false);
-
-		ExpressPrecondition.setBegining(true);
-		ExpressPrecondition.setDone(false);
-		ExpressPrecondition.setCanceled(false);
-
-		ExpressEffetsDeBord.setBegining(true);
-		ExpressEffetsDeBord.setDone(false);
-		ExpressEffetsDeBord.setCanceled(false);
-
-		ExpressIteration.setBegining(true);
-		ExpressIteration.setDone(false);
-		ExpressIteration.setCanceled(false);
-
-		myScrollPane.setBorder(BorderFactory
-				.createTitledBorder(KMADEConstant.LOAD_CONSOLE_TITLE_NAME));
-
-		GraphicEditorAdaptator.disabledMainFrameBeforeLoadAndSaveProcess();
-		this.pack();
-		KMADEToolUtilities.setCenteredInScreen(this);
-		this.setVisible(true);
-	}
 
 	public void goReadSPF(boolean ioError, String message) {
 		this.setTitle(KMADEConstant.LOAD_MONITOR_TITLE_NAME);

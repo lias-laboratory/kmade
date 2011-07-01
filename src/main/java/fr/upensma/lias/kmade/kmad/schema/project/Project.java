@@ -1,24 +1,23 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.project;
 
 import java.util.ArrayList;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -62,68 +61,72 @@ public class Project implements Entity {
 
 	this.oid = o;
     }
-    
-	@Override
-	public Element toXML2(Document doc) throws Exception {
-		Element racine = doc.createElement("project");
-		racine.setAttribute("classkmad", "project.Project");
-		racine.setAttribute("idkmad", oid.get());
-		
-		if(this.myGenInfo != null && !this.myGenInfo.isEmpty())
-			racine.setAttribute("id-project-information",myGenInfo.getOid().get());
 
-		if (!myIntIndex.isEmpty()) {
-		    String list = new String("");
-		    for (int i = 0; i < myIntIndex.size(); i++) {
-		    	list += myIntIndex.get(i).getOid().get() + " ";
-		    }
-		    racine.setAttribute("id-project-interviews-list",list);
-		}
-		return racine;
+    @Override
+    public Element toXML2(Document doc) throws Exception {
+	Element racine = doc.createElement("project");
+	racine.setAttribute("classkmad", "project.Project");
+	racine.setAttribute("idkmad", oid.get());
+
+	if (this.myGenInfo != null && !this.myGenInfo.isEmpty()) {
+	    racine.setAttribute("id-project-information", myGenInfo.getOid()
+		    .get());
+	    racine.appendChild(this.myGenInfo.toXML2(doc));
 	}
-	
-	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
-		String userValue;
-		if(p.hasAttribute("id-project-information")){
-			userValue = p.getAttribute("id-project-information");
-			if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) 
-				return true;
+	if (!myIntIndex.isEmpty()) {
+	    String list = new String("");
+	    for (int i = 0; i < myIntIndex.size(); i++) {
+		list += myIntIndex.get(i).getOid().get() + " ";
+		racine.appendChild(this.myIntIndex.get(i).toXML2(doc));
+	    }
+	    racine.setAttribute("id-project-interviews-list", list);
+	}
+	return racine;
+    }
+
+    public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
+	String userValue;
+	if (p.hasAttribute("id-project-information")) {
+	    userValue = p.getAttribute("id-project-information");
+	    if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null)
+		return true;
+	}
+	if (p.hasAttribute("id-project-interviews-list")) {
+	    String[] values = p.getAttribute("id-project-interviews-list")
+		    .split(" ");
+	    for (int i = 0; i < values.length; i++) {
+		if (InterfaceExpressJava.bdd.prendre(new Oid((values[i]))) == null) {
+		    return true;
 		}
-		if(p.hasAttribute("id-project-interviews-list")){
-			String[] values = p.getAttribute("id-project-interviews-list").split(" ");
-			for (int i = 0; i < values.length; i++) {
-			    if (InterfaceExpressJava.bdd.prendre(new Oid(
-				    (values[i]))) == null) {
-				return true;
-			    }
-			}
-		}
-		
-		return false;
+	    }
 	}
 
-	@Override
-	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		this.oid = new Oid(p.getAttribute("idkmad"));
-		//General Information
-		if(p.hasAttribute("id-project-information")){
-			this.myGenInfo = (GeneralInformation) InterfaceExpressJava.bdd
-				.prendre(new Oid(p.getAttribute("id-project-information")));
-		}
-//		else{
-//			this.myGenInfo = new GeneralInformation();
-//			System.out.println("ah ba si");
-//		}
-		//Interviews
-		if(p.hasAttribute("id-project-interview-list")){
-			String[] interviews = p.getAttribute("id-project-interviews-list").split(" ");
-			for(int i=0;i<interviews.length;i++){
-				this.myIntIndex.add((InterviewIndex) InterfaceExpressJava.bdd
-				    .prendre(new Oid(interviews[i])));
-			}
-		}
+	return false;
+    }
+
+    @Override
+    public void createObjectFromXMLElement2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	this.oid = new Oid(p.getAttribute("idkmad"));
+	// General Information
+	if (p.hasAttribute("id-project-information")) {
+	    this.myGenInfo = (GeneralInformation) InterfaceExpressJava.bdd
+		    .prendre(new Oid(p.getAttribute("id-project-information")));
 	}
+	// else{
+	// this.myGenInfo = new GeneralInformation();
+	// System.out.println("ah ba si");
+	// }
+	// Interviews
+	if (p.hasAttribute("id-project-interview-list")) {
+	    String[] interviews = p.getAttribute("id-project-interviews-list")
+		    .split(" ");
+	    for (int i = 0; i < interviews.length; i++) {
+		this.myIntIndex.add((InterviewIndex) InterfaceExpressJava.bdd
+			.prendre(new Oid(interviews[i])));
+	    }
+	}
+    }
 
     public void addInterviewIndex(InterviewIndex pInterviewIndex) {
 	myIntIndex.add(pInterviewIndex);

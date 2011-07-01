@@ -26,6 +26,9 @@ import java.util.Map;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphConstants;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
+import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
+import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Point;
@@ -101,8 +104,19 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	
 	Point p = this.myTask.getPoint();
 		
+	if(p==null){
+	    myTask.setPoint(new Point(0,0,new Oid(InterfaceExpressJava.bdd.getMax()+1)));
+	    //We need to put the root task out of line
+	    if(myTask.getNumero().contains(ExpressConstant.ROOT_TASK_NAME)){
+		myTask.getPoint().setX(20);
+		myTask.getPoint().setY(20);
+	    }
+	}
+	
+	p = this.myTask.getPoint();
+	
 	GraphConstants.setBounds(map, new Rectangle2D.Double(p.getX(),
-				p.getY(), 0, 0));
+	    	p.getY(), 0, 0));
 	GraphConstants.setResize(map, true);
 	GraphConstants.setAutoSize(map, true);
 	GraphConstants.setOpaque(map, false);

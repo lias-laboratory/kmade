@@ -28,6 +28,7 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JToggleButton;
@@ -163,9 +164,7 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 
 	private AbstractAction loadAction;
 
-	// Added by Joachim TROUVERIE
-	private AbstractAction loadItemsAction;
-
+	//
 	private AbstractAction saveItemsAction;
 	//
 
@@ -298,27 +297,14 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 		mySaveAsAction.putValue(AbstractAction.SHORT_DESCRIPTION,
 				KMADEConstant.SAVE_PROJECT_AS_ACTION_MESSAGE);
 		myFileMenu.add(mySaveAsAction);
-
-		// Made by Joachim TROUVERIE
-		myFileMenu.addSeparator();
-		// Charger des objets
-		this.loadItemsAction = new AbstractAction(
-				KMADEConstant.OPEN_OBJECT_ACTION_MESSAGE, OPEN_PROJECT) {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				if (!activeMenu())
-					KMADeAdaptator.loadItemsXML();
-			}
-		};
-		loadItemsAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-				KMADEConstant.OPEN_OBJECT_ACTION_MESSAGE);
-		toolbar.add(loadItemsAction);
-		myFileMenu.add(loadItemsAction);
-
+		
+		//Sauver des objets uniquement
 		this.saveItemsAction = new AbstractAction(
+			
 				KMADEConstant.SAVE_OBJECT_ACTION_MESSAGE, SAVE_PROJECT) {
+
+		    private static final long serialVersionUID = 2984205029423165557L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -328,8 +314,7 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 		};
 		saveItemsAction.putValue(AbstractAction.SHORT_DESCRIPTION,
 				KMADEConstant.SAVE_OBJECT_ACTION_MESSAGE);
-		toolbar.add(mySaveAction);
-		myFileMenu.add(mySaveAction);
+		myFileMenu.add(saveItemsAction);
 		//
 
 		myFileMenu.addSeparator();

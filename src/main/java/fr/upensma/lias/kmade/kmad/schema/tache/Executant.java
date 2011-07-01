@@ -193,4 +193,10 @@ public enum Executant implements Enumere {
 	else
 	    return 0;
     }
+
+    @Override
+    public Element toXML2(Document doc) {
+	// TODO Auto-generated method stub
+	return this.toXML(doc);
+    }
 }

@@ -1,24 +1,23 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import java.util.ArrayList;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -321,69 +320,73 @@ public class AttributAbstrait implements Entity {
 	return (name.indexOf(" ") == -1);
     }
 
-	@Override
-	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		Element racine = doc.createElement("abstractattribut");
-		racine.setAttribute("classkmad", "metaobjet.AttributAbstrait");
-		racine.setAttribute("idkmad", oid.get());
-		racine.setAttribute("id-abstractattribut-abstractobject",this.utiliseParClass.getOid().get());
-		
-		if (this.typeref != null) 
-			racine.setAttribute("id-abstractattribut-type",this.typeref.getOid().get());
+    @Override
+    public Element toXML2(Document doc) throws Exception {
+	// TODO Auto-generated method stub
+	Element racine = doc.createElement("abstractattribut");
+	racine.setAttribute("classkmad", "metaobjet.AttributAbstrait");
+	racine.setAttribute("idkmad", oid.get());
+	racine.setAttribute("id-abstractattribut-abstractobject",
+		this.utiliseParClass.getOid().get());
 
-		Element element = doc.createElement("abstractattribut-name");
-		element.setTextContent(this.getName());
-		racine.appendChild(element);
+	if (this.typeref != null)
+	    racine.setAttribute("id-abstractattribut-type", this.typeref
+		    .getOid().get());
 
-		if (!this.getDescription().equals("")) {
-		    element = doc.createElement("abstractattribut-description");
-		    element.setTextContent(this.getDescription());
-		    racine.appendChild(element);
-		}
+	Element element = doc.createElement("abstractattribut-name");
+	element.setTextContent(this.getName());
+	racine.appendChild(element);
 
-		racine.appendChild(typeStruct.toXML(doc));
-		
-		return racine;
+	if (!this.getDescription().equals("")) {
+	    element = doc.createElement("abstractattribut-description");
+	    element.setTextContent(this.getDescription());
+	    racine.appendChild(element);
+	}
+	
+	//To write 'typeStruct' as a child of the Abstract attribute
+	racine.appendChild(typeStruct.toXML(doc));
+
+	return racine;
+    }
+
+    @Override
+    public void createObjectFromXMLElement2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	this.oid = new Oid(p.getAttribute("idkmad"));
+	if (p.hasAttribute("id-abstractattribut-type"))
+	    this.setTypeRef((TypeAbs) InterfaceExpressJava.bdd.prendre(new Oid(
+		    p.getAttribute("id-abstractattribut-type"))));
+
+	this.setUtiliseeparClass((ObjetAbstrait) InterfaceExpressJava.bdd
+		.prendre(new Oid(p
+			.getAttribute("id-abstractattribut-abstractobject"))));
+
+	NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
+	this.name = nodeList.item(0).getTextContent();
+
+	nodeList = p.getElementsByTagName("abstractattribut-description");
+	if (nodeList.item(0) != null) {
+	    this.description = nodeList.item(0).getTextContent();
 	}
 
-	@Override
-	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		this.oid = new Oid(p.getAttribute("idkmad"));
-		if (p.hasAttribute("id-abstractattribut-type")) 
-		    this.setTypeRef((TypeAbs) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-abstractattribut-type"))));
+	nodeList = p.getElementsByTagName("abstractattribut-typestructure");
+	this.typeStruct = TypeStructure.getValue(nodeList.item(0)
+		.getTextContent());
+    }
 
-		this.setUtiliseeparClass((ObjetAbstrait) InterfaceExpressJava.bdd
-			.prendre(new Oid(p.getAttribute("id-abstractattribut-abstractobject"))));
-
-		NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
-		this.name = nodeList.item(0).getTextContent();
-
-		nodeList = p.getElementsByTagName("abstractattribut-description");
-		if (nodeList.item(0) != null) {
-		    this.description = nodeList.item(0).getTextContent();
-		}
-
-		nodeList = p.getElementsByTagName("abstractattribut-typestructure");
-		this.typeStruct = TypeStructure.getValue(nodeList.item(0)
-			.getTextContent());
+    @Override
+    public boolean oidIsAnyMissing2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	String userValue = p.getAttribute("id-abstractattribut-abstractobject");
+	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+	    return true;
 	}
-
-	@Override
-	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		String userValue = p
-		.getAttribute("id-abstractattribut-abstractobject");
-		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-			return true;
-		}
-		if (p.hasAttribute("id-abstractattribut-type")) {
-			userValue = p.getAttribute("id-abstractattribut-type");
-			if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-				return true;
-			}
-		}
-		return false;
+	if (p.hasAttribute("id-abstractattribut-type")) {
+	    userValue = p.getAttribute("id-abstractattribut-type");
+	    if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+		return true;
+	    }
 	}
+	return false;
+    }
 }

@@ -27,16 +27,16 @@ public interface KMADXml {
     
     Element toXML(Document doc) throws Exception;
     
-    //Added by Joachim TROUVERIE
+    //Added by Joachim TROUVERIE to correspond to the new version of the dtd
     Element toXML2 (Document doc) throws Exception;
     
     boolean oidIsAnyMissing(Element p) throws Exception;
     
-    //Added by Joachim TROUVERIE
+    //Added by Joachim TROUVERIE to correspond to the new version of the dtd
     boolean oidIsAnyMissing2(Element p) throws Exception;
     
     void createObjectFromXMLElement(Element p) throws Exception;
     
-    //Added by Joachim TROUVERIE
+    //Added by Joachim TROUVERIE to correspond to the new version of the dtd
     void createObjectFromXMLElement2(Element p) throws Exception;
 }

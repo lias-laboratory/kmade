@@ -1,24 +1,23 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.tache;
 
 import java.util.ArrayList;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,7 +29,7 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
 /**
  * @author Mickael BARON
  */
-public class Machine extends Materiel{
+public class Machine extends Materiel {
 
     private static final long serialVersionUID = 144972651724436715L;
 
@@ -218,70 +217,85 @@ public class Machine extends Materiel{
     public static int toArrayLenght() {
 	return 6;
     }
-    
+
     public org.w3c.dom.Element toXML2(Document doc) {
-    	Element racine = doc.createElement("Machine");
-    	racine.setAttribute("classkmad", "tache.Machine");
-    	racine.setAttribute("idkmad", oid.get());
-    	String list = new String("");
-    	for (int i=0;i<this.memberOf.size();i++){
-    		list += this.memberOf.get(i).getOid().get() + " ";
-    	}
-    	racine.setAttribute("id-parc-machine", list);
+	Element racine = doc.createElement("Machine");
+	racine.setAttribute("classkmad", "tache.Machine");
+	racine.setAttribute("idkmad", oid.get());
+	if (!this.memberOf.isEmpty()) {
+	    String list = new String("");
+	    for (int i = 0; i < this.memberOf.size(); i++) {
+		list += this.memberOf.get(i).getOid().get() + " ";
+	    }
+	    racine.setAttribute("id-parc-machine", list);
+	}
 
-    	Element kmadMachineName = doc.createElement("machine-name");
-    	kmadMachineName.setTextContent(this.getName());
-    	racine.appendChild(kmadMachineName);
+	Element kmadMachineName = doc.createElement("machine-name");
+	kmadMachineName.setTextContent(this.getName());
+	racine.appendChild(kmadMachineName);
 
-    	if (!this.getDescription().equals("")) {
-    	    Element kmadMachineDescription = doc
-    		    .createElement("machine-description");
-    	    kmadMachineDescription.setTextContent(this.getDescription());
-    	    racine.appendChild(kmadMachineDescription);
-    	}
+	if (!this.getDescription().equals("")) {
+	    Element kmadMachineDescription = doc
+		    .createElement("machine-description");
+	    kmadMachineDescription.setTextContent(this.getDescription());
+	    racine.appendChild(kmadMachineDescription);
+	}
 
-    	Element kmadMachineDescription = doc
-    		.createElement("machine-isComputer");
-    	kmadMachineDescription.setTextContent(isComputer.toString());
-    	racine.appendChild(kmadMachineDescription);
+	Element kmadMachineDescription = doc
+		.createElement("machine-isComputer");
+	kmadMachineDescription.setTextContent(isComputer.toString());
+	racine.appendChild(kmadMachineDescription);
 
-    	if (!super.getImage().equals("")) {
-    	    Element kmadMachineImagePath = doc
-    		    .createElement("machine-imagepath");
-    	    kmadMachineImagePath.setTextContent(super.getImage());
-    	    racine.appendChild(kmadMachineImagePath);
-    	}
-    	return racine;
-        }
+	if (!super.getImage().equals("")) {
+	    Element kmadMachineImagePath = doc
+		    .createElement("machine-imagepath");
+	    kmadMachineImagePath.setTextContent(super.getImage());
+	    racine.appendChild(kmadMachineImagePath);
+	}
+	return racine;
+    }
 
     public void createObjectFromXMLElement2(org.w3c.dom.Element p) {
-    	this.oid = new Oid(p.getAttribute("idkmad"));
-    	String[] parc = p.getAttribute("id-parcMachine").split(" ");
-    	for (int i = 0; i < parc.length; i++) {
-    		this.addToParc((ParcMachines) InterfaceExpressJava.bdd
-    			.prendre(new Oid(parc[i])));
-    	}
-    	
-    	NodeList kmadMachineName = p.getElementsByTagName("machine-name");
-    	if (kmadMachineName.item(0) != null)
-    	    super.setName(kmadMachineName.item(0).getTextContent());
+	this.oid = new Oid(p.getAttribute("idkmad"));
+	if (p.hasAttribute("id-parcMachine")) {
+	    String[] parc = p.getAttribute("id-parcMachine").split(" ");
+	    for (int i = 0; i < parc.length; i++) {
+		this.addToParc((ParcMachines) InterfaceExpressJava.bdd
+			.prendre(new Oid(parc[i])));
+	    }
+	}
 
-    	NodeList kmadMachineDescription = p
-    		.getElementsByTagName("machine-description");
-    	if (kmadMachineDescription.item(0) != null)
-    	    super.setDescription(kmadMachineDescription.item(0)
-    		    .getTextContent());
+	NodeList kmadMachineName = p.getElementsByTagName("machine-name");
+	if (kmadMachineName.item(0) != null)
+	    super.setName(kmadMachineName.item(0).getTextContent());
 
-    	NodeList kmadMachineIsComputer = p
-    		.getElementsByTagName("machine-isComputer");
-    	if (kmadMachineIsComputer.item(0) != null)
-    	    setIsComputer(kmadMachineIsComputer.item(0).getTextContent());
+	NodeList kmadMachineDescription = p
+		.getElementsByTagName("machine-description");
+	if (kmadMachineDescription.item(0) != null)
+	    super.setDescription(kmadMachineDescription.item(0)
+		    .getTextContent());
 
-    	NodeList kmadMachineImagePath = p
-    		.getElementsByTagName("machine-imagepath");
-    	if (kmadMachineImagePath.item(0) != null) {
-    	    super.setImage(kmadMachineImagePath.item(0).getTextContent());
-    	}
+	NodeList kmadMachineIsComputer = p
+		.getElementsByTagName("machine-isComputer");
+	if (kmadMachineIsComputer.item(0) != null)
+	    setIsComputer(kmadMachineIsComputer.item(0).getTextContent());
+
+	NodeList kmadMachineImagePath = p
+		.getElementsByTagName("machine-imagepath");
+	if (kmadMachineImagePath.item(0) != null) {
+	    super.setImage(kmadMachineImagePath.item(0).getTextContent());
+	}
+    }
+    
+    public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
+	if (p.hasAttribute("id-parcMachine")) {
+	    String[] userValue = p.getAttribute("id-parcMachine").split(" ");
+	    for (int i = 0; i < userValue.length; i++) {
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue[i])) == null) {
+		    return true;
+		}
+	    }
+	}
+	return false;
     }
 }
-

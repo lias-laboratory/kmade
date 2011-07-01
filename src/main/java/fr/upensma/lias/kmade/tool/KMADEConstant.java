@@ -665,7 +665,7 @@ public class KMADEConstant {
     public static String TOOLS_MENU_MESSAGE = "Outils";
 
     public static String NEW_PROJECT_ACTION_MESSAGE = "Nouveau projet";
-    public static String OPEN_PROJECT_ACTION_MESSAGE = "Ouvrir projet";
+    public static String OPEN_PROJECT_ACTION_MESSAGE = "Ouvrir un fichier projet ou objets";
     public static String SAVE_PROJECT_ACTION_MESSAGE = "Enregistrer projet";
     public static String SAVE_PROJECT_AS_ACTION_MESSAGE = "Enregistrer projet sous ...";
     public static String CLOSE_PROJECT_ACTION_MESSAGE = "Fermer projet";

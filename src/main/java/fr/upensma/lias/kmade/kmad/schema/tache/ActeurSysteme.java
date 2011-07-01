@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.tache;
 
 import org.w3c.dom.Document;
@@ -179,44 +179,45 @@ public class ActeurSysteme implements Entity {
 	return userRef;
     }
 
-	@Override
-	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		Element racine = doc.createElement("actor");
-		racine.setAttribute("classkmad", "tache.Acteur");
-		racine.setAttribute("idkmad", oid.get());
-		racine.setAttribute("id-user", this.userRef.getOid().get());
-		
-		racine.appendChild(experience.toXML(doc));
-		if (!this.competence.equals("")) {
-		    Element kmadActorCompetence = doc.createElement("actor-competence");
-		    kmadActorCompetence.setTextContent(this.competence);
-		    racine.appendChild(kmadActorCompetence);
-		}
-		
-		return racine;
+    @Override
+    public Element toXML2(Document doc) throws Exception {
+	// TODO Auto-generated method stub
+	Element racine = doc.createElement("actor");
+	racine.setAttribute("classkmad", "tache.Acteur");
+	racine.setAttribute("idkmad", oid.get());
+	racine.setAttribute("id-user", this.userRef.getOid().get());
+
+	racine.appendChild(experience.toXML2(doc));
+	if (!this.competence.equals("")) {
+	    Element kmadActorCompetence = doc.createElement("actor-competence");
+	    kmadActorCompetence.setTextContent(this.competence);
+	    racine.appendChild(kmadActorCompetence);
 	}
 
-	@Override
-	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		this.oid = new Oid(p.getAttribute("idkmad"));
-		this.userRef = (Materiel) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-user")));
-		this.experience = Experience.getXMLExperienceValue(p);
+	return racine;
+    }
 
-		NodeList nodeList = p.getElementsByTagName("actor-competence");
-		if (nodeList.item(0) != null) {
-		    this.competence = nodeList.item(0).getTextContent();
-		}
+    @Override
+    public void createObjectFromXMLElement2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	this.oid = new Oid(p.getAttribute("idkmad"));
+	this.userRef = (Materiel) InterfaceExpressJava.bdd.prendre(new Oid(p
+		.getAttribute("id-user")));
+	this.experience = Experience.getXMLExperienceValue(p);
+
+	NodeList nodeList = p.getElementsByTagName("actor-competence");
+	if (nodeList.item(0) != null) {
+	    this.competence = nodeList.item(0).getTextContent();
 	}
-	
-	@Override
-	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		String nodeList = p.getAttribute("id-user");
-		if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
-		    return true;
-		}	
-		return false;
+    }
+
+    @Override
+    public boolean oidIsAnyMissing2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	String nodeList = p.getAttribute("id-user");
+	if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
+	    return true;
 	}
+	return false;
+    }
 }

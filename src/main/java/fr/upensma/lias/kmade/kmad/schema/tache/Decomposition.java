@@ -73,6 +73,10 @@ public enum Decomposition implements Enumere {
 	kmadTaskDecomposition.setTextContent(this.enonce);
 	return kmadTaskDecomposition;
     }
+    
+    public org.w3c.dom.Element toXML2(Document doc) {
+	return this.toXML(doc);
+    }
 
     public String toSPF() {
 	return "." + enonce + ".";

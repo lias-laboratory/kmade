@@ -1,24 +1,23 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import java.util.ArrayList;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -242,52 +241,53 @@ public class ObjetAbstrait implements Entity {
     }
 
     @Override
-	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-    	Element racine = doc.createElement("abstractobject");
-    	racine.setAttribute("classkmad", "metaobjet.ObjetAbstrait");
-    	racine.setAttribute("idkmad", oid.get());
+    public Element toXML2(Document doc) throws Exception {
+	// TODO Auto-generated method stub
+	Element racine = doc.createElement("abstractobject");
+	racine.setAttribute("classkmad", "metaobjet.ObjetAbstrait");
+	racine.setAttribute("idkmad", oid.get());
 
-    	Element element = doc.createElement("abstractobject-name");
-    	element.setTextContent(this.getName());
-    	racine.appendChild(element);
+	Element element = doc.createElement("abstractobject-name");
+	element.setTextContent(this.getName());
+	racine.appendChild(element);
 
-    	if (!this.description.equals("")) {
-    	    element = doc.createElement("abstractobject-description");
-    	    element.setTextContent(this.description);
-    	    racine.appendChild(element);
-    	}
-    	
-    	if(!this.inverseGroupe.isEmpty()){
-    		for(int i=0;i<this.inverseGroupe.size();i++){
-    			racine.appendChild(this.inverseGroupe.get(i).toXML2(doc));
-    		}
-    	}
-    	
-    	if(!this.inverseAttributsAbs.isEmpty()){
-    		for(int i=0;i<this.inverseAttributsAbs.size();i++){
-    			racine.appendChild(this.inverseAttributsAbs.get(i).toXML2(doc));
-    		}
-    	}
-    	
-    	if(!this.inverseObjConcDe.isEmpty()){
-    		for(int i=0; i<this.inverseObjConcDe.size();i++){
-    			racine.appendChild(this.inverseObjConcDe.get(i).toXML2(doc));
-    		}
-    	}
-
-    	return racine;
+	if (!this.description.equals("")) {
+	    element = doc.createElement("abstractobject-description");
+	    element.setTextContent(this.description);
+	    racine.appendChild(element);
 	}
 
-	@Override
-	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		createObjectFromXMLElement(p);
+	//Add the object's attributes as childs
+	if (!this.inverseGroupe.isEmpty()) {
+	    for (int i = 0; i < this.inverseGroupe.size(); i++) {
+		racine.appendChild(this.inverseGroupe.get(i).toXML2(doc));
+	    }
 	}
 
-	@Override
-	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	if (!this.inverseAttributsAbs.isEmpty()) {
+	    for (int i = 0; i < this.inverseAttributsAbs.size(); i++) {
+		racine.appendChild(this.inverseAttributsAbs.get(i).toXML2(doc));
+	    }
 	}
+
+	if (!this.inverseObjConcDe.isEmpty()) {
+	    for (int i = 0; i < this.inverseObjConcDe.size(); i++) {
+		racine.appendChild(this.inverseObjConcDe.get(i).toXML2(doc));
+	    }
+	}
+
+	return racine;
+    }
+
+    @Override
+    public void createObjectFromXMLElement2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	createObjectFromXMLElement(p);
+    }
+
+    @Override
+    public boolean oidIsAnyMissing2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	return this.oidIsAnyMissing(p);
+    }
 }

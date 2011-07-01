@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import org.w3c.dom.Document;
@@ -62,11 +62,11 @@ public abstract class ValeurType implements Entity, Cloneable {
     public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("typevalue");
 	racine.setAttribute("idkmad", oid.get());
-		
+
 	Element valueElement = doc.createElement("typevalue-value");
 	valueElement.setTextContent(this.toString());
 	racine.appendChild(valueElement);
-	
+
 	return racine;
     }
 
@@ -81,20 +81,20 @@ public abstract class ValeurType implements Entity, Cloneable {
 	    return null;
 	}
     }
-    
-	@Override
-	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		return toXML(doc);
-	}
 
-	@Override
-	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		createObjectFromXMLElement(p);
-	}
-	
-	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
-		return oidIsAnyMissing(p);
-	}
+    @Override
+    public Element toXML2(Document doc) throws Exception {
+	// TODO Auto-generated method stub
+	return toXML(doc);
+    }
+
+    @Override
+    public void createObjectFromXMLElement2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	createObjectFromXMLElement(p);
+    }
+
+    public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
+	return oidIsAnyMissing(p);
+    }
 }

@@ -69,6 +69,12 @@ public class PileAg extends Agregat {
 	racine.setAttribute("classkmad", "metaobjet.PileAg");
 	return racine;
     }
+    
+    public org.w3c.dom.Element toXML2(Document doc) {
+	org.w3c.dom.Element racine = super.toXML2(doc);
+	racine.setAttribute("classkmad", "metaobjet.PileAg");
+	return racine;
+    }
 
     public void setOid(Oid oid) {
 	this.oid = oid;

@@ -1,24 +1,23 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import java.util.ArrayList;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -300,70 +299,73 @@ public class ObjetConcret implements Entity, Cloneable {
 	return n;
     }
 
-	@Override
-	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		Element racine = doc.createElement("concreteobject");
-		racine.setAttribute("classkmad", "metaobjet.ObjetConcret");
-		racine.setAttribute("idkmad", oid.get());
-		
-		racine.setAttribute("id-concreteobject-abstractobject",this.utiliseParClass.getOid().get());
-		
-		racine.setAttribute("id-concreteobject-group",this.appartientGroupe.getOid().get());
+    @Override
+    public Element toXML2(Document doc) throws Exception {
+	// TODO Auto-generated method stub
+	Element racine = doc.createElement("concreteobject");
+	racine.setAttribute("classkmad", "metaobjet.ObjetConcret");
+	racine.setAttribute("idkmad", oid.get());
 
-		Element element = doc.createElement("concreteobject-name");
-		element.setTextContent(this.getName());
-		racine.appendChild(element);
-		
-		if (!this.description.equals("")) {
-		    element = doc.createElement("concreteobject-description");
-		    element.setTextContent(this.description);
-		    racine.appendChild(element);
-		}
-		
-		if(!this.inverseAttribut.isEmpty()){
-			for(int i =0; i<inverseAttribut.size(); i++){
-				racine.appendChild(inverseAttribut.get(i).toXML2(doc));
-			}
-		}
+	racine.setAttribute("id-concreteobject-abstractobject",
+		this.utiliseParClass.getOid().get());
 
-		return racine;
+	racine.setAttribute("id-concreteobject-group", this.appartientGroupe
+		.getOid().get());
+
+	Element element = doc.createElement("concreteobject-name");
+	element.setTextContent(this.getName());
+	racine.appendChild(element);
+
+	if (!this.description.equals("")) {
+	    element = doc.createElement("concreteobject-description");
+	    element.setTextContent(this.description);
+	    racine.appendChild(element);
+	}
+	
+	//Add object's attributes as child
+	if (!this.inverseAttribut.isEmpty()) {
+	    for (int i = 0; i < inverseAttribut.size(); i++) {
+		racine.appendChild(inverseAttribut.get(i).toXML2(doc));
+	    }
 	}
 
-	@Override
-	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		this.oid = new Oid(p.getAttribute("idkmad"));
+	return racine;
+    }
 
-		this.setUtiliseParClass((ObjetAbstrait) InterfaceExpressJava.bdd
-			.prendre(new Oid(p.getAttribute("id-concreteobject-abstractobject"))));
+    @Override
+    public void createObjectFromXMLElement2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	this.oid = new Oid(p.getAttribute("idkmad"));
 
-		
-		this.setAppartientGroupe((Groupe) InterfaceExpressJava.bdd
-			.prendre(new Oid(p.getAttribute("id-concreteobject-group"))));
-		
-		NodeList nodeList = p.getElementsByTagName("concreteobject-name");
-		this.name = nodeList.item(0).getTextContent();
+	this.setUtiliseParClass((ObjetAbstrait) InterfaceExpressJava.bdd
+		.prendre(new Oid(p
+			.getAttribute("id-concreteobject-abstractobject"))));
 
-		nodeList = p.getElementsByTagName("concreteobject-description");
-		if (nodeList.item(0) != null) {
-		    this.description = nodeList.item(0).getTextContent();
-		}		
+	this.setAppartientGroupe((Groupe) InterfaceExpressJava.bdd
+		.prendre(new Oid(p.getAttribute("id-concreteobject-group"))));
+
+	NodeList nodeList = p.getElementsByTagName("concreteobject-name");
+	this.name = nodeList.item(0).getTextContent();
+
+	nodeList = p.getElementsByTagName("concreteobject-description");
+	if (nodeList.item(0) != null) {
+	    this.description = nodeList.item(0).getTextContent();
+	}
+    }
+
+    @Override
+    public boolean oidIsAnyMissing2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	String userValue = p.getAttribute("id-concreteobject-abstractobject");
+	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+	    return true;
 	}
 
-	@Override
-	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		String userValue = p.getAttribute("id-concreteobject-abstractobject");
-		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-			return true;
-		}
+	userValue = p.getAttribute("id-concreteobject-group");
+	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+	    return true;
+	}
 
-		userValue = p.getAttribute("id-concreteobject-group");
-		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-			return true;
-		}
-
-		return false;
-		}
+	return false;
+    }
 }

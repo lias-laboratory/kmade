@@ -297,6 +297,6 @@ public class Label implements Entity {
 	@Override
 	public boolean oidIsAnyMissing2(Element p) throws Exception {
 		// TODO Auto-generated method stub
-		return false;
+		return this.oidIsAnyMissing(p);
 	}
 }

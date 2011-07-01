@@ -1,24 +1,23 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import java.util.ArrayList;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -111,7 +110,7 @@ public abstract class Agregat implements Entity {
     }
 
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
-    	this.oid = new Oid(p.getAttribute("idkmad"));
+	this.oid = new Oid(p.getAttribute("idkmad"));
     }
 
     public void delete() {
@@ -122,30 +121,30 @@ public abstract class Agregat implements Entity {
 	lstObjConcrets = new ArrayList<ObjetConcret>();
 	lstObjConcrets.addAll(p);
     }
-    
+
     @Override
-	public Element toXML2(Document doc){
-		// TODO Auto-generated method stub
-    	Element racine = doc.createElement("agregat");
-    	racine.setAttribute("idkmad", oid.get());
+    public Element toXML2(Document doc) {
+	// TODO Auto-generated method stub
+	Element racine = doc.createElement("agregat");
+	racine.setAttribute("idkmad", oid.get());
+	//Concrete objects are now considered as attributes
+	if (!lstObjConcrets.isEmpty()) {
+	    String list = new String("");
+	    for (int i = 0; i < lstObjConcrets.size(); i++) {
+		list += lstObjConcrets.get(i).getOid().get() + " ";
+	    }
+	    racine.setAttribute("id-agregat-concreteobjects-list", list);
+	}
+	return racine;
+    }
 
-    	if (!lstObjConcrets.isEmpty()) {
-    	    String list = new String("");
-    	    for (int i = 0; i < lstObjConcrets.size(); i++) {
-    	    	list += lstObjConcrets.get(i).getOid().get() + " ";
-    	    }
-    	    racine.setAttribute("id-agregat-concreteobjects-list", list);
-    	}
-    	return racine;
-	}
+    @Override
+    public void createObjectFromXMLElement2(Element p) {
+	// TODO Auto-generated method stub
+	createObjectFromXMLElement(p);
+    }
 
-	@Override
-	public void createObjectFromXMLElement2(Element p){
-		// TODO Auto-generated method stub
-		createObjectFromXMLElement(p);
-	}
-	
-	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
-		return this.oidIsAnyMissing(p);
-	}
+    public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
+	return this.oidIsAnyMissing(p);
+    }
 }

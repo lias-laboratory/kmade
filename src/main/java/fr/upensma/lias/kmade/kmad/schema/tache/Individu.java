@@ -1,24 +1,23 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.tache;
 
 import java.util.ArrayList;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -190,14 +189,95 @@ public class Individu extends User {
     public static int toArrayLenght() {
 	return 5;
     }
-    
-	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		return toXML(doc);
+
+    public Element toXML2(Document doc) throws Exception {
+	// TODO Auto-generated method stub
+	Element racine = doc.createElement("Individu");
+	racine.setAttribute("classkmad", "tache.Individu");
+	racine.setAttribute("idkmad", oid.get());
+
+	if (this.memberOf.size() != 0) {
+	    String list = new String("");
+	    for (int i = 0; i < memberOf.size(); i++) {
+		list += memberOf.get(i).getOid().get() + " ";
+	    }
+	    racine.setAttribute("id-organisation", list);
 	}
 
-	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		createObjectFromXMLElement(p);
+	Element kmadIndividuName = doc.createElement("individu-name");
+	kmadIndividuName.setTextContent(this.getName());
+	racine.appendChild(kmadIndividuName);
+
+	if (!this.getStatut().equals("")) {
+	    Element kmadIndividuStatut = doc.createElement("individu-statut");
+	    kmadIndividuStatut.setTextContent(this.getStatut());
+	    racine.appendChild(kmadIndividuStatut);
 	}
+
+	if (!this.getRole().equals("")) {
+	    Element kmadIndividuRole = doc.createElement("individu-role");
+	    kmadIndividuRole.setTextContent(this.getRole());
+	    racine.appendChild(kmadIndividuRole);
+	}
+
+	if (!this.getImage().equals("")) {
+	    Element kmadIndividuImagePath = doc
+		    .createElement("individu-imagepath");
+	    kmadIndividuImagePath.setTextContent(this.getImage());
+	    racine.appendChild(kmadIndividuImagePath);
+	}
+	if (this.memberOf.size() != 0) {
+	    for (int i = 0; i < memberOf.size(); i++) {
+		Element idOrganisation = doc.createElement("id-organisation");
+		idOrganisation.setTextContent(memberOf.get(i).getOid().get());
+		racine.appendChild(idOrganisation);
+	    }
+	}
+	return racine;
+
+    }
+
+    public void createObjectFromXMLElement2(Element p) throws Exception {
+	// TODO Auto-generated method stub
+	this.oid = new Oid(p.getAttribute("idkmad"));
+	
+	if(p.hasAttribute("id-organisation")){
+	    String[] kmadIndividuOrganisation = p.getAttribute("id-organisation").split(" ");
+	    for (int i = 0; i < kmadIndividuOrganisation.length; i++) {
+		this.addToOrganization((Organisation) InterfaceExpressJava.bdd
+			.prendre(new Oid(kmadIndividuOrganisation[i])));
+	    }
+	}
+
+	NodeList kmadIndividuName = p.getElementsByTagName("individu-name");
+	if (kmadIndividuName.item(0) != null)
+	    super.setName(kmadIndividuName.item(0).getTextContent());
+
+	NodeList kmadIndividuStatut = p.getElementsByTagName("individu-statut");
+	if (kmadIndividuStatut.item(0) != null)
+	    super.setStatut(kmadIndividuStatut.item(0).getTextContent());
+
+	NodeList kmadIndividuRole = p.getElementsByTagName("individu-role");
+	if (kmadIndividuRole.item(0) != null)
+	    super.setRole(kmadIndividuRole.item(0).getTextContent());
+
+	NodeList kmadIndividuImagePath = p
+		.getElementsByTagName("individu-imagepath");
+	if (kmadIndividuImagePath.item(0) != null)
+	    super.setImage(kmadIndividuImagePath.item(0).getTextContent());
+
+    }
+    
+    public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
+
+	if (p.hasAttribute("id-organisation")) {
+	    String[] userValue = p.getAttribute("id-organisation").split(" ");
+	    for (int i = 0; i < userValue.length; i++) {
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue[i])) == null) {
+		    return true;
+		}
+	    }
+	}
+	return false;
+    }
 }

@@ -34,7 +34,6 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressIteration;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressPrecondition;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserkmad.ExpressKMADXML;
-import fr.upensma.lias.kmade.tool.coreadaptator.parserobjects.ExpressKMADItemsXML;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.KMADEStartDialog;
 import fr.upensma.lias.kmade.tool.view.KMADEToolProjectSplashScreenShadow;
@@ -296,9 +295,9 @@ public final class KMADeAdaptator {
 	    GraphicEditorAdaptator.initMainFrame();
 
 	    // Loading
-	    ExpressKMADXML.loadKMADModel(myCurrentFile);
+	    ExpressKMADXML.loadKMAD(myCurrentFile);
 	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
-		    .readKMADModelFromXMLFile();
+		    .readKMADFromXMLFile();
 	}
 	updateThread = true;
     }
@@ -319,7 +318,7 @@ public final class KMADeAdaptator {
 	} else {
 	    File myCurrentFile = new File(fileName);
 	    if (myCurrentFile != null) {
-		ExpressKMADXML.saveKMADModel(myCurrentFile.getAbsolutePath());
+		ExpressKMADXML.saveKMAD(myCurrentFile.getAbsolutePath());
 		GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
 			.writeKMADModelFromXMLFile();
 	    }
@@ -329,7 +328,7 @@ public final class KMADeAdaptator {
     public static void saveProjectXMLAs() {
 	String myCurrentFile = KMADEFileChooser.saveKMADModelXMLFile();
 	if (myCurrentFile != null) {
-	    ExpressKMADXML.saveKMADModel(myCurrentFile);
+	    ExpressKMADXML.saveKMAD(myCurrentFile);
 	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
 		    .writeKMADModelFromXMLFile();
 	}
@@ -360,12 +359,12 @@ public final class KMADeAdaptator {
     	    KMADeAdaptator.cleanItems();
 
     	    // Loading
-    	    ExpressKMADItemsXML.loadKMADItems(myCurrentFile);
+    	    ExpressKMADXML.loadKMAD(myCurrentFile);
     	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
-    		    .readKMADItemsFromXMLFile();
+    		    .readKMADFromXMLFile();
     	}
     	updateThread = true;
-        }
+     }
     /**
      * @author Joachim TROUVERIE
      * To save the objects separately of the model
@@ -376,7 +375,7 @@ public final class KMADeAdaptator {
     	} else {
     	    File myCurrentFile = new File(fileName);
     	    if (myCurrentFile != null) {
-    		ExpressKMADItemsXML.saveKMADItems(myCurrentFile.getAbsolutePath());
+    		ExpressKMADXML.saveKMAD(myCurrentFile.getAbsolutePath());
     		GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
     			.writeKMADItemsFromXMLFile();
     	    }
@@ -388,7 +387,7 @@ public final class KMADeAdaptator {
     public static void saveItemsXMLAs(){
     	String myCurrentFile = KMADEFileChooser.saveKMADModelXMLFile();
     	if (myCurrentFile != null) {
-    	    ExpressKMADItemsXML.saveKMADItems(myCurrentFile);
+    	    ExpressKMADXML.saveKMAD(myCurrentFile);
     	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
     		    .writeKMADItemsFromXMLFile();
     	}

@@ -52,24 +52,24 @@ public class ExpressDB extends TreeMap<Oid, Object> implements Serializable {
 
 	return leoid;
     }
-    /**
-     * @author Joachim TROUVERIE
-     * @return the maximum id in the DB
-     */
-    public int getMax(){
-    	int max = 0;
-    	for (Iterator<Oid> i = this.keySet().iterator(); i.hasNext();){
-    		Oid oid = i.next();
-    		if(oid.getValue()>max)
-    			max = oid.getValue();
-    	}
-    	return max;
-    }
 
     public void mettre(Oid key, Object value) {
 	put(new Oid(key), value);
 
 	ExpressDB.isSet = true;
+    }
+    
+    public int getMax(){
+	Set<Oid> set = this.keySet();
+	Iterator<Oid> i;
+	int max = 0;
+	for (i = set.iterator(); i.hasNext();) {
+	    Oid oid = (Oid) i.next();
+	    if(oid.getValue()>max)
+		max = oid.getValue();
+	}
+	
+	return max;
     }
 
     public Object prendre(Oid key) {
@@ -128,21 +128,4 @@ public class ExpressDB extends TreeMap<Oid, Object> implements Serializable {
 	}
     }
     
-    /**
-     * @author Joachim TROUVERIE
-     * return the oid by classes
-     * @param className
-     * @return
-     */
-    public ArrayList<Oid> getByClassName(String className){
-    	ArrayList<Oid> list = new ArrayList<Oid>();
-    	for (Iterator<Oid> i = this.keySet().iterator(); i.hasNext();){
-    		Oid oid = i.next();
-    		Object o = this.prendre(oid);
-    		if(o.getClass().getName().equals(className)){
-    			list.add(oid);
-    		}
-    	}
-    	return list;
-    }
 }

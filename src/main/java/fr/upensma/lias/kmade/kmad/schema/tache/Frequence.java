@@ -112,4 +112,10 @@ public enum Frequence implements Enumere {
     public String toSPF() {
 	return "." + enonce + ".";
     }
+
+    @Override
+    public Element toXML2(Document doc) {
+	// TODO Auto-generated method stub
+	return this.toXML(doc);
+    }
 }

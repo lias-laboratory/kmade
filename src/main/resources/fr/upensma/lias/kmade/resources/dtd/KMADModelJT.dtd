@@ -10,10 +10,10 @@
 	Date : June 2010
 -->
 
-<!ELEMENT kmad-model(project, project-information, projectinterviews*, (point | event | actor | user | actorSystem | Individu | Organisation | Machine | ParcMachines | task | abstractobject | abstractattribut | concreteobject | concreteattribut | group | agregat | typevalue | label)*>
+<!ELEMENT kmad-model (project, project-information, projectinterviews*, (point | event | actor | user | actorSystem | Individu | Organisation | Machine | ParcMachines | task | abstractobject | abstractattribut | concreteobject | concreteattribut | group | agregat | typevalue | label)*)>
 	<!ATTLIST kmad-model version CDATA "3.0.BETA">
 
-<!ELEMENT project(#PCDATA)>
+<!ELEMENT project (#PCDATA)>
 	<!ATTLIST project idkmad ID #REQUIRED
 					  classkmad CDATA #REQUIRED
 					  id-project-information IDREF #IMPLIED
@@ -33,13 +33,13 @@
 	<!ATTLIST projectinterview idkmad ID #REQUIRED
 							   classkmad CDATA #REQUIRED >
 	<!ELEMENT projectinterview-actor (#PCDATA)>
-	<!ELEMENT projectinterview-place(#PCDATA)>
-	<!ELEMENT projectinterview-statut(#PCDATA)>
-	<!ELEMENT projectinterview-seniority(#PCDATA)>
-	<!ELEMENT projectinterview-date(#PCDATA)>
-	<!ELEMENT projectinterview-type(#PCDATA)>
-	<!ELEMENT projectinterview-info(#PCDATA)>
-	<!ELEMENT projectinterview-director(#PCDATA)>
+	<!ELEMENT projectinterview-place (#PCDATA)>
+	<!ELEMENT projectinterview-statut (#PCDATA)>
+	<!ELEMENT projectinterview-seniority (#PCDATA)>
+	<!ELEMENT projectinterview-date (#PCDATA)>
+	<!ELEMENT projectinterview-type (#PCDATA)>
+	<!ELEMENT projectinterview-info (#PCDATA)>
+	<!ELEMENT projectinterview-director (#PCDATA)>
 	
 <!ELEMENT task (task-name, task-numero, task-purpose?, task-duration?, task-resources?, task-feedback?,task-observation?, task-executant, task-frequency?, task-compfrequency?, task-importance?, task-modality?,task-optional, task-interruptible, task-decomposition, task-precondition, task-descriptionprecondition?, task-sideeffects?, task-descriptionsideeffects?, task-teration, task-descriptioniteration?)>
 	<!ATTLIST task idkmad ID #REQUIRED
@@ -53,28 +53,28 @@
 				   id-task-point IDREF #IMPLIED
 				   id-task-label IDREF #IMPLIED >
 	<!ELEMENT task-name (#PCDATA) >
-	<!ELEMENT task-numero(#PCDATA) >
-	<!ELEMENT task-purpose(#PCDATA)>
-	<!ELEMENT task-duration(#PCDATA) >
-	<!ELEMENT task-resources(#PCDATA) >
-	<!ELEMENT task-feedback(#PCDATA) >
-	<!ELEMENT task-observation(#PCDATA) >
-	<!ELEMENT task-executant(#PCDATA) >
-	<!ELEMENT task-frequency(#PCDATA) >
-	<!ELEMENT task-compfrequency(#PCDATA) >
-	<!ELEMENT task-importance(#PCDATA) >
-	<!ELEMENT task-modality(#PCDATA) >
-	<!ELEMENT task-optional(#PCDATA) >
-	<!ELEMENT task-interruptible(#PCDATA) >
-	<!ELEMENT task-decomposition(#PCDATA) >
-	<!ELEMENT task-precondition(#PCDATA) >
-	<!ELEMENT task-descriptionprecondition(#PCDATA) >
-	<!ELEMENT task-sideeffects(#PCDATA) >
-	<!ELEMENT task-descriptionsideeffects(#PCDATA) >
-	<!ELEMENT task-teration(#PCDATA) >
-	<!ELEMENT task-descriptioniteration(#PCDATA)>
+	<!ELEMENT task-numero (#PCDATA) >
+	<!ELEMENT task-purpose (#PCDATA)>
+	<!ELEMENT task-duration (#PCDATA) >
+	<!ELEMENT task-resources (#PCDATA) >
+	<!ELEMENT task-feedback (#PCDATA) >
+	<!ELEMENT task-observation (#PCDATA) >
+	<!ELEMENT task-executant (#PCDATA) >
+	<!ELEMENT task-frequency (#PCDATA) >
+	<!ELEMENT task-compfrequency (#PCDATA) >
+	<!ELEMENT task-importance (#PCDATA) >
+	<!ELEMENT task-modality (#PCDATA) >
+	<!ELEMENT task-optional (#PCDATA) >
+	<!ELEMENT task-interruptible (#PCDATA) >
+	<!ELEMENT task-decomposition (#PCDATA) >
+	<!ELEMENT task-precondition (#PCDATA) >
+	<!ELEMENT task-descriptionprecondition (#PCDATA) >
+	<!ELEMENT task-sideeffects (#PCDATA) >
+	<!ELEMENT task-descriptionsideeffects (#PCDATA) >
+	<!ELEMENT task-teration (#PCDATA) >
+	<!ELEMENT task-descriptioniteration (#PCDATA)>
 	
-<!ELEMENT point(point-x,point-y)>
+<!ELEMENT point (point-x,point-y)>
 	<!ATTLIST point idkmad ID #REQUIRED
 					classkmad CDATA #REQUIRED >
 	<!ELEMENT point-x (#PCDATA)>
@@ -90,7 +90,7 @@
 	<!ELEMENT media-finishmark (#PCDATA) >
 	
 
-<!ELEMENT event(event-name, event-description?)>
+<!ELEMENT event (event-name, event-description?)>
 	<!ATTLIST event idkmad ID #REQUIRED
 					classkmad CDATA #REQUIRED >
 	<!ELEMENT event-name (#PCDATA)>
@@ -137,7 +137,7 @@
 <!ELEMENT Machine (machine-name, machine-description?, machine-isComputer, machine-imagepath?)>
 	<!ATTLIST Machine idkmad ID #REQUIRED
 				   	  classkmad CDATA #REQUIRED
-				   	  id-parcMachine IDREF #IMPLIED >
+				   	  id-parcMachine IDREFS #IMPLIED >
 	<!ELEMENT machine-name (#PCDATA) >
 	<!ELEMENT machine-description (#PCDATA) >
 	<!ELEMENT machine-isComputer (#PCDATA) >

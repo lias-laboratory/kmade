@@ -75,6 +75,10 @@ public class EnsembleAg extends Agregat {
 	racine.setAttribute("classkmad", "metaobjet.EnsembleAg");
 	return racine;
     }
+    
+    public org.w3c.dom.Element toXML2(Document doc) {
+	return this.toXML(doc);
+    }
 
     public String getName() {
 	return AgregatStructure

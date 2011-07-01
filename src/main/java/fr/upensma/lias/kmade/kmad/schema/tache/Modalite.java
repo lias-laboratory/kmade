@@ -107,4 +107,10 @@ public enum Modalite implements Enumere {
     public String getValue() {
 	return enonce;
     }
+
+    @Override
+    public Element toXML2(Document doc) {
+	// TODO Auto-generated method stub
+	return this.toXML(doc);
+    }
 }
