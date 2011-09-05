@@ -25,6 +25,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
+import fr.upensma.lias.kmade.kmad.schema.tache.Point;
 
 /**
  * @author Mickael BARON
@@ -42,6 +43,8 @@ public class Groupe implements Entity {
     private ObjetAbstrait contientObj = null;
 
     private String description = "";
+    
+    private Point point;
 
     public Oid oid;
 
@@ -179,6 +182,14 @@ public class Groupe implements Entity {
 	return this.contientObj;
     }
 
+    public void setPoint(Point point) {
+	this.point = point;
+    }
+
+    public Point getPoint() {
+	return point;
+    }
+
     public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("group");
 	racine.setAttribute("classkmad", "metaobjet.Groupe");
@@ -278,18 +289,23 @@ public class Groupe implements Entity {
 
     @Override
     public Element toXML2(Document doc) throws Exception {
-	// TODO Auto-generated method stub
 	Element racine = doc.createElement("group");
 	racine.setAttribute("classkmad", "metaobjet.Groupe");
 	racine.setAttribute("idkmad", oid.get());
 
 	racine.setAttribute("id-group-agregat", this.ensemble.getOid().get());
+	racine.appendChild(this.ensemble.toXML2(doc));
 	racine.setAttribute("id-group-abstractobject", this.contientObj
 		.getOid().get());
 
 	Element element = doc.createElement("group-name");
 	element.setTextContent(this.getName());
 	racine.appendChild(element);
+	
+	if(this.point != null){
+	    racine.setAttribute("id-task-point", this.point.getOid().get());
+	    racine.appendChild(this.point.toXML2(doc));
+	}
 
 	if (!this.description.equals("")) {
 	    element = doc.createElement("group-description");
@@ -302,7 +318,6 @@ public class Groupe implements Entity {
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 	this.oid = new Oid(p.getAttribute("idkmad"));
 	this.setEnsemble((Agregat) InterfaceExpressJava.bdd.prendre(new Oid(p
 		.getAttribute("id-group-agregat"))));
@@ -317,6 +332,14 @@ public class Groupe implements Entity {
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}
+	
+	// Point
+	if (p.hasAttribute("id-task-point"))
+	    this.point = (Point) InterfaceExpressJava.bdd.prendre(new Oid(p
+		    .getAttribute("id-task-point")));
+	else 
+	    this.point = null;
+	    
 
     }
 
