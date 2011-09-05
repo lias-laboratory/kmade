@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
+import fr.upensma.lias.kmade.kmad.schema.tache.Point;
 
 /**
  * @author Mickael BARON
@@ -43,6 +44,8 @@ public class ObjetConcret implements Entity, Cloneable {
     private ObjetAbstrait utiliseParClass = null;
 
     private ArrayList<AttributConcret> inverseAttribut = new ArrayList<AttributConcret>();
+    
+    private Point point = null;
 
     private Groupe appartientGroupe = null;
 
@@ -108,7 +111,8 @@ public class ObjetConcret implements Entity, Cloneable {
 
     public void setAppartientGroupe(Groupe g) {
 	this.appartientGroupe = g;
-	g.addToGroup(this);
+	if(g != null)
+	    g.addToGroup(this);
     }
 
     public Groupe getAppartientGroupe() {
@@ -244,6 +248,14 @@ public class ObjetConcret implements Entity, Cloneable {
 	name = n;
     }
 
+    public void setPoint(Point point) {
+	this.point = point;
+    }
+
+    public Point getPoint() {
+	return point;
+    }
+
     public int getTaille() {
 	return this.name.length();
     }
@@ -301,7 +313,6 @@ public class ObjetConcret implements Entity, Cloneable {
 
     @Override
     public Element toXML2(Document doc) throws Exception {
-	// TODO Auto-generated method stub
 	Element racine = doc.createElement("concreteobject");
 	racine.setAttribute("classkmad", "metaobjet.ObjetConcret");
 	racine.setAttribute("idkmad", oid.get());
@@ -328,13 +339,17 @@ public class ObjetConcret implements Entity, Cloneable {
 		racine.appendChild(inverseAttribut.get(i).toXML2(doc));
 	    }
 	}
+	
+	if(this.point != null){
+	    racine.setAttribute("id-task-point", this.point.getOid().get());
+	    racine.appendChild(this.point.toXML2(doc));
+	}
 
 	return racine;
     }
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
 	this.setUtiliseParClass((ObjetAbstrait) InterfaceExpressJava.bdd
@@ -351,11 +366,17 @@ public class ObjetConcret implements Entity, Cloneable {
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}
+	
+	// Point
+	if (p.hasAttribute("id-task-point"))
+	    this.point = (Point) InterfaceExpressJava.bdd.prendre(new Oid(p
+		    .getAttribute("id-task-point")));
+	else 
+	    this.point = null;
     }
 
     @Override
     public boolean oidIsAnyMissing2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 	String userValue = p.getAttribute("id-concreteobject-abstractobject");
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
 	    return true;

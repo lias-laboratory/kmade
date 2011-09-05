@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
+import fr.upensma.lias.kmade.kmad.schema.tache.Point;
 
 /**
  * @author Delphine AUTARD and Mickael BARON
@@ -39,6 +40,8 @@ public class ObjetAbstrait implements Entity {
     private String name = null;
 
     private String description = null;
+    
+    private Point point;
 
     private ArrayList<ObjetConcret> inverseObjConcDe = null;
 
@@ -197,6 +200,14 @@ public class ObjetAbstrait implements Entity {
     public int getTaille() {
 	return this.name.length();
     }
+    
+    public void setPoint(Point p) {
+	this.point = p;
+    }
+
+    public Point getPoint() {
+	return point;
+    }
 
     public static boolean isUniqueName(String s) {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
@@ -275,6 +286,11 @@ public class ObjetAbstrait implements Entity {
 		racine.appendChild(this.inverseObjConcDe.get(i).toXML2(doc));
 	    }
 	}
+	
+	if(this.point != null){
+	    racine.setAttribute("id-task-point", this.point.getOid().get());
+	    racine.appendChild(this.point.toXML2(doc));
+	}
 
 	return racine;
     }
@@ -283,11 +299,23 @@ public class ObjetAbstrait implements Entity {
     public void createObjectFromXMLElement2(Element p) throws Exception {
 	// TODO Auto-generated method stub
 	createObjectFromXMLElement(p);
+	// Point
+	if (p.hasAttribute("id-task-point")){
+	    this.point = (Point) InterfaceExpressJava.bdd.prendre(new Oid(p
+		    .getAttribute("id-task-point")));
+	}
+	else 
+	    this.point = null;
     }
 
     @Override
     public boolean oidIsAnyMissing2(Element p) throws Exception {
-	// TODO Auto-generated method stub
-	return this.oidIsAnyMissing(p);
+	if(p.hasAttribute("id-task-point")){
+	    String nodeList = p.getAttribute("id-task-point");
+	    if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
+		return true;
+	    }
+	}
+	return false;
     }
 }
