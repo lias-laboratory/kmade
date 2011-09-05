@@ -168,6 +168,11 @@ public final class KMADeAdaptator {
     public static void openStatisticDialog() {
 	StatisticAdaptator.openStatisticDialog();
     }
+    
+    public static void openObjectDialogView() {
+	ObjectDialogViewAdaptator.updateObjectViewDialog();
+	ObjectDialogViewAdaptator.openObjectViewDialog();
+    }
 
     public static void openSimulationDialog() {
 	// Avant d'ouvrir le module simulation il faut v�rifier s'il n'existe
@@ -362,6 +367,9 @@ public final class KMADeAdaptator {
     	    ExpressKMADXML.loadKMAD(myCurrentFile);
     	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
     		    .readKMADFromXMLFile();
+    	    if(GraphicEditorAdaptator.getMainFrame().getObjectDialogView().isVisible())
+    		ObjectDialogViewAdaptator.updateObjectViewDialog();
+    		
     	}
     	updateThread = true;
      }
