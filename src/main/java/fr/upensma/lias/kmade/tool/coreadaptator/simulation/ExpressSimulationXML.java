@@ -249,10 +249,10 @@ public final class ExpressSimulationXML {
 	}
     
     private static Tache readHeadXML(Element node) {
-        String p = "";
-        p += node.getAttribute("coment");
-        p += " " + node.getAttribute("date");
-        p += " " + node.getAttribute("name");
+//        String p = "";
+//        p += node.getAttribute("coment");
+//        p += " " + node.getAttribute("date");
+//        p += " " + node.getAttribute("name");
         String idTask = node.getAttribute("idTask");
         Tache myTask = ExpressTask.getTaskFromOid(idTask);
         return myTask;
