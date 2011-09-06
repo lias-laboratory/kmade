@@ -18,7 +18,6 @@
 package fr.upensma.lias.kmade.tool.viewadaptator;
 
 import java.awt.Dimension;
-import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Window;
 import java.awt.geom.Point2D;
@@ -385,8 +384,8 @@ public final class GraphicEditorAdaptator {
     }
 
     private static Point centeredTask(Point p) {
-	FontMetrics fname = TASK_MODEL_PANEL
-		.getFontMetrics(KMADEConstant.TASK_NAME_FONT);
+//	FontMetrics fname = TASK_MODEL_PANEL
+//		.getFontMetrics(KMADEConstant.TASK_NAME_FONT);
 	/*
 	 * ancienne version du code -> int width =
 	 * SwingUtilities.computeStringWidth(fname,
