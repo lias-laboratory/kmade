@@ -19,7 +19,6 @@ package fr.upensma.lias.kmade.kmad.schema.tache;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
