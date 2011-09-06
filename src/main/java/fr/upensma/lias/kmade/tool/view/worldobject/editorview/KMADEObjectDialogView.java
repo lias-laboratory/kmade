@@ -169,6 +169,7 @@ public class KMADEObjectDialogView extends JDialog {
 	    }
 	});
 
+	this.setModal(true);
 	this.setResizable(true);
 	this.pack();
 	KMADEToolUtilities.setCenteredInScreen(this);
