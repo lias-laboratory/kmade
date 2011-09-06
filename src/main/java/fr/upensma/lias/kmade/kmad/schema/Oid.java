@@ -38,7 +38,7 @@ public class Oid implements Comparable<Object>, Serializable {
 
     public Oid(String st) {
     	//Previous and actual version of the dtd
-	if (st.charAt(0) != '#' || st.charAt(0) != 'K') {
+	if (st.charAt(0) != '#' && st.charAt(0) != 'K') {
 	    System.err.println("Erreur dans chaine pour oid st=" + st);
 	}
 	Integer in = Integer.valueOf(Integer.parseInt(st.substring(1)));
