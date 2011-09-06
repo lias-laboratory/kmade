@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool;
 
 import java.awt.Color;
@@ -29,7 +29,7 @@ import fr.upensma.lias.kmade.KMADeMain;
 public class KMADEConstant {
     // Couleurs
 
-    // Couleur pour la sélection dans les JTable
+    // Couleur pour la s�lection dans les JTable
     public static final Color ACTIVE_SELECTION = new Color(186, 219, 243); // Color.blue;
 
     public static Color ACTIVE_SELECTION_FONT_COLOR = Color.black;
@@ -37,10 +37,10 @@ public class KMADEConstant {
     // Couleur pour les Containers
     public static final Color ACTIVE_PANE = Color.white;
 
-    // Couleur pour le nom d'une tâche
+    // Couleur pour le nom d'une t�che
     public static Color TASK_NAME_COLOR = Color.black;
 
-    // Couleur pour le nom de l'opération
+    // Couleur pour le nom de l'op�ration
     public static Color TASK_OPERATOR_COLOR = Color.black;
 
     // Fontes
@@ -62,10 +62,10 @@ public class KMADEConstant {
     // Hauteur des niveaux
     public static int LEVEL_DISTANCE = 130;
 
-    // Distance entre les tâches
+    // Distance entre les t�ches
     public static int TASK_DISTANCE = 60;
 
-    // Couleur de la sélection d'une tâche
+    // Couleur de la s�lection d'une t�che
     public static Color TASK_SELECTION_COLOR = Color.GREEN;
 
     // Orthogonal Edges
@@ -97,7 +97,7 @@ public class KMADEConstant {
     }
 
     /**
-     * Modifie la police de l'opérateur de la tache
+     * Modifie la police de l'op�rateur de la tache
      * 
      * @param font
      * @param style
@@ -110,7 +110,7 @@ public class KMADEConstant {
 	TASK_OPERATOR_COLOR = fontColor;
     }
 
-    // Les mots affichés sur une tâche dans l'espace de tâche
+    // Les mots affich�s sur une t�che dans l'espace de t�che
     public static String VERTEX_NUM = "N:";
     public static String VERTEX_PRECONDITION = "PRE";
     public static String VERTEX_ITERATION = "ITER";
@@ -124,25 +124,25 @@ public class KMADEConstant {
     public static String VERTEX_EVENT_IN_LETTER = "IN:";
     public static String VERTEX_EVENT_OUT_LETTER = "OUT:";
     //
-    // Les constantes liées aux titres et autres chaines de caractères.
+    // Les constantes li�es aux titres et autres chaines de caract�res.
     //
     public static String FENETRE_PRINCIPALE_TITLE_NAME = "KMADe (Kernel of Model for Activity Description environment)";
     public static String ABOUT_TITLE_NAME = "A Propos de "
 	    + KMADEToolConstant.TOOL_NAME;
-    public static String TASK_DESCRIPTION_TABBEDPANE_TITLE_NAME = "Espace Tâches";
+    public static String TASK_DESCRIPTION_TABBEDPANE_TITLE_NAME = "Espace T�ches";
     public static String ABSTRACT_OBJECT_TABBEDPANE_TITLE_NAME = "Objets Abstraits";
     public static String USER_TABBEDPANE_TITLE_NAME = "Acteurs potentiels";
     public static String INDIVIDU_TABBEDPANE_TITLE_NAME = "Individus";
     public static String ORGANIZATION_TABBEDPANE_TITLE_NAME = "Organisations";
     public static String MACHINE_TABBEDPANE_TITLE_NAME = "Machines";
     public static String PARCMACHINES_TABBEDPANE_TITLE_NAME = "Parc de machines";
-    public static String EVENT_TABBEDPANE_TITLE_NAME = "Evénements";
+    public static String EVENT_TABBEDPANE_TITLE_NAME = "Ev�nements";
     public static String CONCRETE_TASK_OBJECT_TABBEDPANE_TITLE_NAME = "Objets Concrets";
-    public static String PREVIEW_WINDOW_TITLE_NAME = "Fenêtre d'aperçu";
-    public static String INFO_DEBUG_TITLE_NAME = "Informations de développement";
+    public static String PREVIEW_WINDOW_TITLE_NAME = "Fen�tre d'aper�u";
+    public static String INFO_DEBUG_TITLE_NAME = "Informations de d�veloppement";
     public static String HELP_KMADE_TITLE_NAME = "Aide sur l'outil "
 	    + KMADEToolConstant.TOOL_NAME;
-    public static String HELP_KMAD_TITLE_NAME = "Aide sur le modèle K-MAD";
+    public static String HELP_KMAD_TITLE_NAME = "Aide sur le mod�le K-MAD";
     public static String HISTORY_TITLE_NAME = "Historique de l'outil KMADe";
     public static String ABSTRACT_OBJECT_TITLE_NAME = "Editeur Objets Abstraits";
     public static String CONCRETE_OBJECT_TITLE_NAME = "Editeur Objets Concrets";
@@ -151,28 +151,28 @@ public class KMADEConstant {
     public static String ORGANIZATION_TITLE_NAME = "Editeur Organisation";
     public static String MACHINE_TITLE_NAME = "Editeur Machine";
     public static String PARCMACHINES_TITLE_NAME = "Editeur Parc de machines";
-    public static String EVENT_TITLE_NAME = "Editeur Evénements";
-    public static String TASK_MODEL_TITLE_NAME = "Arbre de Tâches";
-    public static String PREFERENCES_TITLE_NAME = "Préférences";
-    public static String COMPLETE_EDITOR_TITLE_NAME = "Editeur complet de tâches";
-    public static String CLIPBOARD_TITLE_NAME = "Aperçu du Presse-Papier";
+    public static String EVENT_TITLE_NAME = "Editeur Ev�nements";
+    public static String TASK_MODEL_TITLE_NAME = "Arbre de T�ches";
+    public static String PREFERENCES_TITLE_NAME = "Pr�f�rences";
+    public static String COMPLETE_EDITOR_TITLE_NAME = "Editeur complet de t�ches";
+    public static String CLIPBOARD_TITLE_NAME = "Aper�u du Presse-Papier";
     public static String LOAD_MONITOR_TITLE_NAME = "Moniteur de chargement de projet K-MAD";
     public static String SAVE_MONITOR_TITLE_NAME = "Moniteur d'enregistrement de projet K-MAD";
     public static String EDITOR_TEXT_TITLE_NAME = "Editeur du contenu de l'attribut";
-    public static String EVENT_TASK_LINKED_TITLE_NAME = "Liaison Tache/Evénement";
-    public static String ACTOR_CREATE_TITLE_NAME = "Création des acteurs";
-    public static String ACTORSYSTEM_CREATE_TITLE_NAME = "Création des acteurs systèmes";
-    public static String PRINT_PREVIEW_WINDOW_TITLE_NAME = "Aperçu d'impression";
+    public static String EVENT_TASK_LINKED_TITLE_NAME = "Liaison Tache/Ev�nement";
+    public static String ACTOR_CREATE_TITLE_NAME = "Cr�ation des acteurs";
+    public static String ACTORSYSTEM_CREATE_TITLE_NAME = "Cr�ation des acteurs syst�mes";
+    public static String PRINT_PREVIEW_WINDOW_TITLE_NAME = "Aper�u d'impression";
     public static String PROJECT_DIALOG_TITLE_NAME = "Gestion des interviews";
 
     // Les affichages des boites de dialogue d'erreur de nom
 
-    public static String BAD_CHARACTER_TEXT = "Erreur d'écriture dans le nom";
+    public static String BAD_CHARACTER_TEXT = "Erreur d'�criture dans le nom";
     public static String BAD_CARACTER_TITLE = "Nom incorrect";
     public static String SAME_NAME_TEXT = "Nom Identique";
-    public static String SAME_NAME_TITLE = "Le nom est déjé utilisé, renommer en :";
+    public static String SAME_NAME_TITLE = "Le nom est d�j� utilis�, renommer en :";
     // Abstract Object
-    public static String BACK_TO_EDITOR = "Retour vers l'éditeur de";
+    public static String BACK_TO_EDITOR = "Retour vers l'�diteur de";
     public static String ABSTRACT_OBJECT_NAME_TABLE = "Nom";
     public static String ABSTRACT_OBJECT_OBSERVATION_TABLE = "Observation";
     public static String ABSTRACT_OBJECT_NEW_OBJECT_TABLE = "Ajouter un objet abstrait ...";
@@ -195,21 +195,21 @@ public class KMADEConstant {
     public static String ABSTRACT_ATTRIBUT_TYPE_NAME_TABLE = "Nom du type";
     public static String ABSTRACT_ATTRIBUT_NEW_OBJECT_TABLE = "Ajouter un attribut abstrait ...";
     public static String ABSTRACT_ATTRIBUT_TITLE_TABLE = "Attribut de";
-    public static String ABSTRACT_ATTRIBUT_ENUMERATE_EDIT_TABLE = "Editer énuméré ...";
+    public static String ABSTRACT_ATTRIBUT_ENUMERATE_EDIT_TABLE = "Editer �num�r� ...";
     public static String ABSTRACT_ATTRIBUT_INTERVAL_EDIT_TABLE = "Editer intervalle ...";
     public static String ABSTRACT_ATTRIBUT_REMOVE_MESSAGE_TITLE = "Suppression d'attributs abstraits";
 
     // Enumeration
-    public static String ENUMERATION_NAME_TABLE = "Nom énuméré";
+    public static String ENUMERATION_NAME_TABLE = "Nom �num�r�";
     public static String ENUMERATION_DESCRIPTION_TABLE = "Description";
-    public static String ENUMERATION_NEW_OBJECT_TABLE = "Ajouter un énuméré ...";
-    public static String ENUMERATION_TITLE_TABLE = "Enumération";
-    public static String ENUMERATION_REMOVE_MESSAGE_TITLE = "Suppression d'énumérés";
+    public static String ENUMERATION_NEW_OBJECT_TABLE = "Ajouter un �num�r� ...";
+    public static String ENUMERATION_TITLE_TABLE = "Enum�ration";
+    public static String ENUMERATION_REMOVE_MESSAGE_TITLE = "Suppression d'�num�r�s";
 
     // Element
     public static String ELEMENT_NAME_TABLE = "Nom";
-    public static String ELEMENT_NEW_OBJECT_TABLE = "Ajouter un élément ...";
-    public static String ELEMENT_REMOVE_MESSAGE_TITLE = "Suppression d'éléments d'un énuméré";
+    public static String ELEMENT_NEW_OBJECT_TABLE = "Ajouter un �l�ment ...";
+    public static String ELEMENT_REMOVE_MESSAGE_TITLE = "Suppression d'�l�ments d'un �num�r�";
 
     // Intervalle
     public static String INTERVALLE_TITLE_TABLE = "Intervalle";
@@ -235,22 +235,22 @@ public class KMADEConstant {
     // Attribut Concret
     public static String CONCRETE_ATTRIBUT_NAME_TABLE = "Nom";
     public static String CONCRETE_ATTRIBUT_VALUE_TABLE = "Valeur";
-    public static String CONCRETE_ATTRIBUT_NOINIT_TABLE = "Attribut non initialisé";
+    public static String CONCRETE_ATTRIBUT_NOINIT_TABLE = "Attribut non initialis�";
     public static String CONCRETE_ATTRIBUT_TITLE_TABLE = "Attribut concret de";
 
     // Evenement
     public static String EVENT_NAME_TABLE = "Nom";
     public static String EVENT_DESCRIPTION_TABLE = "Description";
-    public static String EVENT_NEW_ROW_TABLE = "Ajouter un événement ...";
-    public static String EVENT_NONEW_ROW_TABLE = "Ajout impossible car pas d'événement disponible";
-    public static String EVENT_REMOVE_INTO_TASK = "Suppression d'événements d'une tâche";
-    public static String EVENT_REMOVE_NAME_TITLE = "Suppression d'événements";
-    public static String EVENT_NO_ELEMENT_INTO_TASK = "Pas d'événement associé";
+    public static String EVENT_NEW_ROW_TABLE = "Ajouter un �v�nement ...";
+    public static String EVENT_NONEW_ROW_TABLE = "Ajout impossible car pas d'�v�nement disponible";
+    public static String EVENT_REMOVE_INTO_TASK = "Suppression d'�v�nements d'une t�che";
+    public static String EVENT_REMOVE_NAME_TITLE = "Suppression d'�v�nements";
+    public static String EVENT_NO_ELEMENT_INTO_TASK = "Pas d'�v�nement associ�";
 
     // Utilisateur
     public static String USER_NAME_TABLE = "Nom";
     public static String USER_STATUS_TABLE = "Statut";
-    public static String USER_ROLE_TABLE = "Rôle";
+    public static String USER_ROLE_TABLE = "R�le";
     public static String USER_PHOTO_TABLE = "Photo";
     public static String USER_MEMBERS = "Membre(s)";
     public static String USER_NEW_ROW_TABLE = "Ajouter un utilisateur ...";
@@ -258,23 +258,23 @@ public class KMADEConstant {
     public static String USER_CHOOSE_IMAGE_MESSAGE = "Choisir ...";
     public static String USER_DISPLAY_IMAGE_MESSAGE = "Afficher Image";
     public static String USER_DISPLAY_PATH_IMAGE_MESSAGE = "Afficher Chemin";
-    public static String USER_DISPLAY_DEFAULT_IMAGE_MESSAGE = "Afficher Image Défaut";
-    public static String USER_DISPLAY_BAD_PATH_IMAGE_MESSAGE = "Afficher Chemin Erroné";
+    public static String USER_DISPLAY_DEFAULT_IMAGE_MESSAGE = "Afficher Image D�faut";
+    public static String USER_DISPLAY_BAD_PATH_IMAGE_MESSAGE = "Afficher Chemin Erron�";
     public static String USER_CLEAR_IMAGE_MESSAGE = "Effacer Image";
 
     // Individu
 
     public static String INDIVIDU_NAME_TABLE = "Nom";
     public static String INDIVIDU_STATUS_TABLE = "Statut";
-    public static String INDIVIDU_ROLE_TABLE = "Rôle";
+    public static String INDIVIDU_ROLE_TABLE = "R�le";
     public static String INDIVIDU_PHOTO_TABLE = "Photo";
     public static String INDIVIDU_NEW_ROW_TABLE = "Ajouter un individu";
     public static String INDIVIDU_REMOVE_NAME_TITLE = "Suppression d'individus";
     public static String INDIVIDU_CHOOSE_IMAGE_MESSAGE = "Choisir ...";
     public static String INDIVIDU_DISPLAY_IMAGE_MESSAGE = "Afficher Image";
     public static String INDIVIDU_DISPLAY_PATH_IMAGE_MESSAGE = "Afficher Chemin";
-    public static String INDIVIDU_DISPLAY_DEFAULT_IMAGE_MESSAGE = "Afficher Image Défaut";
-    public static String INDIVIDU_DISPLAY_BAD_PATH_IMAGE_MESSAGE = "Afficher Chemin Erroné";
+    public static String INDIVIDU_DISPLAY_DEFAULT_IMAGE_MESSAGE = "Afficher Image D�faut";
+    public static String INDIVIDU_DISPLAY_BAD_PATH_IMAGE_MESSAGE = "Afficher Chemin Erron�";
     public static String INDIVIDU_CLEAR_IMAGE_MESSAGE = "Effacer Image";
     public static String INDIVIDU_ORGANIZATION_TABLE = "Organisation";
     public static String INDIVIDU_OTHERS = "Autres";
@@ -282,15 +282,15 @@ public class KMADEConstant {
 
     public static String ORGANIZATION_NAME_TABLE = "Nom";
     public static String ORGANIZATION_STATUS_TABLE = "Statut";
-    public static String ORGANIZATION_ROLE_TABLE = "Rôle";
+    public static String ORGANIZATION_ROLE_TABLE = "R�le";
     public static String ORGANIZATION_PHOTO_TABLE = "Logo";
     public static String ORGANIZATION_NEW_ROW_TABLE = "Ajouter un organisation";
     public static String ORGANIZATION_REMOVE_NAME_TITLE = "Suppression d'organisation";
     public static String ORGANIZATION_CHOOSE_IMAGE_MESSAGE = "Choisir ...";
     public static String ORGANIZATION_DISPLAY_IMAGE_MESSAGE = "Afficher Image";
     public static String ORGANIZATION_DISPLAY_PATH_IMAGE_MESSAGE = "Afficher Chemin";
-    public static String ORGANIZATION_DISPLAY_DEFAULT_IMAGE_MESSAGE = "Afficher Image Défaut";
-    public static String ORGANIZATION_DISPLAY_BAD_PATH_IMAGE_MESSAGE = "Afficher Chemin Erroné";
+    public static String ORGANIZATION_DISPLAY_DEFAULT_IMAGE_MESSAGE = "Afficher Image D�faut";
+    public static String ORGANIZATION_DISPLAY_BAD_PATH_IMAGE_MESSAGE = "Afficher Chemin Erron�";
     public static String ORGANIZATION_CLEAR_IMAGE_MESSAGE = "Effacer Image";
     public static String ORGANIZATION_MEMBERS_TABLE = "Membres";
     public static String ORGANIZATION_OTHERS = "Autres";
@@ -299,15 +299,15 @@ public class KMADEConstant {
 
     public static String MACHINE_NAME_TABLE = "Nom";
     public static String MACHINE_DESCRIPTION_TABLE = "Description";
-    public static String MACHINE_ISCOMPUTER_TABLE = "est informatisé";
+    public static String MACHINE_ISCOMPUTER_TABLE = "est informatis�";
     public static String MACHINE_IMAGE_TABLE = "image";
     public static String MACHINE_NEW_ROW_TABLE = "Ajouter un machine";
     public static String MACHINE_REMOVE_NAME_TITLE = "Suppression de machines";
     public static String MACHINE_CHOOSE_IMAGE_MESSAGE = "Choisir ...";
     public static String MACHINE_DISPLAY_IMAGE_MESSAGE = "Afficher Image";
     public static String MACHINE_DISPLAY_PATH_IMAGE_MESSAGE = "Afficher Chemin";
-    public static String MACHINE_DISPLAY_DEFAULT_IMAGE_MESSAGE = "Afficher Image Défaut";
-    public static String MACHINE_DISPLAY_BAD_PATH_IMAGE_MESSAGE = "Afficher Chemin Erroné";
+    public static String MACHINE_DISPLAY_DEFAULT_IMAGE_MESSAGE = "Afficher Image D�faut";
+    public static String MACHINE_DISPLAY_BAD_PATH_IMAGE_MESSAGE = "Afficher Chemin Erron�";
     public static String MACHINE_CLEAR_IMAGE_MESSAGE = "Effacer Image";
     public static String MACHINE_PARCS_TABLE = "Parcs de machines";
     public static String MACHINE_OTHERS = "Autres";
@@ -322,31 +322,31 @@ public class KMADEConstant {
     public static String PARCMACHINES_CHOOSE_IMAGE_MESSAGE = "Choisir ...";
     public static String PARCMACHINES_DISPLAY_IMAGE_MESSAGE = "Afficher Image";
     public static String PARCMACHINES_DISPLAY_PATH_IMAGE_MESSAGE = "Afficher Chemin";
-    public static String PARCMACHINES_DISPLAY_DEFAULT_IMAGE_MESSAGE = "Afficher Image Défaut";
-    public static String PARCMACHINES_DISPLAY_BAD_PATH_IMAGE_MESSAGE = "Afficher Chemin Erroné";
+    public static String PARCMACHINES_DISPLAY_DEFAULT_IMAGE_MESSAGE = "Afficher Image D�faut";
+    public static String PARCMACHINES_DISPLAY_BAD_PATH_IMAGE_MESSAGE = "Afficher Chemin Erron�";
     public static String PARCMACHINES_CLEAR_IMAGE_MESSAGE = "Effacer Image";
     public static String PARCMACHINES_MACHINE_TABLE = "Machines";
     public static String PARCMACHINES_OTHERS = "Autres";
 
     // Label
-    public static String LABEL_TITLE_MESSAGE = "Libellé";
-    public static String LABEL_REMOVE_NAME_TITLE = "Suppression de libellés";
-    public static String LABEL_NUMERO_TITLE = "Numéro";
+    public static String LABEL_TITLE_MESSAGE = "Libell�";
+    public static String LABEL_REMOVE_NAME_TITLE = "Suppression de libell�s";
+    public static String LABEL_NUMERO_TITLE = "Num�ro";
     public static String LABEL_NAME_TITLE = "Nom";
     public static String LABEL_DESCRIPTION_TITLE = "Description";
     public static String LABEL_COLOR_TITLE = "Couleur";
     public static String LABEL_IS_VISIBLE_COLOR_TITLE = "Couleur Visible";
     public static String LABEL_IS_VISIBLE_TITLE = "Visible";
-    public static String LABEL_ADD_NEW_LABEL_TITLE = "Ajouter un libellé ...";
-    public static String LABEL_EDITOR_TITLE = "Editeur Libellé";
+    public static String LABEL_ADD_NEW_LABEL_TITLE = "Ajouter un libell� ...";
+    public static String LABEL_EDITOR_TITLE = "Editeur Libell�";
 
     // Acteur
     public static String ACTOR_NAME_TABLE = "Nom";
-    public static String ACTOR_EXPERIENCE_TABLE = "Expêrience";
-    public static String ACTOR_COMPETENCE_TABLE = "Compétence";
+    public static String ACTOR_EXPERIENCE_TABLE = "Exp�rience";
+    public static String ACTOR_COMPETENCE_TABLE = "Comp�tence";
     public static String ACTOR_NEW_ROW_TABLE = "Ajouter un acteur ...";
     public static String ACTOR_NONEW_ROW_TABLE = "Ajout impossible d'acteur car pas d'utilisateur disponible";
-    public static String ACTOR_NO_ELEMENT_INTO_TASK = "Pas d'acteur associé";
+    public static String ACTOR_NO_ELEMENT_INTO_TASK = "Pas d'acteur associ�";
     public static String ACTOR_REMOVE_NAME_TITLE = "Suppression d'acteurs";
     public static String ACTOR_REMOVE_ALL_NAME_TITLE = "Suppression de l'ensemble des acteurs";
 
@@ -361,190 +361,190 @@ public class KMADEConstant {
     public static String ACTORSYSTEM_REMOVE_NAME_TITLE;
     public static String ACTORSYSTEM_REMOVE_ALL_NAME_TITLE;
 
-    // Propriétés des tâches
-    public static String NO_SELECTED_TASK_MESSAGE = "Pas de tâche Sélectionnée";
-    public static String PROPERTIES_MESSAGE = "Caractéristiques";
-    public static String GENERAL_TABBEDPANE_TITLE_NAME = "Général";
+    // Propri�t�s des t�ches
+    public static String NO_SELECTED_TASK_MESSAGE = "Pas de t�che S�lectionn�e";
+    public static String PROPERTIES_MESSAGE = "Caract�ristiques";
+    public static String GENERAL_TABBEDPANE_TITLE_NAME = "G�n�ral";
     public static String NO_VALUE_LEGEND_MESSAGE = "pas de valeur";
-    public static String NO_CARACTERISTIC_SELECTED_MESSAGE = "Caractéristique non sélectionnée";
+    public static String NO_CARACTERISTIC_SELECTED_MESSAGE = "Caract�ristique non s�lectionn�e";
     public static String ERROR_CARACTERISTIC_MESSAGE = "Erreur";
 
-    // Informations Générales des propriétés d'une tâches
-    public static String TASK_ATTRIBUT_NAME = "Tâche";
-    public static String GENERAL_INFORMATION_PANEL_TITLE_NAME = "Générales";
-    public static String GENERAL_INFORMATION_PANEL_LEGEND_TITLE_NAME = "Les caractéristiques de type générales sont les premières renseignées et sont prévues pour être assimilées par l'ensemble des intervenants de l'analyse d'une activité. Ces caractéristiques sont informelles et ne font pas références à des objets de l'état du monde";
-    public static String TASK_NUMBER_NAME_TITLE = "Numéro";
+    // Informations G�n�rales des propri�t�s d'une t�ches
+    public static String TASK_ATTRIBUT_NAME = "T�che";
+    public static String GENERAL_INFORMATION_PANEL_TITLE_NAME = "G�n�rales";
+    public static String GENERAL_INFORMATION_PANEL_LEGEND_TITLE_NAME = "Les caract�ristiques de type g�n�rales sont les premi�res renseign�es et sont pr�vues pour �tre assimil�es par l'ensemble des intervenants de l'analyse d'une activit�. Ces caract�ristiques sont informelles et ne font pas r�f�rences � des objets de l'�tat du monde";
+    public static String TASK_NUMBER_NAME_TITLE = "Num�ro";
     public static String TASK_NUMBER_SHORT_NAME_TITLE = "Num";
-    public static String TASK_NUMBER_NAME_LEGEND_TITLE = "Numéro";
-    public static String NO_MOTHER_TASK_NAME_MESSAGE = "Pas de tâche mère";
-    public static String SUB_TASK_PARENT_NAME_TITLE = "Sous-tâche";
-    public static String SUB_TASK_PARENT_NAME_LEGEND_TITLE = "Sous-tâche";
+    public static String TASK_NUMBER_NAME_LEGEND_TITLE = "Num�ro";
+    public static String NO_MOTHER_TASK_NAME_MESSAGE = "Pas de t�che m�re";
+    public static String SUB_TASK_PARENT_NAME_TITLE = "Sous-t�che";
+    public static String SUB_TASK_PARENT_NAME_LEGEND_TITLE = "Sous-t�che";
     public static String TASK_NAME_TITLE = "Nom";
     public static String TASK_NAME_LEGEND_TITLE = "Nom";
     public static String TASK_PURPOSE_TITLE = "But";
     public static String TASK_PURPOSE_LEGEND_TITLE = "But";
-    public static String TASK_MULTIMEDIA_PURPOSE_TITLE = "Multimédia";
-    public static String TASK_MULTIMEDIA_PURPOSE_LEGEND_TITLE = "Multimédia";
-    public static String TASK_MULTIMEDIA_ERROR_FILE_MESSAGE = "Problème : média introuvable";
-    public static String TASK_LABEL_TITLE = "Libellé";
-    public static String TASK_LABEL_LEGEND_TITLE = "Libellé";
+    public static String TASK_MULTIMEDIA_PURPOSE_TITLE = "Multim�dia";
+    public static String TASK_MULTIMEDIA_PURPOSE_LEGEND_TITLE = "Multim�dia";
+    public static String TASK_MULTIMEDIA_ERROR_FILE_MESSAGE = "Probl�me : m�dia introuvable";
+    public static String TASK_LABEL_TITLE = "Libell�";
+    public static String TASK_LABEL_LEGEND_TITLE = "Libell�";
     public static String TASK_OBJECTS_TITLE = "Objets";
     public static String TASK_OBJECTS_LEGEND_TITLE = "Objets";
     public static String TASK_FEEDBACK_TITLE = "Affichage";
     public static String TASK_FEEDBACK_LEGEND_TITLE = "Affichage";
-    public static String TASK_DURATION_TITLE = "Durée";
-    public static String TASK_DURATION_LEGEND_TITLE = "Durée";
+    public static String TASK_DURATION_TITLE = "Dur�e";
+    public static String TASK_DURATION_LEGEND_TITLE = "Dur�e";
     public static String TASK_OBSERVATION_TITLE = "Observation";
     public static String TASK_OBSERVATION_LEGEND_TITLE = "Observation";
-    public static String EXECUTING_NAME_TITLE = "Exécutant";
-    public static String EXECUTING_NAME_LEGEND_TITLE = "Exécutant";
-    public static String MODALITY_NAME_TITLE = "Modalité";
-    public static String MODALITY_NAME_LEGEND_TITLE = "Modalité";
-    public static String FREQUENCY_NAME_TITLE = "Fréquence";
-    public static String FREQUENCY_NAME_LEGEND_TITLE = "Fréquence";
-    public static String FREQUENCY_VALUE_NAME_TITLE = "Valeur Fréquence";
-    public static String FREQUENCY_VALUE_NAME_LEGEND_TITLE = "Valeur Fréquence";
+    public static String EXECUTING_NAME_TITLE = "Ex�cutant";
+    public static String EXECUTING_NAME_LEGEND_TITLE = "Ex�cutant";
+    public static String MODALITY_NAME_TITLE = "Modalit�";
+    public static String MODALITY_NAME_LEGEND_TITLE = "Modalit�";
+    public static String FREQUENCY_NAME_TITLE = "Fr�quence";
+    public static String FREQUENCY_NAME_LEGEND_TITLE = "Fr�quence";
+    public static String FREQUENCY_VALUE_NAME_TITLE = "Valeur Fr�quence";
+    public static String FREQUENCY_VALUE_NAME_LEGEND_TITLE = "Valeur Fr�quence";
     public static String IMPORTANT_NAME_TITLE = "Importance";
     public static String IMPORTANT_NAME_LEGEND_TITLE = "Importance";
     public static String SENSORI_MOTRICE_NAME_TITLE = "Sensori-motrice";
     public static String COGNITIVE_NAME_TITLE = "Cognitive";
 
-    // Ordonnancement d'une tâche
+    // Ordonnancement d'une t�che
     public static String SCHEDULE_PANEL_TITLE_NAME = "Ordonnancement";
-    public static String NECESSITE_LABEL_NAME = "Nécessité";
-    public static String NECESSITE_LABEL_LEGEND_NAME = "Nécessité";
+    public static String NECESSITE_LABEL_NAME = "N�cessit�";
+    public static String NECESSITE_LABEL_LEGEND_NAME = "N�cessit�";
     public static String INTERRUPTIBLE_LABEL_NAME = "Interruptible";
     public static String INTERRUPTIBLE_LABEL_LEGEND_NAME = "Interruptible";
-    public static String DECLENCHEMENT_LABEL_NAME = "Déclenchement";
-    public static String DECLENCHEMENT_LABEL_LEGEND_NAME = "Déclenchement";
+    public static String DECLENCHEMENT_LABEL_NAME = "D�clenchement";
+    public static String DECLENCHEMENT_LABEL_LEGEND_NAME = "D�clenchement";
     public static String UTILISATEUR_LABEL_NAME = "Acteur(s)";
     public static String UTILISATEUR_LABEL_LEGEND_NAME = "Utilisateurs";
-    public static String SCHEDULE_LABEL_NAME = "Décomposition";
-    public static String SCHEDULE_LABEL_LEGEND_NAME = "Décomposition";
+    public static String SCHEDULE_LABEL_NAME = "D�composition";
+    public static String SCHEDULE_LABEL_LEGEND_NAME = "D�composition";
     public static String OPTIONAL_NECESSITE_VALUE = "Optionnelle";
     public static String NO_OPTIONAL_NECESSITE_VALUE = "Obligatoire";
     public static String INTERRUPTIBLE_VALUE = "Interruptible";
     public static String NO_INTERRUPTIBLE_VALUE = "Non interruptible";
-    public static String PRECONDITION_LABEL_VALUE = "Précondition";
-    public static String PRECONDITION_LABEL_LEGEND_VALUE = "Précondition";
-    public static String ITERATION_LABEL_VALUE = "Itération";
-    public static String ITERATION_LABEL_LEGEND_VALUE = "Itération";
-    public static String MATERIEL_LABEL_NAME = "Acteur(s) Système(s)";
+    public static String PRECONDITION_LABEL_VALUE = "Pr�condition";
+    public static String PRECONDITION_LABEL_LEGEND_VALUE = "Pr�condition";
+    public static String ITERATION_LABEL_VALUE = "It�ration";
+    public static String ITERATION_LABEL_LEGEND_VALUE = "It�ration";
+    public static String MATERIEL_LABEL_NAME = "Acteur(s) Syst�me(s)";
     public static String MATERIEL_LABEL_LEGEND = "Materiel";
 
-    // Effets d'une tâche
+    // Effets d'une t�che
     public static String POSTCONDITION_PANEL_TITLE_NAME = "Actions";
     public static String EFFETSDEBORD_LABEL_VALUE = "EffetsDeBord";
     public static String EFFETSDEBORD_LABEL_LEGEND_VALUE = "EffetsDeBord";
     public static String EVENT_NAME_TITLE;
-    public static String EVENT_NAME_LEGEND_TITLE = "Evénement";
+    public static String EVENT_NAME_LEGEND_TITLE = "Ev�nement";
 
-    // Pour l'outil lié au multimédia
-    public static String MEDIA_FILE_NAME = "Fichier média";
-    public static String MEDIA_FILE_LENGTH = "Taille média (ko)";
-    public static String MEDIA_LENGTH = "Durée média (m:s)";
-    public static String MEDIA_START_TAG = "Repére départ (m:s)";
-    public static String MEDIA_FINISH_TAG = "Repère fin (m:s)";
+    // Pour l'outil li� au multim�dia
+    public static String MEDIA_FILE_NAME = "Fichier m�dia";
+    public static String MEDIA_FILE_LENGTH = "Taille m�dia (ko)";
+    public static String MEDIA_LENGTH = "Dur�e m�dia (m:s)";
+    public static String MEDIA_START_TAG = "Rep�re d�part (m:s)";
+    public static String MEDIA_FINISH_TAG = "Rep�re fin (m:s)";
     public static String MEDIA_NO_INFORMATION_PANEL_MESSAGE = "Aucune Information";
     public static String INFORMATION_MEDIA_TITLE_NAME = "Informations";
-    public static String MEDIA_TITLE_NAME = "Média";
-    public static String NO_MEDIA_FILE_MESSAGE = "Aucun fichier média";
-    public static String QUICK_TIME_NO_INSTALLED_ERROR_MESSAGE = "Pas de prise en compte vidéo : Installer QuickTime";
-    public static String CONTROLE_MEDIA_TITLE_NAME = "Contrôle";
+    public static String MEDIA_TITLE_NAME = "M�dia";
+    public static String NO_MEDIA_FILE_MESSAGE = "Aucun fichier m�dia";
+    public static String QUICK_TIME_NO_INSTALLED_ERROR_MESSAGE = "Pas de prise en compte vid�o : Installer QuickTime";
+    public static String CONTROLE_MEDIA_TITLE_NAME = "Contr�le";
 
-    // Editeur complet d'une tâche
-    public static String EXECUTION_CONDITION_TITLE_NAME = "Conditions d'éxécution";
+    // Editeur complet d'une t�che
+    public static String EXECUTION_CONDITION_TITLE_NAME = "Conditions d'�x�cution";
     public static String OBJECT_LIST_TITLE_NAME = "Liste des objets";
     public static String POSTCONDITION_TITLE_NAME = "Postconditions";
     public static String EFFETSDEBORD_TITLE_NAME = "Effets de bord";
-    public static String NO_MOTHER_TASK_MESSAGE = "Aucune tâche mère";
-    public static String NO_LEFT_TASK_MESSAGE = "Aucune tâche à gauche";
-    public static String NO_RIGHT_TASK_MESSAGE = "Aucune tâche à droite";
-    public static String NO_SUB_TASK_MESSAGE = "Aucune sous-tâche";
-    public static String NO_NUMERO_TASK = "Pas de numéro";
+    public static String NO_MOTHER_TASK_MESSAGE = "Aucune t�che m�re";
+    public static String NO_LEFT_TASK_MESSAGE = "Aucune t�che � gauche";
+    public static String NO_RIGHT_TASK_MESSAGE = "Aucune t�che � droite";
+    public static String NO_SUB_TASK_MESSAGE = "Aucune sous-t�che";
+    public static String NO_NUMERO_TASK = "Pas de num�ro";
 
-    // Caractéristique d'un projet
-    public static String INTERVIEWED_NAME_TABLE = "Interviewé";
-    public static String PLACE_INFORMATION_TABLE = "Coordonnées";
+    // Caract�ristique d'un projet
+    public static String INTERVIEWED_NAME_TABLE = "Interview�";
+    public static String PLACE_INFORMATION_TABLE = "Coordonn�es";
     public static String STATUT_TABLE = "Statut";
-    public static String SENIORITY_TABLE = "Ancienneté";
+    public static String SENIORITY_TABLE = "Anciennet�";
     public static String DATE_TABLE = "Date";
     public static String INTERVIEW_TYPE_TABLE = "Type de recueil";
     public static String SEARCHED_INFORMATIONS_TABLE = "Informations";
     public static String INTERVIEW_NAME_TABLE = "Interviewer";
     public static String INTERVIEW_NEW_OBJECT_TABLE = "Nouvel interview";
-    public static String GENERAL_DESCRIPTION_PROJECT_DIALOG_TITLE = "Description générale";
+    public static String GENERAL_DESCRIPTION_PROJECT_DIALOG_TITLE = "Description g�n�rale";
     public static String COMPANY_LABEL_NAME = "Entreprise";
     public static String SITE_LABEL_NAME = "Site";
     public static String POSTE_TYPE_LABEL_NAME = "Type de Poste";
-    public static String DATE_STUDY = "Date du cas étudié";
+    public static String DATE_STUDY = "Date du cas �tudi�";
     public static String OTHER_RESOURCES = "Autres Resources";
-    public static String INTERVIEWED_DESCRIPTION_PROJECT_DIALOG_TITLE = "Description des interviewés";
-    public static String JUSTIFICATION_PROJECT_DIALOG_TITLE = "Justification de l'étude de cas (en quoi ce cas reflète un problème de charge)";
+    public static String INTERVIEWED_DESCRIPTION_PROJECT_DIALOG_TITLE = "Description des interview�s";
+    public static String JUSTIFICATION_PROJECT_DIALOG_TITLE = "Justification de l'�tude de cas (en quoi ce cas refl�te un probl�me de charge)";
     public static String REMOVE_INTERVIEW_MESSAGE_TITLE = "Suppression d'interviews";
     public static String ASK_REMOVE_INTERVIEW_MESSAGE_TITLE = "Souhaitez-vous supprimer l'interview de";
 
-    // Editeur des attributs d'une tâche
-    public static String EDITOR_MESSAGE_TITLE = "Editeur de caractéristiques";
-    public static String EDITOR_OPERATOR_NAME = "Décomposition";
+    // Editeur des attributs d'une t�che
+    public static String EDITOR_MESSAGE_TITLE = "Editeur de caract�ristiques";
+    public static String EDITOR_OPERATOR_NAME = "D�composition";
     public static String EDITOR_NAME_NAME = "Nom";
-    public static String EDITOR_EXECUTANT_NAME = "Exécutant";
+    public static String EDITOR_EXECUTANT_NAME = "Ex�cutant";
 
     // Gestion du projet
     public static String EXTENSION_EXPRESS_FILTER_NAME = "Fichier Express (*.spf)";
     public static String EXTENSION_KMADE_FILTER_NAME = "Fichier K-MAD (*.kxml)";
-    public static String SET_EXISTING_PROJECT_LONG_MESSAGE = "Modification des propriétés du projet";
-    public static String SET_EXISTING_PROJECT_SHORT_MESSAGE = "Propriétés";
+    public static String SET_EXISTING_PROJECT_LONG_MESSAGE = "Modification des propri�t�s du projet";
+    public static String SET_EXISTING_PROJECT_SHORT_MESSAGE = "Propri�t�s";
     public static String STATE_LOAD_TITLE_NAME = "Etat";
-    public static String ELEMENT_PARSE_PROBLEM_MESSAGE = "Problème avec l'élément";
-    public static String XML_PARSER_PROBLEM_MESSAGE = "Problème avec le ParserXML";
-    public static String XML_PARSER_MISSING_ELEMENT_PROBLEM_MESSAGE = "entités manquantes dans le fichier XML";
+    public static String ELEMENT_PARSE_PROBLEM_MESSAGE = "Probl�me avec l'�l�ment";
+    public static String XML_PARSER_PROBLEM_MESSAGE = "Probl�me avec le ParserXML";
+    public static String XML_PARSER_MISSING_ELEMENT_PROBLEM_MESSAGE = "entit�s manquantes dans le fichier XML";
 
-    //Gestion des objets
+    // Gestion des objets
     public static String OPEN_OBJECT_ACTION_MESSAGE = "Charger des objets";
     public static String SAVE_OBJECT_ACTION_MESSAGE = "Enregistrer les objets";
     public static String SAVE_OBJECT_AS_ACTION_MESSAGE = "Enregistrer les objets sous ...";
     public static String WRITE_BEFORE_OPEN_OBJECTS_MESSAGE = "Enregistrer les objets avant l'ouverture d'objets existant";
-    
+
     // Gestion du chargement
-    public static String OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME = "Chargement d'un projet MDA annulé";
+    public static String OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME = "Chargement d'un projet MDA annul�";
     public static String OPEN_ERROR_FILE = "Erreur d'ouverture";
-    public static String OPEN_EXPRESS_OK_FILE = "Chargement réussi : ";
-    public static String OPEN_EXPRESS_NO_OK_FILE = "Chargement échoué : ";
+    public static String OPEN_EXPRESS_OK_FILE = "Chargement r�ussi : ";
+    public static String OPEN_EXPRESS_NO_OK_FILE = "Chargement �chou� : ";
     public static String EXPRESS_OBJECTS_TITLE_MESSAGE = "Objets de l'utilisateur";
     public static String GRAPHICAL_OBJECTS_MESSAGE = "Objets graphiques";
-    public static String CREATE_GRAPHICAL_TASKS_MESSAGE = "Création des tâches graphiques";
-    public static String CREATE_GRAPHICAL_EDGES_MESSAGE = "Création des liens";
-    public static String LOAD_PROJECT_FINISHED_MESSAGE = "Chargement terminé";
+    public static String CREATE_GRAPHICAL_TASKS_MESSAGE = "Cr�ation des t�ches graphiques";
+    public static String CREATE_GRAPHICAL_EDGES_MESSAGE = "Cr�ation des liens";
+    public static String LOAD_PROJECT_FINISHED_MESSAGE = "Chargement termin�";
     public static String LOAD_CONSOLE_TITLE_NAME = "Console de chargement";
-    public static String IMPLICIT_STOP_LOAD_SPF_FILE = "Chargement stoppé : Problème dans la création des objets de l'utilisateur";
-    public static String EXPLICIT_STOP_LOAD_SPF_FILE_DURING_OBJECT = "Chargement annulé : Suppression des objets Express";
-    public static String EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT = "Chargement annulé : Suppression des objets Express et Graphiques";
+    public static String IMPLICIT_STOP_LOAD_SPF_FILE = "Chargement stopp� : Probl�me dans la cr�ation des objets de l'utilisateur";
+    public static String EXPLICIT_STOP_LOAD_SPF_FILE_DURING_OBJECT = "Chargement annul� : Suppression des objets Express";
+    public static String EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT = "Chargement annul� : Suppression des objets Express et Graphiques";
 
     // Gestion de la sauvegarde
-    public static String SAVE_CANCELLED_EXPRESS_FILECHOOSER_NAME = "Enregistrement du projet K-MAD courant annulé";
+    public static String SAVE_CANCELLED_EXPRESS_FILECHOOSER_NAME = "Enregistrement du projet K-MAD courant annul�";
     public static String WRITE_EXPRESS_ERROR_FILE = "Erreur d'enregistrement du projet K-MAD : ";
     public static String WRITE_ERROR_FILE = "Erreur d'enregistrement d'un projet K-MAD";
-    public static String WRITE_EXPRESS_OK_FILE = "Enregistrement du projet K-MAD réussi : ";
-    public static String WRITE_EXPRESS_NO_OK_FILE = "Enregistrement du projet K-MAD échoué : ";
+    public static String WRITE_EXPRESS_OK_FILE = "Enregistrement du projet K-MAD r�ussi : ";
+    public static String WRITE_EXPRESS_NO_OK_FILE = "Enregistrement du projet K-MAD �chou� : ";
     public static String WRITE_BEFORE_OPEN_PROJECT_MESSAGE = "Enregistrer le projet courant avant l'ouverture d'un projet existant";
     public static String WRITE_BEFORE_EXIT_TOOL_MESSAGE = "Enregistrer le projet courant avant de quitter";
-    public static String WRITE_BEFORE_NEW_PROJECT_MESSAGE = "Enregistrer le projet courant \n avant de créer un nouveau projet";
+    public static String WRITE_BEFORE_NEW_PROJECT_MESSAGE = "Enregistrer le projet courant \n avant de cr�er un nouveau projet";
     public static String WRITE_BEFORE_CLOSE_PROJECT_MESSAGE = "Enregistrer le projet courant \n avant de le fermer";
     public static String WRITE_BEFORE_CHANGE_LOCALE_MESSAGE = "Enregistrer le projet avant \n de changer la localisation";
     public static String SAVE_CONSOLE_TITLE_NAME = "Console d'enregistrement";
-    public static String SAVE_PROJECT_FINISHED_MESSAGE = "Enregistrement terminé";
-    public static String IMPLICIT_STOP_SAVE_FILE_MESSAGE = "Enregistrement stoppé : Problème dans l'enregistrement des objets de l'utilisateur";
-    public static String EXPLICIT_STOP_SAVE_FILE_MESSAGE = "Enregistrement annulé : Suppression des objets K-MAD";
+    public static String SAVE_PROJECT_FINISHED_MESSAGE = "Enregistrement termin�";
+    public static String IMPLICIT_STOP_SAVE_FILE_MESSAGE = "Enregistrement stopp� : Probl�me dans l'enregistrement des objets de l'utilisateur";
+    public static String EXPLICIT_STOP_SAVE_FILE_MESSAGE = "Enregistrement annul� : Suppression des objets K-MAD";
 
-    // Outil pour lister les entités
-    public static String ENTITY_LIST_DIALOG_TITLE = "Outil d'introspection de l'état du monde";
+    // Outil pour lister les entit�s
+    public static String ENTITY_LIST_DIALOG_TITLE = "Outil d'introspection de l'�tat du monde";
     public static String FORCE_ENTITY_LIST_ACTION_MESSAGE = "Forcer Affichage";
 
-    // Préférences de l'outil
-    public static String GENERAL_TABBED_NAME = "Général";
-    public static String TASK_MODEL_EDITOR_TABBED_NAME = "Tâches";
-    public static String TASK_MODEL_EDITOR_TABBED_LONG_NAME = "Editeur de Tâches";
+    // Pr�f�rences de l'outil
+    public static String GENERAL_TABBED_NAME = "G�n�ral";
+    public static String TASK_MODEL_EDITOR_TABBED_NAME = "T�ches";
+    public static String TASK_MODEL_EDITOR_TABBED_LONG_NAME = "Editeur de T�ches";
     public static String TREE_EDITOR_TABBED_NAME = "Arbres";
     public static String TREE_EDITOR_TABBED_LONG_NAME = "Editeur d'Arbres";
 
@@ -563,25 +563,25 @@ public class KMADEConstant {
     public static String TASK_PANEL_NAME_FONT_SIZE_LABEL = "Taille : ";
     public static String TASK_PANEL_NAME_FONT_STYLE_LABEL = "Style : ";
     public static String TASK_PANEL_NAME_FONT_COLOR_LABEL = "Couleur : ";
-    public static String TASK_PANEL_NAME_BACKGROUND_COLOR_LABEL = "Couleur d'arrière plan : ";
-    public static String TASK_PANEL_DECOMPOSITION_PANEL_NAME = "Décomposition";
+    public static String TASK_PANEL_NAME_BACKGROUND_COLOR_LABEL = "Couleur d'arri�re plan : ";
+    public static String TASK_PANEL_DECOMPOSITION_PANEL_NAME = "D�composition";
 
-    public static String TASK_PANEL_MODEL_PANEL_NAME = "Style Prédéfini";
+    public static String TASK_PANEL_MODEL_PANEL_NAME = "Style Pr�d�fini";
     public static String TASK_PANEL_MODEL_CHOICE_LABEL = "Choix :";
     public static String TASK_PANEL_MODEL_SAVE_BUTTON_LABEL = "Sauvegarde";
     public static String TASK_PANEL_MODEL_LOAD_BUTTON_LABEL = "Chargement";
     public static String TASK_PANEL_OPTIONS_PANEL_NAME = "Options";
-    public static String TASK_PANEL_OPTIONS_TRIGGER_EVENT_LABEL = "Indiquer les tâches déclencheuses d'événements";
-    public static String TASK_PANEL_OPTIONS_ACTOR_TASK_LABEL = "Indiquer l'acteur de la tâche";
-    public static String TASK_PANEL_PREVIEW_PANEL_NAME = "Aperçu";
+    public static String TASK_PANEL_OPTIONS_TRIGGER_EVENT_LABEL = "Indiquer les t�ches d�clencheuses d'�v�nements";
+    public static String TASK_PANEL_OPTIONS_ACTOR_TASK_LABEL = "Indiquer l'acteur de la t�che";
+    public static String TASK_PANEL_PREVIEW_PANEL_NAME = "Aper�u";
 
     public static String TASK_TREE_PANEL_LAYOUT_PANEL_NAME = "Agencement";
     public static String TASK_TREE_PANEL_LAYOUT_ORIENTATION_LABEL = "Orientation de l'arbre";
     public static String TASK_TREE_PANEL_LAYOUT_DISTANCE_LABEL = "Distance entre les noeuds";
-    public static String TASK_TREE_PANEL_LAYOUT_SELECTION_COLOR_LABEL = "Couleur de sélection d'une tâche";
+    public static String TASK_TREE_PANEL_LAYOUT_SELECTION_COLOR_LABEL = "Couleur de s�lection d'une t�che";
     public static String TASK_TREE_PANEL_LAYOUT_LEVEL_DISTANCE_LABEL = "Hauteur des liens";
     public static String TASK_TREE_PANEL_OPTIONS_PANEL_NAME = "Options";
-    public static String TASK_TREE_PANEL_OPTIONS_ORTHOGONAL_EDGE_LABEL = "Activer l'orthogonalité des liens";
+    public static String TASK_TREE_PANEL_OPTIONS_ORTHOGONAL_EDGE_LABEL = "Activer l'orthogonalit� des liens";
 
     // temps (en millisecondes) d'attente avec l'affichage du curseur de grab
     public static long TEMPORISATION_GRAB = 1000;
@@ -589,7 +589,7 @@ public class KMADEConstant {
     // distance (en pixel) servant pour afficher le trait "aimant"
     public static int DISTANCE_AIMANT = 20;
 
-    // Clés des properties
+    // Cl�s des properties
     public static final String LEVEL_DISTANCE_NAME = "levelDistance";
     public static final String TASK_MODEL_ORIENTATION_NAME = "taskModelOrientation";
     public static final String TASK_DISTANCE_NAME = "taskDistanceName";
@@ -639,7 +639,7 @@ public class KMADEConstant {
     public static String ENGLISH_LANGUAGE = "English";
 
     // Noms des langues dans leur langue
-    public static String FRENCH_LANGUAGE_INFO = "Français";
+    public static String FRENCH_LANGUAGE_INFO = "Fran�ais";
     public static String ENGLISH_LANGUAGE_INFO = "English";
 
     // Messages commumns
@@ -660,6 +660,7 @@ public class KMADEConstant {
     public static String FILE_MENU_MESSAGE = "Fichier";
     public static String EDITING_MENU_MESSAGE = "Edition";
     public static String VIEW_MENU_MESSAGE = "Visualisation";
+    public static String OBJECT_MENU_MESSAGE = "Objets";
     public static String PROJECT_MENU_MESSAGE = "Projet";
     public static String HELP_MENU_MESSAGE = "Aide";
     public static String TOOLS_MENU_MESSAGE = "Outils";
@@ -674,25 +675,25 @@ public class KMADEConstant {
     public static String HIDE_GRID_ACTION_MESSAGE = "Cacher grille";
     public static String SHOW_GRID_ACTION_MESSAGE = "Montrer grille";
     public static String CHOICE_GRID_SIZE_MESSAGE = "Choisir taille de la grille";
-    public static String HIDE_RULE_ACTION_MESSAGE = "Cacher règle";
-    public static String SHOW_RULE_ACTION_MESSAGE = "Montrer règle";
-    public static String PREFERENCE_ACTION_MESSAGE = "Préférences...";
-    public static String DEBUG_INFO_ACTION_MESSAGE = "Info de développement";
+    public static String HIDE_RULE_ACTION_MESSAGE = "Cacher r�gle";
+    public static String SHOW_RULE_ACTION_MESSAGE = "Montrer r�gle";
+    public static String PREFERENCE_ACTION_MESSAGE = "Pr�f�rences...";
+    public static String DEBUG_INFO_ACTION_MESSAGE = "Info de d�veloppement";
     public static String ABOUT_ACTION_MESSAGE = "A Propos ...";
     public static String HELP_MODEL_ACTION_MESSAGE = "Aide sur K-MAD";
     public static String HELP_TOOL_ACTION_MESSAGE = "Aide sur KMADe";
     public static String HISTORY_ACTION_MESSAGE = "Historique de KMADe";
-    public static String UNDO_ACTION_MESSAGE = "Annuler dernière action";
-    public static String REDO_ACTION_MESSAGE = "Rétablir dernière action";
+    public static String UNDO_ACTION_MESSAGE = "Annuler derni�re action";
+    public static String REDO_ACTION_MESSAGE = "R�tablir derni�re action";
     public static String CUT_ACTION_MESSAGE = "Couper";
     public static String COPY_ACTION_MESSAGE = "Copier";
     public static String PASTE_ACTION_MESSAGE = "Coller";
-    public static String SHOW_CLIPBOARD_MESSAGE = "Afficher fenêtre presse-papier";
-    public static String SEARCH_ACTION_MESSAGE = "Recherche avancée ...";
+    public static String SHOW_CLIPBOARD_MESSAGE = "Afficher fen�tre presse-papier";
+    public static String SEARCH_ACTION_MESSAGE = "Recherche avanc�e ...";
     public static String SIMULATION_ACTION_MESSAGE = "Simulation";
     public static String INTERROGATION_ACTION_MESSAGE = "Statistiques";
-    public static String CHECK_COHERENCE_ACTION_MESSAGE = "Cohérence";
-    public static String ENTITY_LIST_ACTION_MESSAGE = "Liste des entités de l'état du monde";
+    public static String CHECK_COHERENCE_ACTION_MESSAGE = "Coh�rence";
+    public static String ENTITY_LIST_ACTION_MESSAGE = "Liste des entit�s de l'�tat du monde";
     public static String VERSION_MESSAGE = "Version";
     public static String MESSAGES_MESSAGE = "Messages";
     public static String ERREURS_MESSAGE = "Erreurs";
@@ -702,15 +703,15 @@ public class KMADEConstant {
     public static String INPUT_GRID_SIZE_MESSAGE = "Choix de la taille de la grille";
     public static String INPUT_GRID_SIZE_ERROR_MESSAGE = "Valeur de la grille non conforme";
 
-    public static String NEW_UNKNOWN_TASK_ACTION_MESSAGE = "Nouvelle tâche inconnue";
-    public static String NEW_ABSTRACT_TASK_ACTION_MESSAGE = "Nouvelle tâche abstraite";
-    public static String NEW_INTERACTION_TASK_ACTION_MESSAGE = "Nouvelle tâche interaction";
-    public static String NEW_FEEDBACK_TASK_ACTION_MESSAGE = "Nouvelle tâche système";
-    public static String NEW_USER_TASK_ACTION_MESSAGE = "Nouvelle tâche utilisateur";
-    public static String EDIT_TASK_ACTION_MESSAGE = "Edition de la tâche";
-    public static String COMPLETE_EDIT_TASK_ACTION_MESSAGE = "Edition complète de la tâche";
+    public static String NEW_UNKNOWN_TASK_ACTION_MESSAGE = "Nouvelle t�che inconnue";
+    public static String NEW_ABSTRACT_TASK_ACTION_MESSAGE = "Nouvelle t�che abstraite";
+    public static String NEW_INTERACTION_TASK_ACTION_MESSAGE = "Nouvelle t�che interaction";
+    public static String NEW_FEEDBACK_TASK_ACTION_MESSAGE = "Nouvelle t�che syst�me";
+    public static String NEW_USER_TASK_ACTION_MESSAGE = "Nouvelle t�che utilisateur";
+    public static String EDIT_TASK_ACTION_MESSAGE = "Edition de la t�che";
+    public static String COMPLETE_EDIT_TASK_ACTION_MESSAGE = "Edition compl�te de la t�che";
 
-    public static String COMPLETE_EDIT_TASK_ACTION_MESSAGE_PIE_MENU = "Edition complète";
+    public static String COMPLETE_EDIT_TASK_ACTION_MESSAGE_PIE_MENU = "Edition compl�te";
 
     public static String UNKNOWN_TASK_MESSAGE = "Inconnue";
     public static String ABSTRACT_TASK_MESSAGE = "Abstraite";
@@ -718,41 +719,41 @@ public class KMADEConstant {
     public static String FEEDBACK_TASK_MESSAGE = "Systeme";
     public static String USER_TASK_MESSAGE = "Utilisateur";
 
-    public static String DELETE_CELL_ACTION_MESSAGE = "Supprimer élément(s) du modèle";
+    public static String DELETE_CELL_ACTION_MESSAGE = "Supprimer �l�ment(s) du mod�le";
 
     public static String DELETE_CELL_ACTION_MESSAGE_PIE_MENU = "Supprimer";
 
-    public static String PREVIEW_WINDOW_ACTION_MESSAGE = "Afficher fenêtre aperçue";
-    public static String ZOOM_IN_ACTION_MESSAGE = "Agrandissement du modèle de tâches (+)";
-    public static String ZOOM_OUT_ACTION_MESSAGE = "Dégrossissement du modèle de tâches (-)";
-    public static String ZOOM_DEFAULT_ACTION_MESSAGE = "Taille du modèle de tâches par défaut";
-    public static String ZOOM_GLOBAL_ACTION_MESSAGE = "Vue globale du modèle de tâches";
-    public static String MAGNET_OPTION_ACTION_MESSAGE = "Activer/Désactiver l'aimant";
-    public static String JUSTIFY_OPTION_ACTION_MESSAGE = "Respatialisation d'une tâche";
-    public static String SAME_EXECUTANT_MESSAGE = "Uniformisation des sous exécutants";
-    public static String VISIBLE_LABEL_ACTION_MESSAGE = "Activer/Désactiver l'affichage des libellés";
-    public static String COLOR_LABEL_ACTION_MESSAGE = "Activer/Désactiver la couleur des libellés";
+    public static String PREVIEW_WINDOW_ACTION_MESSAGE = "Afficher fen�tre aper�ue";
+    public static String ZOOM_IN_ACTION_MESSAGE = "Agrandissement du mod�le de t�ches (+)";
+    public static String ZOOM_OUT_ACTION_MESSAGE = "D�grossissement du mod�le de t�ches (-)";
+    public static String ZOOM_DEFAULT_ACTION_MESSAGE = "Taille du mod�le de t�ches par d�faut";
+    public static String ZOOM_GLOBAL_ACTION_MESSAGE = "Vue globale du mod�le de t�ches";
+    public static String MAGNET_OPTION_ACTION_MESSAGE = "Activer/D�sactiver l'aimant";
+    public static String JUSTIFY_OPTION_ACTION_MESSAGE = "Respatialisation d'une t�che";
+    public static String SAME_EXECUTANT_MESSAGE = "Uniformisation des sous ex�cutants";
+    public static String VISIBLE_LABEL_ACTION_MESSAGE = "Activer/D�sactiver l'affichage des libell�s";
+    public static String COLOR_LABEL_ACTION_MESSAGE = "Activer/D�sactiver la couleur des libell�s";
     /*** Boite de dialogue lancement simulation ***/
     public static String OPEN_SIMULATION_MESSAGE = "Lancement de la boite de dialogue de simulation";
 
-    public static String TREE_TASK_PRINT_TITLE_MESSAGE = "Arbre de tâches";
+    public static String TREE_TASK_PRINT_TITLE_MESSAGE = "Arbre de t�ches";
     public static String USER_CARDS_PRINT_TITLE_MESSAGE = "Fiches utilisateur";
     public static String OBJECTS_PRINT_TITLE_MESSAGE = "Objets du monde";
     public static String PRINT_ACTION_MESSAGE = "Impression";
     public static String LAYOUT_PRINT_ACTION_MESSAGE = "Mise en page";
-    public static String PRINT_PREVIEW_ACTION_MESSAGE = "Aperçu avant impression";
+    public static String PRINT_PREVIEW_ACTION_MESSAGE = "Aper�u avant impression";
     public static String PDF_EXPORT_ACTION_MESSAGE = "Exporter en PDF";
     public static String EPS_EXPORT_ACTION_MESSAGE = "Exporter en EPS";
     public static String PORTRAIT_ACTION_MESSAGE = "Portrait";
     public static String LANDSCAPE_ACTION_MESSAGE = "Paysage";
     public static String SCALE_ACTION_MESSAGE = "Echelle";
-    public static String INPUT_SCALE_ACTION_MESSAGE = "Choix de la valeur de l'échelle";
-    public static String PREVIEW_ZOOM_ACTION_MESSAGE = "Agrandissement/Grossissement de l'aperçu";
+    public static String INPUT_SCALE_ACTION_MESSAGE = "Choix de la valeur de l'�chelle";
+    public static String PREVIEW_ZOOM_ACTION_MESSAGE = "Agrandissement/Grossissement de l'aper�u";
     public static String SAVE_HISTORIC_ACTION_MESSAGE = "Sauver historique";
     public static String CLEAR_HISTORIC_ACTION_MESSAGE = "Effacer historique";
 
-    // Messages liés aux expressions
-    public static String PRINT_SCALE_ADAPT_MESSAGE = "Adapter au modèle";
+    // Messages li�s aux expressions
+    public static String PRINT_SCALE_ADAPT_MESSAGE = "Adapter au mod�le";
     public static String PRINT_SCALE_PERSONALIZE_MESSAGE = "Personnaliser...";
     public static String RESET_ACTION_MESSAGE = "Reset";
     public static String CONCRETE_OBJECTS_LIST_MESSAGE = "Liste Objets";
@@ -761,289 +762,289 @@ public class KMADEConstant {
     public static String EDITOR_ITER_TITLE_NAME = "Editeur Iteration";
     public static String CAUSE_MESSAGE = "  CAUSE";
     public static String VALUE_MESSAGE = "  RESULTAT";
-    public static String CHECK_ACTION_MESSAGE = "Vérification de l'expression";
+    public static String CHECK_ACTION_MESSAGE = "V�rification de l'expression";
     public static String EVALUATE_ACTION_MESSAGE = "Evaluation de l'expression";
     public static String STRING_TO_INTEGER = "Erreur : impossible de transformer le texte en entier";
     public static String STRING_TO_NUMBER = "Erreur : impossible de transformer le texte en nombre";
     public static String NO_EXPRESSION_MESSAGE = "Aucune expression";
-    public static String NO_FIRST_EXPRESSION_MESSAGE = "Expression non booléenne ne peut être utilisée toute seule";
+    public static String NO_FIRST_EXPRESSION_MESSAGE = "Expression non bool�enne ne peut �tre utilis�e toute seule";
     public static String MISSING_USER_VALUE_MESSAGE = "Valeur(s) utilisateur manquante(s)";
-    public static String PARSER_PROBLEM_MESSAGE = "Problème dans le module d'analyse grammaticale";
+    public static String PARSER_PROBLEM_MESSAGE = "Probl�me dans le module d'analyse grammaticale";
     public static String LEXICAL_ERROR_MESSAGE = "Erreur lexicale";
     public static String SYNTAXICAL_ERROR_MESSAGE = "Erreur syntaxique";
-    public static String SEMANTICAL_ERROR_MESSAGE = "Erreur sémantique";
+    public static String SEMANTICAL_ERROR_MESSAGE = "Erreur s�mantique";
     public static String LINE_MESSAGE = "ligne";
     public static String COLUMN_MESSAGE = "colonne";
-    public static String ENCOUNTERED_CHAR_MESSAGE = "caractère rencontré";
-    public static String ENCOUNTERED_TOKEN_MESSAGE = "texte rencontré";
+    public static String ENCOUNTERED_CHAR_MESSAGE = "caract�re rencontr�";
+    public static String ENCOUNTERED_TOKEN_MESSAGE = "texte rencontr�";
 
-    public static String CHECK_ALL_PRECONDITIONS = "Vérification des préconditions ...";
-    public static String PRECONDITION_OK_MESSAGE = "précondition correcte";
-    public static String PRECONDITION_NO_OK_MESSAGE = "précondition non correcte";
-    public static String PRECONDITION_EVAL_OK_MESSAGE = "précondition évaluée";
-    public static String PRECONDITION_EVAL_NO_OK_MESSAGE = "précondition non évaluée";
-    public static String PRECONDITION_OF_TASK_OK_MESSAGE = "Précondition correcte pour la tâche";
-    public static String PRECONDITION_OF_TASK_NO_OK_MESSAGE = "Précondition incorrecte pour la tâche";
-    public static String PRECONDITION_ERROR_MESSAGE = "Erreur sur la précondition";
-    public static String NOT_YET_CHECKED_PRECONDITION_MESSAGE = "Précondition non vérifiée";
-    public static String PRECONDITION_CHECKED_AND_BUILT_MESSAGE = "Vérification et création des préconditions terminées";
-    public static String PRECONDITION_PROGRESSBAR_MESSAGE = "Vérification et construction des préconditions";
+    public static String CHECK_ALL_PRECONDITIONS = "V�rification des pr�conditions ...";
+    public static String PRECONDITION_OK_MESSAGE = "pr�condition correcte";
+    public static String PRECONDITION_NO_OK_MESSAGE = "pr�condition non correcte";
+    public static String PRECONDITION_EVAL_OK_MESSAGE = "pr�condition �valu�e";
+    public static String PRECONDITION_EVAL_NO_OK_MESSAGE = "pr�condition non �valu�e";
+    public static String PRECONDITION_OF_TASK_OK_MESSAGE = "Pr�condition correcte pour la t�che";
+    public static String PRECONDITION_OF_TASK_NO_OK_MESSAGE = "Pr�condition incorrecte pour la t�che";
+    public static String PRECONDITION_ERROR_MESSAGE = "Erreur sur la pr�condition";
+    public static String NOT_YET_CHECKED_PRECONDITION_MESSAGE = "Pr�condition non v�rifi�e";
+    public static String PRECONDITION_CHECKED_AND_BUILT_MESSAGE = "V�rification et cr�ation des pr�conditions termin�es";
+    public static String PRECONDITION_PROGRESSBAR_MESSAGE = "V�rification et construction des pr�conditions";
 
-    public static String EXIT_WITHOUT_SAVE_MESSAGE = "Quitter en modifiant l'état du modèle. L'historique des modifications sera initialisé";
-    public static String CHECK_ALL_EFFETSDEBORDS = "Vérification des effetsdebords ...";
+    public static String EXIT_WITHOUT_SAVE_MESSAGE = "Quitter en modifiant l'�tat du mod�le. L'historique des modifications sera initialis�";
+    public static String CHECK_ALL_EFFETSDEBORDS = "V�rification des effetsdebords ...";
     public static String EFFETSDEBORD_OK_MESSAGE = "effetsdebord correcte";
     public static String EFFETSDEBORD_NO_OK_MESSAGE = "effetsdebord non correcte";
-    public static String EFFETSDEBORD_EVAL_OK_MESSAGE = "effetsdebord évaluée et modèle K-MAD modifié";
-    public static String EFFETSDEBORD_EVAL_NO_OK_MESSAGE = "effetsdebord non évaluée";
-    public static String EFFETSDEBORD_OF_TASK_OK_MESSAGE = "EffetsDeBord correcte pour la tâche";
-    public static String EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE = "EffetsDeBord incorrecte pour la tâche";
+    public static String EFFETSDEBORD_EVAL_OK_MESSAGE = "effetsdebord �valu�e et mod�le K-MAD modifi�";
+    public static String EFFETSDEBORD_EVAL_NO_OK_MESSAGE = "effetsdebord non �valu�e";
+    public static String EFFETSDEBORD_OF_TASK_OK_MESSAGE = "EffetsDeBord correcte pour la t�che";
+    public static String EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE = "EffetsDeBord incorrecte pour la t�che";
     public static String EFFETSDEBORD_ERROR_MESSAGE = "Erreur sur la effetsdebord";
-    public static String NOT_YET_CHECKED_EFFETSDEBORD_MESSAGE = "EffetsDeBord non vérifiée";
-    public static String EFFETSDEBORD_CHECKED_AND_BUILT_MESSAGE = "Vérification et création des effetsdebords terminées";
-    public static String EFFETSDEBORD_PROGRESSBAR_MESSAGE = "Vérification et construction des effetsdebords";
+    public static String NOT_YET_CHECKED_EFFETSDEBORD_MESSAGE = "EffetsDeBord non v�rifi�e";
+    public static String EFFETSDEBORD_CHECKED_AND_BUILT_MESSAGE = "V�rification et cr�ation des effetsdebords termin�es";
+    public static String EFFETSDEBORD_PROGRESSBAR_MESSAGE = "V�rification et construction des effetsdebords";
     public static String EFFETSDEBORD_CONCRETE_OBJECT_TITLE_MESSAGE = "Objet Concret";
     public static String EFFETSDEBORD_HISTORY_TITLE_MESSAGE = "Historique de K-MAD";
     public static String EFFETSDEBORD_LOAD_STATE_MESSAGE = "Charger";
-    public static String NO_SELECTED_HISTORIC_MESSAGE = "Historique non sélectionné";
-    public static String HISTORIC_LOADED_MESSAGE = "Historique chargée";
-    public static String HISTORIC_NO_LOADED_MESSAGE = "Historique non chargée";
+    public static String NO_SELECTED_HISTORIC_MESSAGE = "Historique non s�lectionn�";
+    public static String HISTORIC_LOADED_MESSAGE = "Historique charg�e";
+    public static String HISTORIC_NO_LOADED_MESSAGE = "Historique non charg�e";
 
-    public static String CHECK_ALL_ITERATIONS = "Vérification des itérations ...";
-    public static String ITERATION_OK_MESSAGE = "itération correcte";
-    public static String ITERATION_NO_OK_MESSAGE = "itération non correcte";
-    public static String ITERATION_EVAL_OK_MESSAGE = "itération évaluée";
-    public static String ITERATION_EVAL_NO_OK_MESSAGE = "itération non évaluée";
-    public static String NOT_YET_CHECKED_ITERATION_MESSAGE = "Itération non vérifiée";
-    public static String STOP_LOOP_ITERATION_MESSAGE = "Itération terminée";
-    public static String CONTINUE_LOOP_ITERATION_MESSAGE = "Itération en cours";
+    public static String CHECK_ALL_ITERATIONS = "V�rification des it�rations ...";
+    public static String ITERATION_OK_MESSAGE = "it�ration correcte";
+    public static String ITERATION_NO_OK_MESSAGE = "it�ration non correcte";
+    public static String ITERATION_EVAL_OK_MESSAGE = "it�ration �valu�e";
+    public static String ITERATION_EVAL_NO_OK_MESSAGE = "it�ration non �valu�e";
+    public static String NOT_YET_CHECKED_ITERATION_MESSAGE = "It�ration non v�rifi�e";
+    public static String STOP_LOOP_ITERATION_MESSAGE = "It�ration termin�e";
+    public static String CONTINUE_LOOP_ITERATION_MESSAGE = "It�ration en cours";
     public static String ITERATION_MESSAGE = "ITERATION";
-    public static String ITERATION_ERROR_MESSAGE = "Erreur sur l'itération";
-    public static String ITERATION_OF_TASK_OK_MESSAGE = "Itération correcte pour la tâche";
-    public static String ITERATION_OF_TASK_NO_OK_MESSAGE = "Itération incorrecte pour la tâche";
-    public static String ITERATION_CHECKED_AND_BUILT_MESSAGE = "Vérification et création des itérations terminées";
-    public static String ITERATION_PROGRESSBAR_MESSAGE = "Vérification et construction des itérations";
+    public static String ITERATION_ERROR_MESSAGE = "Erreur sur l'it�ration";
+    public static String ITERATION_OF_TASK_OK_MESSAGE = "It�ration correcte pour la t�che";
+    public static String ITERATION_OF_TASK_NO_OK_MESSAGE = "It�ration incorrecte pour la t�che";
+    public static String ITERATION_CHECKED_AND_BUILT_MESSAGE = "V�rification et cr�ation des it�rations termin�es";
+    public static String ITERATION_PROGRESSBAR_MESSAGE = "V�rification et construction des it�rations";
 
     // Calculatrice pour les expressions
     public static String CLEAR_EXPRESSION_MESSAGE = "Effacer";
-    public static String CHECK_VALIDATE_MESSAGE = "Vérifier";
+    public static String CHECK_VALIDATE_MESSAGE = "V�rifier";
     public static String EVALUATE_FORCE1_MESSAGE = "Evaluer";
-    public static String PRECONDITION_EDITION_MESSAGE = "Edition de la précondition";
+    public static String PRECONDITION_EDITION_MESSAGE = "Edition de la pr�condition";
     public static String EFFETSDEBORD_EDITION_MESSAGE = "Edition de la effetsdebord";
-    public static String ITERATION_EDITION_MESSAGE = "Edition de l'itération";
-    public static String PRECONDITION_TEXTUEL_EDITION_MESSAGE = "Edition textuelle de la précondition";
+    public static String ITERATION_EDITION_MESSAGE = "Edition de l'it�ration";
+    public static String PRECONDITION_TEXTUEL_EDITION_MESSAGE = "Edition textuelle de la pr�condition";
     public static String EFFETSDEBORD_TEXTUEL_EDITION_MESSAGE = "Edition textuelle de la effetsdebord";
-    public static String ITERATION_TEXTUEL_EDITION_MESSAGE = "Edition textuelle de l'itération";
-    public static String LITTERAUX_TITLE_MESSAGE = "Litéraux";
-    public static String OPERATORS_TITLE_MESSAGE = "Opérateurs";
+    public static String ITERATION_TEXTUEL_EDITION_MESSAGE = "Edition textuelle de l'it�ration";
+    public static String LITTERAUX_TITLE_MESSAGE = "Lit�raux";
+    public static String OPERATORS_TITLE_MESSAGE = "Op�rateurs";
     public static String FUNCTIONS_TITLE_MESSAGE = "Fonctions";
-    public static String ITERATORS_TITLE_MESSAGE = "Itérateurs";
+    public static String ITERATORS_TITLE_MESSAGE = "It�rateurs";
     public static String LOOP_VARIANT_MESSAGE = "Variant Boucle";
 
     // L'outil de recherche
-    public static String WRITE_TXT_FILE_OK = "Enregistrement du fichier texte réussi : ";
+    public static String WRITE_TXT_FILE_OK = "Enregistrement du fichier texte r�ussi : ";
     public static String WRITE_TXT_FILE_ERROR = "Erreur d'enregistrement du fichier texte";
-    public static String SAVE_CANCELLED_TEXT_FILECHOOSER_NAME = "Enregistrement du fichier texte annulé";
-    public static String SEARCH_NAME_NAME = "Nom de la Tâche";
+    public static String SAVE_CANCELLED_TEXT_FILECHOOSER_NAME = "Enregistrement du fichier texte annul�";
+    public static String SEARCH_NAME_NAME = "Nom de la T�che";
     public static String WHOLE_TASK_NAME_OPTION_REPLACE_MESSAGE = "Nom Complet";
-    public static String SEARCH_FAC_NAME = "Tâche optionnelle";
-    public static String SEARCH_INT_NAME = "Tâche interruptible";
+    public static String SEARCH_FAC_NAME = "T�che optionnelle";
+    public static String SEARCH_INT_NAME = "T�che interruptible";
     public static String EXTENSION_TEXT_FILTER_SEARCH_NAME = "Fichier texte (*.txt)";
     public static String SEARCH_MESSAGE_TITLE = "Outil de recherche ...";
     public static String FIND_MESSAGE = "Rechercher";
     public static String REPLACE_MESSAGE = "Remplacer avec";
     public static String DIRECTION_FIND_MESSAGE = "Direction";
     public static String FORWARD_DIRECTION_FIND_MESSAGE = "En Avant";
-    public static String BACKWARD_DIRECTION_FIND_MESSAGE = "En Arrière";
-    public static String SCOPE_FIND_MESSAGE = "Etendu des tâches";
+    public static String BACKWARD_DIRECTION_FIND_MESSAGE = "En Arri�re";
+    public static String SCOPE_FIND_MESSAGE = "Etendu des t�ches";
     public static String ALL_FIND_MESSAGE = "Toutes";
     public static String SELECTION_FIND_MESSAGE = "Selection";
     public static String OPTION_FIND_MESSAGE = "Options";
-    public static String CASE_SENSITIVE_OPTIONS_FIND_MESSAGE = "Sensible à la case";
-    public static String WHOLE_TASK_NAME_OPTIONS_FIND_MESSAGE = "Nom de tâche complet";
-    public static String REGULAR_EXPRESSIONS_OPTIONS_FIND_MESSAGE = "Expressions régulières";
-    public static String SEARCH_RESULT_FIND_MESSAGE = "Résultat Recherche";
+    public static String CASE_SENSITIVE_OPTIONS_FIND_MESSAGE = "Sensible � la case";
+    public static String WHOLE_TASK_NAME_OPTIONS_FIND_MESSAGE = "Nom de t�che complet";
+    public static String REGULAR_EXPRESSIONS_OPTIONS_FIND_MESSAGE = "Expressions r�guli�res";
+    public static String SEARCH_RESULT_FIND_MESSAGE = "R�sultat Recherche";
     public static String FIND_ACTION_FIND_MESSAGE = "Chercher";
     public static String SAVE_OCCURENCES_ACTION_FIND_MESSAGE = "Enregistrer Occurences";
     public static String REPLACE_NEXT_ACTION_FIND_MESSAGE = "Remplacer/Suivant";
-    public static String REPLACE_PREVIOUS_ACTION_FIND_MESSAGE = "Remplacer/Précédent";
+    public static String REPLACE_PREVIOUS_ACTION_FIND_MESSAGE = "Remplacer/Pr�c�dent";
     public static String REPLACE_ACTION_FIND_MESSAGE = "Remplacer";
     public static String REPLACE_ALL_ACTION_FIND_MESSAGE = "Remplacer tout";
-    public static String NO_TASK_AVAILABLE_FOR_SEARCHING_TOOL_MESSAGE = "Aucune tâche disponible pour la recherche";
-    public static String TASK_NOT_FOUNDED_ACCORDING_FIND_CRITERIAS = "Tâche non trouvée";
-    public static String COUNT_TASKS_FOUNDED_MESSAGE = "Nombre de tâches";
+    public static String NO_TASK_AVAILABLE_FOR_SEARCHING_TOOL_MESSAGE = "Aucune t�che disponible pour la recherche";
+    public static String TASK_NOT_FOUNDED_ACCORDING_FIND_CRITERIAS = "T�che non trouv�e";
+    public static String COUNT_TASKS_FOUNDED_MESSAGE = "Nombre de t�ches";
 
-    // Simulation de manière générale
+    // Simulation de mani�re g�n�rale
     public static String SIMULATION_TITLE_MESSAGE = "Simulation";
     public static String ERROR_ITERATION_VIEW_MESSAGE = "Erreur";
-    public static String PREDICAT_ITERATION_VIEW_MESSAGE = "Prédicat";
+    public static String PREDICAT_ITERATION_VIEW_MESSAGE = "Pr�dicat";
     public static String USER_VALUE_ITERATION_VIEW_MESSAGE = "Val. Utilisateur";
-    public static String SCENARIO_FILTER_NAME = "Fichier de scénario" + " ("
+    public static String SCENARIO_FILTER_NAME = "Fichier de sc�nario" + " ("
 	    + KMADE_SCENARIO_EXTENSION_FILE + ")";
     public static String ACTIONS_SIMULATION_MESSAGE = "Actions";
     public static String EDIT_USER_VALUES_SIMULATION_MESSAGE = "Editer Valeurs Utilisateur";
-    public static String RECORD_SCENARIO_MESSAGE = "Enregistrer scénario";
-    public static String OPEN_CANCELLED_SCENARIO_FILECHOOSER_NAME = "Chargement d'un scénario annulé";
-    public static String SAVE_CANCELLED_SCENARIO_FILECHOOSER_NAME = "Enregistrement d'un scénario annulé";
-    public static String SUCCEEDED_SAVE_SCENARIO_MESSAGE = "Enregistrement du scénario réussi";
-    public static String NO_SUCCEEDED_SAVE_SCENARIO_MESSAGE = "Enregistrement du scénario échoué";
-    public static String AUTHORIZED_EXECUTER_USER_MESSAGE = "Autorisée";
-    public static String NO_AUTHORIZED_EXECUTER_USER_MESSAGE = "Non Autorisée";
-    public static String DISABLED_CONSTRAINT_MESSAGE = "Désactivée";
-    public static String EVENT_TITLE_MESSAGE = "Evénements";
+    public static String RECORD_SCENARIO_MESSAGE = "Enregistrer sc�nario";
+    public static String OPEN_CANCELLED_SCENARIO_FILECHOOSER_NAME = "Chargement d'un sc�nario annul�";
+    public static String SAVE_CANCELLED_SCENARIO_FILECHOOSER_NAME = "Enregistrement d'un sc�nario annul�";
+    public static String SUCCEEDED_SAVE_SCENARIO_MESSAGE = "Enregistrement du sc�nario r�ussi";
+    public static String NO_SUCCEEDED_SAVE_SCENARIO_MESSAGE = "Enregistrement du sc�nario �chou�";
+    public static String AUTHORIZED_EXECUTER_USER_MESSAGE = "Autoris�e";
+    public static String NO_AUTHORIZED_EXECUTER_USER_MESSAGE = "Non Autoris�e";
+    public static String DISABLED_CONSTRAINT_MESSAGE = "D�sactiv�e";
+    public static String EVENT_TITLE_MESSAGE = "Ev�nements";
     public static String NO_CONCRETE_OBJECT = "Aucun objet concret courant";
-    public static String NO_FIRING_EVENT_MESSAGE = "Aucun Evénement Provoqué";
-    public static String NO_FIRING_EVENT_TINY_MESSAGE = "Aucun Evénement";
-    public static String FIRABLE_EVENT_STATE_MESSAGE = "Déclenchable";
-    public static String NO_FIRABLE_EVENT_STATE_MESSAGE = "Non Déclenchable";
-    public static String NO_SELECTED_ACTION_FOR_CONSTRAINTS_MESSAGE = "Aucune action \"exécuter\" sélectionnée";
-    public static String NO_SELECTED_SCENARIO_ACTION_FOR_CONSTRAINTS_MESSAGE = "Aucune action \"exécuter\" du scénario sélectionnée";
+    public static String NO_FIRING_EVENT_MESSAGE = "Aucun Ev�nement Provoqu�";
+    public static String NO_FIRING_EVENT_TINY_MESSAGE = "Aucun Ev�nement";
+    public static String FIRABLE_EVENT_STATE_MESSAGE = "D�clenchable";
+    public static String NO_FIRABLE_EVENT_STATE_MESSAGE = "Non D�clenchable";
+    public static String NO_SELECTED_ACTION_FOR_CONSTRAINTS_MESSAGE = "Aucune action \"ex�cuter\" s�lectionn�e";
+    public static String NO_SELECTED_SCENARIO_ACTION_FOR_CONSTRAINTS_MESSAGE = "Aucune action \"ex�cuter\" du sc�nario s�lectionn�e";
     public static String CONSTRAINTS_TITLE_MESSAGE = "Contraintes";
-    public static String SOURCE_TASK_EVENT_MESSAGE = "Tâche";
+    public static String SOURCE_TASK_EVENT_MESSAGE = "T�che";
     public static String NO_USER_MESSAGE = "Aucun Utilisateur";
     public static String EXECUTING_USER_TITLE_MESSAGE = "Utilisateur";
     public static String CONSTRAINTS_NAME_COLUMN_NAME = "Nom";
     public static String CONSTRAINTS_VALEUR_COLUMN_NAME = "Valeur";
     public static String CONSTRAINTS_STATE_COLUMN_NAME = "Etat";
-    public static String PRECONDITION_CONSTRAINTS_RESPECTED_STATE_MESSAGE = "Respectée";
-    public static String PRECONDITION_CONSTRAINTS_NO_RESPECTED_STATE_MESSAGE = "Non Respectée";
+    public static String PRECONDITION_CONSTRAINTS_RESPECTED_STATE_MESSAGE = "Respect�e";
+    public static String PRECONDITION_CONSTRAINTS_NO_RESPECTED_STATE_MESSAGE = "Non Respect�e";
     public static String PRECONDITION_CONSTRAINTS_ERROR_STATE_MESSAGE = "Erreur";
     public static String PRECONDITION_CONSTRAINTS_NEED_VALUES_STATE_MESSAGE = "Besoin Valeur(s)";
-    public static String EFFETSDEBORD_EXECUTED_STATE_MESSAGE = "Exécutée";
-    public static String EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE = "Non Exécutée";
+    public static String EFFETSDEBORD_EXECUTED_STATE_MESSAGE = "Ex�cut�e";
+    public static String EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE = "Non Ex�cut�e";
     public static String USER_VALUES_TITLE = "Editeur des valeurs utilisateurs";
-    public static String PRECONDITION_USER_EDITION_MESSAGE = "Valeurs utilisateur de la précondition";
+    public static String PRECONDITION_USER_EDITION_MESSAGE = "Valeurs utilisateur de la pr�condition";
     public static String EFFETSDEBORD_USER_EDITION_MESSAGE = "Valeurs utilisateur de la effetsdebord";
-    public static String ITERATION_USER_EDITION_MESSAGE = "Valeurs utilisateur de l'itération";
-    public static String TRIGGER_VALID_TASK_MESSAGE = "Déclencher";
-    public static String NO_TRIGGER_CANCEL_TASK_MESSAGE = "Annuler Déclenchement";
-    public static String EXECUTE_TASK_TRAITEMENT_MESSAGE = "Traitement de la téche";
-    public static String EXECUTION_CONSTRAINT_MESSAGE = "Contraintes d'exécutation";
+    public static String ITERATION_USER_EDITION_MESSAGE = "Valeurs utilisateur de l'it�ration";
+    public static String TRIGGER_VALID_TASK_MESSAGE = "D�clencher";
+    public static String NO_TRIGGER_CANCEL_TASK_MESSAGE = "Annuler D�clenchement";
+    public static String EXECUTE_TASK_TRAITEMENT_MESSAGE = "Traitement de la t�che";
+    public static String EXECUTION_CONSTRAINT_MESSAGE = "Contraintes d'ex�cutation";
     public static String USER_EXECUTION_CONSTRAINT_MESSAGE = "Utilisateur";
-    public static String CAN_EXECUTE_TASK_MESSAGE = "peut exécuter la tâche";
-    public static String CAN_NOT_EXECUTE_TASK_MESSAGE = "ne peut pas exécuter la tâche";
-    public static String EVENT_TRIGGER_CONSTRAINT_MESSAGE = "Evénement";
-    public static String NO_TRIGGER_EVENT_CONSTRAINT_MESSAGE = "Aucun d'événement déclencheur";
-    public static String CAN_TRIGGER_TASK_MESSAGE = "déclenche la tâche";
-    public static String CAN_NOT_TRIGGER_CONSTRAINT_MESSAGE = "non généré et ne peut déclencher la tâche";
-    public static String PRECONDITION_CONSTRAINT_MESSAGE = "Précondition";
+    public static String CAN_EXECUTE_TASK_MESSAGE = "peut ex�cuter la t�che";
+    public static String CAN_NOT_EXECUTE_TASK_MESSAGE = "ne peut pas ex�cuter la t�che";
+    public static String EVENT_TRIGGER_CONSTRAINT_MESSAGE = "Ev�nement";
+    public static String NO_TRIGGER_EVENT_CONSTRAINT_MESSAGE = "Aucun d'�v�nement d�clencheur";
+    public static String CAN_TRIGGER_TASK_MESSAGE = "d�clenche la t�che";
+    public static String CAN_NOT_TRIGGER_CONSTRAINT_MESSAGE = "non g�n�r� et ne peut d�clencher la t�che";
+    public static String PRECONDITION_CONSTRAINT_MESSAGE = "Pr�condition";
     public static String ACTION_CONSTRAINT_MESSAGE = "Actions";
-    public static String GENERATE_EVENTS_CONSTRAINT_MESSAGE = "Génération Evénements";
-    public static String NO_GENERATED_EVENTS_CONSTRAINT_MESSAGE = "Pas d'événement généré";
+    public static String GENERATE_EVENTS_CONSTRAINT_MESSAGE = "G�n�ration Ev�nements";
+    public static String NO_GENERATED_EVENTS_CONSTRAINT_MESSAGE = "Pas d'�v�nement g�n�r�";
     public static String EFFETSDEBORD_CONSTRAINT_MESSAGE = "EffetsDeBord";
-    public static String USER_VALUES_MISSING_OR_WRONG_MESSAGE = "Valeur(s) utilisateur manquante(s) ou erronée(s)";
-    public static String CONCRETE_OBJECT_NO_SELECTED_MESSAGE = "Objet(s) concret(s) non sélectionné(s)";
-    public static String USER_VALUES_PROBLEM_MESSAGE = "Probléme Valeurs Utilisateur";
-    public static String FINISHED_SCENARIO_PROBLEM_MESSAGE = "Scénario Terminée";
-    public static String FINISHED_SIMULATION_PROBLEM_MESSAGE = "Simulation Terminée";
-    public static String FINISHED_SCENARIO_AND_SIMULATION_PROBLEM_MESSAGE = "Simulation et scénario Terminés";
+    public static String USER_VALUES_MISSING_OR_WRONG_MESSAGE = "Valeur(s) utilisateur manquante(s) ou erron�e(s)";
+    public static String CONCRETE_OBJECT_NO_SELECTED_MESSAGE = "Objet(s) concret(s) non s�lectionn�(s)";
+    public static String USER_VALUES_PROBLEM_MESSAGE = "Probl�me Valeurs Utilisateur";
+    public static String FINISHED_SCENARIO_PROBLEM_MESSAGE = "Sc�nario Termin�e";
+    public static String FINISHED_SIMULATION_PROBLEM_MESSAGE = "Simulation Termin�e";
+    public static String FINISHED_SCENARIO_AND_SIMULATION_PROBLEM_MESSAGE = "Simulation et sc�nario Termin�s";
     public static String SELECT_TASK_TO_REPLAY_MESSAGE = "Veuillez selectionner une tache";
-    public static String ITERATION_FINISH_NO_ACTION = "L'itération est fini, aucun effet de bord n'a lieu";
-    // Les actions sur les tâches pour lors de la simulation
-    public static String EXECUTE_ACTION_SIMULATION_MESSAGE = "Exécuter";
+    public static String ITERATION_FINISH_NO_ACTION = "L'it�ration est fini, aucun effet de bord n'a lieu";
+    // Les actions sur les t�ches pour lors de la simulation
+    public static String EXECUTE_ACTION_SIMULATION_MESSAGE = "Ex�cuter";
     public static String PASS_ACTION_SIMULATION_MESSAGE = "Passer";
     public static String SUSPEND_ACTION_SIMULATION_MESSAGE = "Interrompre";
     public static String RESUME_ACTION_SIMULATION_MESSAGE = "Reprendre";
     public static String NO_RESUME_ACTION_SIMULATION_MESSAGE = "Abandonner";
 
-    // L'état des tâches pour lors de la simulation.
+    // L'�tat des t�ches pour lors de la simulation.
     public static String ACTIVE_STATE_TASK_SIMULATION_MESSAGE = "Active";
     public static String ACTIVE_ITERATION_STATE_TASK_SIMULATION_MESSAGE = "ActiveIte";
-    public static String FINISHED_STATE_TASK_SIMULATION_MESSAGE = "Terminée";
+    public static String FINISHED_STATE_TASK_SIMULATION_MESSAGE = "Termin�e";
     public static String PASSIVE_STATE_TASK_SIMULATION_MESSAGE = "Passive";
     public static String NO_ACCESSIBLE_STATE_TASK_SIMULATION_MESSAGE = "Inactive";
-    public static String PASSED_STATE_TASK_SIMULATION_MESSAGE = "Passée";
+    public static String PASSED_STATE_TASK_SIMULATION_MESSAGE = "Pass�e";
     public static String SUSPENDED_STATE_TASK_SIMULATION_MESSAGE = "Suspendue";
-    public static String NO_RESUMED_STATE_TASK_SIMULATION_MESSAGE = "Abandonnée";
+    public static String NO_RESUMED_STATE_TASK_SIMULATION_MESSAGE = "Abandonn�e";
 
     // Pour l'enregistrement de la simulation
     public static String RECORD_TITLE_MESSAGE = "Enregistrement";
-    public static String RECORD_BUILDING_SCENARION_MESSAGE = "Scénario Courant";
+    public static String RECORD_BUILDING_SCENARION_MESSAGE = "Sc�nario Courant";
     public static String RECORD_AVAILABLE_ACTIONABLE_MESSAGE = "Actions Disponibles";
-    public static String FINISHED_RECORD_SIMULATION_MESSAGE = "Simulation du modéle de tâches K-MAD terminée : scénario disponible ...";
-    public static String NO_SELECTED_TASK_BEFORE_RECORD_SIMULATION_MESSAGE = "Veuillez selectionner une tâche";
+    public static String FINISHED_RECORD_SIMULATION_MESSAGE = "Simulation du mod�le de t�ches K-MAD termin�e : sc�nario disponible ...";
+    public static String NO_SELECTED_TASK_BEFORE_RECORD_SIMULATION_MESSAGE = "Veuillez selectionner une t�che";
 
     // Pour le rejeu de la simulation
     public static String REPLAY_TITLE_MESSAGE = "Rejeu";
     public static String REPLAY_SLOW_TEMPO = "Lent";
-    public static String REPLAY_MODERATE_TEMPO = "Modéré";
+    public static String REPLAY_MODERATE_TEMPO = "Mod�r�";
     public static String REPLAY_SPEED_TEMPO = "Rapide";
-    public static String SCENARIO_REPLAY_MESSAGE = "Scénario à Rejouer";
+    public static String SCENARIO_REPLAY_MESSAGE = "Sc�nario � Rejouer";
     public static String REPLAY_OPTIONS_MESSAGE = "Options de rejeu";
     public static String REPLAY_KEEP_USER_VALUES_MESSAGE = "Conserver valeurs";
     public static String REPLAY_TEMPO_MESSAGE = "Tempo";
-    public static String NO_ROOT_TASK_PROBLEM_MESSAGE = "Pas de tâche racine";
-    public static String NO_FOUNDED_TASK_TO_REPLAY_PROBLEM_MESSAGE = "Tâche non trouvée";
-    public static String CAN_NOT_EXECUTE_TASK_TO_REPLAY_PROBLEM_MESSAGE = "Ne peut exécuter cette tâche tout de suite";
+    public static String NO_ROOT_TASK_PROBLEM_MESSAGE = "Pas de t�che racine";
+    public static String NO_FOUNDED_TASK_TO_REPLAY_PROBLEM_MESSAGE = "T�che non trouv�e";
+    public static String CAN_NOT_EXECUTE_TASK_TO_REPLAY_PROBLEM_MESSAGE = "Ne peut ex�cuter cette t�che tout de suite";
 
     public static String CONFIG_ERROR_DOM = "Erreur de configuration du parseur DOM";
-    public static String CALL_NEW_DOCUMENT_BUILDER = "lors de l'appel à fabrique.newDocumentBuilder()";
+    public static String CALL_NEW_DOCUMENT_BUILDER = "lors de l'appel � fabrique.newDocumentBuilder()";
     public static String SIMULATION_PARSING_ERROR = "Erreur lors du parsing du document";
-    public static String CALL_CONSTRUCTEUR_PARSE = "lors de l'appel à construteur.parse(xml)";
-    public static String SIMULATION_IO_ERROR = "Erreur d'entrée/sortie";
+    public static String CALL_CONSTRUCTEUR_PARSE = "lors de l'appel � construteur.parse(xml)";
+    public static String SIMULATION_IO_ERROR = "Erreur d'entr�e/sortie";
 
     // Pour la boite "A Propos de ..."
     public static String PROJECT_LEADER_MESSAGE = "Responsable du Projet";
-    public static String DEVELOPMENT_QUERING_TOOL_MESSAGE = "Développement K-MADe et Interrogation K-MAD";
-    public static String KMAD_SPECIFY_MESSAGE = "Spécification du modèle K-MAD";
-    public static String KMAD_ADAPTATOR_MESSAGE = "Adaptateur du modèle K-MAD";
-    public static String JAVA_GRAPHIC_LIBRARIES_MESSAGE = "Bibliothéques Utilisées";
+    public static String DEVELOPMENT_QUERING_TOOL_MESSAGE = "D�veloppement K-MADe et Interrogation K-MAD";
+    public static String KMAD_SPECIFY_MESSAGE = "Sp�cification du mod�le K-MAD";
+    public static String KMAD_ADAPTATOR_MESSAGE = "Adaptateur du mod�le K-MAD";
+    public static String JAVA_GRAPHIC_LIBRARIES_MESSAGE = "Biblioth�ques Utilis�es";
     public static String KMADE_TEAM_MESSAGE = "Participants";
-    public static String JAVA_LIBRARIES_MESSAGE = "Bibliothèques";
+    public static String JAVA_LIBRARIES_MESSAGE = "Biblioth�ques";
 
-    // Cohérence du modèle
-    public static String COHERENCE_INTRO_ERROR = "L'outil de cohérence a détecté ";
+    // Coh�rence du mod�le
+    public static String COHERENCE_INTRO_ERROR = "L'outil de coh�rence a d�tect� ";
     public static String COHERENCE_ONE_ERROR = " erreur";
     public static String COHERENCE_SOME_ERROR = " erreurs";
     public static String COHERENCE_INTER = " et ";
     public static String COHERENCE_ONE_WARNING = " warning";
     public static String COHERENCE_SOME_WARNING = " warnings";
-    public static String COHERENCE_VERIFICATION_TITLE = "Simulation refusée ...";
+    public static String COHERENCE_VERIFICATION_TITLE = "Simulation refus�e ...";
 
-    public static String NO_ALONE_MESSAGE_PROBLEM = "Pas de tâche seule";
-    public static String PRECONDITION_EXPRESSION_MESSAGE_PROBLEM = "Problème dans l'expression de la précondition";
-    public static String EFFETSDEBORD_EXPRESSION_MESSAGE_PROBLEM = "Problème dans l'expression de la effetsdebord";
-    public static String ITERATION_EXPRESSION_MESSAGE_PROBLEM = "Problème dans l'expression de l'itération";
-    public static String NO_ONLY_ONE_SUBTASK_MESSAGE_PROBLEM = "Pas de sous tâche unique";
+    public static String NO_ALONE_MESSAGE_PROBLEM = "Pas de t�che seule";
+    public static String PRECONDITION_EXPRESSION_MESSAGE_PROBLEM = "Probl�me dans l'expression de la pr�condition";
+    public static String EFFETSDEBORD_EXPRESSION_MESSAGE_PROBLEM = "Probl�me dans l'expression de la effetsdebord";
+    public static String ITERATION_EXPRESSION_MESSAGE_PROBLEM = "Probl�me dans l'expression de l'it�ration";
+    public static String NO_ONLY_ONE_SUBTASK_MESSAGE_PROBLEM = "Pas de sous t�che unique";
     public static String TASK_HAS_NO_NAME_MESSAGE_PROBLEM = "Entrez un nom pour la tache";
     public static String INVALID_DECOMPOSITION_MESSAGE_PROBLEM = "Decomposition invalide";
-    public static String NO_DECOMPOSITION_SPECIFIED_MESSAGE_PROBLEM = "Décomposition non précisée";
-    public static String ELEMENTARY_DECOMPOSITION_FOR_LEAF_TASK = "Décomposition doit être élémentaire pour une tâche feuille";
-    public static String NO_EXECUTANT_SPECIFIED_MESSAGE_WARNING = "Exécutant non défini";
-    public static String SUBTASKS_EXECUTANT_DIFFERENT_MESSAGE_WARNING = "Exécutant différent";
-    public static String HIERARCHY_TYPE_MESSAGE = "Hiérarchie";
+    public static String NO_DECOMPOSITION_SPECIFIED_MESSAGE_PROBLEM = "D�composition non pr�cis�e";
+    public static String ELEMENTARY_DECOMPOSITION_FOR_LEAF_TASK = "D�composition doit �tre �l�mentaire pour une t�che feuille";
+    public static String NO_EXECUTANT_SPECIFIED_MESSAGE_WARNING = "Ex�cutant non d�fini";
+    public static String SUBTASKS_EXECUTANT_DIFFERENT_MESSAGE_WARNING = "Ex�cutant diff�rent";
+    public static String HIERARCHY_TYPE_MESSAGE = "Hi�rarchie";
     public static String EXPRESSION_TYPE_MESSAGE = "Expression";
-    public static String TASKS_SPACE_LOCATION_MESSAGE = "Espace de tâches";
-    public static String PRECONDITION_LOCATION_MESSAGE = "Précondition";
+    public static String TASKS_SPACE_LOCATION_MESSAGE = "Espace de t�ches";
+    public static String PRECONDITION_LOCATION_MESSAGE = "Pr�condition";
     public static String EFFETSDEBORD_LOCATION_MESSAGE = "Action";
-    public static String ITERATION_LOCATION_MESSAGE = "Itération";
-    public static String COHERENCE_TITLE_MESSAGE = "Cohérence";
-    public static String COHERENCE_CHECK_MESSAGE = "Forcer Vérification";
+    public static String ITERATION_LOCATION_MESSAGE = "It�ration";
+    public static String COHERENCE_TITLE_MESSAGE = "Coh�rence";
+    public static String COHERENCE_CHECK_MESSAGE = "Forcer V�rification";
     public static String ERRORS_TITLE_MESSAGE = "Erreurs et Avertissements";
     public static String MESSAGE_ERROR_COLUMN_NAME = "Message";
-    public static String TASK_NAME_COLUMN_NAME = "tâche";
+    public static String TASK_NAME_COLUMN_NAME = "t�che";
     public static String ERROR_TYPE_COLUMN_NAME = "Type";
     public static String LOCATION_COLUMN_NAME = "Localisation";
 
-    // Statistique du modèle
-    public static String COUNT_TASK_INTO_TASK_MODELS_MESSAGE = "Nombre de tâches dans l'espace de tâches";
-    public static String COUNT_USER_TASK_MESSAGE = "Nombre d'exécutant de type utilisateur";
-    public static String COUNT_UNKNOWN_TASK_MESSAGE = "Nombre d'exécutant de type inconnu";
-    public static String COUNT_SYSTEM_TASK_MESSAGE = "Nombre d'exécutant de type système";
-    public static String COUNT_ABSTRACT_TASK_MESSAGE = "Nombre d'exécutant de type abstrait";
-    public static String COUNT_INTERACT_TASK_MESSAGE = "Nombre d'exécutant de type interaction";
-    public static String COUNT_UNKNOWN_DEC_TASK_MESSAGE = "Nombre de décomposition de type inconnu";
-    public static String COUNT_ENABLING_DEC_TASK_MESSAGE = "Nombre de décomposition de type séquenciel";
-    public static String COUNT_CHOICE_DEC_TASK_MESSAGE = "Nombre de décomposition de type alternatif";
-    public static String COUNT_CONCURRENT_DEC_TASK_MESSAGE = "Nombre de décomposition de type parallèle";
-    public static String COUNT_ELEMENTARY_DEC_TASK_MESSAGE = "Nombre de décomposition de type élémentaire";
-    public static String COUNT_NO_ORDER_DEC_TASK_MESSAGE = "Nombre de décomposition de type pas d'ordre";
+    // Statistique du mod�le
+    public static String COUNT_TASK_INTO_TASK_MODELS_MESSAGE = "Nombre de t�ches dans l'espace de t�ches";
+    public static String COUNT_USER_TASK_MESSAGE = "Nombre d'ex�cutant de type utilisateur";
+    public static String COUNT_UNKNOWN_TASK_MESSAGE = "Nombre d'ex�cutant de type inconnu";
+    public static String COUNT_SYSTEM_TASK_MESSAGE = "Nombre d'ex�cutant de type syst�me";
+    public static String COUNT_ABSTRACT_TASK_MESSAGE = "Nombre d'ex�cutant de type abstrait";
+    public static String COUNT_INTERACT_TASK_MESSAGE = "Nombre d'ex�cutant de type interaction";
+    public static String COUNT_UNKNOWN_DEC_TASK_MESSAGE = "Nombre de d�composition de type inconnu";
+    public static String COUNT_ENABLING_DEC_TASK_MESSAGE = "Nombre de d�composition de type s�quenciel";
+    public static String COUNT_CHOICE_DEC_TASK_MESSAGE = "Nombre de d�composition de type alternatif";
+    public static String COUNT_CONCURRENT_DEC_TASK_MESSAGE = "Nombre de d�composition de type parall�le";
+    public static String COUNT_ELEMENTARY_DEC_TASK_MESSAGE = "Nombre de d�composition de type �l�mentaire";
+    public static String COUNT_NO_ORDER_DEC_TASK_MESSAGE = "Nombre de d�composition de type pas d'ordre";
     public static String STATISTIC_TITLE = "Outil de Statistiques";
     public static String TYPE_STATISTIC_MESSAGE = "Type";
     public static String RESULT_STATISTIC_MESSAGE = "Resultat";
-    public static String REFRESH_STATISTIC_MESSAGE = "Mise à jour";
+    public static String REFRESH_STATISTIC_MESSAGE = "Mise � jour";
 
     //
-    // Les constantes lièes aux images
+    // Les constantes li�es aux images
     //
     public static final String SPLASH_SCREEN_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
 	    + "splashscreen2.png";
@@ -1184,7 +1185,7 @@ public class KMADEConstant {
 	    + "visiblelabel.png";
     public static final String LABEL_COLOR_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
 	    + "colorlabel.png";
-    /** ICON Evenement des Taches **/
+    /** IMAGE Evenement des Taches **/
     public static final String EVENEMENT_IN_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
 	    + "evenement_in.png";
     public static final String EVENEMENT_OUT_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
@@ -1332,7 +1333,7 @@ public class KMADEConstant {
 	    + "hmove.gif";
 
     //
-    // Les constantes lièes aux templates de Velocity
+    // Les constantes li�es aux templates de Velocity
     //
     public static final String DEFAULT_CARD_VELOCITY_HTML = KMADEToolConstant.VELOCITY_TEMPLATE_DIRECTORY_NAME
 	    + "default.vm";
@@ -1340,7 +1341,7 @@ public class KMADEConstant {
 	    + "basic.vm";
 
     //
-    // Les constantes lièes aux autres resources
+    // Les constantes li�es aux autres resources
     //
     public static String DEBUG_KMADE_HTML = KMADEToolConstant.HTML_DIRECTORY_NAME
 	    + "kmadedebug_fr.html";
@@ -1355,12 +1356,78 @@ public class KMADEConstant {
     public static String UNDER_DEVELOPMENT_START_TITLE = "KMADe is under development ...";
 
     // Les erreurs d'ouverture KXML
-    public static String NO_VERSION = "Aucune version précisée version n'est précisée dans le fichier chargé";
+    public static String NO_VERSION = "Aucune version pr�cis�e version n'est pr�cis�e dans le fichier charg�";
     public static String NO_COMPATIBLE_ITEMS_DOCUMENT = "Ce fichier ne corresponf pas a un fichier d'objets KMADe";
     public static String NEW_SAVE_NEW_FORMAT = "Attention toute nouvelle sauvegarde se fera au nouveau format";
     public static String VERSION_USE = "Vous utilisez la version : ";
     public static String VERSION_FILE = "Vous chargez un fichier avec la version : ";
-    public static String NOT_SAME_VERSION = "La version que vous essayez de charger n'est pas la même que celle de l'outil";
+    public static String NOT_SAME_VERSION = "La version que vous essayez de charger n'est pas la m�me que celle de l'outil";
+
+    /**
+     * @author Joachim TROUVERIE
+     */
+    // Fenetre objets
+
+    public static Color ACTIVE_OBJECT = new Color(253, 217, 38);
+    public static Color INACTIVE_OBJECT = Color.LIGHT_GRAY;
+    public static String OBJECTS_VISUALIZATION_WINDOW_NAME = "Objets KMADe";
+    public static String OPEN_ITEMS_FILE = "Charger un fichier d'objets";
+    public static String CAN_SAVE_PROJECT = "Vous pouvez sauver le projet ou les objets en cours";
+    public static String CAN_NOT_SAVE_PROJECT = "Vous ne pouvez pas sauver le projet ou les objets en cours";
+
+    // Abstract objects
+
+    public static String EMPTY_CELL_NAME = "VIDE";
+    public static String NEW_ABSTRACT_OBJECT_TEXT = "Creer un nouvel objet abstrait";
+    public static String REMOVE_ABSTRACT_OBJECT_TEXT = "Supprimer l'objet abstrait s�lectionn�";
+    public static String NEW_OBJECT_NAME = "Nouvel objet";
+    public static String NO_SELECTED_OBJECT = "Pas d'objet s�lectionn�";
+    public static String GENERALITY = "G�n�ralit�s";
+    public static String ATTRIBUTES_NAME = "Attributs";
+    public static String ADD_ATTRIBUTE = "Ajouter un nouvel attribut";
+    public static String REMOVE_ATTRIBUTE = "Supprimer un attribut";
+
+    // Concrete objects
+    public static String EDIT_CONCRETE_OBJECT_ACTION_MESSAGE = "Editer l'objet concret ";
+    public static String EDIT_OBJECTS_ACTION_MESSAGE = "Ouvrir la fen�tre d'�dition des objets";
+    public static String OBJECT_INSERTION_ERROR = "Le groupe n'est pas concordant avec l'objet abstrait duquel est instanci� l'objet";
+    public static String NEW_GROUP_NAME = "Nouveau groupe";
+    public static String NEW_STACK_ACTION_MESSAGE = "Ajouter une nouvelle pile";
+    public static String NEW_SET_ACTION_MESSAGE = "Ajouter un nouvel ensemble";
+    public static String NEW_ARRAY_ACTION_MESSAGE = "Ajouter un nouveau tableau";
+    public static String NEW_LIST_ACTION_MESSAGE = "Ajouter une nouvelle liste";
+    public static String NEW_SINGLETON_ACTION_MESSAGE = "Ajouter un nouveau singleton";
+    public static String EDIT_GROUP_ACTION_MESSAGE = "Editer le groupe";
+    public static String EDIT_GROUP_AND_CONCRETE_ACTION_MESSAGE = "Editer le groupe ou l'objet concret";
+    public static String DELETE_GROUP_AND_CONCRETE_ACTION_MESSAGE = "Supprimer le groupe ou l'objet concret";
+
+    // Images
+    public static String OBJECT_MANAGEMENT = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "manage_objects_16x16.png";
+    public static String GROUP_LIST_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "list_16x16.png";
+    public static String GROUP_STACK_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "stack_16x16.png";
+    public static String GROUP_SET_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "set_16x16.png";
+    public static String GROUP_ARRAY_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "array_16x16.png";
+    public static String GROUP_SINGLETON_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "singleton_16x16.png";
+    public static String ADD_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "add_16x16.png";
+    public static String ADD_OBJECT_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "add_object_16x16.png";
+    public static String REMOVE_OBJECT_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "remove_object_16x16.png";
+    public static String CANCEL_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "cancel_16x16.png";
+    public static String EDIT_GROUP_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "edit_16x16.png";
+    public static String DELETE_GROUP_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "delete_group_16x16.png";
+    public static String HELP_OBJECT_VIEW_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	    + "help_16x16.png";
 
     public static void loadMessagesFromBundle() {
 	DEBUG_KMADE_HTML = KMADEToolConstant.HTML_DIRECTORY_NAME
@@ -1794,7 +1861,7 @@ public class KMADEConstant {
 	ACTORSYSTEM_REMOVE_ALL_NAME_TITLE = KMADeMain.messages
 		.getString("ACTORSYSTEM_REMOVE_ALL_NAME_TITLE");
 
-	// Propriétés des tâches
+	// Propri�t�s des t�ches
 	NO_SELECTED_TASK_MESSAGE = KMADeMain.messages
 		.getString("NO_SELECTED_TASK_MESSAGE");
 	PROPERTIES_MESSAGE = KMADeMain.messages.getString("PROPERTIES_MESSAGE");
@@ -1807,7 +1874,7 @@ public class KMADEConstant {
 	ERROR_CARACTERISTIC_MESSAGE = KMADeMain.messages
 		.getString("ERROR_CARACTERISTIC_MESSAGE");
 
-	// Informations Générales des propriétés d'une tâches
+	// Informations G�n�rales des propri�t�s d'une t�ches
 	TASK_ATTRIBUT_NAME = KMADeMain.messages.getString("TASK_ATTRIBUT_NAME");
 	GENERAL_INFORMATION_PANEL_TITLE_NAME = KMADeMain.messages
 		.getString("GENERAL_INFORMATION_PANEL_TITLE_NAME");
@@ -1882,7 +1949,7 @@ public class KMADEConstant {
 	SCHEDULE_PANEL_TITLE_NAME = KMADeMain.messages
 		.getString("SCHEDULE_PANEL_TITLE_NAME");
 
-	// Ordonnancement d'une tâche
+	// Ordonnancement d'une t�che
 	NECESSITE_LABEL_NAME = KMADeMain.messages
 		.getString("NECESSITE_LABEL_NAME");
 	NECESSITE_LABEL_LEGEND_NAME = KMADeMain.messages
@@ -1924,7 +1991,7 @@ public class KMADEConstant {
 	ITERATION_LABEL_LEGEND_VALUE = KMADeMain.messages
 		.getString("ITERATION_LABEL_LEGEND_VALUE");
 
-	// Effets d'une tâche
+	// Effets d'une t�che
 	POSTCONDITION_PANEL_TITLE_NAME = KMADeMain.messages
 		.getString("POSTCONDITION_PANEL_TITLE_NAME");
 	EFFETSDEBORD_LABEL_VALUE = KMADeMain.messages
@@ -1935,7 +2002,7 @@ public class KMADEConstant {
 	EVENT_NAME_LEGEND_TITLE = KMADeMain.messages
 		.getString("EVENT_NAME_LEGEND_TITLE");
 
-	// Pour l'outil lié au multimédia
+	// Pour l'outil li� au multim�dia
 	MEDIA_FILE_NAME = KMADeMain.messages.getString("MEDIA_FILE_NAME");
 	MEDIA_FILE_LENGTH = KMADeMain.messages.getString("MEDIA_FILE_LENGTH");
 	MEDIA_LENGTH = KMADeMain.messages.getString("MEDIA_LENGTH");
@@ -1953,7 +2020,7 @@ public class KMADEConstant {
 	CONTROLE_MEDIA_TITLE_NAME = KMADeMain.messages
 		.getString("CONTROLE_MEDIA_TITLE_NAME");
 
-	// Editeur complet d'une tâche
+	// Editeur complet d'une t�che
 	EXECUTION_CONDITION_TITLE_NAME = KMADeMain.messages
 		.getString("EXECUTION_CONDITION_TITLE_NAME");
 	OBJECT_LIST_TITLE_NAME = KMADeMain.messages
@@ -1972,7 +2039,7 @@ public class KMADEConstant {
 		.getString("NO_SUB_TASK_MESSAGE");
 	NO_NUMERO_TASK = KMADeMain.messages.getString("NO_NUMERO_TASK");
 
-	// Caractéristique d'un projet
+	// Caract�ristique d'un projet
 	INTERVIEWED_NAME_TABLE = KMADeMain.messages
 		.getString("INTERVIEWED_NAME_TABLE");
 	PLACE_INFORMATION_TABLE = KMADeMain.messages
@@ -2005,7 +2072,7 @@ public class KMADEConstant {
 	ASK_REMOVE_INTERVIEW_MESSAGE_TITLE = KMADeMain.messages
 		.getString("ASK_REMOVE_INTERVIEW_MESSAGE_TITLE");
 
-	// Editeur des attributs d'une ttâcche
+	// Editeur des attributs d'une tt�cche
 	EDITOR_MESSAGE_TITLE = KMADeMain.messages
 		.getString("EDITOR_MESSAGE_TITLE");
 	EDITOR_OPERATOR_NAME = KMADeMain.messages
@@ -2088,13 +2155,13 @@ public class KMADEConstant {
 	EXPLICIT_STOP_SAVE_FILE_MESSAGE = KMADeMain.messages
 		.getString("EXPLICIT_STOP_SAVE_FILE_MESSAGE");
 
-	// Outil pour lister les entités
+	// Outil pour lister les entit�s
 	ENTITY_LIST_DIALOG_TITLE = KMADeMain.messages
 		.getString("ENTITY_LIST_DIALOG_TITLE");
 	FORCE_ENTITY_LIST_ACTION_MESSAGE = KMADeMain.messages
 		.getString("FORCE_ENTITY_LIST_ACTION_MESSAGE");
 
-	// Préférences de l'outil
+	// Pr�f�rences de l'outil
 	GENERAL_TABBED_NAME = KMADeMain.messages
 		.getString("GENERAL_TABBED_NAME");
 	TASK_MODEL_EDITOR_TABBED_NAME = KMADeMain.messages
@@ -2368,7 +2435,7 @@ public class KMADEConstant {
 	CLEAR_HISTORIC_ACTION_MESSAGE = KMADeMain.messages
 		.getString("CLEAR_HISTORIC_ACTION_MESSAGE");
 
-	// Messages liés aux expressions
+	// Messages li�s aux expressions
 	PRINT_SCALE_ADAPT_MESSAGE = KMADeMain.messages
 		.getString("PRINT_SCALE_ADAPT_MESSAGE");
 	PRINT_SCALE_PERSONALIZE_MESSAGE = KMADeMain.messages
@@ -2584,7 +2651,7 @@ public class KMADEConstant {
 	COUNT_TASKS_FOUNDED_MESSAGE = KMADeMain.messages
 		.getString("COUNT_TASKS_FOUNDED_MESSAGE");
 
-	// Simulation de manière générale
+	// Simulation de mani�re g�n�rale
 
 	SIMULATION_TITLE_MESSAGE = KMADeMain.messages
 		.getString("SIMULATION_TITLE_MESSAGE");
@@ -2711,7 +2778,7 @@ public class KMADEConstant {
 		.getString("SELECT_TASK_TO_REPLAY_MESSAGE");
 	ITERATION_FINISH_NO_ACTION = KMADeMain.messages
 		.getString("ITERATION_FINISH_NO_ACTION");
-	// Les actions sur les tâches pour lors de la simulation
+	// Les actions sur les t�ches pour lors de la simulation
 	EXECUTE_ACTION_SIMULATION_MESSAGE = KMADeMain.messages
 		.getString("EXECUTE_ACTION_SIMULATION_MESSAGE");
 	PASS_ACTION_SIMULATION_MESSAGE = KMADeMain.messages
@@ -2723,7 +2790,7 @@ public class KMADEConstant {
 	NO_RESUME_ACTION_SIMULATION_MESSAGE = KMADeMain.messages
 		.getString("NO_RESUME_ACTION_SIMULATION_MESSAGE");
 
-	// L'état des tâches pour lors de la simulation.
+	// L'�tat des t�ches pour lors de la simulation.
 	ACTIVE_STATE_TASK_SIMULATION_MESSAGE = KMADeMain.messages
 		.getString("ACTIVE_STATE_TASK_SIMULATION_MESSAGE");
 	ACTIVE_ITERATION_STATE_TASK_SIMULATION_MESSAGE = KMADeMain.messages
@@ -2800,7 +2867,7 @@ public class KMADEConstant {
 	JAVA_LIBRARIES_MESSAGE = KMADeMain.messages
 		.getString("JAVA_LIBRARIES_MESSAGE");
 
-	// Cohérence du modèle
+	// Coh�rence du mod�le
 	COHERENCE_INTRO_ERROR = KMADeMain.messages
 		.getString("COHERENCE_INTRO_ERROR");
 	COHERENCE_ONE_ERROR = KMADeMain.messages
@@ -2860,7 +2927,7 @@ public class KMADEConstant {
 	LOCATION_COLUMN_NAME = KMADeMain.messages
 		.getString("LOCATION_COLUMN_NAME");
 
-	// Statistique du modèle
+	// Statistique du mod�le
 	COUNT_TASK_INTO_TASK_MODELS_MESSAGE = KMADeMain.messages
 		.getString("COUNT_TASK_INTO_TASK_MODELS_MESSAGE");
 	COUNT_USER_TASK_MESSAGE = KMADeMain.messages
@@ -2902,5 +2969,34 @@ public class KMADEConstant {
 	VERSION_FILE = KMADeMain.messages.getString("VERSION_FILE");
 	NOT_SAME_VERSION = KMADeMain.messages.getString("NOT_SAME_VERSION");
 
+	OBJECTS_VISUALIZATION_WINDOW_NAME = "Objets KMADe";
+	OPEN_ITEMS_FILE = "Charger un fichier d'objets";
+	CAN_SAVE_PROJECT = "Vous pouvez sauver le projet ou les objets en cours";
+	CAN_NOT_SAVE_PROJECT = "Vous ne pouvez pas sauver le projet ou les objets en cours";
+
+	// Abstract objects
+	EMPTY_CELL_NAME = KMADeMain.messages.getString("EMPTY_CELL_NAME");
+	NEW_ABSTRACT_OBJECT_TEXT = KMADeMain.messages.getString("NEW_ABSTRACT_OBJECT_TEXT");
+	REMOVE_ABSTRACT_OBJECT_TEXT = KMADeMain.messages.getString("REMOVE_ABSTRACT_OBJECT_TEXT");
+	NEW_OBJECT_NAME = KMADeMain.messages.getString("NEW_OBJECT_NAME");
+	NO_SELECTED_OBJECT = KMADeMain.messages.getString("NO_SELECTED_OBJECT");
+	GENERALITY = KMADeMain.messages.getString("GENERALITY");
+	ATTRIBUTES_NAME = KMADeMain.messages.getString("ATTRIBUTES_NAME");
+	ADD_ATTRIBUTE = KMADeMain.messages.getString("ADD_ATTRIBUTE");
+	REMOVE_ATTRIBUTE = KMADeMain.messages.getString("REMOVE_ATTRIBUTE");
+
+	// Concrete objects
+	EDIT_CONCRETE_OBJECT_ACTION_MESSAGE = KMADeMain.messages.getString("EDIT_CONCRETE_OBJECT_ACTION_MESSAGE");
+	EDIT_OBJECTS_ACTION_MESSAGE = KMADeMain.messages.getString("EDIT_OBJECTS_ACTION_MESSAGE");
+	OBJECT_INSERTION_ERROR = KMADeMain.messages.getString("OBJECT_INSERTION_ERROR");
+	NEW_GROUP_NAME = KMADeMain.messages.getString("NEW_GROUP_NAME");
+	NEW_STACK_ACTION_MESSAGE = KMADeMain.messages.getString("NEW_STACK_ACTION_MESSAGE");
+	NEW_SET_ACTION_MESSAGE = KMADeMain.messages.getString("NEW_SET_ACTION_MESSAGE");
+	NEW_ARRAY_ACTION_MESSAGE = KMADeMain.messages.getString("NEW_ARRAY_ACTION_MESSAGE");
+	NEW_LIST_ACTION_MESSAGE = KMADeMain.messages.getString("NEW_LIST_ACTION_MESSAGE");
+	NEW_SINGLETON_ACTION_MESSAGE = KMADeMain.messages.getString("NEW_SINGLETON_ACTION_MESSAGE");
+	EDIT_GROUP_ACTION_MESSAGE = KMADeMain.messages.getString("EDIT_GROUP_ACTION_MESSAGE");
+	EDIT_GROUP_AND_CONCRETE_ACTION_MESSAGE = KMADeMain.messages.getString("EDIT_GROUP_AND_CONCRETE_ACTION_MESSAGE");
+	DELETE_GROUP_AND_CONCRETE_ACTION_MESSAGE = KMADeMain.messages.getString("DELETE_GROUP_AND_CONCRETE_ACTION_MESSAGE");
     }
 }

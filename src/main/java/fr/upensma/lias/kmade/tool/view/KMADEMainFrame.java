@@ -71,6 +71,7 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessagePanel;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEInfoHTMLDialog;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
 import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
+import fr.upensma.lias.kmade.tool.view.worldobject.editorview.KMADEObjectDialogView;
 import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 import fr.upensma.lias.kmade.tool.viewadaptator.KMADeAdaptator;
 
@@ -143,8 +144,12 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 
     private KMADEEntityDialog entityDialog = new KMADEEntityDialog(this);
 
+  
     private KMADEFindReplaceDialog findReplaceDialog = new KMADEFindReplaceDialog(
 	    this);
+    
+    // ADDED by Joachim TROUVERIE
+    private KMADEObjectDialogView objectDialogView = new KMADEObjectDialogView(this);
 
     private final KMADEStatusBar myStatusBar = new KMADEStatusBar();
 
@@ -517,6 +522,7 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
     public KMADEPrintingDialog getPrintingFrame() {
 	return printingDialog;
     }
+    
 
     /**
      * @return Returns the aPPLICATION_TOOL_BAR.
@@ -608,6 +614,10 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 
     public KMADEEntityDialog getEntityDialog() {
 	return entityDialog;
+    }
+    
+    public KMADEObjectDialogView getObjectDialogView() {
+	return objectDialogView;
     }
 
     public void notifLocalisationModification() {
