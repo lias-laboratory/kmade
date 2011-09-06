@@ -19,9 +19,7 @@ package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import java.util.ArrayList;
 
-
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
