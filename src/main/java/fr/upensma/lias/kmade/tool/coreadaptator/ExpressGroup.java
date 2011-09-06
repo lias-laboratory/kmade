@@ -50,6 +50,16 @@ public class ExpressGroup {
 	g.setContientObj(ObjAbs);
 	return (oidG.get());
     }
+    
+    public static String createGroup() {
+	Oid oidG = InterfaceExpressJava.createEntity("metaobjet", "Groupe");
+	Groupe g = (Groupe) InterfaceExpressJava.prendre(oidG);
+
+	Oid oidLst = InterfaceExpressJava.createEntity("metaobjet", "ListeAg");
+	ListeAg lst = (ListeAg) InterfaceExpressJava.prendre(oidLst);
+	g.setEnsemble(lst);
+	return (oidG.get());
+    }
 
     public static void removeGroup(String oid) {
 	Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
