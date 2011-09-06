@@ -77,10 +77,10 @@ public class KMADEToolAbout extends JDialog implements LanguageFactory {
 		.getLabelCenter(KMADEToolConstant.TOOL_NAME + " "
 			+ KMADEConstant.VERSION_MESSAGE + " "
 			+ KMADEToolConstant.VERSION_VALUE));
-	panel_info.add(KMADEToolUtilities.getLabelCenter("2005 - 2010"));
+	panel_info.add(KMADEToolUtilities.getLabelCenter("2005 - 2011"));
 	panel_info
 		.add(KMADEToolUtilities
-			.getLabelCenter("INRIA Rocquencourt - Projet MErLIn - LISI ENSMA"));
+			.getLabelCenter("INRIA Rocquencourt - Projet MErLIn - LISI / ENSMA"));
 	panel_info.add(KMADEToolUtilities.getLabelCenter("France"));
 	mySouthPanel.add(panel_info, BorderLayout.CENTER);
 
