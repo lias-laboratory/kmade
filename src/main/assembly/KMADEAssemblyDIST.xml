@@ -14,7 +14,7 @@
 	</fileSets>
 	<files>
 		<file>
-			<source>${project.build.directory}/${project.artifactId}-${project.version}-dist.jar</source>
+			<source>${project.build.directory}/${project.artifactId}-${project.version}-jar.jar</source>
 			<destName>kmade.jar</destName>
 		</file>
 		<file>
