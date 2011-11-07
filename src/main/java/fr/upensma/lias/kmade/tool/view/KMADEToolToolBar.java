@@ -152,6 +152,8 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
     private AbstractAction aboutAction;
 
     private AbstractAction simulationAction;
+    
+    private AbstractAction prototypeAction;
 
     private AbstractAction statisticAction;
 
@@ -627,7 +629,22 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 	// **
 	myFileMenu = new JMenu(KMADEConstant.TOOLS_MENU_MESSAGE);
 	myMenuBar.add(myFileMenu);
+	
+	prototypeAction = new AbstractAction(KMADEConstant.PROTOTYPING_TOOL_MENU_TITLE) {
+	    
+	
+	    private static final long serialVersionUID = 353172974792966132L;
 
+	    public void actionPerformed(ActionEvent e) {
+		KMADeAdaptator.openPrototypeDialog();
+		
+	    }
+	};
+	prototypeAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.PROTOTYPING_TOOL_MENU_TOOLTIP);
+	prototypeAction.setEnabled(true);
+	myFileMenu.add(prototypeAction);
+	
+	
 	simulationAction = new AbstractAction(
 		KMADEConstant.SIMULATION_ACTION_MESSAGE) {
 	    private static final long serialVersionUID = -3565098144261030486L;
@@ -922,7 +939,7 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
      * this.getComponents(); boolean haveIt = false; for(Component cur:compo ){
      * if(cur.equals(EditorToolBar)){ haveIt = true; } } if(!haveIt){
      * this.add(EditorToolBar, BorderLayout.CENTER); } }else{
-     * System.err.println("testremove !s"); EditorToolBar.setVisible(false);
+     * KMADEHistoryMessageManager.printError("testremove !s"); EditorToolBar.setVisible(false);
      * this.getLayout().removeLayoutComponent(EditorToolBar); } }
      */
     public void setEnabledGrid() {

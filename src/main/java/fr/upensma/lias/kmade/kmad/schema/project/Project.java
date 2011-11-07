@@ -115,7 +115,7 @@ public class Project implements Entity {
 	}
 	// else{
 	// this.myGenInfo = new GeneralInformation();
-	// System.out.println("ah ba si");
+	// KMADEHistoryMessageManager.printMessage("ah ba si");
 	// }
 	// Interviews
 	if (p.hasAttribute("id-project-interview-list")) {

@@ -39,6 +39,7 @@ import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.expression.CurrentObject;
 import fr.upensma.lias.kmade.kmad.schema.tache.CurrentEvents;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
 
 /**
@@ -146,20 +147,20 @@ public class InterfaceExpressJava {
 	try {
 	    entity = Class.forName(classe);
 	} catch (ClassNotFoundException e) {
-	    System.err.println(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
+		KMADEHistoryMessageManager.printlnError(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
 		    + " : " + classe);
-	    System.err.println(e.getMessage());
+	    KMADEHistoryMessageManager.printlnError(e.getMessage());
 	}
 
 	Object object = null;
 	try {
 	    object = entity.newInstance();
 	} catch (InstantiationException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	} catch (IllegalAccessException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	} catch (IllegalArgumentException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	}
 
 	Oid oid = MY_CLIP_BOARD.put(object);
@@ -187,7 +188,7 @@ public class InterfaceExpressJava {
 	} catch (ClassNotFoundException e) {
 	    System.err.print(ExpressConstant.ENTITY_NO_EXIST_PROBLEM_MESSAGE
 		    + " : " + classe);
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	}
 
 	Iterator<?> i;
@@ -219,20 +220,20 @@ public class InterfaceExpressJava {
 	try {
 	    entity = Class.forName(classe);
 	} catch (ClassNotFoundException e) {
-	    System.err.println(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
+	    KMADEHistoryMessageManager.printlnError(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
 		    + classe);
-	    System.err.println(e.getMessage());
+	    KMADEHistoryMessageManager.printlnError(e.getMessage());
 	}
 
 	Object object = null;
 	try {
 	    object = entity.newInstance();
 	} catch (InstantiationException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	} catch (IllegalAccessException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	} catch (IllegalArgumentException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	}
 
 	Oid oid = bdd.put(object);
@@ -257,20 +258,20 @@ public class InterfaceExpressJava {
 	try {
 	    entity = Class.forName(classe);
 	} catch (ClassNotFoundException e) {
-	    System.err.println(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
+	    KMADEHistoryMessageManager.printlnError(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
 		    + classe);
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	}
 
 	Object object = null;
 	try {
 	    object = entity.newInstance();
 	} catch (InstantiationException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	} catch (IllegalAccessException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	} catch (IllegalArgumentException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	}
 
 	Oid oid = bdd.put(object);
@@ -285,9 +286,9 @@ public class InterfaceExpressJava {
 	    widthField = entity.getField("oid");
 	    widthField.set(object, (Oid) valeur);
 	} catch (NoSuchFieldException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	} catch (IllegalAccessException e) {
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	}
     }
 
@@ -331,7 +332,7 @@ public class InterfaceExpressJava {
 	} catch (ClassNotFoundException e) {
 	    System.err.print(ExpressConstant.ENTITY_NO_EXIST_PROBLEM_MESSAGE
 		    + " : " + classe);
-	    System.err.println(e);
+	    KMADEHistoryMessageManager.printlnError(e);
 	}
 
 	Iterator<?> i;
@@ -352,7 +353,7 @@ public class InterfaceExpressJava {
 	for (i = set.iterator(); i.hasNext();) {
 	    Oid oid = i.next();
 	    Object o = bdd.prendre(oid);
-	    System.out.println(((Entity) o).toSPF());
+	    KMADEHistoryMessageManager.printlnMessage(((Entity) o).toSPF());
 	}
     }
 
@@ -587,7 +588,7 @@ public class InterfaceExpressJava {
 	    } else if (ch[0].equalsIgnoreCase("NULL")) {
 		lesArgs[compteur] = null;
 	    } else {
-		System.err.println("Type inconnu :" + ch[0]);
+		KMADEHistoryMessageManager.printlnError("Type inconnu :" + ch[0]);
 		System.exit(0);
 	    }
 	    compteur++;

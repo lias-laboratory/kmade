@@ -27,6 +27,7 @@ import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.Iteration;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.MyIteration;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.ParseException;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.TokenMgrError;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEObservable;
 import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
 
@@ -88,8 +89,7 @@ public final class ExpressIteration {
 	SwingWorker worker = new SwingWorker() {
 	    public Object construct() {
 		Tache[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
-		System.out.println();
-		System.out.println(KMADEConstant.CHECK_ALL_ITERATIONS);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CHECK_ALL_ITERATIONS);
 		for (int i = 0; i < tacheToBeCreated.length
 			&& !ExpressIteration.isCanceled(); i++) {
 		    String iteration = tacheToBeCreated[i].getIteExpression()
@@ -103,8 +103,7 @@ public final class ExpressIteration {
 		    try {
 			NodeExpression ref = parser.expression();
 			if (ref == null) {
-			    System.out
-				    .println(KMADEConstant.PARSER_PROBLEM_MESSAGE);
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PARSER_PROBLEM_MESSAGE);
 			    ExpressIteration.setIteration(tacheToBeCreated[i],
 				    null);
 			} else {
@@ -113,8 +112,7 @@ public final class ExpressIteration {
 				    ref);
 			}
 		    } catch (SemanticException e) {
-			System.out
-				.println(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -125,8 +123,7 @@ public final class ExpressIteration {
 			ExpressIteration
 				.setIteration(tacheToBeCreated[i], null);
 		    } catch (ParseException e) {
-			System.out
-				.println(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -137,8 +134,7 @@ public final class ExpressIteration {
 			ExpressIteration
 				.setIteration(tacheToBeCreated[i], null);
 		    } catch (TokenMgrError e) {
-			System.out
-				.println(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -149,8 +145,7 @@ public final class ExpressIteration {
 			ExpressIteration
 				.setIteration(tacheToBeCreated[i], null);
 		    } catch (Error e) {
-			System.out
-				.println(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -164,8 +159,7 @@ public final class ExpressIteration {
 		}
 
 		if (!ExpressIteration.isCanceled()) {
-		    System.out
-			    .println(KMADEConstant.ITERATION_CHECKED_AND_BUILT_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_CHECKED_AND_BUILT_MESSAGE);
 		    ExpressIteration.done = true;
 		}
 		return null;

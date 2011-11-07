@@ -98,7 +98,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	this.sonPort = new KMADEDefaultPort("son");
 	this.add(motherPort);
 	this.add(sonPort);
-	// System.out.println("methode gettask"+getTask().getLabelName());
+	// KMADEHistoryMessageManager.printMessage("methode gettask"+getTask().getLabelName());
 
 	Map<Object, Object> map = new Hashtable<Object, Object>();
 	

@@ -36,6 +36,7 @@ import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.MyEffetsDeBord;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.ParseException;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.TokenMgrError;
 import fr.upensma.lias.kmade.tool.view.taskproperties.KMADEEditorPrePostIterDialog;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -64,7 +65,7 @@ public final class EffetsDeBordAdaptator {
 		new NumberValue(t);
 	    } catch (NumberFormatException e) {
 		e.printStackTrace();
-		System.out.println(KMADEConstant.STRING_TO_NUMBER);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.STRING_TO_NUMBER);
 		return;
 	    }
 	} else if (l.equals(TypeStructure.STRING_STRUCT.getValue())) {
@@ -75,7 +76,7 @@ public final class EffetsDeBordAdaptator {
 
     public static void loadConcreteHistory(int indice) {
 	if (indice == -1) {
-	    System.out.println(KMADEConstant.NO_SELECTED_HISTORIC_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_SELECTED_HISTORIC_MESSAGE);
 	    return;
 	}
 	if (ExpressHistory.loadConcreteHistoryAt(indice)) {
@@ -83,10 +84,10 @@ public final class EffetsDeBordAdaptator {
 	    // partie "Objet Concret" d'une modification.
 	    // Est-ce utile?
 	    ConcreteObjectPanelAdaptator.updateConcreteObjectView();
-	    System.out.println(KMADEConstant.HISTORIC_LOADED_MESSAGE);
+	    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.HISTORIC_LOADED_MESSAGE);
 	} else {
 	    // Erreur.
-	    System.out.println(KMADEConstant.HISTORIC_NO_LOADED_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.HISTORIC_NO_LOADED_MESSAGE);
 	}
     }
 
@@ -101,7 +102,7 @@ public final class EffetsDeBordAdaptator {
 
     public static void removeConcreteHistory(int indice) {
 	if (indice == -1) {
-	    System.out.println(KMADEConstant.NO_SELECTED_HISTORIC_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_SELECTED_HISTORIC_MESSAGE);
 	    return;
 	}
 	ExpressHistory.removeExpressHistoryAt(indice);
@@ -122,13 +123,13 @@ public final class EffetsDeBordAdaptator {
     }
 
     public static void checkEffetsDeBord(String text) {
-	System.out.print(KMADEConstant.CHECK_ACTION_MESSAGE + " : ");
+    	KMADEHistoryMessageManager.printMessage(KMADEConstant.CHECK_ACTION_MESSAGE + " : ");
 	EffetsDeBordAdaptator.checkEffetsDeBordBuilder(text);
 	EffetsDeBordAdaptator.initEffetsDeBord();
     }
 
     public static void evaluateEffetsDeBord(String text) {
-	System.out.print(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
+    	KMADEHistoryMessageManager.printMessage(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
 	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 
@@ -155,15 +156,15 @@ public final class EffetsDeBordAdaptator {
 		    .setConcreteObjectName(
 			    ExpressEffetsDeBord.getCurrentObject().toString());
 	    InterfaceExpressJava.clearHistoryMessage();
-	    System.out.println(KMADEConstant.EFFETSDEBORD_EVAL_OK_MESSAGE);
+	    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_EVAL_OK_MESSAGE);
 	} catch (SemanticErrorException e) {
-	    System.out.println(KMADEConstant.EFFETSDEBORD_EVAL_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_EVAL_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " , "
 		    + e.getMessage());
 	} catch (SemanticUnknownException e) {
-	    System.out.println(KMADEConstant.EFFETSDEBORD_EVAL_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_EVAL_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.MISSING_USER_VALUE_MESSAGE + " , "
 		    + e.getMessage());
 	} catch (SemanticException e) {
@@ -184,31 +185,31 @@ public final class EffetsDeBordAdaptator {
 	try {
 	    NodeExpression ref = parser.expression();
 	    if (ref == null) {
-		System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 			+ KMADEConstant.PARSER_PROBLEM_MESSAGE);
 		ExpressEffetsDeBord.setEffetsDeBord(myCurrentTask, null);
 	    } else {
 		ref.checkNode();
 		ExpressEffetsDeBord.setEffetsDeBord(myCurrentTask, ref);
-		System.out.println(KMADEConstant.EFFETSDEBORD_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_OK_MESSAGE);
 	    }
 	} catch (SemanticException e) {
-	    System.out.println(KMADEConstant.EFFETSDEBORD_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " : "
 		    + e.getMessage());
 	    ExpressEffetsDeBord.setEffetsDeBord(myCurrentTask, null);
 	    return;
 	} catch (ParseException e) {
-	    System.out.println(KMADEConstant.EFFETSDEBORD_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_NO_OK_MESSAGE);
+	    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SYNTAXICAL_ERROR_MESSAGE + " : "
 		    + e.getMessage());
 	    ExpressEffetsDeBord.setEffetsDeBord(myCurrentTask, null);
 	    return;
 	} catch (TokenMgrError e) {
-	    System.out.println(KMADEConstant.EFFETSDEBORD_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.LEXICAL_ERROR_MESSAGE + " : "
 		    + e.getMessage());
 	    ExpressEffetsDeBord.setEffetsDeBord(myCurrentTask, null);
@@ -216,8 +217,8 @@ public final class EffetsDeBordAdaptator {
 	} catch (Error e) {
 	    // Erreur normalement qui doit venir de AttributExpressExpression ou
 	    // GroupExpressExpression
-	    System.out.println(KMADEConstant.EFFETSDEBORD_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " : "
 		    + e.getMessage());
 	    ExpressEffetsDeBord.setEffetsDeBord(myCurrentTask, null);

@@ -19,6 +19,8 @@ package fr.upensma.lias.kmade.kmad.schema;
 
 import java.io.Serializable;
 
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
+
 /**
  * @author Vincent LUCQUIAUD et Mickael BARON
  */
@@ -39,7 +41,7 @@ public class Oid implements Comparable<Object>, Serializable {
     public Oid(String st) {
     	//Previous and actual version of the dtd
 	if (st.charAt(0) != '#' && st.charAt(0) != 'K') {
-	    System.err.println("Erreur dans chaine pour oid st=" + st);
+	    KMADEHistoryMessageManager.printlnError("Erreur dans chaine pour oid st=" + st);
 	}
 	Integer in = Integer.valueOf(Integer.parseInt(st.substring(1)));
 	numoid = in.intValue();

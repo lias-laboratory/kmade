@@ -21,6 +21,7 @@ import org.w3c.dom.Document;
 
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -50,12 +51,12 @@ public class EnumValue extends ValeurType implements Entity {
     }
 
     public void setEnumeration(Enumeration e) {
-	System.out.println(e);
+    	KMADEHistoryMessageManager.printlnMessage(e.toString());
 	this.enumere = e;
     }
 
     public void setElement(Element e) {
-	System.out.println(e);
+    	KMADEHistoryMessageManager.printlnMessage(e.toString());
 	this.element = e;
     }
 

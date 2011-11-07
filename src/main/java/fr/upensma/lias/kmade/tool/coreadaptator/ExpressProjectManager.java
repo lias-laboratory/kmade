@@ -24,6 +24,7 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.project.GeneralInformation;
 import fr.upensma.lias.kmade.kmad.schema.project.InterviewIndex;
 import fr.upensma.lias.kmade.kmad.schema.project.Project;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -60,7 +61,7 @@ public class ExpressProjectManager {
 
     public static void displayProjectManagerSPF(String oid) {
 	Project m = (Project) InterfaceExpressJava.prendre(new Oid(oid));
-	System.out.println(m.toSPF());
+	KMADEHistoryMessageManager.printlnMessage(m.toSPF());
     }
 
     public static String createInterviewIndex(Oid oidProject) {

@@ -24,6 +24,7 @@ import java.util.TreeMap;
 
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -123,7 +124,7 @@ public class ExpressDB extends TreeMap<Oid, Object> implements Serializable {
 	for (i = set.iterator(); i.hasNext();) {
 	    Oid oid = (Oid) i.next();
 	    Object o = this.prendre(oid);
-	    System.out.println(((Entity) o).toSPF());
+	    KMADEHistoryMessageManager.printlnMessage(((Entity) o).toSPF());
 	}
     }
     

@@ -30,6 +30,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -221,10 +222,10 @@ public class Label implements Entity {
 		if (nodeListEvent.item(i).getNodeType() == Element.ELEMENT_NODE) {
 		    Node node = nodeListEvent.item(i);
 		    if (node.getNodeName().equals("label-color-red")) {
-			System.out.println(node.getTextContent());
+		    	KMADEHistoryMessageManager.printlnMessage(node.getTextContent());
 			try {
 			    red = Integer.parseInt(node.getTextContent());
-			    System.out.println(node.getTextContent());
+			    KMADEHistoryMessageManager.printlnMessage(node.getTextContent());
 			} catch (Exception e) {
 			    red = 255;
 			}

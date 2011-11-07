@@ -29,6 +29,7 @@ import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.EffetsDeBord;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.MyEffetsDeBord;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.ParseException;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.TokenMgrError;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEObservable;
 import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
 
@@ -79,8 +80,7 @@ public class ExpressEffetsDeBord {
 	SwingWorker worker = new SwingWorker() {
 	    public Object construct() {
 		Tache[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
-		System.out.println();
-		System.out.println(KMADEConstant.CHECK_ALL_EFFETSDEBORDS);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CHECK_ALL_EFFETSDEBORDS);
 		for (int i = 0; i < tacheToBeCreated.length
 			&& !ExpressEffetsDeBord.isCanceled(); i++) {
 		    String effetsdebord = tacheToBeCreated[i]
@@ -94,8 +94,7 @@ public class ExpressEffetsDeBord {
 		    try {
 			NodeExpression ref = parser.expression();
 			if (ref == null) {
-			    System.out
-				    .println(KMADEConstant.PARSER_PROBLEM_MESSAGE);
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PARSER_PROBLEM_MESSAGE);
 			    ExpressEffetsDeBord.setEffetsDeBord(
 				    tacheToBeCreated[i], null);
 			} else {
@@ -104,8 +103,7 @@ public class ExpressEffetsDeBord {
 				    tacheToBeCreated[i], ref);
 			}
 		    } catch (SemanticException e) {
-			System.out
-				.println(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -116,8 +114,7 @@ public class ExpressEffetsDeBord {
 			ExpressEffetsDeBord.setEffetsDeBord(
 				tacheToBeCreated[i], null);
 		    } catch (ParseException e) {
-			System.out
-				.println(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -128,8 +125,7 @@ public class ExpressEffetsDeBord {
 			ExpressEffetsDeBord.setEffetsDeBord(
 				tacheToBeCreated[i], null);
 		    } catch (TokenMgrError e) {
-			System.out
-				.println(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -140,8 +136,7 @@ public class ExpressEffetsDeBord {
 			ExpressEffetsDeBord.setEffetsDeBord(
 				tacheToBeCreated[i], null);
 		    } catch (Error e) {
-			System.out
-				.println(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -155,8 +150,7 @@ public class ExpressEffetsDeBord {
 		}
 
 		if (!ExpressEffetsDeBord.isCanceled()) {
-		    System.out
-			    .println(KMADEConstant.EFFETSDEBORD_CHECKED_AND_BUILT_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_CHECKED_AND_BUILT_MESSAGE);
 		    ExpressEffetsDeBord.done = true;
 		}
 		return null;

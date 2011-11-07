@@ -375,7 +375,7 @@ public class AttributAbstrait implements Entity {
     }
 
     @Override
-    public boolean oidIsAnyMissing2(Element p) throws Exception {
+    public boolean oidIsAnyMissing2(Element p){
 	// TODO Auto-generated method stub
 	String userValue = p.getAttribute("id-abstractattribut-abstractobject");
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {

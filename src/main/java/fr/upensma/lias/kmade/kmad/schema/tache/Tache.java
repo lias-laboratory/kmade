@@ -104,10 +104,12 @@ public class Tache implements Entity {
 
     private boolean motherUsed = false;
 
-    // Cet attribut permet de retrouver plus rapidement la ta�che graphique.
+    // Cet attribut permet de retrouver plus rapidement la taï¿½che graphique.
     private Object refJTask = null;
 
     private StateSimulation stateSimulation;
+    
+    private StateExecution stateExecution;
 
     /**
      * Creation d'une tache avec des valeurs par defaut.
@@ -144,7 +146,7 @@ public class Tache implements Entity {
     }
 
     /**
-     * Création d'une nouvelle tâche avec des valeurs imposées.
+     * CrÃ©ation d'une nouvelle tÃ¢che avec des valeurs imposÃ©es.
      * 
      * @param name
      * @param but
@@ -341,7 +343,7 @@ public class Tache implements Entity {
 
     /**
      * @param sensOrCogn
-     *            : 0 pas de modalit�, 1 Sensori-motrice, 2 Cognitive
+     *            : 0 pas de modalitï¿½, 1 Sensori-motrice, 2 Cognitive
      */
     public void setModal(int sensOrCogn) {
 	if (sensOrCogn == 0)
@@ -571,20 +573,20 @@ public class Tache implements Entity {
     }
 
     /**
-     * Cette m�thode permet de supprimer une sous-t�che.
+     * Cette mï¿½thode permet de supprimer une sous-tï¿½che.
      * 
      * @param tachefils
      * @return
      */
     public ArrayList<Tache> removeSubTask(Tache tachefils) {
-	// 1. supprimer la reference à la tâche mere
+	// 1. supprimer la reference Ã  la tÃ¢che mere
 	// 2. supprimer la reference aux taches filles
 	// 3. modifier le numero de chaque tache fille
-	// 4. verifier le numero des t�ches soeurs
+	// 4. verifier le numero des tï¿½ches soeurs
 
 	ArrayList<Tache> numeroTacheModifie = new ArrayList<Tache>();
 
-	// A. traitement des nouveaux sous-arbres g�r�n�s par la
+	// A. traitement des nouveaux sous-arbres gï¿½rï¿½nï¿½s par la
 	// suppression
 	// 2. supprimer la reference aux taches filles
 	tachefils.mere = null;
@@ -593,11 +595,11 @@ public class Tache implements Entity {
 	tachefils.setDeriveTaskNumero(0);
 	numeroTacheModifie.add(tachefils);
 
-	// B. traitement des soeurs de la tache supprim�e
-	// 1. supprimer la reference � la t�che mere
+	// B. traitement des soeurs de la tache supprimï¿½e
+	// 1. supprimer la reference ï¿½ la tï¿½che mere
 	this.fils.remove(tachefils);
 	// if (this.fils.size() == 0) this.fils = null;
-	// 4. verifier le numero des t�ches soeurs
+	// 4. verifier le numero des tï¿½ches soeurs
 	// setDeriveNumero(0, this.mere );
 	// numeroTacheModifie.add( this.mere );
 
@@ -605,25 +607,25 @@ public class Tache implements Entity {
     }
 
     /**
-     * Cette méthode permet de supprimer une tâche et ses liens si
-     * nécessaire.
+     * Cette mÃ©thode permet de supprimer une tÃ¢che et ses liens si
+     * nÃ©cessaire.
      * 
      * @return
      */
     public ArrayList<Tache> removeTask() {
-	// 1. Supprimer la reference à la tâche mere
+	// 1. Supprimer la reference Ã  la tÃ¢che mere
 	// 2. Supprimer la reference aux taches filles
 	// 3. Modifier le numero de chaque tache fille
-	// 4. Vérifier le numero des tâches soeurs
+	// 4. VÃ©rifier le numero des tÃ¢ches soeurs
 	// 5. Supprimer Point
-	// 6. Supprimer relation avec les événements
+	// 6. Supprimer relation avec les Ã©vÃ©nements
 	// 7. Supprimer relation avec les utilisateurs
-	// 8. Supprimer relation avec le libellé
+	// 8. Supprimer relation avec le libellÃ©
 	// 9. Supprimer la tache
 
 	ArrayList<Tache> numeroTacheModifie = new ArrayList<Tache>();
 
-	// A Traitement des nouveaux sous-arbres gérénés par la suppression
+	// A Traitement des nouveaux sous-arbres gÃ©rÃ©nÃ©s par la suppression
 	int taille = this.fils.size();
 	for (int i = 0; i < taille; i++) {
 	    Tache t = (Tache) this.fils.get(i);
@@ -635,11 +637,11 @@ public class Tache implements Entity {
 	    numeroTacheModifie.add(t);
 	}
 
-	// B. traitement des soeurs de la tache supprimée
+	// B. traitement des soeurs de la tache supprimÃ©e
 	if (this.mere != null) {
-	    // 1. supprimer la reference à la tâche mere
+	    // 1. supprimer la reference Ã  la tÃ¢che mere
 	    this.mere.fils.remove(this);
-	    // 4. verifier le numero des t�ches soeurs
+	    // 4. verifier le numero des tï¿½ches soeurs
 	    this.mere.setDeriveTaskNumero(0);
 	    numeroTacheModifie.add(this.mere);
 	}
@@ -647,7 +649,7 @@ public class Tache implements Entity {
 	// 5. supprimer Point
 	InterfaceExpressJava.remove(this.point.oid);
 
-	// 6. Supprimer relation avec les événements.
+	// 6. Supprimer relation avec les Ã©vÃ©nements.
 	if (this.declencheur != null) {
 	    this.declencheur.removeInverseTache(this);
 	}
@@ -675,7 +677,7 @@ public class Tache implements Entity {
     }
 
     /*
-     * Donne le num�ro de la tache selon son positionnement dans les fils
+     * Donne le numéro de la tache selon son positionnement dans les fils
      */
     private static int place(Tache leFils, Tache laMere) {
 	int pointX = (leFils.point.x).intValue();
@@ -724,9 +726,9 @@ public class Tache implements Entity {
     }
 
     /**
-     * revoie les oids � mettre � jours si il y a eu des modification dans
-     * la numerotation d'une tâche mère valable pour le "collage" et le
-     * "décollage"
+     * revoie les oids ï¿½ mettre ï¿½ jours si il y a eu des modification dans
+     * la numerotation d'une tÃ¢che mÃ¨re valable pour le "collage" et le
+     * "dÃ©collage"
      * 
      * @param x
      * @param y
@@ -763,9 +765,9 @@ public class Tache implements Entity {
 	return this.numero + " - " + name;
     }
 
-    // attention il ne faut pas utilis� le tag postcondition pour les
+    // attention il ne faut pas utilisï¿½ le tag postcondition pour les
     // postcondition de la V2 !
-    // ils sont r�server aux effets de bord de la v1!
+    // ils sont rï¿½server aux effets de bord de la v1!
     public org.w3c.dom.Element toXML(Document doc) {
 
 	Element racine = doc.createElement("task");
@@ -939,9 +941,9 @@ public class Tache implements Entity {
 	    racine.appendChild(kmadElement);
 	}
 
-	// attention il ne faut pas utilis� le tag postcondition pour les
+	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
 	// postcondition de la V2 !
-	// ils sont r�server aux effets de bord de la v1!
+	// ils sont rï¿½server aux effets de bord de la v1!
 	// EffetsDeBord
 	kmadElement = doc.createElement("task-effetsdebord");
 	kmadElement.setTextContent(this.effetsDeBordExpression.getName());
@@ -1233,7 +1235,7 @@ public class Tache implements Entity {
 	    this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList
 		    .item(0).getTextContent());
 	}
-	// attention il ne faut pas utilis� le tag postcondition pour les
+	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-postcondition");
 	if (nodeList.item(0) != null) {
@@ -1241,7 +1243,7 @@ public class Tache implements Entity {
 		    .item(0).getTextContent());
 	}
 
-	// attention il ne faut pas utilis� le tag postcondition pour les
+	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-descriptionpostcondition");
 	if (nodeList.item(0) != null) {
@@ -1374,7 +1376,7 @@ public class Tache implements Entity {
     }
 
     /**
-     * Cette m�thode retourne le point de la t�che.
+     * Cette mï¿½thode retourne le point de la tï¿½che.
      * 
      * @return Returns the point.
      */
@@ -1383,7 +1385,7 @@ public class Tache implements Entity {
     }
 
     /**
-     * Cette m�thode modifie le point de la t�che.
+     * Cette mï¿½thode modifie le point de la tï¿½che.
      * 
      * @param point
      *            The point to set.
@@ -1594,6 +1596,16 @@ public class Tache implements Entity {
 	}
     }
 
+
+    public void setStateExecution(StateExecution stateExecution) {
+	this.stateExecution = stateExecution;
+    }
+
+    public StateExecution getStateExecution() {
+	return stateExecution;
+    }
+
+
     /**
      * Same as "toXML" method adapted to the new dtd
      * 
@@ -1777,6 +1789,10 @@ public class Tache implements Entity {
      */
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
+        this.lstEvent.clear();
+        this.acteurs.clear();
+        this.acteurSysteme.clear();
+        this.fils.clear();
 	this.oid = new Oid(p.getAttribute("idkmad"));
 	// Media
 	if (p.hasAttribute("id-task-media)"))
@@ -1784,14 +1800,12 @@ public class Tache implements Entity {
 		    .getAttribute("id-task-media")));
 	// Triggering Event
 	if (p.hasAttribute("id-task-eventtrigger"))
-	    this.declencheur = (Evenement) InterfaceExpressJava.bdd
-		    .prendre(new Oid(p.getAttribute("id-task-eventtrigger")));
+	    this.declencheur = (Evenement) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-task-eventtrigger")));
 	// Generated Events
 	if (p.hasAttribute("id-task-events-list")) {
 	    String[] events = p.getAttribute("id-task-events-list").split(" ");
 	    for (int i = 0; i < events.length; i++) {
-		Evenement event = (Evenement) InterfaceExpressJava.bdd
-			.prendre(new Oid(events[i]));
+		Evenement event = (Evenement) InterfaceExpressJava.bdd.prendre(new Oid(events[i]));
 		this.lstEvent.add(event);
 		event.addInverseTache(this);
 	    }
@@ -1800,8 +1814,7 @@ public class Tache implements Entity {
 	if (p.hasAttribute("id-task-actors-list")) {
 	    String[] actors = p.getAttribute("id-task-actors-list").split(" ");
 	    for (int i = 0; i < actors.length; i++) {
-		this.addActeur((Acteur) InterfaceExpressJava.bdd
-			.prendre(new Oid(actors[i])));
+		this.addActeur((Acteur) InterfaceExpressJava.bdd.prendre(new Oid(actors[i])));
 		this.acteurs.get(i).setInverseTache(this);
 	    }
 	}
@@ -1815,7 +1828,7 @@ public class Tache implements Entity {
 		this.acteurSysteme.get(i).setInverseTache(this);
 	    }
 	}
-	// Point
+	// Point (coordonnée)
 	if (p.hasAttribute("id-task-point"))
 	    this.point = (Point) InterfaceExpressJava.bdd.prendre(new Oid(p
 		    .getAttribute("id-task-point")));
@@ -1837,7 +1850,8 @@ public class Tache implements Entity {
 		}
 	    }
 	}
-
+	
+	
 	// Label
 	if (p.hasAttribute("id-task-label"))
 	    this.label = (Label) InterfaceExpressJava.bdd.prendre(new Oid(p
@@ -1915,14 +1929,14 @@ public class Tache implements Entity {
 	    this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList
 		    .item(0).getTextContent());
 	}
-	// attention il ne faut pas utilis� le tag postcondition pour les
+	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-postcondition");
 	if (nodeList.item(0) != null) {
 	    this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList
 		    .item(0).getTextContent());
 	}
-	// attention il ne faut pas utilis� le tag postcondition pour les
+	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-descriptionpostcondition");
 	if (nodeList.item(0) != null) {
@@ -1945,6 +1959,7 @@ public class Tache implements Entity {
 	    this.iteExpression
 		    .setDescription(nodeList.item(0).getTextContent());
 	}
+
     }
 
     /**
@@ -2009,7 +2024,7 @@ public class Tache implements Entity {
 	if (p.hasAttribute("id-task-point")) {
 	    String nodeList = p.getAttribute("id-task-point");
 	    if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
-		return true;
+	    	return false;
 	    }
 	}
 	// Label
@@ -2024,5 +2039,6 @@ public class Tache implements Entity {
 	return false;
 
     }
+
 
 }

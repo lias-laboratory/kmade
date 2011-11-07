@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.viewadaptator;
 
 import java.awt.Point;
@@ -26,6 +26,7 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import quicktime.QTSession;
 import fr.upensma.lias.kmade.KMADeMain;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
@@ -38,8 +39,7 @@ import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.KMADEStartDialog;
 import fr.upensma.lias.kmade.tool.view.KMADEToolProjectSplashScreenShadow;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEFileChooser;
-
-import quicktime.QTSession;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -153,14 +153,14 @@ public final class KMADeAdaptator {
 		KMADeAdaptator.cleanAllAdaptateur();
 		InterfaceExpressJava.readOIDFromFile(myFile);
 	    } catch (Exception e) {
-		System.out.println("erreur");
+		KMADEHistoryMessageManager.printlnMessage("erreur");
 		return;
 	    }
 	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
-		    .goReadSPF(false, "");
+	    .goReadSPF(false, "");
 	    GraphicEditorAdaptator.enabledMainFrameAfterEdition();
 	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
-		    .setVisible(false);
+	    .setVisible(false);
 	    openSimulationDialog();
 	}
     }
@@ -174,11 +174,7 @@ public final class KMADeAdaptator {
 	ObjectDialogViewAdaptator.openObjectViewDialog();
     }
 
-    public static void openSimulationDialog() {
-	// Avant d'ouvrir le module simulation il faut vï¿½rifier s'il n'existe
-	// pas d'erreur
-	// /!\ Problï¿½me la mise ï¿½ jour des valeurs ne se fait que si la boite de
-	// dialogue de cohï¿½rence a ï¿½tï¿½ ouverte
+    private static boolean coherenceBeforeTool(){
 	int erreur = CoherenceAdaptator.getErrorMessageCount();
 	int warning = CoherenceAdaptator.getWarningMessageCount();
 	if (erreur != 0) {
@@ -200,10 +196,27 @@ public final class KMADeAdaptator {
 		    new ImageIcon(GraphicEditorAdaptator.class
 			    .getResource(KMADEConstant.INFO_DIALOG_IMAGE)));
 	    KMADeAdaptator.openCoherenceDialog();
-	    return;
+	    return false;
+	}else{
+	    return true;
 	}
-	GraphicEditorAdaptator.clearSelection();
-	SimulationAdaptator.openSimulationDialog();
+    }
+
+    public static void openSimulationDialog() {
+	// Avant d'ouvrir le module simulation il faut vï¿½rifier s'il n'existe
+	// pas d'erreur
+	if(coherenceBeforeTool()){
+	    GraphicEditorAdaptator.clearSelection();
+	    SimulationAdaptator.openSimulationDialog();
+	}
+
+    }
+
+    public static void openPrototypeDialog() {
+	if(coherenceBeforeTool()){
+	    PrototypeAdaptator.openPrototypeDialog();
+	}
+
     }
 
     public static void noToExistProject() {
@@ -261,31 +274,30 @@ public final class KMADeAdaptator {
 
     public static void closeProject() {
 	KMADeAdaptator
-		.doSaveProjectBeforeClose(KMADEConstant.WRITE_BEFORE_CLOSE_PROJECT_MESSAGE);
+	.doSaveProjectBeforeClose(KMADEConstant.WRITE_BEFORE_CLOSE_PROJECT_MESSAGE);
     }
 
     public static void showPreferences() {
 	GraphicEditorAdaptator.getMainFrame().getPreferencesDialog()
-		.setVisible(true);
+	.setVisible(true);
     }
 
     public static void hidePreferences() {
 	GraphicEditorAdaptator.getMainFrame().getPreferencesDialog()
-		.setVisible(false);
+	.setVisible(false);
     }
 
     public static void loadProjectXML() {
 	// Avant d'ouvrir demander si le projet courant doit ï¿½tre sauvegardï¿½.
 	if (InterfaceExpressJava.isBddSet()) {
 	    int value = KMADeAdaptator
-		    .askToSaveBeforeAction(KMADEConstant.WRITE_BEFORE_OPEN_PROJECT_MESSAGE);
+	    .askToSaveBeforeAction(KMADEConstant.WRITE_BEFORE_OPEN_PROJECT_MESSAGE);
 	    if (value == JOptionPane.YES_OPTION) {
 		// On peut sauvegarder avant
 		KMADeAdaptator.saveProjectXML();
 	    } else if (value == JOptionPane.CANCEL_OPTION) {
 		// Pas de chargement on arrï¿½te
-		System.out
-			.println(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
 		return;
 	    }
 	}
@@ -300,9 +312,9 @@ public final class KMADeAdaptator {
 	    GraphicEditorAdaptator.initMainFrame();
 
 	    // Loading
-	    ExpressKMADXML.loadKMAD(myCurrentFile);
-	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
-		    .readKMADFromXMLFile();
+	    ExpressKMADXML.loadKMADModel(myCurrentFile);
+	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog().readKMADFromXMLFile();
+	    
 	}
 	updateThread = true;
     }
@@ -323,9 +335,9 @@ public final class KMADeAdaptator {
 	} else {
 	    File myCurrentFile = new File(fileName);
 	    if (myCurrentFile != null) {
-		ExpressKMADXML.saveKMAD(myCurrentFile.getAbsolutePath());
+		ExpressKMADXML.saveKMADModel(myCurrentFile.getAbsolutePath());
 		GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
-			.writeKMADModelFromXMLFile();
+		.writeKMADModelFromXMLFile();
 	    }
 	}
     }
@@ -333,9 +345,9 @@ public final class KMADeAdaptator {
     public static void saveProjectXMLAs() {
 	String myCurrentFile = KMADEFileChooser.saveKMADModelXMLFile();
 	if (myCurrentFile != null) {
-	    ExpressKMADXML.saveKMAD(myCurrentFile);
+	    ExpressKMADXML.saveKMADModel(myCurrentFile);
 	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
-		    .writeKMADModelFromXMLFile();
+	    .writeKMADModelFromXMLFile();
 	}
     }
     /**
@@ -351,8 +363,7 @@ public final class KMADeAdaptator {
     		KMADeAdaptator.saveItemsXML();
     	    } else if (value == JOptionPane.CANCEL_OPTION) {
     		// Pas de chargement on arrï¿½te
-    		System.out
-    			.println(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
+    	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
     		return;
     	    }
     	}
@@ -364,7 +375,7 @@ public final class KMADeAdaptator {
     	    KMADeAdaptator.cleanItems();
 
     	    // Loading
-    	    ExpressKMADXML.loadKMAD(myCurrentFile);
+    	    ExpressKMADXML.loadKMADModel(myCurrentFile);
     	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
     		    .readKMADFromXMLFile();
     	    if(GraphicEditorAdaptator.getMainFrame().getObjectDialogView().isVisible())
@@ -383,7 +394,7 @@ public final class KMADeAdaptator {
     	} else {
     	    File myCurrentFile = new File(fileName);
     	    if (myCurrentFile != null) {
-    		ExpressKMADXML.saveKMAD(myCurrentFile.getAbsolutePath());
+    		ExpressKMADXML.saveKMADModel(myCurrentFile.getAbsolutePath());
     		GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
     			.writeKMADItemsFromXMLFile();
     	    }
@@ -395,7 +406,7 @@ public final class KMADeAdaptator {
     public static void saveItemsXMLAs(){
     	String myCurrentFile = KMADEFileChooser.saveKMADModelXMLFile();
     	if (myCurrentFile != null) {
-    	    ExpressKMADXML.saveKMAD(myCurrentFile);
+    	    ExpressKMADXML.saveKMADModel(myCurrentFile);
     	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
     		    .writeKMADItemsFromXMLFile();
     	}
@@ -408,14 +419,13 @@ public final class KMADeAdaptator {
 	// Avant d'ouvrir demander si le projet courant doit ï¿½tre sauvegardï¿½.
 	if (InterfaceExpressJava.isBddSet()) {
 	    int value = KMADeAdaptator
-		    .askToSaveBeforeAction(KMADEConstant.WRITE_BEFORE_OPEN_PROJECT_MESSAGE);
+	    .askToSaveBeforeAction(KMADEConstant.WRITE_BEFORE_OPEN_PROJECT_MESSAGE);
 	    if (value == JOptionPane.YES_OPTION) {
 		// On peut sauvegarder avant.
 		KMADeAdaptator.saveProjectXML();
 	    } else if (value == JOptionPane.CANCEL_OPTION) {
 		// Pas de chargement on arrï¿½te.
-		System.out
-			.println(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
 		return;
 	    }
 	}
@@ -433,7 +443,7 @@ public final class KMADeAdaptator {
 
 		InterfaceExpressJava.readOIDFromFile(myCurrentFile);
 		message = KMADEConstant.OPEN_EXPRESS_OK_FILE
-			+ myCurrentFile.getAbsolutePath();
+		+ myCurrentFile.getAbsolutePath();
 		ioError = false;
 		fileName = myCurrentFile.getAbsolutePath();
 		// Activer le bouton Sauvegarde et changer le titre.
@@ -441,14 +451,14 @@ public final class KMADeAdaptator {
 			fileName);
 	    } catch (Exception e) {
 		message = KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
-			+ e.getLocalizedMessage();
+		+ e.getLocalizedMessage();
 		ioError = true;
 		fileName = "";
 		GraphicEditorAdaptator.getMainFrame().disableSaveTitleName();
 	    }
 	    updateThread = true;
 	    GraphicEditorAdaptator.getMainFrame().getProgressBarDialog()
-		    .goReadSPF(ioError, message);
+	    .goReadSPF(ioError, message);
 	}
     }
 
@@ -460,7 +470,7 @@ public final class KMADeAdaptator {
 	// Avant d'ouvrir demander si le projet courant doit ï¿½tre sauvegardï¿½.
 	if (InterfaceExpressJava.isBddSet()) {
 	    int value = KMADeAdaptator
-		    .askToSaveBeforeAction(KMADEConstant.WRITE_BEFORE_EXIT_TOOL_MESSAGE);
+	    .askToSaveBeforeAction(KMADEConstant.WRITE_BEFORE_EXIT_TOOL_MESSAGE);
 	    if (value == JOptionPane.YES_OPTION) {
 		// On peut sauvegarder avant.
 		KMADeAdaptator.saveProjectXML();
@@ -487,34 +497,34 @@ public final class KMADeAdaptator {
 
     public static void showHistoryDialog() {
 	GraphicEditorAdaptator
-		.getMainFrame()
-		.getInfoHistoryDialog()
-		.showInfoAbout(KMADEConstant.HISTORY_TITLE_NAME,
-			KMADEConstant.HISTORY_KMADE_HTML);
+	.getMainFrame()
+	.getInfoHistoryDialog()
+	.showInfoAbout(KMADEConstant.HISTORY_TITLE_NAME,
+		KMADEConstant.HISTORY_KMADE_HTML);
     }
 
     public static void showInfoDebugDialog() {
 	GraphicEditorAdaptator
-		.getMainFrame()
-		.getInfoDebugDialog()
-		.showInfoAbout(KMADEConstant.INFO_DEBUG_TITLE_NAME,
-			KMADEConstant.DEBUG_KMADE_HTML);
+	.getMainFrame()
+	.getInfoDebugDialog()
+	.showInfoAbout(KMADEConstant.INFO_DEBUG_TITLE_NAME,
+		KMADEConstant.DEBUG_KMADE_HTML);
     }
 
     public static void showHelpModelDialog() {
 	GraphicEditorAdaptator
-		.getMainFrame()
-		.getInfoNMDADialog()
-		.showInfoAbout(KMADEConstant.HELP_KMAD_TITLE_NAME,
-			KMADEConstant.HELP_KMAD_HTML);
+	.getMainFrame()
+	.getInfoNMDADialog()
+	.showInfoAbout(KMADEConstant.HELP_KMAD_TITLE_NAME,
+		KMADEConstant.HELP_KMAD_HTML);
     }
 
     public static void showHelpToolInfoDebugDialog() {
 	GraphicEditorAdaptator
-		.getMainFrame()
-		.getInfoHistoryDialog()
-		.showInfoAbout(KMADEConstant.HELP_KMADE_TITLE_NAME,
-			KMADEConstant.HELP_KMADE_HTML);
+	.getMainFrame()
+	.getInfoHistoryDialog()
+	.showInfoAbout(KMADEConstant.HELP_KMADE_TITLE_NAME,
+		KMADEConstant.HELP_KMADE_HTML);
     }
 
     /**
@@ -539,8 +549,8 @@ public final class KMADeAdaptator {
     }
 
     /**
-	 * 
-	 */
+     * 
+     */
     public static void cutAction() {
 	KMADeAdaptator.copyAction();
 	KMADeAdaptator.deleteAction();
@@ -560,11 +570,11 @@ public final class KMADeAdaptator {
 
     public static void showClipBoardOverView() {
 	GraphicEditorAdaptator
-		.getMainFrame()
-		.getClipBoardDialog()
-		.setVisible(
-			!GraphicEditorAdaptator.getMainFrame()
-				.getClipBoardDialog().isVisible());
+	.getMainFrame()
+	.getClipBoardDialog()
+	.setVisible(
+		!GraphicEditorAdaptator.getMainFrame()
+		.getClipBoardDialog().isVisible());
     }
 
     public static void showOverviewWindow() {
@@ -578,7 +588,7 @@ public final class KMADeAdaptator {
 		KMADeMain.loadKMADEResourceBundle(myLocale);
 		GraphicEditorAdaptator.notifLocalisationModification();
 		TaskPropertiesEnhancedEditorAdaptator
-			.notifLocalisationModification();
+		.notifLocalisationModification();
 	    }
 	} else {
 	}
@@ -615,7 +625,7 @@ public final class KMADeAdaptator {
     }
     
     /**
-     * Cette méthode sert à supprimer les objets
+     * Cette mï¿½thode sert ï¿½ supprimer les objets
      */
     public static void cleanItems() {
     	AbstractObjectAdaptator.removeAllAbstractObject();
@@ -636,4 +646,6 @@ public final class KMADeAdaptator {
 		new ImageIcon(GraphicEditorAdaptator.class
 			.getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
     }
+
+
 }

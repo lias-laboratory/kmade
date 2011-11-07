@@ -45,7 +45,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 
-
 import org.jgraph.JGraph;
 import org.jgraph.graph.CellView;
 import org.jgraph.graph.DefaultGraphModel;
@@ -54,6 +53,7 @@ import org.jgraph.graph.VertexView;
 
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADETaskModelToolBar;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
 import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 
@@ -490,7 +490,7 @@ public class KMADEPrintingTaskModelPanel extends JPanel {
 		try {
 		    KMADEPrintingDialog.getPrinterJob().print();
 		} catch (PrinterException e) {
-		    System.err.println(e.getMessage());
+		    KMADEHistoryMessageManager.printlnError(e.getMessage());
 		}
 		return null;
 	    }

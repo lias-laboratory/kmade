@@ -31,6 +31,7 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEDefaultGraphCell;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEFileChooser;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -243,9 +244,9 @@ public final class SearchAdaptator {
 			    + "\n");
 		}
 		fw.close();
-		System.out.println(KMADEConstant.WRITE_TXT_FILE_OK);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_TXT_FILE_OK);
 	    } catch (IOException e) {
-		System.out.println(KMADEConstant.WRITE_TXT_FILE_ERROR);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_TXT_FILE_ERROR);
 	    }
 	}
     }

@@ -34,6 +34,7 @@ import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.ParseException;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.Precondition;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.TokenMgrError;
 import fr.upensma.lias.kmade.tool.view.taskproperties.KMADEEditorPrePostIterDialog;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -66,13 +67,13 @@ public final class PreconditionAdaptator {
     }
 
     public static void checkPrecondition(String s) {
-	System.out.print(KMADEConstant.CHECK_ACTION_MESSAGE + " : ");
+    	KMADEHistoryMessageManager.printMessage(KMADEConstant.CHECK_ACTION_MESSAGE + " : ");
 	PreconditionAdaptator.checkPreconditionBuilder(s);
 	PreconditionAdaptator.initPrecondition();
     }
 
     public static void evaluatePrecondition(String text) {
-	System.out.print(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
+    	KMADEHistoryMessageManager.printMessage(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
 	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	try {
@@ -82,21 +83,21 @@ public final class PreconditionAdaptator {
 		    myCurrentTask.getPreExpression().getNodeExpression()
 			    .getNodeValue().toString()
 			    + " =");
-	    System.out.println(KMADEConstant.PRECONDITION_EVAL_OK_MESSAGE);
-	    System.out.println(KMADEConstant.VALUE_MESSAGE
+	    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_EVAL_OK_MESSAGE);
+	    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.VALUE_MESSAGE
 		    + " = "
 		    + myCurrentTask.getPreExpression().getNodeExpression()
 			    .getNodeValue());
 	} catch (SemanticErrorException e) {
-	    System.out.println(KMADEConstant.PRECONDITION_EVAL_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_EVAL_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " , "
 		    + e.getMessage());
 	    KMADEEditorPrePostIterDialog.getPreconditionPanel().giveResult(
 		    KMADEConstant.VALUE_MESSAGE + " ? =");
 	} catch (SemanticUnknownException e) {
-	    System.out.println(KMADEConstant.PRECONDITION_EVAL_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_EVAL_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.MISSING_USER_VALUE_MESSAGE + " , "
 		    + e.getMessage());
 	    KMADEEditorPrePostIterDialog.getPreconditionPanel().giveResult(
@@ -118,31 +119,31 @@ public final class PreconditionAdaptator {
 	try {
 	    NodeExpression ref = parser.expression();
 	    if (ref == null) {
-		System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 			+ KMADEConstant.PARSER_PROBLEM_MESSAGE);
 		ExpressPrecondition.setPrecondition(myCurrentTask, null);
 	    } else {
 		ref.checkNode();
 		ExpressPrecondition.setPrecondition(myCurrentTask, ref);
-		System.out.println(KMADEConstant.PRECONDITION_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_OK_MESSAGE);
 	    }
 	} catch (SemanticException e) {
-	    System.out.println(KMADEConstant.PRECONDITION_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " , "
 		    + e.getMessage());
 	    ExpressPrecondition.setPrecondition(myCurrentTask, null);
 	    return;
 	} catch (ParseException e) {
-	    System.out.println(KMADEConstant.PRECONDITION_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SYNTAXICAL_ERROR_MESSAGE + " , "
 		    + e.getMessage());
 	    ExpressPrecondition.setPrecondition(myCurrentTask, null);
 	    return;
 	} catch (TokenMgrError e) {
-	    System.out.println(KMADEConstant.PRECONDITION_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.LEXICAL_ERROR_MESSAGE + " , "
 		    + e.getMessage());
 	    ExpressPrecondition.setPrecondition(myCurrentTask, null);
@@ -150,8 +151,8 @@ public final class PreconditionAdaptator {
 	} catch (Error e) {
 	    // Erreur normalement qui doit venir de AttributExpressExpression ou
 	    // GroupExpressExpression
-	    System.out.println(KMADEConstant.PRECONDITION_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " , "
 		    + e.getMessage());
 	    ExpressPrecondition.setPrecondition(myCurrentTask, null);
@@ -184,7 +185,7 @@ public final class PreconditionAdaptator {
 	    try {
 		new NumberValue(t);
 	    } catch (NumberFormatException e) {
-		System.out.println(KMADEConstant.STRING_TO_INTEGER);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.STRING_TO_INTEGER);
 		return;
 	    }
 	} else if (l.equals(TypeStructure.STRING_STRUCT.getValue())) {

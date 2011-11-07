@@ -33,6 +33,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
 import fr.upensma.lias.kmade.tool.coreadaptator.simulation.StackState;
 import fr.upensma.lias.kmade.tool.coreadaptator.simulation.StackStateModel;
 import fr.upensma.lias.kmade.tool.coreadaptator.simulation.TokenSimulation;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -153,7 +154,7 @@ public final class ExpressHistory {
 	}
 
 	if (cellModel.size() != myStateSimulationCollection.size()) {
-	    System.out.println("Problème IO");
+		 KMADEHistoryMessageManager.printlnMessage("Problème IO");
 	}
 
 	for (int i = 0; i < cursorUndo; i++) {

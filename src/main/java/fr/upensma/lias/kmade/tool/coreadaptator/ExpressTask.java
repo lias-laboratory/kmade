@@ -152,10 +152,10 @@ public final class ExpressTask {
 		.getAllReferencesOfEntityFromClipBoard("tache", "Tache");
 
 	Tache[] myNewTaskList = new Tache[myTaskList.length];
-	// System.out.println("nb tache arbre debut" + myTaskList.length);
+	// KMADEHistoryMessageManager.printMessage("nb tache arbre debut" + myTaskList.length);
 
 	for (int i = 0; i < myTaskList.length; i++) {
-	    // System.out.println("Collage a partir du PP2 " + myTaskList[i]);
+	    // KMADEHistoryMessageManager.printMessage("Collage a partir du PP2 " + myTaskList[i]);
 	    // On cree un point et une tache.
 	    Point refPoint = (Point) InterfaceExpressJava
 		    .createEntityReferenceBack("tache", "Point");

@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>************</comment>
+
+<!-- *************-->
+<!-- * File name *-->
+<!-- *************-->
+
+<!-- HTML files-->
+<entry key="DEBUG_KMADE_HTML">kmadedebug_en.html</entry>
+<entry key="HELP_KMADE_HTML">kmadehelp_en.html</entry>
+<entry key="HELP_KMAD_HTML">kmadhelp_en.html</entry>
+<entry key="HISTORY_KMADE_HTML">kmadehistory_en.html</entry>
+<entry key="UNDER_DEVELOPMENT_START_HTML">kmadeudstart_en.html</entry>
+<entry key="UNDER_DEVELOPMENT_START_TITLE">KMADe is under development ...</entry>
+
+<!-- *****************-->
+<!-- * String values *-->
+<!-- *****************-->
+
+<entry key="VERTEX_ITER_LETTER">I:</entry>
+<entry key="VERTEX_STATE_LETTER">S:</entry>
+<entry key="VERTEX_NUM">N:</entry>
+<entry key="VERTEX_EVENT_IN_LETTER">IN:</entry>
+<entry key="VERTEX_EVENT_OUT_LETTER">OUT:</entry>
+<entry key="VERTEX_PRECONDITION">PRE</entry>
+<entry key="VERTEX_ITERATION">ITER</entry>
+<entry key="VERTEX_OPT">OPT</entry>
+<entry key="VERTEX_INTERRUPTIBLE">INTER</entry>
+<entry key="VERTEX_ACTOR">ACTOR</entry>
+<entry key="VERTEX_EFFETSDEBORD">ACTION</entry>
+<entry key="VERTEX_OBJET">OBJECT</entry>
+
+<!-- Title messages-->
+<entry key="FENETRE_PRINCIPALE_TITLE_NAME">K-MADe (Kernel of Model for Activity Description environment) - EN</entry>
+<entry key="ABOUT_TITLE_NAME">About</entry>
+<entry key="TASK_DESCRIPTION_TABBEDPANE_TITLE_NAME">Task Space</entry>
+<entry key="ABSTRACT_OBJECT_TABBEDPANE_TITLE_NAME">Abstract Objects</entry>
+<entry key="USER_TABBEDPANE_TITLE_NAME">Actors</entry>
+<entry key="INDIVIDU_TABBEDPANE_TITLE_NAME">Persons</entry>
+<entry key="ORGANIZATION_TABBEDPANE_TITLE_NAME">Organization</entry>
+<entry key="EVENT_TABBEDPANE_TITLE_NAME">Events</entry>
+<entry key="MACHINE_TABBEDPANE_TITLE_NAME">Machines</entry>
+<entry key="PARCMACHINES_TABBEDPANE_TITLE_NAME">Machine Stock</entry>
+<entry key="CONCRETE_TASK_OBJECT_TABBEDPANE_TITLE_NAME">Concrete Objects</entry>
+<entry key="PREVIEW_WINDOW_TITLE_NAME">Thumbnail</entry>
+<entry key="INFO_DEBUG_TITLE_NAME">Informations about software development  </entry>
+<entry key="HELP_KMADE_TITLE_NAME">Help : K-MADe</entry>
+<entry key="HELP_KMAD_TITLE_NAME">Help : K-MAD model</entry>
+<entry key="HISTORY_TITLE_NAME"> K-MADe Story</entry>
+<entry key="ABSTRACT_OBJECT_TITLE_NAME">Abstract Objects Editor</entry>
+<entry key="CONCRETE_OBJECT_TITLE_NAME">Concrete Objects Editor</entry>
+<entry key="USER_TITLE_NAME">Users Editor</entry>
+<entry key="INDIVIDU_TITLE_NAME">Persons Editor</entry>
+<entry key="ORGANIZATION_TITLE_NAME">Organizations Editor</entry>
+<entry key="MACHINE_TITLE_NAME">Machines Editor</entry>
+<entry key="PARCMACHINES_TITLE_NAME"> Machine stock Editor</entry>
+<entry key="EVENT_TITLE_NAME">Events Editor</entry>
+<entry key="TASK_MODEL_TITLE_NAME">User-Task Tree    </entry>
+<entry key="PREFERENCES_TITLE_NAME">K-MADe Options...</entry>
+<entry key="COMPLETE_EDITOR_TITLE_NAME">Complete Task Editor</entry>
+<entry key="CLIPBOARD_TITLE_NAME">Clipboard Overview</entry>
+<entry key="LOAD_MONITOR_TITLE_NAME">Loading Monitor for a K-MAD project</entry>
+<entry key="SAVE_MONITOR_TITLE_NAME">Saving Monitor for a K-MAD project</entry>
+<entry key="EDITOR_TEXT_TITLE_NAME">Content Editor for the Attribut</entry>
+<entry key="EVENT_TASK_LINKED_TITLE_NAME">Task/Event Editor</entry>
+<entry key="ACTOR_CREATE_TITLE_NAME">Actor Editor</entry>
+<entry key="ACTORSYSTEM_CREATE_TITLE_NAME">Actor System Editor</entry>
+<entry key="PRINT_PREVIEW_WINDOW_TITLE_NAME">Print Preview</entry>
+<entry key="PROJECT_DIALOG_TITLE_NAME">Interviews Managment</entry>
+    
+ 
+<entry key="BAD_CHARACTER_TEXT">Error in the name</entry>
+<entry key="BAD_CARACTER_TITLE">Incorrect name</entry>
+<entry key="SAME_NAME_TEXT">This name is already used</entry>
+<entry key="SAME_NAME_TITLE">Same name</entry>
+    
+<!-- Abstract Object-->
+<entry key="BACK_TO_EDITOR">Back to editor of </entry>
+<entry key="ABSTRACT_OBJECT_NAME_TABLE">Name</entry>
+<entry key="ABSTRACT_OBJECT_OBSERVATION_TABLE">Observation</entry>
+<entry key="ABSTRACT_OBJECT_NEW_OBJECT_TABLE">Add new abstract object ...</entry>
+<entry key="ABSTRACT_OBJECT_TITLE_TABLE">Abstract Object</entry>
+<entry key="ABSTRACT_OBJECT_REMOVE_MESSAGE_TITLE">Remove abstract object(s)</entry>
+<entry key="ABSTRACT_OBJECT_LIST_MESSAGE_TITLE">Abstract Objecs List</entry>
+
+
+<!-- Group-->
+<entry key="ABSTRACT_GROUP_NAME_TABLE">Name</entry>
+<entry key="ABSTRACT_GROUP_DESCRIPTION_TABLE">Description</entry>
+<entry key="ABSTRACT_GROUP_SET_TYPE_TABLE">Type</entry>
+<entry key="ABSTRACT_GROUP_NEW_OBJECT_TABLE">Add new group ...</entry>
+<entry key="ABSTRACT_GROUP_TITLE_TABLE">Group of</entry>
+<entry key="ABSTRACT_GROUP_REMOVE_MESSAGE_TITLE">Remove group(s)</entry>
+
+	
+<!-- Abstract Attribute-->
+<entry key="ABSTRACT_ATTRIBUT_NAME_TABLE">Name</entry>
+<entry key="ABSTRACT_ATTRIBUT_DESCRIPTION_TABLE">Description</entry>
+<entry key="ABSTRACT_ATTRIBUT_TYPE_TABLE">Type</entry>
+<entry key="ABSTRACT_ATTRIBUT_TYPE_NAME_TABLE">Type Value</entry>
+<entry key="ABSTRACT_ATTRIBUT_NEW_OBJECT_TABLE">Add new abstract attribute ...</entry>
+<entry key="ABSTRACT_ATTRIBUT_TITLE_TABLE">Attribute of</entry>
+<entry key="ABSTRACT_ATTRIBUT_ENUMERATE_EDIT_TABLE">Edit Enumeration ...</entry>
+<entry key="ABSTRACT_ATTRIBUT_INTERVAL_EDIT_TABLE">Edit Interval ...</entry>
+<entry key="ABSTRACT_ATTRIBUT_REMOVE_MESSAGE_TITLE">Remove abstract attribute(s)</entry>
+
+	
+<!-- Enumeration-->
+<entry key="ENUMERATION_NAME_TABLE">Name</entry>
+<entry key="ENUMERATION_DESCRIPTION_TABLE">Description</entry>
+<entry key="ENUMERATION_NEW_OBJECT_TABLE">Add new enumeration ...</entry>
+<entry key="ENUMERATION_TITLE_TABLE">Enumeration</entry>
+<entry key="ENUMERATION_REMOVE_MESSAGE_TITLE">Remove enumeration(s)</entry>
+
+    
+<!-- Element-->
+<entry key="ELEMENT_NAME_TABLE">Name</entry>
+<entry key="ELEMENT_NEW_OBJECT_TABLE">Add new enumeration element ...</entry>
+<entry key="ELEMENT_REMOVE_MESSAGE_TITLE">Remove enumeration element(s)</entry>
+
+    
+<!-- Interval-->
+<entry key="INTERVALLE_TITLE_TABLE">Interval</entry>
+<entry key="INTERVALLE_NAME_TABLE">Name</entry>
+<entry key="INTERVALLE_DESCRIPTION_TABLE">Description</entry>
+<entry key="INTERVALLE_MIN_VALUE_TABLE">Min value</entry>
+<entry key="INTERVALLE_MAX_VALUE_TABLE">Max value</entry>
+<entry key="INTERVALLE_NEW_OBJECT_TABLE">Add new interval ...</entry>
+<entry key="INTERVALLE_REMOVE_MESSAGE_TITLE">Remove interval(s)</entry>
+
+    
+<!-- Concrete Object-->
+<entry key="CONCRETE_ABSTRACT_OBJECT_TITLE_TABLE">Abstract Object</entry>
+<entry key="CONCRETE_OBJECT_TITLE_TABLE">Concrete Object</entry>
+<entry key="CONCRETE_OBJECT_NAME_TABLE">Name</entry>
+<entry key="CONCRETE_OBJECT_OBSERVATION_TABLE">Observation</entry>
+<entry key="CONCRETE_OBJECT_GROUPE_TABLE">Group</entry>
+<entry key="CONCRETE_OBJECT_GROUPE_NAME">group</entry>
+<entry key="NO_CONCRETE_OBJECT_GROUPE_NAME">None</entry>
+<entry key="CONCRETE_NEW_OBJECT_TABLE">Add new concrete object ...</entry>
+<entry key="CONCRETE_NONEW_ROW_TABLE">Can not to add new concrete object, because no group available </entry>
+<entry key="CONCRETE_OBJECT_REMOVE_MESSAGE_TITLE">Remove concrete object(s)</entry>
+
+    
+<!-- Concrete Attribute-->
+<entry key="CONCRETE_ATTRIBUT_NAME_TABLE">Name</entry>
+<entry key="CONCRETE_ATTRIBUT_VALUE_TABLE">Value</entry>
+<entry key="CONCRETE_ATTRIBUT_NOINIT_TABLE">Attribute not initialized</entry>
+<entry key="CONCRETE_ATTRIBUT_TITLE_TABLE">Concrete attribut of</entry>
+
+    
+<!-- Event-->
+<entry key="EVENT_NAME_TABLE">Name</entry>
+<entry key="EVENT_DESCRIPTION_TABLE">Description</entry>
+<entry key="EVENT_NEW_ROW_TABLE">Add new event ...</entry>
+<entry key="EVENT_NONEW_ROW_TABLE">Can not to link an event with a task, because no event available</entry>
+<entry key="EVENT_REMOVE_INTO_TASK">Remove linking between event and task</entry>
+<entry key="EVENT_REMOVE_NAME_TITLE">Remove event(s)</entry>
+<entry key="EVENT_NO_ELEMENT_INTO_TASK">No linking between event and task</entry>
+
+    
+<!-- User-->
+<entry key="USER_NAME_TABLE">Name</entry>
+<entry key="USER_STATUS_TABLE">Status</entry>
+<entry key="USER_ROLE_TABLE">Role</entry>
+<entry key="USER_PHOTO_TABLE">Image</entry>
+<entry key="USER_MEMBERS">Member(s)</entry>
+<entry key="USER_NEW_ROW_TABLE">Add new user ...</entry>
+<entry key="USER_REMOVE_NAME_TITLE">Remove user(s)</entry>
+<entry key="USER_CHOOSE_IMAGE_MESSAGE">Choose image ...</entry>
+<entry key="USER_DISPLAY_IMAGE_MESSAGE">Show image</entry>
+<entry key="USER_DISPLAY_PATH_IMAGE_MESSAGE">Show image path</entry>
+<entry key="USER_DISPLAY_DEFAULT_IMAGE_MESSAGE">Show default image</entry>
+<entry key="USER_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Show bad image path</entry>
+<entry key="USER_CLEAR_IMAGE_MESSAGE">Remove image</entry>
+
+<!-- Person-->
+<entry key="INDIVIDU_NAME_TABLE">Name</entry>
+<entry key="INDIVIDU_STATUS_TABLE">Status </entry>
+<entry key="INDIVIDU_ROLE_TABLE">Role</entry>
+<entry key="INDIVIDU_PHOTO_TABLE">Image</entry>
+<entry key="INDIVIDU_NEW_ROW_TABLE">Add new person ...</entry>
+<entry key="INDIVIDU_REMOVE_NAME_TITLE">Remove person(s)</entry>
+<entry key="INDIVIDU_CHOOSE_IMAGE_MESSAGE">Choose image ...</entry>
+<entry key="INDIVIDU_DISPLAY_IMAGE_MESSAGE">Show image</entry>
+<entry key="INDIVIDU_DISPLAY_PATH_IMAGE_MESSAGE">Show image path</entry>
+<entry key="INDIVIDU_DISPLAY_DEFAULT_IMAGE_MESSAGE">Show default image</entry>
+<entry key="INDIVIDU_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Show bad image path</entry>
+<entry key="INDIVIDU_CLEAR_IMAGE_MESSAGE">Remove image</entry>
+<entry key="INDIVIDU_ORGANIZATION_TABLE">Organization(s)</entry>
+<entry key="INDIVIDU_OTHERS">Other</entry>
+
+<!-- Organization-->
+
+<entry key="ORGANIZATION_NAME_TABLE">Name</entry> 
+<entry key="ORGANIZATION_STATUS_TABLE">Status</entry> 
+<entry key="ORGANIZATION_ROLE_TABLE">Role</entry>
+<entry key="ORGANIZATION_PHOTO_TABLE">Logo</entry>
+<entry key="ORGANIZATION_NEW_ROW_TABLE">Add new organization ...</entry>
+<entry key="ORGANIZATION_REMOVE_NAME_TITLE">Remove organization(s)</entry>
+<entry key="ORGANIZATION_CHOOSE_IMAGE_MESSAGE">choose image ...</entry>
+<entry key="ORGANIZATION_DISPLAY_IMAGE_MESSAGE">Show image</entry>
+<entry key="ORGANIZATION_DISPLAY_PATH_IMAGE_MESSAGE">Show image path</entry>
+<entry key="ORGANIZATION_DISPLAY_DEFAULT_IMAGE_MESSAGE">Show default image</entry>
+<entry key="ORGANIZATION_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Show bad image path</entry>
+<entry key="ORGANIZATION_CLEAR_IMAGE_MESSAGE">Remove image</entry>
+<entry key="ORGANIZATION_MEMBERS_TABLE">Member(s)</entry>
+<entry key="ORGANIZATION_OTHERS">Other</entry>
+
+<!-- Machine-->
+
+<entry key="MACHINE_NAME_TABLE">Name</entry>
+<entry key="MACHINE_DESCRIPTION_TABLE">Description</entry>
+<entry key="MACHINE_ISCOMPUTER_TABLE">Is computer</entry>
+<entry key="MACHINE_IMAGE_TABLE">Image</entry>
+<entry key="MACHINE_NEW_ROW_TABLE">Add new machine</entry>
+<entry key="MACHINE_REMOVE_NAME_TITLE">Remove machine(s)</entry>
+<entry key="MACHINE_CHOOSE_IMAGE_MESSAGE">Choose image ...</entry>
+<entry key="MACHINE_DISPLAY_IMAGE_MESSAGE">Show image</entry>
+<entry key="MACHINE_DISPLAY_PATH_IMAGE_MESSAGE">Show image path</entry>
+<entry key="MACHINE_DISPLAY_DEFAULT_IMAGE_MESSAGE">Show default image</entry>
+<entry key="MACHINE_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Show bad image path</entry>
+<entry key="MACHINE_CLEAR_IMAGE_MESSAGE">Remove image</entry>
+<entry key="MACHINE_PARCS_TABLE">Machine stock</entry>
+<entry key="MACHINE_OTHERS">Other</entry>
+
+<!-- Machine stock-->
+
+<entry key="PARCMACHINES_NAME_TABLE">Name</entry>
+<entry key="PARCMACHINES_DESCRIPTION_TABLE">Description</entry>
+<entry key="PARCMACHINES_IMAGE_TABLE">Image</entry>
+<entry key="PARCMACHINES_NEW_ROW_TABLE">Add new machine stock</entry>
+<entry key="PARCMACHINES_REMOVE_NAME_TITLE">Remove machine stock</entry>
+<entry key="PARCMACHINES_CHOOSE_IMAGE_MESSAGE">Choose image ...</entry>
+<entry key="PARCMACHINES_DISPLAY_IMAGE_MESSAGE">Show image</entry>
+<entry key="PARCMACHINES_DISPLAY_PATH_IMAGE_MESSAGE">Show image path</entry>
+<entry key="PARCMACHINES_DISPLAY_DEFAULT_IMAGE_MESSAGE">Show default image</entry>
+<entry key="PARCMACHINES_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Show bad image path</entry>
+<entry key="PARCMACHINES_CLEAR_IMAGE_MESSAGE">Remove image</entry>
+<entry key="PARCMACHINES_MACHINE_TABLE">Machine(s)</entry>
+<entry key="PARCMACHINES_OTHERS">Other</entry>
+
+
+<!-- Label-->
+<entry key="LABEL_TITLE_MESSAGE">Labels</entry>
+<entry key="LABEL_REMOVE_NAME_TITLE">Remove label(s)</entry>
+<entry key="LABEL_NUMERO_TITLE">Number</entry>
+<entry key="LABEL_NAME_TITLE">Name</entry>
+<entry key="LABEL_DESCRIPTION_TITLE">Description </entry>
+<entry key="LABEL_COLOR_TITLE">Color</entry>
+<entry key="LABEL_IS_VISIBLE_COLOR_TITLE">Color State (visible or not)</entry>
+<entry key="LABEL_IS_VISIBLE_TITLE">State (visible or not)</entry>
+<entry key="LABEL_ADD_NEW_LABEL_TITLE">Add new label ...</entry>
+<entry key="LABEL_EDITOR_TITLE">Label Editor</entry>
+
+    
+<!-- Actor-->
+<entry key="ACTOR_NAME_TABLE">Name</entry>
+<entry key="ACTOR_EXPERIENCE_TABLE">Experience	</entry>
+<entry key="ACTOR_COMPETENCE_TABLE">Skills</entry>
+<entry key="ACTOR_NEW_ROW_TABLE">Add new actor ...</entry>
+<entry key="ACTOR_NONEW_ROW_TABLE">Can not to add new actor, because no user available</entry>
+<entry key="ACTOR_NO_ELEMENT_INTO_TASK">No linking between actor and task</entry>
+<entry key="ACTOR_REMOVE_NAME_TITLE">Remove actor(s)</entry>
+<entry key="ACTOR_REMOVE_ALL_NAME_TITLE">Remove all actors</entry>
+
+<!-- Actor System-->
+<entry key="ACTORSYSTEM_NAME_TABLE">Name</entry>
+<entry key="ACTORSYSTEM_EXPERIENCE_TABLE">Experience	</entry>
+<entry key="ACTORSYSTEM_COMPETENCE_TABLE">Skills</entry>
+<entry key="ACTORSYSTEM_NEW_ROW_TABLE">Add new actor system...</entry>
+<entry key="ACTORSYSTEM_NONEW_ROW_TABLE">Can not to add new actor system, because no machine available</entry>
+<entry key="ACTORSYSTEM_NO_ELEMENT_INTO_TASK">No linking between actor system and task</entry>
+<entry key="ACTORSYSTEM_REMOVE_NAME_TITLE">Remove actor system</entry>
+<entry key="ACTORSYSTEM_REMOVE_ALL_NAME_TITLE">Remove all actor system</entry>
+
+       
+<!-- Task characteristics-->
+<entry key="NO_SELECTED_TASK_MESSAGE">No task selected</entry>
+<entry key="PROPERTIES_MESSAGE">Characteristics </entry>
+<entry key="GENERAL_TABBEDPANE_TITLE_NAME">General</entry>
+<entry key="NO_VALUE_LEGEND_MESSAGE">no value</entry>
+<entry key="NO_CARACTERISTIC_SELECTED_MESSAGE">No characteristic selected</entry>
+<entry key="ERROR_CARACTERISTIC_MESSAGE">Error</entry>
+
+	
+<!-- General characteristics-->
+<entry key="TASK_ATTRIBUT_NAME">Task</entry>
+<entry key="GENERAL_INFORMATION_PANEL_TITLE_NAME">General</entry>
+<entry key="GENERAL_INFORMATION_PANEL_LEGEND_TITLE_NAME">The general characteristics are the first ones to enter and are to be used by all people involved in the activity analysis. These characteristics are informal and do not refer to the state-of-the-world objects</entry>
+<entry key="TASK_NUMBER_NAME_TITLE">Number</entry>
+<entry key="TASK_NUMBER_SHORT_NAME_TITLE">Num</entry>
+<entry key="TASK_NUMBER_NAME_LEGEND_TITLE">For each task of a task tree, a unique number is defined. It incorporates the depth of a task as well as its position towards its "sister-tasks" (same level tasks). That number is automatically generated and is not editable</entry>
+<entry key="NO_MOTHER_TASK_NAME_MESSAGE">No mother task</entry>
+<entry key="SUB_TASK_PARENT_NAME_TITLE">Subtask</entry>
+<entry key="SUB_TASK_PARENT_NAME_LEGEND_TITLE">Indicates the "mother-task" (upper-level task) of that task</entry>
+<entry key="TASK_NAME_TITLE">Name</entry>
+<entry key="TASK_NAME_LEGEND_TITLE">Indicates the name of the task provided by the analyst</entry>
+<entry key="TASK_PURPOSE_TITLE">Goal (disable)</entry>
+<entry key="TASK_PURPOSE_LEGEND_TITLE">Indicates the goal assigned to the task</entry>
+<entry key="TASK_MULTIMEDIA_PURPOSE_TITLE">Multimedia (disable)</entry>
+<entry key="TASK_MULTIMEDIA_PURPOSE_LEGEND_TITLE">That characteristic allows to complement the task goal with additional multimedia information (video or sound)</entry>
+<entry key="TASK_MULTIMEDIA_ERROR_FILE_MESSAGE">Problem : media not found</entry>
+<entry key="TASK_LABEL_TITLE">Label</entry>
+<entry key="TASK_LABEL_LEGEND_TITLE">That characteristic allows to label a task in order to help further identifying a task. A label, or tag can be associated with a colour</entry>
+<entry key="TASK_OBJECTS_TITLE">Objects</entry>
+<entry key="TASK_OBJECTS_LEGEND_TITLE">That characteristic allows to list all the objects used by a task</entry>
+<entry key="TASK_FEEDBACK_TITLE">Display(disable)</entry>
+<entry key="TASK_FEEDBACK_LEGEND_TITLE">That characteristic allows to describe the user observable (or expected) effects resulting from a task</entry>
+<entry key="TASK_DURATION_TITLE">Duration (disable)</entry>
+<entry key="TASK_DURATION_LEGEND_TITLE">That indicates the task duration. All sorts of time related informations are accepted</entry>
+<entry key="TASK_OBSERVATION_TITLE">Observation</entry>
+<entry key="TASK_OBSERVATION_LEGEND_TITLE">Observation</entry>
+<entry key="EXECUTING_NAME_TITLE">Executant</entry>
+<entry key="EXECUTING_NAME_LEGEND_TITLE">Indicates who performs the task. The possible values are: "user, system, interactive, and abstract, unknown"</entry>
+<entry key="MODALITY_NAME_TITLE">Modality</entry>
+<entry key="MODALITY_NAME_LEGEND_TITLE">Indicates the nature of the action performed by the executant "User"</entry>
+<entry key="FREQUENCY_NAME_TITLE">Frequency</entry>
+<entry key="FREQUENCY_NAME_LEGEND_TITLE">That characteristic corresponds to an indication of the iterative nature of the task</entry>
+<entry key="FREQUENCY_VALUE_NAME_TITLE">Frequency value</entry>
+<entry key="FREQUENCY_VALUE_NAME_LEGEND_TITLE">That characteristic allows to set a value for the task frequency</entry>
+<entry key="IMPORTANT_NAME_TITLE">Priority</entry>
+<entry key="IMPORTANT_NAME_LEGEND_TITLE">Indicates the priority of a task towards other task of the same level</entry>
+<entry key="SENSORI_MOTRICE_NAME_TITLE">Sensorimotor</entry>
+<entry key="COGNITIVE_NAME_TITLE">Cognitive   </entry>
+    
+
+<!-- Scheduling characteristics-->
+<entry key="SCHEDULE_PANEL_TITLE_NAME">Scheduling</entry>
+<entry key="NECESSITE_LABEL_NAME">Optional</entry>
+<entry key="NECESSITE_LABEL_LEGEND_NAME">Indicates if a task is mandatory or optional. A mandatory task must be executed while an optional task can be omitted</entry>
+<entry key="INTERRUPTIBLE_LABEL_NAME">Interruptible</entry>
+<entry key="INTERRUPTIBLE_LABEL_LEGEND_NAME">Indicates if a task is interruptible or not</entry>
+<entry key="DECLENCHEMENT_LABEL_NAME">Trigger event</entry>
+<entry key="DECLENCHEMENT_LABEL_LEGEND_NAME">This characteristic indicates that task execution is constrained by an event</entry>
+<entry key="UTILISATEUR_LABEL_NAME">Actor(s)</entry>
+<entry key="UTILISATEUR_LABEL_LEGEND_NAME">This characteristic contains the list of users allowed to execute a task</entry>
+<entry key="SCHEDULE_LABEL_NAME">Scheduling</entry>
+<entry key="SCHEDULE_LABEL_LEGEND_NAME">This characteristic describes the way the sub-tasks of an upper-level task will be executed</entry>
+<entry key="OPTIONAL_NECESSITE_VALUE">Optional</entry>
+<entry key="NO_OPTIONAL_NECESSITE_VALUE">Mandatory</entry>
+<entry key="INTERRUPTIBLE_VALUE">Interruptible</entry>
+<entry key="NO_INTERRUPTIBLE_VALUE">Not interruptible</entry>
+<entry key="PRECONDITION_LABEL_VALUE">Precondition</entry>
+<entry key="PRECONDITION_LABEL_LEGEND_VALUE">This characteristic indicates that task execution is constrained by a condition. That condition relates to the objects manipulated by the user: the state-of-the-world objects</entry>
+<entry key="ITERATION_LABEL_VALUE">Iteration</entry>
+<entry key="ITERATION_LABEL_LEGEND_VALUE">That characteristic allows to precise the iterative nature of a tasks that can be executed several times and/or until a particular condition is satisfied. That condition relates to the objects manipulated by the user</entry>
+<entry key="MATERIEL_LABEL_NAME">System Actor(s)</entry>
+<entry key="MATERIEL_LABEL_LEGEND">This characteristic contains the list of machines allowed to execute a task</entry>
+    
+<!-- Side effect-->
+<entry key="POSTCONDITION_PANEL_TITLE_NAME">Side effects</entry>
+<entry key="EFFETSDEBORD_LABEL_VALUE">Actions</entry>
+<entry key="EFFETSDEBORD_LABEL_LEGEND_VALUE">That characteristic modifies the objects of the state-of-the-world</entry>
+<entry key="EVENT_NAME_TITLE">Event generated</entry>
+<entry key="EVENT_NAME_LEGEND_TITLE">That characteristic generates a set of events</entry>
+        
+        
+<!-- Multimedia tool-->
+<entry key="MEDIA_FILE_NAME">Media file</entry>
+<entry key="MEDIA_FILE_LENGTH">Media file length (ko)</entry>
+<entry key="MEDIA_LENGTH">Media duration (m:s)</entry>
+<entry key="MEDIA_START_TAG">Start tag (m:s)</entry>
+<entry key="MEDIA_FINISH_TAG">Finish tag (m:s)</entry>
+<entry key="MEDIA_NO_INFORMATION_PANEL_MESSAGE">No Information</entry>
+<entry key="INFORMATION_MEDIA_TITLE_NAME">Properties</entry>
+<entry key="MEDIA_TITLE_NAME">Media</entry>
+<entry key="NO_MEDIA_FILE_MESSAGE">No media</entry>
+<entry key="QUICK_TIME_NO_INSTALLED_ERROR_MESSAGE">No codec available : Need to instal QuickTime (Apple)</entry>
+<entry key="CONTROLE_MEDIA_TITLE_NAME">Control</entry>
+        
+                
+<!-- Complete task editor-->
+<entry key="EXECUTION_CONDITION_TITLE_NAME">Firing constraints</entry>
+<entry key="POSTCONDITION_TITLE_NAME">Postcondition</entry>
+<entry key="OBJECT_LIST_TITLE_NAME">Objects used</entry>
+<entry key="EFFETSDEBORD_TITLE_NAME">Action</entry>
+<entry key="NO_MOTHER_TASK_MESSAGE">No mother task</entry>
+<entry key="NO_LEFT_TASK_MESSAGE">No older task (task on the left)</entry>
+<entry key="NO_RIGHT_TASK_MESSAGE">No young task (task on the right)</entry>
+<entry key="NO_SUB_TASK_MESSAGE">No subtask</entry>
+<entry key="NO_NUMERO_TASK">No number</entry>
+
+    
+<!-- Project properties-->
+<entry key="INTERVIEWED_NAME_TABLE">Interviewee</entry>
+<entry key="PLACE_INFORMATION_TABLE">Co-ordinates</entry>
+<entry key="STATUT_TABLE">Status</entry>
+<entry key="SENIORITY_TABLE">Seniority</entry>
+<entry key="DATE_TABLE">Date</entry>
+<entry key="INTERVIEW_TYPE_TABLE">Interview type</entry>
+<entry key="SEARCHED_INFORMATIONS_TABLE">Information</entry>
+<entry key="INTERVIEW_NAME_TABLE">Interviewer</entry>
+<entry key="INTERVIEW_NEW_OBJECT_TABLE">Add new interview ...    </entry>
+<entry key="GENERAL_DESCRIPTION_PROJECT_DIALOG_TITLE">General description</entry>
+<entry key="COMPANY_LABEL_NAME">Company</entry>
+<entry key="SITE_LABEL_NAME">Site </entry>
+<entry key="POSTE_TYPE_LABEL_NAME">Type of job</entry>
+<entry key="DATE_STUDY">Date of the case</entry>
+<entry key="OTHER_RESOURCES">Other resources</entry>
+<entry key="INTERVIEWED_DESCRIPTION_PROJECT_DIALOG_TITLE">Interviewed description</entry>
+<entry key="JUSTIFICATION_PROJECT_DIALOG_TITLE">Why this case study</entry>
+<entry key="REMOVE_INTERVIEW_MESSAGE_TITLE">Remove interview(s)</entry>
+<entry key="ASK_REMOVE_INTERVIEW_MESSAGE_TITLE">Wish you to remove the interview of </entry>
+    
+    
+<!-- Tiny task characteristics editor-->
+<entry key="EDITOR_MESSAGE_TITLE">Task characteristics editor</entry>
+<entry key="EDITOR_OPERATOR_NAME">Scheduling</entry>
+<entry key="EDITOR_NAME_NAME">Name</entry>
+<entry key="EDITOR_EXECUTANT_NAME">Executant</entry>
+    
+    
+<!-- Project managing-->
+<entry key="EXTENSION_EXPRESS_FILTER_NAME">Express File (*.spf)</entry>
+<entry key="EXTENSION_KMADE_FILTER_NAME">K-MAD File (*.kxml)</entry>
+<entry key="SET_EXISTING_PROJECT_LONG_MESSAGE">Set the project properties</entry>
+<entry key="SET_EXISTING_PROJECT_SHORT_MESSAGE">Properties</entry>
+<entry key="STATE_LOAD_TITLE_NAME">State</entry>
+<entry key="ELEMENT_PARSE_PROBLEM_MESSAGE">Problem with the element</entry>
+<entry key="XML_PARSER_PROBLEM_MESSAGE">Problem with the XML Parser</entry>
+<entry key="XML_PARSER_MISSING_ELEMENT_PROBLEM_MESSAGE">entities are missing in the XML file</entry>
+
+
+<!-- Loading managment-->
+<entry key="OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME">Loading of K-MAD project cancelled</entry>
+<entry key="OPEN_ERROR_FILE">Can not to load a K-MAD project</entry>
+<entry key="OPEN_EXPRESS_OK_FILE">Success to load the K-MAD project : </entry>
+<entry key="OPEN_EXPRESS_NO_OK_FILE">Failure to load the K-MAD project : </entry>
+<entry key="EXPRESS_OBJECTS_TITLE_MESSAGE">User objects</entry>
+<entry key="GRAPHICAL_OBJECTS_MESSAGE">Graphical entities</entry>
+<entry key="CREATE_GRAPHICAL_TASKS_MESSAGE">Creating graphical tasks</entry>
+<entry key="CREATE_GRAPHICAL_EDGES_MESSAGE">Creating edges</entry>
+<entry key="LOAD_PROJECT_FINISHED_MESSAGE">Loading finished</entry>
+<entry key="LOAD_CONSOLE_TITLE_NAME">Console of loading</entry>
+<entry key="IMPLICIT_STOP_LOAD_SPF_FILE">Loading stopped : Failure to build the user objects</entry>
+<entry key="EXPLICIT_STOP_LOAD_SPF_FILE_DURING_OBJECT">Loading cancelled : Remove all user objects</entry>
+<entry key="EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT">Loading cancelled : Remove all user objects and graphical entities</entry>
+
+
+<!-- Saving managment-->
+<entry key="SAVE_CANCELLED_EXPRESS_FILECHOOSER_NAME">Saving of K-MAD project cancelled</entry>
+<entry key="WRITE_EXPRESS_ERROR_FILE">Failure to save the K-MAD project : </entry>
+<entry key="WRITE_ERROR_FILE">Can not to save a K-MAD project</entry>
+<entry key="WRITE_EXPRESS_OK_FILE">Success to save the K-MAD project : </entry>
+<entry key="WRITE_EXPRESS_NO_OK_FILE">Failure to save the K-MAD project :</entry>
+<entry key="WRITE_BEFORE_OPEN_PROJECT_MESSAGE">Save the current K-MAD project before to load another one ?</entry>
+<entry key="WRITE_BEFORE_EXIT_TOOL_MESSAGE">Save the current K-MAD project before to quit K-MADe</entry>
+<entry key="WRITE_BEFORE_NEW_PROJECT_MESSAGE">Save the current K-MAD project \n before to create a new one</entry>
+<entry key="WRITE_BEFORE_CLOSE_PROJECT_MESSAGE">Save the current K-MAD project \n before to close it</entry>
+<entry key="WRITE_BEFORE_CHANGE_LOCALE_MESSAGE">Save the current K-MAD project \n before to change the localisation</entry>
+<entry key="SAVE_CONSOLE_TITLE_NAME">Console of saving</entry>
+<entry key="SAVE_PROJECT_FINISHED_MESSAGE">Saving finished</entry>
+<entry key="IMPLICIT_STOP_SAVE_FILE_MESSAGE">Saving stopped : Failure to write the user objects</entry>
+<entry key="EXPLICIT_STOP_SAVE_FILE_MESSAGE">Saving cancelled : Remove all user objects</entry>
+
+
+<!-- Entities monitor-->
+<entry key="ENTITY_LIST_DIALOG_TITLE">Monitor of state-of-the-world objects</entry>
+<entry key="FORCE_ENTITY_LIST_ACTION_MESSAGE">Refresh Objects</entry>
+
+
+<!-- K-MADe preferences-->
+<entry key="GENERAL_TABBED_NAME">General</entry>
+<entry key="TASK_MODEL_EDITOR_TABBED_NAME">Tasks</entry>
+<entry key="TASK_MODEL_EDITOR_TABBED_LONG_NAME">User-Tasks Editor</entry>
+<entry key="TREE_EDITOR_TABBED_NAME">User-Task Trees</entry>
+<entry key="TREE_EDITOR_TABBED_LONG_NAME">User-Task Trees Editor</entry>
+<entry key="GENERAL_PANEL_CONFIGURATION_PANEL_NAME">Configuration</entry>
+<entry key="GENERAL_PANEL_AUTOMATIC_SAVE_LABEL">Automatic saving :</entry>
+<entry key="GENERAL_PANEL_BUG_MESSAGE_LABEL">Send K-MADe bugs report</entry>
+<entry key="GENERAL_PANEL_GARBAGE_COLLECTOR_LABEL">Call the Java Garbage Collector :</entry>
+<entry key="GENERAL_PANEL_SPLASH_SREEN_LABEL">Display splashscreen </entry>
+<entry key="GENERAL_PANEL_LANGUAGE_PANEL_NAME">Language</entry>
+<entry key="GENERAL_PANEL_LANGUAGE_LABEL">Language choice :</entry>
+<entry key="GENERAL_PANEL_KEYS_PANEL_NAME">Shortcuts</entry>
+<entry key="GENERAL_PANEL_ZOOM_LABEL">Step of zoom</entry>
+<entry key="TASK_PANEL_NAME_PANEL_NAME">Name</entry>
+<entry key="TASK_PANEL_NAME_FONT_NAME_LABEL">Police :</entry>
+<entry key="TASK_PANEL_NAME_FONT_SIZE_LABEL">Size :</entry>
+<entry key="TASK_PANEL_NAME_FONT_STYLE_LABEL">Style :</entry>
+<entry key="TASK_PANEL_NAME_FONT_COLOR_LABEL">Color :</entry>
+<entry key="TASK_PANEL_NAME_BACKGROUND_COLOR_LABEL">Background color :    </entry>
+<entry key="TASK_PANEL_DECOMPOSITION_PANEL_NAME">Scheduling</entry>
+<entry key="TASK_PANEL_MODEL_PANEL_NAME">Template</entry>
+<entry key="TASK_PANEL_MODEL_CHOICE_LABEL">Choice :</entry>
+<entry key="TASK_PANEL_MODEL_SAVE_BUTTON_LABEL">Save</entry>
+<entry key="TASK_PANEL_MODEL_LOAD_BUTTON_LABEL">Load</entry>
+<entry key="TASK_PANEL_OPTIONS_PANEL_NAME">Options</entry>
+<entry key="TASK_PANEL_OPTIONS_TRIGGER_EVENT_LABEL">Show trigger event characteristic on the task view</entry>
+<entry key="TASK_PANEL_OPTIONS_ACTOR_TASK_LABEL">Show actor characteristic on the task view</entry>
+<entry key="TASK_PANEL_PREVIEW_PANEL_NAME">Preview</entry>
+<entry key="TASK_TREE_PANEL_LAYOUT_PANEL_NAME">Layout</entry>
+<entry key="TASK_TREE_PANEL_LAYOUT_ORIENTATION_LABEL">User-task tree orientation</entry>
+<entry key="TASK_TREE_PANEL_LAYOUT_DISTANCE_LABEL">Horizontal gap between the tasks</entry>
+<entry key="TASK_TREE_PANEL_LAYOUT_SELECTION_COLOR_LABEL">Task color selection</entry>
+<entry key="TASK_TREE_PANEL_LAYOUT_LEVEL_DISTANCE_LABEL">Vertical gap between the tasks</entry>
+<entry key="TASK_TREE_PANEL_OPTIONS_PANEL_NAME">Options</entry>
+<entry key="TASK_TREE_PANEL_OPTIONS_ORTHOGONAL_EDGE_LABEL">Edges orthogonality </entry>
+
+
+<!-- Colors name-->
+<entry key="COLOR_NO_COLOR">Node</entry>
+<entry key="COLOR_BLUE">Blue</entry>
+<entry key="COLOR_GREEN">Green</entry>
+<entry key="COLOR_RED">Red</entry>
+<entry key="COLOR_BLACK">Black</entry>
+<entry key="COLOR_YELLOW">Yellow</entry>
+<entry key="COLOR_WHITE">White</entry>
+
+
+<!-- Polices name-->
+<entry key="ARIAL_FONT">Arial</entry>
+<entry key="TIMES_FONT">Times New Roman</entry>
+<entry key="TAHOMA_FONT">Tahoma</entry>
+
+
+<!-- Polices style-->
+<entry key="STYLE_PLAIN">Normal</entry>
+<entry key="STYLE_BOLD">Bold</entry>
+<entry key="STYLE_ITALIC">Italic</entry>
+<entry key="STYLE_BOLD_ITALIC">Bold + Italic</entry>
+
+
+<!-- Languages-->
+<entry key="FRENCH_LANGUAGE">French</entry>
+<entry key="ENGLISH_LANGUAGE">English</entry>
+
+<entry key="FRENCH_LANGUAGE_INFO">Fran�ais</entry>
+<entry key="ENGLISH_LANGUAGE_INFO">English</entry>
+
+    
+<!-- Commun messages-->
+<entry key="YES_MESSAGE">Yes</entry>
+<entry key="NO_MESSAGE">No</entry>
+<entry key="ALL_MESSAGE">All</entry>
+<entry key="VALID_MESSAGE">Ok</entry>
+<entry key="APPLY_MESSAGE">Apply</entry>
+<entry key="CANCEL_MESSAGE">Cancel</entry>
+<entry key="SAVE_AS_MESSAGE">Save as ...</entry>
+<entry key="OVERWRITE_FILE_MESSAGE">Overwrite exising file ?</entry>
+<entry key="GO_BACK_MESSAGE">Close</entry>
+<entry key="CONFIRMATION_DIALOG_MESSAGE">Confirm message</entry>
+<entry key="BROWSE_DIRECTORY_OR_FILE_MESSAGE">Browse</entry>
+<entry key="REMOVE_MESSAGE">Remove</entry>
+
+    
+<!-- ToolBars Actions-->
+<entry key="FILE_MENU_MESSAGE">File</entry>
+<entry key="EDITING_MENU_MESSAGE">Edition</entry>
+<entry key="VIEW_MENU_MESSAGE">Visualization</entry>
+<entry key="PROJECT_MENU_MESSAGE">Project</entry>
+<entry key="HELP_MENU_MESSAGE">Help</entry>
+<entry key="TOOLS_MENU_MESSAGE">Tools	</entry>
+<entry key="NEW_PROJECT_ACTION_MESSAGE">New project</entry>
+<entry key="OPEN_PROJECT_ACTION_MESSAGE">Open project </entry>
+<entry key="SAVE_PROJECT_ACTION_MESSAGE">Save project</entry>
+<entry key="SAVE_PROJECT_AS_ACTION_MESSAGE">Save project as ...</entry>
+<entry key="CLOSE_PROJECT_ACTION_MESSAGE">Close project</entry>
+<entry key="PRINT_PROJECT_ACTION_MESSAGE">Print</entry>
+<entry key="EXIT_ACTION_MESSAGE">Exit</entry>
+<entry key="HIDE_GRID_ACTION_MESSAGE">Hide grid</entry>
+<entry key="SHOW_GRID_ACTION_MESSAGE">Show grid</entry>
+<entry key="CHOICE_GRID_SIZE_MESSAGE">Choose grid size</entry>
+<entry key="HIDE_RULE_ACTION_MESSAGE">Hide rule</entry>
+<entry key="SHOW_RULE_ACTION_MESSAGE">Show rule</entry>
+<entry key="PREFERENCE_ACTION_MESSAGE">Preferences...</entry>
+<entry key="DEBUG_INFO_ACTION_MESSAGE">Version history</entry>
+<entry key="ABOUT_ACTION_MESSAGE">About ...</entry>
+<entry key="HELP_MODEL_ACTION_MESSAGE">K-MAD help</entry>
+<entry key="HELP_TOOL_ACTION_MESSAGE">K-MADe help</entry>
+<entry key="HISTORY_ACTION_MESSAGE">K-MADe story</entry>
+<entry key="UNDO_ACTION_MESSAGE">Undo</entry>
+<entry key="REDO_ACTION_MESSAGE">Redo</entry>
+<entry key="CUT_ACTION_MESSAGE">Cut</entry>
+<entry key="COPY_ACTION_MESSAGE">Copy</entry>
+<entry key="PASTE_ACTION_MESSAGE">Paste</entry>
+<entry key="SHOW_CLIPBOARD_MESSAGE">Show clipboard</entry>
+<entry key="SEARCH_ACTION_MESSAGE">Advanced search ...</entry>
+<entry key="SIMULATION_ACTION_MESSAGE">Simulator</entry>
+<entry key="INTERROGATION_ACTION_MESSAGE">Statistics</entry>
+<entry key="CHECK_COHERENCE_ACTION_MESSAGE">Grammar verification</entry>
+<entry key="ENTITY_LIST_ACTION_MESSAGE">Entities summary</entry>
+<entry key="VERSION_MESSAGE">Version</entry>
+<entry key="MESSAGES_MESSAGE">Messages</entry>
+<entry key="ERREURS_MESSAGE">Errors</entry>
+<entry key="FIND_REPLACE_ACTION_MESSAGE">Find/Replace  </entry>
+<entry key="GRID_SIZE_ACTION_MESSAGE">Grid size (between 1 and 40)</entry>
+<entry key="INPUT_GRID_SIZE_MESSAGE">Choix of the grid size</entry>
+<entry key="INPUT_GRID_SIZE_ERROR_MESSAGE">Grid value is bad (between 1 and 40)</entry>
+<entry key="NEW_UNKNOWN_TASK_ACTION_MESSAGE">New unknown task</entry>
+<entry key="NEW_ABSTRACT_TASK_ACTION_MESSAGE">New abstract task</entry>
+<entry key="NEW_INTERACTION_TASK_ACTION_MESSAGE">New interactive task</entry>
+<entry key="NEW_FEEDBACK_TASK_ACTION_MESSAGE">New system task</entry>
+<entry key="NEW_USER_TASK_ACTION_MESSAGE">New user task</entry>
+<entry key="EDIT_TASK_ACTION_MESSAGE">Quick task edit</entry>
+<entry key="COMPLETE_EDIT_TASK_ACTION_MESSAGE">Complete task edit</entry>
+<entry key="COMPLETE_EDIT_TASK_ACTION_MESSAGE_PIE_MENU">Complete edit</entry>
+
+<entry key="UNKNOWN_TASK_MESSAGE">Unknown</entry>
+<entry key="ABSTRACT_TASK_MESSAGE">Abstract</entry>
+<entry key="INTERACTION_TASK_MESSAGE">Interactive</entry>
+<entry key="FEEDBACK_TASK_MESSAGE">System</entry>
+<entry key="USER_TASK_MESSAGE">User</entry>
+
+
+<entry key="DELETE_CELL_ACTION_MESSAGE">Remove selected element(s)</entry>
+<entry key="DELETE_CELL_ACTION_MESSAGE_PIE_MENU">Remove</entry>
+<entry key="PREVIEW_WINDOW_ACTION_MESSAGE">Show thumbnail</entry>
+<entry key="ZOOM_IN_ACTION_MESSAGE">Zoom (+)</entry>
+<entry key="ZOOM_OUT_ACTION_MESSAGE">Unzoom (-)</entry>
+<entry key="ZOOM_DEFAULT_ACTION_MESSAGE">Default zoom</entry>
+<entry key="ZOOM_GLOBAL_ACTION_MESSAGE">Fit</entry>
+<entry key="MAGNET_OPTION_ACTION_MESSAGE">Enable/Disable magnet</entry>
+<entry key="JUSTIFY_OPTION_ACTION_MESSAGE">Justify</entry>
+<entry key="SAME_EXECUTANT_MESSAGE">Same executant down</entry>
+<entry key="VISIBLE_LABEL_ACTION_MESSAGE">Enable/Disable visible labels</entry>
+<entry key="COLOR_LABEL_ACTION_MESSAGE">Enable/Disable color labels</entry>
+
+
+<!-- Printing-->
+<entry key="TREE_TASK_PRINT_TITLE_MESSAGE">Task space</entry>
+<entry key="USER_CARDS_PRINT_TITLE_MESSAGE">Analyst cards</entry>
+<entry key="OBJECTS_PRINT_TITLE_MESSAGE">User objects</entry>
+<entry key="PRINT_ACTION_MESSAGE">Printing</entry>
+<entry key="LAYOUT_PRINT_ACTION_MESSAGE">Print layout</entry>
+<entry key="PRINT_PREVIEW_ACTION_MESSAGE">Print preview</entry>
+<entry key="PDF_EXPORT_ACTION_MESSAGE">Export to PDF</entry>
+<entry key="EPS_EXPORT_ACTION_MESSAGE">Export to EPS</entry>
+<entry key="PORTRAIT_ACTION_MESSAGE">Portrait</entry>
+<entry key="LANDSCAPE_ACTION_MESSAGE">Landscape</entry>
+<entry key="SCALE_ACTION_MESSAGE">Scale</entry>
+<entry key="INPUT_SCALE_ACTION_MESSAGE">Choice scale value</entry>
+<entry key="PREVIEW_ZOOM_ACTION_MESSAGE">Zoom / Unzoom overview</entry>
+<entry key="SAVE_HISTORIC_ACTION_MESSAGE">Sauve historic</entry>
+<entry key="CLEAR_HISTORIC_ACTION_MESSAGE">Clear historic</entry>
+
+
+<!-- Messages li�s aux expressions-->
+<entry key="PRINT_SCALE_ADAPT_MESSAGE">Auto</entry>
+<entry key="PRINT_SCALE_PERSONALIZE_MESSAGE">Personalize...</entry>
+<entry key="RESET_ACTION_MESSAGE">Reset</entry>
+<entry key="CONCRETE_OBJECTS_LIST_MESSAGE">Concrete object summary</entry>
+<entry key="EDITOR_PRE_TITLE_NAME">Precondition editor</entry>
+<entry key="EDITOR_POST_TITLE_NAME">Side effect editor </entry>
+<entry key="EDITOR_ITER_TITLE_NAME">Iteration editor</entry>
+<entry key="CAUSE_MESSAGE">REASON</entry>
+<entry key="VALUE_MESSAGE">RESULT</entry>
+<entry key="CHECK_ACTION_MESSAGE">Checking expression correctness</entry>
+<entry key="EVALUATE_ACTION_MESSAGE">Computing expression value</entry>
+<entry key="STRING_TO_INTEGER">Error : can not to parse String to Integer</entry>
+<entry key="STRING_TO_NUMBER">Error : can not to parse String to Number</entry>
+<entry key="NO_EXPRESSION_MESSAGE">No expression</entry>
+<entry key="NO_FIRST_EXPRESSION_MESSAGE">No boolean expression, can not to use alone</entry>
+<entry key="MISSING_USER_VALUE_MESSAGE">User value(s) missing</entry>
+<entry key="PARSER_PROBLEM_MESSAGE">Problem in the syntax analysis module</entry>
+<entry key="LEXICAL_ERROR_MESSAGE">Lexical error</entry>
+<entry key="SYNTAXICAL_ERROR_MESSAGE">Grammatical error</entry>
+<entry key="SEMANTICAL_ERROR_MESSAGE">Semantic error</entry>
+<entry key="LINE_MESSAGE">line</entry>
+<entry key="COLUMN_MESSAGE">column</entry>
+<entry key="ENCOUNTERED_CHAR_MESSAGE">char encountered</entry>
+<entry key="ENCOUNTERED_TOKEN_MESSAGE">string encountered</entry>
+<entry key="CHECK_ALL_PRECONDITIONS">Checking preconditions ...</entry>
+<entry key="PRECONDITION_OK_MESSAGE">precondition is ok</entry>
+<entry key="PRECONDITION_NO_OK_MESSAGE">precondition is not ok</entry>
+<entry key="PRECONDITION_EVAL_OK_MESSAGE">precondition computed</entry>
+<entry key="PRECONDITION_EVAL_NO_OK_MESSAGE">precondition not computed</entry>
+<entry key="PRECONDITION_OF_TASK_OK_MESSAGE">precondition is ok for the task</entry>
+<entry key="PRECONDITION_OF_TASK_NO_OK_MESSAGE">precondition is not ok for the task</entry>
+<entry key="PRECONDITION_ERROR_MESSAGE">Error on the precondition</entry>
+<entry key="NOT_YET_CHECKED_PRECONDITION_MESSAGE">Precondition not checked</entry>
+<entry key="PRECONDITION_CHECKED_AND_BUILT_MESSAGE">Checking and creating preconditions finished</entry>
+<entry key="PRECONDITION_PROGRESSBAR_MESSAGE">Checking and creating preconditions</entry>
+<entry key="EXIT_WITHOUT_SAVE_MESSAGE">Exit by setting the state of the model. Modifications history will be not saved</entry>
+<entry key="CHECK_ALL_EFFETSDEBORDS">Checking action ...</entry>
+<entry key="EFFETSDEBORD_OK_MESSAGE">Action is ok</entry>
+<entry key="EFFETSDEBORD_NO_OK_MESSAGE">Action is not ok</entry>
+<entry key="EFFETSDEBORD_EVAL_OK_MESSAGE">Action computed and K-MAD model modified</entry>
+<entry key="EFFETSDEBORD_EVAL_NO_OK_MESSAGE">Action not computed</entry>
+<entry key="EFFETSDEBORD_OF_TASK_OK_MESSAGE">Action is ok for the task</entry>
+<entry key="EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE">Action is not ok for the task</entry>
+<entry key="EFFETSDEBORD_ERROR_MESSAGE">Error on the action</entry>
+<entry key="NOT_YET_CHECKED_EFFETSDEBORD_MESSAGE">Action not checked</entry>
+<entry key="EFFETSDEBORD_CHECKED_AND_BUILT_MESSAGE">Checking and creating action finished</entry>
+<entry key="EFFETSDEBORD_PROGRESSBAR_MESSAGE">Checking and creating action</entry>
+<entry key="EFFETSDEBORD_CONCRETE_OBJECT_TITLE_MESSAGE">Concrete Object</entry>
+<entry key="EFFETSDEBORD_HISTORY_TITLE_MESSAGE">K-MAD History</entry>
+<entry key="EFFETSDEBORD_LOAD_STATE_MESSAGE">Load</entry>
+<entry key="NO_SELECTED_HISTORIC_MESSAGE">History not selected</entry>
+<entry key="HISTORIC_LOADED_MESSAGE">History loaded</entry>
+<entry key="HISTORIC_NO_LOADED_MESSAGE">History not loaded</entry>
+<entry key="CHECK_ALL_ITERATIONS">Checking iterations ...</entry>
+<entry key="ITERATION_OK_MESSAGE">iteration is ok</entry>
+<entry key="ITERATION_NO_OK_MESSAGE">iteration is not ok</entry>
+<entry key="ITERATION_EVAL_OK_MESSAGE">iteration computed</entry>
+<entry key="ITERATION_EVAL_NO_OK_MESSAGE">iteration not computed</entry>
+<entry key="NOT_YET_CHECKED_ITERATION_MESSAGE">Iteration not checked</entry>
+<entry key="STOP_LOOP_ITERATION_MESSAGE">Iteration finished</entry>
+<entry key="CONTINUE_LOOP_ITERATION_MESSAGE">Iteration in progress</entry>
+<entry key="ITERATION_MESSAGE">ITERATION</entry>
+<entry key="ITERATION_ERROR_MESSAGE">Error on the iteration</entry>
+<entry key="ITERATION_OF_TASK_OK_MESSAGE">Iteration is ok for the task</entry>
+<entry key="ITERATION_OF_TASK_NO_OK_MESSAGE">Iteration is not ok for the task</entry>
+<entry key="ITERATION_CHECKED_AND_BUILT_MESSAGE">Checking and creating iterations finished</entry>
+<entry key="ITERATION_PROGRESSBAR_MESSAGE">Checking and creating iterations</entry>
+
+        
+<!-- Expressions computing-->
+<entry key="CLEAR_EXPRESSION_MESSAGE">Clear</entry>
+<entry key="CHECK_VALIDATE_MESSAGE">Check</entry>
+<entry key="EVALUATE_FORCE1_MESSAGE">Compute</entry>
+<entry key="PRECONDITION_EDITION_MESSAGE">Precondition edition</entry>
+<entry key="EFFETSDEBORD_EDITION_MESSAGE">Action edition</entry>
+<entry key="ITERATION_EDITION_MESSAGE">Iteration edition</entry>
+<entry key="PRECONDITION_TEXTUEL_EDITION_MESSAGE">Textual precondition edition</entry>
+<entry key="EFFETSDEBORD_TEXTUEL_EDITION_MESSAGE">Textual action edition</entry>
+<entry key="ITERATION_TEXTUEL_EDITION_MESSAGE">Textual iteration edition</entry>
+<entry key="LITTERAUX_TITLE_MESSAGE">Literals </entry>
+<entry key="OPERATORS_TITLE_MESSAGE">Operators</entry>
+<entry key="FUNCTIONS_TITLE_MESSAGE">Functions</entry>
+<entry key="ITERATORS_TITLE_MESSAGE">Iterators</entry>
+<entry key="LOOP_VARIANT_MESSAGE">Loop variant</entry>
+
+
+<!-- Search tool-->
+<entry key="WRITE_TXT_FILE_OK">Success to save the text file : </entry>
+<entry key="WRITE_TXT_FILE_ERROR">Can not to save the text file</entry>
+<entry key="SAVE_CANCELLED_TEXT_FILECHOOSER_NAME">Saving of text file cancelled</entry>
+<entry key="SEARCH_NAME_NAME">Task name</entry>
+<entry key="WHOLE_TASK_NAME_OPTION_REPLACE_MESSAGE">Whole name</entry>
+<entry key="SEARCH_FAC_NAME">Optional task</entry>
+<entry key="SEARCH_INT_NAME">Interruptible task</entry>
+<entry key="EXTENSION_TEXT_FILTER_SEARCH_NAME">Text file (*.txt)</entry>
+<entry key="SEARCH_MESSAGE_TITLE">Search tool ...</entry>
+<entry key="FIND_MESSAGE">Search</entry>
+<entry key="REPLACE_MESSAGE">Replace with</entry>
+<entry key="DIRECTION_FIND_MESSAGE">Direction</entry>
+<entry key="FORWARD_DIRECTION_FIND_MESSAGE">Forward</entry>
+<entry key="BACKWARD_DIRECTION_FIND_MESSAGE">Backward</entry>
+<entry key="SCOPE_FIND_MESSAGE">Scope</entry>
+<entry key="ALL_FIND_MESSAGE">All</entry>
+<entry key="SELECTION_FIND_MESSAGE">Selected tasks</entry>
+<entry key="OPTION_FIND_MESSAGE">Options</entry>
+<entry key="CASE_SENSITIVE_OPTIONS_FIND_MESSAGE">Case sensitive</entry>
+<entry key="WHOLE_TASK_NAME_OPTIONS_FIND_MESSAGE">Whole task name</entry>
+<entry key="REGULAR_EXPRESSIONS_OPTIONS_FIND_MESSAGE">Regular expressions</entry>
+<entry key="SEARCH_RESULT_FIND_MESSAGE">Search result</entry>
+<entry key="FIND_ACTION_FIND_MESSAGE">Search</entry>
+<entry key="SAVE_OCCURENCES_ACTION_FIND_MESSAGE">Save search result</entry>
+<entry key="REPLACE_NEXT_ACTION_FIND_MESSAGE">Replace/Next</entry>
+<entry key="REPLACE_PREVIOUS_ACTION_FIND_MESSAGE">Replace/Previous</entry>
+<entry key="REPLACE_ACTION_FIND_MESSAGE">Replace</entry>
+<entry key="REPLACE_ALL_ACTION_FIND_MESSAGE">Replace all</entry>
+<entry key="TASK_NOT_FOUNDED_ACCORDING_FIND_CRITERIAS">Task not found</entry>
+<entry key="COUNT_TASKS_FOUNDED_MESSAGE">Result search (tasks number)</entry>
+
+
+<!-- Simulator tool : general part-->
+<entry key="SIMULATION_TITLE_MESSAGE">Simulator</entry>
+<entry key="ERROR_ITERATION_VIEW_MESSAGE">Error</entry>
+<entry key="PREDICAT_ITERATION_VIEW_MESSAGE">Predicate</entry>
+<entry key="USER_VALUE_ITERATION_VIEW_MESSAGE">User Val</entry>
+<entry key="SCENARIO_FILTER_NAME">Scenario file</entry>
+<entry key="ACTIONS_SIMULATION_MESSAGE">Actions</entry>
+<entry key="EDIT_USER_VALUES_SIMULATION_MESSAGE">Edit User Values</entry>
+<entry key="RECORD_SCENARIO_MESSAGE">Record scenario </entry>
+<entry key="OPEN_CANCELLED_SCENARIO_FILECHOOSER_NAME">Loading scenario canceled</entry>
+<entry key="SAVE_CANCELLED_SCENARIO_FILECHOOSER_NAME">Recording scenario canceled</entry>
+<entry key="SUCCEEDED_SAVE_SCENARIO_MESSAGE">Success to record scenario</entry>
+<entry key="NO_SUCCEEDED_SAVE_SCENARIO_MESSAGE">Failure to recod scenario</entry>
+<entry key="AUTHORIZED_EXECUTER_USER_MESSAGE">Authorized</entry>
+<entry key="NO_AUTHORIZED_EXECUTER_USER_MESSAGE">Non Autoris�e</entry>
+<entry key="DISABLED_CONSTRAINT_MESSAGE">Disabled</entry>
+<entry key="EVENT_TITLE_MESSAGE">Events</entry>
+<entry key="NO_CONCRETE_OBJECT">No current concrete object</entry>
+<entry key="NO_FIRING_EVENT_MESSAGE">No triggered event</entry>
+<entry key="NO_FIRING_EVENT_TINY_MESSAGE">No event</entry>
+<entry key="FIRABLE_EVENT_STATE_MESSAGE">Triggerable</entry>
+<entry key="NO_FIRABLE_EVENT_STATE_MESSAGE">No Triggerable</entry>
+<entry key="NO_SELECTED_ACTION_FOR_CONSTRAINTS_MESSAGE">No "execute" action selected</entry>
+<entry key="NO_SELECTED_SCENARIO_ACTION_FOR_CONSTRAINTS_MESSAGE">No "execute" action from scenario selected</entry>
+<entry key="CONSTRAINTS_TITLE_MESSAGE">Constraints</entry>
+<entry key="SOURCE_TASK_EVENT_MESSAGE">Task</entry>
+<entry key="NO_USER_MESSAGE">No User</entry>
+<entry key="EXECUTING_USER_TITLE_MESSAGE">User</entry>
+<entry key="CONSTRAINTS_NAME_COLUMN_NAME">Name</entry>
+<entry key="CONSTRAINTS_VALEUR_COLUMN_NAME">Value</entry>
+<entry key="CONSTRAINTS_STATE_COLUMN_NAME">State</entry>
+<entry key="PRECONDITION_CONSTRAINTS_RESPECTED_STATE_MESSAGE">Respected</entry>
+<entry key="PRECONDITION_CONSTRAINTS_NO_RESPECTED_STATE_MESSAGE">No Respected</entry>
+<entry key="PRECONDITION_CONSTRAINTS_ERROR_STATE_MESSAGE">Error</entry>
+<entry key="PRECONDITION_CONSTRAINTS_NEED_VALUES_STATE_MESSAGE">Need Value(s)</entry>
+<entry key="EFFETSDEBORD_EXECUTED_STATE_MESSAGE">Executed</entry>
+<entry key="EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE">Not Executed</entry>
+<entry key="USER_VALUES_TITLE">User Values Editor</entry>
+<entry key="PRECONDITION_USER_EDITION_MESSAGE">User values for precondition</entry>
+<entry key="EFFETSDEBORD_USER_EDITION_MESSAGE">User values for action</entry>
+<entry key="ITERATION_USER_EDITION_MESSAGE">User values for iteration</entry>
+<entry key="TRIGGER_VALID_TASK_MESSAGE">Trigger</entry>
+<entry key="NO_TRIGGER_CANCEL_TASK_MESSAGE">Cancel Trigger</entry>
+<entry key="EXECUTE_TASK_TRAITEMENT_MESSAGE">Task treatment</entry>
+<entry key="EXECUTION_CONSTRAINT_MESSAGE">Executing constraints</entry>
+<entry key="USER_EXECUTION_CONSTRAINT_MESSAGE">User</entry>
+<entry key="CAN_EXECUTE_TASK_MESSAGE">can execute the task</entry>
+<entry key="CAN_NOT_EXECUTE_TASK_MESSAGE">can not execute the task</entry>
+<entry key="EVENT_TRIGGER_CONSTRAINT_MESSAGE">Event</entry>
+<entry key="NO_TRIGGER_EVENT_CONSTRAINT_MESSAGE">No trigger event</entry>
+<entry key="CAN_TRIGGER_TASK_MESSAGE">can execute the task</entry>
+<entry key="CAN_NOT_TRIGGER_CONSTRAINT_MESSAGE">not generated and can not to execute the task</entry>
+<entry key="PRECONDITION_CONSTRAINT_MESSAGE">Precondition</entry>
+<entry key="ACTION_CONSTRAINT_MESSAGE">Side effects</entry>
+<entry key="GENERATE_EVENTS_CONSTRAINT_MESSAGE">Generating Events</entry>
+<entry key="NO_GENERATED_EVENTS_CONSTRAINT_MESSAGE">No event generated</entry>
+<entry key="EFFETSDEBORD_CONSTRAINT_MESSAGE">Action</entry>
+<entry key="USER_VALUES_MISSING_OR_WRONG_MESSAGE">User value(s) is/are missing or wrong</entry>
+<entry key="CONCRETE_OBJECT_NO_SELECTED_MESSAGE">Concrete object(s) not selected</entry>
+<entry key="USER_VALUES_PROBLEM_MESSAGE">User Values Error</entry>
+<entry key="FINISHED_SCENARIO_PROBLEM_MESSAGE">Scenario Finished</entry>
+<entry key="FINISHED_SIMULATION_PROBLEM_MESSAGE">Simulation Finished</entry>
+<entry key="FINISHED_SCENARIO_AND_SIMULATION_PROBLEM_MESSAGE">Simulation and scenario Finished</entry>
+<entry key="SELECT_TASK_TO_REPLAY_MESSAGE">Please, select a task</entry>
+<entry key="ITERATION_FINISH_NO_ACTION">Iteration is finished, side effect are canceled</entry>
+
+<!-- Simulation Actions-->
+<entry key="EXECUTE_ACTION_SIMULATION_MESSAGE">Execute</entry>
+<entry key="PASS_ACTION_SIMULATION_MESSAGE">Pass</entry>
+<entry key="SUSPEND_ACTION_SIMULATION_MESSAGE">Suspend</entry>
+<entry key="RESUME_ACTION_SIMULATION_MESSAGE">Resume</entry>
+<entry key="NO_RESUME_ACTION_SIMULATION_MESSAGE">No Resume</entry>
+
+
+<!-- Simulation task states-->
+<entry key="ACTIVE_STATE_TASK_SIMULATION_MESSAGE">Active</entry>
+<entry key="ACTIVE_ITERATION_STATE_TASK_SIMULATION_MESSAGE">ActiveLoop</entry>
+<entry key="FINISHED_STATE_TASK_SIMULATION_MESSAGE">Finished</entry>
+<entry key="PASSIVE_STATE_TASK_SIMULATION_MESSAGE">Passive</entry>
+<entry key="NO_ACCESSIBLE_STATE_TASK_SIMULATION_MESSAGE">Inactive</entry>
+<entry key="PASSED_STATE_TASK_SIMULATION_MESSAGE">Passed</entry>
+<entry key="SUSPENDED_STATE_TASK_SIMULATION_MESSAGE">Suspended</entry>
+<entry key="NO_RESUMED_STATE_TASK_SIMULATION_MESSAGE">Abandoned</entry>
+
+
+<!-- Recording simulation process-->
+<entry key="RECORD_TITLE_MESSAGE">Record Scenario</entry>
+<entry key="RECORD_BUILDING_SCENARION_MESSAGE">Current Scenario</entry>
+<entry key="RECORD_AVAILABLE_ACTIONABLE_MESSAGE">Available Actions</entry>
+<entry key="FINISHED_RECORD_SIMULATION_MESSAGE">Simulation of K-MAD model finished : a new scenario is available ...</entry>
+<entry key="NO_SELECTED_TASK_BEFORE_RECORD_SIMULATION_MESSAGE">Please, select a task</entry>
+
+
+<!-- Playing scenario-->
+<entry key="REPLAY_TITLE_MESSAGE">Play Scenario</entry>
+<entry key="REPLAY_SLOW_TEMPO">Slow</entry>
+<entry key="REPLAY_MODERATE_TEMPO">Moderate</entry>
+<entry key="REPLAY_SPEED_TEMPO">Fast</entry>
+<entry key="SCENARIO_REPLAY_MESSAGE">Scenario to play</entry>
+<entry key="REPLAY_OPTIONS_MESSAGE">Play options</entry>
+<entry key="REPLAY_KEEP_USER_VALUES_MESSAGE">Keep user values</entry>
+<entry key="REPLAY_TEMPO_MESSAGE">Timing</entry>
+<entry key="NO_ROOT_TASK_PROBLEM_MESSAGE">No root task</entry>
+<entry key="NO_FOUNDED_TASK_TO_REPLAY_PROBLEM_MESSAGE">Task not found</entry>
+<entry key="CAN_NOT_EXECUTE_TASK_TO_REPLAY_PROBLEM_MESSAGE">Can not execute this task immediatly</entry>
+
+<entry key="CONFIG_ERROR_DOM">Error of DOM configuration</entry>
+<entry key="CALL_NEW_DOCUMENT_BUILDER">when calling� fabrique.newDocumentBuilder()";</entry>
+<entry key="SIMULATION_PARSING_ERROR">Error when Document parsing</entry>
+<entry key="CALL_CONSTRUCTEUR_PARSE">: construteur.parse(xml)</entry>
+<entry key="SIMULATION_IO_ERROR">Input/Output error</entry>
+
+<!-- About-->
+<entry key="PROJECT_LEADER_MESSAGE">Project leader</entry>
+<entry key="DEVELOPMENT_QUERING_TOOL_MESSAGE">K-MADe development and Querying K-MAD model</entry>
+<entry key="KMAD_SPECIFY_MESSAGE">K-MAD model requirement</entry>
+<entry key="KMAD_ADAPTATOR_MESSAGE">K-MAD model adaptator</entry>
+<entry key="JAVA_GRAPHIC_LIBRARIES_MESSAGE">Libraries used</entry>
+<entry key="KMADE_TEAM_MESSAGE">Team</entry>
+<entry key="JAVA_LIBRARIES_MESSAGE">Libraries</entry>
+
+
+<!-- Grammar verification-->
+<entry key="COHERENCE_INTRO_ERROR">Grammar verification have found</entry>
+<entry key="COHERENCE_ONE_ERROR">error</entry>
+<entry key="COHERENCE_SOME_ERROR">errors</entry>
+<entry key="COHERENCE_INTER">and</entry>
+<entry key="COHERENCE_ONE_WARNING">warning</entry>
+<entry key="COHERENCE_SOME_WARNING">warnings</entry>
+<entry key="COHERENCE_VERIFICATION_TITLE">Access denied ...</entry>
+
+<entry key="NO_ALONE_MESSAGE_PROBLEM">No single task</entry>
+<entry key="PRECONDITION_EXPRESSION_MESSAGE_PROBLEM">Problem in the precondition expression</entry>
+<entry key="EFFETSDEBORD_EXPRESSION_MESSAGE_PROBLEM">Problem in the action expression</entry>
+<entry key="ITERATION_EXPRESSION_MESSAGE_PROBLEM">Problem in the iteration expression</entry>
+<entry key="NO_ONLY_ONE_SUBTASK_MESSAGE_PROBLEM">No single sub task</entry>
+<entry key="INVALID_DECOMPOSITION_MESSAGE_PROBLEM">Invalid scheduling</entry>
+<entry key="NO_DECOMPOSITION_SPECIFIED_MESSAGE_PROBLEM">Scheduling not defined</entry>
+<entry key="TASK_HAS_NO_NAME_MESSAGE_PROBLEM">Enter a name for the task</entry>
+<entry key="ELEMENTARY_DECOMPOSITION_FOR_LEAF_TASK">Scheduling must be elementary for a leaf task</entry>
+<entry key="NO_EXECUTANT_SPECIFIED_MESSAGE_WARNING">Executant not defined </entry>
+<entry key="SUBTASKS_EXECUTANT_DIFFERENT_MESSAGE_WARNING">Executant not the same</entry>
+<entry key="HIERARCHY_TYPE_MESSAGE">Hierarchical</entry>
+<entry key="EXPRESSION_TYPE_MESSAGE">Expression</entry>
+<entry key="TASKS_SPACE_LOCATION_MESSAGE">Task Space</entry>
+<entry key="PRECONDITION_LOCATION_MESSAGE">Precondition</entry>
+<entry key="EFFETSDEBORD_LOCATION_MESSAGE">Action</entry>
+<entry key="ITERATION_LOCATION_MESSAGE">Iteration</entry>
+<entry key="COHERENCE_TITLE_MESSAGE">Grammar verification</entry>
+<entry key="COHERENCE_CHECK_MESSAGE">Check grammar</entry>
+<entry key="ERRORS_TITLE_MESSAGE">Errors and Warnings</entry>
+<entry key="MESSAGE_ERROR_COLUMN_NAME">Message</entry>
+<entry key="TASK_NAME_COLUMN_NAME">Task</entry>
+<entry key="ERROR_TYPE_COLUMN_NAME">Type</entry>
+<entry key="LOCATION_COLUMN_NAME">Where</entry>
+
+
+<!-- Statistic tool-->
+<entry key="COUNT_TASK_INTO_TASK_MODELS_MESSAGE">Total tasks from the task space</entry>
+<entry key="COUNT_USER_TASK_MESSAGE">Total user executants    </entry>
+<entry key="COUNT_UNKNOWN_TASK_MESSAGE">Total unknown executants</entry>
+<entry key="COUNT_SYSTEM_TASK_MESSAGE">Total system executants</entry>
+<entry key="COUNT_ABSTRACT_TASK_MESSAGE">Total abstract executants</entry>
+<entry key="COUNT_INTERACT_TASK_MESSAGE">Total interaction executants</entry>
+<entry key="COUNT_UNKNOWN_DEC_TASK_MESSAGE">Total unknown decomposition</entry>
+<entry key="COUNT_ENABLING_DEC_TASK_MESSAGE">Total enabling decomposition</entry>
+<entry key="COUNT_CHOICE_DEC_TASK_MESSAGE">Total choice decomposition</entry>
+<entry key="COUNT_CONCURRENT_DEC_TASK_MESSAGE">Total concurrent decomposition</entry>
+<entry key="COUNT_ELEMENTARY_DEC_TASK_MESSAGE">Total elementary decomposition</entry>
+<entry key="COUNT_NO_ORDER_DEC_TASK_MESSAGE">Total no order decomposition</entry>
+<entry key="STATISTIC_TITLE">Statistics Tool</entry>
+<entry key="TYPE_STATISTIC_MESSAGE">Type</entry>
+<entry key="RESULT_STATISTIC_MESSAGE">Result</entry>
+<entry key="REFRESH_STATISTIC_MESSAGE">Refresh Statistics</entry>
+
+
+<!-- **-->
+<!-- * ExpressConstant Part-->
+<!-- **-->
+<entry key="ATTRIBUT_NOT_FOUND_EXPRESSION_EXCEPTION_MESSAGE">Attribut type not found</entry>
+<entry key="GROUP_NOT_FOUND_EXPRESSION_EXCEPTION_MESSAGE">Group not found</entry>
+
+<entry key="NEW_NAME_TASK">Task name</entry>
+<entry key="ROOT_TASK_NAME">Root</entry>
+<entry key="SINGLETON_NAME">Singleton</entry>
+<entry key="STACK_NAME">Stack</entry>
+<entry key="SET_NAME">Set</entry>
+<entry key="LIST_NAME">List</entry>
+<entry key="ARRAY_NAME">Array</entry>
+<entry key="BOOLEAN_NAME">Boolean</entry>
+<entry key="ENUMERATION_NAME">Enumeration</entry>
+<entry key="INTEGER_NAME">Integer</entry>
+<entry key="NUMBER_NAME">Number</entry>
+<entry key="INTERVALLE_NAME">Interval</entry>
+<entry key="STRING_NAME">String</entry>
+<entry key="UNKNOWN_EXECUTANT_NAME">Unknown</entry>
+<entry key="SYSTEM_EXECUTANT_NAME">System</entry>
+<entry key="INTERACTION_EXECUTANT_NAME">Interactive</entry>
+<entry key="USER_EXECUTANT_NAME">User</entry>
+<entry key="ABSTRACT_EXECUTANT_NAME">Abstract</entry>
+<entry key="UNKNOWN_IMPORTANCE_NAME">Not defined</entry>
+<entry key="HIGH_IMPORTANCE_NAME">Very significant</entry>
+<entry key="AVERAGE_IMPORTANCE_NAME">Rather significant</entry>
+<entry key="LOW_IMPORTANCE_NAME">Not very significant</entry>
+<entry key="UNKNOWN_FREQUENCY_NAME">Not defined</entry>
+<entry key="HIGH_FREQUENCY_NAME">High</entry>
+<entry key="AVERAGE_FREQUENCY_NAME">Medium</entry>
+<entry key="LOW_FREQUENCY_NAME">Low</entry>
+<entry key="UNKNOWN_MODALITY_NAME">Not defined</entry>
+<entry key="SENSORI_MODALITY_NAME">Sensorimotor</entry>
+<entry key="COGNITIF_MODALITY_NAME">Cognitive</entry>
+<entry key="UNKNOWN_EXPERIENCE_NAME">Not defined</entry>
+<entry key="HIGH_EXPERIENCE_NAME">Expert</entry>
+<entry key="AVERAGE_EXPERIENCE_NAME">Average</entry>
+<entry key="LOW_EXPERIENCE_NAME">Beginner </entry>
+<entry key="OPERATOR_NAME">Scheduling</entry>
+<entry key="ALTERNATIF_LONG_NAME">Choice</entry>
+<entry key="PARALLELE_LONG_NAME">Concurrent</entry>
+<entry key="SEQUENTIEL_LONG_NAME">Enabling</entry>
+<entry key="NO_ORDER_LONG_NAME">No order</entry>
+<entry key="LEAF_LONG_NAME">Elementary</entry>
+<entry key="UNKNOWN_LONG_NAME">Unknown</entry>
+    
+    
+<!-- Event    -->
+<entry key="REMOVE_ABSTRACT_OBJECT">Remove abstract object</entry>
+<entry key="REMOVE_ABSTRACT_ATTRIBUT">Remove abstract attribut</entry>
+<entry key="REMOVE_GROUP">Remove group</entry>
+<entry key="REMOVE_USER">Remove user</entry>
+<entry key="REMOVE_EVENT">Remove event</entry>
+<entry key="REMOVE_CONCRETE_OBJECT">Remove concrete object</entry>
+<entry key="REMOVE_CONCRETE_ATTRIBUT">Remove concrete attribut</entry>
+<entry key="NO_USED_GROUP_ATTRIBUT">Group or abstract attribut never used</entry>
+<entry key="NO_USED_ABSTRACT_OBJECT">Abstract object never used</entry>
+<entry key="REMOVE_ACTOR">Remove actor</entry>
+<entry key="REMOVE_ACTOR_SYSTEM">Remove actor system</entry>
+<entry key="REMOVE_MATERIEL">Remove equipment</entry>
+<entry key="REMOVE_ENUMERATION">Remove enumeration</entry>
+<entry key="REMOVE_ELEMENT">Remove enumeration element</entry>
+<entry key="REMOVE_INTERVALLE">Remove interval</entry>
+<entry key="REMOVE_LABEL">Remove label</entry>
+<entry key="CHANGE_AGREGAT">Set type</entry>
+<entry key="REMOVE_OF_THE_TASK_MESSAGE">from the task</entry>
+<entry key="REMOVE_OF_THE_ABSTRACT_ATTRIBUT_MESSAGE">from the abstract attribut</entry>
+<entry key="REMOVE_OF_THE_ABSTRACT_OBJECT_MESSAGE">from the abstract object</entry>
+<entry key="GROUP_MESSAGE">Group</entry>
+<entry key="CONCRETE_OBJECT_MESSAGE">CO</entry>
+<entry key="FROM_GROUP_MESSAGE">from the group</entry>
+<entry key="ATTRIBUT_ABSTRAIT">Abstract attribut</entry>
+<entry key="NOT_FOUNDED_ERROR">not found</entry>
+<entry key="INTEGER_STRING_COMPARISON_OPERATOR_ERROR">Impossible to transform string to integer</entry>
+<entry key="INTEGER_STRINGS_COMPARISON_OPERATOR_ERROR">Impossible to transform strings to integer</entry>
+<entry key="COMPARISON_OPERATOR_ERROR">Type problem for the comparaison</entry>
+<entry key="BOOLEAN_IS_NEEDED_ERROR">Function need a boolean expression parameter</entry>
+<entry key="NO_SAME_ABSTRACT_OBJECT">Groups have different abstract objects</entry>
+<entry key="TYPAGE_ERROR">Not the same type</entry>
+<entry key="TYPE_NOT_A_NUMBER">Types must be number</entry>
+<entry key="TYPE_NEED_BOOLEAN">Type must be boolean</entry>
+<entry key="TYPE_PLUS_ASSIGNMENT">Types must be two numbers or two texts</entry>
+
+<!-- ClassLoader Error-->
+<entry key="CLASS_LOADER_PROBLEM_MESSAGE">Java class problem</entry>
+<entry key="ENTITY_NO_EXIST_PROBLEM_MESSAGE">Entity does not exist</entry>
+
+
+
+<!-- chargement kxml-->
+<entry key="NO_VERSION">No version specified in the loaded file</entry>
+<entry key="NEW_SAVE_NEW_FORMAT">The saving will be made in the new format</entry>
+<entry key="VERSION_USE">KMADe Version : </entry>
+<entry key="VERSION_FILE">File version : </entry>
+<entry key="NOT_SAME_VERSION">The version file is not the same as KMADe tool</entry>
+
+
+
+
+<entry key="EMPTY_CELL_NAME">EMPTY</entry>
+<entry key="NEW_ABSTRACT_OBJECT_TEXT">New abstract object</entry>
+<entry key="REMOVE_ABSTRACT_OBJECT_TEXT">Remove the selected abstract object</entry>
+<entry key="NEW_OBJECT_NAME">New object</entry>
+<entry key="NO_SELECTED_OBJECT">No object selected</entry>
+<entry key="GENERALITY">Generality</entry>
+<entry key="ATTRIBUTES_NAME">Attributes</entry>
+<entry key="ADD_ATTRIBUTE">Add new attributs</entry>
+<entry key="REMOVE_ATTRIBUTE">Remove attribut</entry>
+
+
+<entry key="EDIT_CONCRETE_OBJECT_ACTION_MESSAGE">Edit concret object</entry>
+<entry key="EDIT_OBJECTS_ACTION_MESSAGE">Open object editor window</entry>
+<entry key="OBJECT_INSERTION_ERROR">The group is not consistent with the abstract object which is instantiated object</entry>
+<entry key="NEW_GROUP_NAME">New group</entry>
+<entry key="NEW_STACK_ACTION_MESSAGE">Add new stack</entry>
+<entry key="NEW_SET_ACTION_MESSAGE">Add new set</entry>
+<entry key="NEW_ARRAY_ACTION_MESSAGE">Add new tab</entry>
+<entry key="NEW_LIST_ACTION_MESSAGE">Add new list</entry>
+<entry key="NEW_SINGLETON_ACTION_MESSAGE">Add new singleton</entry>
+<entry key="EDIT_GROUP_ACTION_MESSAGE">Edit group</entry>
+<entry key="EDIT_GROUP_AND_CONCRETE_ACTION_MESSAGE">Edit group or abstract object</entry>
+<entry key="DELETE_GROUP_AND_CONCRETE_ACTION_MESSAGE">Delete group or concrete object</entry>
+
+
+<!-- Prototyping tool -->
+<!--   <entry key="PROTOTYPING_TOOL_TITLE_NAME">Outil de prototypage</entry> -->
+<entry key="PROTOTYPING_TOOL_RESET">Reset</entry>
+<entry key="PROTOTYPING_TOOL_TITLE_NAME">Prototype Tool</entry>
+<entry key="PROTOTYPING_TOOL_CURRENT_TASK">Current task</entry>
+<entry key="PROTOTYPING_TOOL_NAME_TITLE">Name</entry>
+<entry key="PROTOTYPING_TOOL_NAME_TOOLTIP">The task name</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_ABS">The performer is abstract</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_INCONNU">The performer is unknown</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_INT">The user perform the task on a system</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_SYS">The system perform the task</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_USER">The user perform the task, independently of the system</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_TOOLTIP">The performer of the task</entry>
+<entry key="PROTOTYPING_TOOL_DECOMPOSITION_TITLE">Task decomposition</entry>
+<entry key="PROTOTYPING_TOOL_PRECONDITION_TITLE">Execution prerequisite</entry>
+<entry key="PROTOTYPING_TOOL_PRECONDITION_TOOLTIP">Task execution condition</entry>
+<entry key="PROTOTYPING_TOOL_ITERATION_TITLE">Repetition condition</entry>
+<entry key="PROTOTYPING_TOOL_ITERATION_TOOLTIP">Task condition for repetition</entry>
+<entry key="PROTOTYPING_TOOL_DESCRIPTION_TITLE">Task description</entry>
+<entry key="PROTOTYPING_TOOL_DESCRIPTION_TOOLTIP">Textual description of the task</entry>
+<entry key="PROTOTYPING_TOOL_SUBTASK_DECOMP">(...)</entry>
+<entry key="PROTOTYPING_TOOL_SUBTASK_DECOMP_TOOLTIP1">This subtask is decomposed in</entry>
+<entry key="PROTOTYPING_TOOL_SUBTASK_DECOMP_TOOLTIP2">task(s)</entry>
+<entry key="PROTOTYPING_TOOL_SUBTASK_TERMINAL_TOOLTIP">This subtask have no decomposition</entry>
+<entry key="PROTOTYPING_TOOL_SUBTASK_DESCRIPTION_TOOLTIP">Description</entry>
+<entry key="PROTOTYPING_TOOL_SUBTASK_PRECONDITION">Prerequisite</entry>
+<entry key="PROTOTYPING_TOOL_CANCEL_BUTTON">Cancel</entry>
+<entry key="PROTOTYPING_TOOL_END_BUTTON">Finish</entry>
+<entry key="PROTOTYPING_TOOL_VALIDATE_END_BUTTON">Complete and validate</entry>
+<entry key="PROTOTYPING_TOOL_CONTROL_TITLE">Control</entry>
+<entry key="PROTOTYPING_TOOL_ITERATION_BUTTON">Do it again</entry>
+<entry key="PROTOTYPING_TOOL_MENU_TITLE">Prototype tool</entry>
+<entry key="PROTOTYPING_TOOL_MENU_TOOLTIP">Prototype tool</entry>
+<entry key="PROTOTYPING_TOOL_PRECONDITION_TEXT_PANE">Prerequisites</entry>
+<entry key="PROTOTYPING_TOOL_PRECONDITION_TITLE_PANE">Prerequisites verification</entry>
+<entry key="PROTOTYPING_TOOL_PASSIVE_INACTIVE_ERROR">Error : not the good state for the task</entry>
+<entry key="PROTOTYPING_TOOL_END_ERROR">Ended task is impossible</entry>
+
+
+
+
+
+
+</properties>

@@ -465,7 +465,6 @@ public final class PreferencesAdaptator {
      * M�thode qui applique les changements de param�tres de police, taille...
      */
     public static void applyTaskParameters() {
-	System.out.println();
 	PreferencesAdaptator.setSelectedTaskColor();
 	PreferencesAdaptator.setNodeDistance();
 	PreferencesAdaptator.setLevelDistance();

@@ -30,6 +30,7 @@ import fr.upensma.lias.kmade.kmad.schema.expression.UserNumber;
 import fr.upensma.lias.kmade.kmad.schema.expression.UserString;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.NumberValue;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -96,7 +97,7 @@ public class KMADEUserExpressionField extends JTextField {
 	    try {
 		myUserExpression.setNodeValue(new NumberValue(myText));
 	    } catch (NumberFormatException nfe) {
-		System.out.println(KMADEConstant.STRING_TO_INTEGER + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.STRING_TO_INTEGER + " : "
 			+ myText);
 		myUserExpression.setStateToError();
 	    }

@@ -51,6 +51,7 @@ import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEVertexView;
 import fr.upensma.lias.kmade.tool.view.taskproperties.KMADETaskPropertiesPanel;
 import fr.upensma.lias.kmade.tool.view.toolutilities.CustomOptionDialog;
 import fr.upensma.lias.kmade.tool.view.toolutilities.InDevelopmentGlassPanel;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
 import fr.upensma.lias.kmade.tool.view.worldobject.concreteobject.KMADEReadWriteConcreteObjectPanel;
 import fr.upensma.lias.kmade.tool.view.worldobject.event.KMADEReadWriteEventObjectPanel;
@@ -117,7 +118,7 @@ public final class GraphicEditorAdaptator {
     // }
     //
     // if (cellView.length != cellModel.size()) {
-    // System.out.println("Non correspondance entre le modèle Express et les vues JGraph : un conseil recharger le fichier");
+    // KMADEHistoryMessageManager.printMessage("Non correspondance entre le modèle Express et les vues JGraph : un conseil recharger le fichier");
     // return;
     // } else {
     // for (int i = 0; i < cellView.length; i++) {
@@ -495,7 +496,7 @@ public final class GraphicEditorAdaptator {
 	// Cr�ation de la t�che de type graphique.
 	KMADEDefaultGraphCell tempTask = new KMADEDefaultGraphCell(pTask);
 
-	// System.out.println("Nom "+tempTask.getName()+" "+tempTask.getExecutant()+" "+tempTask.getDecomposition());
+	// KMADEHistoryMessageManager.printMessage("Nom "+tempTask.getName()+" "+tempTask.getExecutant()+" "+tempTask.getDecomposition());
 	// Positionner la t�che dans le graphique.
 	MAIN_FRAME.getClipBoardDialog().getMyGraph().getGraphLayoutCache()
 		.insert(tempTask);
@@ -1020,7 +1021,7 @@ public final class GraphicEditorAdaptator {
 		}
 
 		// Plus rapide que de créer séparement la tâche.
-		System.out.println("\n"
+		KMADEHistoryMessageManager.printlnMessage("\n"
 			+ KMADEConstant.CREATE_GRAPHICAL_TASKS_MESSAGE);
 		GraphicEditorAdaptator.getCurrentGraphLayoutCache()
 			.insert(toto);
@@ -1044,8 +1045,7 @@ public final class GraphicEditorAdaptator {
 		if (GraphicEditorAdaptator.canceled) {
 		    return null;
 		} else {
-		    System.out
-			    .println(KMADEConstant.CREATE_GRAPHICAL_EDGES_MESSAGE);
+		    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CREATE_GRAPHICAL_EDGES_MESSAGE);
 		    // Effacer les anciennes valeurs dans les Tables (Graphique)
 		    GraphicEditorAdaptator.done = true;
 		}
@@ -1098,10 +1098,10 @@ public final class GraphicEditorAdaptator {
 		    GraphicEditorAdaptator.showOrHideGrid(false);
 		}
 	    } else {
-		System.err.println(KMADEConstant.INPUT_GRID_SIZE_ERROR_MESSAGE);
+		KMADEHistoryMessageManager.printlnError(KMADEConstant.INPUT_GRID_SIZE_ERROR_MESSAGE);
 	    }
 	} catch (Exception ee) {
-	    System.err.println(KMADEConstant.INPUT_GRID_SIZE_ERROR_MESSAGE);
+	    KMADEHistoryMessageManager.printlnError(KMADEConstant.INPUT_GRID_SIZE_ERROR_MESSAGE);
 	}
     }
 
@@ -1192,7 +1192,7 @@ public final class GraphicEditorAdaptator {
 	Object[] cellSelected = GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getSelectionCells();
 
-	// System.out.println("Ajout d'une t�che dans le clipBord  "+
+	// KMADEHistoryMessageManager.printMessage("Ajout d'une t�che dans le clipBord  "+
 	// cellSelected.length);
 	// Etape 1 : dissocier les taches et les liens au sens graphique.
 	ArrayList<String[]> edgeOIDList = new ArrayList<String[]>();

@@ -23,7 +23,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.PrintStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -31,7 +30,6 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
@@ -42,7 +40,8 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressEffetsDeBord;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressIteration;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressPrecondition;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserkmad.ExpressKMADXML;
-import fr.upensma.lias.kmade.tool.view.toolutilities.JTextAreaOutputStream;
+import fr.upensma.lias.kmade.tool.view.toolutilities.JTextAreaMessageIO;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
 import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
 import fr.upensma.lias.kmade.tool.viewadaptator.AbstractObjectAdaptator;
@@ -67,9 +66,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
 	private JProgressBar myProgressBar;
 
-	private JTextArea myTextArea;
-
-	private JTextAreaOutputStream myOutputStream;
+	private JTextAreaMessageIO myTextArea;
 
 	private JButton cancelButton;
 
@@ -92,11 +89,10 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 				.createTitledBorder(KMADEConstant.STATE_LOAD_TITLE_NAME);
 		myProgressBar.setBorder(myTitledBorder);
 
-		myTextArea = new JTextArea();
+		myTextArea = new JTextAreaMessageIO();
 		myScrollPane = new JScrollPane(myTextArea);
 		myScrollPane.setPreferredSize(new Dimension(600, 300));
 		myTextArea.setEditable(false);
-		myOutputStream = new JTextAreaOutputStream(myTextArea);
 
 		panelSouth = new JPanel();
 		cancelButton = new JButton(KMADEConstant.CANCEL_MESSAGE);
@@ -154,9 +150,9 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 		});
 	}
 
-	public void initWriteKMADModelFromXMLFile() {
+	public void initWriteKMADModelFromXMLFile(){
 		this.setTitle(KMADEConstant.SAVE_MONITOR_TITLE_NAME);
-		System.setOut(new PrintStream(myOutputStream));
+		myTextArea.setOutputMessage();
 		myTextArea.setText("");
 
 		panelSouth.removeAll();
@@ -190,10 +186,9 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 	}
 	
 	//Save the KMADModel
-	public void writeKMADModelFromXMLFile() {
+	public void writeKMADModelFromXMLFile(){
 		this.setTitle(KMADEConstant.SAVE_MONITOR_TITLE_NAME);
-		System.setOut(new PrintStream(myOutputStream));
-
+		myTextArea.setOutputMessage();
 		myTextArea.setText("");
 
 		panelSouth.removeAll();
@@ -240,30 +235,28 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
 					InterfaceExpressJava.setBddSetOff();
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.WRITE_EXPRESS_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_EXPRESS_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
 				if (ExpressKMADXML.isError()) {
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
-					System.out
-							.println(KMADEConstant.IMPLICIT_STOP_SAVE_FILE_MESSAGE);
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.IMPLICIT_STOP_SAVE_FILE_MESSAGE);
 					myTimer.stop();
 					myTimer = null;
 
 					KMADeAdaptator.disableCurrentFileName();
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.WRITE_EXPRESS_NO_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_EXPRESS_NO_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
 				if (ExpressKMADXML.isCanceled()) {
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_SAVE_FILE_MESSAGE);
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_SAVE_FILE_MESSAGE);
 					InterfaceExpressJava.clearCurrentProject();
 					KMADeAdaptator.cleanAllAdaptateur();
 					myTimer.stop();
@@ -272,7 +265,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					KMADeAdaptator.disableCurrentFileName();
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.WRITE_EXPRESS_NO_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_EXPRESS_NO_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 			}
@@ -294,8 +287,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 	//Save the KMAD Items
 	public void writeKMADItemsFromXMLFile() {
 		this.setTitle(KMADEConstant.SAVE_MONITOR_TITLE_NAME);
-		System.setOut(new PrintStream(myOutputStream));
-
+		myTextArea.setOutputMessage();
 		myTextArea.setText("");
 
 		panelSouth.removeAll();
@@ -322,7 +314,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 							.setString(KMADEConstant.EXPRESS_OBJECTS_TITLE_MESSAGE);
 					myProgressBar.setValue(0);
 					ExpressKMADXML.setBegining(false);
-					ExpressKMADXML.saveKMADItemsProcess();
+					ExpressKMADXML.saveKMADModelProcess();
 				}
 
 				myProgressBar.setValue(ExpressKMADXML.getCurrentEntity());
@@ -342,30 +334,28 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
 					InterfaceExpressJava.setBddSetOff();
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.WRITE_EXPRESS_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_EXPRESS_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
 				if (ExpressKMADXML.isError()) {
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
-					System.out
-							.println(KMADEConstant.IMPLICIT_STOP_SAVE_FILE_MESSAGE);
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.IMPLICIT_STOP_SAVE_FILE_MESSAGE);
 					myTimer.stop();
 					myTimer = null;
 
 					KMADeAdaptator.disableCurrentFileName();
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.WRITE_EXPRESS_NO_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_EXPRESS_NO_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
 				if (ExpressKMADXML.isCanceled()) {
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_SAVE_FILE_MESSAGE);
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_SAVE_FILE_MESSAGE);
 					InterfaceExpressJava.clearCurrentProject();
 					KMADeAdaptator.cleanAllAdaptateur();
 					myTimer.stop();
@@ -374,7 +364,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					KMADeAdaptator.disableCurrentFileName();
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.WRITE_EXPRESS_NO_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_EXPRESS_NO_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 			}
@@ -396,9 +386,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 	//Load KMADModel or KMADItems
 	public void readKMADFromXMLFile() {
 		this.setTitle(KMADEConstant.LOAD_MONITOR_TITLE_NAME);
-
-		System.setOut(new PrintStream(myOutputStream));
-
+		myTextArea.setOutputMessage();
 		myTextArea.setText("");
 
 		panelSouth.removeAll();
@@ -425,7 +413,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					myProgressBar
 							.setString(KMADEConstant.EXPRESS_OBJECTS_TITLE_MESSAGE);
 					ExpressKMADXML.setBegining(false);
-					ExpressKMADXML.loadKMADProcess();
+					ExpressKMADXML.loadKMADModelProcess();
 				}
 
 				if (!ExpressKMADXML.isDone()) {
@@ -516,13 +504,12 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 							.getCurrentFileName());
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_EXPRESS_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
 				if (ExpressKMADXML.isError()) {
-					System.out
-							.println(KMADEConstant.IMPLICIT_STOP_LOAD_SPF_FILE);
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.IMPLICIT_STOP_LOAD_SPF_FILE);
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
 					InterfaceExpressJava.clearCurrentProject();
@@ -533,14 +520,13 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					KMADeAdaptator.disableCurrentFileName();
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
 				if (ExpressKMADXML.isCanceled()
 						&& GraphicEditorAdaptator.isBegining()) {
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_OBJECT);
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_OBJECT);
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
 					InterfaceExpressJava.clearCurrentProject();
@@ -551,15 +537,14 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					KMADeAdaptator.disableCurrentFileName();
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
 				if (ExpressKMADXML.isDone()
 						&& GraphicEditorAdaptator.isCanceled()
 						&& ExpressPrecondition.isBegining()) {
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
 					InterfaceExpressJava.clearCurrentProject();
@@ -572,15 +557,14 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					KMADeAdaptator.disableCurrentFileName();
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
 				if (ExpressKMADXML.isDone() && GraphicEditorAdaptator.isDone()
 						&& ExpressPrecondition.isCanceled()
 						&& ExpressEffetsDeBord.isBegining()) {
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
 					InterfaceExpressJava.clearCurrentProject();
@@ -593,7 +577,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					KMADeAdaptator.disableCurrentFileName();
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
@@ -601,8 +585,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 						&& ExpressPrecondition.isDone()
 						&& ExpressEffetsDeBord.isCanceled()
 						&& ExpressIteration.isBegining()) {
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
 					InterfaceExpressJava.clearCurrentProject();
@@ -615,7 +598,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					KMADeAdaptator.disableCurrentFileName();
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
@@ -623,8 +606,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 						&& ExpressPrecondition.isDone()
 						&& ExpressEffetsDeBord.isDone()
 						&& ExpressIteration.isCanceled()) {
-					System.out
-							.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
 					cancelButton.setEnabled(false);
 					retourButton.setEnabled(true);
 					InterfaceExpressJava.clearCurrentProject();
@@ -637,7 +619,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					KMADeAdaptator.disableCurrentFileName();
 
 					GraphicEditorAdaptator.getMainFrame().activeMessageStream();
-					System.out.println(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_EXPRESS_NO_OK_FILE
 							+ ExpressKMADXML.getCurrentFileName());
 				}
 
@@ -802,8 +784,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					}
 
 					if (InterfaceExpressJava.isError()) {
-						System.err
-								.println(KMADEConstant.IMPLICIT_STOP_LOAD_SPF_FILE);
+						KMADEHistoryMessageManager.printlnMessage(KMADEConstant.IMPLICIT_STOP_LOAD_SPF_FILE);
 						cancelButton.setEnabled(false);
 						retourButton.setEnabled(true);
 						InterfaceExpressJava.clearCurrentProject();
@@ -814,8 +795,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 
 					if (InterfaceExpressJava.isCanceled()
 							&& GraphicEditorAdaptator.isBegining()) {
-						System.out
-								.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_OBJECT);
+						KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_OBJECT);
 						cancelButton.setEnabled(false);
 						retourButton.setEnabled(true);
 						InterfaceExpressJava.clearCurrentProject();
@@ -827,8 +807,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 					if (InterfaceExpressJava.isDone()
 							&& GraphicEditorAdaptator.isCanceled()
 							&& ExpressPrecondition.isBegining()) {
-						System.out
-								.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
+						KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
 						cancelButton.setEnabled(false);
 						retourButton.setEnabled(true);
 						InterfaceExpressJava.clearCurrentProject();
@@ -843,8 +822,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 							&& GraphicEditorAdaptator.isDone()
 							&& ExpressPrecondition.isCanceled()
 							&& ExpressEffetsDeBord.isBegining()) {
-						System.out
-								.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
+						KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
 						cancelButton.setEnabled(false);
 						retourButton.setEnabled(true);
 						InterfaceExpressJava.clearCurrentProject();
@@ -860,8 +838,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 							&& ExpressPrecondition.isDone()
 							&& ExpressEffetsDeBord.isCanceled()
 							&& ExpressIteration.isBegining()) {
-						System.out
-								.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
+						KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
 						cancelButton.setEnabled(false);
 						retourButton.setEnabled(true);
 						InterfaceExpressJava.clearCurrentProject();
@@ -877,8 +854,7 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 							&& ExpressPrecondition.isDone()
 							&& ExpressEffetsDeBord.isDone()
 							&& ExpressIteration.isCanceled()) {
-						System.out
-								.println(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
+						KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT);
 						cancelButton.setEnabled(false);
 						retourButton.setEnabled(true);
 						InterfaceExpressJava.clearCurrentProject();
@@ -915,10 +891,8 @@ public class KMADEProgressBarPanel extends JDialog implements LanguageFactory {
 			myScrollPane.setBorder(BorderFactory
 					.createTitledBorder(KMADEConstant.LOAD_CONSOLE_TITLE_NAME));
 		}
-
-		System.setOut(new PrintStream(myOutputStream));
-
-		System.out.println(message);
+		myTextArea.setOutputMessage();
+		KMADEHistoryMessageManager.printlnMessage(message);
 
 		GraphicEditorAdaptator.disabledMainFrameBeforeLoadAndSaveProcess();
 		this.pack();

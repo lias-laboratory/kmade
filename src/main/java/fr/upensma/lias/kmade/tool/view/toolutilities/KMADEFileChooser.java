@@ -43,17 +43,16 @@ public final class KMADEFileChooser {
 	if (returnVal == JFileChooser.APPROVE_OPTION) {
 	    file = fc.getSelectedFile();
 	    if (file == null) {
-		System.out.println(KMADEConstant.OPEN_ERROR_FILE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
 		return null;
 	    } else {
 		if (!file.exists()) {
-		    System.out.println(KMADEConstant.OPEN_ERROR_FILE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
 		    return null;
 		}
 	    }
 	} else
-	    System.out
-		    .println(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
 	return file;
     }
 
@@ -69,7 +68,7 @@ public final class KMADEFileChooser {
 	    file = fc.getSelectedFile();
 
 	    if (file == null) {
-		System.out.println(KMADEConstant.WRITE_ERROR_FILE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_ERROR_FILE);
 		return null;
 	    } else {
 		if (file.exists()) {
@@ -94,8 +93,7 @@ public final class KMADEFileChooser {
 		}
 	    }
 	} else {
-	    System.out
-		    .println(KMADEConstant.SAVE_CANCELLED_EXPRESS_FILECHOOSER_NAME);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SAVE_CANCELLED_EXPRESS_FILECHOOSER_NAME);
 	    return null;
 	}
 	return file.getAbsolutePath();
@@ -117,12 +115,11 @@ public final class KMADEFileChooser {
 	if (returnVal == JFileChooser.APPROVE_OPTION) {
 	    file = fc.getSelectedFile();
 	    if (file == null) {
-		System.out.println(KMADEConstant.OPEN_ERROR_FILE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
 		return null;
 	    }
 	} else
-	    System.out
-		    .println(KMADEConstant.OPEN_CANCELLED_SCENARIO_FILECHOOSER_NAME);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_CANCELLED_SCENARIO_FILECHOOSER_NAME);
 	return file;
     }
 
@@ -143,7 +140,7 @@ public final class KMADEFileChooser {
 	    file = fc.getSelectedFile();
 
 	    if (file == null) {
-		System.out.println(KMADEConstant.WRITE_ERROR_FILE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_ERROR_FILE);
 		return null;
 	    } else {
 		if (file.exists()) {
@@ -168,8 +165,7 @@ public final class KMADEFileChooser {
 		}
 	    }
 	} else {
-	    System.out
-		    .println(KMADEConstant.SAVE_CANCELLED_SCENARIO_FILECHOOSER_NAME);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SAVE_CANCELLED_SCENARIO_FILECHOOSER_NAME);
 	    return null;
 	}
 	return file.getAbsolutePath();
@@ -191,12 +187,11 @@ public final class KMADEFileChooser {
 	if (returnVal == JFileChooser.APPROVE_OPTION) {
 	    file = fc.getSelectedFile();
 	    if (file == null) {
-		System.out.println(KMADEConstant.OPEN_ERROR_FILE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
 		return null;
 	    }
 	} else
-	    System.out
-		    .println(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
 	return file;
     }
 
@@ -213,7 +208,7 @@ public final class KMADEFileChooser {
 	    file = fc.getSelectedFile();
 
 	    if (file == null) {
-		System.out.println(KMADEConstant.WRITE_TXT_FILE_ERROR);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_TXT_FILE_ERROR);
 		return null;
 	    } else {
 		if (file.exists()) {
@@ -236,8 +231,7 @@ public final class KMADEFileChooser {
 		}
 	    }
 	} else {
-	    System.out
-		    .println(KMADEConstant.SAVE_CANCELLED_TEXT_FILECHOOSER_NAME);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SAVE_CANCELLED_TEXT_FILECHOOSER_NAME);
 	}
 	return file;
     }

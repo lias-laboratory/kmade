@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -85,7 +86,7 @@ public class WarningMessage implements AbstractMessage {
     public void displayMessages() {
 	String[] str = getMessages();
 	for (int i = 0; i < str.length; i++) {
-	    System.out.println("ATTENTION " + str[i]);
+		 KMADEHistoryMessageManager.printlnMessage("ATTENTION " + str[i]);
 	}
 	listOid.clear();
 	listInteger.clear();

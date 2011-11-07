@@ -70,6 +70,7 @@ import fr.upensma.lias.kmade.tool.view.PieMenuCreateTask;
 import fr.upensma.lias.kmade.tool.view.PieMenuEditDecomposition;
 import fr.upensma.lias.kmade.tool.view.PieMenuEditExecutant;
 import fr.upensma.lias.kmade.tool.view.PieMenuEdition;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 
 /**
@@ -722,7 +723,7 @@ public class KMADETaskModelPanel extends JPanel {
 			try {
 			    graph.setSelectionCell(cell);
 			} catch (Exception e) {
-			    System.err.println("Editing exception: " + e);
+			    KMADEHistoryMessageManager.printlnError("Editing exception: " + e);
 			}
 			stopEditingInCompleteEditing = true;
 		    }

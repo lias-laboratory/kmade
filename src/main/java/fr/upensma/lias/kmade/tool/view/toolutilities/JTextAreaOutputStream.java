@@ -48,8 +48,10 @@ public class JTextAreaOutputStream extends OutputStream {
     public void write(int b) throws IOException {
 	byte[] bytes = new byte[1];
 	bytes[0] = (byte) b;
-	String new_text = new String(bytes);
+	//String new_text = new String(bytes);
+	String new_text = String.valueOf( ( char )b );
 	m_text_area.append(new_text);
+	
 	if (new_text.indexOf('\n') > -1) {
 	    try {
 		m_text_area.scrollRectToVisible(m_text_area

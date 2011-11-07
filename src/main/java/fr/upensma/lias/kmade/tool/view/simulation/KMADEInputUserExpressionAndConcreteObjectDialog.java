@@ -25,7 +25,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -39,12 +38,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.JTextArea;
 
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.taskproperties.constrainteditors.KMADEGroupTypeComboBox;
 import fr.upensma.lias.kmade.tool.view.taskproperties.constrainteditors.KMADEUserExpressionField;
-import fr.upensma.lias.kmade.tool.view.toolutilities.JTextAreaOutputStream;
+import fr.upensma.lias.kmade.tool.view.toolutilities.JTextAreaMessageIO;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
 import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 import fr.upensma.lias.kmade.tool.viewadaptator.SimulationAdaptator;
@@ -89,7 +87,7 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
 
     private JPanel panelIteration;
 
-    private JTextArea myTextArea;
+    private JTextAreaMessageIO myTextArea;
 
     private JPanelUserTool panelPreconditionTool;
 
@@ -190,7 +188,7 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
 	panelHaut.add(Box.createRigidArea(new Dimension(0, 10)));
 	panelHaut.add(panelIterationEdit);
 
-	myTextArea = new JTextArea();
+	myTextArea = new JTextAreaMessageIO();
 	JScrollPane myScroll = new JScrollPane(myTextArea);
 	myScroll.setBorder(BorderFactory
 		.createTitledBorder(KMADEConstant.MESSAGES_MESSAGE));
@@ -261,8 +259,7 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
     }
 
     public void showInputUserConcreteDialogToEdit() {
-	JTextAreaOutputStream out_stream = new JTextAreaOutputStream(myTextArea);
-	System.setOut(new PrintStream(out_stream));
+	myTextArea.setOutputMessage();
 	this.getContentPane().validate();
 	this.getContentPane().repaint();
 	buttonRetour.setText(KMADEConstant.VALID_MESSAGE);
@@ -271,8 +268,7 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
     }
 
     public void showInputUserConcreteDialogToSimulate() {
-	JTextAreaOutputStream out_stream = new JTextAreaOutputStream(myTextArea);
-	System.setOut(new PrintStream(out_stream));
+	myTextArea.setOutputMessage();
 	this.getContentPane().validate();
 	this.getContentPane().repaint();
 	buttonRetour.setText(KMADEConstant.TRIGGER_VALID_TASK_MESSAGE);

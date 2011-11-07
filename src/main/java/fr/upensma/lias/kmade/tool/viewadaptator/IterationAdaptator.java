@@ -34,6 +34,7 @@ import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.MyIteration;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.ParseException;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.TokenMgrError;
 import fr.upensma.lias.kmade.tool.view.taskproperties.KMADEEditorPrePostIterDialog;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -80,7 +81,7 @@ public final class IterationAdaptator {
     }
 
     public static void checkIteration(String s) {
-	System.out.print(KMADEConstant.CHECK_ACTION_MESSAGE + " : ");
+    	KMADEHistoryMessageManager.printMessage(KMADEConstant.CHECK_ACTION_MESSAGE + " : ");
 	IterationAdaptator.checkIterationBuilder(s);
 	IterationAdaptator.initIteration();
     }
@@ -98,31 +99,31 @@ public final class IterationAdaptator {
 	try {
 	    NodeExpression ref = parser.expression();
 	    if (ref == null) {
-		System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 			+ KMADEConstant.PARSER_PROBLEM_MESSAGE);
 		ExpressIteration.setIteration(myCurrentTask, null);
 	    } else {
 		ref.checkNode();
 		ExpressIteration.setIteration(myCurrentTask, ref);
-		System.out.println(KMADEConstant.ITERATION_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_OK_MESSAGE);
 	    }
 	} catch (SemanticException e) {
-	    System.out.println(KMADEConstant.ITERATION_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " : "
 		    + e.getMessage());
 	    ExpressIteration.setIteration(myCurrentTask, null);
 	    return;
 	} catch (ParseException e) {
-	    System.out.println(KMADEConstant.ITERATION_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SYNTAXICAL_ERROR_MESSAGE + " : "
 		    + e.getMessage());
 	    ExpressIteration.setIteration(myCurrentTask, null);
 	    return;
 	} catch (TokenMgrError e) {
-	    System.out.println(KMADEConstant.ITERATION_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.LEXICAL_ERROR_MESSAGE + " : "
 		    + e.getMessage());
 	    ExpressIteration.setIteration(myCurrentTask, null);
@@ -130,8 +131,8 @@ public final class IterationAdaptator {
 	} catch (Error e) {
 	    // Erreur normalement qui doit venir de AttributExpressExpression ou
 	    // GroupExpressExpression
-	    System.out.println(KMADEConstant.ITERATION_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " : "
 		    + e.getMessage());
 	    ExpressIteration.setIteration(myCurrentTask, null);
@@ -143,7 +144,7 @@ public final class IterationAdaptator {
 	try {
 	    new NumberValue(l);
 	} catch (NumberFormatException e) {
-	    System.out.println(KMADEConstant.STRING_TO_INTEGER);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.STRING_TO_INTEGER);
 	    return;
 	}
 	IterationAdaptator.setNewVariantToken("[" + l + "]");
@@ -156,7 +157,7 @@ public final class IterationAdaptator {
 	    try {
 		new NumberValue(t);
 	    } catch (NumberFormatException e) {
-		System.out.println(KMADEConstant.STRING_TO_INTEGER);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.STRING_TO_INTEGER);
 		return;
 	    }
 	} else if (l.equals(TypeStructure.STRING_STRUCT.getValue())) {
@@ -166,7 +167,7 @@ public final class IterationAdaptator {
     }
 
     public static void evaluateIteration(String text) {
-	System.out.print(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
+    	KMADEHistoryMessageManager.printMessage(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
 	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	try {
@@ -178,9 +179,8 @@ public final class IterationAdaptator {
 			    (myCurrentTask.getIteExpression().isFinished() ? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE
 				    : KMADEConstant.STOP_LOOP_ITERATION_MESSAGE)
 				    + " =");
-	    System.out.println(KMADEConstant.ITERATION_EVAL_OK_MESSAGE);
-	    System.out
-		    .println(KMADEConstant.VALUE_MESSAGE
+	    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_EVAL_OK_MESSAGE);
+	    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.VALUE_MESSAGE
 			    + " = "
 			    + myCurrentTask.getIteExpression()
 				    .getNodeExpression().getNodeValue()
@@ -189,15 +189,15 @@ public final class IterationAdaptator {
 				    .isLoopProgress() ? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE
 				    : KMADEConstant.STOP_LOOP_ITERATION_MESSAGE));
 	} catch (SemanticErrorException e) {
-	    System.out.println(KMADEConstant.ITERATION_EVAL_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_EVAL_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " , "
 		    + e.getMessage());
 	    KMADEEditorPrePostIterDialog.getIterationPanel().giveResult(
 		    KMADEConstant.ITERATION_MESSAGE + " ? =");
 	} catch (SemanticUnknownException e) {
-	    System.out.println(KMADEConstant.ITERATION_EVAL_NO_OK_MESSAGE);
-	    System.out.println(KMADEConstant.CAUSE_MESSAGE + " : "
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_EVAL_NO_OK_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
 		    + KMADEConstant.MISSING_USER_VALUE_MESSAGE + " , "
 		    + e.getMessage());
 	    KMADEEditorPrePostIterDialog.getIterationPanel().giveResult(

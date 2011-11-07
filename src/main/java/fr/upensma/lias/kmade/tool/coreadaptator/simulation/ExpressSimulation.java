@@ -36,6 +36,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.User;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressEvent;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressIteration;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -172,11 +173,11 @@ public final class ExpressSimulation {
     
     public static boolean isExecutableTask(boolean exe, boolean event, boolean pre, int value, Tache myCurrentTask) {        
         // Cette méthode s'occupe de gérer la première catégorie
-        System.out.println(KMADEConstant.EXECUTE_TASK_TRAITEMENT_MESSAGE + " : " + myCurrentTask.getName());
-        System.out.println(" * " + KMADEConstant.EXECUTION_CONSTRAINT_MESSAGE); 
+    	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXECUTE_TASK_TRAITEMENT_MESSAGE + " : " + myCurrentTask.getName());
+    	 KMADEHistoryMessageManager.printlnMessage(" * " + KMADEConstant.EXECUTION_CONSTRAINT_MESSAGE); 
         
         // Est-ce le bon utilisateur qui exécute.
-        System.out.print("  - " + KMADEConstant.USER_EXECUTION_CONSTRAINT_MESSAGE + " : ");
+    	 KMADEHistoryMessageManager.printMessage("  - " + KMADEConstant.USER_EXECUTION_CONSTRAINT_MESSAGE + " : ");
         if (exe) {
         	boolean trouve = false;
         	boolean isSystem = myCurrentTask.getExecutant().equals(Executant.SYS);
@@ -191,68 +192,68 @@ public final class ExpressSimulation {
 				}
 
 				if (trouve) {
-					System.out.println(selectUser.getName() + " " + KMADEConstant.CAN_EXECUTE_TASK_MESSAGE + " " + myCurrentTask.getName());
+					KMADEHistoryMessageManager.printlnMessage(selectUser.getName() + " " + KMADEConstant.CAN_EXECUTE_TASK_MESSAGE + " " + myCurrentTask.getName());
 				} else {
-					System.out.println(selectUser.getName() + " " + KMADEConstant.CAN_NOT_EXECUTE_TASK_MESSAGE + " " + myCurrentTask.getName());
-			       	System.out.println("");
+					KMADEHistoryMessageManager.printlnMessage(selectUser.getName() + " " + KMADEConstant.CAN_NOT_EXECUTE_TASK_MESSAGE + " " + myCurrentTask.getName());
+			       	KMADEHistoryMessageManager.printlnMessage("");
 					return false;
 				}
 			} else {
 				// La tâche n'est pas soumise à la contrainte d'un utilisateur.
-				System.out.println(KMADEConstant.AUTHORIZED_EXECUTER_USER_MESSAGE);
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.AUTHORIZED_EXECUTER_USER_MESSAGE);
 			}
         } else {
-       		System.out.println(KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
+       		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
         }
         
         // Est-ce le bon événement déclencheur.
-        System.out.print("  - " + KMADEConstant.EVENT_TRIGGER_CONSTRAINT_MESSAGE + " : ");
+        KMADEHistoryMessageManager.printMessage("  - " + KMADEConstant.EVENT_TRIGGER_CONSTRAINT_MESSAGE + " : ");
         if (event) {
             Evenement eventTask = myCurrentTask.getDeclencheur();
             if (eventTask == null) {
-                System.out.println(KMADEConstant.NO_TRIGGER_EVENT_CONSTRAINT_MESSAGE);
+            	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_TRIGGER_EVENT_CONSTRAINT_MESSAGE);
             } else {
                 if (ExpressEvent.isExistingEvent(eventTask)) {
-                    System.out.println(eventTask.getName() + " " + KMADEConstant.CAN_TRIGGER_TASK_MESSAGE + " " + myCurrentTask.getName());
+                	 KMADEHistoryMessageManager.printlnMessage(eventTask.getName() + " " + KMADEConstant.CAN_TRIGGER_TASK_MESSAGE + " " + myCurrentTask.getName());
                 } else {
-                    System.out.println(eventTask.getName() + " " + KMADEConstant.CAN_NOT_TRIGGER_CONSTRAINT_MESSAGE + " " + myCurrentTask.getName());
+                	 KMADEHistoryMessageManager.printlnMessage(eventTask.getName() + " " + KMADEConstant.CAN_NOT_TRIGGER_CONSTRAINT_MESSAGE + " " + myCurrentTask.getName());
                 }
             }          
         } else {
-       		System.out.println(KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
+       		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
         }
         
         // La précondition est-elle respectée.
-        System.out.print("  - " + KMADEConstant.PRECONDITION_CONSTRAINT_MESSAGE + " : ");
+        KMADEHistoryMessageManager.printMessage("  - " + KMADEConstant.PRECONDITION_CONSTRAINT_MESSAGE + " : ");
         if (pre) {
         		try {
         			if (myCurrentTask.getPreExpression().getNodeExpression() == null) {
-        				System.out.print(myCurrentTask.getPreExpression().getName());
+        				KMADEHistoryMessageManager.printMessage(myCurrentTask.getPreExpression().getName());
         			} else {
-        				System.out.print(ExpressSimulation.getLinearExpressionWithUserValues(myCurrentTask.getPreExpression().getNodeExpression().getLinearExpression()));
+        				KMADEHistoryMessageManager.printMessage(ExpressSimulation.getLinearExpressionWithUserValues(myCurrentTask.getPreExpression().getNodeExpression().getLinearExpression()));
                  }   
 
         			myCurrentTask.getPreExpression().getNodeExpression().evaluateNode(null);
 				if ((Boolean) myCurrentTask.getPreExpression().getNodeExpression().getNodeValue()) {
-					System.out.println(" -> " + KMADEConstant.PRECONDITION_CONSTRAINTS_RESPECTED_STATE_MESSAGE);
+					KMADEHistoryMessageManager.printlnMessage(" -> " + KMADEConstant.PRECONDITION_CONSTRAINTS_RESPECTED_STATE_MESSAGE);
 				} else {
-					System.out.println(" -> " + KMADEConstant.PRECONDITION_CONSTRAINTS_NO_RESPECTED_STATE_MESSAGE);
-			        System.out.println("");
+					KMADEHistoryMessageManager.printlnMessage(" -> " + KMADEConstant.PRECONDITION_CONSTRAINTS_NO_RESPECTED_STATE_MESSAGE);
+					 KMADEHistoryMessageManager.printlnMessage("");
 					return false;
 				}
 			} catch (SemanticUnknownException e) {
-				System.out.println(" -> " + KMADEConstant.MISSING_USER_VALUE_MESSAGE);
-		        System.out.println("");
+				KMADEHistoryMessageManager.printlnMessage(" -> " + KMADEConstant.MISSING_USER_VALUE_MESSAGE);
+				 KMADEHistoryMessageManager.printlnMessage("");
 				return false;
 			} catch (SemanticErrorException e) {
-				System.out.println(" -> " + KMADEConstant.SEMANTICAL_ERROR_MESSAGE);
-		        System.out.println("");
+				KMADEHistoryMessageManager.printlnMessage(" -> " + KMADEConstant.SEMANTICAL_ERROR_MESSAGE);
+				 KMADEHistoryMessageManager.printlnMessage("");
 				return false;
 			} catch (SemanticException e) {
 				return false;
 			}        
         } else {
-        	System.out.println(KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
+        	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
         }
         return true;
     }
@@ -262,61 +263,61 @@ public final class ExpressSimulation {
         
         if(ExpressIteration.isFinished(myTask)){
         	 myTask.getStateSimulation().setFinished();
-        	 System.out.println(" * " + KMADEConstant.ACTION_CONSTRAINT_MESSAGE);
-        	 System.out.println("  - " + KMADEConstant.ITERATION_FINISH_NO_ACTION);
+        	 KMADEHistoryMessageManager.printlnMessage(" * " + KMADEConstant.ACTION_CONSTRAINT_MESSAGE);
+        	 KMADEHistoryMessageManager.printlnMessage("  - " + KMADEConstant.ITERATION_FINISH_NO_ACTION);
         	return true;
         }else{
         	ExpressIteration.evaluateIteration(myTask);
         myTask.getMotherTask().getStateSimulation().setActive();
         
         // Post-traitement ...
-        System.out.println(" * " + KMADEConstant.ACTION_CONSTRAINT_MESSAGE);
+        KMADEHistoryMessageManager.printlnMessage(" * " + KMADEConstant.ACTION_CONSTRAINT_MESSAGE);
             // Evénement déclencheur
         if (event) {
             ExpressEvent.extractFiringEvent(myTask.getDeclencheur());
         }
         
             // Génération des Evénements
-        System.out.print("  - " + KMADEConstant.GENERATE_EVENTS_CONSTRAINT_MESSAGE + " : ");
+        KMADEHistoryMessageManager.printMessage("  - " + KMADEConstant.GENERATE_EVENTS_CONSTRAINT_MESSAGE + " : ");
         if (trigevent) {
             String temp = ExpressEvent.generateFiringEvent(myTask);
             if (temp.length() == 0) {
-                System.out.println(KMADEConstant.NO_GENERATED_EVENTS_CONSTRAINT_MESSAGE);
+            	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_GENERATED_EVENTS_CONSTRAINT_MESSAGE);
             } else {
-                System.out.println(temp);
+            	 KMADEHistoryMessageManager.printlnMessage(temp);
             }
         } else {
-        	System.out.println(KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
+        	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
         }
         
             // Traitement des effetsdebord
         if (post) {            
-            System.out.print("  - " + KMADEConstant.EFFETSDEBORD_CONSTRAINT_MESSAGE + " : " );
+        	KMADEHistoryMessageManager.printMessage("  - " + KMADEConstant.EFFETSDEBORD_CONSTRAINT_MESSAGE + " : " );
             
 			if (myTask.getEffetsDeBordExpression().getNodeExpression() == null) {
-				System.out.print(myTask.getEffetsDeBordExpression().getName());
+				KMADEHistoryMessageManager.printMessage(myTask.getEffetsDeBordExpression().getName());
 			} else {
-				System.out.print(ExpressSimulation.getLinearExpressionWithUserValues(myTask.getEffetsDeBordExpression().getNodeExpression().getLinearExpression()));
+				KMADEHistoryMessageManager.printMessage(ExpressSimulation.getLinearExpressionWithUserValues(myTask.getEffetsDeBordExpression().getNodeExpression().getLinearExpression()));
 			}   
 
         	try {
         		myTask.getEffetsDeBordExpression().getNodeExpression().evaluateNode(null);
-        		System.out.println(" -> " + KMADEConstant.EFFETSDEBORD_EXECUTED_STATE_MESSAGE);
+        		KMADEHistoryMessageManager.printlnMessage(" -> " + KMADEConstant.EFFETSDEBORD_EXECUTED_STATE_MESSAGE);
         	} catch (SemanticErrorException e) {
-        		System.out.println(" -> " + KMADEConstant.EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE + " , " + e.getMessage());
-        		System.out.println("");
+        		KMADEHistoryMessageManager.printlnMessage(" -> " + KMADEConstant.EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE + " , " + e.getMessage());
+        		KMADEHistoryMessageManager.printlnMessage("");
         		return false;
             } catch (SemanticUnknownException e) {
-            	System.out.println(" -> " + KMADEConstant.EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE + " , " + e.getMessage());
-            	System.out.println("");
+            	KMADEHistoryMessageManager.printlnMessage(" -> " + KMADEConstant.EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE + " , " + e.getMessage());
+            	KMADEHistoryMessageManager.printlnMessage("");
             	return false;
             } catch (SemanticException e) {
-            	System.out.println("");
+            	KMADEHistoryMessageManager.printlnMessage("");
             	return false;
             }
         	
         } else {
-        	System.out.println("  - " + KMADEConstant.EFFETSDEBORD_CONSTRAINT_MESSAGE + " : " + KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
+        	KMADEHistoryMessageManager.printlnMessage("  - " + KMADEConstant.EFFETSDEBORD_CONSTRAINT_MESSAGE + " : " + KMADEConstant.DISABLED_CONSTRAINT_MESSAGE);
         }
         
         		// Etat de la tâche
@@ -326,7 +327,7 @@ public final class ExpressSimulation {
             myTask.getStateSimulation().setActive();
         }
         }
-        System.out.println("");
+        KMADEHistoryMessageManager.printlnMessage("");
         return true;
     }
 

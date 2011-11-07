@@ -62,6 +62,7 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.coherence.KMADECoherenceDialog;
 import fr.upensma.lias.kmade.tool.view.preferences.KMADEPreferencesDialog;
 import fr.upensma.lias.kmade.tool.view.print.KMADEPrintingDialog;
+import fr.upensma.lias.kmade.tool.view.prototype.KMADEPrototypeDialog;
 import fr.upensma.lias.kmade.tool.view.search.KMADEFindReplaceDialog;
 import fr.upensma.lias.kmade.tool.view.simulation.KMADESimulationDialog;
 import fr.upensma.lias.kmade.tool.view.statistic.KMADEStatisticDialog;
@@ -136,6 +137,8 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 
     private KMADESimulationDialog simulationDialog = new KMADESimulationDialog();
 
+    private KMADEPrototypeDialog prototypeDialog = new KMADEPrototypeDialog();
+    
     private KMADEStatisticDialog statisticDialog = new KMADEStatisticDialog(
 	    this);
 
@@ -604,6 +607,10 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 	return simulationDialog;
     }
 
+    public KMADEPrototypeDialog getPrototypeDialog() {
+	return prototypeDialog;
+    }
+    
     public KMADEStatisticDialog getStatisticDialog() {
 	return statisticDialog;
     }

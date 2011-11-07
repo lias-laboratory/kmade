@@ -185,7 +185,7 @@ public class KMADEGraph extends org.jgraph.JGraph {
 		 */
 		double wheelRotation = -((double) e.getWheelRotation()) / 4;
 
-		// System.err.println("wheelRotation = " + wheelRotation);
+		// KMADEHistoryMessageManager.printError("wheelRotation = " + wheelRotation);
 
 		if (zoom > 1) {
 		    zoom += wheelRotation;

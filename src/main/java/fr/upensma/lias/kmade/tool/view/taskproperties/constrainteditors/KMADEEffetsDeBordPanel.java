@@ -216,7 +216,7 @@ public class KMADEEffetsDeBordPanel extends JPanel implements LanguageFactory {
 
 	JPanel panelModel = new JPanel(new BorderLayout());
 	panelModel.setPreferredSize(new Dimension(150, 150));
-	JPanel panelHistorique = new JPanel(new BorderLayout());
+	JPanel panelHistoric = new JPanel(new BorderLayout());
 	myModel = new DefaultListModel();
 	myList = new JList(myModel);
 	myList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -269,9 +269,9 @@ public class KMADEEffetsDeBordPanel extends JPanel implements LanguageFactory {
 	panelHistoricControl.setBorder(BorderFactory.createEmptyBorder(5, 5, 5,
 		5));
 
-	panelHistorique.add(BorderLayout.CENTER, myHistoryScrollPane);
-	panelHistorique.add(BorderLayout.SOUTH, panelHistoricControl);
-	panelModel.add(BorderLayout.CENTER, panelHistorique);
+	panelHistoric.add(BorderLayout.CENTER, myHistoryScrollPane);
+	panelHistoric.add(BorderLayout.SOUTH, panelHistoricControl);
+	panelModel.add(BorderLayout.CENTER, panelHistoric);
 	panelConcreteObjectVariable = new JPanel(new BorderLayout());
 	panelConcreteObjectVariable
 		.setBorder(BorderFactory

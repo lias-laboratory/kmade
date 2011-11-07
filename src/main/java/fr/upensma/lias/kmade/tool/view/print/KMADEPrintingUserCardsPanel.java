@@ -58,6 +58,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEEnhancedSplitPane;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
 import fr.upensma.lias.kmade.tool.viewadaptator.PrintAdaptator;
 
@@ -285,7 +286,7 @@ public class KMADEPrintingUserCardsPanel extends JPanel {
 		    try {
 			pJob.print();
 		    } catch (PrinterException e) {
-			System.err.println(e.getMessage());
+			KMADEHistoryMessageManager.printlnError(e.getMessage());
 		    }
 		    return null;
 		}

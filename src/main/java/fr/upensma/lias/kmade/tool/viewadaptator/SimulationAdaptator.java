@@ -68,6 +68,7 @@ import fr.upensma.lias.kmade.tool.view.taskproperties.constrainteditors.KMADESet
 import fr.upensma.lias.kmade.tool.view.taskproperties.constrainteditors.KMADEUserExpressionField;
 import fr.upensma.lias.kmade.tool.view.toolutilities.InDevelopmentGlassPanel;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEFileChooser;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
 
 /**
@@ -185,12 +186,10 @@ public final class SimulationAdaptator {
 		    replayScenarioModified = false;
 	    }
 	    if (isSuccess) {
-		System.out
-			.println(KMADEConstant.SUCCEEDED_SAVE_SCENARIO_MESSAGE);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SUCCEEDED_SAVE_SCENARIO_MESSAGE);
 		return true;
 	    } else {
-		System.out
-			.println(KMADEConstant.NO_SUCCEEDED_SAVE_SCENARIO_MESSAGE);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_SUCCEEDED_SAVE_SCENARIO_MESSAGE);
 		return false;
 	    }
 	} else {
@@ -290,8 +289,7 @@ public final class SimulationAdaptator {
 		.getRecordingPanel().updateListEnabledTask(myTasks);
 	if (ExpressSimulation.getCurrentTask().getStateSimulation()
 		.isFinished()) {
-	    System.out
-		    .println(KMADEConstant.FINISHED_RECORD_SIMULATION_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.FINISHED_RECORD_SIMULATION_MESSAGE);
 	}
 
 	GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
@@ -334,8 +332,7 @@ public final class SimulationAdaptator {
 		.getMainFrame().getSimulationDialog().getGraphSimulation()
 		.getSelectionCell());
 	if (myCell == null) {
-	    System.out
-		    .println(KMADEConstant.NO_SELECTED_TASK_BEFORE_RECORD_SIMULATION_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_SELECTED_TASK_BEFORE_RECORD_SIMULATION_MESSAGE);
 	} else {
 	    ArrayList<TokenSimulation> myTasks = ExpressSimulation
 		    .startSimulation(myCell.getTask());
@@ -605,8 +602,7 @@ public final class SimulationAdaptator {
 
 	if (ExpressSimulation.getCurrentTask().getStateSimulation()
 		.isFinished()) {
-	    System.out
-		    .println(KMADEConstant.FINISHED_RECORD_SIMULATION_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.FINISHED_RECORD_SIMULATION_MESSAGE);
 	}
 
 	// Enregistre l'action exécutée.
@@ -1137,7 +1133,7 @@ public final class SimulationAdaptator {
 	    if (scenarioModel.getRootTask() == null) {
 		// Pas de tâche Root
 		REPLAY_SCENARIO_STATE = SimulationAdaptator.NO_REPLAY_SCENARIO;
-		System.out.println(KMADEConstant.NO_ROOT_TASK_PROBLEM_MESSAGE
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_ROOT_TASK_PROBLEM_MESSAGE
 			+ "...");
 	    } else {
 		REPLAY_SCENARIO_STATE = SimulationAdaptator.REPLAY_SCENARIO_NO_STARTED;
@@ -1175,16 +1171,14 @@ public final class SimulationAdaptator {
 	    TokenReplayScenarioSimulation tokenSimulation) {
 	if (tokenSimulation.isNotFounded()) {
 	    // La tâche n'a pas été trouvée.
-	    System.out
-		    .println(KMADEConstant.NO_FOUNDED_TASK_TO_REPLAY_PROBLEM_MESSAGE
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_FOUNDED_TASK_TO_REPLAY_PROBLEM_MESSAGE
 			    + " : UNDER DEVELOPMENT");
 	    return false;
 	} else {
 	    if (!tokenSimulation.isActionable(GraphicEditorAdaptator
 		    .getMainFrame().getSimulationDialog().getReplayPanel()
 		    .getAvailableTaches())) {
-		System.out
-			.println(KMADEConstant.CAN_NOT_EXECUTE_TASK_TO_REPLAY_PROBLEM_MESSAGE
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAN_NOT_EXECUTE_TASK_TO_REPLAY_PROBLEM_MESSAGE
 				+ " : UNDER DEVELOPMENT");
 		return false;
 	    }
@@ -1217,19 +1211,16 @@ public final class SimulationAdaptator {
 		.getReplayPanel().isFinishedReplayScenario()) {
 	    if (ExpressSimulation.getCurrentTask().getStateSimulation()
 		    .isFinished()) {
-		System.out
-			.println(KMADEConstant.FINISHED_SCENARIO_AND_SIMULATION_PROBLEM_MESSAGE);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.FINISHED_SCENARIO_AND_SIMULATION_PROBLEM_MESSAGE);
 		isFinished = true;
 	    } else {
-		System.out
-			.println(KMADEConstant.FINISHED_SCENARIO_PROBLEM_MESSAGE);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.FINISHED_SCENARIO_PROBLEM_MESSAGE);
 		isFinished = true;
 	    }
 	} else {
 	    if (ExpressSimulation.getCurrentTask().getStateSimulation()
 		    .isFinished()) {
-		System.out
-			.println(KMADEConstant.FINISHED_SIMULATION_PROBLEM_MESSAGE);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.FINISHED_SIMULATION_PROBLEM_MESSAGE);
 		isFinished = true;
 	    } else {
 		GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
@@ -1280,7 +1271,7 @@ public final class SimulationAdaptator {
 
     private static void initReplayScenario(Tache rootTask) {
 	if (rootTask == null) {
-	    System.out.println(KMADEConstant.SELECT_TASK_TO_REPLAY_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SELECT_TASK_TO_REPLAY_MESSAGE);
 	} else {
 	    GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
 		    .getReplayPanel().initCurrentReplaySimulation();

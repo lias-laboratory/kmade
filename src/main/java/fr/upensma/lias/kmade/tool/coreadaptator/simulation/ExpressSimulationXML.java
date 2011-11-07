@@ -47,6 +47,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
  * @author Mickael BARON
@@ -236,14 +237,14 @@ public final class ExpressSimulationXML {
              ReplayScenarioModel myReplayScenarioModel = new ReplayScenarioModel(ref,rootTask);
              return myReplayScenarioModel;
 	    } catch(ParserConfigurationException pce){
-	         System.out.println(KMADEConstant.CONFIG_ERROR_DOM);
-	         System.out.println(KMADEConstant.CALL_NEW_DOCUMENT_BUILDER);
+	    	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CONFIG_ERROR_DOM);
+	    	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CALL_NEW_DOCUMENT_BUILDER);
 	    } catch(SAXException se){
-	         System.out.println(KMADEConstant.SIMULATION_PARSING_ERROR);
-	         System.out.println(KMADEConstant.CALL_CONSTRUCTEUR_PARSE);
+	    	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SIMULATION_PARSING_ERROR);
+	    	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CALL_CONSTRUCTEUR_PARSE);
 	    } catch(IOException ioe){
-	         System.out.println(KMADEConstant.SIMULATION_IO_ERROR);
-	         System.out.println(KMADEConstant.CALL_CONSTRUCTEUR_PARSE);
+	    	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SIMULATION_IO_ERROR);
+	    	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CALL_CONSTRUCTEUR_PARSE);
 	    }
         return new ReplayScenarioModel();
 	}

@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
+
 /**
  * @author Mickael BARON
  */
@@ -165,7 +167,7 @@ public final class ParserSPF {
     private String extractEnum(String s) throws Exception {
 	String enumm = "";
 	if (s.charAt(0) != '.') {
-	    System.out.println("Erreur dans l'enum \n");
+		 KMADEHistoryMessageManager.printlnMessage("Erreur dans l'enum \n");
 	    throw new Exception();
 	}
 	int ptr = 1;
@@ -177,7 +179,7 @@ public final class ParserSPF {
 
     public String extractOid(String s) throws Exception {
 	if (s.charAt(0) != '#') {
-	    System.out.println("Erreur dans l'OID +> " + s);
+		 KMADEHistoryMessageManager.printlnMessage("Erreur dans l'OID +> " + s);
 	    throw new Exception();
 	}
 	String oid = "#";
@@ -200,7 +202,7 @@ public final class ParserSPF {
     private String extractString(String s) throws Exception {
 	String chaine = "";
 	if (s.charAt(0) != '\'') {
-	    System.out.println("Erreur dans chaine \n");
+		 KMADEHistoryMessageManager.printlnMessage("Erreur dans chaine \n");
 	    throw new Exception();
 	}
 	int ptr = 1;

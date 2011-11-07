@@ -24,6 +24,9 @@ import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
+
+
+
 /**
  * @author Mickael BARON
  */
@@ -360,7 +363,6 @@ public class AttributConcret implements Entity, Cloneable {
 
 	this.valeur = (ValeurType) InterfaceExpressJava.bdd.prendre(new Oid(p
 		.getAttribute("id-concreteattribut-value")));
-
     }
 
     @Override
