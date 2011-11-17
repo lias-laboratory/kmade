@@ -172,7 +172,7 @@ public final class ExpressTask {
 
 		// On modifie le contenu.
 		refPoint.setX(new Integer(x.intValue()
-			+ ExpressTask.counterClipboard * 10));
+			+ ExpressTask.counterClipboard * 50));
 		refPoint.setY(new Integer(y.intValue()
 			+ ExpressTask.counterClipboard * 10));
 	    }

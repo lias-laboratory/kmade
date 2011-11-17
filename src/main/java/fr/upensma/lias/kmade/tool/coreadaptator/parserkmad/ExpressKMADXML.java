@@ -349,6 +349,7 @@ public final class ExpressKMADXML {
 				racine.appendChild(myElement);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new KMADXMLParserException(
 					KMADEConstant.ELEMENT_PARSE_PROBLEM_MESSAGE + " : "
 							+ object.toString() + "("

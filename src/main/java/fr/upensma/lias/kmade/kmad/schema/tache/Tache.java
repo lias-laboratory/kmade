@@ -1727,7 +1727,7 @@ public class Tache implements Entity {
 	racine.setAttribute("classkmad", "tache.Tache");
 	racine.setAttribute("idkmad", oid.get());
 	// Media
-	if (this.idMedia.isExisting()){
+	if (this.idMedia != null && this.idMedia.isExisting()){
 	    racine.setAttribute("id-task-media", this.idMedia.getOid().get());
 	    racine.appendChild(this.idMedia.toXML2(doc));
 	}
