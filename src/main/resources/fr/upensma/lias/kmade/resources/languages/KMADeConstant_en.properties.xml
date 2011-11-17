@@ -528,7 +528,7 @@
 <entry key="FRENCH_LANGUAGE">French</entry>
 <entry key="ENGLISH_LANGUAGE">English</entry>
 
-<entry key="FRENCH_LANGUAGE_INFO">Fran�ais</entry>
+<entry key="FRENCH_LANGUAGE_INFO">Français</entry>
 <entry key="ENGLISH_LANGUAGE_INFO">English</entry>
 
     
@@ -638,7 +638,7 @@
 <entry key="CLEAR_HISTORIC_ACTION_MESSAGE">Clear historic</entry>
 
 
-<!-- Messages li�s aux expressions-->
+<!-- Messages li?s aux expressions-->
 <entry key="PRINT_SCALE_ADAPT_MESSAGE">Auto</entry>
 <entry key="PRINT_SCALE_PERSONALIZE_MESSAGE">Personalize...</entry>
 <entry key="RESET_ACTION_MESSAGE">Reset</entry>
@@ -772,7 +772,7 @@
 <entry key="SUCCEEDED_SAVE_SCENARIO_MESSAGE">Success to record scenario</entry>
 <entry key="NO_SUCCEEDED_SAVE_SCENARIO_MESSAGE">Failure to recod scenario</entry>
 <entry key="AUTHORIZED_EXECUTER_USER_MESSAGE">Authorized</entry>
-<entry key="NO_AUTHORIZED_EXECUTER_USER_MESSAGE">Non Autoris�e</entry>
+<entry key="NO_AUTHORIZED_EXECUTER_USER_MESSAGE">Non Autoris?e</entry>
 <entry key="DISABLED_CONSTRAINT_MESSAGE">Disabled</entry>
 <entry key="EVENT_TITLE_MESSAGE">Events</entry>
 <entry key="NO_CONCRETE_OBJECT">No current concrete object</entry>
@@ -865,7 +865,7 @@
 <entry key="CAN_NOT_EXECUTE_TASK_TO_REPLAY_PROBLEM_MESSAGE">Can not execute this task immediatly</entry>
 
 <entry key="CONFIG_ERROR_DOM">Error of DOM configuration</entry>
-<entry key="CALL_NEW_DOCUMENT_BUILDER">when calling� fabrique.newDocumentBuilder()";</entry>
+<entry key="CALL_NEW_DOCUMENT_BUILDER">when calling? fabrique.newDocumentBuilder()";</entry>
 <entry key="SIMULATION_PARSING_ERROR">Error when Document parsing</entry>
 <entry key="CALL_CONSTRUCTEUR_PARSE">: construteur.parse(xml)</entry>
 <entry key="SIMULATION_IO_ERROR">Input/Output error</entry>
