@@ -19,7 +19,7 @@
 <entry key="VERTEX_NUM">N:</entry>
 <entry key="VERTEX_EVENT_IN_LETTER">IN:</entry>
 <entry key="VERTEX_EVENT_OUT_LETTER">OUT:</entry>
-<entry key="VERTEX_PRECONDITION">PREFR</entry>
+<entry key="VERTEX_PRECONDITION">PRE</entry>
 <entry key="VERTEX_ITERATION">ITER</entry>
 <entry key="VERTEX_OPT">OPT</entry>
 <entry key="VERTEX_INTERRUPTIBLE">INTER</entry>

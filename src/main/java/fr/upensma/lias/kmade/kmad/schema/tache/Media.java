@@ -231,13 +231,54 @@ public class Media implements Entity {
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
-	createObjectFromXMLElement(p);
+    	this.oid = new Oid(p.getAttribute("idkmad"));
+
+    	NodeList nodeList = p.getElementsByTagName("media-existing");
+    	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+    		nodeList = null;}
+    	if (nodeList.item(0) != null)
+    	    this.isExisting = Boolean.parseBoolean(nodeList.item(0)
+    		    .getTextContent());
+
+    	nodeList = p.getElementsByTagName("media-filename");
+    	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+    		nodeList = null;}
+    	if (nodeList.item(0) != null)
+    	    this.fileName = nodeList.item(0).getTextContent();
+
+    	nodeList = p.getElementsByTagName("media-path");
+    	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+    		nodeList = null;}
+    	if (nodeList.item(0) != null)
+    	    this.path = nodeList.item(0).getTextContent();
+
+    	nodeList = p.getElementsByTagName("media-startmark");
+    	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+    		nodeList = null;}
+    	if (nodeList.item(0) != null) {
+    	    try {
+    		this.startMark = Integer.parseInt(nodeList.item(0)
+    			.getTextContent());
+    	    } catch (NumberFormatException e) {
+    		this.startMark = -1;
+    	    }
+    	}
+
+    	nodeList = p.getElementsByTagName("media-finishmark");
+    	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+    		nodeList = null;}
+    	if (nodeList.item(0) != null) {
+    	    try {
+    		this.finishMark = Integer.parseInt(nodeList.item(0)
+    			.getTextContent());
+    	    } catch (NumberFormatException e) {
+    		this.startMark = -1;
+    	    }
+    	}
     }
 
     @Override
     public boolean oidIsAnyMissing2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 	return false;
     }
 }

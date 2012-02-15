@@ -21,13 +21,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -39,13 +39,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
+import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.coreadaptator.prototype.PROTOExecution;
 import fr.upensma.lias.kmade.tool.coreadaptator.prototype.PROTOHistoric;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADETaskModelToolBar;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEEnhancedSplitPane;
+import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 
 
 /**
@@ -66,7 +70,7 @@ public class KMADEPrototypeDialog extends JFrame {
 	private JPanel myContentPane; 
 	private JPanel buttonPanel;
 	private KMADEHistoricPanel historicPanel;
-	private JScrollPane taskScroll ;
+	//private JScrollPane taskScroll ;
 	private JScrollPane possibleTaskScroll ;
 	private JPanel rightBotTaskPanel;
 
@@ -82,8 +86,8 @@ public class KMADEPrototypeDialog extends JFrame {
 				.getScreenSize();
 		//TODO dont understant why it is /4 and /2
 		this.setLocation(
-			(int) ((screen_dimension.getWidth() - this.getWidth()) / 4),
-			(int) ((screen_dimension.getHeight() - this.getHeight()) / 4));
+				(int) ((screen_dimension.getWidth() - this.getWidth()) / 4),
+				(int) ((screen_dimension.getHeight() - this.getHeight()) / 4));
 		// JPanel for constraint
 		this.myContentPane = new JPanel();
 		this.setContentPane(myContentPane);
@@ -103,27 +107,30 @@ public class KMADEPrototypeDialog extends JFrame {
 
 		leftPanel.setLayout(new BorderLayout());
 
-		taskScroll = new JScrollPane();
+		//taskScroll = new JScrollPane();
 		possibleTaskScroll = new JScrollPane();
 
 		this.task = new JPanel();
-		task.setLayout(new GridLayout(4,1));
-		task.setAlignmentX(LEFT_ALIGNMENT);
-		task.setAlignmentY(TOP_ALIGNMENT);
+		//task.setLayout(new GridLayout(4,1));
+		task.setLayout(new BoxLayout(task, BoxLayout.PAGE_AXIS));
+	//task.setAlignmentX(LEFT_ALIGNMENT);
+		//task.setAlignmentY(TOP_ALIGNMENT);
+		
 
 		leftPanel.setAlignmentX(LEFT_ALIGNMENT);
 		leftPanel.setAlignmentY(TOP_ALIGNMENT);
 		this.possibleTask = Box.createVerticalBox();
 		possibleTask.setAlignmentX(LEFT_ALIGNMENT);
 		possibleTask.setAlignmentY(TOP_ALIGNMENT);
+		possibleTask.setBackground(Color.WHITE);
 
 		JPanel botTaskPanel = new JPanel();
 		botTaskPanel.setLayout(new BorderLayout());
 		rightBotTaskPanel = new JPanel();
 		rightBotTaskPanel.setLayout(new BoxLayout(rightBotTaskPanel, BoxLayout.PAGE_AXIS));
 		TitledBorder rightBotTaskPanelTitle = new TitledBorder(null,
-				"Pannel de contrôle",
-				TitledBorder.LEFT, TitledBorder.TOP);
+				KMADEConstant.PROTOTYPING_TOOL_CONTROL_TITLE,
+				TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		rightBotTaskPanel.setBorder(rightBotTaskPanelTitle);
 		buttonPanel = new JPanel();
 		buildButtonPanel();
@@ -136,13 +143,17 @@ public class KMADEPrototypeDialog extends JFrame {
 
 		myContentPane.add(myCenterPanel,BorderLayout.CENTER);
 		myContentPane.add(myBotPanel,BorderLayout.SOUTH);
-		leftPanel.add(taskScroll,BorderLayout.CENTER);
+		
+		leftPanel.add(task,BorderLayout.CENTER);
 		leftPanel.add(botTaskPanel, BorderLayout.SOUTH);
-		taskScroll.setViewportView(task);
+	//	taskScroll.setViewportView(task);
 		possibleTaskScroll.setViewportView(possibleTask);
 		botTaskPanel.add(possibleTaskScroll,BorderLayout.CENTER);
 		botTaskPanel.add(rightBotTaskPanel,BorderLayout.EAST);
-		rightPanel.add(historicPanel);
+		TitledBorder leftTitle = new TitledBorder(BorderFactory.createLineBorder(Color.BLACK,2),"Tâche en cours",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
+		leftPanel.setBorder(leftTitle);
+		rightPanel.setLayout(new BorderLayout());
+		rightPanel.add(historicPanel, BorderLayout.CENTER);
 
 		myBotPanel.add(buttonPanel);
 		setEnabledEnd(null,false);
@@ -163,12 +174,12 @@ public class KMADEPrototypeDialog extends JFrame {
 			}
 		});
 		buttonPanel.add(reset);
-
 	}
 
 
 	public void openPrototypeDialog(){
 		this.setVisible(true);
+		GraphicEditorAdaptator.selectNoTask();
 		PROTOExecution.startExecution();
 	}
 
@@ -177,34 +188,38 @@ public class KMADEPrototypeDialog extends JFrame {
 		this.setVisible(false);
 	}
 
-	public void setCurrentTask(Tache currentTask) {
+	public void setCurrentTask(final Tache currentTask) {
 		possibleTask.removeAll();
 		possibleTask.revalidate();
 		possibleTask.repaint();
 		possibleTask.add(Box.createVerticalStrut(5));
 		task.removeAll();
-
-		TitledBorder titlepanel = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_CURRENT_TASK + " : "+currentTask.getName(),TitledBorder.LEFT, TitledBorder.TOP);
-		task.setBorder(titlepanel);
+ 
+		
+		
+		//TitledBorder titlepanel = new TitledBorder(BorderFactory.createLineBorder(Color.RED,2),KMADEConstant.PROTOTYPING_TOOL_CURRENT_TASK + " : "+currentTask.getName(),TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK);
+		//task.setBorder(titlepanel);
 
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new BoxLayout(topPanel,BoxLayout.PAGE_AXIS));
 		String name = currentTask.getName();
-		JLabel nameLabel = new JLabel("<HTML><FONT SIZE=3>" + KMADEConstant.PROTOTYPING_TOOL_NAME_TITLE +" : "+name+"</size></FONT></HTML>");
+		JLabel nameLabel = new JLabel("<HTML><FONT SIZE=7><B>" + name+"</B></FONT></HTML>");
+		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 		nameLabel.setToolTipText(KMADEConstant.PROTOTYPING_TOOL_NAME_TOOLTIP);
-		nameLabel.setAlignmentY(TOP_ALIGNMENT);
+		//	nameLabel.setAlignmentX(TOP_ALIGNMENT);
 		topPanel.add(nameLabel);
 		topPanel.add(Box.createVerticalStrut(2));
 		ImageIcon executantImage = null;
 		String executantText = "";
 		switch(currentTask.getExecutant()){
 		case ABS :
-			executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.ABSTRACT_TASK_48_IMAGE));
-			executantText += KMADEConstant.PROTOTYPING_TOOL_EXECUTANT_ABS;
+			//	executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.ABSTRACT_TASK_48_IMAGE));
+			//	executantText += KMADEConstant.PROTOTYPING_TOOL_EXECUTANT_ABS;
 			break;
-		case INCONNU:executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.UNKNOWN_TASK_48_IMAGE));
-		executantText += KMADEConstant.PROTOTYPING_TOOL_EXECUTANT_INCONNU;
-		break;
+		case INCONNU:
+			//	executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.UNKNOWN_TASK_48_IMAGE));
+			//	executantText += KMADEConstant.PROTOTYPING_TOOL_EXECUTANT_INCONNU;
+			break;
 		case INT : executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.INTERACTIF_TASK_48_IMAGE));
 		executantText += KMADEConstant.PROTOTYPING_TOOL_EXECUTANT_INT;
 		break;
@@ -221,14 +236,14 @@ public class KMADEPrototypeDialog extends JFrame {
 		executantLabel.setToolTipText(KMADEConstant.PROTOTYPING_TOOL_EXECUTANT_TOOLTIP);
 		executantLabel.setIcon(executantImage);
 		topPanel.add(executantLabel);
-
-		TitledBorder ordoPanelTitle = new TitledBorder(null, KMADEConstant.PROTOTYPING_TOOL_DECOMPOSITION_TITLE + " : "+ currentTask.getDecomposition().getValue(),TitledBorder.LEFT, TitledBorder.TOP);
+		TitledBorder ordoPanelTitle = new TitledBorder(null, KMADEConstant.PROTOTYPING_TOOL_DECOMPOSITION_TITLE + " : "+ currentTask.getDecomposition().getValue(),TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		possibleTaskScroll.setBorder(ordoPanelTitle);
 
 		//précondition
 		String precondition = currentTask.getPreExpression().getDescription();
-		TitledBorder titleprecondition = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_PRECONDITION_TITLE + " : ",TitledBorder.LEFT, TitledBorder.TOP);
+		TitledBorder titleprecondition = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_PRECONDITION_TITLE + " : ",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		JTextArea preconditionLabel = new JTextArea(precondition);
+		preconditionLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 		preconditionLabel.setEditable(false);
 		preconditionLabel.setToolTipText(KMADEConstant.PROTOTYPING_TOOL_PRECONDITION_TOOLTIP);
 		preconditionLabel.setBackground(Color.white);
@@ -241,6 +256,7 @@ public class KMADEPrototypeDialog extends JFrame {
 		//Iteration
 		String iteration =  currentTask.getIteExpression().getDescription();
 		JTextArea iterationLabel = new JTextArea(iteration);
+		iterationLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 		iterationLabel.setEditable(false);
 		iterationLabel.setToolTipText(KMADEConstant.PROTOTYPING_TOOL_ITERATION_TOOLTIP);
 		iterationLabel.setBackground(Color.white);
@@ -250,22 +266,41 @@ public class KMADEPrototypeDialog extends JFrame {
 		iterationScroll.setViewportView(iterationLabel);
 		TitledBorder iterationTitle = new TitledBorder(null,
 				KMADEConstant.PROTOTYPING_TOOL_ITERATION_TOOLTIP+" : ",
-				TitledBorder.LEFT, TitledBorder.TOP);
+				TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		iterationScroll.setBorder(iterationTitle);
 
 		//Description 	
 		String observation =  currentTask.getObservation();
-		JTextArea descriptionLabel = new JTextArea(observation);
-		descriptionLabel.setEditable(false);
+		final JTextArea descriptionLabel = new JTextArea(observation);
+		descriptionLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
+		descriptionLabel.setEditable(true);
 		descriptionLabel.setToolTipText(KMADEConstant.PROTOTYPING_TOOL_DESCRIPTION_TOOLTIP);
 		descriptionLabel.setBackground(Color.white);
 		descriptionLabel.setLineWrap(true);
 		descriptionLabel.setWrapStyleWord(true);
+		descriptionLabel.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {
+				ExpressTask.setObservationTask(currentTask,descriptionLabel.getText());
+				}
+			
+			@Override
+			public void insertUpdate(DocumentEvent arg0) {
+				ExpressTask.setObservationTask(currentTask,descriptionLabel.getText());				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				ExpressTask.setObservationTask(currentTask,descriptionLabel.getText());
+			}
+		});
+		
 		JScrollPane descriptionScroll = new JScrollPane();
 		descriptionScroll.setViewportView(descriptionLabel);
 		TitledBorder myUserBorder = new TitledBorder(null,
 				KMADEConstant.PROTOTYPING_TOOL_DESCRIPTION_TITLE + " : ",
-				TitledBorder.LEFT, TitledBorder.TOP);
+				TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		descriptionScroll.setBorder(myUserBorder);
 
 		task.add(topPanel);
@@ -280,6 +315,7 @@ public class KMADEPrototypeDialog extends JFrame {
 
 	public void setExecutableTask(final Tache t,boolean enabled, int number) {
 		JPanel executableTask = new JPanel();
+		executableTask.setBackground(Color.WHITE);
 		executableTask.setLayout(new FlowLayout(FlowLayout.LEFT));
 		executableTask.setAlignmentY(TOP_ALIGNMENT);
 		executableTask.setAlignmentX(LEFT_ALIGNMENT);
@@ -297,10 +333,11 @@ public class KMADEPrototypeDialog extends JFrame {
 		toolTip += "</HTML>";
 		JButton name = new JButton(buttonName);
 		name.setToolTipText(toolTip);
+		name.setFont(KMADEConstant.TASK_NAME_FONT);
 		ImageIcon executantImage = null;
 		switch(t.getExecutant()){
-		case ABS :  executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.ABSTRACT_TASK_16_IMAGE)); break;
-		case INCONNU:executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.UNKNOWN_TASK_16_IMAGE));break;
+		case ABS : /* executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.ABSTRACT_TASK_16_IMAGE))*/; break;
+		case INCONNU:/*executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.UNKNOWN_TASK_16_IMAGE))*/;break;
 		case INT : executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.INTERACTIF_TASK_16_IMAGE));break;
 		case SYS : executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.FEEDBACK_TASK_16_IMAGE));break;
 		case USER : executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.USER_TASK_16_IMAGE));break;
@@ -320,6 +357,7 @@ public class KMADEPrototypeDialog extends JFrame {
 		if(t.getPreExpression().getDescription() != null && !t.getPreExpression().getDescription().equals("")){
 			String precond = KMADEConstant.PROTOTYPING_TOOL_SUBTASK_PRECONDITION+" : " +t.getPreExpression().getDescription();
 			JLabel preLabel = new JLabel(precond);
+			preLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 			preLabel.setBackground(Color.white);
 			executableTask.add(preLabel);
 		}
@@ -330,29 +368,33 @@ public class KMADEPrototypeDialog extends JFrame {
 
 	public void setEnabledEnd(final Tache t,boolean b) {
 		rightBotTaskPanel.removeAll();
+		
 		JPanel executableTask = new JPanel();
+		executableTask.setBackground(Color.white);
 		executableTask.setLayout(new FlowLayout(FlowLayout.LEFT));
 		executableTask.setAlignmentY(TOP_ALIGNMENT);
 		executableTask.setAlignmentX(LEFT_ALIGNMENT);
 		JPanel annulerPanel = new JPanel();
+		annulerPanel.setBackground(Color.white);
 		annulerPanel.setAlignmentY(TOP_ALIGNMENT);
 		annulerPanel.setAlignmentX(LEFT_ALIGNMENT);
 		annulerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		JButton buttonAnnuler = new JButton( KMADEConstant.PROTOTYPING_TOOL_CANCEL_BUTTON);  
 		JButton buttonTermine = new JButton( KMADEConstant.PROTOTYPING_TOOL_END_BUTTON);
+		buttonAnnuler.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
+		buttonTermine.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
+
 		if(t!=null){
-			buttonTermine.setText( KMADEConstant.PROTOTYPING_TOOL_VALIDATE_END_BUTTON +" : "+t.getName());
-			buttonAnnuler.setText( KMADEConstant.PROTOTYPING_TOOL_CANCEL_BUTTON+ " : "+ t.getName()); 
+			buttonTermine.setText( KMADEConstant.PROTOTYPING_TOOL_VALIDATE_END_BUTTON);
+			buttonAnnuler.setText( KMADEConstant.PROTOTYPING_TOOL_CANCEL_BUTTON); 
 			rightBotTaskPanel.setBorder(new TitledBorder(null,
-					KMADEConstant.PROTOTYPING_TOOL_CONTROL_TITLE+ " : "+t.getName() ,
-					TitledBorder.LEFT, TitledBorder.TOP));
+					KMADEConstant.PROTOTYPING_TOOL_CONTROL_TITLE ,
+					TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT));
 		}
 
 		executableTask.add(buttonTermine);
 		annulerPanel.add(buttonAnnuler);
-
 		rightBotTaskPanel.add(executableTask);
-
 		rightBotTaskPanel.add(annulerPanel);
 		executableTask.setMaximumSize(new Dimension(500, buttonTermine.getPreferredSize().height + 5));
 
@@ -363,7 +405,6 @@ public class KMADEPrototypeDialog extends JFrame {
 				}
 			});
 			buttonAnnuler.addActionListener(new ActionListener() {
-
 				public void actionPerformed(ActionEvent e) {
 					PROTOExecution.cancelTask();
 				}

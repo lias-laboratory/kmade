@@ -130,4 +130,21 @@ public enum Importance implements Enumere {
 	// TODO Auto-generated method stub
 	return this.toXML(doc);
     }
+
+	public static Importance getXMLExecutantValue2(Element p) {
+		NodeList nodeList = p.getElementsByTagName("task-importance");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			return INCONNU;}
+		if (nodeList.item(0) == null) {
+		    return INCONNU;
+		}
+		String value = (String) nodeList.item(0).getTextContent();
+
+		for (Importance i : Importance.values()) {
+		    if (value.equalsIgnoreCase(i.enonce)) {
+			return i;
+		    }
+		}
+		return INCONNU;
+	}
 }

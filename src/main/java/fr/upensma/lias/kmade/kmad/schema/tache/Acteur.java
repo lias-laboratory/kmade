@@ -127,6 +127,7 @@ public class Acteur implements Entity {
 	}
 
 	nodeList = p.getElementsByTagName("id-user");
+
 	this.userRef = (User) InterfaceExpressJava.bdd.prendre(new Oid(nodeList
 		.item(0).getTextContent()));
     }
@@ -202,6 +203,8 @@ public class Acteur implements Entity {
 	this.experience = Experience.getXMLExperienceValue(p);
 
 	NodeList nodeList = p.getElementsByTagName("actor-competence");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.competence = nodeList.item(0).getTextContent();
 	}

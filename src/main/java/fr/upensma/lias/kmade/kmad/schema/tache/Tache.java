@@ -1650,11 +1650,11 @@ public class Tache implements Entity {
 	    racine.appendChild(kmadElement);
 	}
 	// Observation
-	if (!this.observation.equals("")) {
+	//if (!this.observation.equals("")) {
 	    kmadElement = doc.createElement("task-observation");
 	    kmadElement.setTextContent(this.observation);
 	    racine.appendChild(kmadElement);
-	}
+	//}
 	// Executant
 	racine.appendChild(this.executant.toXML2(doc));
 	// Frequency
@@ -1783,13 +1783,14 @@ public class Tache implements Entity {
 
     }
 
+    
     /**
      * Same as "createObjectFromXMLElement" method adapted to the new dtd
      * @author Joachim TROUVERIE
      */
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-        this.lstEvent.clear();
+      	this.lstEvent.clear();
         this.acteurs.clear();
         this.acteurSysteme.clear();
         this.fils.clear();
@@ -1860,71 +1861,101 @@ public class Tache implements Entity {
 	// Elements
 	// Name
 	NodeList nodeList = p.getElementsByTagName("task-name");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 	// Numero
 	nodeList = p.getElementsByTagName("task-numero");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	this.numero = nodeList.item(0).getTextContent();
 
 	// Purpose
 	nodeList = p.getElementsByTagName("task-purpose");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.but = nodeList.item(0).getTextContent();
 	}
 	// Duration
 	nodeList = p.getElementsByTagName("task-duration");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.duree = nodeList.item(0).getTextContent();
 	}
 	// Resources
 	nodeList = p.getElementsByTagName("task-resources");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.ressources = nodeList.item(0).getTextContent();
 	}
 	// Feedback
 	nodeList = p.getElementsByTagName("task-feedback");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.feed = nodeList.item(0).getTextContent();
 	}
 	// Observation
 	nodeList = p.getElementsByTagName("task-observation");
-	if (nodeList.item(0) != null) {
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
+	 if(nodeList == null){
+		 this.observation = "";
+	 } else if (nodeList.item(0) != null) {
 	    this.observation = nodeList.item(0).getTextContent();
 	}
 	// Executant
-	this.executant = Executant.getXMLExecutantValue(p);
+	this.executant = Executant.getXMLExecutantValue2(p);
 	// Frequence
-	this.frequence = Frequence.getXMLFrequenceValue(p);
+	this.frequence = Frequence.getXMLFrequenceValue2(p);
 	// Valeur de la Frequence
 	nodeList = p.getElementsByTagName("task-compfrequency");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.compFreq = nodeList.item(0).getTextContent();
 	}
 	// Importance
-	this.imp = Importance.getXMLExecutantValue(p);
+	this.imp = Importance.getXMLExecutantValue2(p);
 	// Modality
-	this.modal = Modalite.getXMLModalityValue(p);
+	this.modal = Modalite.getXMLModalityValue2(p);
 	// Optional
 	nodeList = p.getElementsByTagName("task-optional");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	this.facultatif = new Boolean(nodeList.item(0).getTextContent());
 	// Interruptible
 	nodeList = p.getElementsByTagName("task-interruptible");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	this.interruptible = new Boolean(nodeList.item(0).getTextContent());
 	// Decomposition
-	this.decomposition = Decomposition.getXMLModalityValue(p);
+	this.decomposition = Decomposition.getXMLModalityValue2(p);
 	// Precondition
 	nodeList = p.getElementsByTagName("task-precondition");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.preExpression = new PreExpression(nodeList.item(0)
 		    .getTextContent());
 	}
 	// Precondition Description
 	nodeList = p.getElementsByTagName("task-descriptionprecondition");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.preExpression
 		    .setDescription(nodeList.item(0).getTextContent());
 	}
+
 	// EffetsDeBord
+
 	nodeList = p.getElementsByTagName("task-effetsdebord");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList
 		    .item(0).getTextContent());
@@ -1932,6 +1963,8 @@ public class Tache implements Entity {
 	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-postcondition");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList
 		    .item(0).getTextContent());
@@ -1939,26 +1972,35 @@ public class Tache implements Entity {
 	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-descriptionpostcondition");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.effetsDeBordExpression.setDescription(nodeList.item(0)
 		    .getTextContent());
 	}
 	// EffetsDeBord Description
 	nodeList = p.getElementsByTagName("task-descriptioneffetsdebord");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.effetsDeBordExpression.setDescription(nodeList.item(0)
 		    .getTextContent());
 	}
 	// Iteration
 	nodeList = p.getElementsByTagName("task-iteration");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	this.iteExpression = new IterExpression(nodeList.item(0)
 		.getTextContent());
 	// Iteration Description
 	nodeList = p.getElementsByTagName("task-descriptioniteration");
+	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		 nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.iteExpression
 		    .setDescription(nodeList.item(0).getTextContent());
 	}
+	
 
     }
 
@@ -2039,6 +2081,7 @@ public class Tache implements Entity {
 	return false;
 
     }
+
 
 
 }

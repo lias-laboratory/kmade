@@ -188,13 +188,14 @@ public class AttributAbstrait implements Entity {
     }
 
     public boolean oidIsAnyMissing(Element p) {
-	NodeList userValue = p
-		.getElementsByTagName("id-abstractattribut-abstractobject");
+	NodeList userValue = p.getElementsByTagName("id-abstractattribut-abstractobject");
+
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
 	}
 	userValue = p.getElementsByTagName("id-abstractattribut-type");
+	
 	if (userValue.item(0) != null) {
 	    if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		    .getTextContent())) == null) {
@@ -208,22 +209,32 @@ public class AttributAbstrait implements Entity {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
 	NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 
 	nodeList = p.getElementsByTagName("abstractattribut-description");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}
 
 	nodeList = p.getElementsByTagName("abstractattribut-typestructure");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.typeStruct = TypeStructure.getValue(nodeList.item(0)
 		.getTextContent());
 
 	nodeList = p.getElementsByTagName("id-abstractattribut-abstractobject");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setUtiliseeparClass((ObjetAbstrait) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent())));
 
 	nodeList = p.getElementsByTagName("id-abstractattribut-type");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    TypeAbs ref = (TypeAbs) InterfaceExpressJava.bdd.prendre(new Oid(
 		    nodeList.item(0).getTextContent()));
@@ -353,6 +364,7 @@ public class AttributAbstrait implements Entity {
     public void createObjectFromXMLElement2(Element p) throws Exception {
 	// TODO Auto-generated method stub
 	this.oid = new Oid(p.getAttribute("idkmad"));
+	utilisePar.clear();
 	if (p.hasAttribute("id-abstractattribut-type"))
 	    this.setTypeRef((TypeAbs) InterfaceExpressJava.bdd.prendre(new Oid(
 		    p.getAttribute("id-abstractattribut-type"))));
@@ -362,21 +374,26 @@ public class AttributAbstrait implements Entity {
 			.getAttribute("id-abstractattribut-abstractobject"))));
 
 	NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 
 	nodeList = p.getElementsByTagName("abstractattribut-description");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}
 
 	nodeList = p.getElementsByTagName("abstractattribut-typestructure");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.typeStruct = TypeStructure.getValue(nodeList.item(0)
 		.getTextContent());
     }
 
     @Override
     public boolean oidIsAnyMissing2(Element p){
-	// TODO Auto-generated method stub
 	String userValue = p.getAttribute("id-abstractattribut-abstractobject");
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
 	    return true;

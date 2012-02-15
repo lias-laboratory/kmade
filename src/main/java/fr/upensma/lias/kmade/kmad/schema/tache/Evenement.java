@@ -124,9 +124,10 @@ public class Evenement implements Entity {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
 	NodeList kmadEventName = p.getElementsByTagName("event-name");
+
 	this.name = kmadEventName.item(0).getTextContent();
-	NodeList kmadEventDescription = p
-		.getElementsByTagName("event-description");
+	NodeList kmadEventDescription = p.getElementsByTagName("event-description");
+	
 	if (kmadEventDescription.item(0) != null) {
 	    this.description = kmadEventDescription.item(0).getTextContent();
 	}
@@ -208,13 +209,22 @@ public class Evenement implements Entity {
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
-	createObjectFromXMLElement(p);
+    	this.oid = new Oid(p.getAttribute("idkmad"));
+
+    	NodeList kmadEventName = p.getElementsByTagName("event-name");
+    	if(kmadEventName.item(0).getParentNode() != p){
+    		kmadEventName = null;}
+    	this.name = kmadEventName.item(0).getTextContent();
+    	NodeList kmadEventDescription = p.getElementsByTagName("event-description");
+    	if(kmadEventDescription.item(0).getParentNode() != p){
+    		kmadEventDescription = null;}
+    	if (kmadEventDescription.item(0) != null) {
+    	    this.description = kmadEventDescription.item(0).getTextContent();
+    	}
     }
 
     @Override
     public boolean oidIsAnyMissing2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 	return false;
     }
 }

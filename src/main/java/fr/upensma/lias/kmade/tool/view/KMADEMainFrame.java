@@ -138,7 +138,8 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
     private KMADESimulationDialog simulationDialog = new KMADESimulationDialog();
 
     private KMADEPrototypeDialog prototypeDialog = new KMADEPrototypeDialog();
-    
+    private KMADESimpleTreePanel simpleTreePanel = new KMADESimpleTreePanel();
+
     private KMADEStatisticDialog statisticDialog = new KMADEStatisticDialog(
 	    this);
 
@@ -150,6 +151,7 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
   
     private KMADEFindReplaceDialog findReplaceDialog = new KMADEFindReplaceDialog(
 	    this);
+    
     
     // ADDED by Joachim TROUVERIE
     private KMADEObjectDialogView objectDialogView = new KMADEObjectDialogView(this);
@@ -187,6 +189,10 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 	return findReplaceDialog;
     }
 
+    public KMADESimpleTreePanel getSimpleTreePanel(){
+    	return simpleTreePanel;
+    }
+    
     public void showEmptyPanel() {
 
 	myProjectCard.show(panelHaut, "PanelEmpty");

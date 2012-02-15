@@ -143,8 +143,7 @@ public class InterviewIndex implements Entity {
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
-	NodeList userPreValue = p
-		.getElementsByTagName("projectinterview-actor");
+	NodeList userPreValue = p.getElementsByTagName("projectinterview-actor");
 	interviewedName = userPreValue.item(0).getTextContent();
 
 	userPreValue = p.getElementsByTagName("projectinterview-place");
@@ -172,7 +171,6 @@ public class InterviewIndex implements Entity {
 	    type = userPreValue.item(0).getTextContent();
 	}
 
-	userPreValue = p.getElementsByTagName("projectinterview-info");
 	if (userPreValue.item(0) != null) {
 	    searchedInformations = userPreValue.item(0).getTextContent();
 	}
@@ -349,14 +347,67 @@ public class InterviewIndex implements Entity {
 
 	@Override
 	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		createObjectFromXMLElement(p);
+		this.oid = new Oid(p.getAttribute("idkmad"));
+
+		NodeList userPreValue = p.getElementsByTagName("projectinterview-actor");
+		if(userPreValue.item(0).getParentNode() != p){
+			userPreValue = null;}
+		interviewedName = userPreValue.item(0).getTextContent();
+
+		userPreValue = p.getElementsByTagName("projectinterview-place");
+		if(userPreValue.item(0).getParentNode() != p){
+			userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    placeInformation = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-statut");
+		if(userPreValue.item(0).getParentNode() != p){
+			userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    statut = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-seniority");
+		if(userPreValue.item(0).getParentNode() != p){
+			userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    seniority = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-date");
+		if(userPreValue.item(0).getParentNode() != p){
+			userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    date = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-type");
+		if(userPreValue.item(0).getParentNode() != p){
+			userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    type = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-info");
+		if(userPreValue.item(0).getParentNode() != p){
+			userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    searchedInformations = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-director");
+		if(userPreValue.item(0).getParentNode() != p){
+			userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    interviewerName = userPreValue.item(0).getTextContent();
+		}
 		
 	}
 
 	@Override
 	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 }

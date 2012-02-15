@@ -31,4 +31,5 @@ public interface Entity extends Serializable, KMADXml {
     Oid getOid();
 
     String getName();
+
 }

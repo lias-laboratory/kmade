@@ -107,6 +107,7 @@ public class ParcMachines extends Materiel {
 
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 	this.oid = new Oid(p.getAttribute("idkmad"));
+	inverseMember.clear();
 
 	NodeList kmadParcName = p.getElementsByTagName("parcMachines-name");
 	if (kmadParcName.item(0) != null)
@@ -147,16 +148,58 @@ public class ParcMachines extends Materiel {
     }
 
     public Element toXML2(Document doc) throws Exception {
-	// TODO Auto-generated method stub
-	return toXML(doc);
+    	Element racine = doc.createElement("ParcMachines");
+    	racine.setAttribute("classkmad", "tache.ParcMachines");
+    	racine.setAttribute("idkmad", oid.get());
+
+    	Element kmadParcName = doc.createElement("parcMachines-name");
+    	kmadParcName.setTextContent(this.getName());
+    	racine.appendChild(kmadParcName);
+
+    	if (!this.getDescription().equals("")) {
+    	    Element kmadParcDescription = doc
+    		    .createElement("parcMachines-description");
+    	    kmadParcDescription.setTextContent(this.getDescription());
+    	    racine.appendChild(kmadParcDescription);
+    	}
+
+    	if (!super.getImage().equals("")) {
+    	    Element kmadParcImagePath = doc
+    		    .createElement("parcMachines-imagepath");
+    	    kmadParcImagePath.setTextContent(super.getImage());
+    	    racine.appendChild(kmadParcImagePath);
+    	}
+    	// seul les machines stocks les parcs dans le XML
+
+    	return racine;
     }
 
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
-	createObjectFromXMLElement(p);
+    	this.oid = new Oid(p.getAttribute("idkmad"));
+    	inverseMember.clear();
+
+    	NodeList kmadParcName = p.getElementsByTagName("parcMachines-name");
+    	if(kmadParcName.item(0).getParentNode() != p){
+    		kmadParcName = null;}
+    	if (kmadParcName.item(0) != null)
+    	    super.setName(kmadParcName.item(0).getTextContent());
+
+    	NodeList kmadParcDescription = p
+    		.getElementsByTagName("parcMachines-description");
+    	if(kmadParcDescription.item(0).getParentNode() != p){
+    		kmadParcDescription = null;}
+    	if (kmadParcDescription.item(0) != null)
+    	    super.setDescription(kmadParcDescription.item(0).getTextContent());
+
+    	NodeList kmadParcImagePath = p
+    		.getElementsByTagName("parcMachines-imagepath");
+    	if(kmadParcImagePath.item(0).getParentNode() != p){
+    		kmadParcImagePath = null;}
+    	if (kmadParcImagePath.item(0) != null)
+    	    super.setImage(kmadParcImagePath.item(0).getTextContent());
     }
 
     public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
-	return oidIsAnyMissing(p);
+    	return false;
     }
 }

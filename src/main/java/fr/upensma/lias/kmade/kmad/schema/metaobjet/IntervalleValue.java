@@ -123,17 +123,15 @@ public class IntervalleValue extends ValeurType {
 
     @Override
     public Element toXML2(Document doc) throws Exception {
-	// TODO Auto-generated method stub
-	return this.toXML(doc);
+	return null;
     }
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 
     }
     
     public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
-	return this.oidIsAnyMissing(p);
+	return false;
     }
 }

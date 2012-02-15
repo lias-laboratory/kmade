@@ -248,11 +248,15 @@ public class Label implements Entity {
 	this.color = new Color(red, green, blue);
 
 	nodeList = p.getElementsByTagName("label-visible");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null)
 	    this.isVisible = Boolean.parseBoolean(nodeList.item(0)
 		    .getTextContent());
 
 	nodeList = p.getElementsByTagName("label-colorvisible");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null)
 	    this.isColorVisible = Boolean.parseBoolean(nodeList.item(0)
 		    .getTextContent());
@@ -291,13 +295,75 @@ public class Label implements Entity {
 
 	@Override
 	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		createObjectFromXMLElement(p);
+		this.oid = new Oid(p.getAttribute("idkmad"));
+
+		NodeList nodeList = p.getElementsByTagName("label-name");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		if (nodeList.item(0) != null)
+		    this.name = nodeList.item(0).getTextContent();
+
+		nodeList = p.getElementsByTagName("label-description");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		if (nodeList.item(0) != null)
+		    this.description = nodeList.item(0).getTextContent();
+
+		nodeList = p.getElementsByTagName("label-color");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		int red = 255;
+		int green = 255;
+		int blue = 255;
+		if (nodeList.getLength() != 0) {
+		    NodeList nodeListEvent = nodeList.item(0).getChildNodes();
+
+		    for (int i = 0; i < nodeListEvent.getLength(); i++) {
+			if (nodeListEvent.item(i).getNodeType() == Element.ELEMENT_NODE) {
+			    Node node = nodeListEvent.item(i);
+			    if (node.getNodeName().equals("label-color-red")) {
+			    	KMADEHistoryMessageManager.printlnMessage(node.getTextContent());
+				try {
+				    red = Integer.parseInt(node.getTextContent());
+				    KMADEHistoryMessageManager.printlnMessage(node.getTextContent());
+				} catch (Exception e) {
+				    red = 255;
+				}
+			    } else if (node.getNodeName().equals("label-color-green")) {
+				try {
+				    green = Integer.parseInt(node.getTextContent());
+				} catch (Exception e) {
+				    green = 255;
+				}
+			    } else if (node.getNodeName().equals("label-color-blue")) {
+				try {
+				    blue = Integer.parseInt(node.getTextContent());
+				} catch (Exception e) {
+				    blue = 255;
+				}
+			    }
+			}
+		    }
+		}
+		this.color = new Color(red, green, blue);
+
+		nodeList = p.getElementsByTagName("label-visible");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		if (nodeList.item(0) != null)
+		    this.isVisible = Boolean.parseBoolean(nodeList.item(0)
+			    .getTextContent());
+
+		nodeList = p.getElementsByTagName("label-colorvisible");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		if (nodeList.item(0) != null)
+		    this.isColorVisible = Boolean.parseBoolean(nodeList.item(0)
+			    .getTextContent());
 	}
 
 	@Override
 	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		return this.oidIsAnyMissing(p);
+	return false;
 	}
 }

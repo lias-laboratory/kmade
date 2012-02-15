@@ -149,6 +149,6 @@ public abstract class Agregat implements Entity {
 	}
 
 	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
-		return this.oidIsAnyMissing(p);
+		return false;
 	}
 }

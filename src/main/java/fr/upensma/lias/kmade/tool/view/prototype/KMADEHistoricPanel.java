@@ -1,10 +1,12 @@
 package fr.upensma.lias.kmade.tool.view.prototype;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -39,9 +41,14 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 	private JPanel taskPanel;
 
 	public KMADEHistoricPanel() {
+		
+		TitledBorder titlepanel = new TitledBorder(BorderFactory.createLineBorder(Color.BLACK, 1),"Historique ",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
+		this.setBorder(titlepanel);
+		this.setLayout(new BorderLayout());
 		botPanel = new JScrollPane();
 
-
+		TitledBorder descriptionTitle = new TitledBorder(null,"Description ",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
+		botPanel.setBorder(descriptionTitle);
 		root = new DefaultMutableTreeNode();
 		root.setAllowsChildren(true);
 		tree = new JTree(root);
@@ -60,9 +67,10 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 				.createStrippedSplitPane(JSplitPane.VERTICAL_SPLIT,
 						treeView,botPanel);	
 		myCenterPanel.setResizeWeight(1);
+		myCenterPanel.setDividerLocation(300);
 		myCenterPanel.setDividerBorderVisible(true);
 		myCenterPanel.setOneTouchExpandable(true);
-		this.add(myCenterPanel);
+		this.add(myCenterPanel,BorderLayout.CENTER);
 		tree.setCellRenderer(new TreeCellRenderer() {
 
 			public Component getTreeCellRendererComponent(JTree tree, Object value,
@@ -87,6 +95,7 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 						case USER : executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.USER_TASK_16_IMAGE));
 						break;
 						}
+						myLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 						myLabel.setText(myNode.getUserObject().toString());
 						myLabel.setIcon(executantImage);
 					}}
@@ -121,9 +130,8 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 	}
 
 
-
+	@Override
 	public void valueChanged(TreeSelectionEvent e) {
-
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
 		if (node == null){
 			return;
@@ -135,23 +143,28 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 	private void displaytask(Tache task) {
 		taskPanel.removeAll();
 		JPanel titlePanel = new JPanel();
-		TitledBorder titleborder = new TitledBorder(null,task.getName()+" : ",TitledBorder.CENTER, TitledBorder.TOP);
+		TitledBorder titleborder = new TitledBorder(null,task.getName()+" : ",TitledBorder.CENTER, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		titlePanel.setBorder(titleborder);
-		titlePanel.setLayout(new GridLayout(3, 1));
-		TitledBorder titleprecondition = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_PRECONDITION_TITLE + " : ",TitledBorder.LEFT, TitledBorder.TOP);
+		//titlePanel.setLayout(new GridLayout(3, 1));
+		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.PAGE_AXIS));
+		TitledBorder titleprecondition = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_PRECONDITION_TITLE + " : ",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		JTextArea pre = new JTextArea(task.getPreExpression().getDescription());
+		pre.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 		pre.setBorder(titleprecondition);
 		pre.setEditable(false);
 		pre.setLineWrap(true);
 		pre.setWrapStyleWord(true);
-		TitledBorder titleobservation = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_DESCRIPTION_TITLE + " : ",TitledBorder.LEFT, TitledBorder.TOP);
+		
+		TitledBorder titleobservation = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_DESCRIPTION_TITLE + " : ",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		JTextArea desc = new JTextArea(task.getObservation());
+		desc.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 		desc.setBorder(titleobservation);
 		desc.setEditable(false);
 		desc.setLineWrap(true);
 		desc.setWrapStyleWord(true);
-		TitledBorder titleIter = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_ITERATION_TOOLTIP+" : ",TitledBorder.LEFT, TitledBorder.TOP);
+		TitledBorder titleIter = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_ITERATION_TOOLTIP+" : ",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		JTextArea iter = new JTextArea(task.getIteExpression().getDescription());
+		iter.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 		iter.setBorder(titleIter);
 		iter.setEditable(false);
 		iter.setLineWrap(true);

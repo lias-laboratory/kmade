@@ -54,7 +54,13 @@ public class KMADEConstant {
 	public static Font TASK_NAME_FONT = new Font("arial", Font.BOLD, 15);
 
 	public static Font TASK_OPERATOR_FONT = new Font("arial", Font.BOLD, 10);
+	
+	public static Font TITLE_PROTO_TASK_FONT = new Font("arial", Font.BOLD, 20);
 
+	public static Font BORDER_PROTO_TASK_FONT = new Font("arial", Font.BOLD, 13);
+	
+	public static Font TEXT_PROTO_TASK_FONT = new Font("arial", Font.PLAIN, 14);
+	
 	public static final int ROW_HEIGHT = 35;
 
 	// Task model appearance

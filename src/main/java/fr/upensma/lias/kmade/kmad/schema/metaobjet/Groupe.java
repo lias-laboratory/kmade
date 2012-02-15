@@ -218,12 +218,14 @@ public class Groupe implements Entity {
 
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	NodeList userValue = p.getElementsByTagName("id-group-agregat");
+
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
 	}
 
 	userValue = p.getElementsByTagName("id-group-abstractobject");
+
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
@@ -236,18 +238,26 @@ public class Groupe implements Entity {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
 	NodeList nodeList = p.getElementsByTagName("group-name");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 
 	nodeList = p.getElementsByTagName("group-description");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}
 
 	nodeList = p.getElementsByTagName("id-group-agregat");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setEnsemble((Agregat) InterfaceExpressJava.bdd.prendre(new Oid(
 		nodeList.item(0).getTextContent())));
 
 	nodeList = p.getElementsByTagName("id-group-abstractobject");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setContientObj((ObjetAbstrait) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent())));
     }
@@ -326,9 +336,13 @@ public class Groupe implements Entity {
 		.prendre(new Oid(p.getAttribute("id-group-abstractobject"))));
 
 	NodeList nodeList = p.getElementsByTagName("group-name");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 
 	nodeList = p.getElementsByTagName("group-description");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}

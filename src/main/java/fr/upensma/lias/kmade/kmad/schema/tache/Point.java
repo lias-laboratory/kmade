@@ -122,19 +122,37 @@ public class Point implements Entity {
 
 	@Override
 	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		return toXML(doc);
+        Element racine = doc.createElement("point");
+        racine.setAttribute("classkmad", "tache.Point");
+        racine.setAttribute("idkmad", oid.get());
+        
+        Element kmadPointx = doc.createElement("point-x");
+        kmadPointx.setTextContent(this.getX().toString());
+        racine.appendChild(kmadPointx);
+        
+        Element kmadPointy = doc.createElement("point-y");
+        kmadPointy.setTextContent(this.getY().toString());
+        racine.appendChild(kmadPointy);
+        
+        return racine;
 	}
 
 	@Override
 	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		createObjectFromXMLElement(p);
+		 this.oid = new Oid(p.getAttribute("idkmad"));        
+	        
+	        NodeList kmadPointX = p.getElementsByTagName("point-x");
+	    	if(kmadPointX.item(0).getParentNode() != p){
+	    		kmadPointX = null;}
+	        this.x = new Integer(kmadPointX.item(0).getTextContent());
+	        NodeList kmadPointY = p.getElementsByTagName("point-y");
+	        if(kmadPointY.item(0).getParentNode() != p){
+	        	kmadPointY = null;}
+	        this.y = new Integer(kmadPointY.item(0).getTextContent());
 	}
 
 	@Override
 	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

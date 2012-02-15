@@ -132,24 +132,29 @@ public class Individu extends User {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
 	NodeList kmadIndividuName = p.getElementsByTagName("individu-name");
+
 	if (kmadIndividuName.item(0) != null)
 	    super.setName(kmadIndividuName.item(0).getTextContent());
 
 	NodeList kmadIndividuStatut = p.getElementsByTagName("individu-statut");
+
 	if (kmadIndividuStatut.item(0) != null)
 	    super.setStatut(kmadIndividuStatut.item(0).getTextContent());
 
 	NodeList kmadIndividuRole = p.getElementsByTagName("individu-role");
+
 	if (kmadIndividuRole.item(0) != null)
 	    super.setRole(kmadIndividuRole.item(0).getTextContent());
 
 	NodeList kmadIndividuImagePath = p
 		.getElementsByTagName("individu-imagepath");
+
 	if (kmadIndividuImagePath.item(0) != null)
 	    super.setImage(kmadIndividuImagePath.item(0).getTextContent());
 
 	NodeList kmadIndividuOrganisation = p
 		.getElementsByTagName("id-organisation");
+
 	if (kmadIndividuOrganisation.item(0) != null) {
 	    for (int i = 0; i < kmadIndividuOrganisation.getLength(); i++) {
 		this.addToOrganization((Organisation) InterfaceExpressJava.bdd
@@ -240,7 +245,7 @@ public class Individu extends User {
     public void createObjectFromXMLElement2(Element p) throws Exception {
 	// TODO Auto-generated method stub
 	this.oid = new Oid(p.getAttribute("idkmad"));
-	
+	memberOf.clear();
 	if(p.hasAttribute("id-organisation")){
 	    String[] kmadIndividuOrganisation = p.getAttribute("id-organisation").split(" ");
 	    for (int i = 0; i < kmadIndividuOrganisation.length; i++) {
@@ -250,19 +255,26 @@ public class Individu extends User {
 	}
 
 	NodeList kmadIndividuName = p.getElementsByTagName("individu-name");
+	if(kmadIndividuName.item(0).getParentNode() != p){
+		kmadIndividuName = null;}
 	if (kmadIndividuName.item(0) != null)
 	    super.setName(kmadIndividuName.item(0).getTextContent());
 
 	NodeList kmadIndividuStatut = p.getElementsByTagName("individu-statut");
+	if(kmadIndividuStatut.item(0).getParentNode() != p){
+		kmadIndividuStatut = null;}
 	if (kmadIndividuStatut.item(0) != null)
 	    super.setStatut(kmadIndividuStatut.item(0).getTextContent());
 
 	NodeList kmadIndividuRole = p.getElementsByTagName("individu-role");
+	if(kmadIndividuRole.item(0).getParentNode() != p){
+		kmadIndividuRole = null;}
 	if (kmadIndividuRole.item(0) != null)
 	    super.setRole(kmadIndividuRole.item(0).getTextContent());
 
-	NodeList kmadIndividuImagePath = p
-		.getElementsByTagName("individu-imagepath");
+	NodeList kmadIndividuImagePath = p.getElementsByTagName("individu-imagepath");
+	if(kmadIndividuImagePath.item(0).getParentNode() != p){
+		kmadIndividuImagePath = null;}
 	if (kmadIndividuImagePath.item(0) != null)
 	    super.setImage(kmadIndividuImagePath.item(0).getTextContent());
 

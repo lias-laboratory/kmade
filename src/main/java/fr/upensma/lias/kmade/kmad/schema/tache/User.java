@@ -243,19 +243,67 @@ public class User implements Entity {
 
     @Override
 	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		return toXML(doc);
+    	Element racine = doc.createElement("user");
+    	racine.setAttribute("classkmad", "tache.User");
+    	racine.setAttribute("idkmad", oid.get());
+
+    	Element kmadUserName = doc.createElement("user-name");
+    	kmadUserName.setTextContent(this.getName());
+    	racine.appendChild(kmadUserName);
+
+    	if (!this.getStatut().equals("")) {
+    	    Element kmadUserStatut = doc.createElement("user-statut");
+    	    kmadUserStatut.setTextContent(this.getStatut());
+    	    racine.appendChild(kmadUserStatut);
+    	}
+
+    	if (!this.getRole().equals("")) {
+    	    Element kmadUserRole = doc.createElement("user-role");
+    	    kmadUserRole.setTextContent(this.getRole());
+    	    racine.appendChild(kmadUserRole);
+    	}
+
+    	if (!this.getImage().equals("")) {
+    	    Element kmadUserImagePath = doc.createElement("user-imagepath");
+    	    kmadUserImagePath.setTextContent(this.getImage());
+    	    racine.appendChild(kmadUserImagePath);
+    	}
+
+    	return racine;
 	}
 
 	@Override
 	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		createObjectFromXMLElement(p);
+		this.oid = new Oid(p.getAttribute("idkmad"));
+
+		NodeList kmadUserName = p.getElementsByTagName("user-name");
+		 if(kmadUserName.item(0).getParentNode() != p){
+			 kmadUserName = null;}
+		if (kmadUserName.item(0) != null)
+		    this.name = kmadUserName.item(0).getTextContent();
+
+		NodeList kmadUserStatut = p.getElementsByTagName("user-statut");
+		 if(kmadUserStatut.item(0).getParentNode() != p){
+			 kmadUserStatut = null;}
+		if (kmadUserStatut.item(0) != null)
+		    this.statut = kmadUserStatut.item(0).getTextContent();
+
+		NodeList kmadUserRole = p.getElementsByTagName("user-role");
+		 if(kmadUserRole.item(0).getParentNode() != p){
+			 kmadUserRole = null;}
+		if (kmadUserRole.item(0) != null)
+		    this.role = kmadUserRole.item(0).getTextContent();
+
+		NodeList kmadUserImagePath = p.getElementsByTagName("user-imagepath");
+		 if(kmadUserImagePath.item(0).getParentNode() != p){
+			 kmadUserImagePath = null;}
+		if (kmadUserImagePath.item(0) != null)
+		    this.imagePath = kmadUserImagePath.item(0).getTextContent();
+
 	}
 
 	@Override
 	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

@@ -144,4 +144,21 @@ public enum Decomposition implements Enumere {
 	else
 	    return null;
     }
+
+	public static Decomposition getXMLModalityValue2(Element p) {
+		NodeList nodeList = p.getElementsByTagName("task-decomposition");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			return INCONNU;}
+		if (nodeList.item(0) == null) {
+		    return INCONNU;
+		}
+		String value = (String) nodeList.item(0).getTextContent();
+
+		for (Decomposition i : Decomposition.values()) {
+		    if (value.equalsIgnoreCase(i.enonce)) {
+			return i;
+		    }
+		}
+		return INCONNU;
+	}
 }

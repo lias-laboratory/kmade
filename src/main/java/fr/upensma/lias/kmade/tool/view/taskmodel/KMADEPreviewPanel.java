@@ -145,7 +145,10 @@ public class KMADEPreviewPanel extends JPanel implements GraphLayoutCacheListene
 	    public void run() {
 		KMADEGraph jgraph = currentGraph;
 		if (jgraph != null) {
-		    Dimension dimension = jgraph.getPreferredSize();
+			Dimension dimension = new Dimension(0,0);
+			
+			// dimension = jgraph.getPreferredSize();
+		  
 		    Dimension dimension1 = jgraph.getBounds().getSize();
 		    dimension.width = Math.max(dimension.width,
 			    dimension1.width);

@@ -123,11 +123,15 @@ public class ActeurSysteme implements Entity {
 	this.experience = Experience.getXMLExperienceValue(p);
 
 	NodeList nodeList = p.getElementsByTagName("actorSystem-competence");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.competence = nodeList.item(0).getTextContent();
 	}
 
 	nodeList = p.getElementsByTagName("id-userSystem");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.userRef = (Materiel) InterfaceExpressJava.bdd.prendre(new Oid(
 		nodeList.item(0).getTextContent()));
     }
@@ -199,13 +203,14 @@ public class ActeurSysteme implements Entity {
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 	this.oid = new Oid(p.getAttribute("idkmad"));
 	this.userRef = (Materiel) InterfaceExpressJava.bdd.prendre(new Oid(p
 		.getAttribute("id-user")));
 	this.experience = Experience.getXMLExperienceValue(p);
 
 	NodeList nodeList = p.getElementsByTagName("actor-competence");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.competence = nodeList.item(0).getTextContent();
 	}
@@ -213,7 +218,6 @@ public class ActeurSysteme implements Entity {
 
     @Override
     public boolean oidIsAnyMissing2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 	String nodeList = p.getAttribute("id-user");
 	if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
 	    return true;

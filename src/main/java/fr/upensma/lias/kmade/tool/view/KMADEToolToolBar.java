@@ -189,6 +189,8 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 
     private JMenuBar myMenuBar;
 
+    private AbstractAction myExportAction;
+    
     private AbstractAction mySaveAction;
 
     private AbstractAction mySaveAsAction;
@@ -292,6 +294,8 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 	toolbar.add(mySaveAction);
 	myFileMenu.add(mySaveAction);
 
+	
+	
 	// Sauver sous ...
 	mySaveAsAction = new AbstractAction(
 		KMADEConstant.SAVE_PROJECT_AS_ACTION_MESSAGE) {
@@ -306,7 +310,22 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 	mySaveAsAction.putValue(AbstractAction.SHORT_DESCRIPTION,
 		KMADEConstant.SAVE_PROJECT_AS_ACTION_MESSAGE);
 	myFileMenu.add(mySaveAsAction);
+	// exportation texte
+	myExportAction = new AbstractAction("KMC EXPORT"){
+		private static final long serialVersionUID = -7482079639019314991L;
 
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			KMADeAdaptator.exportSimpleText();			
+		}
+		
+	};
+	myExportAction.putValue(AbstractAction.SHORT_DESCRIPTION,"KMC EXPORT");
+	myFileMenu.add(myExportAction);
+	
+	
+	
+	
 	myFileMenu.addSeparator();
 	AbstractAction myImportAction = new AbstractAction(
 		"Importer SPF (BETA)") {

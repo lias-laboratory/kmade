@@ -651,7 +651,7 @@ public final class ExpressKMADXML {
 						myEntities.remove(newInstance);
 						break;
 					} catch (Exception e) {
-						//TODO
+						//TODO lot of exception because code archi ...
 					}
 				}
 			}

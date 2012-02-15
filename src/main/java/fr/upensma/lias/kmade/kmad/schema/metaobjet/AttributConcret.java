@@ -220,21 +220,23 @@ public class AttributConcret implements Entity, Cloneable {
     }
 
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
-	NodeList userValue = p
-		.getElementsByTagName("id-concreteattribut-concreteobject");
+	NodeList userValue = p.getElementsByTagName("id-concreteattribut-concreteobject");
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
 	}
 
-	userValue = p
-		.getElementsByTagName("id-concreteattribut-abstractattribut");
+	userValue = p.getElementsByTagName("id-concreteattribut-abstractattribut");
+	if(userValue.item(0).getParentNode() != p){
+		userValue = null;}
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
 	}
 
 	userValue = p.getElementsByTagName("id-concreteattribut-value");
+	if(userValue.item(0).getParentNode() != p){
+		userValue = null;}
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
@@ -245,18 +247,22 @@ public class AttributConcret implements Entity, Cloneable {
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
-	NodeList nodeList = p
-		.getElementsByTagName("id-concreteattribut-concreteobject");
+	NodeList nodeList = p.getElementsByTagName("id-concreteattribut-concreteobject");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setObjConcDe((ObjetConcret) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent())));
 
-	nodeList = p
-		.getElementsByTagName("id-concreteattribut-abstractattribut");
+	nodeList = p.getElementsByTagName("id-concreteattribut-abstractattribut");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setAttributDe((AttributAbstrait) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent())));
 	this.name = this.attributAbsDe.getName();
 
 	nodeList = p.getElementsByTagName("id-concreteattribut-value");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.valeur = (ValeurType) InterfaceExpressJava.bdd
 		    .prendre(new Oid(nodeList.item(0).getTextContent()));
@@ -367,7 +373,6 @@ public class AttributConcret implements Entity, Cloneable {
 
     @Override
     public boolean oidIsAnyMissing2(org.w3c.dom.Element p) throws Exception {
-	// TODO Auto-generated method stub
 	String userValue = p.getAttribute("id-concreteattribut-concreteobject");
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
 	    return true;

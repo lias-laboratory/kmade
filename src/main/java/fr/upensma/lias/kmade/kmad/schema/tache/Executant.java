@@ -55,7 +55,26 @@ public enum Executant implements Enumere {
     }
 
     public static Executant getXMLExecutantValue(org.w3c.dom.Element p) {
+    	
 	NodeList nodeList = p.getElementsByTagName("task-executant");
+	if (nodeList.item(0) == null) {
+	    return INCONNU;
+	}
+	String value = (String) nodeList.item(0).getTextContent();
+
+	for (Executant i : Executant.values()) {
+	    if (value.equalsIgnoreCase(i.enonce)) {
+		return i;
+	    }
+	}
+	return INCONNU;
+    }
+    
+    public static Executant getXMLExecutantValue2(org.w3c.dom.Element p) {
+    	
+	NodeList nodeList = p.getElementsByTagName("task-executant");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		return INCONNU;}
 	if (nodeList.item(0) == null) {
 	    return INCONNU;
 	}

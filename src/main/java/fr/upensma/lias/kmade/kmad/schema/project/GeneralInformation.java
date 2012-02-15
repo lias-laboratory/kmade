@@ -144,28 +144,32 @@ public class GeneralInformation implements Entity {
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
-	NodeList userPreValue = p
-		.getElementsByTagName("projectinformation-compagny");
+	NodeList userPreValue = p.getElementsByTagName("projectinformation-compagny");
+
 	if (userPreValue.item(0) != null) {
 	    entreprise = userPreValue.item(0).getTextContent();
 	}
-	userPreValue = p.getElementsByTagName("projectinformation-place");
+	
 	if (userPreValue.item(0) != null) {
 	    site = userPreValue.item(0).getTextContent();
 	}
 	userPreValue = p.getElementsByTagName("projectinformation-type");
+	
 	if (userPreValue.item(0) != null) {
 	    typePost = userPreValue.item(0).getTextContent();
 	}
 	userPreValue = p.getElementsByTagName("projectinformation-date");
+	 
 	if (userPreValue.item(0) != null) {
 	    date = userPreValue.item(0).getTextContent();
 	}
 	userPreValue = p.getElementsByTagName("projectinformation-resources");
+	
 	if (userPreValue.item(0) != null) {
 	    resources = userPreValue.item(0).getTextContent();
 	}
 	userPreValue = p.getElementsByTagName("projectinformation-motivation");
+	 
 	if (userPreValue.item(0) != null) {
 	    justification = userPreValue.item(0).getTextContent();
 	}
@@ -298,14 +302,49 @@ public class GeneralInformation implements Entity {
 
 	@Override
 	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		createObjectFromXMLElement(p);
+		this.oid = new Oid(p.getAttribute("idkmad"));
+
+		NodeList userPreValue = p.getElementsByTagName("projectinformation-compagny");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    entreprise = userPreValue.item(0).getTextContent();
+		}
+		userPreValue = p.getElementsByTagName("projectinformation-place");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    site = userPreValue.item(0).getTextContent();
+		}
+		userPreValue = p.getElementsByTagName("projectinformation-type");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    typePost = userPreValue.item(0).getTextContent();
+		}
+		userPreValue = p.getElementsByTagName("projectinformation-date");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    date = userPreValue.item(0).getTextContent();
+		}
+		userPreValue = p.getElementsByTagName("projectinformation-resources");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    resources = userPreValue.item(0).getTextContent();
+		}
+		userPreValue = p.getElementsByTagName("projectinformation-motivation");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    justification = userPreValue.item(0).getTextContent();
+		}
 		
 	}
 
 	@Override
 	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+				return false;
 	}
 }

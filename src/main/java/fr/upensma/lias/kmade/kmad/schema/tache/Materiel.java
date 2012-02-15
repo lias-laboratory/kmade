@@ -207,20 +207,45 @@ public class Materiel implements Entity {
 
     @Override
     public Element toXML2(Document doc) throws Exception {
-	// TODO Auto-generated method stub
-	return toXML(doc);
+    	Element racine = doc.createElement("materiel");
+    	racine.setAttribute("classkmad", "tache.Materiel");
+    	racine.setAttribute("idkmad", oid.get());
+
+    	Element kmadUserName = doc.createElement("materiel-name");
+    	kmadUserName.setTextContent(this.getName());
+    	racine.appendChild(kmadUserName);
+
+    	if (!this.getDescription().equals("")) {
+    	    Element kmadUserDescription = doc
+    		    .createElement("materiel-description");
+    	    kmadUserDescription.setTextContent(this.getDescription());
+    	    racine.appendChild(kmadUserDescription);
+    	}
+
+    	return racine;
     }
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
-	createObjectFromXMLElement(p);
+    	this.oid = new Oid(p.getAttribute("idkmad"));
+
+    	NodeList kmadUserName = p.getElementsByTagName("materiel-name");
+    	if(kmadUserName.item(0).getParentNode() != p){
+    		kmadUserName = null;}
+    	if (kmadUserName.item(0) != null)
+    	    this.name = kmadUserName.item(0).getTextContent();
+
+    	NodeList kmadUserDescription = p
+    		.getElementsByTagName("materiel-description");
+    	if(kmadUserDescription.item(0).getParentNode() != p){
+    		kmadUserDescription = null;}
+    	if (kmadUserDescription.item(0) != null)
+    	    this.description = kmadUserDescription.item(0).getTextContent();
 
     }
 
     @Override
     public boolean oidIsAnyMissing2(Element p) throws Exception {
-	// TODO Auto-generated method stub
-	return this.oidIsAnyMissing(p);
+    	return false;
     }
 }

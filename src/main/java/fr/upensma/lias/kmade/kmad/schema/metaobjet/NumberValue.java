@@ -160,6 +160,8 @@ public class NumberValue extends ValeurType {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
 	NodeList nodeList = p.getElementsByTagName("typevalue-value");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setValeur(nodeList.item(0).getTextContent());
     }
 

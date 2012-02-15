@@ -163,6 +163,7 @@ public class ObjetAbstrait implements Entity {
 		this.name = nodeList.item(0).getTextContent();
 
 		nodeList = p.getElementsByTagName("abstractobject-description");
+		
 		if (nodeList.item(0) != null) {
 			this.description = nodeList.item(0).getTextContent();
 		}
@@ -254,6 +255,9 @@ public class ObjetAbstrait implements Entity {
 	@Override
 	public Element toXML2(Document doc) throws Exception {
 		// TODO Auto-generated method stub
+		inverseObjConcDe.clear();
+		inverseAttributsAbs.clear();
+		inverseGroupe.clear();
 		Element racine = doc.createElement("abstractobject");
 		racine.setAttribute("classkmad", "metaobjet.ObjetAbstrait");
 		racine.setAttribute("idkmad", oid.get());
@@ -297,7 +301,6 @@ public class ObjetAbstrait implements Entity {
 
 	@Override
 	public void createObjectFromXMLElement2(Element p) throws Exception {
-		// TODO Auto-generated method stub
 		createObjectFromXMLElement(p);
 		// Point
 		if (p.hasAttribute("id-task-point")){

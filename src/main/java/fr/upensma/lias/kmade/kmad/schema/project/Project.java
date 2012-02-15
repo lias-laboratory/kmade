@@ -159,11 +159,15 @@ public class Project implements Entity {
 
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	NodeList userValue = p.getElementsByTagName("id-project-information");
+	 if(userValue != null && userValue.item(0)!=null && userValue.item(0).getParentNode()!=p){
+		 userValue = null;}
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
 	}
 	userValue = p.getElementsByTagName("id-project-interviews-list");
+	 if(userValue != null && userValue.item(0)!=null && userValue.item(0).getParentNode()!=p){
+		 userValue = null;}
 	if (userValue.getLength() != 0) {
 	    NodeList nodeListInterview = userValue.item(0).getChildNodes();
 	    for (int i = 0; i < nodeListInterview.getLength(); i++) {
@@ -181,12 +185,16 @@ public class Project implements Entity {
 
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 	this.oid = new Oid(p.getAttribute("idkmad"));
-
+	myIntIndex.clear();
 	NodeList nodeList = p.getElementsByTagName("id-project-information");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	myGenInfo = (GeneralInformation) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent()));
 
 	nodeList = p.getElementsByTagName("id-project-interviews-list");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.getLength() != 0) {
 	    NodeList nodeListInterview = nodeList.item(0).getChildNodes();
 	    for (int i = 0; i < nodeListInterview.getLength(); i++) {

@@ -87,6 +87,8 @@ public enum Experience implements Enumere {
 
     public static Experience getXMLExperienceValue(org.w3c.dom.Element p) {
 	NodeList nodeList = p.getElementsByTagName("actor-experience");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) == null) {
 	    return INCONNU;
 	}

@@ -41,7 +41,7 @@ public class PROTOExecution {
 	//modification of task state
 	public static void setCurrentTask(Tache t, boolean historic) {
 		int reponse = 42;
-		if(t.getPreExpression().getDescription()!=null && !t.getPreExpression().getDescription().equals("")){
+		if(t.getPreExpression()!= null && t.getPreExpression().getDescription()!=null && !t.getPreExpression().getDescription().equals("")){
 			reponse = JOptionPane.showConfirmDialog(null, KMADEConstant.PROTOTYPING_TOOL_PRECONDITION_TEXT_PANE +" : "+ t.getPreExpression().getDescription(),KMADEConstant.PROTOTYPING_TOOL_PRECONDITION_TITLE_PANE, JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null);
 
 		}

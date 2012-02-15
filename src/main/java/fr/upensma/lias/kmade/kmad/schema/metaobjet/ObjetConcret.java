@@ -168,13 +168,12 @@ public class ObjetConcret implements Entity, Cloneable {
     }
 
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
-	NodeList userValue = p
-		.getElementsByTagName("id-concreteobject-abstractobject");
+	NodeList userValue = p.getElementsByTagName("id-concreteobject-abstractobject");
+
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
 	}
-
 	userValue = p.getElementsByTagName("id-concreteobject-group");
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
@@ -188,18 +187,26 @@ public class ObjetConcret implements Entity, Cloneable {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
 	NodeList nodeList = p.getElementsByTagName("concreteobject-name");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 
 	nodeList = p.getElementsByTagName("concreteobject-description");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}
 
 	nodeList = p.getElementsByTagName("id-concreteobject-abstractobject");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setUtiliseParClass((ObjetAbstrait) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent())));
 
 	nodeList = p.getElementsByTagName("id-concreteobject-group");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setAppartientGroupe((Groupe) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent())));
     }
@@ -360,9 +367,13 @@ public class ObjetConcret implements Entity, Cloneable {
 		.prendre(new Oid(p.getAttribute("id-concreteobject-group"))));
 
 	NodeList nodeList = p.getElementsByTagName("concreteobject-name");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 
 	nodeList = p.getElementsByTagName("concreteobject-description");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}

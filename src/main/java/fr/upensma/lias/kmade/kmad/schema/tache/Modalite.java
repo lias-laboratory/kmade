@@ -113,4 +113,21 @@ public enum Modalite implements Enumere {
 	// TODO Auto-generated method stub
 	return this.toXML(doc);
     }
+
+	public static Modalite getXMLModalityValue2(Element p) {
+		NodeList nodeList = p.getElementsByTagName("task-modality");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			return INCONNU;}
+		if (nodeList.item(0) == null) {
+		    return INCONNU;
+		}
+
+		String value = (String) nodeList.item(0).getTextContent();
+		for (Modalite i : Modalite.values()) {
+		    if (value.equalsIgnoreCase(i.enonce)) {
+			return i;
+		    }
+		}
+		return INCONNU;
+	}
 }
