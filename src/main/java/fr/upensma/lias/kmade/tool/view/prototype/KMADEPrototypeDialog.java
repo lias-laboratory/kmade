@@ -19,25 +19,33 @@ package fr.upensma.lias.kmade.tool.view.prototype;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -45,6 +53,7 @@ import javax.swing.event.DocumentListener;
 import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
+import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ChoiceEnum;
 import fr.upensma.lias.kmade.tool.coreadaptator.prototype.PROTOExecution;
 import fr.upensma.lias.kmade.tool.coreadaptator.prototype.PROTOHistoric;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADETaskModelToolBar;
@@ -66,13 +75,19 @@ public class KMADEPrototypeDialog extends JFrame {
 
 	private static final long serialVersionUID = -3520781345362173500L;
 	private JPanel task;
+	private Box conditionBox;
 	private Box possibleTask;
 	private JPanel myContentPane; 
 	private JPanel buttonPanel;
 	private KMADEHistoricPanel historicPanel;
 	//private JScrollPane taskScroll ;
 	private JScrollPane possibleTaskScroll ;
+	private JScrollPane conditionScroll;
 	private JPanel rightBotTaskPanel;
+	private JButton buttonTermine;
+	//	private JPanel conditionPanel;
+	private static HashMap<String,ChoiceEnum> map = new HashMap<String, ChoiceEnum>() ;
+	private static ArrayList<String> displayed = new ArrayList<String>();
 
 	public KMADEPrototypeDialog() {
 		super(KMADEConstant.PROTOTYPING_TOOL_TITLE_NAME);
@@ -109,13 +124,13 @@ public class KMADEPrototypeDialog extends JFrame {
 
 		//taskScroll = new JScrollPane();
 		possibleTaskScroll = new JScrollPane();
-
+		conditionScroll = new JScrollPane();
 		this.task = new JPanel();
 		//task.setLayout(new GridLayout(4,1));
 		task.setLayout(new BoxLayout(task, BoxLayout.PAGE_AXIS));
-	//task.setAlignmentX(LEFT_ALIGNMENT);
+		//task.setAlignmentX(LEFT_ALIGNMENT);
 		//task.setAlignmentY(TOP_ALIGNMENT);
-		
+
 
 		leftPanel.setAlignmentX(LEFT_ALIGNMENT);
 		leftPanel.setAlignmentY(TOP_ALIGNMENT);
@@ -123,6 +138,12 @@ public class KMADEPrototypeDialog extends JFrame {
 		possibleTask.setAlignmentX(LEFT_ALIGNMENT);
 		possibleTask.setAlignmentY(TOP_ALIGNMENT);
 		possibleTask.setBackground(Color.WHITE);
+
+		this.conditionBox = Box.createVerticalBox();
+		conditionBox.setAlignmentX(LEFT_ALIGNMENT);
+		conditionBox.setAlignmentY(TOP_ALIGNMENT);
+		conditionBox.setBackground(Color.WHITE);
+
 
 		JPanel botTaskPanel = new JPanel();
 		botTaskPanel.setLayout(new BorderLayout());
@@ -143,23 +164,28 @@ public class KMADEPrototypeDialog extends JFrame {
 
 		myContentPane.add(myCenterPanel,BorderLayout.CENTER);
 		myContentPane.add(myBotPanel,BorderLayout.SOUTH);
-		
+
 		leftPanel.add(task,BorderLayout.CENTER);
 		leftPanel.add(botTaskPanel, BorderLayout.SOUTH);
-	//	taskScroll.setViewportView(task);
+		//	taskScroll.setViewportView(task);
 		possibleTaskScroll.setViewportView(possibleTask);
+		conditionScroll.setViewportView(conditionBox);
 		botTaskPanel.add(possibleTaskScroll,BorderLayout.CENTER);
 		botTaskPanel.add(rightBotTaskPanel,BorderLayout.EAST);
 		TitledBorder leftTitle = new TitledBorder(BorderFactory.createLineBorder(Color.BLACK,2),"Tâche en cours",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		leftPanel.setBorder(leftTitle);
 		rightPanel.setLayout(new BorderLayout());
 		rightPanel.add(historicPanel, BorderLayout.CENTER);
+		//	 conditionPanel = new JPanel();
+		//	 conditionPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		//	 conditionPanel.setAlignmentY(TOP_ALIGNMENT);
+		//	 conditionPanel.setAlignmentX(LEFT_ALIGNMENT);
 
+		//conditionBox.setBackground(Color.WHITE);
 		myBotPanel.add(buttonPanel);
 		setEnabledEnd(null,false);
 		this.validate();
 		this.repaint();
-
 	}
 
 
@@ -170,6 +196,8 @@ public class KMADEPrototypeDialog extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				task.removeAll();
 				possibleTask.removeAll();
+				conditionBox.removeAll();
+				map.clear();
 				PROTOExecution.startExecution();
 			}
 		});
@@ -179,6 +207,7 @@ public class KMADEPrototypeDialog extends JFrame {
 
 	public void openPrototypeDialog(){
 		this.setVisible(true);
+		displayed.clear();
 		GraphicEditorAdaptator.selectNoTask();
 		PROTOExecution.startExecution();
 	}
@@ -188,15 +217,15 @@ public class KMADEPrototypeDialog extends JFrame {
 		this.setVisible(false);
 	}
 
-	public void setCurrentTask(final Tache currentTask) {
+	public void setCurrentTask(final Tache currentTask, String displayPrecondition) {
 		possibleTask.removeAll();
 		possibleTask.revalidate();
 		possibleTask.repaint();
-		possibleTask.add(Box.createVerticalStrut(5));
+		conditionBox.removeAll();
+		conditionBox.revalidate();
+		conditionBox.repaint();
 		task.removeAll();
- 
-		
-		
+
 		//TitledBorder titlepanel = new TitledBorder(BorderFactory.createLineBorder(Color.RED,2),KMADEConstant.PROTOTYPING_TOOL_CURRENT_TASK + " : "+currentTask.getName(),TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK);
 		//task.setBorder(titlepanel);
 
@@ -240,7 +269,7 @@ public class KMADEPrototypeDialog extends JFrame {
 		possibleTaskScroll.setBorder(ordoPanelTitle);
 
 		//précondition
-		String precondition = currentTask.getPreExpression().getDescription();
+		String precondition = displayPrecondition;
 		TitledBorder titleprecondition = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_PRECONDITION_TITLE + " : ",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		JTextArea preconditionLabel = new JTextArea(precondition);
 		preconditionLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
@@ -269,6 +298,9 @@ public class KMADEPrototypeDialog extends JFrame {
 				TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		iterationScroll.setBorder(iterationTitle);
 
+
+		//Condition
+
 		//Description 	
 		String observation =  currentTask.getObservation();
 		final JTextArea descriptionLabel = new JTextArea(observation);
@@ -279,23 +311,23 @@ public class KMADEPrototypeDialog extends JFrame {
 		descriptionLabel.setLineWrap(true);
 		descriptionLabel.setWrapStyleWord(true);
 		descriptionLabel.getDocument().addDocumentListener(new DocumentListener() {
-			
+
 			@Override
 			public void removeUpdate(DocumentEvent arg0) {
 				ExpressTask.setObservationTask(currentTask,descriptionLabel.getText());
-				}
-			
+			}
+
 			@Override
 			public void insertUpdate(DocumentEvent arg0) {
 				ExpressTask.setObservationTask(currentTask,descriptionLabel.getText());				
 			}
-			
+
 			@Override
 			public void changedUpdate(DocumentEvent arg0) {
 				ExpressTask.setObservationTask(currentTask,descriptionLabel.getText());
 			}
 		});
-		
+
 		JScrollPane descriptionScroll = new JScrollPane();
 		descriptionScroll.setViewportView(descriptionLabel);
 		TitledBorder myUserBorder = new TitledBorder(null,
@@ -307,19 +339,41 @@ public class KMADEPrototypeDialog extends JFrame {
 		task.add(descriptionScroll);
 		task.add(preconditionScroll);
 		task.add(iterationScroll);
+		task.add(conditionScroll);
 		task.revalidate();
 		task.repaint();
 
 	}
 
 
-	public void setExecutableTask(final Tache t,boolean enabled, int number) {
+	/**
+	 * @param t
+	 * @param accessible
+	 * @param enabled
+	 * @param number if 0 no order
+	 */
+	public void setExecutableTask(final Tache t,boolean strikeOut,boolean enabled, int number,HashMap<String,ChoiceEnum> primary, HashMap<String,ChoiceEnum> secondary,String displayPrecond) {
+		if(primary!=null)
+			map.putAll(primary);
+		if(secondary!=null)
+			map.putAll(secondary);
 		JPanel executableTask = new JPanel();
 		executableTask.setBackground(Color.WHITE);
 		executableTask.setLayout(new FlowLayout(FlowLayout.LEFT));
 		executableTask.setAlignmentY(TOP_ALIGNMENT);
 		executableTask.setAlignmentX(LEFT_ALIGNMENT);
-		String buttonName =  number +". "+t.getName();
+		String buttonName;
+		String numberString;
+		if(number == 0){
+			numberString = "";
+		} else {
+			numberString = ""+number+". ";
+		}
+
+		if(strikeOut)
+			buttonName =  "<HTML><S>" + numberString + t.getName()+"</S></HTML>";
+		else
+			buttonName =  "<HTML>" + numberString + t.getName()+"</HTML>";
 		String toolTip = "";
 		if(!t.isLeaf()){
 			buttonName += " "+ KMADEConstant.PROTOTYPING_TOOL_SUBTASK_DECOMP;
@@ -349,26 +403,61 @@ public class KMADEPrototypeDialog extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				PROTOHistoric.descendre();
-				PROTOExecution.setCurrentTask(t,true);
+				PROTOExecution.setCurrentTask(t,true,map);
 			}
 		});
-		name.setEnabled(enabled);
+		trueFalseIndeterminateGroupButton buttonChoice;
+		if(enabled){
+			name.setEnabled(true);
+		}else{
+			name.setEnabled(false);
+		}
+
+
 		executableTask.add(name);
-		if(t.getPreExpression().getDescription() != null && !t.getPreExpression().getDescription().equals("")){
-			String precond = KMADEConstant.PROTOTYPING_TOOL_SUBTASK_PRECONDITION+" : " +t.getPreExpression().getDescription();
-			JLabel preLabel = new JLabel(precond);
-			preLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
-			preLabel.setBackground(Color.white);
-			executableTask.add(preLabel);
+		//precondition
+		if(primary != null){
+			String key = (String) primary.keySet().toArray()[0];
+			//if(!displayed.contains(key)){
+				//String precond = KMADEConstant.PROTOTYPING_TOOL_SUBTASK_PRECONDITION+" : "+ primary.keySet().toArray()[0];
+				String precond = key;
+				JLabel preLabel = new JLabel(displayPrecond);
+				preLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
+				preLabel.setBackground(Color.white);
+					executableTask.add(preLabel); 
+				System.out.println("precondi primary "+ primary.get(key));
+				buttonChoice = new trueFalseIndeterminateGroupButton(precond,key,primary.get(key),true,false);
+				conditionBox.add(buttonChoice);
+				displayed.add(key);
+			//}
+
+		}
+		if(secondary != null){
+			for(int i =0; i< secondary.size();i++){
+				String key = (String) secondary.keySet().toArray()[i];
+				//if(!displayed.contains(key)){
+					//String precond = KMADEConstant.PROTOTYPING_TOOL_SUBTASK_PRECONDITION+" : "+ secondary.keySet().toArray()[i];
+					String precond = key;
+					JLabel preLabel = new JLabel(precond);
+					preLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
+					preLabel.setBackground(Color.white);
+					//	executableTask.add(preLabel); 
+					
+					buttonChoice = new trueFalseIndeterminateGroupButton(precond,key,secondary.get(key),true,true);
+					conditionBox.add(buttonChoice);
+					displayed.add(key);
+				//}
+			}
 		}
 		possibleTask.add(executableTask);
+
 		possibleTask.revalidate();
 	}
 
 
 	public void setEnabledEnd(final Tache t,boolean b) {
 		rightBotTaskPanel.removeAll();
-		
+
 		JPanel executableTask = new JPanel();
 		executableTask.setBackground(Color.white);
 		executableTask.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -380,7 +469,7 @@ public class KMADEPrototypeDialog extends JFrame {
 		annulerPanel.setAlignmentX(LEFT_ALIGNMENT);
 		annulerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		JButton buttonAnnuler = new JButton( KMADEConstant.PROTOTYPING_TOOL_CANCEL_BUTTON);  
-		JButton buttonTermine = new JButton( KMADEConstant.PROTOTYPING_TOOL_END_BUTTON);
+		buttonTermine = new JButton( KMADEConstant.PROTOTYPING_TOOL_END_BUTTON);
 		buttonAnnuler.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 		buttonTermine.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 
@@ -401,12 +490,16 @@ public class KMADEPrototypeDialog extends JFrame {
 		if(b){
 			buttonTermine.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					PROTOExecution.finishedTask(t);
+					//map.clear();
+					displayed.clear();
+					PROTOExecution.finishedTask(t,map);
 				}
 			});
 			buttonAnnuler.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					PROTOExecution.cancelTask();
+					//map.clear();
+					displayed.clear();
+					PROTOExecution.cancelTask(map);
 				}
 			});
 
@@ -421,24 +514,37 @@ public class KMADEPrototypeDialog extends JFrame {
 	}
 
 
-	public void setIterationEnabled(boolean enabled) {
+	public void setIterationEnabled(Tache t,boolean existed, ChoiceEnum enabled) {
+		trueFalseIndeterminateGroupButton groupButton;
+		if(existed){
+			groupButton = new trueFalseIndeterminateGroupButton(t.getIteExpression().getDescription(),t.getIteExpression().getDescription(),enabled,true,false);
+			conditionBox.add(groupButton);
 
-		JPanel repeatPanel = new JPanel();
-		repeatPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		repeatPanel.setAlignmentY(TOP_ALIGNMENT);
-		repeatPanel.setAlignmentX(LEFT_ALIGNMENT);
+			JPanel repeatPanel = new JPanel();
+			repeatPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+			repeatPanel.setAlignmentY(TOP_ALIGNMENT);
+			repeatPanel.setAlignmentX(LEFT_ALIGNMENT);
 
-		JButton repeat = new JButton(KMADEConstant.PROTOTYPING_TOOL_ITERATION_BUTTON);
-		repeat.addActionListener(new ActionListener() {
+			JButton repeat = new JButton(KMADEConstant.PROTOTYPING_TOOL_ITERATION_BUTTON);
+			repeat.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				PROTOExecution.repeatCurrentTask();
+				public void actionPerformed(ActionEvent e) {
+					//map.clear();
+					PROTOExecution.repeatCurrentTask(map);
+				}
+			});
+			if(enabled == ChoiceEnum.vrai){
+				repeat.setEnabled(true);
+				buttonTermine.setEnabled(false);
+			}else{
+				repeat.setEnabled(false);
+				buttonTermine.setEnabled(true);
 			}
-		});
-		repeatPanel.add(repeat);
-		rightBotTaskPanel.add(repeatPanel);
-		rightBotTaskPanel.revalidate();
-		rightBotTaskPanel.repaint();
+			repeatPanel.add(repeat);
+			rightBotTaskPanel.add(repeatPanel);
+			rightBotTaskPanel.revalidate();
+			rightBotTaskPanel.repaint();
+		}
 	}
 
 
@@ -454,7 +560,91 @@ public class KMADEPrototypeDialog extends JFrame {
 
 
 
+	class trueFalseIndeterminateGroupButton extends JPanel implements ActionListener  { 
+		private static final long serialVersionUID = 1L;
+		String trueString = "Vrai";
+		String falseString = "Faux";
+		String indeterminateString = "Indeterminé";
+		String condition;
 
+
+		public trueFalseIndeterminateGroupButton(String conditionDisplay,String condition,ChoiceEnum choice, boolean enabled, boolean shift) {
+			this.condition = condition;
+			this.setLayout(new FlowLayout(FlowLayout.LEFT));
+			this.setAlignmentY(TOP_ALIGNMENT);
+			this.setAlignmentX(LEFT_ALIGNMENT);
+			this.setBorder(LineBorder.createBlackLineBorder());
+			JLabel condi = new JLabel();
+			String conditext="";
+			if(shift)
+				conditext+="      ";
+			conditext +=conditionDisplay + " : ";
+			condi.setText(conditext);
+			condi.setFont(KMADEConstant.TITLE_PROTO_TASK_FONT);
+			//Create the radio buttons.
+			JRadioButton trueButton = new JRadioButton(trueString);
+			// trueButton.setMnemonic(KeyEvent.VK_B);
+			trueButton.setActionCommand(trueString);
+			trueButton.setSelected(true);
+
+			JRadioButton falseButton = new JRadioButton(falseString);
+			//   falseButton.setMnemonic(KeyEvent.VK_C);
+			falseButton.setActionCommand(falseString);
+
+			JRadioButton indeterminateButton = new JRadioButton(indeterminateString);
+			// indeterminateButton.setMnemonic(KeyEvent.VK_D);
+			indeterminateButton.setActionCommand(indeterminateString);
+
+
+			//Group the radio buttons.
+			ButtonGroup group = new ButtonGroup();
+			group.add(trueButton);
+			group.add(falseButton);
+			group.add(indeterminateButton);
+			if(choice == null){
+				indeterminateButton.setSelected(true);
+			}else if(choice == ChoiceEnum.vrai){
+				trueButton.setSelected(true);
+			}else if(choice == ChoiceEnum.faux){
+				falseButton.setSelected(true);
+			}else if(choice == ChoiceEnum.indeterminée){
+				indeterminateButton.setSelected(true);
+			}
+
+			this.add(condi);
+			this.add(trueButton);
+			this.add(falseButton);
+			this.add(indeterminateButton);
+
+			//Register a listener for the radio buttons.
+			trueButton.addActionListener(this);
+			falseButton.addActionListener(this);
+			indeterminateButton.addActionListener(this);
+			if(!enabled){
+				// 	trueButton.setEnabled(false);
+				//	falseButton.setEnabled(false);
+				//indeterminateButton.setEnabled(false);
+			}
+		}
+
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//map.clear();
+
+			if(e.getActionCommand().equals(trueString)){
+				System.err.println("condition : "+condition);
+				map.put(condition,ChoiceEnum.vrai);
+			}else if(e.getActionCommand().equals(falseString)){
+				map.put(condition,ChoiceEnum.faux);
+			}else if(e.getActionCommand().equals(indeterminateString)){
+				map.put(condition,ChoiceEnum.indeterminée);				
+			}
+			//todo envoyer la maj du tableau
+			displayed.clear();
+			PROTOExecution.updateCondition(map);
+		}
+	}
 
 
 
