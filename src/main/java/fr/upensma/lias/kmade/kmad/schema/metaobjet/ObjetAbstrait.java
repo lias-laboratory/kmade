@@ -119,7 +119,8 @@ public class ObjetAbstrait implements Entity {
 	}
 
 	public void addInverseObjConc(ObjetConcret ObjConc) {
-		inverseObjConcDe.add(ObjConc);
+		if(!inverseObjConcDe.contains(ObjConc))
+			inverseObjConcDe.add(ObjConc);
 	}
 
 	public void removeInverseObjConc(ObjetConcret ObjConc) {
@@ -254,61 +255,79 @@ public class ObjetAbstrait implements Entity {
 
 	@Override
 	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		inverseObjConcDe.clear();
-		inverseAttributsAbs.clear();
-		inverseGroupe.clear();
+//		inverseObjConcDe.clear();
+	//	inverseAttributsAbs.clear();
+	//	inverseGroupe.clear();
 		Element racine = doc.createElement("abstractobject");
-		racine.setAttribute("classkmad", "metaobjet.ObjetAbstrait");
-		racine.setAttribute("idkmad", oid.get());
+		try {
+			racine.setAttribute("classkmad", "metaobjet.ObjetAbstrait");
+			racine.setAttribute("idkmad", oid.get());
 
-		Element element = doc.createElement("abstractobject-name");
-		element.setTextContent(this.getName());
-		racine.appendChild(element);
-
-		if (!this.description.equals("")) {
-			element = doc.createElement("abstractobject-description");
-			element.setTextContent(this.description);
+			Element element = doc.createElement("abstractobject-name");
+			element.setTextContent(this.getName());
 			racine.appendChild(element);
-		}
 
-		//Add the object's attributes as childs
-		if (!this.inverseGroupe.isEmpty()) {
-			for (int i = 0; i < this.inverseGroupe.size(); i++) {
-				racine.appendChild(this.inverseGroupe.get(i).toXML2(doc));
+			if (!this.description.equals("")) {
+				element = doc.createElement("abstractobject-description");
+				element.setTextContent(this.description);
+				racine.appendChild(element);
 			}
-		}
 
-		if (!this.inverseAttributsAbs.isEmpty()) {
-			for (int i = 0; i < this.inverseAttributsAbs.size(); i++) {
-				racine.appendChild(this.inverseAttributsAbs.get(i).toXML2(doc));
+			//Add the object's attributes as childs
+			if (!this.inverseGroupe.isEmpty()) {
+				for (int i = 0; i < this.inverseGroupe.size(); i++) {
+					racine.appendChild(this.inverseGroupe.get(i).toXML2(doc));
+				}
 			}
-		}
 
-		if (!this.inverseObjConcDe.isEmpty()) {
-			for (int i = 0; i < this.inverseObjConcDe.size(); i++) {
-				racine.appendChild(this.inverseObjConcDe.get(i).toXML2(doc));
+			if (!this.inverseAttributsAbs.isEmpty()) {
+				for (int i = 0; i < this.inverseAttributsAbs.size(); i++) {
+					racine.appendChild(this.inverseAttributsAbs.get(i).toXML2(doc));
+				}
 			}
-		}
 
-		if(this.point != null){
-			racine.setAttribute("id-task-point", this.point.getOid().get());
-			racine.appendChild(this.point.toXML2(doc));
-		}
+			if (!this.inverseObjConcDe.isEmpty()) {
+				for (int i = 0; i < this.inverseObjConcDe.size(); i++) {
+					racine.appendChild(this.inverseObjConcDe.get(i).toXML2(doc));
+				}
+			}
 
-		return racine;
+			if(this.point != null){
+				racine.setAttribute("id-task-point", this.point.getOid().get());
+				racine.appendChild(this.point.toXML2(doc));
+			}
+
+			return racine;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@Override
 	public void createObjectFromXMLElement2(Element p) throws Exception {
-		createObjectFromXMLElement(p);
-		// Point
-		if (p.hasAttribute("id-task-point")){
-			this.point = (Point) InterfaceExpressJava.bdd.prendre(new Oid(p
-					.getAttribute("id-task-point")));
+//	inverseObjConcDe.clear();
+	//	inverseAttributsAbs.clear();
+	//	inverseGroupe.clear();
+		try {
+			createObjectFromXMLElement(p);
+			// Point
+			if (p.hasAttribute("id-task-point")){
+				this.point = (Point) InterfaceExpressJava.bdd.prendre(new Oid(p
+						.getAttribute("id-task-point")));
+			}
+			else 
+				this.point = null;
+			NodeList nodeList = p.getElementsByTagName("groupe");
+			if(nodeList !=null){
+			//	Groupe.createObjectFromXMLElement2((Element) nodeList);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
 		}
-		else 
-			this.point = null;
 	}
 
 	@Override

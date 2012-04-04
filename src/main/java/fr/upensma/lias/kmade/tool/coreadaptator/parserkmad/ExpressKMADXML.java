@@ -646,9 +646,9 @@ public final class ExpressKMADXML {
 				if(!oidIsAnyMissing){
 
 					try {
-						newInstance.createObjectFromXMLElement2(myElement);
-						InterfaceExpressJava.bdd.mettre(new Oid(idTask),newInstance);
-						myEntities.remove(newInstance);
+							newInstance.createObjectFromXMLElement2(myElement);
+							InterfaceExpressJava.bdd.mettre(new Oid(idTask),newInstance);
+							myEntities.remove(newInstance);
 						break;
 					} catch (Exception e) {
 						//TODO lot of exception because code archi ...

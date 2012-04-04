@@ -362,34 +362,33 @@ public class AttributAbstrait implements Entity {
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
-	this.oid = new Oid(p.getAttribute("idkmad"));
-	utilisePar.clear();
-	if (p.hasAttribute("id-abstractattribut-type"))
-	    this.setTypeRef((TypeAbs) InterfaceExpressJava.bdd.prendre(new Oid(
-		    p.getAttribute("id-abstractattribut-type"))));
+		// TODO Auto-generated method stub
+		this.oid = new Oid(p.getAttribute("idkmad"));
+		utilisePar.clear();
+		if (p.hasAttribute("id-abstractattribut-type"))
+		    this.setTypeRef((TypeAbs) InterfaceExpressJava.bdd.prendre(new Oid(  p.getAttribute("id-abstractattribut-type"))));
 
-	this.setUtiliseeparClass((ObjetAbstrait) InterfaceExpressJava.bdd
-		.prendre(new Oid(p
-			.getAttribute("id-abstractattribut-abstractobject"))));
+		this.setUtiliseeparClass((ObjetAbstrait) InterfaceExpressJava.bdd
+			.prendre(new Oid(p
+				.getAttribute("id-abstractattribut-abstractobject"))));
 
-	NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
-	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		nodeList = null;}
-	this.name = nodeList.item(0).getTextContent();
+		NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		this.name = nodeList.item(0).getTextContent();
 
-	nodeList = p.getElementsByTagName("abstractattribut-description");
-	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		nodeList = null;}
-	if (nodeList.item(0) != null) {
-	    this.description = nodeList.item(0).getTextContent();
-	}
+		nodeList = p.getElementsByTagName("abstractattribut-description");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		if (nodeList.item(0) != null) {
+		    this.description = nodeList.item(0).getTextContent();
+		}
 
-	nodeList = p.getElementsByTagName("abstractattribut-typestructure");
-	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		nodeList = null;}
-	this.typeStruct = TypeStructure.getValue(nodeList.item(0)
-		.getTextContent());
+		nodeList = p.getElementsByTagName("abstractattribut-typestructure");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		this.typeStruct = TypeStructure.getValue(nodeList.item(0)
+			.getTextContent());
     }
 
     @Override
