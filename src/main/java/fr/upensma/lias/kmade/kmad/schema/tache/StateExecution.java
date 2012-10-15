@@ -17,13 +17,17 @@
 **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.tache;
 
-/**
- * @author Mickael BARON
- */
 public enum StateExecution {
     INACTIVE,
     PASSIVE,
     ACTIVE,
     WAITEND,
-    FINISHED
+    FINISHED,
+    INACTIVABLE,
+    ACTIVABLE,
+    ATTENTEFIN,
+    ATTENTEFINKO,
+    ATTENTETASK,
+    PASSEE,
+    FINIE
 }
