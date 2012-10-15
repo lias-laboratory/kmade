@@ -28,6 +28,7 @@ import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
+import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ChoiceEnum;
 
 /**
  * @author Vincent LUCQUIAUD and Mickael BARON
@@ -109,7 +110,10 @@ public class Tache implements Entity {
 
     private StateSimulation stateSimulation;
     
+    //PROTOTASK
     private StateExecution stateExecution;
+    //PROTOTASK
+    private ChoiceEnum IterationValue = ChoiceEnum.indeterminée;
 
     /**
      * Creation d'une tache avec des valeurs par defaut.
@@ -2081,6 +2085,23 @@ public class Tache implements Entity {
 	return false;
 
     }
+
+    //prototask
+	/*public ChoiceEnum getPreconditionValue() {
+		return getPreExpression().getPreconditionValue();
+	}
+	//prototask
+	public void setPreconditionValue(ChoiceEnum preconditionValue) {
+		getPreExpression().setPreconditionValue(preconditionValue);
+	}
+*/
+	public ChoiceEnum getIterationValue() {
+		return IterationValue;
+	}
+
+	public void setIterationValue(ChoiceEnum iterationValue) {
+		IterationValue = iterationValue;
+	}
 
 
 

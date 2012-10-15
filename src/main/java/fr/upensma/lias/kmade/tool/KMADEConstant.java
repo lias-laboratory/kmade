@@ -1437,7 +1437,7 @@ public class KMADEConstant {
 
 
 	//outil de prototypage
-	public static String PROTOTYPING_TOOL_TITLE_NAME = "Outil de prototypage";
+	public static String PROTOTYPING_TOOL_TITLE_NAME = "ProtoTask";
 	public static String PROTOTYPING_TOOL_RESET = "Recommencer";
 	public static String PROTOTYPING_TOOL_CURRENT_TASK = "Tâche en cours";
 	public static String PROTOTYPING_TOOL_NAME_TITLE = "Nom";
@@ -1466,12 +1466,16 @@ public class KMADEConstant {
 	public static String PROTOTYPING_TOOL_VALIDATE_END_BUTTON = "Valider et Terminer";
 	public static String PROTOTYPING_TOOL_CONTROL_TITLE = "Contrôle";
 	public static String PROTOTYPING_TOOL_ITERATION_BUTTON = "Faire de nouveau";
-	public static String PROTOTYPING_TOOL_MENU_TITLE = "Outil de prototypage";
-	public static String PROTOTYPING_TOOL_MENU_TOOLTIP = "Outil de prototypage";
+	public static String PROTOTYPING_TOOL_MENU_TITLE = "ProtoTask";
+	public static String PROTOTYPING_TOOL_MENU_TOOLTIP = "ProtoTask";
 	public static String PROTOTYPING_TOOL_PRECONDITION_TEXT_PANE = "Prérequis";
 	public static String PROTOTYPING_TOOL_PRECONDITION_TITLE_PANE = "Vérification du prérequis";
 	public static String PROTOTYPING_TOOL_PASSIVE_INACTIVE_ERROR = "Erreur : la tâche en cours n'a pas le bon état";
 	public static String PROTOTYPING_TOOL_END_ERROR = "Impossible de terminer la tâche";
+	public static String PROTOTYPING_TOOL_TRUE = "Vrai";
+	public static String PROTOTYPING_TOOL_FALSE = "Faux";
+	public static String PROTOTYPING_TOOL_INDETERMINATE = "Indeterminée";
+
 
 	public static void loadMessagesFromBundle() {
 		DEBUG_KMADE_HTML = KMADEToolConstant.HTML_DIRECTORY_NAME
@@ -3083,6 +3087,9 @@ public class KMADEConstant {
 		PROTOTYPING_TOOL_PRECONDITION_TITLE_PANE = KMADeMain.messages.getString("PROTOTYPING_TOOL_PRECONDITION_TITLE_PANE");
 		PROTOTYPING_TOOL_PASSIVE_INACTIVE_ERROR = KMADeMain.messages.getString("PROTOTYPING_TOOL_PASSIVE_INACTIVE_ERROR");
 		PROTOTYPING_TOOL_END_ERROR = KMADeMain.messages.getString("PROTOTYPING_TOOL_END_ERROR");
+		PROTOTYPING_TOOL_TRUE = KMADeMain.messages.getString("PROTOTYPING_TOOL_TRUE");
+		PROTOTYPING_TOOL_FALSE = KMADeMain.messages.getString("PROTOTYPING_TOOL_FALSE");
+		PROTOTYPING_TOOL_INDETERMINATE = KMADeMain.messages.getString("PROTOTYPING_TOOL_INDETERMINATE");
 		
 		
 		

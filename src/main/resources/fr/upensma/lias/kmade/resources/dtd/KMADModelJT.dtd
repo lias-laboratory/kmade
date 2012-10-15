@@ -41,7 +41,7 @@
 	<!ELEMENT projectinterview-info (#PCDATA)>
 	<!ELEMENT projectinterview-director (#PCDATA)>
 	
-<!ELEMENT task (task-name, task-numero, task-purpose?, task-duration?, task-resources?, task-feedback?,task-observation?, task-executant, task-frequency?, task-compfrequency?, task-importance?, task-modality?,task-optional, task-interruptible, task-decomposition, task-precondition, task-descriptionprecondition?, task-sideeffects?, task-descriptionsideeffects?, task-teration, task-descriptioniteration?)>
+<!ELEMENT task (task-name, task-numero, task-purpose?, task-duration?, task-resources?, task-feedback?,task-observation?, task-executant, task-frequency?, task-compfrequency?, task-importance?, task-modality?,task-optional, task-interruptible, task-decomposition, task-precondition, task-descriptionprecondition?, task-sideeffects?, task-descriptionsideeffects?, task-iteration, task-descriptioniteration?)>
 	<!ATTLIST task idkmad ID #REQUIRED
 				   classkmad CDATA #REQUIRED
 				   id-task-media IDREF #IMPLIED
@@ -71,7 +71,7 @@
 	<!ELEMENT task-descriptionprecondition (#PCDATA) >
 	<!ELEMENT task-sideeffects (#PCDATA) >
 	<!ELEMENT task-descriptionsideeffects (#PCDATA) >
-	<!ELEMENT task-teration (#PCDATA) >
+	<!ELEMENT task-iteration (#PCDATA) >
 	<!ELEMENT task-descriptioniteration (#PCDATA)>
 	
 <!ELEMENT point (point-x,point-y)>

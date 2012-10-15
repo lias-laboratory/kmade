@@ -1056,8 +1056,8 @@
 
 
 <!-- Prototyping tool -->
-<!--   <entry key="PROTOTYPING_TOOL_TITLE_NAME">Outil de prototypage</entry> -->
-<entry key="PROTOTYPING_TOOL_TITLE_NAME">Outil de prototypage</entry>
+<!--   <entry key="PROTOTYPING_TOOL_TITLE_NAME">ProtoTask</entry> -->
+<entry key="PROTOTYPING_TOOL_TITLE_NAME">ProtoTask</entry>
 <entry key="PROTOTYPING_TOOL_RESET">Recommencer</entry>
 <entry key="PROTOTYPING_TOOL_CURRENT_TASK">Tâche en cours</entry>
 <entry key="PROTOTYPING_TOOL_NAME_TITLE">Nom</entry>
@@ -1086,13 +1086,15 @@
 <entry key="PROTOTYPING_TOOL_VALIDATE_END_BUTTON">Valider et Terminer</entry>
 <entry key="PROTOTYPING_TOOL_CONTROL_TITLE">Contrôle</entry>
 <entry key="PROTOTYPING_TOOL_ITERATION_BUTTON">Faire de nouveau</entry>
-<entry key="PROTOTYPING_TOOL_MENU_TITLE">Outil de prototypage</entry>
-<entry key="PROTOTYPING_TOOL_MENU_TOOLTIP">Outil de prototypage</entry>
+<entry key="PROTOTYPING_TOOL_MENU_TITLE">ProtoTask</entry>
+<entry key="PROTOTYPING_TOOL_MENU_TOOLTIP">ProtoTask</entry>
 <entry key="PROTOTYPING_TOOL_PRECONDITION_TEXT_PANE">Prérequis</entry>
 <entry key="PROTOTYPING_TOOL_PRECONDITION_TITLE_PANE">Vérification du prérequis</entry>
 <entry key="PROTOTYPING_TOOL_PASSIVE_INACTIVE_ERROR">Erreur : la tâche en cours n'a pas le bon état</entry>
 <entry key="PROTOTYPING_TOOL_END_ERROR">Impossible de terminer la tâche</entry>
-
+<entry key="PROTOTYPING_TOOL_TRUE">Vrai</entry>
+<entry key="PROTOTYPING_TOOL_FALSE">Faux</entry>
+<entry key="PROTOTYPING_TOOL_INDETERMINATE">Indeterminé</entry>
 
 
 

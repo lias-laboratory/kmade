@@ -1060,17 +1060,17 @@
 
 
 <!-- Prototyping tool -->
-<!--   <entry key="PROTOTYPING_TOOL_TITLE_NAME">Outil de prototypage</entry> -->
+<entry key="PROTOTYPING_TOOL_TITLE_NAME">ProtoTask</entry>
 <entry key="PROTOTYPING_TOOL_RESET">Reset</entry>
-<entry key="PROTOTYPING_TOOL_TITLE_NAME">Prototype Tool</entry>
+<entry key="PROTOTYPING_TOOL_TITLE_NAME">ProtoTask</entry>
 <entry key="PROTOTYPING_TOOL_CURRENT_TASK">Current task</entry>
 <entry key="PROTOTYPING_TOOL_NAME_TITLE">Name</entry>
 <entry key="PROTOTYPING_TOOL_NAME_TOOLTIP">The task name</entry>
 <entry key="PROTOTYPING_TOOL_EXECUTANT_ABS">The performer is abstract</entry>
 <entry key="PROTOTYPING_TOOL_EXECUTANT_INCONNU">The performer is unknown</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_INT">The user perform the task on a system</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_SYS">The system perform the task</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_USER">The user perform the task, independently of the system</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_INT">The user performs the task on the system</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_SYS">The system performs the task</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_USER">The user performs the task, independently of the system</entry>
 <entry key="PROTOTYPING_TOOL_EXECUTANT_TOOLTIP">The performer of the task</entry>
 <entry key="PROTOTYPING_TOOL_DECOMPOSITION_TITLE">Task decomposition</entry>
 <entry key="PROTOTYPING_TOOL_PRECONDITION_TITLE">Execution prerequisite</entry>
@@ -1090,13 +1090,15 @@
 <entry key="PROTOTYPING_TOOL_VALIDATE_END_BUTTON">Complete and validate</entry>
 <entry key="PROTOTYPING_TOOL_CONTROL_TITLE">Control</entry>
 <entry key="PROTOTYPING_TOOL_ITERATION_BUTTON">Do it again</entry>
-<entry key="PROTOTYPING_TOOL_MENU_TITLE">Prototype tool</entry>
-<entry key="PROTOTYPING_TOOL_MENU_TOOLTIP">Prototype tool</entry>
+<entry key="PROTOTYPING_TOOL_MENU_TITLE">ProtoTask</entry>
+<entry key="PROTOTYPING_TOOL_MENU_TOOLTIP">ProtoTask</entry>
 <entry key="PROTOTYPING_TOOL_PRECONDITION_TEXT_PANE">Prerequisites</entry>
 <entry key="PROTOTYPING_TOOL_PRECONDITION_TITLE_PANE">Prerequisites verification</entry>
 <entry key="PROTOTYPING_TOOL_PASSIVE_INACTIVE_ERROR">Error : not the good state for the task</entry>
 <entry key="PROTOTYPING_TOOL_END_ERROR">Ended task is impossible</entry>
-
+<entry key="PROTOTYPING_TOOL_TRUE">True</entry>
+<entry key="PROTOTYPING_TOOL_FALSE">False</entry>
+<entry key="PROTOTYPING_TOOL_INDETERMINATE">Indeterminate</entry>
 
 
 

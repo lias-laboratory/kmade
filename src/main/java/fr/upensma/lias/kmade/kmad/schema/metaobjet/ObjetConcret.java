@@ -360,10 +360,6 @@ public class ObjetConcret implements Entity, Cloneable {
 		this.oid = new Oid(p.getAttribute("idkmad"));
 		this.setUtiliseParClass((ObjetAbstrait) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-concreteobject-abstractobject"))));
 		this.setAppartientGroupe((Groupe) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-concreteobject-group"))));
-
-		System.err.println("kmc ccc");
-		
-		
 		NodeList nodeList = p.getElementsByTagName("concreteobject-name");
 		if (nodeList != null && nodeList.item(0) != null && nodeList.item(0).getParentNode() != p) {
 			nodeList = null;
