@@ -233,7 +233,7 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 		int gapw = 20;
 		int gaph = 20;
 		g.drawImage(LISI_LOGO.getImage(), w - (100 + gapw), h - 73
-			- gaph, 100, 90, this);// 50,100
+			- gaph, 100, 41, this);// 50,100
 		g.drawImage(INRIA_LOGO.getImage(), gapw, h - 22 - 73 - gaph
 			- gaph, 100, 22, this);// 50,100
 		g.drawImage(MERLIN_LOGO.getImage(), gapw, h - 73 - gaph, 100,
