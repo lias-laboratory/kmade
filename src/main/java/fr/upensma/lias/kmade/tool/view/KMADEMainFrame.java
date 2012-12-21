@@ -62,6 +62,7 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.coherence.KMADECoherenceDialog;
 import fr.upensma.lias.kmade.tool.view.preferences.KMADEPreferencesDialog;
 import fr.upensma.lias.kmade.tool.view.print.KMADEPrintingDialog;
+import fr.upensma.lias.kmade.tool.view.prototask.KMADEProtoTaskMainPanel;
 import fr.upensma.lias.kmade.tool.view.prototype.KMADEPrototypeDialog;
 import fr.upensma.lias.kmade.tool.view.search.KMADEFindReplaceDialog;
 import fr.upensma.lias.kmade.tool.view.simulation.KMADESimulationDialog;
@@ -124,6 +125,9 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
     private KMADESimulationDialog simulationDialog = new KMADESimulationDialog();
 
     private KMADEPrototypeDialog prototypeDialog = new KMADEPrototypeDialog();
+    
+    private KMADEProtoTaskMainPanel protoTaskPanel = new KMADEProtoTaskMainPanel();
+    
     private KMADESimpleTreePanel simpleTreePanel = new KMADESimpleTreePanel();
 
     private KMADEStatisticDialog statisticDialog = new KMADEStatisticDialog(
@@ -229,7 +233,7 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 		int gapw = 20;
 		int gaph = 20;
 		g.drawImage(LISI_LOGO.getImage(), w - (100 + gapw), h - 73
-			- gaph, 100, 41, this);// 50,100
+			- gaph, 100, 90, this);// 50,100
 		g.drawImage(INRIA_LOGO.getImage(), gapw, h - 22 - 73 - gaph
 			- gaph, 100, 22, this);// 50,100
 		g.drawImage(MERLIN_LOGO.getImage(), gapw, h - 73 - gaph, 100,
@@ -602,6 +606,11 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
     public KMADEPrototypeDialog getPrototypeDialog() {
 	return prototypeDialog;
     }
+    
+    public KMADEProtoTaskMainPanel getProtoTaskPanel() {
+    	return protoTaskPanel;
+        }
+    
     
     public KMADEStatisticDialog getStatisticDialog() {
 	return statisticDialog;
