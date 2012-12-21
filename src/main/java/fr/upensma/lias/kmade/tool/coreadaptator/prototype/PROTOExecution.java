@@ -1,20 +1,3 @@
-/*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator.prototype;
 
 import java.util.ArrayList;
@@ -44,17 +27,25 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 public class PROTOExecution {
 
 	private static Tache currentTask;
+	private static Tache startTask;
 
 	public static void startExecution() {
 		PROTOHistoric.clearHisto();
+		ArrayList<Tache> selected = GraphicEditorAdaptator.getSelectedTasks();
+		if (selected.size() == 1) {
+			startTask = selected.get(0);
+			setAllChildStateExecution(selected.get(0), StateExecution.INACTIVE);
+			setCurrentTask(selected.get(0),true,null);			
+		}else{
 		ArrayList<Tache> root = ExpressTask.getRootTasks();
 		if (root.size() == 1) {
+			startTask = root.get(0);
 			// normal execution with one mother task
 			setAllChildStateExecution(root.get(0), StateExecution.INACTIVE);
 			setCurrentTask(root.get(0),true,null);
 		} else {
 			// two or more mother tasks...
-		}
+		}}
 	}
 
 	//modification of task state
@@ -144,11 +135,12 @@ public class PROTOExecution {
 			if(currentTask.getOrdonnancement() != Decomposition.ELE){
 				PROTOHistoric.addFinished(currentTask);
 			}
-			if (currentTask.getMotherTask() != null) {
+			if (currentTask.getMotherTask() != null && !currentTask.equals(startTask)) {
 				currentTask = currentTask.getMotherTask();
 				execution(map);
 			} else {
 				// TODO display simulation end
+				System.out.println("ProtoTask fini");
 			}
 			break;
 		}
@@ -192,8 +184,7 @@ public class PROTOExecution {
 		if (currentTask.equals(t)) {
 			PROTOHistoric.remonter();
 			currentTask.setStateExecution(StateExecution.FINISHED);
-			GraphicEditorAdaptator.getMainFrame().getPrototypeDialog()
-			.setEnabledEnd(currentTask, false);
+			GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setEnabledEnd(currentTask, false);
 			execution(map);
 		} else {
 			KMADEHistoryMessageManager.printlnError(KMADEConstant.PROTOTYPING_TOOL_END_ERROR + " : "
@@ -219,14 +210,16 @@ public class PROTOExecution {
 			}
 		}
 		int number =1;
+		boolean onefinished = false;
 		for (Tache t : currentTask.getFils()) {
-			if (t.getStateExecution() == StateExecution.FINISHED) {
+			if (t.getStateExecution() == StateExecution.FINISHED ) {
 				GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setExecutableTask(t,false,true,number++,false,ChoiceEnum.vrai);
+				onefinished = true;
 			} else {
 				if((t.getPreExpression().getDescription()== null) || t.getPreExpression().getDescription().equals("") 
 						|| //(!(t.getPreExpression().getDescription()!= null) && !t.getPreExpression().getDescription().equals("")  && 
 						(map!=null && map.get(t.getPreExpression().getDescription())==ChoiceEnum.vrai)){	
-					GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setExecutableTask(t, !choice,true,number++,true,ChoiceEnum.vrai);
+					GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setExecutableTask(t,t.getStateExecution() != StateExecution.FINISHED ,!choice,number++,true&&!onefinished,ChoiceEnum.vrai);
 				}else{	
 					ChoiceEnum choiceE;
 					if(map==null || map.get(t.getPreExpression().getDescription())==null){
@@ -234,7 +227,7 @@ public class PROTOExecution {
 					}else{
 						choiceE = map.get(t.getPreExpression().getDescription());
 					}
-					GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setExecutableTask(t, !choice,false,number++,true,choiceE);
+					GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setExecutableTask(t, !choice,false,number++,true&&!onefinished,choiceE);
 				}
 			}
 		}

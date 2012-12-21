@@ -65,7 +65,7 @@ public class Tache implements Entity {
 
     private Boolean facultatif = false;
 
-    private Boolean interruptible = true;
+    private Boolean interruptible = false;
 
     private Decomposition decomposition;
 
@@ -132,7 +132,7 @@ public class Tache implements Entity {
 	this.compFreq = "";
 	this.lstEvent = new ArrayList<Evenement>();
 	this.facultatif = false;
-	this.interruptible = true;
+	this.interruptible = false;
 	this.decomposition = Decomposition.ELE;
 	this.fils = new ArrayList<Tache>();
 	this.mere = null;
@@ -1869,6 +1869,7 @@ public class Tache implements Entity {
 		 nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 	// Numero
+
 	nodeList = p.getElementsByTagName("task-numero");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
@@ -1878,28 +1879,30 @@ public class Tache implements Entity {
 	nodeList = p.getElementsByTagName("task-purpose");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	if (nodeList.item(0) != null) {
+	if (nodeList!= null && nodeList.item(0) != null) {
 	    this.but = nodeList.item(0).getTextContent();
 	}
+
 	// Duration
 	nodeList = p.getElementsByTagName("task-duration");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	if (nodeList.item(0) != null) {
+	if (nodeList!= null && nodeList.item(0) != null) {
 	    this.duree = nodeList.item(0).getTextContent();
 	}
+
 	// Resources
 	nodeList = p.getElementsByTagName("task-resources");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	if (nodeList.item(0) != null) {
+	if (nodeList!= null && nodeList.item(0) != null) {
 	    this.ressources = nodeList.item(0).getTextContent();
 	}
 	// Feedback
 	nodeList = p.getElementsByTagName("task-feedback");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	if (nodeList.item(0) != null) {
+	if (nodeList!= null && nodeList.item(0) != null) {
 	    this.feed = nodeList.item(0).getTextContent();
 	}
 	// Observation
@@ -1911,6 +1914,7 @@ public class Tache implements Entity {
 	 } else if (nodeList.item(0) != null) {
 	    this.observation = nodeList.item(0).getTextContent();
 	}
+
 	// Executant
 	this.executant = Executant.getXMLExecutantValue2(p);
 	// Frequence
@@ -1919,7 +1923,7 @@ public class Tache implements Entity {
 	nodeList = p.getElementsByTagName("task-compfrequency");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	if (nodeList.item(0) != null) {
+	if (nodeList!= null && nodeList.item(0) != null) {
 	    this.compFreq = nodeList.item(0).getTextContent();
 	}
 	// Importance
@@ -1937,15 +1941,17 @@ public class Tache implements Entity {
 		 nodeList = null;}
 	this.interruptible = new Boolean(nodeList.item(0).getTextContent());
 	// Decomposition
-	this.decomposition = Decomposition.getXMLModalityValue2(p);
+	this.decomposition = Decomposition.getXMLDecompositionValue2(p);
 	// Precondition
 	nodeList = p.getElementsByTagName("task-precondition");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	if (nodeList.item(0) != null) {
+	if (nodeList!= null && nodeList.item(0) != null) {
 	    this.preExpression = new PreExpression(nodeList.item(0)
 		    .getTextContent());
 	}
+	
+
 	// Precondition Description
 	nodeList = p.getElementsByTagName("task-descriptionprecondition");
 	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
@@ -1960,7 +1966,7 @@ public class Tache implements Entity {
 	nodeList = p.getElementsByTagName("task-effetsdebord");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	if (nodeList.item(0) != null) {
+	if (nodeList!= null && nodeList.item(0) != null) {
 	    this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList
 		    .item(0).getTextContent());
 	}
@@ -1978,15 +1984,16 @@ public class Tache implements Entity {
 	nodeList = p.getElementsByTagName("task-descriptionpostcondition");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	if (nodeList.item(0) != null) {
+	if (nodeList!= null && nodeList.item(0) != null) {
 	    this.effetsDeBordExpression.setDescription(nodeList.item(0)
 		    .getTextContent());
 	}
+
 	// EffetsDeBord Description
 	nodeList = p.getElementsByTagName("task-descriptioneffetsdebord");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	if (nodeList.item(0) != null) {
+	if (nodeList!= null&& nodeList.item(0) != null) {
 	    this.effetsDeBordExpression.setDescription(nodeList.item(0)
 		    .getTextContent());
 	}
@@ -2000,11 +2007,10 @@ public class Tache implements Entity {
 	nodeList = p.getElementsByTagName("task-descriptioniteration");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	if (nodeList.item(0) != null) {
+	if (nodeList!= null && nodeList.item(0) != null) {
 	    this.iteExpression
 		    .setDescription(nodeList.item(0).getTextContent());
 	}
-	
 
     }
 

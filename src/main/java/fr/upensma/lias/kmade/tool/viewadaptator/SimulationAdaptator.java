@@ -741,12 +741,12 @@ public final class SimulationAdaptator {
 		    .getPanelProprieteTache()
 		    .displayTaskProperties(tache.getNumero(),
 			    tache.getMotherTaskName(), tache.getName(),
-			    /* tache.getBut(), */
+			     tache.getBut(), 
 			    tache.getRessources(),
 			    /* tache.getMedia(), */
 			    tache.getLabelName(),
 			    /* tache.getFeedBack(), */
-			    /* tache.getDuree(), */
+			    tache.getDuree(), 
 			    tache.getObservation(), tache.getExecutant(),
 			    tache.getModalite().getValue(),
 			    tache.getFrequence().getValue(),

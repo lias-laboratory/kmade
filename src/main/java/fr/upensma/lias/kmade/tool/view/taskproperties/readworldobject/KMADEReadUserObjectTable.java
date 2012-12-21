@@ -129,6 +129,7 @@ public class KMADEReadUserObjectTable extends JScrollPane {
 	    if (mouseEvent.getClickCount() == 2) {
 		String select = (String) modele.getValueAt(
 			table.getSelectedRow(), 5);
+		System.err.println(select);
 		ActorAdaptator.addNewActor(new Oid(select));
 	    }
 	}

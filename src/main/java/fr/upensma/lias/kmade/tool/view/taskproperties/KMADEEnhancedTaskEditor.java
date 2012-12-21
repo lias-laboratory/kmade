@@ -308,13 +308,14 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	nameField.addKeyListener(this);
 	numField.setEditable(false);
 	dureeField.addKeyListener(this);
-	/*
-	 * purposeField.setEditable(false); purposeField.addActionListener(new
-	 * ActionListener() { public void actionPerformed(ActionEvent e) {
-	 * TaskPropertiesEnhancedEditorAdaptator.setPurpose(); } });
-	 * purposeField.addMouseListener(this);
-	 * purposeField.setBackground(nameField.getBackground());
-	 */
+	
+	  purposeField.setEditable(true); purposeField.addActionListener(new
+	  ActionListener() { public void actionPerformed(ActionEvent e) {
+	  TaskPropertiesEnhancedEditorAdaptator.setPurpose(); } });
+	  purposeField.addMouseListener(this);
+	  purposeField.addKeyListener(this);
+	  purposeField.setBackground(nameField.getBackground());
+	 
 	/*
 	 * feedbackField.setEditable(false); feedbackField.addActionListener(new
 	 * ActionListener() { public void actionPerformed(ActionEvent e) {
@@ -322,10 +323,9 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	 * feedbackField.addMouseListener(this);
 	 * feedbackField.setBackground(nameField.getBackground());
 	 */
-	/*
-	 * observationArea.setEditable(false);
-	 * observationArea.addMouseListener(this);
-	 */
+	
+	 observationArea.addMouseListener(this);
+	 observationArea.addKeyListener(this);
 	unkModalite.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		TaskPropertiesEnhancedEditorAdaptator.setUnknownModalite();
@@ -1930,11 +1930,17 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	    TaskPropertiesEnhancedEditorAdaptator
 		    .setNameInTaskProperties(nameField.getText());
 	}
-	/*
-	 * if (keyEvent.getSource() == dureeField) {
-	 * TaskPropertiesEnhancedEditorAdaptator
-	 * .setDureeInTaskProperties(dureeField.getText()); }
-	 */
+	if(keyEvent.getSource() == purposeField){
+		TaskPropertiesEnhancedEditorAdaptator.setPurposeInTaskProperties(purposeField.getText());
+	}
+	if(keyEvent.getSource() == observationArea){
+		TaskPropertiesEnhancedEditorAdaptator.setObservationInTaskProperties(observationArea.getText());
+	}
+	
+	  if (keyEvent.getSource() == dureeField) {
+	  TaskPropertiesEnhancedEditorAdaptator
+	  .setDureeInTaskProperties(dureeField.getText()); }
+	 
 	if (keyEvent.getSource() == valeurFrequenceField) {
 	    TaskPropertiesEnhancedEditorAdaptator
 		    .setFrequencyValueInTaskProperties(valeurFrequenceField
@@ -1951,14 +1957,13 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	} else {
 	    return;
 	}
-	/*
-	 * if (e.getSource() == purposeField) {
-	 * TaskPropertiesEnhancedEditorAdaptator.setPurpose(); } if
-	 * (e.getSource() == feedbackField) {
-	 * TaskPropertiesEnhancedEditorAdaptator.setFeedBack(); } if
-	 * (e.getSource() == observationArea) {
-	 * TaskPropertiesEnhancedEditorAdaptator.setObservation(); }
-	 */
+	if (e.getSource() == purposeField) {
+	  TaskPropertiesEnhancedEditorAdaptator.setPurpose(); }
+	//if (e.getSource() == feedbackField) {
+	//  TaskPropertiesEnhancedEditorAdaptator.setFeedBack(); } 
+	if  (e.getSource() == observationArea) {
+	  TaskPropertiesEnhancedEditorAdaptator.setObservation(); }
+	 
 	if (e.getSource() == fireEvents) {
 	    EventAdaptator.editedFromEnhancedFrame();
 	    TaskPropertiesEnhancedEditorAdaptator.setFiredEvents();

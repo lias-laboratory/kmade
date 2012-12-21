@@ -25,6 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import fr.upensma.lias.kmade.kmad.schema.tache.Evenement;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadEventObjectTable;
@@ -32,6 +33,7 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.DefaultPropertiesTableModel
 import fr.upensma.lias.kmade.tool.view.toolutilities.JPropertiesEditorDialog;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
 import fr.upensma.lias.kmade.tool.viewadaptator.EventAdaptator;
+import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 import fr.upensma.lias.kmade.tool.viewadaptator.PrePostIterExpressionAdaptator;
 
 /**
@@ -58,13 +60,13 @@ public class KMADEEditorEventDecl extends JPropertiesEditorDialog {
 	JPanel comboPanel = new JPanel();
 	comboPanel.setLayout(new BoxLayout(comboPanel, BoxLayout.PAGE_AXIS));
 	comboPanel.setBorder(javax.swing.BorderFactory
-		.createTitledBorder("Ev�nement d�clencheur"));
+		.createTitledBorder(KMADEConstant.EVENT_TRIGGER));
 	comboPanel.add(myComboBox);
 
 	/* Liste des événements disponibles */
 	JPanel listPanel = new JPanel(new BorderLayout());
 	listPanel.setBorder(javax.swing.BorderFactory
-		.createTitledBorder("Ev�nements disponibles"));
+		.createTitledBorder(KMADEConstant.EVENT_ENABLE));
 	KMADEReadEventObjectTable obj = new KMADEReadEventObjectTable(
 		EventAdaptator.getEventReadPanel(), false);
 	listPanel.add(obj);
@@ -111,7 +113,14 @@ public class KMADEEditorEventDecl extends JPropertiesEditorDialog {
 	/* Insertion de la liste récupérée dans la liste déroulante */
 	myComboBox.setModel(new javax.swing.DefaultComboBoxModel(listOfEvent
 		.toArray(temp)));
-
+	String evt="null";
+	if(row == KMADETaskPropertiesPanel.DECLENCHEMENT_TITLE_ELEMENT){
+		if(GraphicEditorAdaptator.getSelectedExpressTask().getDeclencheur()!=null)
+			evt = GraphicEditorAdaptator.getSelectedExpressTask().getDeclencheur().getName();
+	}
+	if(!evt.equals("null")){
+		myComboBox.setSelectedItem(evt);
+	}
 	PrePostIterExpressionAdaptator.disabledFrame();
 	super.showPropertiesEditor(refModel, row);
     }

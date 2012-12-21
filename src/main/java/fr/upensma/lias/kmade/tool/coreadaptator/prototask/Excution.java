@@ -1,18 +1,14 @@
 package fr.upensma.lias.kmade.tool.coreadaptator.prototask;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.StringTokenizer;
 
+import fr.lri.swingstates.debug.Watcher;
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
+import fr.upensma.lias.kmade.kmad.schema.tache.PreExpression;
+import fr.upensma.lias.kmade.kmad.schema.tache.StateCondition;
 import fr.upensma.lias.kmade.kmad.schema.tache.StateExecution;
 import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
-import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ChoiceEnum;
-import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ExpressionTree;
-import fr.upensma.lias.kmade.tool.coreadaptator.prototype.PROTOHistoric;
-import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ReturnParsePreCondition;
 
 
 /**
@@ -24,565 +20,455 @@ import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ReturnParsePreConditio
  * @author Thomas LACHAUME
  *
  */
-public class Excution {
-/*
-	private static HashMap <String,ChoiceEnum> map = new HashMap<String, ChoiceEnum>();
-	private static ArrayList<String> expressions = new ArrayList<String>();
+public class Excution{
 
-	public static void startExecution() {
-		PROTOHistoric.clearHisto();
-		ArrayList<Tache> root = ExpressTask.getRootTasks();
-		for (Tache tache : root) {
-			setAllChildStateExecution(tache, StateExecution.INACTIVE);
-			setTaskToActive(tache,true,null);
-		}
-	}
+	public static void doTask(Tache t) throws ProtoTaskException {
+		if(t.getStateExecution()==StateExecution.ACTIVABLE || t.getStateExecution()==StateExecution.ACTIVE){  
+			t.setStateExecution(StateExecution.ACTIVE);
+			takeCareOfMyChildren(t);
+			if(t.getMotherTask()!=null)
+				oneOfMyChildrenBecommeActive(t.getMotherTask());
 
+			System.out.println("do TASK eNd + " + t.getStateExecution());
 
-
-	//modification of task state
-	public static void setTaskToActive(Tache t, boolean historic,HashMap<String,ChoiceEnum> map) {
-		if(historic){
-			PROTOHistoric.addTask(t);
-		}
-		t.setStateExecution(StateExecution.ACTIVE);
-	}
-
-	// une tâche qui change d'état doit mettre à jour ses tâches filles
-	public static void updateMySubTask(Tache t){
-		ArrayList<Tache> fils = t.getFils();
-		Tache last;
-		switch (t.getDecomposition()) {
-		case ELE: 
-			setInWaitingState(t);
-			break;
-		case SEQ:
-			boolean firstInactive = true;
-			boolean OptionalFound = false;
-			for (Tache tache : fils) {
-				StateExecution state = tache.getStateExecution();
-				if(state == StateExecution.FINIE || state == StateExecution.PASSEE){
-
-				}else if(state == StateExecution.INACTIVE){
-					if(firstInactive || OptionalFound){
-						if(t.getPreconditionValue() == ChoiceEnum.vrai){
-							t.setStateExecution(StateExecution.ACTIVABLE);
-						}else{
-							t.setStateExecution(StateExecution.INACTIVABLE);
-						}
-						firstInactive = false;
-						OptionalFound = t.getFacultatif();
-					}
-				}	
-
-			}
-			//on regarde si on se met en attente de fin
-			boolean waitEnd = true;
-			last = fils.get(fils.size());
-			StateExecution statefin = last.getStateExecution();
-			switch (statefin) {
-			case INACTIVE:waitEnd =false;break;
-			case ACTIVABLE:
-			case INACTIVABLE:
-				if(last.getFacultatif())
-					waitEnd = true;
-				else
-					waitEnd = false;
-				break;
-			case FINIE: waitEnd = true;	break;
-			default:
-				break;
-			}
-			if(waitEnd){
-				setInWaitingState(t);
-			}
-
-			break;
-		case ALT:
-			boolean choicemade = false;
-			for (Tache tache : fils) {
-				if(tache.getStateExecution() == StateExecution.FINIE){
-					choicemade = true;
-				}
-			}
-			if(!choicemade){
-				for (Tache tache : fils) {
-					StateExecution state = tache.getStateExecution();
-					if(state == StateExecution.INACTIVE){
-						if(t.getPreconditionValue() == ChoiceEnum.vrai){
-							t.setStateExecution(StateExecution.ACTIVABLE);
-						}else{
-							t.setStateExecution(StateExecution.INACTIVABLE);
-						}
-					}
-				}
-			}else{
-				setInWaitingState(t);
-			}
-			break;
-		case ET:
-			for (Tache tache : fils) {
-				if(tache.getStateExecution()==StateExecution.INACTIVE){
-					if(t.getPreconditionValue() == ChoiceEnum.vrai){
-						t.setStateExecution(StateExecution.ACTIVABLE);
-					}else{
-						t.setStateExecution(StateExecution.INACTIVABLE);
-					}
-				}
-			}
-			waitEnd = true;
-			for (Tache tache : fils) {
-				if((tache.getStateExecution() == StateExecution.ACTIVABLE|| tache.getStateExecution()== StateExecution.INACTIVABLE) && (!tache.getFacultatif()))
-					waitEnd = false;
-			}
-			if(waitEnd){
-				setInWaitingState(t);
-			}
-			break;
-		case PAR:
-			for (Tache tache : fils) {
-				if(tache.getStateExecution()==StateExecution.INACTIVE){
-					if(t.getPreconditionValue() == ChoiceEnum.vrai){
-						t.setStateExecution(StateExecution.ACTIVABLE);
-					}else{
-						t.setStateExecution(StateExecution.INACTIVABLE);
-					}
-				}
-			}
-			waitEnd = true;
-			for (Tache tache : fils) {
-				if(!(tache.getStateExecution() == StateExecution.FINIE) && !tache.getFacultatif()){
-					waitEnd = false;
-				}
-			}
-			break;
-		case INCONNU :
-		default:System.err.println("erreur decomposition");
-		break;
-		}
-
-
-	}
-
-	//gestion des itérations
-	private static void setInWaitingState(Tache t) {
-		t.setStateExecution(StateExecution.ATTENTEFIN);
-		if(t.getIteExpression().getDescription()!=null || t.getIteExpression().getDescription().equals("") ){
-			if(t.getIterationValue() != ChoiceEnum.vrai){
-				t.setStateExecution(StateExecution.ATTENTEFINKO);
-			}
-		} 
-
-	}
-
-
-
-	//attente
-	public static void updateMother(Tache mother){
-		Decomposition decomp = mother.getDecomposition();
-		ArrayList<Tache> fils = mother.getFils();
-		if(decomp == Decomposition.ALT){
-			mother.setStateExecution(StateExecution.ATTENTETASK);
-			boolean choicemade = false;
-			for (Tache tache : fils) {
-				if(tache.getStateExecution() == StateExecution.FINIE){
-					choicemade = true;
-				}
-			}
-			if(choicemade){
-				for (Tache tache : fils) {
-					if(tache.getStateExecution() != StateExecution.FINIE){
-						tache.setStateExecution(StateExecution.PASSEE);
-					}
-				}
-
-			}
-		}else if( decomp == Decomposition.ET ){
-
-			mother.setStateExecution(StateExecution.ATTENTETASK);
-
-			for (Tache tache : fils) {
-				StateExecution state = tache.getStateExecution();
-				if( state == StateExecution.ACTIVABLE || state == StateExecution.INACTIVABLE){
-					tache.setStateExecution(StateExecution.INACTIVE);
-				}
-			}
-		}else if(decomp == Decomposition.PAR){
-			boolean active = false;
-			for (Tache tache : fils) {
-				if(tache.getStateExecution()==StateExecution.ACTIVABLE || tache.getStateExecution() == StateExecution.INACTIVABLE)
-					active = true;
-			}
-			if(active)
-				mother.setStateExecution(StateExecution.ACTIVE);
-			else
-				mother.setStateExecution(StateExecution.ATTENTETASK);
-
-		}else if (decomp == Decomposition.SEQ ){
-			mother.setStateExecution(StateExecution.ATTENTETASK);
-			for (Tache tache : fils) {
-				StateExecution state = tache.getStateExecution();
-				if( state == StateExecution.ACTIVABLE || state == StateExecution.INACTIVABLE){
-					if(tache.getFacultatif() &&  tache.getOldSisterTask() != null && (tache.getOldSisterTask().getStateExecution()==StateExecution.ACTIVE ||tache.getOldSisterTask().getStateExecution()==StateExecution.ATTENTEFIN || tache.getOldSisterTask().getStateExecution()==StateExecution.ATTENTETASK || tache.getOldSisterTask().getStateExecution()==StateExecution.FINIE) ){
-						tache.setStateExecution(StateExecution.PASSEE);
-					}else{
-						tache.setStateExecution(StateExecution.INACTIVE);
-					}
-				}
-			}
 		}else{
-
-			System.err.println("erreur decompo");
-		}
-	}
-
-
-	public static void setActive(Tache t){
-		t.setStateExecution(StateExecution.ACTIVE);
-		Tache mother = t.getMotherTask();
-		if (mother != null){
-			updateMother(mother);
-		}
-	}
-
-	public static void startTask(Tache t){
-
-		Tache mother = t.getMotherTask();
-		//	if(t.getStateExecution() == StateExecution.ACTIVABLE){
-		t.setStateExecution(StateExecution.ACTIVE);
-		if(t.getMotherTask() != null){
-			updateMother(t.getMotherTask());
-		}
-		updateMySubTask(t);
-
-
-		/*}else{
-			//TODO 
-			System.err.println("error ");
-		}*/
-
-	
-	/*
-	}
-
-
-	public static void valideTask(Tache t){
-		if(t.getStateExecution() == StateExecution.ATTENTEFIN){
-			t.setStateExecution(StateExecution.FINIE);
-			if(t.getMotherTask()!=null){
-				startTask(t.getMotherTask());
-			}
-		}else{
-			System.err.println("error no wait end");
-		}
-	}
-
-	public static boolean preconditionSensitive(StateExecution s){
-		return true;
-	}
-
-	public static boolean buttunViewed(){
-		return true;
-	}
-
-	public static boolean panelViewed(){
-		return true;
-	}
-
-
-
-
-
-
-	//TODO test
-	private static List<Tache> getAllActive() {
-		ArrayList<Tache> active = new ArrayList<Tache>();
-		ArrayList<Tache> root = ExpressTask.getRootTasks();
-		for (Tache tache : root) {
-			getActive(tache, active);
-		}
-		return active;
-	}
-	//TODO test
-	private static void getActive(Tache t, ArrayList<Tache> active){
-		if( t.getStateExecution() == StateExecution.ACTIVE){
-			active.add(t);
-		}
-		ArrayList<Tache> fils = t.getFils();
-		for (Tache tache : fils) {
-			getActive(tache, active);
+			throw new ProtoTaskException();
 		}
 	}
 
 
 
 
-	public static void updateCondition(HashMap<String,ChoiceEnum> map2 ){
-	}
 
-
-	private static void getAllExpressions(Tache tache) {
-		String delim = "\\^";
-		String[] tokens = tache.getPreExpression().getDescription().split(delim);
-		expressions.clear();
-		map.clear();
-		for (String exp : tokens) {
-			expressions.add(exp);
-			map.put(exp,ChoiceEnum.indeterminée);
-		}
-	}
-
-
-	private static boolean isReman(String expression){
-		System.err.println("expresssion :" + expression);
-		String delim = "[\\^]";
-		String[] tokens = expression.split(delim);
-		String formal = tokens[0];
-
-		String delimFormal = "[=]";
-		String[] formalDecomp = formal.split(delimFormal);
-		boolean rema = true;
-		StringTokenizer myST = new StringTokenizer(formalDecomp[0],"[//?]",true);
-		if(myST.countTokens()>1){
-			rema = false;
-		}
-		return rema;
-	}
-
-	private static String displayCondition(String description) {
-		String res= "";
-		if(description!=null && !description.equals("")){
-
-			String delim = "[\\^]";
-			String[] tokens = description.split(delim);
-			String formal = tokens[0];
-			ArrayList<String> exp = new ArrayList<String>();
-			String delimFormal = "[=]";
-			String[] formalDecomp = formal.split(delimFormal);
-			int number = 0;
-			boolean rema = true;
-			StringTokenizer myST = new StringTokenizer(formalDecomp[0],"[//?!]",true);
-			if(myST.countTokens()>1){
-				while (myST.hasMoreTokens()) {
-					rema=false;
-					String element = myST.nextToken();
-					if(!element.equals("?") && !element.equals("!"))
-						number =  Integer.parseInt(element);
-				}
-			}
-			else
-				number = Integer.parseInt(formalDecomp[0]);
-
-			res+= expressions.get(number)+ "  ";
-			if(formalDecomp.length >1){
-				// logical expression parsing and evaluation
-
-				ExpressionTree expression = parseLogical(formalDecomp[1],rema);
-				res += expression.getDescription();
-			}
-		}
-
-
-		return res;
-	}
-
-
-
-
-	private static ReturnParsePreCondition parsePreCondition(String expression){
-		System.out.println(map.get("zero"));
-		String delim = "[\\^]";
-		String[] tokens = expression.split(delim);
-		String formal = tokens[0];
-		ArrayList<String> exp = new ArrayList<String>();
-
-		String delimFormal = "[=]";
-		String[] formalDecomp = formal.split(delimFormal);
-		int number = 0;
-		boolean rema = true;
-		boolean negat = false;
-		StringTokenizer myST = new StringTokenizer(formalDecomp[0],"[//?!]",true);
-		if(myST.countTokens()>1){
-			while (myST.hasMoreTokens()) {
-				rema=false;
-				String element = myST.nextToken();
-				if(element.equals("?"))
-					rema=false;
-				else if(element.equals("!"))
-					negat = true;
-				else
-					number =  Integer.parseInt(element);
-			}
-		}
-		else
-			number = Integer.parseInt(formalDecomp[0]);
-
-		exp.add(expressions.get(number));
-		if(formalDecomp.length >1){
-			// logical expression parsing and evaluation
-
-			ChoiceEnum rep = evaluateLogical(parseLogical(formalDecomp[1],rema));
-			exp.addAll(extractExpression(formalDecomp[1]));
-			map.put(expressions.get(number),rep);
-		}
-
-		//l'expression logigue est evaluer il faut transmettre la valeur et les differentes partie de l'expression à afficher
-		for (int i = 0; i<exp.size();i++) {
-			System.out.println("exp "+i+" :"+exp.get(i));
-		}
-		ReturnParsePreCondition res = new ReturnParsePreCondition();
-		res.list = exp;
-		res.negat = negat;
-		System.out.println(map.get("zero"));
-
-		return res;
-	}
-
-
-
-
-	private static ChoiceEnum evaluateLogical(ExpressionTree expressionTree) {
-		ChoiceEnum res = expressionTree.evaluate(map);
-		return res;
+	public void cancelTask(Tache t) throws ProtoTaskException {
+		// TODO Auto-generated method stub
 
 	}
 
-
-
-	private static List<String> extractExpression(String logical) {
-		String delim =  "[+\\-*!()]";
-		StringTokenizer myST = new StringTokenizer(logical,delim,false);
-		ArrayList<String> value = new ArrayList<String>();
-		while (myST.hasMoreTokens()) {
-			String element = myST.nextToken();
-			value.add(expressions.get(Integer.parseInt(element)));
-		}
-		return value;
+	public void suspendTask(Tache t) throws ProtoTaskException {
+		// TODO Auto-generated method stub
 
 	}
-
 
 
 	/**
-	 * parse and evalue the logical expression
-	 * @param logical
-	 * @param rema 
-	 * @param exp 
-	 * @return
+	 * @param t
 	 */
-	/*
-	private static ExpressionTree parseLogical(String logical, boolean rema){
-		String delim =  "[+\\-*!()]";
-		StringTokenizer myST = new StringTokenizer(logical,delim,true);
-		ArrayList<String> operator = new ArrayList<String>();
-		ArrayList<String> value = new ArrayList<String>();
-		ArrayList<String> res = new ArrayList<String>();
-		ExpressionTree myExpression = null;
-		boolean first = false;
-		while (myST.hasMoreTokens()) {
-			String element = myST.nextToken();
-			if(element.equals("(")){
-				operator.add(element);
-			}else if (element.equals(")")){
-				while(!operator.get(operator.size()-1).equals("(")){
-					if( operator.get(operator.size()-1).equals("!") ){
-						if(value.size()>0){
-							myExpression = new ExpressionTree("!",new ExpressionTree(value.get(value.size()-1), null, null),null);
-							operator.remove(operator.size()-1);
-							value.remove(value.size()-1);
-						}
-						else{
-							myExpression = new ExpressionTree("!",myExpression,null);
-							operator.remove(operator.size()-1);
-						}
-					}else if( operator.get(operator.size()-1).equals("+") ){
-						if(myExpression==null){
-							myExpression = new ExpressionTree(value.get(value.size()-1),null,null);
-							value.remove(value.size()-1);
-						}
-						myExpression = new ExpressionTree("+",myExpression,new ExpressionTree(value.get(value.size()-1),null,null));
-						operator.remove(operator.size()-1);
-						value.remove(value.size()-1);
+	private static void oneOfMyChildrenBecommeActive(Tache t) throws ProtoTaskException {
 
-					}else if( operator.get(operator.size()-1).equals("*") ){
-						if(myExpression==null){
-							myExpression = new ExpressionTree(value.get(value.size()-1),null,null);
-							value.remove(value.size()-1);
-						}
-						myExpression = new ExpressionTree("*",myExpression,new ExpressionTree(value.get(value.size()-1),null,null));
-						operator.remove(operator.size()-1);
-						value.remove(value.size()-1);
-					}
-				}
-				operator.remove(operator.size()-1);
-				//depiler jusqu'à (
-			}else if (element.equals("!")){
-				operator.add(element);
-			}else if (element.equals("+")){
-				operator.add(element);
-			}else if (element.equals("*")){
-				operator.add(element);
-			}else {
-				if(first){
-					myExpression = new ExpressionTree(expressions.get(Integer.parseInt(element)),null,null);
-					first = false;
-				}else{ 
-					value.add(expressions.get(Integer.parseInt(element)));
-					res.add(expressions.get(Integer.parseInt(element)));
+		//je regarde mon ordonnancement et je met à jours mes filles si besoin et je me met en attente si besoin
+		Decomposition decompo = t.getOrdonnancement();
+		ArrayList<Tache> enfants ;
+		switch (decompo) {
+		case ALT:
+			t.setStateExecution(StateExecution.ATTENTETASK);
+			enfants = t.getFils();
+			for (Tache fille : enfants) {
+				switch (fille.getStateExecution()) {
+				case ATTENTEFIN:
+				case 	ATTENTEFINKO :
+				case ACTIVE :
+				case ATTENTETASK :
+					break;
+				default:
+					fille.setStateExecution(StateExecution.PASSEE);
 				}
 			}
-
+			break;
+		case ELE:
+			throw new ProtoTaskException();
+		case ET:
+			t.setStateExecution(StateExecution.ATTENTETASK);
+			enfants = t.getFils();
+			for (Tache fille : enfants) {
+				switch (fille.getStateExecution()) {
+				case ACTIVABLE:
+				case INACTIVABLE:
+					fille.setStateExecution(StateExecution.ATTENTETASK);
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		case INCONNU:
+			throw new ProtoTaskException();
+		case PAR:
+			boolean canStartAChild = false;
+			enfants = t.getFils();
+			for (Tache fille : enfants) {
+				switch (fille.getStateExecution()) {
+				case ACTIVABLE:
+				case INACTIVABLE:
+					canStartAChild = true;
+					break;
+				default: 
+					break;
+				}
+			}
+			if(!canStartAChild){
+				t.setStateExecution(StateExecution.ATTENTETASK);
+			}
+			break;
+		case SEQ:
+			t.setStateExecution(StateExecution.ATTENTETASK);
+			enfants = t.getFils();
+			for (Tache fille : enfants) {
+				switch (fille.getStateExecution()) {
+				case ACTIVABLE:
+				case INACTIVABLE:
+					fille.setStateExecution(StateExecution.ATTENTETASK);
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		default:
+			break;
 		}
-
-
-		return myExpression;
-
-
 	}
-	*/
 
-/*
-	private static ReturnParsePreCondition preonditionEvaluation(String expression){
 
-		// si ya pas de precondition il faut afficher la tâche selon son ordonnancement
-		if ((expression == null) || expression.equals("") )
-			return null;
-		else { 
-			// sinon il faut parser l'expression et l'évaluer avec la map
-			// il faut donner l'ensemble des expressions à afficher avec leurs valeurs 
-			ReturnParsePreCondition res = parsePreCondition(expression);
-			//List<String> str = res.list;
-			return res;
-		}
-	}
-*/
-	/*	private static void remanance() {
-		if(currentTask!=null){ // && currentTask.getFacultatif() !=null){
-			for (Tache t : currentTask.getFils()) {
-				String precondition = t.getPreExpression().getDescription();
-				if(!isReman(precondition)){
-					List<String> l = parsePreCondition(precondition).list;
-					for(int i = 0;i<l.size();i++){
-						System.err.println("kmc"+l.get(i));
-						map.put(l.get(i),ChoiceEnum.indeterminée);
+	private static void takeCareOfMyChildren(Tache t) throws ProtoTaskException {
+		Decomposition decompo = t.getOrdonnancement();
+		ArrayList<Tache> children;
+		switch (decompo) {
+		case ALT:
+			children = t.getFils();
+			for (Tache child : children) {
+				if(child.getStateExecution()==null)
+					child.setStateExecution(StateExecution.INACTIVE);
+				switch(child.getStateExecution()){
+				case INACTIVE:
+					iCanBeActivable(child);
+					break;
+				case FINISHED:
+					waitEndTask(t);
+					break;
+				case ACTIVABLE:
+				case ACTIVE:
+				case ATTENTEFIN:
+				case ATTENTEFINKO:
+				case ATTENTETASK:
+				case INACTIVABLE:
+				case PASSEE:
+				case PASSIVE:
+				case WAITEND:
+				default:
+					break;
+					//throw new ProtoTaskException();
+				}
+
+			}
+			break;
+		case ELE:
+			waitEndTask(t);
+			break;
+		case ET:
+			children = t.getFils();
+			boolean oneActivable = true;
+			for (Tache child : children) {
+				if(child.getStateExecution()==null)
+					child.setStateExecution(StateExecution.INACTIVE);
+				switch(child.getStateExecution()){
+				case ATTENTETASK:
+				case INACTIVE:
+					iCanBeActivable(child);
+					oneActivable = false;
+					break;
+				case FINISHED:
+				case ACTIVABLE:
+				case ACTIVE:
+				case ATTENTEFIN:
+				case ATTENTEFINKO:
+				case INACTIVABLE:
+				case PASSEE:
+				case PASSIVE:
+				case WAITEND:
+				default:
+					if(oneActivable){
+						waitEndTask(t);
 					}
 				}
-			}		
-		}
-	}*/
 
-	/*
-	public static void setAllChildStateExecution(Tache t, StateExecution s) {
-		if (t.getFils() != null) {
-			ArrayList<Tache> child = t.getFils();
-			for (Tache tache : child) {
-				tache.setStateExecution(s);
-				setAllChildStateExecution(tache, s);
+			}
+			break;
+		case INCONNU:
+			throw new ProtoTaskException();
+		case PAR:
+			children = t.getFils();
+			for (Tache child : children) {
+				if(child.getStateExecution()==null)
+					child.setStateExecution(StateExecution.INACTIVE);
+				switch(child.getStateExecution()){
+
+				case INACTIVE:
+					iCanBeActivable(child);
+					break;
+				case FINISHED:
+				case ATTENTETASK:
+				case ACTIVABLE:
+				case ACTIVE:
+				case ATTENTEFIN:
+				case ATTENTEFINKO:
+				case INACTIVABLE:
+				case PASSEE:
+				case PASSIVE:
+				case WAITEND:
+				default:
+					//	System.out.println(child.getName() + child.getStateExecution());
+					//throw new ProtoTaskException();
+					break;
+				}
+
+			}
+			break;
+		case SEQ:					
+			children = t.getFils();
+			//permet de dire si la première tache non optionnel a été trouvé
+			boolean first = false;
+			for (Tache child : children) {
+				if(child.getStateExecution()==null)
+					child.setStateExecution(StateExecution.INACTIVE);
+				switch(child.getStateExecution()){
+
+				case INACTIVE:
+					if(!first){
+						iCanBeActivable(child);
+						if(!child.getFacultatif()){
+							first = true;
+						}
+					}
+					break;
+				case FINISHED:
+				case ATTENTETASK:
+				case ACTIVABLE:
+				case ACTIVE:
+				case ATTENTEFIN:
+				case ATTENTEFINKO:
+				case INACTIVABLE:
+				case PASSEE:
+				case PASSIVE:
+				case WAITEND:
+				default:
+					System.out.println(child.getName() + child.getStateExecution());
+					break;
+					//throw new ProtoTaskException();
+				}
+
+			}
+			break;
+
+		default:
+			break;
+		}
+		children = t.getFils();
+		for (Tache child : children) {
+			if(child.getStateExecution()!=null)
+				System.out.println("fils : " + child.getStateExecution());
+		}
+	}
+
+
+
+
+
+	private static void iCanBeActivable(Tache t) {
+		//TODO vérifier la precondition
+		//if the task has a condition
+		if(t.getPreExpression().getDescription()!=null && !t.getPreExpression().getDescription().equals("")){
+			t.getPreExpression();
+			if(PreExpression.getState()==StateCondition.TRUE){
+				t.setStateExecution(StateExecution.ACTIVABLE);
+			}else{
+				t.setStateExecution(StateExecution.INACTIVABLE);
+			}
+
+
+		}else{
+			t.setStateExecution(StateExecution.ACTIVABLE);
+		}
+	}
+
+
+
+
+	//
+	private static void waitEndTask(Tache t) {
+		//faire la gestion de 
+		System.out.println("waitend");
+
+		t.setStateExecution(StateExecution.ATTENTEFIN);
+
+	}
+
+
+
+
+
+	public static void changeCondition(StateCondition state) throws ProtoTaskException {
+		// TODO Auto-generated method stub
+
+	}
+
+
+
+
+	public static void  interruptTask() throws ProtoTaskException {
+		// TODO Auto-generated method stub
+
+	}
+
+
+
+
+
+	public static void endTask(Tache t) throws ProtoTaskException {
+		t.setStateExecution(StateExecution.FINISHED);
+		Tache mother = t.getMotherTask();
+		if(mother!=null)
+			oneOfMyChildrenBecomeFinish(mother);
+		else{
+			//TODO FIN SIMUL
+			System.err.println("fin simu");
+		}
+	}
+
+	private static void oneOfMyChildrenBecomeFinish(Tache t) throws ProtoTaskException{
+		Decomposition decompo = t.getOrdonnancement();
+		ArrayList<Tache> enfants ;
+		switch (decompo) {
+		case ALT:
+			waitEndTask(t);
+			break;
+		case ELE:
+			throw new ProtoTaskException();
+		case ET:
+			//t.setStateExecution(StateExecution.ATTENTETASK);
+			enfants = t.getFils();
+			int counter = 0;
+			for (Tache fille : enfants) {
+				switch (fille.getStateExecution()) {
+				case ACTIVABLE:
+				case INACTIVABLE:
+				case ATTENTETASK:
+					if(!fille.getFacultatif()){
+						counter++;
+					}
+					break;
+				default:
+					break;
+				}
+			}
+			if(counter == 0){
+				waitEndTask(t);
+			}else{
+				t.setStateExecution(StateExecution.ACTIVE);
+				doTask(t);
+			}
+			break;
+		case INCONNU:
+			throw new ProtoTaskException();
+		case PAR:
+			boolean canStartAChild = false;
+			enfants = t.getFils();
+			counter = 0;
+			for (Tache fille : enfants) {
+				switch (fille.getStateExecution()) {
+				case ACTIVABLE:
+				case INACTIVABLE:
+					canStartAChild = true;
+					if(fille.getFacultatif())
+						counter++;
+					break;
+				case FINISHED:
+					counter++;
+				default: 
+					break;
+				}
+			}
+			if(counter==enfants.size()){
+				waitEndTask(t);
+			}else if(!canStartAChild){
+				t.setStateExecution(StateExecution.ATTENTETASK);
+			}else{
+				doTask(t);
+			}
+
+			break;
+		case SEQ:
+			t.setStateExecution(StateExecution.ATTENTETASK);
+			enfants = t.getFils();
+			counter = 0;
+			for (Tache fille : enfants) {
+				switch (fille.getStateExecution()) {
+				case ACTIVABLE:
+				case INACTIVABLE:
+				case INACTIVE:
+				case ATTENTETASK:	
+					if(!fille.getFacultatif()){
+						counter++;
+					}
+					break;
+				default:
+					break;
+				}
+			}
+			if(counter == 0){
+				waitEndTask(t);
+				takeCareOfMyChildren(t);
+			}else{
+				t.setStateExecution(StateExecution.ACTIVE);
+				doTask(t);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+
+
+
+
+	public static void resetScenario() {
+		ArrayList<Tache> root = ExpressTask.getRootTasks();
+		setAllTaskState(StateExecution.INACTIVE);
+		for (Tache tache : root) {
+			tache.setStateExecution(StateExecution.ACTIVABLE);
+			try {
+				Excution.doTask(tache);
+			} catch (ProtoTaskException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	private static void setAllTaskState(StateExecution state){
+		ArrayList<Tache> root = ExpressTask.getRootTasks();
+		for (Tache tache : root) {
+			tache.setStateExecution(state);
+			for(Tache t : tache.getFils()){
+				setStateRecu(t,state);
 			}
 		}
 	}
 
 
-*/
+
+
+
+	private static void setStateRecu(Tache t, StateExecution state) {
+		t.setStateExecution(state);
+		for(Tache f : t.getFils()){
+			setStateRecu(f, state);
+		}
+		
+	}
+
+
 
 }

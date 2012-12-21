@@ -68,10 +68,10 @@ public final class ExpressIteration {
     public static boolean isFinished(Tache myTache) {
 	return myTache.getIteExpression().isFinished();
 	/*
-	 * if (myTache.getIteExpression().isVariableExpressionNode()) { return
-	 * (myTache.getIteExpression().getIterationVariant() <= 0); } else {
-	 * return (Boolean)
-	 * myTache.getIteExpression().getNodeExpression().getNodeValue(); }
+	  if (myTache.getIteExpression().isVariableExpressionNode()) { return
+	  (myTache.getIteExpression().getIterationVariant() <= 0); } else {
+	  return (Boolean)
+	  myTache.getIteExpression().getNodeExpression().getNodeValue(); }
 	 */
     }
 

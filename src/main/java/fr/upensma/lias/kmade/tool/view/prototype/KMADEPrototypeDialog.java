@@ -19,22 +19,31 @@ package fr.upensma.lias.kmade.tool.view.prototype;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -87,8 +96,12 @@ public class KMADEPrototypeDialog extends JFrame {
 //	private JPanel conditionPanel;
 	private static HashMap<String,ChoiceEnum> map = new HashMap<String, ChoiceEnum>() ;
 	
-
+	//LOG
+	private static ArrayList<String> log = new ArrayList<String>();
+	
+	
 	public KMADEPrototypeDialog() {
+		
 		super(KMADEConstant.PROTOTYPING_TOOL_TITLE_NAME);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
@@ -185,6 +198,125 @@ public class KMADEPrototypeDialog extends JFrame {
 		setEnabledEnd(null,false);
 		this.validate();
 		this.repaint();
+		
+		
+		//LOG ----------------------------------------------
+/*ComponentListener componentL = new ComponentListener() {
+			
+	public void componentHidden(ComponentEvent e) {
+		Date date = Calendar.getInstance().getTime();
+        System.err.println(e.getComponent().getClass().getName() + " --- Hidden");
+        log.add(date + e.getComponent().getClass().getName() + " --- Hidden");
+    }
+
+    public void componentMoved(ComponentEvent e) {
+    	Date date = Calendar.getInstance().getTime();
+        System.err.println(e.getComponent().getClass().getName() + " --- Moved");
+        log.add(date + e.getComponent().getClass().getName() + " --- Moved");
+    }
+
+    public void componentResized(ComponentEvent e) {
+    	Date date = Calendar.getInstance().getTime();
+        System.err.println(e.getComponent().getClass().getName() + " --- Resized ");   
+        log.add(date + e.getComponent().getClass().getName() + " --- Resized ");   
+    }
+
+    public void componentShown(ComponentEvent e) {
+    	Date date = Calendar.getInstance().getTime();
+        System.err.println(e.getComponent().getClass().getName() + " --- Shown");
+        log.add(date + e.getComponent().getClass().getName() + " --- Shown");
+    }
+		};*/
+		//this.addComponentListener(componentL);
+		/*this.addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				Date date = Calendar.getInstance().getTime();
+				System.err.println(date + " frame windowOpened");
+				log.add(date + " frame windowOpened");
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				Date date = Calendar.getInstance().getTime();
+				System.err.println(date + " frame windowIconified");
+				log.add(date + " frame windowIconified");
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				Date date = Calendar.getInstance().getTime();
+				System.err.println(date + "frame windowDeiconified");
+				log.add(date + " frame windowDeiconified");
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				Date date = Calendar.getInstance().getTime();
+				System.err.println(date + "frame windowDeactivated");
+				log.add(date + "frame windowDeactivated");
+				ecrirelog();
+
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				Date date = Calendar.getInstance().getTime();
+				System.err.println(date + "frame windowClosing");
+				log.add(date + "frame windowClosing");
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				Date date = Calendar.getInstance().getTime();
+				System.err.println(date + "frame windowClosed");
+				log.add(date + "frame windowClosed");
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+				Date date = Calendar.getInstance().getTime();
+				System.err.println(date + " frame windowActivated");
+				log.add(date + "frame windowActivated");
+			}
+		});
+		*/
+		/*this.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Date date = Calendar.getInstance().getTime();
+				System.err.println(date + "frame clicked");
+				log.add(date + "frame clicked");
+			}
+		});*/
+	//	myContentPane.addComponentListener(componentL);
+		
 	}
 
 
@@ -193,6 +325,9 @@ public class KMADEPrototypeDialog extends JFrame {
 		reset.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				Date date = Calendar.getInstance().getTime();
+		    //    System.err.println(date+ " reset");
+		    //    log.add(date +" reset");
 				task.removeAll();
 				possibleTask.removeAll();
 				conditionBox.removeAll();
@@ -240,8 +375,8 @@ public class KMADEPrototypeDialog extends JFrame {
 		String executantText = "";
 		switch(currentTask.getExecutant()){
 		case ABS :
-			//	executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.ABSTRACT_TASK_48_IMAGE));
-			//	executantText += KMADEConstant.PROTOTYPING_TOOL_EXECUTANT_ABS;
+				executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.ABSTRACT_TASK_48_IMAGE));
+				executantText += KMADEConstant.PROTOTYPING_TOOL_EXECUTANT_ABS;
 			break;
 		case INCONNU:
 			//	executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.UNKNOWN_TASK_48_IMAGE));
@@ -391,14 +526,19 @@ public class KMADEPrototypeDialog extends JFrame {
 		name.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+			//	Date date = Calendar.getInstance().getTime();
+		     //   System.err.println(date + " activate task : "+ t.getName());
+		      //  log.add(date +" activate task : "+ t.getName());
 				PROTOHistoric.descendre();
 				PROTOExecution.setCurrentTask(t,true,map);
 			}
 		});
 		trueFalseIndeterminateGroupButton buttonChoice;
 		if(accessible && enabled){
+			name.setFont(KMADEConstant.TASK_NAME_FONT);
 			name.setEnabled(true);
 		}else{
+			name.setFont(new Font("arial", Font.PLAIN, 10));
 			name.setEnabled(false);
 		}
 		
@@ -460,12 +600,18 @@ public class KMADEPrototypeDialog extends JFrame {
 		if(b){
 			buttonTermine.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					//Date date = Calendar.getInstance().getTime();
+			        //System.err.println(date +" terminer: "+ t.getName());
+			        //log.add(date + "terminer : "+ t.getName());
 					map.clear();
 					PROTOExecution.finishedTask(t,map);
 				}
 			});
 			buttonAnnuler.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+			//		Date date = Calendar.getInstance().getTime();
+		      //  System.err.println(date + " annuler : "+ t.getName());
+		       // log.add(date + " annuler : "+ t.getName());
 					map.clear();
 					PROTOExecution.cancelTask(map);
 				}
@@ -497,6 +643,9 @@ public class KMADEPrototypeDialog extends JFrame {
 		repeat.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				//Date date = Calendar.getInstance().getTime();
+		        //System.err.println(date +" repeter: ");
+		        //log.add(date + "repeter : ");
 				map.clear();
 				PROTOExecution.repeatCurrentTask(map);
 			}
@@ -504,9 +653,12 @@ public class KMADEPrototypeDialog extends JFrame {
 		if(enabled == ChoiceEnum.vrai){
 			repeat.setEnabled(true);
 			buttonTermine.setEnabled(false);
-		}else{
+		}else if(enabled ==ChoiceEnum.faux){
 			repeat.setEnabled(false);
 			buttonTermine.setEnabled(true);
+		}else{
+			repeat.setEnabled(false);
+			buttonTermine.setEnabled(false);
 		}
 		repeatPanel.add(repeat);
 		rightBotTaskPanel.add(repeatPanel);
@@ -586,8 +738,11 @@ public class KMADEPrototypeDialog extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
+		//	Date date = Calendar.getInstance().getTime();
+	     //   System.err.println(date +" condition: "+ e.getActionCommand());
+	      //  log.add(date + "condition : "+  e.getActionCommand());
 			if(e.getActionCommand().equals(trueString)){
+				
 				map.put(condition,ChoiceEnum.vrai);
 			}else if(e.getActionCommand().equals(falseString)){
 				map.put(condition,ChoiceEnum.faux);
@@ -599,6 +754,28 @@ public class KMADEPrototypeDialog extends JFrame {
 		}
 	}
 
-
-
+	public void ecrirelog(){
+	/*	Date date = Calendar.getInstance().getTime();
+		String name = ExpressTask.getRootTasks().get(0).getName().replaceAll("\\s", "");
+		@SuppressWarnings("deprecation")
+		String adressedufichier = System.getProperty("user.dir") + "/"+"KMC"+ name+date.getHours()+"h"+date.getMinutes()+"min.txt";
+		FileWriter fw;
+		try {
+			fw = new FileWriter(adressedufichier, true);
+			BufferedWriter output = new BufferedWriter(fw);
+			for (String str : log) {
+				output.write(str);
+			}
+			for(String str : KMADEHistoricPanel.log){
+				output.write(str);
+			}
+			output.flush();
+			output.close();
+			log.clear();
+			KMADEHistoricPanel.log.clear();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	}
 }

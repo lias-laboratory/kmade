@@ -34,6 +34,8 @@ import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ReturnParsePreConditio
 public class PreExpression extends Expression {
 
 	private static final long serialVersionUID = 966193885483435378L;
+	
+	private static StateCondition state = StateCondition.INDETERMINATE;
 
 	public PreExpression() {
 		refNode = new BooleanConstant();
@@ -43,6 +45,7 @@ public class PreExpression extends Expression {
 	public PreExpression(String pre) {
 		this.chaine = pre;
 	}
+	
 	
 	//PROTOTASK 
 	
@@ -149,6 +152,14 @@ public class PreExpression extends Expression {
 
 		}
 		return myExpression;
+	}
+
+	public static StateCondition getState() {
+		return state;
+	}
+
+	public static void setState(StateCondition state) {
+		PreExpression.state = state;
 	}
 
 

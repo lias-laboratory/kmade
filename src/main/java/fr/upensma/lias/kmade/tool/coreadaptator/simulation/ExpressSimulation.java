@@ -175,7 +175,7 @@ public final class ExpressSimulation {
         // Cette méthode s'occupe de gérer la première catégorie
     	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXECUTE_TASK_TRAITEMENT_MESSAGE + " : " + myCurrentTask.getName());
     	 KMADEHistoryMessageManager.printlnMessage(" * " + KMADEConstant.EXECUTION_CONSTRAINT_MESSAGE); 
-        
+    	
         // Est-ce le bon utilisateur qui exécute.
     	 KMADEHistoryMessageManager.printMessage("  - " + KMADEConstant.USER_EXECUTION_CONSTRAINT_MESSAGE + " : ");
         if (exe) {
@@ -268,6 +268,7 @@ public final class ExpressSimulation {
         	return true;
         }else{
         	ExpressIteration.evaluateIteration(myTask);
+
         myTask.getMotherTask().getStateSimulation().setActive();
         
         // Post-traitement ...
@@ -327,6 +328,7 @@ public final class ExpressSimulation {
             myTask.getStateSimulation().setActive();
         }
         }
+ 
         KMADEHistoryMessageManager.printlnMessage("");
         return true;
     }

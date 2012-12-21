@@ -145,7 +145,7 @@ public enum Decomposition implements Enumere {
 	    return null;
     }
 
-	public static Decomposition getXMLModalityValue2(Element p) {
+	public static Decomposition getXMLDecompositionValue2(Element p) {
 		NodeList nodeList = p.getElementsByTagName("task-decomposition");
 		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 			return INCONNU;}

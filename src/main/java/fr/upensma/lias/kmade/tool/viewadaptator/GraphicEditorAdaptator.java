@@ -753,23 +753,18 @@ public final class GraphicEditorAdaptator {
 	    if (cellSelected instanceof KMADEDefaultGraphCell) {
 
 		// Get cell point
-		Point2D monPoint = GraphicEditorAdaptator
-			.getPointFromCell(cellSelected);
+		Point2D monPoint = GraphicEditorAdaptator.getPointFromCell(cellSelected);
 		if (monPoint != null) {
 		    KMADEDefaultGraphCell myCell = (KMADEDefaultGraphCell) cellSelected;
 		    // Old position values
 		    int x = myCell.getPoint().x;
 		    int y = myCell.getPoint().y;
-		    ExpressTask.setTaskPoint((int) monPoint.getX(),
-			    (int) monPoint.getY(), myCell.getTask());
-		    if (!myCell.isSonExpanded()
-			    || MAIN_FRAME.getApplicationToolBar()
-				    .getEditorsToolBar().isMagnet()) {
+		    ExpressTask.setTaskPoint((int) monPoint.getX(),(int) monPoint.getY(), myCell.getTask());
+		    if (!myCell.isSonExpanded() || MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().isMagnet()) {
 			int dx = x - (int) monPoint.getX();
 			int dy = y - (int) monPoint.getY();
 
-			ArrayList<KMADEDefaultGraphCell> toto = myCell
-				.getDescendantSubCells(false);
+			ArrayList<KMADEDefaultGraphCell> toto = myCell.getDescendantSubCells(false);
 			for (int i = 0; i < toto.size(); i++) {
 			    if (toto.get(i) != myCell) {
 				toto.get(i).setDeltaPoint(dx, dy);

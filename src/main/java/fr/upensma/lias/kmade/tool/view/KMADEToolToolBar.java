@@ -655,13 +655,17 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 	    private static final long serialVersionUID = 353172974792966132L;
 
 	    public void actionPerformed(ActionEvent e) {
+	    	//TODO Echange version de ProtoTask
 		KMADeAdaptator.openPrototypeDialog();
+		//KMADeAdaptator.openProtoTaskMainFrame();
 		
 	    }
 	};
 	prototypeAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.PROTOTYPING_TOOL_MENU_TOOLTIP);
 	prototypeAction.setEnabled(true);
 	myFileMenu.add(prototypeAction);
+	
+	
 	
 	
 	simulationAction = new AbstractAction(

@@ -105,36 +105,36 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
     public static final int PARENT_NAME_ELEMENT = 2;
     public static final int TASK_NAME_TITLE_ELEMENT = 3;
     public static final int TASK_OBSERVATION_TITLE_ELEMENT = 4;
-    /* public static final int TASK_DURATION_TITLE_ELEMENT = 4; */
-    /* public static final int TASK_PURPOSE_TITLE_ELEMENT = 5; */
+     public static final int TASK_DURATION_TITLE_ELEMENT = 5; 
+     public static final int TASK_PURPOSE_TITLE_ELEMENT = 6; 
     /* public static final int TASK_VIDEO_PURPOSE_TITLE_ELEMENT = 6; */
-    public static final int TASK_LABEL_TITLE_ELEMENT = 5;
-    public static final int TASK_OBJECTS_TITLE_ELEMENT = 6;
+    public static final int TASK_LABEL_TITLE_ELEMENT = 7;
+    public static final int TASK_OBJECTS_TITLE_ELEMENT = 8;
     /* public static final int TASK_FEEDBACK_TITLE_ELEMENT = 9; */
 
-    public static final int EXECUTING_NAME_TITLE_ELEMENT = 7;
-    public static final int MODALITY_NAME_TITLE_ELEMENT = 8;
-    public static final int FREQUENCY_NAME_TITLE_ELEMENT = 9;
-    public static final int FREQUENCY_VALUE_NAME_TITLE_ELEMENT = 10;
-    public static final int IMPORTANT_NAME_TITLE_ELEMENT = 11;
+    public static final int EXECUTING_NAME_TITLE_ELEMENT = 9;
+    public static final int MODALITY_NAME_TITLE_ELEMENT = 10;
+    public static final int FREQUENCY_NAME_TITLE_ELEMENT = 11;
+    public static final int FREQUENCY_VALUE_NAME_TITLE_ELEMENT = 12;
+    public static final int IMPORTANT_NAME_TITLE_ELEMENT = 13;
 
-    public static final int SCHEDULING_TITLE_ELEMENT = 12;
-    public static final int NECESSITE_TITLE_ELEMENT = 13;
-    public static final int INTERRUPTIBLE_TITLE_ELEMENT = 14;
-    public static final int DECLENCHEMENT_TITLE_ELEMENT = 15;
-    public static final int SCHEDULE_TITLE_ELEMENT = 16;
-    public static final int USER_TITLE_ELEMENT = 17;
-    public static final int SYSTEM_USER_TITLE_ELEMENT = 18;
-    public static final int PRECONDITION_TITLE_ELEMENT = 19;
-    public static final int ITERATION_TITLE_ELEMENT = 20;
+    public static final int SCHEDULING_TITLE_ELEMENT = 14;
+    public static final int NECESSITE_TITLE_ELEMENT = 15;
+    public static final int INTERRUPTIBLE_TITLE_ELEMENT = 16;
+    public static final int DECLENCHEMENT_TITLE_ELEMENT = 17;
+    public static final int SCHEDULE_TITLE_ELEMENT = 18;
+    public static final int USER_TITLE_ELEMENT = 19;
+    public static final int SYSTEM_USER_TITLE_ELEMENT = 20;
+    public static final int PRECONDITION_TITLE_ELEMENT = 21;
+    public static final int ITERATION_TITLE_ELEMENT = 22;
 
-    public static final int POSTCONDITION_TITLE_ELEMENT = 21;
-    public static final int EVENT_TITLE_ELEMENT = 22;
-    public static final int EFFETSDEBORD_TITLE_ELEMENT = 23;
+    public static final int POSTCONDITION_TITLE_ELEMENT = 23;
+    public static final int EVENT_TITLE_ELEMENT = 24;
+    public static final int EFFETSDEBORD_TITLE_ELEMENT = 25;
 
     public KMADETaskPropertiesPanel() {
 
-	PropertiesObject[] taskProperties = new PropertiesObject[24];
+	PropertiesObject[] taskProperties = new PropertiesObject[26];
 	taskProperties[GENERAL_TITLE_ELEMENT] = new PropertiesObject(
 		KMADEConstant.GENERAL_INFORMATION_PANEL_TITLE_NAME,
 		KMADEConstant.GENERAL_INFORMATION_PANEL_LEGEND_TITLE_NAME, "",
@@ -151,18 +151,18 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		KMADEConstant.TASK_NAME_TITLE,
 		KMADEConstant.TASK_NAME_LEGEND_TITLE, "",
 		JPropertiesTable.SHORT_TEXT, true);
-	/*
-	 * taskProperties[TASK_DURATION_TITLE_ELEMENT] = new
-	 * PropertiesObject(KMADEConstant
-	 * .TASK_DURATION_TITLE,KMADEConstant.TASK_DURATION_LEGEND_TITLE, "",
-	 * JPropertiesTable.SHORT_TEXT, true);
-	 */
-	/*
-	 * taskProperties[TASK_PURPOSE_TITLE_ELEMENT] = new
-	 * PropertiesObject(KMADEConstant.TASK_PURPOSE_TITLE,
-	 * KMADEConstant.TASK_PURPOSE_LEGEND_TITLE,"",
-	 * JPropertiesTable.LONG_TEXT, true, null, myEditorText);
-	 */
+	
+	 taskProperties[TASK_DURATION_TITLE_ELEMENT] = new
+	  PropertiesObject(KMADEConstant
+	  .TASK_DURATION_TITLE,KMADEConstant.TASK_DURATION_LEGEND_TITLE, "",
+	 JPropertiesTable.SHORT_TEXT, true);
+	 
+	
+	  taskProperties[TASK_PURPOSE_TITLE_ELEMENT] = new
+	  PropertiesObject(KMADEConstant.TASK_PURPOSE_TITLE,
+	  KMADEConstant.TASK_PURPOSE_LEGEND_TITLE,"",
+	 JPropertiesTable.LONG_TEXT, true, null, myEditorText);
+	
 	/*
 	 * taskProperties[TASK_VIDEO_PURPOSE_TITLE_ELEMENT] = new
 	 * PropertiesObject(KMADEConstant.TASK_MULTIMEDIA_PURPOSE_TITLE,
@@ -535,16 +535,16 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		    }
 		    break;
 		}
-		    /*
-		     * case TASK_DURATION_TITLE_ELEMENT : { if (!isInit) {
-		     * TaskPropertiesAdaptator
-		     * .setDurationFromExpressTask((String)aValue); } break; }
-		     */
-		    /*
-		     * case TASK_PURPOSE_TITLE_ELEMENT : { if (!isInit) {
-		     * TaskPropertiesAdaptator
-		     * .setButFromExpressTask((String)aValue); } break; }
-		     */
+		   
+		      case TASK_DURATION_TITLE_ELEMENT : { if (!isInit) {
+		      TaskPropertiesAdaptator
+		      .setDurationFromExpressTask((String)aValue); } break; }
+		     
+		    
+		      case TASK_PURPOSE_TITLE_ELEMENT : { if (!isInit) {
+		      TaskPropertiesAdaptator
+		      .setButFromExpressTask((String)aValue); } break; }
+		     
 		    /*
 		     * case TASK_VIDEO_PURPOSE_TITLE_ELEMENT : { break; }
 		     */
@@ -806,8 +806,8 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
     }
 
     public void displayTaskProperties(String numero, String tacheMere,
-	    String name,/* String but, */String res, /* Media media, */
-	    String label, /* String feed, *//* String duree, */
+	    String name,String but, String res, /* Media media, */
+	    String label, /* String feed, */ String duree, 
 	    String obs, Executant exec, String mod, String freq,
 	    String compFreq, String imp, ArrayList<String> events,
 	    Boolean facultatif, Boolean interruptible, String dec,
@@ -817,11 +817,11 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 	myTaskPropertiesModel.setInitValueAt(numero, TASK_NUMBER_NAME_ELEMENT);
 	myTaskPropertiesModel.setInitValueAt(tacheMere, PARENT_NAME_ELEMENT);
 	myTaskPropertiesModel.setInitValueAt(name, TASK_NAME_TITLE_ELEMENT);
-	/*
-	 * myTaskPropertiesModel.setInitValueAt(duree,TASK_DURATION_TITLE_ELEMENT
-	 * );
-	 */
-	/* myTaskPropertiesModel.setInitValueAt(but,TASK_PURPOSE_TITLE_ELEMENT); */
+	
+	 myTaskPropertiesModel.setInitValueAt(duree,TASK_DURATION_TITLE_ELEMENT
+	 );
+	 
+	myTaskPropertiesModel.setInitValueAt(but,TASK_PURPOSE_TITLE_ELEMENT); 
 	myTaskPropertiesModel.setInitValueAt("", TASK_OBJECTS_TITLE_ELEMENT);
 	/*
 	 * myTaskPropertiesModel.setInitValueAt(media,
@@ -900,6 +900,14 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 			.getValue()), EXECUTING_NAME_TITLE_ELEMENT, 1);
     }
 
+    public void setPurposeRealTime(String p){
+    	myTaskPropertiesModel.setValueAt(p, TASK_PURPOSE_TITLE_ELEMENT,1);
+    }
+    
+    public void setObservationRealTime(String p){
+    	myTaskPropertiesModel.setValueAt(p, TASK_OBSERVATION_TITLE_ELEMENT,1);
+    }
+    
     public void setInterruptibleCharacRealTime(boolean b) {
 	if (b) {
 	    myTaskPropertiesModel.setValueAt(KMADEConstant.INTERRUPTIBLE_VALUE,
@@ -926,24 +934,24 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 	myTaskPropertiesModel.setValueAt(enumere, SCHEDULE_TITLE_ELEMENT, 1);
     }
 
-    /*
-     * public void setDureeRealTime(String duree) {
-     * myTaskPropertiesModel.setValueAt(duree,TASK_DURATION_TITLE_ELEMENT,1); }
-     */
+    
+     public void setDureeRealTime(String duree) {
+      myTaskPropertiesModel.setValueAt(duree,TASK_DURATION_TITLE_ELEMENT,1); }
+     
 
     public void setFrequencyRealTime(String freq) {
-	myTaskPropertiesModel.setValueAt(freq, FREQUENCY_NAME_TITLE_ELEMENT, 1);
+	myTaskPropertiesModel.setValueAt(freq, FREQUENCY_VALUE_NAME_TITLE_ELEMENT, 1);
     }
 
-    /*
-     * public void setPurpose() {
-     * myEditorText.showPropertiesEditor(myTaskPropertiesModel
-     * ,TASK_PURPOSE_TITLE_ELEMENT); }
-     * 
-     * public String getPurpose() { return
-     * (String)(myTaskPropertiesModel.getValueAt(TASK_PURPOSE_TITLE_ELEMENT,1));
-     * }
-     */
+    
+      public void setPurpose() {
+     myEditorText.showPropertiesEditor(myTaskPropertiesModel
+      ,TASK_PURPOSE_TITLE_ELEMENT); }
+      
+      public String getPurpose() { return
+      (String)(myTaskPropertiesModel.getValueAt(TASK_PURPOSE_TITLE_ELEMENT,1));
+      }
+     
     /*
      * public void setFeedback() {
      * myEditorText.showPropertiesEditor(myTaskPropertiesModel

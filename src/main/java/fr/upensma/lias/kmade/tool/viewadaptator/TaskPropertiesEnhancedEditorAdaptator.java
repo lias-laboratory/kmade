@@ -242,26 +242,34 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
     public static void setNameInTaskProperties(String value) {
 	TaskPropertiesAdaptator.updateNameRealTime(value);
     }
+    public static void setPurposeInTaskProperties(String value) {
+	TaskPropertiesAdaptator.updatePurposeRealTime(value);
+    }
 
-    /*
-     * public static void setDureeInTaskProperties(String text) {
-     * TaskPropertiesAdaptator.updateDurationRealTime(text); }
-     */
-    /*
-     * public static void setPurpose() { TaskPropertiesAdaptator.setPurpose();
-     * myRefTaskEditor.setPurposeField(TaskPropertiesAdaptator.getPurpose()); }
-     */
+    public static void setObservationInTaskProperties(String value) {
+    	TaskPropertiesAdaptator.updateObservationRealTime(value);
+        }
+
+    
+    
+      public static void setDureeInTaskProperties(String text) {
+      TaskPropertiesAdaptator.updateDurationRealTime(text); }
+     
+   
+     public static void setPurpose() { TaskPropertiesAdaptator.setPurpose();
+     myRefTaskEditor.setPurposeField(TaskPropertiesAdaptator.getPurpose()); }
+     
     /*
      * public static void setFeedBack() { TaskPropertiesAdaptator.setFeedback();
      * myRefTaskEditor.setFeedbackField(TaskPropertiesAdaptator.getFeedback());
      * }
      */
-    /*
-     * public static void setObservation() {
-     * TaskPropertiesAdaptator.setObservation();
-     * myRefTaskEditor.setObservationArea
-     * (TaskPropertiesAdaptator.getObservation()); }
-     */
+    
+     public static void setObservation() {
+     TaskPropertiesAdaptator.setObservation();
+     myRefTaskEditor.setObservationArea
+     (TaskPropertiesAdaptator.getObservation()); }
+    
     public static void setUnknownExecutant() {
 	TaskPropertiesAdaptator.setUnknownExecutant();
 	myRefTaskEditor.setEnabledModalityGroup();

@@ -50,6 +50,16 @@ public final class TaskPropertiesAdaptator {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
 		.setTaskNameRealTime(nameJTache);
     }
+    
+    public static void updatePurposeRealTime(String p){
+    	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
+		.setPurposeRealTime(p);
+    }
+    public static void updateObservationRealTime(String p){
+    	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
+		.setObservationRealTime(p);
+    }
+    
 
     public static void updateExecutantTypeRealTime(Executant myExecutant) {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
@@ -72,23 +82,23 @@ public final class TaskPropertiesAdaptator {
 		.setDecompositionRealTime(localeDecompositionIntoEnumere);
     }
 
-    /*
-     * public static void updateDurationRealTime(String duree) {
-     * KMADEMainFrame.getProjectPanel
-     * ().getPanelProprieteTache().setDureeRealTime(duree); }
-     */
+    
+      public static void updateDurationRealTime(String duree) {
+      KMADEMainFrame.getProjectPanel
+      ().getPanelProprieteTache().setDureeRealTime(duree); }
+     
     public static void updateFrequencyRealTime(String text) {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
 		.setFrequencyRealTime(text);
     }
 
-    /*
-     * public static void setPurpose() {
-     * KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setPurpose(); }
-     * 
-     * public static String getPurpose() { return
-     * KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getPurpose(); }
-     */
+    
+      public static void setPurpose() {
+      KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setPurpose(); }
+      
+      public static String getPurpose() { return
+      KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getPurpose(); }
+     
     /*
      * public static void setFeedback() {
      * KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setFeedback();
@@ -308,12 +318,12 @@ public final class TaskPropertiesAdaptator {
 		.getPanelProprieteTache()
 		.displayTaskProperties(tache.getNumero(),
 			tache.getMotherTaskName(), tache.getName(),
-			/* tache.getBut(), */
+			 tache.getBut(), 
 			tache.getRessources(),
 			/* tache.getMedia(), */
 			tache.getLabelName(),
 			/* tache.getFeedBack(), */
-			/* tache.getDuree(), */
+			 tache.getDuree(), 
 			tache.getObservation(), tache.getExecutant(),
 			tache.getModalite().getValue(),
 			tache.getFrequence().getValue(), tache.getCompFreq(),
@@ -369,11 +379,11 @@ public final class TaskPropertiesAdaptator {
 	GraphicEditorAdaptator.updateSelectedTaskGraphModel();
     }
 
-    /*
-     * public static void setButFromExpressTask(String but) {
-     * ExpressTask.setButTask(GraphicEditorAdaptator.getSelectedExpressTask(),
-     * but); }
-     */
+    
+      public static void setButFromExpressTask(String but) {
+      ExpressTask.setButTask(GraphicEditorAdaptator.getSelectedExpressTask(),
+      but); }
+     
     public static void setLabelExpressTask(String pcolor) {
 	ExpressTask.setLabelTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), pcolor);

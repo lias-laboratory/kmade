@@ -219,6 +219,14 @@ public final class KMADeAdaptator {
 		}
 
 	}
+	
+	public static void openProtoTaskMainFrame() {
+		//TODO KMC REMETTRE LA COH2RENCE
+		//if(coherenceBeforeTool()){
+			ProtoTaskAdaptor.openProtoTaskMainFrame();
+		//}
+
+	}
 
 	public static void noToExistProject() {
 		GraphicEditorAdaptator.getMainFrame().showProjectPanel();

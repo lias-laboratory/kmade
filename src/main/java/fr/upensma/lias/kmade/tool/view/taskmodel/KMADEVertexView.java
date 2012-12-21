@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-
 import org.jgraph.JGraph;
 import org.jgraph.graph.CellHandle;
 import org.jgraph.graph.CellView;
@@ -50,7 +49,11 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADETaskModelPanel.MyBasicGraphUI;
+import fr.upensma.lias.kmade.tool.view.taskproperties.KMADEEditorTextDialog;
+import fr.upensma.lias.kmade.tool.view.toolutilities.JPropertiesTable;
+import fr.upensma.lias.kmade.tool.view.toolutilities.PropertiesObject;
 import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
+import fr.upensma.lias.kmade.tool.viewadaptator.TaskPropertiesAdaptator;
 
 /**
  * @author Mickael BARON
@@ -192,7 +195,7 @@ public class KMADEVertexView extends VertexView {
 
     private Rectangle2D rectAct;
 
-    private Rectangle2D rectObj;
+    private Rectangle2D rectDesc;
 
     private Rectangle2D rectTache;
 
@@ -478,13 +481,13 @@ public class KMADEVertexView extends VertexView {
 		// L'ic�ne PRE
 		String s_pre = KMADEConstant.VERTEX_PRECONDITION;
 
-		if (myGraphCell.getTask().getPreExpression().getName()
-			.equals("true")) {
-		    f.setColor(Color.LIGHT_GRAY);
-		} else {
-		    f.setColor(Color.BLACK);
-		}
-
+		if (!myGraphCell.getTask().getPreExpression().getName()
+				.equals("true") || (myGraphCell.getTask().getPreExpression().getDescription()!= null && !myGraphCell.getTask().getPreExpression().getDescription().equals("") )) {
+			    f.setColor(Color.BLACK);
+			} else {
+			    f.setColor(Color.LIGHT_GRAY);
+			}
+		
 		f.setFont(KMADEConstant.TASK_NUM_FONT);
 		FontMetrics fm_pre = f.getFontMetrics();
 		Rectangle2D rpre = fm_pre.getStringBounds(s_pre, f);
@@ -583,15 +586,19 @@ public class KMADEVertexView extends VertexView {
 		/***************************************************************
 		 * Les inscriptions de droite
 		 **************************************************************/
-		// L'ic�ne REP
+		// L'icône REP
 		String s_rep = KMADEConstant.VERTEX_ITERATION;
 
 		Rectangle2D rrep = fm_pre.getStringBounds(s_rep, f);
-
-		if (!myGraphCell.getTask().getIteExpression()
-			.isMoreOneIteration())
-		    f.setColor(Color.LIGHT_GRAY);
-
+		myGraphCell.getTask().getIteExpression().setInitIterationVariant();
+		if((!myGraphCell.getTask().getIteExpression().getName().equals("[1]"))||
+				(myGraphCell.getTask().getIteExpression().getDescription()!=null && !myGraphCell.getTask().getIteExpression().getDescription().equals(""))
+				){
+			f.setColor(Color.BLACK);
+		}else{
+			f.setColor(Color.LIGHT_GRAY);
+		}
+		
 		f.drawString(
 			s_rep,
 			widthd - (int) rrep.getWidth(),
@@ -608,12 +615,14 @@ public class KMADEVertexView extends VertexView {
 
 		f.setColor(Color.BLACK);
 
-		// L'ic�ne POST
+		// L'icône POST
 		String s_post = KMADEConstant.VERTEX_EFFETSDEBORD;
 
 		if (myGraphCell.getTask().getEffetsDeBordExpression().getName()
-			.equals("void")) {
+			.equals("void") && (myGraphCell.getTask().getEffetsDeBordExpression().getDescription()==null || myGraphCell.getTask().getEffetsDeBordExpression().getDescription().equals("") )) {
 		    f.setColor(Color.LIGHT_GRAY);
+		}else{
+			 f.setColor(Color.BLACK);
 		}
 
 		Rectangle2D rpost = fm_pre.getStringBounds(s_post, f);
@@ -635,7 +644,7 @@ public class KMADEVertexView extends VertexView {
 			(int) (zoom * rpost.getWidth()),
 			(int) (zoom * rpost.getHeight()));
 
-		// �v�nement
+		// événement
 		ImageIcon myImage_evt_out;
 		if (myGraphCell.getTask().getEvents() != null
 			&& myGraphCell.getTask().getEvents().size() != 0) {
@@ -665,7 +674,7 @@ public class KMADEVertexView extends VertexView {
 
 		// TODO objet non g�r� par les t�ches
 		// OBJ
-		String s_obj = KMADEConstant.VERTEX_OBJET;
+		String s_obj = KMADEConstant.VERTEX_DESCRIPTION;
 		Rectangle2D robj = fm_pre.getStringBounds(s_obj, f);
 		f.setColor(Color.LIGHT_GRAY);
 		f.drawString(
@@ -679,7 +688,7 @@ public class KMADEVertexView extends VertexView {
 				+ (int) robj.getHeight());
 		f.setColor(Color.BLACK);
 		// la tooltip
-		rectObj = new Rectangle((int) (zoom * (this.getBounds().getX()
+		rectDesc = new Rectangle((int) (zoom * (this.getBounds().getX()
 			+ widthd - (int) robj.getWidth())), (int) (zoom * (this
 			.getBounds().getMinY()
 			+ (int) rpre.getHeight()
@@ -1088,6 +1097,11 @@ public class KMADEVertexView extends VertexView {
 		    && rectEvenementIn.contains(event.getPoint())) {
 		KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel()
 			.getProprieteTache().setEventDecl();
+	    } else if(rectDesc != null
+			    && rectDesc.contains(event.getPoint())) {
+	    	KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel()
+	    		.getProprieteTache().setObservation();
+	  		  
 	    }
 	    graph.repaint();
 	}
@@ -1156,7 +1170,7 @@ public class KMADEVertexView extends VertexView {
     }
 
     public Rectangle2D getRectObj() {
-	return rectObj;
+	return rectDesc;
     }
 
     public Rectangle2D getRectEvenementIn() {

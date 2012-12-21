@@ -175,8 +175,8 @@ public class KMADEGraph extends org.jgraph.JGraph {
 	addMouseMotionListener(mia);
 	addMouseListener(mia);
 	addMouseWheelListener(new MouseWheelListener() {
-	    public void mouseWheelMoved(MouseWheelEvent e) {
-
+	    public void mouseWheelMoved(MouseWheelEvent e) {	
+	    if(e.isControlDown()){
 		double zoom = getScale();
 
 		/*
@@ -218,7 +218,10 @@ public class KMADEGraph extends org.jgraph.JGraph {
 		    }
 		}
 
+	    }else{
+	    	
 	    }
+	}
 	});
     }
 
@@ -338,7 +341,7 @@ public class KMADEGraph extends org.jgraph.JGraph {
 	addMouseListener(mia);
 	addMouseWheelListener(new MouseWheelListener() {
 	    public void mouseWheelMoved(MouseWheelEvent e) {
-
+	    	if(e.isControlDown()){
 		double zoom = getScale();
 		double tmp;
 
@@ -402,7 +405,7 @@ public class KMADEGraph extends org.jgraph.JGraph {
 		setScale(zoom, getMousePosition());
 
 	    }
-	});
+	}});
     }
 
     public String getToolTipText(MouseEvent event) {
