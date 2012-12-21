@@ -124,7 +124,7 @@ public class KMADEConstant {
 	public static String VERTEX_INTERRUPTIBLE = "INTER";
 	public static String VERTEX_ACTOR = "ACTEUR";
 	public static String VERTEX_EFFETSDEBORD = "ACTION";
-	public static String VERTEX_OBJET = "OBJET";
+	public static String VERTEX_DESCRIPTION = "DESC";
 	public static String VERTEX_ITER_LETTER = "I:";
 	public static String VERTEX_STATE_LETTER = "S:";
 	public static String VERTEX_EVENT_IN_LETTER = "IN:";
@@ -997,6 +997,11 @@ public class KMADEConstant {
 	public static String KMADE_TEAM_MESSAGE = "Participants";
 	public static String JAVA_LIBRARIES_MESSAGE = "Biblioth�ques";
 
+	//Event
+
+	public static String EVENT_TRIGGER = "Evénement déclancheur";
+	public static String EVENT_ENABLE = "Evénement disponible";
+	
 	// Coh�rence du mod�le
 	public static String COHERENCE_INTRO_ERROR = "L'outil de coh�rence a d�tect� ";
 	public static String COHERENCE_ONE_ERROR = " erreur";
@@ -1206,7 +1211,7 @@ public class KMADEConstant {
 	public static final String MERLIN_LOGO_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
 			+ "logoMerlin.gif";
 	public static final String LISI_LOGO_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
-			+ "lias.png";
+			+ "lisi.gif";
 	public static final String BARON_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
 			+ "baron.gif";
 	public static final String SCAPIN_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
@@ -1346,6 +1351,7 @@ public class KMADEConstant {
 	public static final String BASIC_CARD_VELOCITY_HTML = KMADEToolConstant.VELOCITY_TEMPLATE_DIRECTORY_NAME
 			+ "basic.vm";
 
+
 	//
 	// Les constantes li�es aux autres resources
 	//
@@ -1442,7 +1448,7 @@ public class KMADEConstant {
 	public static String PROTOTYPING_TOOL_CURRENT_TASK = "Tâche en cours";
 	public static String PROTOTYPING_TOOL_NAME_TITLE = "Nom";
 	public static String PROTOTYPING_TOOL_NAME_TOOLTIP = "Le nom de la tâche";
-	public static String PROTOTYPING_TOOL_EXECUTANT_ABS = "L'éxécutant de la tâche est abstrait";
+	public static String PROTOTYPING_TOOL_EXECUTANT_ABS = "La tâche se décompose en plusieurs sous tâches";
 	public static String PROTOTYPING_TOOL_EXECUTANT_INCONNU = "La tâche est réalisée par \"inconnu\"";
 	public static String PROTOTYPING_TOOL_EXECUTANT_INT = "La tâche est réalisée par l'utilisateur sur le système";
 	public static String PROTOTYPING_TOOL_EXECUTANT_SYS = "La tâche est réalisée par le système";
@@ -1475,7 +1481,9 @@ public class KMADEConstant {
 	public static String PROTOTYPING_TOOL_TRUE = "Vrai";
 	public static String PROTOTYPING_TOOL_FALSE = "Faux";
 	public static String PROTOTYPING_TOOL_INDETERMINATE = "Indeterminée";
-
+	public static String PROTOTYPING_TOOL_HISTORY = "Historique";
+	public static String PROTOTYPING_TOOL_HISTORY_DESCRIPTION = "Description";
+	public static String PROTOTYPING_TOOL_DURATION = "Durée";
 
 	public static void loadMessagesFromBundle() {
 		DEBUG_KMADE_HTML = KMADEToolConstant.HTML_DIRECTORY_NAME
@@ -1501,7 +1509,7 @@ public class KMADEConstant {
 		VERTEX_ACTOR = KMADeMain.messages.getString("VERTEX_ACTOR");
 		VERTEX_EFFETSDEBORD = KMADeMain.messages
 				.getString("VERTEX_EFFETSDEBORD");
-		VERTEX_OBJET = KMADeMain.messages.getString("VERTEX_OBJET");
+		VERTEX_DESCRIPTION = KMADeMain.messages.getString("VERTEX_DESCRIPTION");
 		VERTEX_ITER_LETTER = KMADeMain.messages.getString("VERTEX_ITER_LETTER");
 		VERTEX_STATE_LETTER = KMADeMain.messages
 				.getString("VERTEX_STATE_LETTER");
@@ -2915,6 +2923,10 @@ public class KMADEConstant {
 		JAVA_LIBRARIES_MESSAGE = KMADeMain.messages
 				.getString("JAVA_LIBRARIES_MESSAGE");
 
+		//Event
+		EVENT_TRIGGER = KMADeMain.messages.getString("EVENT_TRIGGER");
+		EVENT_ENABLE  = KMADeMain.messages.getString("EVENT_ENABLE");
+		
 		// Coh�rence du mod�le
 		COHERENCE_INTRO_ERROR = KMADeMain.messages
 				.getString("COHERENCE_INTRO_ERROR");
@@ -3090,8 +3102,9 @@ public class KMADEConstant {
 		PROTOTYPING_TOOL_TRUE = KMADeMain.messages.getString("PROTOTYPING_TOOL_TRUE");
 		PROTOTYPING_TOOL_FALSE = KMADeMain.messages.getString("PROTOTYPING_TOOL_FALSE");
 		PROTOTYPING_TOOL_INDETERMINATE = KMADeMain.messages.getString("PROTOTYPING_TOOL_INDETERMINATE");
-		
-		
+		PROTOTYPING_TOOL_HISTORY = KMADeMain.messages.getString("PROTOTYPING_TOOL_HISTORY");
+		PROTOTYPING_TOOL_HISTORY_DESCRIPTION = KMADeMain.messages.getString("PROTOTYPING_TOOL_HISTORY_DESCRIPTION");
+		PROTOTYPING_TOOL_DURATION = KMADeMain.messages.getString("PROTOTYPING_TOOL_DURATION");
 		
 		COMPLETE_EDIT_TASK_ACTION_MESSAGE_PIE_MENU = KMADeMain.messages.getString("COMPLETE_EDIT_TASK_ACTION_MESSAGE_PIE_MENU");
 		DELETE_CELL_ACTION_MESSAGE_PIE_MENU =  KMADeMain.messages.getString("DELETE_CELL_ACTION_MESSAGE_PIE_MENU");
