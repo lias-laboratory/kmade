@@ -157,7 +157,7 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
     private JPanel panelEmpty = new JPanel();
 
     public static final ImageIcon LISI_LOGO = new ImageIcon(
-	    KMADEMainFrame.class.getResource(KMADEConstant.LISI_LOGO_IMAGE));
+	    KMADEMainFrame.class.getResource(KMADEConstant.LIAS_LOGO_IMAGE));
 
     public static final ImageIcon INRIA_LOGO = new ImageIcon(
 	    KMADEMainFrame.class.getResource(KMADEConstant.INRIA_LOGO_IMAGE));

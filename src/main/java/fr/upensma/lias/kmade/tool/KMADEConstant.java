@@ -1210,7 +1210,7 @@ public class KMADEConstant {
 			+ "inria.gif";
 	public static final String MERLIN_LOGO_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
 			+ "logoMerlin.gif";
-	public static final String LISI_LOGO_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
+	public static final String LIAS_LOGO_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
 			+ "lias.png";
 	public static final String BARON_IMAGE = KMADEToolConstant.IMAGE_DIRECTORY_NAME
 			+ "baron.gif";
