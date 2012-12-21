@@ -41,7 +41,9 @@ public class AddUnaryFunction extends UnaryFunction {
     }
 
     public void checkNode() throws SemanticException {
-	ObjetAbstrait groupeStored = InterfaceExpressJava.getCurrentObject()
+	try{
+		ObjetAbstrait groupeStored = InterfaceExpressJava.getCurrentObject()
+	
 		.getCurrentCheckGroup().getContientObj();
 	ObjetAbstrait groupeAttributed = ((GroupExpressExpression) myAloneExpression)
 		.getGroup().getContientObj();
@@ -51,6 +53,10 @@ public class AddUnaryFunction extends UnaryFunction {
 		    + " : \"" + groupeStored.getName() + "\" et " + "\""
 		    + groupeAttributed.getName() + "\"");
 	}
+	}catch (Exception e) {
+		System.err.println("KMC");
+		e.printStackTrace();
+		}
     }
 
     public void evaluateNode(ObjetConcret ref) throws SemanticException {
