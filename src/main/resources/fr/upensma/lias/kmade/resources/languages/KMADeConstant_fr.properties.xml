@@ -25,7 +25,7 @@
 <entry key="VERTEX_INTERRUPTIBLE">INTER</entry>
 <entry key="VERTEX_ACTOR">ACTEUR</entry>
 <entry key="VERTEX_EFFETSDEBORD">ACTION</entry>
-<entry key="VERTEX_OBJET">OBJET</entry>
+<entry key="VERTEX_DESCRIPTION">DESC</entry>
 
 
 <!--  Title Value -->
@@ -76,7 +76,7 @@
 
 <entry key="BACK_TO_EDITOR">Retour vers l'éditeur de</entry>
 <entry key="ABSTRACT_OBJECT_NAME_TABLE">Nom</entry>
-<entry key="ABSTRACT_OBJECT_OBSERVATION_TABLE">Observation</entry>
+<entry key="ABSTRACT_OBJECT_OBSERVATION_TABLE">Description</entry>
 <entry key="ABSTRACT_OBJECT_NEW_OBJECT_TABLE">Ajouter un objet abstrait ...</entry>
 <entry key="ABSTRACT_OBJECT_TITLE_TABLE">Objet Abstrait</entry>
 <entry key="ABSTRACT_OBJECT_REMOVE_MESSAGE_TITLE">Suppression d'objet(s) abstrait(s)</entry>
@@ -132,7 +132,7 @@
 <entry key="CONCRETE_ABSTRACT_OBJECT_TITLE_TABLE">Objet Abstrait</entry>
 <entry key="CONCRETE_OBJECT_TITLE_TABLE">Objet Concret</entry>
 <entry key="CONCRETE_OBJECT_NAME_TABLE">Nom</entry>
-<entry key="CONCRETE_OBJECT_OBSERVATION_TABLE">Observation</entry>
+<entry key="CONCRETE_OBJECT_OBSERVATION_TABLE">Description</entry>
 <entry key="CONCRETE_OBJECT_GROUPE_TABLE">Groupe</entry>
 <entry key="CONCRETE_OBJECT_GROUPE_NAME">groupe</entry>
 <entry key="NO_CONCRETE_OBJECT_GROUPE_NAME">Aucun</entry>
@@ -293,7 +293,7 @@
 <entry key="SUB_TASK_PARENT_NAME_LEGEND_TITLE">Précise la tâche mère de cette tâche</entry>
 <entry key="TASK_NAME_TITLE">Nom</entry>
 <entry key="TASK_NAME_LEGEND_TITLE">Désigne le nom de la tâche donné par l'analyste</entry>
-<entry key="TASK_PURPOSE_TITLE">But(désactivé)</entry>
+<entry key="TASK_PURPOSE_TITLE">But</entry>
 <entry key="TASK_PURPOSE_LEGEND_TITLE">Désigne l'objectif assigné à la tâche</entry>
 <entry key="TASK_MULTIMEDIA_PURPOSE_TITLE">Multimédia (désactivé)</entry>
 <entry key="TASK_MULTIMEDIA_PURPOSE_LEGEND_TITLE">Cette caractéristique permet de compléter le but d'une tâche par une information multimédia (vidéo ou un son)</entry>
@@ -304,10 +304,10 @@
 <entry key="TASK_OBJECTS_LEGEND_TITLE">Cette caractéristique permet de lister l'ensemble des objets utilisés par une tâche</entry>
 <entry key="TASK_FEEDBACK_TITLE">Affichage (désactivé)</entry>
 <entry key="TASK_FEEDBACK_LEGEND_TITLE">Cette caractéristique permet la description des effets observables (ou souhaitables) par l'utilisateur pendant la réalisation d'une tâche. C'est la réponse du système à l'utilisateur</entry>
-<entry key="TASK_DURATION_TITLE">Durée (désactivé)</entry>
+<entry key="TASK_DURATION_TITLE">Durée</entry>
 <entry key="TASK_DURATION_LEGEND_TITLE">Caractérise la durée de la tâche. Toutes sortes d'informations relatives au temps sont acceptées</entry>
-<entry key="TASK_OBSERVATION_TITLE">Observation</entry>
-<entry key="TASK_OBSERVATION_LEGEND_TITLE">Observation</entry>
+<entry key="TASK_OBSERVATION_TITLE">Description</entry>
+<entry key="TASK_OBSERVATION_LEGEND_TITLE">Description</entry>
 <entry key="EXECUTING_NAME_TITLE">Exécutant</entry>
 <entry key="EXECUTING_NAME_LEGEND_TITLE">Précise qui réalise la tâche. Les valeurs possibles sont « Utilisateur, Système, Interactif et Abstrait, Inconnue »</entry>
 <entry key="MODALITY_NAME_TITLE">Modalité</entry>
@@ -872,6 +872,9 @@
 <entry key="KMADE_TEAM_MESSAGE">Participants</entry>
 <entry key="JAVA_LIBRARIES_MESSAGE">Bibliothèques</entry>
 
+<!-- Event -->
+<entry key="EVENT_TRIGGER">Evénement déclenché</entry>
+<entry key="EVENT_ENABLE">Evénement disponible</entry>
 
 
 <entry key="COHERENCE_INTRO_ERROR">L'outil de cohérence a détecté</entry>
@@ -1062,7 +1065,7 @@
 <entry key="PROTOTYPING_TOOL_CURRENT_TASK">Tâche en cours</entry>
 <entry key="PROTOTYPING_TOOL_NAME_TITLE">Nom</entry>
 <entry key="PROTOTYPING_TOOL_NAME_TOOLTIP">Le nom de la tâche</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_ABS">L'éxécutant de la tâche est abstrait</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_ABS">La tâche se décompose en plusieurs sous tâches</entry>
 <entry key="PROTOTYPING_TOOL_EXECUTANT_INCONNU">La tâche est réalisée par \"inconnu\"</entry>
 <entry key="PROTOTYPING_TOOL_EXECUTANT_INT">La tâche est réalisée par l'utilisateur sur le système</entry>
 <entry key="PROTOTYPING_TOOL_EXECUTANT_SYS">La tâche est réalisée par le système</entry>
@@ -1095,6 +1098,9 @@
 <entry key="PROTOTYPING_TOOL_TRUE">Vrai</entry>
 <entry key="PROTOTYPING_TOOL_FALSE">Faux</entry>
 <entry key="PROTOTYPING_TOOL_INDETERMINATE">Indeterminé</entry>
+<entry key="PROTOTYPING_TOOL_HISTORY">Historique</entry>
+<entry key="PROTOTYPING_TOOL_HISTORY_DESCRIPTION">Description</entry>
+<entry key="PROTOTYPING_TOOL_DURATION">Duration</entry>
 
 
 

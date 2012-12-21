@@ -30,7 +30,7 @@
 <entry key="VERTEX_INTERRUPTIBLE">INTER</entry>
 <entry key="VERTEX_ACTOR">ACTOR</entry>
 <entry key="VERTEX_EFFETSDEBORD">ACTION</entry>
-<entry key="VERTEX_OBJET">OBJECT</entry>
+<entry key="VERTEX_DESCRIPTION">DESC</entry>
 
 <!-- Title messages-->
 <entry key="FENETRE_PRINCIPALE_TITLE_NAME">K-MADe (Kernel of Model for Activity Description environment) - EN</entry>
@@ -79,7 +79,7 @@
 <!-- Abstract Object-->
 <entry key="BACK_TO_EDITOR">Back to editor of </entry>
 <entry key="ABSTRACT_OBJECT_NAME_TABLE">Name</entry>
-<entry key="ABSTRACT_OBJECT_OBSERVATION_TABLE">Observation</entry>
+<entry key="ABSTRACT_OBJECT_OBSERVATION_TABLE">Description</entry>
 <entry key="ABSTRACT_OBJECT_NEW_OBJECT_TABLE">Add new abstract object ...</entry>
 <entry key="ABSTRACT_OBJECT_TITLE_TABLE">Abstract Object</entry>
 <entry key="ABSTRACT_OBJECT_REMOVE_MESSAGE_TITLE">Remove abstract object(s)</entry>
@@ -135,7 +135,7 @@
 <entry key="CONCRETE_ABSTRACT_OBJECT_TITLE_TABLE">Abstract Object</entry>
 <entry key="CONCRETE_OBJECT_TITLE_TABLE">Concrete Object</entry>
 <entry key="CONCRETE_OBJECT_NAME_TABLE">Name</entry>
-<entry key="CONCRETE_OBJECT_OBSERVATION_TABLE">Observation</entry>
+<entry key="CONCRETE_OBJECT_OBSERVATION_TABLE">Description</entry>
 <entry key="CONCRETE_OBJECT_GROUPE_TABLE">Group</entry>
 <entry key="CONCRETE_OBJECT_GROUPE_NAME">group</entry>
 <entry key="NO_CONCRETE_OBJECT_GROUPE_NAME">None</entry>
@@ -298,7 +298,7 @@
 <entry key="SUB_TASK_PARENT_NAME_LEGEND_TITLE">Indicates the "mother-task" (upper-level task) of that task</entry>
 <entry key="TASK_NAME_TITLE">Name</entry>
 <entry key="TASK_NAME_LEGEND_TITLE">Indicates the name of the task provided by the analyst</entry>
-<entry key="TASK_PURPOSE_TITLE">Goal (disable)</entry>
+<entry key="TASK_PURPOSE_TITLE">Goal</entry>
 <entry key="TASK_PURPOSE_LEGEND_TITLE">Indicates the goal assigned to the task</entry>
 <entry key="TASK_MULTIMEDIA_PURPOSE_TITLE">Multimedia (disable)</entry>
 <entry key="TASK_MULTIMEDIA_PURPOSE_LEGEND_TITLE">That characteristic allows to complement the task goal with additional multimedia information (video or sound)</entry>
@@ -309,10 +309,10 @@
 <entry key="TASK_OBJECTS_LEGEND_TITLE">That characteristic allows to list all the objects used by a task</entry>
 <entry key="TASK_FEEDBACK_TITLE">Display(disable)</entry>
 <entry key="TASK_FEEDBACK_LEGEND_TITLE">That characteristic allows to describe the user observable (or expected) effects resulting from a task</entry>
-<entry key="TASK_DURATION_TITLE">Duration (disable)</entry>
+<entry key="TASK_DURATION_TITLE">Duration</entry>
 <entry key="TASK_DURATION_LEGEND_TITLE">That indicates the task duration. All sorts of time related informations are accepted</entry>
-<entry key="TASK_OBSERVATION_TITLE">Observation</entry>
-<entry key="TASK_OBSERVATION_LEGEND_TITLE">Observation</entry>
+<entry key="TASK_OBSERVATION_TITLE">Description</entry>
+<entry key="TASK_OBSERVATION_LEGEND_TITLE">Description</entry>
 <entry key="EXECUTING_NAME_TITLE">Executant</entry>
 <entry key="EXECUTING_NAME_LEGEND_TITLE">Indicates who performs the task. The possible values are: "user, system, interactive, and abstract, unknown"</entry>
 <entry key="MODALITY_NAME_TITLE">Modality</entry>
@@ -879,6 +879,9 @@
 <entry key="KMADE_TEAM_MESSAGE">Team</entry>
 <entry key="JAVA_LIBRARIES_MESSAGE">Libraries</entry>
 
+<!-- Event -->
+<entry key="EVENT_TRIGGER">Event trigger</entry>
+<entry key="EVENT_ENABLE">Event enable</entry>
 
 <!-- Grammar verification-->
 <entry key="COHERENCE_INTRO_ERROR">Grammar verification have found</entry>
@@ -1066,7 +1069,7 @@
 <entry key="PROTOTYPING_TOOL_CURRENT_TASK">Current task</entry>
 <entry key="PROTOTYPING_TOOL_NAME_TITLE">Name</entry>
 <entry key="PROTOTYPING_TOOL_NAME_TOOLTIP">The task name</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_ABS">The performer is abstract</entry>
+<entry key="PROTOTYPING_TOOL_EXECUTANT_ABS">Task is decomposed</entry>
 <entry key="PROTOTYPING_TOOL_EXECUTANT_INCONNU">The performer is unknown</entry>
 <entry key="PROTOTYPING_TOOL_EXECUTANT_INT">The user performs the task on the system</entry>
 <entry key="PROTOTYPING_TOOL_EXECUTANT_SYS">The system performs the task</entry>
@@ -1100,8 +1103,9 @@
 <entry key="PROTOTYPING_TOOL_FALSE">False</entry>
 <entry key="PROTOTYPING_TOOL_INDETERMINATE">Indeterminate</entry>
 
-
-
+<entry key="PROTOTYPING_TOOL_HISTORY">History</entry>
+<entry key="PROTOTYPING_TOOL_HISTORY_DESCRIPTION">Description</entry>
+<entry key="PROTOTYPING_TOOL_DURATION">Duration</entry>
 
 
 </properties>
