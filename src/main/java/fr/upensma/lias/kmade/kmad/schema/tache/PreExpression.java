@@ -18,15 +18,10 @@
 package fr.upensma.lias.kmade.kmad.schema.tache;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.StringTokenizer;
 
 import fr.upensma.lias.kmade.kmad.schema.expression.BooleanConstant;
-import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ChoiceEnum;
 import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ExpressionTree;
-import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ReturnParsePreCondition;
 
 /**
  * @author Mickael BARON
