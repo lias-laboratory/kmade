@@ -44,7 +44,7 @@ import fr.upensma.lias.kmade.tool.viewadaptator.KMADeAdaptator;
 /**
  * @author Mickael BARON
  */
-public class KMADeMain {
+public class KMADeMain { 
 
 	private static boolean acceptedMedia = false;
 
