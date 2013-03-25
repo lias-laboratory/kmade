@@ -283,7 +283,7 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 				trueButton.setSelected(true);
 			} else if (choice == ChoiceEnum.faux) {
 				falseButton.setSelected(true);
-			} else if (choice == ChoiceEnum.indeterminée) {
+			} else if (choice == ChoiceEnum.indeterminee) {
 				indeterminateButton.setSelected(true);
 			}
 

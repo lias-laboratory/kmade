@@ -53,7 +53,7 @@ public class ExpressionTree {
 				ChoiceEnum l = left.eval_rec(map);
 				switch(l){
 				case faux : return ChoiceEnum.vrai;
-				case indeterminée : return ChoiceEnum.indeterminée ;
+				case indeterminee : return ChoiceEnum.indeterminee ;
 				case vrai : return ChoiceEnum.faux;
 				}
 			} else if (value.equals("*")){
@@ -63,7 +63,7 @@ public class ExpressionTree {
 					return r; 
 				}else if (l == ChoiceEnum.faux){
 					return l;
-				} else if (l == ChoiceEnum.indeterminée){
+				} else if (l == ChoiceEnum.indeterminee){
 					if(r == ChoiceEnum.faux){
 						return r;
 					}else{
@@ -75,8 +75,8 @@ public class ExpressionTree {
 				ChoiceEnum r = right.eval_rec(map);
 				if(l == ChoiceEnum.vrai || r == ChoiceEnum.vrai){
 					return ChoiceEnum.vrai;
-				}else if(l == ChoiceEnum.indeterminée || r == ChoiceEnum.indeterminée){
-					return ChoiceEnum.indeterminée;
+				}else if(l == ChoiceEnum.indeterminee || r == ChoiceEnum.indeterminee){
+					return ChoiceEnum.indeterminee;
 				}else{
 					return ChoiceEnum.faux;
 				}

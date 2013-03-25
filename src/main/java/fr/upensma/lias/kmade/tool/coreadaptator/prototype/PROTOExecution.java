@@ -154,11 +154,11 @@ public class PROTOExecution {
 			GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setIterationEnabled(currentTask,true,ChoiceEnum.vrai);
 		}else{
 			if((currentTask.getIteExpression().getDescription()== null) || currentTask.getIteExpression().getDescription().equals("") ){
-				GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setIterationEnabled(currentTask,false,ChoiceEnum.indeterminée);
+				GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setIterationEnabled(currentTask,false,ChoiceEnum.indeterminee);
 			}else{
 				ChoiceEnum choiceE;
 				if(map==null || map.get(currentTask.getIteExpression().getDescription())==null){
-					choiceE = ChoiceEnum.indeterminée;
+					choiceE = ChoiceEnum.indeterminee;
 				}else{
 					choiceE = map.get(currentTask.getIteExpression().getDescription());
 				}
@@ -223,7 +223,7 @@ public class PROTOExecution {
 				}else{	
 					ChoiceEnum choiceE;
 					if(map==null || map.get(t.getPreExpression().getDescription())==null){
-						choiceE = ChoiceEnum.indeterminée;
+						choiceE = ChoiceEnum.indeterminee;
 					}else{
 						choiceE = map.get(t.getPreExpression().getDescription());
 					}
@@ -272,7 +272,7 @@ public class PROTOExecution {
 					else{
 						ChoiceEnum choice;
 						if(map==null || map.get(t.getPreExpression().getDescription())==null){
-							choice = ChoiceEnum.indeterminée;
+							choice = ChoiceEnum.indeterminee;
 						}else{
 							choice = map.get(t.getPreExpression().getDescription());
 						}
@@ -314,7 +314,7 @@ public class PROTOExecution {
 				}else{
 					ChoiceEnum choice;
 					if(map==null || map.get(t.getPreExpression().getDescription())==null){
-						choice = ChoiceEnum.indeterminée;
+						choice = ChoiceEnum.indeterminee;
 					}else{
 						choice = map.get(t.getPreExpression().getDescription());
 					}

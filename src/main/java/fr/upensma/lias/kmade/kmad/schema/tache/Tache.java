@@ -113,7 +113,7 @@ public class Tache implements Entity {
     //PROTOTASK
     private StateExecution stateExecution;
     //PROTOTASK
-    private ChoiceEnum IterationValue = ChoiceEnum.indeterminée;
+    private ChoiceEnum IterationValue = ChoiceEnum.indeterminee;
 
     /**
      * Creation d'une tache avec des valeurs par defaut.

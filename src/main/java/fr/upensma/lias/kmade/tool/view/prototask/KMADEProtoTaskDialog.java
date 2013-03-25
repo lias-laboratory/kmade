@@ -592,7 +592,7 @@ public class KMADEProtoTaskDialog extends JFrame {
 				trueButton.setSelected(true);
 			}else if(choice == ChoiceEnum.faux){
 				falseButton.setSelected(true);
-			}else if(choice == ChoiceEnum.indeterminée){
+			}else if(choice == ChoiceEnum.indeterminee){
 				indeterminateButton.setSelected(true);
 			}
 
@@ -622,7 +622,7 @@ public class KMADEProtoTaskDialog extends JFrame {
 			}else if(e.getActionCommand().equals(falseString)){
 				map.put(condition,ChoiceEnum.faux);
 			}else if(e.getActionCommand().equals(indeterminateString)){
-				map.put(condition,ChoiceEnum.indeterminée);				
+				map.put(condition,ChoiceEnum.indeterminee);				
 			}
 			//todo envoyer la maj du tableau
 			displayed.clear();
