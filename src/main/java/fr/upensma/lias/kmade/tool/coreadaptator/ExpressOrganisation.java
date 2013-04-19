@@ -117,11 +117,11 @@ public class ExpressOrganisation{
     }
 
     public static Object[][] getIndividuAddIntoTab(String oid) {
-	// R�cup�ration de l'individu
+	// Récupération de l'individu
 	Organisation o;
 	try {
 	    o = (Organisation) InterfaceExpressJava.prendre(new Oid(oid));
-	    // r�cup�ration de ses individus
+	    // récupération de ses individus
 	    ArrayList<Individu> myIndi = o.getMember();
 	    Object[][] res = new Object[myIndi.size()][Individu.toArrayLenght()];
 	    for (int i = 0; i < myIndi.size(); i++) {
@@ -135,16 +135,16 @@ public class ExpressOrganisation{
 
     public static Object[][] getIndividuNotAddIntoTab(String oid) {
 	try {
-	    // la liste � laquelle on va ajouter les individus
+	    // la liste à laquelle on va ajouter les individus
 	    ArrayList<Object[]> restmp = new ArrayList<Object[]>();
 
-	    // R�cup�ration de l'organisation
+	    // Récupération de l'organisation
 	    Organisation m = (Organisation) InterfaceExpressJava
 		    .prendre(new Oid(oid));
-	    // R�cup�ration de toutes les individus
+	    // Récupération de toutes les individus
 	    Object[] tabObj = (Object[]) InterfaceExpressJava
 		    .prendreAllOidOfEntity("tache", "Individu");
-	    // cast des objet r�cup�r� en individus
+	    // cast des objet récupéré en individus
 	    Individu[] tabInd = new Individu[tabObj.length];
 	    for (int i = 0; i < tabInd.length; i++) {
 		tabInd[i] = (Individu) tabObj[i];
@@ -152,14 +152,14 @@ public class ExpressOrganisation{
 
 	    // pour toute les individus
 	    for (int i = 0; i < tabInd.length; i++) {
-		// on regarde si l'individu appartient � l'organisation, si non
-		// on l'ajoute � notre r�sultat
+		// on regarde si l'individu appartient à l'organisation, si non
+		// on l'ajoute à notre résultat
 		if (!tabInd[i].getMemberOf().contains(m)) {
 		    restmp.add(tabInd[i].toArray());
 		}
 	    }
 
-	    // construction du resultat � partir de l'arrayList
+	    // construction du resultat à partir de l'arrayList
 	    Object[][] res = new Object[restmp.size()][Organisation
 		    .toArrayLenght()];
 	    for (int i = 0; i < restmp.size(); i++) {
@@ -167,7 +167,7 @@ public class ExpressOrganisation{
 	    }
 	    return res;
 	} catch (Exception e) {
-	    // s'il n'y a pas d'oid ou un oid �rron� on renvoi un tableau sans
+	    // s'il n'y a pas d'oid ou un oid érroné on renvoi un tableau sans
 	    // ligne
 	    Object[][] resnul = new Object[0][0];
 	    return resnul;

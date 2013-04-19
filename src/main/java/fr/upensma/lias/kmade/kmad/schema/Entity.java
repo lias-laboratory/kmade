@@ -21,6 +21,8 @@ import java.io.Serializable;
 
 /**
  * @author Vincent LUCQUIAUD and Mickael BARON
+ * CommentPG: Je ne comprends pas cette classe. Pourquoi en avoir fait une interface, 
+ * et pas une classe mere, contenant l'Oid ?
  */
 public interface Entity extends Serializable, KMADXml {
     

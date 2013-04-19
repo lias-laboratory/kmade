@@ -105,7 +105,7 @@ public class Tache implements Entity {
 
     private boolean motherUsed = false;
 
-    // Cet attribut permet de retrouver plus rapidement la taï¿½che graphique.
+    // Cet attribut permet de retrouver plus rapidement la tâche graphique.
     private Object refJTask = null;
 
     private StateSimulation stateSimulation;
@@ -149,34 +149,7 @@ public class Tache implements Entity {
 
     }
 
-    /**
-     * CrÃ©ation d'une nouvelle tÃ¢che avec des valeurs imposÃ©es.
-     * 
-     * @param name
-     * @param but
-     * @param res
-     * @param f
-     * @param duree
-     * @param obs
-     * @param exe
-     * @param freq
-     * @param comp
-     * @param imp
-     * @param mod
-     * @param dec
-     * @param events
-     * @param facultatif
-     * @param interruptible
-     * @param decomposition
-     * @param act
-     * @param fils
-     * @param point
-     * @param prec
-     * @param post
-     * @param it
-     * @param oid
-     */
-
+ 
     /*
      * public Tache( String name, String but, String res, String f, String
      * duree, String obs, String exe, String freq, String comp, String imp,

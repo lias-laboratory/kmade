@@ -28,6 +28,7 @@ import fr.upensma.lias.kmade.kmad.schema.KMADXMLParserException;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
+ * 
  * @author Mickael BARON
  */
 public class Acteur implements Entity {
@@ -36,8 +37,16 @@ public class Acteur implements Entity {
 
     public Oid oid = null;
 
+    /**
+     * userRef : User -> reference sur un User
+     * CommentPG: je ne comprends pas ce que veut dire cette reference à discuter
+     */
     private User userRef;
 
+    /**
+     * experience : Experience 
+     * Attribut enumere qui represente l'experience de l'utilisateur 
+     */
     private Experience experience = Experience.INCONNU;
 
     private String competence = "";
@@ -50,6 +59,16 @@ public class Acteur implements Entity {
 	competence = "";
     }
 
+    /**
+     * Constructeur de la classe avec tous ses parametres
+     * Les parametres doivent etre corrects !
+     * La tache inverse n'est pas associee
+     * 
+     * @param exp String valeur du type enumere Experience
+     * @param comp String non defini
+     * @param u User = l'utilisateur associe
+     * @param o Oid
+     */
     public Acteur(String exp, String comp, User u, Oid o) {
 	userRef = u;
 	experience = Experience.getValue(exp);
@@ -57,6 +76,9 @@ public class Acteur implements Entity {
 	this.oid = o;
     }
 
+    /**
+     * 
+     */
     public void delete() {
 	userRef.removeInverseActeur(this);
 	inverseTache.removeActeur(this);

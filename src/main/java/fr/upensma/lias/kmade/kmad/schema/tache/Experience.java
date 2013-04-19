@@ -24,6 +24,10 @@ import org.w3c.dom.NodeList;
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 
 /**
+ * Type enumerer representant l'experience d'un utilisateur. 
+ * Trois niveaux sont predefinis, EXPERT("HIGH"), MOYEN("MIDDLE"), NOVICE("LOW", 
+ * et un niveau INCONNU("UNK") est prevu pour l'absence de definition
+ * L'ordre croissant des valeurs est INCONNU-EXPERT-MOYEN-NOVICE
  * @author Delphine AUTARD and Mickaël BARON
  **/
 public enum Experience implements Enumere {
@@ -31,10 +35,20 @@ public enum Experience implements Enumere {
 
     private final String enonce;
 
+    /**
+     * Constructeur de la classe
+     * Aucune verification n'est faite a la creation !
+     * 
+     * @param s chaine de caractere supposee representer l'enumere
+     */
     private Experience(String s) {
 	enonce = s;
     }
 
+    /**
+     * @param s String chaine de caractere supposee representer un element de l'enumere
+     * @return la valeur de l'enumere si la conversion est ok, null sinon
+     */
     public static Experience getValue(String s) {
 	for (Experience i : Experience.values()) {
 	    if (s.equalsIgnoreCase(i.enonce)) {
@@ -44,6 +58,9 @@ public enum Experience implements Enumere {
 	return null;
     }
 
+    /**
+     * @return tableau de chaines contenant les valeurs localisees 
+     */
     public static String[] getNameLocaleExperience() {
 	String[] myExperienceArray = new String[4];
 	myExperienceArray[0] = ExpressConstant.UNKNOWN_EXPERIENCE_NAME;

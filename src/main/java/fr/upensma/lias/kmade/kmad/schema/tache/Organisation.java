@@ -151,7 +151,7 @@ public class Organisation extends User {
 
 	String s = new String("");
 	/*
-	 * affichage des oid des membres désactivés s += "','("; for(int i =
+	 * affichage des oid des membres desactives s += "','("; for(int i =
 	 * 0;i<inverseMember.size();i++){ s = s +
 	 * inverseMember.get(i).getOid().toString(); if(i!=
 	 * inverseMember.size()-1) s += ","; } s += ")";

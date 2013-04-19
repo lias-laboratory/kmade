@@ -9,6 +9,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import fr.upensma.lias.kmade.kmad.schema.expression.DiffOperatorTest;
 import fr.upensma.lias.kmade.kmad.schema.expression.EqualOperatorTest;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.NumberValueTest;
+import fr.upensma.lias.kmade.kmad.schema.tache.ExperienceTest;
 import fr.upensma.lias.kmade.kmad.schema.tache.TacheTest;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressIndividuTest;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressOrganisationTest;
@@ -26,7 +27,8 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressUserTest;
 	ExpressIndividuTest.class,
 	ExpressOrganisationTest.class,
 	ExpressUserTest.class,
-	TacheTest.class
+	TacheTest.class,
+	ExperienceTest.class
 	
 })
 public class AllTests {
