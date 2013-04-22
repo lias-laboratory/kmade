@@ -28,8 +28,12 @@ import fr.upensma.lias.kmade.kmad.schema.KMADXMLParserException;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
+ * An actor is an association between one task and one user (one person or one organization). 
+ * Relatively to this association, an experience (enumerated type) and a competence (free string) 
+ * can be defined
  * 
- * @author Mickael BARON
+ * @author Mickael BARON 
+ * @author [Comment] Patrick GIRARD
  */
 public class Acteur implements Entity {
 
@@ -38,19 +42,24 @@ public class Acteur implements Entity {
     public Oid oid = null;
 
     /**
-     * userRef : User -> reference sur un User
-     * CommentPG: je ne comprends pas ce que veut dire cette reference à discuter
+     * userRef : User -> This user may be a person or an organization (i.e. a group of persons) 
      */
     private User userRef;
 
     /**
-     * experience : Experience 
-     * Attribut enumere qui represente l'experience de l'utilisateur 
+     * experience : Experience -> Enumerated attribute, which is supposed to reflect the required level of 
+     * experience of the user in accomplishing his/her task.  
      */
     private Experience experience = Experience.INCONNU;
 
+    /**
+     * competence : String -> free text for detailing the required competence for the task
+     */
     private String competence = "";
 
+    /**
+     * Reverse link to the task where the actor is defined
+     */
     private Tache inverseTache;
 
     public Acteur() {
@@ -60,14 +69,14 @@ public class Acteur implements Entity {
     }
 
     /**
-     * Constructeur de la classe avec tous ses parametres
-     * Les parametres doivent etre corrects !
-     * La tache inverse n'est pas associee
+     * Constructor with all parameters
+     * The parameters are supposed to be ok !
+     * The inverse task is not set
      * 
-     * @param exp String valeur du type enumere Experience
-     * @param comp String non defini
-     * @param u User = l'utilisateur associe
-     * @param o Oid
+     * @param exp String value from enumerated type Experience
+     * @param comp free text for the competence
+     * @param u User the associated user
+     * @param o Oid unique Express identifier
      */
     public Acteur(String exp, String comp, User u, Oid o) {
 	userRef = u;
@@ -77,7 +86,7 @@ public class Acteur implements Entity {
     }
 
     /**
-     * 
+     * Suppress the actor, deleting the inverse links in the user and the task
      */
     public void delete() {
 	userRef.removeInverseActeur(this);
@@ -101,8 +110,46 @@ public class Acteur implements Entity {
 	this.oid = oid;
     }
 
+    /**
+     * Sets the inverse link to the task in which the actor is defined
+     * Warning: no verification is made to ensure the task is the right one
+     * 
+     * @param a the task where the actor is defined
+     */
     public void setInverseTache(Tache a) {
 	this.inverseTache = a;
+    }
+
+    public Tache getInverseTache() {
+	return inverseTache;
+    }
+
+    public void setExperience(String s) {
+	experience = Experience.getValue(s);
+    }
+
+    public Experience getExperience() {
+	return experience;
+    }
+
+    public void setCompetence(String s) {
+	competence = s;
+    }
+
+    public String getCompetence() {
+	return competence;
+    }
+
+    public void setUserRef(User u) {
+	userRef = u;
+    }
+
+    public User getUserRef() {
+	return userRef;
+    }
+
+    public Oid getOid() {
+	return oid;
     }
 
     public String toString() {
@@ -163,38 +210,6 @@ public class Acteur implements Entity {
 	    SPF = SPF + "$";
 	SPF = SPF + ");";
 	return SPF;
-    }
-
-    public void setExperience(String s) {
-	experience = Experience.getValue(s);
-    }
-
-    public Experience getExperience() {
-	return experience;
-    }
-
-    public void setCompetence(String s) {
-	competence = s;
-    }
-
-    public String getCompetence() {
-	return competence;
-    }
-
-    public void setUserRef(User u) {
-	userRef = u;
-    }
-
-    public User getUserRef() {
-	return userRef;
-    }
-
-    public Oid getOid() {
-	return oid;
-    }
-
-    public Tache getInverseTache() {
-	return inverseTache;
     }
 
     @Override

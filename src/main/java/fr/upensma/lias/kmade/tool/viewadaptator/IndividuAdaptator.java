@@ -102,7 +102,7 @@ public final class IndividuAdaptator {
 		    .addIndividu(myList.get(i).getName(),
 			    myList.get(i).getStatut(), myList.get(i).getRole(),
 			    myList.get(i).getImage(),
-			    myList.get(i).getMemberOf(),
+			    myList.get(i).getOrganisations(),
 			    myList.get(i).getOid().get());
 	}
     }

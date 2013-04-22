@@ -31,7 +31,9 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ChoiceEnum;
 
 /**
+ * 
  * @author Vincent LUCQUIAUD and Mickael BARON
+ * @author [Comment] Patrick GIRARD
  **/
 public class Tache implements Entity {
 
@@ -39,104 +41,205 @@ public class Tache implements Entity {
 
     public Oid oid = null;
 
-    private String name = ExpressConstant.NEW_NAME_TASK;
-
-    private String but = "";
-
-    private String ressources = "";
-
-    private String feed = "";
-
-    private String duree = "";
-
-    private String observation = "";
-
-    private String compFreq = "";
-
-    private Executant executant = Executant.INCONNU;
-
-    private Frequence frequence = Frequence.INCONNU;
-
-    private Importance imp = Importance.INCONNU;
-
-    private Modalite modal = Modalite.INCONNU;
-
-    private Evenement declencheur = null;
-
-    private Boolean facultatif = false;
-
-    private Boolean interruptible = false;
-
-    private Decomposition decomposition;
-
-    private Tache mere = null;
-
-    private String numero = null;
-
-    private Point point = null;
-
-    private IterExpression iteExpression;
-
-    private PreExpression preExpression;
-
-    private EffetsDeBordExpression effetsDeBordExpression;
-
-    private ArrayList<Evenement> lstEvent = new ArrayList<Evenement>();
-
-    private ArrayList<Acteur> acteurs = new ArrayList<Acteur>();
-
-    private ArrayList<ActeurSysteme> acteurSysteme = new ArrayList<ActeurSysteme>();
-
-    private ArrayList<Tache> fils = new ArrayList<Tache>();
-
-    private Label label;
-
-    private String media = "";
-
-    private Media idMedia = null;
-
-    // If the task has no point related
-    private boolean noPoint = false;
-
-    // Ces trois attributs sont reserves pour la copie
-    private Tache taskCloned = null;
-
-    private Tache newTask = null;
-
-    private boolean motherUsed = false;
-
-    // Cet attribut permet de retrouver plus rapidement la tâche graphique.
-    private Object refJTask = null;
-
-    private StateSimulation stateSimulation;
+    // Task type
     
-    //PROTOTASK
-    private StateExecution stateExecution;
-    //PROTOTASK
-    private ChoiceEnum IterationValue = ChoiceEnum.indeterminee;
+		/**
+		 * executant : Executant -> Enumerated values for the kind of task (user, system, interactive, etc.)
+		 */
+		private Executant executant = Executant.INCONNU;
+
+		/**
+		 * modality : Modalite -> Enumerated values for the modalities of user tasks
+		 */
+		private Modalite modality= Modalite.INCONNU;
+    
+    // Static task attributes
+    
+    	/**
+    	 * name : String -> Name of the task - no need to be unique, but cannot be null
+    	 */
+    	private String name = ExpressConstant.NEW_NAME_TASK;
+
+    	/**
+    	 * goal : String -> The goal of the task. Can be null
+    	 */
+    	private String goal = "";
+
+    	/**
+    	 * resources : String -> Resources ???
+    	 */
+    	private String resources = "";
+
+    	/**
+    	 * feed : String -> Task feedback, not really used
+    	 */
+    	private String feed = "";
+
+	    /**
+	     * duration : String -> Task duration - can be of either form. If only a number, can be interpreted
+	     */
+	    private String duration = "";
+
+	    /**
+	     * description : String -> informal description of the task. Can be null, but not recommended
+	     */
+	    private String description = "";
+
+	    /**
+	     * frequency : Frequence -> Enumerated value for frequency
+	     */
+	    private Frequence frequency = Frequence.INCONNU;
+	    
+	    /**
+	     * frequencyValue : String -> Value for the frequency. Free text, no interpretation
+	     */
+	    private String frequencyValue = "";
+
+	    /**
+	     * importance : Importance -> Enumerated value for importance
+	     */
+	    private Importance imp = Importance.INCONNU;
+
+	    private String media = "";
+
+	    private Media idMedia = null;
+
+    // Dynamic attributes
+	    
+	    /**
+	     * optional = Boolean -> is the task optional - default value false
+	     */
+	    private Boolean optional = false;
+
+	    /**
+	     * interruptible : Boolean -> is the task interruptible - default value false
+	     */
+	    private Boolean interruptible = false;
+
+	    /**
+	     * ordering : Decomposition -> Enumerated value for task ordering, including leaf
+	     */
+	    private Decomposition ordering;
+	    
+    // Structural attributes
+	    
+	    /**
+	     * number : String -> computed value for the numbering of tasks: root, 1, 1.1, 1.1.1, etc.
+	     */
+	    private String number = null;
+
+	    /**
+	     * label : Label -> Free characterization of tasks, associated to a color
+	     */
+	    private Label label;
+
+	    /**
+	     * mere : Task -> Super-task of the current task. Null if the task is root, or if it is 
+	     *                        not attached to the tree
+	     */
+	    private Tache mere = null;
+	    
+	    /**
+	     * fils : ArrayList<Tache> -> ordered list of sub-tasks
+	     */
+	    private ArrayList<Tache> fils = new ArrayList<Tache>();
+
+    // Actors
+	    
+	    /**
+	     * acteurs : ArrayList<Acteur> -> Human actors involved in the task
+	     */
+	    private ArrayList<Acteur> acteurs = new ArrayList<Acteur>();
+
+	    /**
+	     * acteurSysteme : ArrayList<ActeurSysteme> -> System actors involved in the task
+	     */
+	    private ArrayList<ActeurSysteme> acteurSysteme = new ArrayList<ActeurSysteme>();
+
+    // Expressions management
+
+	    /**
+	     * preExpression : PreExpression -> Precondition of the task
+	     */
+	    private PreExpression preExpression;
+
+	    /**
+	     * iterExpression : IterExpression -> condition for the iteration of the task
+	     */
+	    private IterExpression iteExpression;
+
+	    /**
+	     * effetsDeBordExpression : EffetsDeBordExpression -> Side effects for the task (action)
+	     */
+	    private EffetsDeBordExpression effetsDeBordExpression;
+
+    // Event management
+	    
+	    /**
+	     * lstEvent : ArrayList<Evenement> -> list of event the task may fire. Often empty
+	     */
+	    private ArrayList<Evenement> lstEvent = new ArrayList<Evenement>();
+	    
+	    /**
+	     * declencheur : Evenement -> the possible firing event. May be null
+	     */
+	    private Evenement declencheur = null;
+	    
+    // Graphical attributes
+
+	    /**
+	     * Graphical position of the task on the graphical layout
+	     */
+	    private Point point = null;
+
+	    /**
+	     * noPoint : Boolean -> States if the oint owns a valid graphical position or no. Default false
+	     */
+	    private boolean noPoint = false;
+
+	    // Graphical optimization
+	    private Object refJTask = null;
+
+    // Interactive attributes, for copy-paste
+    
+	    private Tache taskCloned = null;
+
+	    private Tache newTask = null;
+
+	    private boolean motherUsed = false;
+
+    // Attributes cfor prototyping and simulating
+
+	    private StateSimulation stateSimulation;
+    
+	    //PROTOTASK
+	    private StateExecution stateExecution;
+    
+	    //PROTOTASK
+	    private ChoiceEnum IterationValue = ChoiceEnum.indeterminee;
 
     /**
      * Creation d'une tache avec des valeurs par defaut.
      */
     public Tache() {
 	this.name = ExpressConstant.NEW_NAME_TASK;
-	this.but = "";
-	this.ressources = "";
+	this.goal = "";
+	this.resources = "";
 	this.feed = "";
-	this.duree = "";
-	this.observation = "";
+	this.duration = "";
+	this.description = "";
 	this.executant = Executant.INCONNU;
 	this.imp = Importance.INCONNU;
-	this.modal = Modalite.COGN;
-	this.frequence = Frequence.INCONNU;
-	this.compFreq = "";
+	this.modality = Modalite.COGN;
+	this.frequency = Frequence.INCONNU;
+	this.frequencyValue = "";
 	this.lstEvent = new ArrayList<Evenement>();
-	this.facultatif = false;
+	this.optional = false;
 	this.interruptible = false;
-	this.decomposition = Decomposition.ELE;
+	this.ordering = Decomposition.ELE;
 	this.fils = new ArrayList<Tache>();
 	this.mere = null;
-	this.numero = ExpressConstant.ROOT_TASK_NAME;
+	this.number = ExpressConstant.ROOT_TASK_NAME;
 	this.point = null;
 	this.idMedia = null;
 	this.declencheur = null;
@@ -277,11 +380,11 @@ public class Tache implements Entity {
     }
 
     public void setFreq(Frequence s) {
-	frequence = s;
+	frequency = s;
     }
 
     public void setCompFreq(String s) {
-	compFreq = s;
+	frequencyValue = s;
     }
 
     public void setImp(Importance s) {
@@ -315,28 +418,15 @@ public class Tache implements Entity {
     }
 
     public void setModal(Modalite modalite) {
-	modal = modalite;
-    }
-
-    /**
-     * @param sensOrCogn
-     *            : 0 pas de modalitï¿½, 1 Sensori-motrice, 2 Cognitive
-     */
-    public void setModal(int sensOrCogn) {
-	if (sensOrCogn == 0)
-	    modal = Modalite.INCONNU;
-	else if (sensOrCogn == 1)
-	    modal = Modalite.SENS;
-	else if (sensOrCogn == 2)
-	    modal = Modalite.COGN;
+	modality = modalite;
     }
 
     public Decomposition getDecomposition() {
-	return this.decomposition;
+	return this.ordering;
     }
 
     public void setDecomposition(Decomposition d) {
-	decomposition = d;
+	ordering = d;
     }
 
     public ArrayList<Tache> getFils() {
@@ -458,11 +548,11 @@ public class Tache implements Entity {
     }
 
     public String getBut() {
-	return this.but;
+	return this.goal;
     }
 
     public void setBut(String v) {
-	this.but = v;
+	this.goal = v;
     }
 
     public Tache getMotherTask() {
@@ -482,27 +572,27 @@ public class Tache implements Entity {
     }
 
     public String getRessources() {
-	return this.ressources;
+	return this.resources;
     }
 
     public void setRessources(String p) {
-	this.ressources = p;
+	this.resources = p;
     }
 
     public String getDuree() {
-	return this.duree;
+	return this.duration;
     }
 
     public void setDuree(String v) {
-	this.duree = v;
+	this.duration = v;
     }
 
     public String getObservation() {
-	return this.observation;
+	return this.description;
     }
 
     public void setObservation(String p) {
-	this.observation = p;
+	this.description = p;
     }
 
     public String getFeedBack() {
@@ -514,15 +604,15 @@ public class Tache implements Entity {
     }
 
     public Frequence getFrequence() {
-	return this.frequence;
+	return this.frequency;
     }
 
     public Modalite getModalite() {
-	return this.modal;
+	return this.modality;
     }
 
     public Decomposition getOrdonnancement() {
-	return this.decomposition;
+	return this.ordering;
     }
 
     public Importance getImportance() {
@@ -530,7 +620,7 @@ public class Tache implements Entity {
     }
 
     public String getNumero() {
-	return numero;
+	return number;
     }
 
     public int getPlace() {
@@ -538,7 +628,7 @@ public class Tache implements Entity {
     }
 
     public Boolean isFacultatif() {
-	return this.facultatif;
+	return this.optional;
     }
 
     public Boolean isInterruptible() {
@@ -568,7 +658,7 @@ public class Tache implements Entity {
 	// 2. supprimer la reference aux taches filles
 	tachefils.mere = null;
 	// 3. modifier le numero de chaque tache fille
-	tachefils.numero = ExpressConstant.ROOT_TASK_NAME;
+	tachefils.number = ExpressConstant.ROOT_TASK_NAME;
 	tachefils.setDeriveTaskNumero(0);
 	numeroTacheModifie.add(tachefils);
 
@@ -609,7 +699,7 @@ public class Tache implements Entity {
 	    // 2. supprimer la reference aux taches filles
 	    t.mere = null;
 	    // 3. modifier le numero de chaque tache fille
-	    t.numero = ExpressConstant.ROOT_TASK_NAME;
+	    t.number = ExpressConstant.ROOT_TASK_NAME;
 	    t.setDeriveTaskNumero(0);
 	    numeroTacheModifie.add(t);
 	}
@@ -681,7 +771,7 @@ public class Tache implements Entity {
     }
 
     private void setDeriveTaskNumero(int place) {
-	String s = this.numero;
+	String s = this.number;
 	if (s.startsWith(ExpressConstant.ROOT_TASK_NAME))
 	    s = "";
 	if (this.mere == null)
@@ -689,9 +779,9 @@ public class Tache implements Entity {
 	for (int i = place; i < this.fils.size(); i++) {
 	    Tache tmp = (Tache) this.fils.get(i);
 	    if (s.length() == 0)
-		tmp.numero = "" + (i + 1);
+		tmp.number = "" + (i + 1);
 	    else
-		tmp.numero = s + "." + (i + 1);
+		tmp.number = s + "." + (i + 1);
 	    // attention a la memoire...
 	    tmp.setDeriveTaskNumero(0);
 	}
@@ -739,7 +829,7 @@ public class Tache implements Entity {
     }
 
     public String toString() {
-	return this.numero + " - " + name;
+	return this.number + " - " + name;
     }
 
     // attention il ne faut pas utilisï¿½ le tag postcondition pour les
@@ -757,9 +847,9 @@ public class Tache implements Entity {
 	racine.appendChild(kmadElement);
 
 	// But
-	if (!this.but.equals("")) {
+	if (!this.goal.equals("")) {
 	    kmadElement = doc.createElement("task-purpose");
-	    kmadElement.setTextContent(this.but);
+	    kmadElement.setTextContent(this.goal);
 	    racine.appendChild(kmadElement);
 	}
 
@@ -771,9 +861,9 @@ public class Tache implements Entity {
 	}
 
 	// Duration
-	if (!this.duree.equals("")) {
+	if (!this.duration.equals("")) {
 	    kmadElement = doc.createElement("task-duration");
-	    kmadElement.setTextContent(this.duree);
+	    kmadElement.setTextContent(this.duration);
 	    racine.appendChild(kmadElement);
 	}
 
@@ -785,9 +875,9 @@ public class Tache implements Entity {
 	}
 
 	// Resources
-	if (!this.ressources.equals("")) {
+	if (!this.resources.equals("")) {
 	    kmadElement = doc.createElement("task-resources");
-	    kmadElement.setTextContent(this.ressources);
+	    kmadElement.setTextContent(this.resources);
 	    racine.appendChild(kmadElement);
 	}
 
@@ -799,9 +889,9 @@ public class Tache implements Entity {
 	}
 
 	// Observation
-	if (!this.observation.equals("")) {
+	if (!this.description.equals("")) {
 	    kmadElement = doc.createElement("task-observation");
-	    kmadElement.setTextContent(this.observation);
+	    kmadElement.setTextContent(this.description);
 	    racine.appendChild(kmadElement);
 	}
 
@@ -809,14 +899,14 @@ public class Tache implements Entity {
 	racine.appendChild(this.executant.toXML(doc));
 
 	// Frequency
-	if (!this.frequence.equals(Frequence.INCONNU)) {
-	    racine.appendChild(this.frequence.toXML(doc));
+	if (!this.frequency.equals(Frequence.INCONNU)) {
+	    racine.appendChild(this.frequency.toXML(doc));
 	}
 
 	// Frequency Value
-	if (!this.compFreq.equals("")) {
+	if (!this.frequencyValue.equals("")) {
 	    kmadElement = doc.createElement("task-compfrequency");
-	    kmadElement.setTextContent(this.compFreq);
+	    kmadElement.setTextContent(this.frequencyValue);
 	    racine.appendChild(kmadElement);
 	}
 
@@ -826,8 +916,8 @@ public class Tache implements Entity {
 	}
 
 	// Modality
-	if (!this.modal.equals(Modalite.INCONNU)) {
-	    racine.appendChild(this.modal.toXML(doc));
+	if (!this.modality.equals(Modalite.INCONNU)) {
+	    racine.appendChild(this.modality.toXML(doc));
 	}
 
 	// EventTrigger
@@ -850,7 +940,7 @@ public class Tache implements Entity {
 
 	// Optional
 	kmadElement = doc.createElement("task-optional");
-	kmadElement.setTextContent(this.facultatif.toString());
+	kmadElement.setTextContent(this.optional.toString());
 	racine.appendChild(kmadElement);
 
 	// Interruptible
@@ -859,7 +949,7 @@ public class Tache implements Entity {
 	racine.appendChild(kmadElement);
 
 	// Decomposition
-	racine.appendChild(this.decomposition.toXML(doc));
+	racine.appendChild(this.ordering.toXML(doc));
 
 	// Actors
 	if (this.acteurs.size() != 0) {
@@ -1051,13 +1141,13 @@ public class Tache implements Entity {
 	// Purpose
 	nodeList = p.getElementsByTagName("task-purpose");
 	if (nodeList.item(0) != null) {
-	    this.but = nodeList.item(0).getTextContent();
+	    this.goal = nodeList.item(0).getTextContent();
 	}
 
 	// Duration
 	nodeList = p.getElementsByTagName("task-duration");
 	if (nodeList.item(0) != null) {
-	    this.duree = nodeList.item(0).getTextContent();
+	    this.duration = nodeList.item(0).getTextContent();
 	}
 
 	// Media
@@ -1070,7 +1160,7 @@ public class Tache implements Entity {
 	// Resources
 	nodeList = p.getElementsByTagName("task-resources");
 	if (nodeList.item(0) != null) {
-	    this.ressources = nodeList.item(0).getTextContent();
+	    this.resources = nodeList.item(0).getTextContent();
 	}
 
 	// Feedback
@@ -1082,26 +1172,26 @@ public class Tache implements Entity {
 	// Observation
 	nodeList = p.getElementsByTagName("task-observation");
 	if (nodeList.item(0) != null) {
-	    this.observation = nodeList.item(0).getTextContent();
+	    this.description = nodeList.item(0).getTextContent();
 	}
 
 	// Executant
 	this.executant = Executant.getXMLExecutantValue(p);
 
 	// Frequence
-	this.frequence = Frequence.getXMLFrequenceValue(p);
+	this.frequency = Frequence.getXMLFrequenceValue(p);
 
 	// Valeur de la Frequence
 	nodeList = p.getElementsByTagName("task-compfrequency");
 	if (nodeList.item(0) != null) {
-	    this.compFreq = nodeList.item(0).getTextContent();
+	    this.frequencyValue = nodeList.item(0).getTextContent();
 	}
 
 	// Importance
 	this.imp = Importance.getXMLExecutantValue(p);
 
 	// Modality
-	this.modal = Modalite.getXMLModalityValue(p);
+	this.modality = Modalite.getXMLModalityValue(p);
 
 	// Triggering Event
 	nodeList = p.getElementsByTagName("id-task-eventtrigger");
@@ -1129,14 +1219,14 @@ public class Tache implements Entity {
 
 	// Optional
 	nodeList = p.getElementsByTagName("task-optional");
-	this.facultatif = new Boolean(nodeList.item(0).getTextContent());
+	this.optional = new Boolean(nodeList.item(0).getTextContent());
 
 	// Interruptible
 	nodeList = p.getElementsByTagName("task-interruptible");
 	this.interruptible = new Boolean(nodeList.item(0).getTextContent());
 
 	// Decomposition
-	this.decomposition = Decomposition.getXMLModalityValue(p);
+	this.ordering = Decomposition.getXMLModalityValue(p);
 
 	// Actors
 	nodeList = p.getElementsByTagName("id-task-actors-list");
@@ -1212,7 +1302,7 @@ public class Tache implements Entity {
 	    this.effetsDeBordExpression = new EffetsDeBordExpression(nodeList
 		    .item(0).getTextContent());
 	}
-	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
+	// attention il ne faut pas utiliser le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-postcondition");
 	if (nodeList.item(0) != null) {
@@ -1220,7 +1310,7 @@ public class Tache implements Entity {
 		    .item(0).getTextContent());
 	}
 
-	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
+	// attention il ne faut pas utiliser le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-descriptionpostcondition");
 	if (nodeList.item(0) != null) {
@@ -1253,11 +1343,11 @@ public class Tache implements Entity {
      */
     public String toSPF() {
 	String SPF = oid.get() + "=" + "Tache" + "(" + "'"
-		+ name.replaceAll("'", "\\\\'") + "'" + "," + "'" + but + "'"
-		+ "," + "'" + ressources + "'" + "," + "'" + feed + "'" + ","
-		+ "'" + duree + "'" + "," + "'" + observation + "'" + ","
-		+ executant.toSPF() + "," + frequence.toSPF() + ",'" + compFreq
-		+ "'," + imp.toSPF() + "," + modal.toSPF() + ",";
+		+ name.replaceAll("'", "\\\\'") + "'" + "," + "'" + goal + "'"
+		+ "," + "'" + resources + "'" + "," + "'" + feed + "'" + ","
+		+ "'" + duration + "'" + "," + "'" + description + "'" + ","
+		+ executant.toSPF() + "," + frequency.toSPF() + ",'" + frequencyValue
+		+ "'," + imp.toSPF() + "," + modality.toSPF() + ",";
 	if (declencheur != null)
 	    SPF = SPF + declencheur.oid.get() + ",";
 	else
@@ -1271,15 +1361,15 @@ public class Tache implements Entity {
 	}
 	SPF = SPF + "),";
 	// priorite + "," +
-	if (facultatif == null)
+	if (optional == null)
 	    SPF = SPF + "$,";
 	else
-	    SPF = SPF + "." + facultatif + "." + ",";
+	    SPF = SPF + "." + optional + "." + ",";
 	if (interruptible == null)
 	    SPF = SPF + "$,";
 	else
 	    SPF = SPF + "." + interruptible + "." + ",";
-	SPF = SPF + "," + decomposition.toSPF();
+	SPF = SPF + "," + ordering.toSPF();
 	// acteurs
 	SPF = SPF + ",(";
 	for (int i = 0; i < acteurs.size(); i++) {
@@ -1457,7 +1547,7 @@ public class Tache implements Entity {
      * @return Returns the facultatif.
      */
     public Boolean getFacultatif() {
-	return facultatif;
+	return optional;
     }
 
     /**
@@ -1465,7 +1555,7 @@ public class Tache implements Entity {
      *            The facultatif to set.
      */
     public void setFacultatif(Boolean facultatif) {
-	this.facultatif = facultatif;
+	this.optional = facultatif;
     }
 
     /**
@@ -1487,7 +1577,7 @@ public class Tache implements Entity {
      * @return Returns the compFreq.
      */
     public String getCompFreq() {
-	return compFreq;
+	return frequencyValue;
     }
 
     /**
@@ -1600,24 +1690,24 @@ public class Tache implements Entity {
 	racine.appendChild(kmadElement);
 	// Numero
 	kmadElement = doc.createElement("task-numero");
-	kmadElement.setTextContent(this.numero);
+	kmadElement.setTextContent(this.number);
 	racine.appendChild(kmadElement);
 	// But
-	if (!this.but.equals("")) {
+	if (!this.goal.equals("")) {
 	    kmadElement = doc.createElement("task-purpose");
-	    kmadElement.setTextContent(this.but);
+	    kmadElement.setTextContent(this.goal);
 	    racine.appendChild(kmadElement);
 	}
 	// Duration
-	if (!this.duree.equals("")) {
+	if (!this.duration.equals("")) {
 	    kmadElement = doc.createElement("task-duration");
-	    kmadElement.setTextContent(this.duree);
+	    kmadElement.setTextContent(this.duration);
 	    racine.appendChild(kmadElement);
 	}
 	// Resources
-	if (!this.ressources.equals("")) {
+	if (!this.resources.equals("")) {
 	    kmadElement = doc.createElement("task-resources");
-	    kmadElement.setTextContent(this.ressources);
+	    kmadElement.setTextContent(this.resources);
 	    racine.appendChild(kmadElement);
 	}
 	// Feedback
@@ -1629,19 +1719,19 @@ public class Tache implements Entity {
 	// Observation
 	//if (!this.observation.equals("")) {
 	    kmadElement = doc.createElement("task-observation");
-	    kmadElement.setTextContent(this.observation);
+	    kmadElement.setTextContent(this.description);
 	    racine.appendChild(kmadElement);
 	//}
 	// Executant
 	racine.appendChild(this.executant.toXML2(doc));
 	// Frequency
-	if (!this.frequence.equals(Frequence.INCONNU)) {
-	    racine.appendChild(this.frequence.toXML2(doc));
+	if (!this.frequency.equals(Frequence.INCONNU)) {
+	    racine.appendChild(this.frequency.toXML2(doc));
 	}
 	// Frequency Value
-	if (!this.compFreq.equals("")) {
+	if (!this.frequencyValue.equals("")) {
 	    kmadElement = doc.createElement("task-compfrequency");
-	    kmadElement.setTextContent(this.compFreq);
+	    kmadElement.setTextContent(this.frequencyValue);
 	    racine.appendChild(kmadElement);
 	}
 	// Importance
@@ -1649,19 +1739,19 @@ public class Tache implements Entity {
 	    racine.appendChild(this.imp.toXML2(doc));
 	}
 	// Modality
-	if (!this.modal.equals(Modalite.INCONNU)) {
-	    racine.appendChild(this.modal.toXML2(doc));
+	if (!this.modality.equals(Modalite.INCONNU)) {
+	    racine.appendChild(this.modality.toXML2(doc));
 	}
 	// Optional
 	kmadElement = doc.createElement("task-optional");
-	kmadElement.setTextContent(this.facultatif.toString());
+	kmadElement.setTextContent(this.optional.toString());
 	racine.appendChild(kmadElement);
 	// Interruptible
 	kmadElement = doc.createElement("task-interruptible");
 	kmadElement.setTextContent(this.interruptible.toString());
 	racine.appendChild(kmadElement);
 	// Decomposition
-	racine.appendChild(this.decomposition.toXML2(doc));
+	racine.appendChild(this.ordering.toXML2(doc));
 	// Precondition
 	kmadElement = doc.createElement("task-precondition");
 	kmadElement.setTextContent(this.preExpression.getName());
@@ -1846,14 +1936,14 @@ public class Tache implements Entity {
 	nodeList = p.getElementsByTagName("task-numero");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	this.numero = nodeList.item(0).getTextContent();
+	this.number = nodeList.item(0).getTextContent();
 
 	// Purpose
 	nodeList = p.getElementsByTagName("task-purpose");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
 	if (nodeList!= null && nodeList.item(0) != null) {
-	    this.but = nodeList.item(0).getTextContent();
+	    this.goal = nodeList.item(0).getTextContent();
 	}
 
 	// Duration
@@ -1861,7 +1951,7 @@ public class Tache implements Entity {
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
 	if (nodeList!= null && nodeList.item(0) != null) {
-	    this.duree = nodeList.item(0).getTextContent();
+	    this.duration = nodeList.item(0).getTextContent();
 	}
 
 	// Resources
@@ -1869,7 +1959,7 @@ public class Tache implements Entity {
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
 	if (nodeList!= null && nodeList.item(0) != null) {
-	    this.ressources = nodeList.item(0).getTextContent();
+	    this.resources = nodeList.item(0).getTextContent();
 	}
 	// Feedback
 	nodeList = p.getElementsByTagName("task-feedback");
@@ -1883,38 +1973,38 @@ public class Tache implements Entity {
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
 	 if(nodeList == null){
-		 this.observation = "";
+		 this.description = "";
 	 } else if (nodeList.item(0) != null) {
-	    this.observation = nodeList.item(0).getTextContent();
+	    this.description = nodeList.item(0).getTextContent();
 	}
 
 	// Executant
 	this.executant = Executant.getXMLExecutantValue2(p);
 	// Frequence
-	this.frequence = Frequence.getXMLFrequenceValue2(p);
+	this.frequency = Frequence.getXMLFrequenceValue2(p);
 	// Valeur de la Frequence
 	nodeList = p.getElementsByTagName("task-compfrequency");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
 	if (nodeList!= null && nodeList.item(0) != null) {
-	    this.compFreq = nodeList.item(0).getTextContent();
+	    this.frequencyValue = nodeList.item(0).getTextContent();
 	}
 	// Importance
 	this.imp = Importance.getXMLExecutantValue2(p);
 	// Modality
-	this.modal = Modalite.getXMLModalityValue2(p);
+	this.modality = Modalite.getXMLModalityValue2(p);
 	// Optional
 	nodeList = p.getElementsByTagName("task-optional");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
-	this.facultatif = new Boolean(nodeList.item(0).getTextContent());
+	this.optional = new Boolean(nodeList.item(0).getTextContent());
 	// Interruptible
 	nodeList = p.getElementsByTagName("task-interruptible");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		 nodeList = null;}
 	this.interruptible = new Boolean(nodeList.item(0).getTextContent());
 	// Decomposition
-	this.decomposition = Decomposition.getXMLDecompositionValue2(p);
+	this.ordering = Decomposition.getXMLDecompositionValue2(p);
 	// Precondition
 	nodeList = p.getElementsByTagName("task-precondition");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){

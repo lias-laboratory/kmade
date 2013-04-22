@@ -132,8 +132,8 @@ public class ExpressOrganisationTest {
 		assertTrue(o1.getRole()==orole1);
 		assertTrue(o1.getStatut()==ostatut1);
 		//vérification que o1 contient bien 1 membre et qu'il a pour nom nom1
-		assertTrue(o1.getMember().size()==1);
-		assertTrue(o1.getMember().get(0).toString()==nom1);
+		assertTrue(o1.getMembers().size()==1);
+		assertTrue(o1.getMembers().get(0).toString()==nom1);
 
 
 		Organisation o2  = ExpressOrganisation.getOrganisationWithName(onom2);
@@ -142,9 +142,9 @@ public class ExpressOrganisationTest {
 		assertTrue(o2.getRole()==orole2);
 		assertTrue(o2.getStatut()==ostatut2);
 		//vérification que o2 contient bien 2 membres et qu'ils ont pour nom nom1 puis nom2
-		assertTrue(o2.getMember().size()==2);
-		assertTrue(o2.getMember().get(0).toString()==nom2);
-		assertTrue(o2.getMember().get(1).toString()==nom1);
+		assertTrue(o2.getMembers().size()==2);
+		assertTrue(o2.getMembers().get(0).toString()==nom2);
+		assertTrue(o2.getMembers().get(1).toString()==nom1);
 
 	}
 

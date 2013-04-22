@@ -1,5 +1,5 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
+   * This file is part of KMADe Project.
  * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
@@ -26,57 +26,139 @@ import org.w3c.dom.NodeList;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
+ * The Organisation class stands for "groups", named "Organizations", which can organize individuals. 
+ * The semantics associated to grouping is left to task model designers. It can relates to authorization levels,
+ * abilities, or everything else. organizations cannot contain other organizations.
+ * The class inherits from User to allow using Individuals or Organizations as Actors
+ * The only responsibility of this class is to maintain the list or individuals who are members.
+ * 
  * @author Mickael BARON
+ * @author [Comment] Patrick GIRARD
  */
 public class Organisation extends User {
 
     private static final long serialVersionUID = -4187152840289735872L;
 
+    /**
+     * List of individuals who are member of the organization
+     */
     private ArrayList<Individu> inverseMember = new ArrayList<Individu>();
 
+    /**
+     * Empty constructor
+     */
     public Organisation() {
 	super();
     }
 
+    /**
+     * Constructor with only a name and an oid
+     * @param name name of the individual
+     * @param oid unique Express identifier
+     */
     public Organisation(String name, Oid oid) {
 	super(name, "", "", "", oid);
     }
 
+    /**
+     * Constructor with an empty image path
+     * @param name name of the individual
+     * @param st status
+     * @param r role
+     * @param oid unique Express identifier
+     */
     public Organisation(String name, String st, String r, Oid oid) {
 	super(name, st, r, "", oid);
     }
 
+    /**
+     * Complete constructor
+     * @param name name of the individual
+     * @param st status
+     * @param r role
+     * @param pi image path
+     * @param oid unique Express identifier
+     */
     public Organisation(String name, String st, String r, String pi, Oid oid) {
 	super(name, st, r, pi, oid);
     }
 
+    @Override
+    /**
+     * removes the organization from all individuals who are members
+     * CommentPG: Seems redundant with the equivalent method in Individu
+     * @see fr.upensma.lias.kmade.kmad.schema.tache.User#delete()
+     */
     public void delete() {
 	// supprimer l'individu des organisations
 	for (int i = 0; i < inverseMember.size(); i++) {
-	    inverseMember.get(i).removeToOrganization(this);
+	    inverseMember.get(i).removeOrganisation(this);
 	}
 	super.delete();
     }
 
     /**
-     * Enregistre l'individu ind au sein de l'organisation L'individu ne sait
-     * pas qu'il appartient à l'organisation
+     * Registers an individual into the organization
+     * A verification is made for avoiding duplication
+     * Warning: the reverse registering is not done at this step
      * 
-     * @param org
+     * @param ind Individu -> the individual to add to the organization
      */
     public void addMember(Individu ind) {
-	if (!inverseMember.contains(ind)) {
-	    inverseMember.add(ind);
+		if (!inverseMember.contains(ind)) {
+		    inverseMember.add(ind);
+		}
+    }
+
+    /**
+     * Removes the individual from the organization
+     * Warning: no verification is done to verify if it where already a member
+     * @param ind : Individu -> The inidividual to remove
+     */
+    public void removeIndividu(Individu ind) {
+    	inverseMember.remove(ind);
+    }
+
+    /**
+     * Gives the list of individual who are member of the organization
+     * Warning: it is a reference on the list itself. Be careful not to modify it
+     * 
+     * @return an ArrayList which contains all individuals who are members
+     */
+    public ArrayList<Individu> getMembers() {
+    	return inverseMember;
+    }
+
+    /**
+     * Returns an array containing all characteristics of an organization
+     * 
+     * @return an array of Object, which contains all attributes of superclass, plus a list of name of individual
+     * who are member of the prganization 
+     */
+    public Object[] toArray() {
+	String s = "";
+	for (int i = 0; i < inverseMember.size(); i++) {
+	    s += inverseMember.get(i).getName();
+	    if (i != inverseMember.size() - 1) {
+		s += ", ";
+	    }
 	}
+
+	Object[] res = { super.oid.get(), super.getName(), super.getStatut(),
+		super.getRole(), super.getImage(), s };
+	return res;
     }
 
-    public void removeToOrganization(Individu ind) {
-	inverseMember.remove(ind);
+    /**
+     * This function is supposed to give the size of the array returned by the "toArray" method
+     * It returns always 5 !
+     * Warning: Very dangerous implementation
+     * @return 5
+     */
+    public static int toArrayLenght() {
+	return 5;
     }
 
-    public ArrayList<Individu> getMember() {
-	return inverseMember;
-    }
 
     public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("Organisation");
@@ -159,24 +241,6 @@ public class Organisation extends User {
 	return oid.get() + "=Organisation('" + super.getName() + "','"
 		+ super.getStatut() + "','" + super.getRole() + "','"
 		+ super.getImage() + s + "');";
-    }
-
-    public Object[] toArray() {
-	String s = "";
-	for (int i = 0; i < inverseMember.size(); i++) {
-	    s += inverseMember.get(i).getName();
-	    if (i != inverseMember.size() - 1) {
-		s += ", ";
-	    }
-	}
-
-	Object[] res = { super.oid.get(), super.getName(), super.getStatut(),
-		super.getRole(), super.getImage(), s };
-	return res;
-    }
-
-    public static int toArrayLenght() {
-	return 5;
     }
 
     public Element toXML2(Document doc) throws Exception {

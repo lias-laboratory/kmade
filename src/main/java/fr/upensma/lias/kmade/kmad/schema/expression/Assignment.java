@@ -68,8 +68,8 @@ public class Assignment extends AssignmentOperator {
 	if (this.isUnknownState()) {
 	    throw new SemanticUnknownException();
 	}
-	// dans certains cas un java null pointer exception peut �tre lever ce
-	// qui correspond � une semanticunknownException
+	// dans certains cas un java null pointer exception peut être lever ce
+	// qui correspond à une semanticunknownException
 	try {
 	    AttributConcret refConcret = ref
 		    .getAttribut(((AttributExpressExpression) this.leftNode)

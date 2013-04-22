@@ -449,7 +449,7 @@ public class KMADEReadWriteIndividuObjectTable extends JScrollPane implements La
 		// r�cup�ration du tableau des organisations
 		Individu i = (Individu) InterfaceExpressJava.prendre(new Oid(
 			newIndividuObject));
-		ArrayList<Organisation> org = i.getMemberOf();
+		ArrayList<Organisation> org = i.getOrganisations();
 		// nom ,statut, Role, image , Organisation , oid , Boolean
 		Object[] tempo = { value, "", "", couple, org,
 			newIndividuObject, false };

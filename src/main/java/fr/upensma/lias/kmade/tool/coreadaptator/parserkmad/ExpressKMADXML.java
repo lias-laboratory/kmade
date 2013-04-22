@@ -739,7 +739,7 @@ public final class ExpressKMADXML {
 			ind[i] = (Individu) indObj[i];
 		}
 		for (int i = 0; i < ind.length; i++) {
-			ArrayList<Organisation> org = ind[i].getMemberOf();
+			ArrayList<Organisation> org = ind[i].getOrganisations();
 			for (int j = 0; j < org.size(); j++) {
 				org.get(j).addMember(ind[i]);
 			}

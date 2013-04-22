@@ -105,7 +105,7 @@ public class ExpressIndividu{
 	Organisation o = (Organisation) InterfaceExpressJava.prendre(new Oid(
 		oidOrganisation));
 	// on les ajoutes mutuellement
-	i.addToOrganization(o);
+	i.addOrganization(o);
 	o.addMember(i);
     }
 
@@ -116,8 +116,8 @@ public class ExpressIndividu{
 	Organisation o = (Organisation) InterfaceExpressJava.prendre(new Oid(
 		oidOrganisation));
 	// on les ajoutes mutuellement
-	i.removeToOrganization(o);
-	o.removeToOrganization(i);
+	i.removeOrganisation(o);
+	o.removeIndividu(i);
     }
 
     /**
@@ -138,7 +138,7 @@ public class ExpressIndividu{
 	try {
 	    m = (Individu) InterfaceExpressJava.prendre(new Oid(oid));
 	    // Récupération de ses organisations.
-	    ArrayList<Organisation> myOrga = m.getMemberOf();
+	    ArrayList<Organisation> myOrga = m.getOrganisations();
 	    Object[][] res = new Object[myOrga.size()][Organisation
 		    .toArrayLenght()];
 	    for (int i = 0; i < myOrga.size(); i++) {
@@ -182,7 +182,7 @@ public class ExpressIndividu{
 	for (int i = 0; i < tabOrg.length; i++) {
 	    // on regarde si l'organisation � pour membre l'individu, si non on
 	    // l'ajoute � notre r�sultat
-	    if (!tabOrg[i].getMember().contains(m)) {
+	    if (!tabOrg[i].getMembers().contains(m)) {
 		restmp.add(tabOrg[i].toArray());
 	    }
 	}

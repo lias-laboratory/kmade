@@ -447,7 +447,7 @@ public class KMADEReadWriteOrganisationObjectTable extends JScrollPane implement
 									     // etat.
 		Organisation o = (Organisation) InterfaceExpressJava
 			.prendre(new Oid(newOrganisationObject));
-		ArrayList<Individu> ind = o.getMember();
+		ArrayList<Individu> ind = o.getMembers();
 
 		// nom ,statut, Role, image , Organisation , oid , Boolean
 		Object[] tempo = { value, "", "", couple, ind,

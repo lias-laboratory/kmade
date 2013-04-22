@@ -109,7 +109,7 @@ public final class OrganisationAdaptator {
 		    .addOrganization(myList.get(i).getName(),
 			    myList.get(i).getStatut(), myList.get(i).getRole(),
 			    myList.get(i).getImage(),
-			    myList.get(i).getMember(),
+			    myList.get(i).getMembers(),
 			    myList.get(i).getOid().get());
 	}
     }

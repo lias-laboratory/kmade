@@ -27,55 +27,107 @@ import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
+ * The Individual class stands for human beings involved in the task analysis process. 
+ * The class inherits from User to allow using Individuals or Organizations as Actors
+ * The only responsibility of this class is to maintain the list or organization an
+ * individual belongs to.
+ * 
  * @author Mickael BARON
+ * @author [Comment] Patrick GIRARD
  */
 public class Individu extends User {
 
     private static final long serialVersionUID = 144972651724436715L;
 
+    /**
+     * List of organizations the individual is member of
+     */
     private ArrayList<Organisation> memberOf = new ArrayList<Organisation>();
 
+    /**
+     * Empty constructor
+     */
     public Individu() {
 	super();
     }
 
+    /**
+     * Constructor with only a name and an oid
+     * 
+     * @param name name of the individual
+     * @param oid unique Express identifier
+     */
     public Individu(String name, Oid oid) {
 	super(name, "", "", "", oid);
     }
 
+    /**
+     * Constructor with an empty image path
+     * 
+     * @param name name of the individual
+     * @param st status
+     * @param r role
+     * @param oid unique Express identifier
+     */
     public Individu(String name, String st, String r, Oid oid) {
 	super(name, st, r, "", oid);
     }
 
+    /**
+     * Complete constructor
+     * 
+     * @param name name of the individual
+     * @param st status
+     * @param r role
+     * @param pi image path
+     * @param oid unique Express identifier
+     */
     public Individu(String name, String st, String r, String pi, Oid oid) {
 	super(name, st, r, pi, oid);
     }
 
+    @Override
+    /**
+     * removes the individual from all organizations he/she is member of
+     * @see fr.upensma.lias.kmade.kmad.schema.tache.User#delete()
+     */
     public void delete() {
-	// supprimer l'individu des organisations
 	for (int i = 0; i < memberOf.size(); i++) {
-	    memberOf.get(i).removeToOrganization(this);
+	    memberOf.get(i).removeIndividu(this);
 	}
 	super.delete();
     }
 
     /**
-     * Enregistre que l'individu fait partie de l'organisation org
-     * L'organisation org ne sait pas que l'individu en fait partie
+     * Registers the organization from which the individual is supposed to be member
+     * A verification is made for avoiding duplication
+     * Warning: the reverse registering is not done at this step
      * 
-     * @param org
+     * @param org the organization to register
      */
-    public void addToOrganization(Organisation org) {
+    public void addOrganization(Organisation org) {
 	if (!memberOf.contains(org)) {
 	    memberOf.add(org);
 	}
     }
 
-    public ArrayList<Organisation> getMemberOf() {
+    /**
+     * Gives the list of organizations the individual is member of
+     * Warning: it is a reference on the list itself. Be careful not to modify it
+     * 
+     * @return an ArrayList which contains all organizations the individual is member of
+     */
+    public ArrayList<Organisation> getOrganisations() {
 	return memberOf;
     }
 
-    public void removeToOrganization(Organisation org) {
+    /**
+     * Removes the organization from the organization it was member
+     * Warning: no verification is made on the existence of the organization
+     * 
+     * @param org the organization to be removed
+     */
+    public void removeOrganisation(Organisation org) {
 	memberOf.remove(org);
     }
 
@@ -157,7 +209,7 @@ public class Individu extends User {
 
 	if (kmadIndividuOrganisation.item(0) != null) {
 	    for (int i = 0; i < kmadIndividuOrganisation.getLength(); i++) {
-		this.addToOrganization((Organisation) InterfaceExpressJava.bdd
+		this.addOrganization((Organisation) InterfaceExpressJava.bdd
 			.prendre(new Oid(kmadIndividuOrganisation.item(i)
 				.getTextContent())));
 	    }
@@ -177,6 +229,12 @@ public class Individu extends User {
 		+ super.getImage() + "','" + s + "');";
     }
 
+    /**
+     * Returns an array containing all characteristics of an individual
+     * 
+     * @return an array of Object, which contains all attributes of superclass, plus a list of group name the individual
+     * is member of 
+     */
     public Object[] toArray() {
 	String s = "";
 	for (int i = 0; i < memberOf.size(); i++) {
@@ -191,6 +249,12 @@ public class Individu extends User {
 	return res;
     }
 
+    /**
+     * This function is supposed to give the size of the array returned by the "toArray" method
+     * It returns always 5 !
+     * Warning: Very dangerous implementation
+     * @return 5
+     */
     public static int toArrayLenght() {
 	return 5;
     }
@@ -249,7 +313,7 @@ public class Individu extends User {
 	if(p.hasAttribute("id-organisation")){
 	    String[] kmadIndividuOrganisation = p.getAttribute("id-organisation").split(" ");
 	    for (int i = 0; i < kmadIndividuOrganisation.length; i++) {
-		this.addToOrganization((Organisation) InterfaceExpressJava.bdd
+		this.addOrganization((Organisation) InterfaceExpressJava.bdd
 			.prendre(new Oid(kmadIndividuOrganisation[i])));
 	    }
 	}
