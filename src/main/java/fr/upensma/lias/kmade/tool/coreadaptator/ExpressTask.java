@@ -18,6 +18,7 @@
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observer;
 
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
@@ -45,7 +46,7 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEObservable;
 public final class ExpressTask {
 
     private static int counterClipboard = 0;
-
+    
     private static KMADEObservable expressTaskObservable = new KMADEObservable();
 
     public static void addObserver(Observer o) {
@@ -152,6 +153,9 @@ public final class ExpressTask {
 		.getAllReferencesOfEntityFromClipBoard("tache", "Tache");
 
 	Tache[] myNewTaskList = new Tache[myTaskList.length];
+	// PG: correction de l'anomalie "NewTache dans la classe Tache
+	HashMap<Tache, Tache> myNewTasks = new HashMap<Tache, Tache>();
+	
 	// KMADEHistoryMessageManager.printMessage("nb tache arbre debut" + myTaskList.length);
 
 	for (int i = 0; i < myTaskList.length; i++) {
@@ -179,12 +183,12 @@ public final class ExpressTask {
 
 	    refTache.setPoint(refPoint);
 
+	    // To save a reference between my old task and my new task
+	    myNewTasks.put((Tache) myTaskList[i], refTache) ; 
+
 	    /**********************************************************
 	     * On effectue la relation Clipboard et modele Express. *
 	     **********************************************************/
-	    refTache.setTaskCloned((Tache) myTaskList[i]);
-	    ((Tache) myTaskList[i]).setNewTask(refTache);
-
 	    refTache.setName(((Tache) myTaskList[i]).getName()); // nom de la
 								 // tache
 	    refTache.setDecomposition(((Tache) myTaskList[i])
@@ -215,18 +219,19 @@ public final class ExpressTask {
 	    myNewTaskList[i] = refTache;
 	}
 
-	// Cr�eation des liaisons.
+	// Links (mother and children) must be changed from clipboard tasks to new tasks
 	for (int i = 0; i < myTaskList.length; i++) {
-	    ArrayList<Tache> mySubTasks = ((Tache) myTaskList[i]).getFils();
-	    if (mySubTasks.size() != 0) {
-		ArrayList<Tache> myNewSubTasks = new ArrayList<Tache>();
-		for (int j = 0; j < mySubTasks.size(); j++) {
-		    myNewSubTasks.add(mySubTasks.get(j).getNewTask());
-		    mySubTasks.get(j).getNewTask()
-			    .setMotherTask(myNewTaskList[i]);
+		ArrayList<Tache> mySubTasks = ((Tache) myTaskList[i]).getFils();
+		if (mySubTasks.size() != 0) {
+			ArrayList<Tache> myNewSubTasks = new ArrayList<Tache>();
+			for (int j = 0; j < mySubTasks.size(); j++) {
+				// get my new task through the old one 
+				Tache myNewTask=myNewTasks.get(mySubTasks.get(j));
+				myNewSubTasks.add(myNewTask);
+				myNewTask.setMotherTask(myNewTaskList[i]);
+			}
+			myNewTaskList[i].setFils(myNewSubTasks);
 		}
-		myNewTaskList[i].setFils(myNewSubTasks);
-	    }
 	}
 
 	return myNewTaskList;
@@ -245,8 +250,9 @@ public final class ExpressTask {
 	InterfaceExpressJava.clearClipBoard();
 
 	// Pour l'instant on fait une copie sans les autres attributs.
-	// Y a au moins le point puisqu'il doit �tre cr�e par Express
+	// Y a au moins le point puisqu'il doit etre cree par Express
 	Tache[] myNewTaskList = new Tache[myTacheList.size()];
+		
 	for (int i = 0; i < myTacheList.size(); i++) {
 	    // On pioche.
 	    Integer x = (myTacheList.get(i)).getPoint().getX();
@@ -262,7 +268,6 @@ public final class ExpressTask {
 	    refPoint.setX(new Integer(x.intValue()));
 	    refPoint.setY(new Integer(y.intValue()));
 	    refTache.setPoint(refPoint);
-	    refTache.setTaskCloned(myTacheList.get(i));
 
 	    /*******************************************
 	     * Les caracteristiques a copier.
@@ -291,14 +296,17 @@ public final class ExpressTask {
 
 	// Traitement des liens.
 	int i = 0;
+	boolean[] motherTasksUsed = new boolean[myNewTaskList.length];
+	
 	while (edgeOIDList.size() != 0) {
 	    String oldMotherTask = (edgeOIDList.get(i))[0];
 
 	    boolean supprimee = false;
 	    for (int j = 0; j < myNewTaskList.length; j++) {
-		if (myNewTaskList[j].getTaskCloned().getOid()
+			if (myTacheList.get(j).getOid()
 			.equals(new Oid(oldMotherTask))
-			&& !myNewTaskList[j].isMotherUsed()) {
+//			&& !myNewTaskList[j].isMotherUsed()) {
+			&& !motherTasksUsed[j]) {
 
 		    int l = 0;
 		    while (l != edgeOIDList.size()) {
@@ -308,18 +316,17 @@ public final class ExpressTask {
 			    boolean trouveeFils = false;
 			    for (int k = 0; k < myNewTaskList.length
 				    && !trouveeFils; k++) {
-				if (k != j) { // Une t�che m�re ne peut �tre son
+				if (k != j) { // Une tache mere ne peut etre son
 					      // fils.
-				    if (myNewTaskList[k].getTaskCloned()
-					    .getOid()
+					if (myTacheList.get(k).getOid()
 					    .equals(new Oid(oldSonTask))) {
 					// Ici on a vérifié qu'il y a une
-					// nouvelle t�che qui doit �tre
-					// connect�e.
+					// nouvelle tache qui doit etre
+					// connectee.
 					myNewTaskList[j].getFils().add(
 						myNewTaskList[k]);
-					// On n'oublie pas la r�f�rence de la
-					// sous-t�ches � la t�che m�re
+					// On n'oublie pas la reference de la
+					// sous-taches a la tache mere
 					myNewTaskList[k]
 						.setMotherTask(myNewTaskList[j]);
 					trouveeFils = true;
@@ -340,9 +347,9 @@ public final class ExpressTask {
 			    l++;
 			}
 		    }
-		    // On a effectu� la recherche dans toutes les sous-t�ches et
-		    // ainsi la m�re est combl�e...
-		    myNewTaskList[j].setMotherUsed(true);
+		    // On a effectue la recherche dans toutes les sous-taches et
+		    // ainsi la mere est comblee...
+		    motherTasksUsed[j]=true;
 		}
 	    }
 
@@ -363,13 +370,11 @@ public final class ExpressTask {
     }
 
     /**
-     * Cette m�thode cr�e une t�che au sens Express.
+     * Cette methode cree une tache au sens Express.
      * 
-     * @param x
-     *            : position abcisse
-     * @param y
-     *            : position ordonn�e
-     * @return Oid de la t�che
+     * @param x  : position abcisse
+     * @param y  : position ordonnee
+     * @return Oid de la tache
      */
     public static Tache addNewTask(int x, int y, Executant e) {
 	Oid oidPoint = InterfaceExpressJava.createEntity("tache", "Point");

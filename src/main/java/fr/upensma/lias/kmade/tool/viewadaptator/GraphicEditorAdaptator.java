@@ -514,11 +514,11 @@ public final class GraphicEditorAdaptator {
      * @param taches
      */
     public static void connectAllTasksIntoClipBoard(Tache[] taches) {
-	// Cr�ation des liens.
+	// Creation des liens.
 	for (int i = 0; i < taches.length; i++) {
-	    // OID de la t�che (
+	    // OID de la tache (
 	    String oid = ((Tache) taches[i]).getOid().get();
-	    // R�f�rence de la t�che m�re.
+	    // Reference de la tache mere.
 	    Tache mere = ((Tache) taches[i]).getMotherTask();
 	    if (mere != null)
 		GraphicEditorAdaptator.addNewEdgeIntoClipBoard(mere.getOid()
@@ -527,7 +527,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette m�thode permet d'effectuer un lien graphique entre deux t�ches
+     * Cette methode permet d'effectuer un lien graphique entre deux taches
      * dans le presse-papier.
      * 
      * @param oidMere
@@ -539,7 +539,7 @@ public final class GraphicEditorAdaptator {
 	KMADEDefaultGraphCell fils = MAIN_FRAME.getClipBoardDialog().getTask(
 		oidFils);
 
-	// Cr�ation de la liaison dans la partie graphique.
+	// Creation de la liaison dans la partie graphique.
 	KMADEDefaultEdge edge = new KMADEDefaultEdge();
 	MAIN_FRAME.getClipBoardDialog().getMyGraph().getGraphLayoutCache()
 		.insertEdge(edge, mere.getMotherPort(), fils.getSonPort());
@@ -1187,7 +1187,7 @@ public final class GraphicEditorAdaptator {
 	Object[] cellSelected = GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getSelectionCells();
 
-	// KMADEHistoryMessageManager.printMessage("Ajout d'une t�che dans le clipBord  "+
+	// KMADEHistoryMessageManager.printMessage("Ajout d'une tache dans le clipBord  "+
 	// cellSelected.length);
 	// Etape 1 : dissocier les taches et les liens au sens graphique.
 	ArrayList<String[]> edgeOIDList = new ArrayList<String[]>();

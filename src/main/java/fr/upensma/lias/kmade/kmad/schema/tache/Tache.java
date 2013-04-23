@@ -41,63 +41,45 @@ public class Tache implements Entity {
 
     public Oid oid = null;
 
-    // Task type
-    
-		/**
-		 * executant : Executant -> Enumerated values for the kind of task (user, system, interactive, etc.)
-		 */
+    // Task type    
+		/** executant : Executant -> Enumerated values for the kind of 
+		                      task (user, system, interactive, etc.) */
 		private Executant executant = Executant.INCONNU;
 
-		/**
-		 * modality : Modalite -> Enumerated values for the modalities of user tasks
-		 */
+		/** modality : Modalite -> Enumerated values for the modalities 
+		 *                    of user tasks */
 		private Modalite modality= Modalite.INCONNU;
     
-    // Static task attributes
-    
-    	/**
-    	 * name : String -> Name of the task - no need to be unique, but cannot be null
-    	 */
-    	private String name = ExpressConstant.NEW_NAME_TASK;
+    // Static attributes    
+	    /** name : String -> Name of the task - no need to be unique, 
+	     *                    but cannot be null */
+	    private String name = ExpressConstant.NEW_NAME_TASK;
 
-    	/**
-    	 * goal : String -> The goal of the task. Can be null
-    	 */
-    	private String goal = "";
+	    /** goal : String -> The goal of the task. Can be null */
+	    private String goal = "";
 
-    	/**
-    	 * resources : String -> Resources ???
-    	 */
-    	private String resources = "";
+	    /** resources : String -> Resources ???  */
+	    private String resources = "";
 
-    	/**
-    	 * feed : String -> Task feedback, not really used
-    	 */
+    	/** feed : String -> Task feedback, not really used */
     	private String feed = "";
 
-	    /**
-	     * duration : String -> Task duration - can be of either form. If only a number, can be interpreted
-	     */
+	    /** duration : String -> Task duration - can be of either form. 
+	     *                     If only a number, can be interpreted */
 	    private String duration = "";
 
-	    /**
-	     * description : String -> informal description of the task. Can be null, but not recommended
-	     */
+	    /** description : String -> informal description of the task. 
+	     *                      Can be null, but not recommended */
 	    private String description = "";
 
-	    /**
-	     * frequency : Frequence -> Enumerated value for frequency
-	     */
+	    /** frequency : Frequence -> Enumerated value for frequency */
 	    private Frequence frequency = Frequence.INCONNU;
 	    
-	    /**
-	     * frequencyValue : String -> Value for the frequency. Free text, no interpretation
-	     */
+	    /** frequencyValue : String -> Value for the frequency. 
+	     *                      Free text, no interpretation */
 	    private String frequencyValue = "";
 
-	    /**
-	     * importance : Importance -> Enumerated value for importance
-	     */
+	    /** importance : Importance -> Enumerated value for importance */
 	    private Importance imp = Importance.INCONNU;
 
 	    private String media = "";
@@ -105,110 +87,81 @@ public class Tache implements Entity {
 	    private Media idMedia = null;
 
     // Dynamic attributes
-	    
-	    /**
-	     * optional = Boolean -> is the task optional - default value false
-	     */
+	    /** optional = Boolean -> is the task optional? - 
+	     * 						default value false  */
 	    private Boolean optional = false;
 
-	    /**
-	     * interruptible : Boolean -> is the task interruptible - default value false
-	     */
+	    /** interruptible : Boolean -> is the task interruptible - 
+	     * 						default value false */
 	    private Boolean interruptible = false;
 
-	    /**
-	     * ordering : Decomposition -> Enumerated value for task ordering, including leaf
-	     */
+	    /** ordering : Decomposition -> Enumerated value for task 
+	     * 				ordering, including leaf */
 	    private Decomposition ordering;
 	    
     // Structural attributes
 	    
-	    /**
-	     * number : String -> computed value for the numbering of tasks: root, 1, 1.1, 1.1.1, etc.
-	     */
+	    /** number : String -> computed value for the numbering of tasks: 
+	     * 						root, 1, 1.1, 1.1.1, etc.  */
 	    private String number = null;
 
-	    /**
-	     * label : Label -> Free characterization of tasks, associated to a color
-	     */
+	    /** label : Label -> Free characterization of tasks, 
+	     * 						associated to a color  */
 	    private Label label;
 
-	    /**
-	     * mere : Task -> Super-task of the current task. Null if the task is root, or if it is 
-	     *                        not attached to the tree
-	     */
+	    /** mere : Task -> Super-task of the current task. Null if 
+	     * the task is root, or if it is not attached to the tree */
 	    private Tache mere = null;
 	    
-	    /**
-	     * fils : ArrayList<Tache> -> ordered list of sub-tasks
-	     */
+	    /** fils : ArrayList<Tache> -> ordered list of sub-tasks */
 	    private ArrayList<Tache> fils = new ArrayList<Tache>();
 
     // Actors
 	    
-	    /**
-	     * acteurs : ArrayList<Acteur> -> Human actors involved in the task
-	     */
+	    /** acteurs : ArrayList<Acteur> -> Human actors involved 
+	     *  						in the task*/
 	    private ArrayList<Acteur> acteurs = new ArrayList<Acteur>();
 
-	    /**
-	     * acteurSysteme : ArrayList<ActeurSysteme> -> System actors involved in the task
-	     */
-	    private ArrayList<ActeurSysteme> acteurSysteme = new ArrayList<ActeurSysteme>();
+	    /** acteurSysteme : ArrayList<ActeurSysteme> -> 
+	     * 					System actors involved in the task   */
+	    private ArrayList<ActeurSysteme> acteurSysteme = 
+	    						new ArrayList<ActeurSysteme>();
 
-    // Expressions management
+    // Expression management
 
-	    /**
-	     * preExpression : PreExpression -> Precondition of the task
-	     */
+	    /** preExpression : PreExpression -> Precondition of the task  */
 	    private PreExpression preExpression;
 
-	    /**
-	     * iterExpression : IterExpression -> condition for the iteration of the task
-	     */
+	    /**citerExpression : IterExpression -> condition for the 
+	     * 			iteration of the task */
 	    private IterExpression iteExpression;
 
-	    /**
-	     * effetsDeBordExpression : EffetsDeBordExpression -> Side effects for the task (action)
-	     */
+	    /** effetsDeBordExpression : EffetsDeBordExpression -> 
+	     * 						Side effects for the task (action)   */
 	    private EffetsDeBordExpression effetsDeBordExpression;
 
-    // Event management
+    // Event management    
+	    /** lstEvent : ArrayList<Evenement> -> list of event  
+	     * 					the task may fire. Often empty   */
+	    private ArrayList<Evenement> lstEvent = 
+	    					new ArrayList<Evenement>();
 	    
-	    /**
-	     * lstEvent : ArrayList<Evenement> -> list of event the task may fire. Often empty
-	     */
-	    private ArrayList<Evenement> lstEvent = new ArrayList<Evenement>();
-	    
-	    /**
-	     * declencheur : Evenement -> the possible firing event. May be null
-	     */
+	    /**  declencheur : Evenement -> the possible firing event. 
+	     * 						May be null  */
 	    private Evenement declencheur = null;
 	    
     // Graphical attributes
-
-	    /**
-	     * Graphical position of the task on the graphical layout
-	     */
+	    /** Graphical position of the task on the graphical layout */
 	    private Point point = null;
 
-	    /**
-	     * noPoint : Boolean -> States if the oint owns a valid graphical position or no. Default false
-	     */
+	    /** noPoint : Boolean -> States if the oint owns a valid graphical 
+	     * 					position or no. Default false */
 	    private boolean noPoint = false;
 
 	    // Graphical optimization
 	    private Object refJTask = null;
 
-    // Interactive attributes, for copy-paste
-    
-	    private Tache taskCloned = null;
-
-	    private Tache newTask = null;
-
-	    private boolean motherUsed = false;
-
-    // Attributes cfor prototyping and simulating
+    // Attributes for prototyping and simulating
 
 	    private StateSimulation stateSimulation;
     
@@ -218,6 +171,16 @@ public class Tache implements Entity {
 	    //PROTOTASK
 	    private ChoiceEnum IterationValue = ChoiceEnum.indeterminee;
 
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
     /**
      * Creation d'une tache avec des valeurs par defaut.
      */
@@ -1497,50 +1460,6 @@ public class Tache implements Entity {
 	    return null;
 	}
 	return (mySon.get(0));
-    }
-
-    /**
-     * @return Returns the taskCloned.
-     */
-    public Tache getTaskCloned() {
-	return taskCloned;
-    }
-
-    /**
-     * @param taskCloned
-     *            The taskCloned to set.
-     */
-    public void setTaskCloned(Tache taskCloned) {
-	this.taskCloned = taskCloned;
-    }
-
-    /**
-     * @return Returns the motherUsed.
-     */
-    public boolean isMotherUsed() {
-	return motherUsed;
-    }
-
-    /**
-     * @param b
-     */
-    public void setMotherUsed(boolean b) {
-	this.motherUsed = b;
-    }
-
-    /**
-     * @return Returns the newTask.
-     */
-    public Tache getNewTask() {
-	return newTask;
-    }
-
-    /**
-     * @param newTask
-     *            The newTask to set.
-     */
-    public void setNewTask(Tache newTask) {
-	this.newTask = newTask;
     }
 
     /**
