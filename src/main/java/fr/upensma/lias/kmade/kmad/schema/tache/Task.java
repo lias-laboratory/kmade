@@ -88,9 +88,7 @@ public class Task implements Entity {
 	    /** importance : Importance -> Enumerated value for importance */
 	    private Importance importance = Importance.INCONNU;
 
-	    /** media : ??? Mickaël ??? */
-	    private String media = "";
-
+	    /** media : Audio-Video file, which illustrates the task */
 	    private Media idMedia = null;
 
     // Dynamic attributes
