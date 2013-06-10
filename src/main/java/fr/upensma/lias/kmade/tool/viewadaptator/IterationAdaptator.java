@@ -25,7 +25,7 @@ import fr.upensma.lias.kmade.kmad.schema.expression.SemanticException;
 import fr.upensma.lias.kmade.kmad.schema.expression.SemanticUnknownException;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.NumberValue;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.TypeStructure;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressIteration;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
@@ -63,7 +63,7 @@ public final class IterationAdaptator {
 
     public static void initIteration() {
 	// Active ou pas l'�valuation
-	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
+	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	if (myCurrentTask.getIteExpression().getNodeExpression() != null) {
 	    // Construire l'expression.
@@ -87,7 +87,7 @@ public final class IterationAdaptator {
     }
 
     private static void checkIterationBuilder(String s) {
-	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
+	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	myCurrentTask.getIteExpression().setName(s);
 
@@ -168,7 +168,7 @@ public final class IterationAdaptator {
 
     public static void evaluateIteration(String text) {
     	KMADEHistoryMessageManager.printMessage(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
-	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
+	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	try {
 	    myCurrentTask.getIteExpression().getNodeExpression()

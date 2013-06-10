@@ -35,7 +35,7 @@ import fr.lri.swingstates.canvas.CStateMachine;
 import fr.lri.swingstates.canvas.CText;
 import fr.lri.swingstates.canvas.Canvas;
 import fr.lri.swingstates.sm.JStateMachine;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEDefaultEdge;
@@ -268,7 +268,7 @@ public class PieMenuEdition extends Menu {
 		    tagWhole.setPickable(true);
 		    tagLabels.setPickable(false);
 
-		    Tache[] newTasks = ExpressTask.getAllTaskFromExpress();
+		    Task[] newTasks = ExpressTask.getAllTaskFromExpress();
 		    // .pasteElementsFromClipBoard((Point) pointDisplay);
 		    Object tagWholeIterator = null;
 		    Object precedentTag = null;
@@ -452,7 +452,7 @@ public class PieMenuEdition extends Menu {
 
 			    if (textTag.getText().equals(
 				    KMADEConstant.PASTE_ACTION_MESSAGE)) {
-				Tache[] newTasks = ExpressTask
+				Task[] newTasks = ExpressTask
 					.getAllTaskFromExpress();
 				// .pasteElementsFromClipBoard((Point)
 				// pointDisplay);

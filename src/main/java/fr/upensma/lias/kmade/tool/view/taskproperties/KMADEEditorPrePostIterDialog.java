@@ -24,7 +24,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.EffetsDeBordExpression;
+import fr.upensma.lias.kmade.kmad.schema.tache.SideEffectExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.IterExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.PreExpression;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
@@ -94,17 +94,17 @@ public class KMADEEditorPrePostIterDialog extends JPropertiesEditorDialog {
 	    // Sélection de l'onglet pour la précondition
 	    cl.show(cardPanel, "PRECONDITION");
 	    PrePostIterExpressionAdaptator.setToPreCondition();
-	} else if (refModel.getValue(row) instanceof EffetsDeBordExpression) {
+	} else if (refModel.getValue(row) instanceof SideEffectExpression) {
 	    this.setTitle(KMADEConstant.EDITOR_POST_TITLE_NAME
 		    + " : "
 		    + GraphicEditorAdaptator.getSelectedGraphicTask().getTask()
 			    .getName());
 	    refEffetsDeBordPanel.setOutputMessage();
 	    refEffetsDeBordPanel.textArea
-		    .setText(((EffetsDeBordExpression) refModel.getValue(row))
+		    .setText(((SideEffectExpression) refModel.getValue(row))
 			    .getName());
 	    refEffetsDeBordPanel
-		    .setDescriptionArea(((EffetsDeBordExpression) refModel
+		    .setDescriptionArea(((SideEffectExpression) refModel
 			    .getValue(row)).getDescription());
 	    // Sélection de l'onglet pour la effetsdebord
 	    cl.show(cardPanel, "EFFETSDEBORD");

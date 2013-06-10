@@ -34,17 +34,17 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Acteur;
-import fr.upensma.lias.kmade.kmad.schema.tache.ActeurSysteme;
+import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
+import fr.upensma.lias.kmade.kmad.schema.tache.ActorSystem;
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
-import fr.upensma.lias.kmade.kmad.schema.tache.EffetsDeBordExpression;
+import fr.upensma.lias.kmade.kmad.schema.tache.SideEffectExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Frequence;
 import fr.upensma.lias.kmade.kmad.schema.tache.Importance;
 import fr.upensma.lias.kmade.kmad.schema.tache.IterExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.Modalite;
 import fr.upensma.lias.kmade.kmad.schema.tache.PreExpression;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEVertexView;
 import fr.upensma.lias.kmade.tool.view.toolutilities.DefaultPropertiesTableModel;
@@ -372,8 +372,8 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
     }
 
     public void updateTaskPropertiesPanel(String[] nameValue,
-	    ArrayList<String> eventListFromTask, ArrayList<Acteur> refActeurs,
-	    ArrayList<ActeurSysteme> refActeurSysteme, String[] labelNames) {
+	    ArrayList<String> eventListFromTask, ArrayList<Actor> refActeurs,
+	    ArrayList<ActorSystem> refActeurSysteme, String[] labelNames) {
 	// Les Utilisateurs.
 	myTaskPropertiesModel.setValueAt(refActeurs, USER_TITLE_ELEMENT,
 		DefaultPropertiesTableModel.COLUMN_VALUE_INDEX);
@@ -429,7 +429,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		}
 		String toDisplay = "";
 		for (int i = 0; i < myList.size(); i++) {
-		    toDisplay += ((Acteur) myList.get(i)).getName();
+		    toDisplay += ((Actor) myList.get(i)).getName();
 		    if (i < myList.size() - 1) {
 			toDisplay += ";";
 		    }
@@ -443,7 +443,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		}
 		String toDisplay = "";
 		for (int i = 0; i < myList.size(); i++) {
-		    toDisplay += ((ActeurSysteme) myList.get(i)).getName();
+		    toDisplay += ((ActorSystem) myList.get(i)).getName();
 		    if (i < myList.size() - 1) {
 			toDisplay += ";";
 		    }
@@ -482,7 +482,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		}
 		return toDisplay;
 	    } else if (column == 1 && row == EFFETSDEBORD_TITLE_ELEMENT) {
-		EffetsDeBordExpression myEffetsDeBordExpression = (EffetsDeBordExpression) this
+		SideEffectExpression myEffetsDeBordExpression = (SideEffectExpression) this
 			.getValue(row);
 		if (myEffetsDeBordExpression.isErrorInExpression()) {
 		    return KMADEConstant.ERROR_CARACTERISTIC_MESSAGE + " : "
@@ -579,12 +579,12 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 			    .getValue(Executant
 				    .getLocaleExecutantIntoEnumere((String) aValue));
 		    // Modification de l'attribut acteur.
-		    if (Tache.canHaveActor(mySelectedExecutant)) {
+		    if (Task.canHaveActor(mySelectedExecutant)) {
 			informationTable[USER_TITLE_ELEMENT].setEditable(true);
 		    } else {
 			informationTable[USER_TITLE_ELEMENT].setEditable(false);
 		    }
-		    if (Tache.canHaveActorSystem(mySelectedExecutant)) {
+		    if (Task.canHaveActorSystem(mySelectedExecutant)) {
 			informationTable[SYSTEM_USER_TITLE_ELEMENT]
 				.setEditable(true);
 		    } else {
@@ -806,13 +806,13 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
     }
 
     public void displayTaskProperties(String numero, String tacheMere,
-	    String name,String but, String res, /* Media media, */
+	    String name,String but, /* Media media, */
 	    String label, /* String feed, */ String duree, 
 	    String obs, Executant exec, String mod, String freq,
 	    String compFreq, String imp, ArrayList<String> events,
 	    Boolean facultatif, Boolean interruptible, String dec,
-	    ArrayList<Acteur> actRef, PreExpression prec,
-	    EffetsDeBordExpression post, String decomposition, IterExpression it) {
+	    ArrayList<Actor> actRef, PreExpression prec,
+	    SideEffectExpression post, String decomposition, IterExpression it) {
 	isInit = true;
 	myTaskPropertiesModel.setInitValueAt(numero, TASK_NUMBER_NAME_ELEMENT);
 	myTaskPropertiesModel.setInitValueAt(tacheMere, PARENT_NAME_ELEMENT);
@@ -1113,7 +1113,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
     }
 
     public void setEffetsDeBordInModel(
-	    EffetsDeBordExpression effetsDeBordExpression) {
+	    SideEffectExpression effetsDeBordExpression) {
 	myTaskPropertiesModel.setValueAt(effetsDeBordExpression,
 		EFFETSDEBORD_TITLE_ELEMENT, 1);
     }

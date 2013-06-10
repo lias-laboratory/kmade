@@ -56,7 +56,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEEnhancedSplitPane;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
@@ -75,20 +75,20 @@ public class KMADEPrintingUserCardsPanel extends JPanel {
 
     private KMADEPrintingDialog refDialog;
 
-    public static Tache[] getSelected(DefaultMutableTreeNode root) {
-	ArrayList<Tache> list = new ArrayList<Tache>();
+    public static Task[] getSelected(DefaultMutableTreeNode root) {
+	ArrayList<Task> list = new ArrayList<Task>();
 	CheckBoxNode temp = (CheckBoxNode) root.getUserObject();
 	if (temp.isSelected() && !temp.isRoot()) {
 	    list.add(temp.getTask());
 	}
 
 	for (int i = 0; i < root.getChildCount(); i++) {
-	    Tache[] toro = KMADEPrintingUserCardsPanel
+	    Task[] toro = KMADEPrintingUserCardsPanel
 		    .getSelected((DefaultMutableTreeNode) root.getChildAt(i));
 	    for (int j = 0; j < toro.length; j++)
 		list.add(toro[j]);
 	}
-	return list.toArray(new Tache[list.size()]);
+	return list.toArray(new Task[list.size()]);
     }
 
     public KMADEPrintingUserCardsPanel(KMADEPrintingDialog pref) {
@@ -136,10 +136,10 @@ public class KMADEPrintingUserCardsPanel extends JPanel {
 	this.add(BorderLayout.CENTER, myCentralSplitPane);
     }
 
-    public void setTasks(ArrayList<Tache> rootTasks) {
+    public void setTasks(ArrayList<Task> rootTasks) {
 	DefaultMutableTreeNode top = new DefaultMutableTreeNode(
 		new CheckBoxNode("Taches", false));
-	for (Tache current : rootTasks) {
+	for (Task current : rootTasks) {
 	    KMADEPrintingUserCardsPanel.createNodesUserCards(top, current);
 	}
 	this.myTree.getSelectionModel().clearSelection();
@@ -151,13 +151,13 @@ public class KMADEPrintingUserCardsPanel extends JPanel {
     }
 
     private static void createNodesUserCards(DefaultMutableTreeNode top,
-	    Tache myTache) {
+	    Task myTache) {
 	DefaultMutableTreeNode subRoot = new DefaultMutableTreeNode(
 		new CheckBoxNode(myTache, false));
 	top.add(subRoot);
 
 	if (!myTache.isLeaf()) {
-	    for (Tache current : myTache.getFils()) {
+	    for (Task current : myTache.getChildren()) {
 		KMADEPrintingUserCardsPanel.createNodesUserCards(subRoot,
 			current);
 	    }
@@ -167,10 +167,10 @@ public class KMADEPrintingUserCardsPanel extends JPanel {
     public String getValue(DefaultMutableTreeNode node) {
 	StringBuffer htmlBuffer = new StringBuffer();
 
-	if (node.getUserObject() instanceof Tache) {
+	if (node.getUserObject() instanceof Task) {
 	    htmlBuffer
 		    .append(PrintAdaptator
-			    .getSelectionUserCardsContent((Tache) node
+			    .getSelectionUserCardsContent((Task) node
 				    .getUserObject()));
 	}
 
@@ -181,7 +181,7 @@ public class KMADEPrintingUserCardsPanel extends JPanel {
 		htmlBuffer.append(getValue(temp));
 	    } else {
 		htmlBuffer.append(PrintAdaptator
-			.getSelectionUserCardsContent((Tache) temp
+			.getSelectionUserCardsContent((Task) temp
 				.getUserObject()));
 	    }
 	}
@@ -195,7 +195,7 @@ public class KMADEPrintingUserCardsPanel extends JPanel {
 
 	StringBuffer htmlBuffer = new StringBuffer();
 
-	Tache[] tabTask = KMADEPrintingUserCardsPanel
+	Task[] tabTask = KMADEPrintingUserCardsPanel
 		.getSelected((DefaultMutableTreeNode) myTree.getModel()
 			.getRoot());
 
@@ -507,7 +507,7 @@ public class KMADEPrintingUserCardsPanel extends JPanel {
 
     static class CheckBoxNode {
 	String text;
-	Tache myRef;
+	Task myRef;
 	boolean selected;
 
 	public CheckBoxNode(String text, boolean selected) {
@@ -515,7 +515,7 @@ public class KMADEPrintingUserCardsPanel extends JPanel {
 	    this.selected = selected;
 	}
 
-	public CheckBoxNode(Tache text, boolean selected) {
+	public CheckBoxNode(Task text, boolean selected) {
 	    this.myRef = text;
 	    this.selected = selected;
 	}
@@ -528,12 +528,12 @@ public class KMADEPrintingUserCardsPanel extends JPanel {
 	    selected = newValue;
 	}
 
-	public Tache getTask() {
+	public Task getTask() {
 	    return myRef;
 	}
 
 	public String getText() {
-	    return myRef == null ? text : myRef.getNumero() + " : "
+	    return myRef == null ? text : myRef.getNumber() + " : "
 		    + myRef.getName();
 	}
 

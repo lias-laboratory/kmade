@@ -32,7 +32,7 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Point;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 
 /**
@@ -42,7 +42,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
     
     private static final long serialVersionUID = 1L;
 
-    private Tache myTask;
+    private Task myTask;
 
     private String oid;
 
@@ -89,7 +89,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	return this.myTask.isRoot();
     }
 
-    public KMADEDefaultGraphCell(Tache currentTask) {
+    public KMADEDefaultGraphCell(Task currentTask) {
 	this.myTask = currentTask;
 	this.myTask.setJTask(this);
 	this.oid = this.myTask.getOid().get();
@@ -107,7 +107,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	if(p==null){
 	    myTask.setPoint(new Point(0,0,new Oid(InterfaceExpressJava.bdd.getMax()+1)));
 	    //We need to put the root task out of line
-	    if(myTask.getNumero().contains(ExpressConstant.ROOT_TASK_NAME)){
+	    if(myTask.getNumber().contains(ExpressConstant.ROOT_TASK_NAME)){
 		myTask.getPoint().setX(20);
 		myTask.getPoint().setY(20);
 	    }
@@ -148,14 +148,14 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
      */
     public String getDecomposition() {
 	return Decomposition.getEnumereIntoLocaleDecomposition(this.myTask
-		.getDecomposition().getValue());
+		.getOrdering().getValue());
     }
 
     /**
      * @return Returns the facultatif.
      */
     public boolean isFacultatif() {
-	return myTask.isFacultatif();
+	return myTask.isOptional();
     }
 
     /**
@@ -169,7 +169,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
      * @return Returns the numero.
      */
     public String getNumero() {
-	return myTask.getNumero();
+	return myTask.getNumber();
     }
 
     /**
@@ -189,11 +189,11 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
     /**
      * @return Returns the myTask.
      */
-    public Tache getTask() {
+    public Task getTask() {
 	return myTask;
     }
 
-    public void setTask(Tache p) {
+    public void setTask(Task p) {
 	myTask = p;
     }
 
@@ -269,7 +269,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
     }
 
     public ArrayList<KMADEDefaultGraphCell> getDirectSubCells() {
-	ArrayList<Tache> mySubTasks = this.myTask.getFils();
+	ArrayList<Task> mySubTasks = this.myTask.getChildren();
 	ArrayList<KMADEDefaultGraphCell> myCell = new ArrayList<KMADEDefaultGraphCell>();
 
 	for (int i = 0; i < mySubTasks.size(); i++) {
@@ -280,7 +280,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 
     public ArrayList<KMADEDefaultGraphCell> getDescendantSubCells(
 	    boolean onlyLeaf) {
-	ArrayList<Tache> mySubTasks = this.myTask.getFils();
+	ArrayList<Task> mySubTasks = this.myTask.getChildren();
 	ArrayList<KMADEDefaultGraphCell> mySubTasksTotal = new ArrayList<KMADEDefaultGraphCell>();
 	for (int i = 0; i < mySubTasks.size(); i++) {
 	    ArrayList<KMADEDefaultGraphCell> current = ((KMADEDefaultGraphCell) mySubTasks

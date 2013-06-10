@@ -28,69 +28,38 @@ import fr.upensma.lias.kmade.kmad.schema.KMADXMLParserException;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * An actor is an association between one task and one user (one person or one organization). 
- * Relatively to this association, an experience (enumerated type) and a competence (free string) 
- * can be defined
- * 
- * @author Mickael BARON 
- * @author [Comment] Patrick GIRARD
+ * @author Mickael BARON
  */
-public class Acteur implements Entity {
+public class ActorSystem implements Entity {
 
     private static final long serialVersionUID = -5271006845716055412L;
 
     public Oid oid = null;
 
-    /**
-     * userRef : User -> This user may be a person or an organization (i.e. a group of persons) 
-     */
-    private User userRef;
+    private Materiel userRef;
 
-    /**
-     * experience : Experience -> Enumerated attribute, which is supposed to reflect the required level of 
-     * experience of the user in accomplishing his/her task.  
-     */
     private Experience experience = Experience.INCONNU;
 
-    /**
-     * competence : String -> free text for detailing the required competence for the task
-     */
     private String competence = "";
 
-    /**
-     * Reverse link to the task where the actor is defined
-     */
-    private Tache inverseTache;
+    private Task inverseTache;
 
-    public Acteur() {
+    public ActorSystem() {
 	userRef = null;
 	experience = Experience.INCONNU;
 	competence = "";
     }
 
-    /**
-     * Constructor with all parameters
-     * The parameters are supposed to be ok !
-     * The inverse task is not set
-     * 
-     * @param exp String value from enumerated type Experience
-     * @param comp free text for the competence
-     * @param u User the associated user
-     * @param o Oid unique Express identifier
-     */
-    public Acteur(String exp, String comp, User u, Oid o) {
+    public ActorSystem(String exp, String comp, Materiel u, Oid o) {
 	userRef = u;
 	experience = Experience.getValue(exp);
 	competence = comp;
 	this.oid = o;
     }
 
-    /**
-     * Suppress the actor, deleting the inverse links in the user and the task
-     */
     public void delete() {
-	userRef.removeInverseActeur(this);
-	inverseTache.removeActeur(this);
+	userRef.removeInverseActeurSysteme(this);
+	inverseTache.removeActorSystem(this);
 	InterfaceExpressJava.remove(oid);
     }
 
@@ -101,7 +70,7 @@ public class Acteur implements Entity {
     public void affDelete() {
 	InterfaceExpressJava.getGestionWarning().addMessage(
 		oid,
-		9,
+		15,
 		ExpressConstant.REMOVE_OF_THE_TASK_MESSAGE + " \""
 			+ inverseTache.getName() + "\"");
     }
@@ -110,18 +79,72 @@ public class Acteur implements Entity {
 	this.oid = oid;
     }
 
-    /**
-     * Sets the inverse link to the task in which the actor is defined
-     * Warning: no verification is made to ensure the task is the right one
-     * 
-     * @param a the task where the actor is defined
-     */
-    public void setInverseTache(Tache a) {
+    public void setInverseTache(Task a) {
 	this.inverseTache = a;
     }
 
-    public Tache getInverseTache() {
-	return inverseTache;
+    public String toString() {
+	return userRef.toString();
+    }
+
+    public org.w3c.dom.Element toXML(Document doc) {
+	Element racine = doc.createElement("actorSystem");
+	racine.setAttribute("classkmad", "tache.ActeurSysteme");
+	racine.setAttribute("idkmad", oid.get());
+
+	racine.appendChild(experience.toXML(doc));
+
+	if (!this.competence.equals("")) {
+	    Element kmadActorCompetence = doc
+		    .createElement("actorSystem-competence");
+	    kmadActorCompetence.setTextContent(this.competence);
+	    racine.appendChild(kmadActorCompetence);
+	}
+
+	Element idUser = doc.createElement("id-userSystem");
+	idUser.setTextContent(this.userRef.getOid().get());
+	racine.appendChild(idUser);
+	return racine;
+    }
+
+    public boolean oidIsAnyMissing(org.w3c.dom.Element p) throws Exception,
+	    KMADXMLParserException {
+	NodeList nodeList = p.getElementsByTagName("id-userSystem");
+	if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList.item(0)
+		.getTextContent())) == null) {
+	    return true;
+	}
+	return false;
+    }
+
+    public void createObjectFromXMLElement(org.w3c.dom.Element p) {
+	this.oid = new Oid(p.getAttribute("idkmad"));
+
+	this.experience = Experience.getXMLExperienceValue(p);
+
+	NodeList nodeList = p.getElementsByTagName("actorSystem-competence");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
+	if (nodeList.item(0) != null) {
+	    this.competence = nodeList.item(0).getTextContent();
+	}
+
+	nodeList = p.getElementsByTagName("id-userSystem");
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
+	this.userRef = (Materiel) InterfaceExpressJava.bdd.prendre(new Oid(
+		nodeList.item(0).getTextContent()));
+    }
+
+    public String toSPF() {
+	String SPF = oid.get() + "=" + "Acteur System" + "("
+		+ experience.toSPF() + "," + "'" + competence + "'" + ",";
+	if (userRef != null)
+	    SPF = SPF + userRef.getOid().get();
+	else
+	    SPF = SPF + "$";
+	SPF = SPF + ");";
+	return SPF;
     }
 
     public void setExperience(String s) {
@@ -140,11 +163,11 @@ public class Acteur implements Entity {
 	return competence;
     }
 
-    public void setUserRef(User u) {
+    public void setMaterielRef(Materiel u) {
 	userRef = u;
     }
 
-    public User getUserRef() {
+    public Materiel getMaterielRef() {
 	return userRef;
     }
 
@@ -152,64 +175,12 @@ public class Acteur implements Entity {
 	return oid;
     }
 
-    public String toString() {
-	return userRef.toString();
+    public Task getInverseTache() {
+	return inverseTache;
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
-	Element racine = doc.createElement("actor");
-	racine.setAttribute("classkmad", "tache.Acteur");
-	racine.setAttribute("idkmad", oid.get());
-
-	racine.appendChild(experience.toXML(doc));
-
-	if (!this.competence.equals("")) {
-	    Element kmadActorCompetence = doc.createElement("actor-competence");
-	    kmadActorCompetence.setTextContent(this.competence);
-	    racine.appendChild(kmadActorCompetence);
-	}
-
-	Element idUser = doc.createElement("id-user");
-	idUser.setTextContent(this.userRef.getOid().get());
-	racine.appendChild(idUser);
-	return racine;
-    }
-
-    public boolean oidIsAnyMissing(org.w3c.dom.Element p) throws Exception,
-	    KMADXMLParserException {
-	NodeList nodeList = p.getElementsByTagName("id-user");
-	if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList.item(0)
-		.getTextContent())) == null) {
-	    return true;
-	}
-	return false;
-    }
-
-    public void createObjectFromXMLElement(org.w3c.dom.Element p) {
-	this.oid = new Oid(p.getAttribute("idkmad"));
-
-	this.experience = Experience.getXMLExperienceValue(p);
-
-	NodeList nodeList = p.getElementsByTagName("actor-competence");
-	if (nodeList.item(0) != null) {
-	    this.competence = nodeList.item(0).getTextContent();
-	}
-
-	nodeList = p.getElementsByTagName("id-user");
-
-	this.userRef = (User) InterfaceExpressJava.bdd.prendre(new Oid(nodeList
-		.item(0).getTextContent()));
-    }
-
-    public String toSPF() {
-	String SPF = oid.get() + "=" + "Acteur" + "(" + experience.toSPF()
-		+ "," + "'" + competence + "'" + ",";
-	if (userRef != null)
-	    SPF = SPF + userRef.getOid().get();
-	else
-	    SPF = SPF + "$";
-	SPF = SPF + ");";
-	return SPF;
+    public Materiel getUserSystemRef() {
+	return userRef;
     }
 
     @Override
@@ -232,10 +203,8 @@ public class Acteur implements Entity {
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 	this.oid = new Oid(p.getAttribute("idkmad"));
-
-	this.userRef = (User) InterfaceExpressJava.bdd.prendre(new Oid(p
+	this.userRef = (Materiel) InterfaceExpressJava.bdd.prendre(new Oid(p
 		.getAttribute("id-user")));
 	this.experience = Experience.getXMLExperienceValue(p);
 
@@ -245,17 +214,14 @@ public class Acteur implements Entity {
 	if (nodeList.item(0) != null) {
 	    this.competence = nodeList.item(0).getTextContent();
 	}
-
     }
 
     @Override
     public boolean oidIsAnyMissing2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 	String nodeList = p.getAttribute("id-user");
 	if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
 	    return true;
 	}
-
 	return false;
     }
 }

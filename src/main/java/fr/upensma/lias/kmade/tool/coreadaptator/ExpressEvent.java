@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-import fr.upensma.lias.kmade.kmad.schema.tache.Evenement;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Event;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.CurrentEvents.CurrentEvent;
 
 /**
@@ -35,37 +35,37 @@ public class ExpressEvent {
     }
 
     public static void removeEvent(String oid) {
-	Evenement e = (Evenement) InterfaceExpressJava.prendre(new Oid(oid));
+	Event e = (Event) InterfaceExpressJava.prendre(new Oid(oid));
 	e.delete();
     }
 
     public static ArrayList<String> getForeseeableEvent(String oid) {
-	Evenement e = (Evenement) InterfaceExpressJava.prendre(new Oid(oid));
+	Event e = (Event) InterfaceExpressJava.prendre(new Oid(oid));
 	return e.affProvoquer();
     }
 
     public static void affRemoveEvent(String oid) {
-	Evenement e = (Evenement) InterfaceExpressJava.prendre(new Oid(oid));
+	Event e = (Event) InterfaceExpressJava.prendre(new Oid(oid));
 	e.affDelete();
     }
 
     public static String setEventName(String oid, String name) {
-	Evenement m = (Evenement) InterfaceExpressJava.prendre(new Oid(oid));
+	Event m = (Event) InterfaceExpressJava.prendre(new Oid(oid));
 	m.setName(name);
 	return m.getName();
     }
 
     public static void setEventDescription(String oid, String description) {
-	Evenement m = (Evenement) InterfaceExpressJava.prendre(new Oid(oid));
+	Event m = (Event) InterfaceExpressJava.prendre(new Oid(oid));
 	m.setDescription(description);
     }
 
-    public static ArrayList<Evenement> getEvents() {
-	ArrayList<Evenement> lst = new ArrayList<Evenement>();
+    public static ArrayList<Event> getEvents() {
+	ArrayList<Event> lst = new ArrayList<Event>();
 	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Evenement");
 	for (int i = 0; i < objs.length; i++) {
-	    Evenement obj = (Evenement) objs[i];
+	    Event obj = (Event) objs[i];
 	    lst.add(obj);
 	}
 	return lst;
@@ -76,17 +76,17 @@ public class ExpressEvent {
 	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Evenement");
 	for (int i = 0; i < objs.length; i++) {
-	    Evenement obj = (Evenement) objs[i];
+	    Event obj = (Event) objs[i];
 	    lst.add(obj.getName());
 	}
 	return lst;
     }
 
-    public static Evenement stringToEvent(String s) {
+    public static Event stringToEvent(String s) {
 	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Evenement");
 	for (int i = 0; i < objs.length; i++) {
-	    Evenement obj = (Evenement) objs[i];
+	    Event obj = (Event) objs[i];
 	    if (obj.getName().equals(s)) {
 		return obj;
 	    }
@@ -94,7 +94,7 @@ public class ExpressEvent {
 	return null;
     }
 
-    public static String generateFiringEvent(Tache myTache) {
+    public static String generateFiringEvent(Task myTache) {
 	String temp = "";
 	for (int i = 0; i < myTache.getEvents().size(); i++) {
 	    InterfaceExpressJava.getCurrentEvents().addEvent(
@@ -108,7 +108,7 @@ public class ExpressEvent {
 	return temp;
     }
 
-    public static void extractFiringEvent(Evenement p) {
+    public static void extractFiringEvent(Event p) {
 	InterfaceExpressJava.getCurrentEvents().extractEvent(p);
     }
 
@@ -116,7 +116,7 @@ public class ExpressEvent {
 	return InterfaceExpressJava.getCurrentEvents().getAllCurrentEvents();
     }
 
-    public static boolean isExistingEvent(Evenement p) {
+    public static boolean isExistingEvent(Event p) {
 	return InterfaceExpressJava.getCurrentEvents().isExistingEvent(p);
     }
 

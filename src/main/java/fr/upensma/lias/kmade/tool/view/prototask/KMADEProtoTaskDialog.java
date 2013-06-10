@@ -30,7 +30,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ChoiceEnum;
@@ -198,7 +198,7 @@ public class KMADEProtoTaskDialog extends JFrame {
 		this.setVisible(false);
 	}
 
-	public void setCurrentTask(final Tache currentTask, String displayPrecondition) {
+	public void setCurrentTask(final Task currentTask, String displayPrecondition) {
 		possibleTask.removeAll();
 		possibleTask.revalidate();
 		possibleTask.repaint();
@@ -248,7 +248,7 @@ public class KMADEProtoTaskDialog extends JFrame {
 		executantLabel.setToolTipText(KMADEConstant.PROTOTYPING_TOOL_EXECUTANT_TOOLTIP);
 		executantLabel.setIcon(executantImage);
 		topPanel.add(executantLabel);
-		TitledBorder ordoPanelTitle = new TitledBorder(null, KMADEConstant.PROTOTYPING_TOOL_DECOMPOSITION_TITLE + " : "+ currentTask.getDecomposition().getValue(),TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
+		TitledBorder ordoPanelTitle = new TitledBorder(null, KMADEConstant.PROTOTYPING_TOOL_DECOMPOSITION_TITLE + " : "+ currentTask.getOrdering().getValue(),TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
 		possibleTaskScroll.setBorder(ordoPanelTitle);
 
 		//précondition
@@ -285,7 +285,7 @@ public class KMADEProtoTaskDialog extends JFrame {
 		//Condition
 
 		//Description 	
-		String observation =  currentTask.getObservation();
+		String observation =  currentTask.getDescription();
 		final JTextArea descriptionLabel = new JTextArea(observation);
 		descriptionLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 		descriptionLabel.setEditable(true);
@@ -336,7 +336,7 @@ public class KMADEProtoTaskDialog extends JFrame {
 	 * @param number if 0 no order
 	 * @param negat 
 	 */
-	public void setExecutableTask(final Tache t,boolean strikeOut,boolean enabled, int number,HashMap<String,ChoiceEnum> primary, HashMap<String,ChoiceEnum> secondary,String displayPrecond) {
+	public void setExecutableTask(final Task t,boolean strikeOut,boolean enabled, int number,HashMap<String,ChoiceEnum> primary, HashMap<String,ChoiceEnum> secondary,String displayPrecond) {
 		if(primary!=null)
 			map.putAll(primary);
 		if(secondary!=null)
@@ -361,12 +361,12 @@ public class KMADEProtoTaskDialog extends JFrame {
 		String toolTip = "";
 		if(!t.isLeaf()){
 			buttonName += " "+ KMADEConstant.PROTOTYPING_TOOL_SUBTASK_DECOMP;
-			toolTip += "<HTML>" + KMADEConstant.PROTOTYPING_TOOL_SUBTASK_DECOMP_TOOLTIP1+ " " + t.getFils().size() + " " +  KMADEConstant.PROTOTYPING_TOOL_SUBTASK_DECOMP_TOOLTIP2;
+			toolTip += "<HTML>" + KMADEConstant.PROTOTYPING_TOOL_SUBTASK_DECOMP_TOOLTIP1+ " " + t.getChildren().size() + " " +  KMADEConstant.PROTOTYPING_TOOL_SUBTASK_DECOMP_TOOLTIP2;
 		}else{
 			toolTip += "<HTML>" +KMADEConstant.PROTOTYPING_TOOL_SUBTASK_TERMINAL_TOOLTIP;
 		}
-		if(t.getObservation()!=null && !t.getObservation().equals("")){
-			toolTip += "<BR> "+  KMADEConstant.PROTOTYPING_TOOL_SUBTASK_DESCRIPTION_TOOLTIP +" : "+t.getObservation();
+		if(t.getDescription()!=null && !t.getDescription().equals("")){
+			toolTip += "<BR> "+  KMADEConstant.PROTOTYPING_TOOL_SUBTASK_DESCRIPTION_TOOLTIP +" : "+t.getDescription();
 		}
 		toolTip += "</HTML>";
 		JButton name = new JButton(buttonName);
@@ -440,7 +440,7 @@ public class KMADEProtoTaskDialog extends JFrame {
 	}
 
 
-	public void setEnabledEnd(final Tache t,boolean b) {
+	public void setEnabledEnd(final Task t,boolean b) {
 		rightBotTaskPanel.removeAll();
 
 		JPanel executableTask = new JPanel();
@@ -499,7 +499,7 @@ public class KMADEProtoTaskDialog extends JFrame {
 	}
 
 
-	public void setIterationEnabled(Tache t,boolean existed, ChoiceEnum enabled) {
+	public void setIterationEnabled(Task t,boolean existed, ChoiceEnum enabled) {
 		trueFalseIndeterminateGroupButton groupButton;
 		if(existed){
 			groupButton = new trueFalseIndeterminateGroupButton(t.getIteExpression().getDescription(),t.getIteExpression().getDescription(),enabled,true,false);

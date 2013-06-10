@@ -56,7 +56,7 @@ import org.jdesktop.animation.timing.TimingListener;
 import org.jdesktop.animation.timing.interpolation.ObjectModifier;
 import org.jdesktop.animation.timing.interpolation.PropertyRange;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.simulation.TokenRecordScenarioSimulation;
 import fr.upensma.lias.kmade.tool.coreadaptator.simulation.TokenReplayScenarioSimulation;
@@ -448,8 +448,8 @@ public class KMADEReplaySimulationPanel extends JPanel implements LanguageFactor
 	myScenarioReplayModel.clear();
     }
 
-    public ArrayList<Tache> getAvailableTaches() {
-	ArrayList<Tache> temp = new ArrayList<Tache>();
+    public ArrayList<Task> getAvailableTaches() {
+	ArrayList<Task> temp = new ArrayList<Task>();
 	for (int i = 0; i < this.myAvailableActionModel.size(); i++) {
 	    temp.add(((TokenSimulation) (this.myAvailableActionModel.get(i)))
 		    .getTask());

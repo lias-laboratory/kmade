@@ -37,7 +37,7 @@ import org.jgraph.graph.GraphLayoutCache;
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
@@ -67,7 +67,7 @@ public final class GraphicEditorAdaptator {
 
     private static boolean begining = false;
 
-    private static Tache[] tacheToBeCreated;
+    private static Task[] tacheToBeCreated;
 
     private static KMADEDefaultGraphCell myDefaultGraphCellRef = null;
 
@@ -181,7 +181,7 @@ public final class GraphicEditorAdaptator {
 	GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().clearSelection();
     }
 
-    public static void setSelectionTask(Tache myTask) {
+    public static void setSelectionTask(Task myTask) {
 	GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().setSelectionCell(
 		myTask.getJTask());
     }
@@ -455,7 +455,7 @@ public final class GraphicEditorAdaptator {
      */
     public static void addNewTask(Executant e, Point p) {
 	// A d�terminer ici les coordonn�es de cr�ation.
-	Tache myTask = ExpressTask.addNewTask(p.x, p.y, e);
+	Task myTask = ExpressTask.addNewTask(p.x, p.y, e);
 	GraphicEditorAdaptator.addNewTask(myTask);
     }
 
@@ -467,7 +467,7 @@ public final class GraphicEditorAdaptator {
      * @param pTask
      */
 
-    public static void addNewTask(Tache pTask) {
+    public static void addNewTask(Task pTask) {
 	// Creation de la tache de type graphique.
 	KMADEDefaultGraphCell tempTask = new KMADEDefaultGraphCell(pTask);
 
@@ -477,7 +477,7 @@ public final class GraphicEditorAdaptator {
     }
 
     /* Ajout */
-    public static void addCopyTask(Tache pTask) {
+    public static void addCopyTask(Task pTask) {
 	// Creation de la tache de type graphique.
 	KMADEDefaultGraphCell tempTask = new KMADEDefaultGraphCell(pTask);
 
@@ -492,7 +492,7 @@ public final class GraphicEditorAdaptator {
      * 
      * @param pTask
      */
-    public static void addNewTaskIntoClipBoard(Tache pTask) {
+    public static void addNewTaskIntoClipBoard(Task pTask) {
 	// Cr�ation de la t�che de type graphique.
 	KMADEDefaultGraphCell tempTask = new KMADEDefaultGraphCell(pTask);
 
@@ -513,13 +513,13 @@ public final class GraphicEditorAdaptator {
      * 
      * @param taches
      */
-    public static void connectAllTasksIntoClipBoard(Tache[] taches) {
+    public static void connectAllTasksIntoClipBoard(Task[] taches) {
 	// Creation des liens.
 	for (int i = 0; i < taches.length; i++) {
 	    // OID de la tache (
-	    String oid = ((Tache) taches[i]).getOid().get();
+	    String oid = ((Task) taches[i]).getOid().get();
 	    // Reference de la tache mere.
-	    Tache mere = ((Tache) taches[i]).getMotherTask();
+	    Task mere = ((Task) taches[i]).getMother();
 	    if (mere != null)
 		GraphicEditorAdaptator.addNewEdgeIntoClipBoard(mere.getOid()
 			.get(), oid);
@@ -550,13 +550,13 @@ public final class GraphicEditorAdaptator {
      * 
      * @param taches
      */
-    public static void connectAllTasks(Tache[] taches) {
+    public static void connectAllTasks(Task[] taches) {
 	// Cr�ation des liens.
 	for (int i = 0; i < taches.length; i++) {
 	    // OID de la t�che (
-	    String oid = ((Tache) taches[i]).getOid().get();
+	    String oid = ((Task) taches[i]).getOid().get();
 	    // R�f�rence de la t�che m�re.
-	    Tache mere = ((Tache) taches[i]).getMotherTask();
+	    Task mere = ((Task) taches[i]).getMother();
 	    if (mere != null)
 		GraphicEditorAdaptator.addNewEdge(mere.getOid().get(), oid);
 	}
@@ -1003,7 +1003,7 @@ public final class GraphicEditorAdaptator {
 		    KMADEDefaultGraphCell tempTask = new KMADEDefaultGraphCell(
 			    tacheToBeCreated[i]);
 		    if (tacheToBeCreated[i].hasNoPoint()
-			    && tacheToBeCreated[i].getNumero().contains(
+			    && tacheToBeCreated[i].getNumber().contains(
 				    ExpressConstant.ROOT_TASK_NAME)) {
 			GraphicEditorAdaptator.setSelectedTask(tempTask);
 		    }
@@ -1027,7 +1027,7 @@ public final class GraphicEditorAdaptator {
 		    // OID de la t�che (
 		    String oid = (tacheToBeCreated[i]).getOid().get();
 		    // Réfèrence de la tâche mère.
-		    Tache mere = (tacheToBeCreated[i]).getMotherTask();
+		    Task mere = (tacheToBeCreated[i]).getMother();
 		    if (mere != null)
 			GraphicEditorAdaptator.addNewEdge(mere.getOid().get(),
 				oid);
@@ -1063,7 +1063,7 @@ public final class GraphicEditorAdaptator {
 	return GraphicEditorAdaptator.myDefaultGraphCellRef.getOid();
     }
 
-    public static Tache getSelectedExpressTask() {
+    public static Task getSelectedExpressTask() {
 	return GraphicEditorAdaptator.myDefaultGraphCellRef.getTask();
     }
 
@@ -1165,10 +1165,10 @@ public final class GraphicEditorAdaptator {
 	}
     }
 
-    public static ArrayList<Tache> getSelectedTasks() {
+    public static ArrayList<Task> getSelectedTasks() {
 	Object[] cellSelected = GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getSelectionCells();
-	ArrayList<Tache> taskList = new ArrayList<Tache>();
+	ArrayList<Task> taskList = new ArrayList<Task>();
 
 	for (int i = 0; i < cellSelected.length; i++) {
 	    if (cellSelected[i] instanceof KMADEDefaultGraphCell) {
@@ -1191,7 +1191,7 @@ public final class GraphicEditorAdaptator {
 	// cellSelected.length);
 	// Etape 1 : dissocier les taches et les liens au sens graphique.
 	ArrayList<String[]> edgeOIDList = new ArrayList<String[]>();
-	ArrayList<Tache> taskList = new ArrayList<Tache>();
+	ArrayList<Task> taskList = new ArrayList<Task>();
 
 	for (int i = 0; i < cellSelected.length; i++) {
 
@@ -1210,7 +1210,7 @@ public final class GraphicEditorAdaptator {
 
 	MAIN_FRAME.getClipBoardDialog().removeAllEntities();
 
-	Tache[] newTasks = ExpressTask.copyElementsIntoClipBoard(taskList,
+	Task[] newTasks = ExpressTask.copyElementsIntoClipBoard(taskList,
 		edgeOIDList);
 	for (int i = 0; i < newTasks.length; i++) {
 	    GraphicEditorAdaptator.addNewTaskIntoClipBoard(newTasks[i]);
@@ -1224,7 +1224,7 @@ public final class GraphicEditorAdaptator {
      * Cette methode effectue un collage sur la partie graphique et express.
      */
     public static void pasteAction(Point pt) {
-	Tache[] newTasks = ExpressTask.pasteElementsFromClipBoard(pt);
+	Task[] newTasks = ExpressTask.pasteElementsFromClipBoard(pt);
 	for (int i = 0; i < newTasks.length; i++) {
 	    GraphicEditorAdaptator.addNewTask(newTasks[i]);
 	}
@@ -1434,13 +1434,13 @@ public final class GraphicEditorAdaptator {
     }
 
     public static void applySameExecutant() {
-	Tache currentTask = myDefaultGraphCellRef.getTask();
+	Task currentTask = myDefaultGraphCellRef.getTask();
 	GraphicEditorAdaptator.applySameExecutant(currentTask);
 	GraphicEditorAdaptator.refreshJGraphView();
     }
 
-    private static void applySameExecutant(Tache myTask) {
-	for (Tache current : myTask.getFils()) {
+    private static void applySameExecutant(Task myTask) {
+	for (Task current : myTask.getChildren()) {
 	    GraphicEditorAdaptator.applySameExecutant(current);
 	    current.setExecutant(myTask.getExecutant());
 	}

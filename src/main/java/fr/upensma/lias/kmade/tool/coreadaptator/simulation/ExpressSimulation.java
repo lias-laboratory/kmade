@@ -26,12 +26,12 @@ import fr.upensma.lias.kmade.kmad.schema.expression.SemanticErrorException;
 import fr.upensma.lias.kmade.kmad.schema.expression.SemanticException;
 import fr.upensma.lias.kmade.kmad.schema.expression.SemanticUnknownException;
 import fr.upensma.lias.kmade.kmad.schema.expression.UserExpression;
-import fr.upensma.lias.kmade.kmad.schema.tache.Acteur;
+import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
-import fr.upensma.lias.kmade.kmad.schema.tache.Evenement;
+import fr.upensma.lias.kmade.kmad.schema.tache.Event;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Importance;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressEvent;
@@ -42,7 +42,7 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
  * @author Mickael BARON
  */
 public final class ExpressSimulation {
-    private static Tache currentTask;
+    private static Task currentTask;
       
     private static ArrayList<User> myUserList = new ArrayList<User>();
        
@@ -61,17 +61,17 @@ public final class ExpressSimulation {
         myUserList.clear();
     }
     
-    public static Tache getCurrentTask() {
+    public static Task getCurrentTask() {
         return currentTask;
     }
              
-    public static void setCurrentTask(Tache pcurrentTask) {
+    public static void setCurrentTask(Task pcurrentTask) {
     	currentTask = pcurrentTask;
     }
            
            
     // Algorithmes pour la partie simulation du modele de taches K-MAD    
-    public static ArrayList<TokenSimulation> startSimulation(Tache myTask) {
+    public static ArrayList<TokenSimulation> startSimulation(Task myTask) {
         currentTask = myTask;
         myTask.getStateSimulation().setPassive();
         ExpressSimulation.applyDecomposition(currentTask);
@@ -89,7 +89,7 @@ public final class ExpressSimulation {
    		return ExpressSimulation.searchActivableTask(currentTask);
     }
     
-    public static ArrayList<TokenSimulation> searchActivableTask(Tache myTache) {
+    public static ArrayList<TokenSimulation> searchActivableTask(Task myTache) {
         ArrayList<TokenSimulation> myTacheList = new ArrayList<TokenSimulation>();
         
         // L'interruption est une affaire de parallélisme et d'entrelacement
@@ -104,12 +104,12 @@ public final class ExpressSimulation {
                     // Vérifie avec la tache mere s'il existe une sous-tache de plus haute priorite
                     
                 	// /!\ getMotherTask peut renvoy� null -> � modifier 
-                	Tache myMother = myTache.getMotherTask();
+                	Task myMother = myTache.getMother();
                     boolean etat = false;
-                    for (int i = 0; i < myMother.getFils().size() && !etat; i++) {
+                    for (int i = 0; i < myMother.getChildren().size() && !etat; i++) {
                         // Etat Terminal
-                        if (!myMother.getFils().get(i).getStateSimulation().isTerminalState()) {
-                            etat = myTache.getImportance().isMoreImportant(myMother.getFils().get(i).getImportance());
+                        if (!myMother.getChildren().get(i).getStateSimulation().isTerminalState()) {
+                            etat = myTache.getImportance().isMoreImportant(myMother.getChildren().get(i).getImportance());
                         }
                     }
                     if (!etat) {
@@ -117,7 +117,7 @@ public final class ExpressSimulation {
                     }
                 } else {
                     // Les autres exécutants peuvent reprendre l'exécution d'une tâche.
-                    if (myTache.isFacultatif()) {
+                    if (myTache.isOptional()) {
                         myTacheList.add(new TokenSimulation(myTache, TokenSimulation.ABANDONNER));
                     }
                     myTacheList.add(new TokenSimulation(myTache, TokenSimulation.REPRENDRE));                    
@@ -126,12 +126,12 @@ public final class ExpressSimulation {
         }
         
         // Leaf Task
-        if (myTache.getDecomposition().equals((Decomposition.ELE))) {
+        if (myTache.getOrdering().equals((Decomposition.ELE))) {
             if (myTache.getStateSimulation().isPassive() || myTache.getStateSimulation().isActive()) {
                 myTacheList.add(new TokenSimulation(myTache, TokenSimulation.EXECUTER));                
             }
-            if (myTache.getStateSimulation().isPassive() && myTache.isFacultatif()) {
-            	if (!myTache.isRoot() && !myTache.getMotherTask().getDecomposition().equals(Decomposition.ALT) && !myTache.getExecutant().equals(Executant.SYS)) {
+            if (myTache.getStateSimulation().isPassive() && myTache.isOptional()) {
+            	if (!myTache.isRoot() && !myTache.getMother().getOrdering().equals(Decomposition.ALT) && !myTache.getExecutant().equals(Executant.SYS)) {
             		myTacheList.add(new TokenSimulation(myTache, TokenSimulation.PASSER));
 				}
             }
@@ -140,14 +140,14 @@ public final class ExpressSimulation {
         
         // No Leaf Task
 		if (myTache.getStateSimulation().isPassive()) {
-			if (myTache.isFacultatif()) {
-				if (!myTache.isRoot() && !myTache.getMotherTask().getDecomposition().equals(Decomposition.ALT) && !myTache.getExecutant().equals(Executant.SYS)) {
+			if (myTache.isOptional()) {
+				if (!myTache.isRoot() && !myTache.getMother().getOrdering().equals(Decomposition.ALT) && !myTache.getExecutant().equals(Executant.SYS)) {
 					myTacheList.add(new TokenSimulation(myTache, TokenSimulation.PASSER));
 				}
 			}
 		}
 
-		for (Tache current : myTache.getFils()) {
+		for (Task current : myTache.getChildren()) {
 			if (!myTache.getStateSimulation().isSuspended()) {
 				ArrayList<TokenSimulation> myList = ExpressSimulation.searchActivableTask(current);
 				myTacheList.addAll(myList);
@@ -157,21 +157,21 @@ public final class ExpressSimulation {
 		return myTacheList;
     }
 
-    public static void initSimulation(Tache task) {
+    public static void initSimulation(Task task) {
         task.getStateSimulation().setNotAccessible();
         task.getIteExpression().setInitIterationVariant();
-        for (Tache current : task.getFils()) {
+        for (Task current : task.getChildren()) {
             ExpressSimulation.initSimulation(current);
         }
     }
 
-    public static void initIteration(Tache task) {
-        for (Tache current : task.getFils()) {
+    public static void initIteration(Task task) {
+        for (Task current : task.getChildren()) {
             ExpressSimulation.initSimulation(current);
         }
     }
     
-    public static boolean isExecutableTask(boolean exe, boolean event, boolean pre, int value, Tache myCurrentTask) {        
+    public static boolean isExecutableTask(boolean exe, boolean event, boolean pre, int value, Task myCurrentTask) {        
         // Cette méthode s'occupe de gérer la première catégorie
     	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EXECUTE_TASK_TRAITEMENT_MESSAGE + " : " + myCurrentTask.getName());
     	 KMADEHistoryMessageManager.printlnMessage(" * " + KMADEConstant.EXECUTION_CONSTRAINT_MESSAGE); 
@@ -182,9 +182,9 @@ public final class ExpressSimulation {
         	boolean trouve = false;
         	boolean isSystem = myCurrentTask.getExecutant().equals(Executant.SYS);
         	
-			if (myCurrentTask.getActeurs().size() != 0 && !isSystem) {				
+			if (myCurrentTask.getActors().size() != 0 && !isSystem) {				
 				User selectUser = ExpressSimulation.getCurrentUserList(value);
-				for (Acteur current : myCurrentTask.getActeurs()) {
+				for (Actor current : myCurrentTask.getActors()) {
 					if (current.getUserRef().getName().equals(selectUser.getName())) {
 						trouve = true;
 						break;
@@ -209,7 +209,7 @@ public final class ExpressSimulation {
         // Est-ce le bon événement déclencheur.
         KMADEHistoryMessageManager.printMessage("  - " + KMADEConstant.EVENT_TRIGGER_CONSTRAINT_MESSAGE + " : ");
         if (event) {
-            Evenement eventTask = myCurrentTask.getDeclencheur();
+            Event eventTask = myCurrentTask.getRaisingEvent();
             if (eventTask == null) {
             	 KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_TRIGGER_EVENT_CONSTRAINT_MESSAGE);
             } else {
@@ -258,7 +258,7 @@ public final class ExpressSimulation {
         return true;
     }
     
-    public static boolean setExecuter(Tache myTask, boolean post, boolean iter, boolean trigevent, boolean event) {
+    public static boolean setExecuter(Task myTask, boolean post, boolean iter, boolean trigevent, boolean event) {
         // Faire le traitement. Première catégorie, seconde catégorie et troisième catégorie.    
         
         if(ExpressIteration.isFinished(myTask)){
@@ -269,13 +269,13 @@ public final class ExpressSimulation {
         }else{
         	ExpressIteration.evaluateIteration(myTask);
 
-        myTask.getMotherTask().getStateSimulation().setActive();
+        myTask.getMother().getStateSimulation().setActive();
         
         // Post-traitement ...
         KMADEHistoryMessageManager.printlnMessage(" * " + KMADEConstant.ACTION_CONSTRAINT_MESSAGE);
             // Evénement déclencheur
         if (event) {
-            ExpressEvent.extractFiringEvent(myTask.getDeclencheur());
+            ExpressEvent.extractFiringEvent(myTask.getRaisingEvent());
         }
         
             // Génération des Evénements
@@ -333,29 +333,29 @@ public final class ExpressSimulation {
         return true;
     }
 
-    public static void setNoResumed(Tache myTache) {
+    public static void setNoResumed(Task myTache) {
     	myTache.getStateSimulation().setNoResumed();
     	ExpressSimulation.noResumedTasks(myTache);
     }
     
-    public static void setPasser(Tache myTache) {
-        myTache.getMotherTask().getStateSimulation().setActive();
+    public static void setPasser(Task myTache) {
+        myTache.getMother().getStateSimulation().setActive();
         ExpressSimulation.passedTasks(myTache);
     }
     
-    public static void setSuspend(Tache myTache) {
+    public static void setSuspend(Task myTache) {
     	myTache.getStateSimulation().setSuspended();
     	ExpressSimulation.suspendSubTasks(myTache);
     }
     
-    public static void setResume(Tache myTache) {
+    public static void setResume(Task myTache) {
 		myTache.getStateSimulation().setResume();
 		myTache.getStateSimulation().resumeTag = true;
     	ExpressSimulation.resumeSubTasks(myTache);
     }
 
-    private static void resumeSubTasks(Tache myTache) {
-        for (Tache current : myTache.getFils()) {
+    private static void resumeSubTasks(Task myTache) {
+        for (Task current : myTache.getChildren()) {
     		if (current.getStateSimulation().isSuspended()) {
     			// Ne rien faire dans cette sous-tache. Elle est encore suspendue.
     		} else {
@@ -365,59 +365,59 @@ public final class ExpressSimulation {
     	}
     }
     
-    private static void suspendSubTasks(Tache myTache) {
+    private static void suspendSubTasks(Task myTache) {
     	myTache.getStateSimulation().setSuspendedSubTaskOn();
-    	for (Tache current : myTache.getFils()) {
+    	for (Task current : myTache.getChildren()) {
     		suspendSubTasks(current);
     	}
     }
     
-    private static void noResumedTasks(Tache myTache) {
+    private static void noResumedTasks(Task myTache) {
     	myTache.getStateSimulation().setNoResumed();
-    	for (Tache current : myTache.getFils()) {
+    	for (Task current : myTache.getChildren()) {
     		noResumedTasks(current);
     	}
     }
     
-    private static void passedTasks(Tache myTache) {
+    private static void passedTasks(Task myTache) {
         myTache.getStateSimulation().setPassed();
-        for (Tache current : myTache.getFils()) {
+        for (Task current : myTache.getChildren()) {
             passedTasks(current);
         }
     }
     
-    private static void finishedTasks(Tache myTache) {
+    private static void finishedTasks(Task myTache) {
     	myTache.getStateSimulation().setFinished();
-    	for (Tache current : myTache.getFils()) {
+    	for (Task current : myTache.getChildren()) {
     		finishedTasks(current);
     	}
     }
 
-    private static void noAccessibledTasks(Tache myTache) {
+    private static void noAccessibledTasks(Task myTache) {
         myTache.getStateSimulation().setNotAccessible();
-        for (Tache current : myTache.getFils()) {
+        for (Task current : myTache.getChildren()) {
             noAccessibledTasks(current);
         }
     }
     
     // Construction des règles pour les opérateurs
-    public static void applyDecomposition(Tache refTask) {
-        if (refTask.getDecomposition().equals(Decomposition.SEQ)) {
+    public static void applyDecomposition(Task refTask) {
+        if (refTask.getOrdering().equals(Decomposition.SEQ)) {
             ExpressSimulation.sequenceOperatorEffects(refTask);
-        } else if (refTask.getDecomposition().equals(Decomposition.ALT)) {
+        } else if (refTask.getOrdering().equals(Decomposition.ALT)) {
             ExpressSimulation.choiceOperatorEffects(refTask);
-        } else if (refTask.getDecomposition().equals(Decomposition.PAR)) {
+        } else if (refTask.getOrdering().equals(Decomposition.PAR)) {
             ExpressSimulation.concurencyOperatorEffects(refTask);
-        } else if (refTask.getDecomposition().equals(Decomposition.ET)) {
+        } else if (refTask.getOrdering().equals(Decomposition.ET)) {
             ExpressSimulation.indenpendancyOrderOperatorEffects(refTask);
-        } else if (refTask.getDecomposition().equals(Decomposition.ELE)) {
+        } else if (refTask.getOrdering().equals(Decomposition.ELE)) {
         } 
     }
 
-    private static void sequenceOperatorEffects(Tache refTask) {
+    private static void sequenceOperatorEffects(Task refTask) {
         // Le début : mettre la première tâche fille a Passive
-        if (refTask.getStateSimulation().isPassive() && refTask.getFils().get(0).getStateSimulation().isNotAccessible()) {
-            refTask.getFils().get(0).getStateSimulation().setPassive();
+        if (refTask.getStateSimulation().isPassive() && refTask.getChildren().get(0).getStateSimulation().isNotAccessible()) {
+            refTask.getChildren().get(0).getStateSimulation().setPassive();
         }
 
         boolean finishedOne = false;
@@ -425,7 +425,7 @@ public final class ExpressSimulation {
         boolean activedOne = false;
         boolean noresumedOne = false;
         
-        for (Tache current : refTask.getFils()) {
+        for (Task current : refTask.getChildren()) {
             if (activedOne) {
                 refTask.getStateSimulation().setActive();
             }
@@ -466,12 +466,12 @@ public final class ExpressSimulation {
     }
     
     // Pas de tâche facultative pour une tâche de type Choice.
-    private static void choiceOperatorEffects(Tache refTask) {
+    private static void choiceOperatorEffects(Task refTask) {
         // Le debut : mettre toutes les sous-taches fille a Passive
-    	if ((refTask.getStateSimulation().isPassive() || refTask.getStateSimulation().isActive()) && refTask.getFils().get(0).getStateSimulation().isNotAccessible()) {
+    	if ((refTask.getStateSimulation().isPassive() || refTask.getStateSimulation().isActive()) && refTask.getChildren().get(0).getStateSimulation().isNotAccessible()) {
     		// Pour la verification on a simplement besoin de verifier la premiere tache a NotAccessible car cet etat
     		// n'est jamais repris
-    		for (Tache current : refTask.getFils()) {
+    		for (Task current : refTask.getChildren()) {
     			current.getStateSimulation().setPassive();
     		}
     	}
@@ -479,11 +479,11 @@ public final class ExpressSimulation {
          boolean activedOne = false;
          boolean finishedOne = false;
          boolean suspended = false;
-         for (Tache current : refTask.getFils()) {
+         for (Task current : refTask.getChildren()) {
              if (activedOne) {
                  // La tache precedente est une tache terminee et celle-ci est obligatoiteremnt en passive
             	 	refTask.getStateSimulation().setActive();            	 	
-            	 	for (Tache subCurrent : refTask.getFils()) {
+            	 	for (Task subCurrent : refTask.getChildren()) {
             	 		if (!subCurrent.getStateSimulation().isActive()) { 
             	 			ExpressSimulation.finishedTasks(subCurrent);
             	 		}
@@ -502,7 +502,7 @@ public final class ExpressSimulation {
         
          if (activedOne) {
         	 	refTask.getStateSimulation().setActive();
-        	 	for (Tache subCurrent : refTask.getFils()) {
+        	 	for (Task subCurrent : refTask.getChildren()) {
         	 		if (!subCurrent.getStateSimulation().isActive()) { 
         	 			ExpressSimulation.finishedTasks(subCurrent);
         	 		}
@@ -512,7 +512,7 @@ public final class ExpressSimulation {
              if (ExpressIteration.isFinished(refTask)) {
                  refTask.getStateSimulation().setFinished();
                  
-                 for (Tache subCurrent : refTask.getFils()) {
+                 for (Task subCurrent : refTask.getChildren()) {
                      // Toutes les sous-taches sont dans l'état terminee.
                      ExpressSimulation.finishedTasks(subCurrent);
                  }
@@ -531,9 +531,9 @@ public final class ExpressSimulation {
      *  lors d'une concurrence ou d'une ind�pendance.
      *  Si pas d'interruption pour toutes les t�ches
      */    
-    private static void concurencyOperatorEffects(Tache refTask) {
+    private static void concurencyOperatorEffects(Task refTask) {
     		Importance temp = Importance.PEU;
-		for (Tache current : refTask.getFils()) {
+		for (Task current : refTask.getChildren()) {
             if (!current.getStateSimulation().isTerminalState()) {
 				temp = Importance.getMoreImportant(temp, current.getImportance());
 			}
@@ -545,7 +545,7 @@ public final class ExpressSimulation {
       
 		// Maintenant qu'on a fait le tour, il faut interrompre les taches de priorite plus faible.	
         boolean activedOne = false;
-        for (Tache current : refTask.getFils()) {
+        for (Task current : refTask.getChildren()) {
         	if (current.isInterruptible() && 
         			current.getImportance().isMoreImportant(temp) && 
         			!current.getStateSimulation().isSuspended() && 
@@ -567,7 +567,7 @@ public final class ExpressSimulation {
             activedOne = activedOne | current.getStateSimulation().isActive();
         }
 
-        for (Tache current : refTask.getFils()) {
+        for (Task current : refTask.getChildren()) {
             if (!current.getStateSimulation().isTerminalState()) {
                 return;
             }
@@ -583,10 +583,10 @@ public final class ExpressSimulation {
         }        
     }
     
-    private static void indenpendancyOrderOperatorEffects(Tache refTask) {
+    private static void indenpendancyOrderOperatorEffects(Task refTask) {
         Importance temp = Importance.PEU;
         boolean notAccessibleAll = false;
-        for (Tache current : refTask.getFils()) {
+        for (Task current : refTask.getChildren()) {
             if (!current.getStateSimulation().isTerminalState()) {
                 temp = Importance.getMoreImportant(temp, current.getImportance());
             }
@@ -594,17 +594,17 @@ public final class ExpressSimulation {
         }      
         
         if (!notAccessibleAll) {
-            for (Tache current : refTask.getFils()) {
+            for (Task current : refTask.getChildren()) {
                 current.getStateSimulation().setPassive();
             }
         }
         
         boolean activedOne = false;
         boolean finishedOne = false;
-        for (Tache current : refTask.getFils()) {            
+        for (Task current : refTask.getChildren()) {            
             if (activedOne) {
                 // Si active => rendre NotAccessibleAll les t�ches Passive.
-                for (Tache subCurrent : refTask.getFils()) {
+                for (Task subCurrent : refTask.getChildren()) {
                     if (subCurrent.getStateSimulation().isPassive()) {
                         ExpressSimulation.noAccessibledTasks(subCurrent);
                     }
@@ -614,7 +614,7 @@ public final class ExpressSimulation {
             
             if (finishedOne) {
                 // Si finished => rendre Passive les t�ches NotAccessible.
-                for (Tache subCurrent : refTask.getFils()) {
+                for (Task subCurrent : refTask.getChildren()) {
                     if (subCurrent.getStateSimulation().isNotAccessible()) {
                         subCurrent.getStateSimulation().setPassive();
                         ExpressSimulation.applyDecomposition(subCurrent);
@@ -632,7 +632,7 @@ public final class ExpressSimulation {
 
         if (activedOne) {
             // Si la derni�re t�che active => rendre NotAccessibleAll les taches Passive.
-            for (Tache subCurrent : refTask.getFils()) {
+            for (Task subCurrent : refTask.getChildren()) {
                 if (subCurrent.getStateSimulation().isPassive()) {
                     ExpressSimulation.noAccessibledTasks(subCurrent);
                 }
@@ -642,7 +642,7 @@ public final class ExpressSimulation {
         
         if (finishedOne) {
             // Si la derni�re t�che finished => rendre Passive les taches NotAccessible.
-            for (Tache subCurrent : refTask.getFils()) {
+            for (Task subCurrent : refTask.getChildren()) {
                 if (subCurrent.getStateSimulation().isNotAccessible()) {
                     subCurrent.getStateSimulation().setPassive();
                     ExpressSimulation.applyDecomposition(subCurrent);
@@ -651,7 +651,7 @@ public final class ExpressSimulation {
         }
 
         // V�rifie si toutes les t�ches sont dans l'état terminé
-        for (Tache current : refTask.getFils()) {
+        for (Task current : refTask.getChildren()) {
             if (!current.getStateSimulation().isTerminalState()) {
                 return;
             }

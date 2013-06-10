@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Evenement;
+import fr.upensma.lias.kmade.kmad.schema.tache.Event;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.RegularExpression;
 import fr.upensma.lias.kmade.tool.view.toolutilities.DefaultListTableModel;
@@ -111,7 +111,7 @@ public class KMADEReadWriteEventObjectPanel extends JScrollPane implements Langu
 						    .getResource(KMADEConstant.ASK_DIALOG_IMAGE)),
 				    null, name);
 		} else { // l'expression est ok
-		    if (Evenement.isUniqueName(name)) {
+		    if (Event.isUniqueName(name)) {
 			// si le nom est unique, le nom est correct et possible
 			needVerif = false;
 		    } else {
@@ -124,7 +124,7 @@ public class KMADEReadWriteEventObjectPanel extends JScrollPane implements Langu
 					new ImageIcon(
 						GraphicEditorAdaptator.class
 							.getResource(KMADEConstant.ASK_DIALOG_IMAGE)),
-					null, Evenement.propositionNom(name));
+					null, Event.propositionNom(name));
 		    }
 		}
 	    }

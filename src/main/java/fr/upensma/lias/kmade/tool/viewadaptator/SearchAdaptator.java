@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEDefaultGraphCell;
@@ -40,7 +40,7 @@ public final class SearchAdaptator {
 
     private static boolean side = true; // true = forward ; false = backward
 
-    private static ArrayList<Tache> searchTache = new ArrayList<Tache>();;
+    private static ArrayList<Task> searchTache = new ArrayList<Task>();;
 
     private static int current = 0;
 
@@ -64,7 +64,7 @@ public final class SearchAdaptator {
 	    boolean caseSensitive, boolean wholeWord, boolean scope) {
 	SearchAdaptator.disableFindFlag();
 	// Récupère les tâches
-	ArrayList<Tache> allTask = null;
+	ArrayList<Task> allTask = null;
 	if (scope) {
 	    allTask = ExpressTask.getTasksFromExpress();
 	} else {
@@ -107,7 +107,7 @@ public final class SearchAdaptator {
     public static void replace(String taskNameFind, boolean wholeName,
 	    String taskName, String executant, String operateur, int inter,
 	    int facul) {
-	Tache temp = SearchAdaptator.replaceFromCriterias(taskNameFind,
+	Task temp = SearchAdaptator.replaceFromCriterias(taskNameFind,
 		wholeName, taskName, executant, operateur, inter, facul);
 	GraphicEditorAdaptator.getMainFrame().getFindReplaceDialog()
 		.addElement(SearchAdaptator.getSearchTasks());
@@ -150,7 +150,7 @@ public final class SearchAdaptator {
     }
 
     private static void disableFindFlag() {
-	ArrayList<Tache> listCell = SearchAdaptator.getSearchTasks();
+	ArrayList<Task> listCell = SearchAdaptator.getSearchTasks();
 	for (int i = 0; i < SearchAdaptator.getSearchTasks().size(); i++) {
 	    ((KMADEDefaultGraphCell) (listCell.get(i).getJTask()))
 		    .setFlagSearch(false);
@@ -161,7 +161,7 @@ public final class SearchAdaptator {
     }
 
     private static KMADEDefaultGraphCell[] getSearchTasksArray() {
-	ArrayList<Tache> taskList = SearchAdaptator.getSearchTasks();
+	ArrayList<Task> taskList = SearchAdaptator.getSearchTasks();
 	KMADEDefaultGraphCell[] array = new KMADEDefaultGraphCell[taskList
 		.size()];
 	for (int i = 0; i < taskList.size(); i++) {
@@ -238,7 +238,7 @@ public final class SearchAdaptator {
 		}
 		for (int i = 0; i < SearchAdaptator.getSearchTasks().size(); i++) {
 		    fw.write(SearchAdaptator.getSearchTasks().get(i)
-			    .getNumero()
+			    .getNumber()
 			    + " - "
 			    + SearchAdaptator.getSearchTasks().get(i).getName()
 			    + "\n");
@@ -251,14 +251,14 @@ public final class SearchAdaptator {
 	}
     }
 
-    public static void selectTasksFromOccurence(Tache selectedTask, int p) {
+    public static void selectTasksFromOccurence(Task selectedTask, int p) {
 	SearchAdaptator.setCurrent(p);
 	GraphicEditorAdaptator.setSelectionTask(selectedTask);
 	GraphicEditorAdaptator
 		.getTaskModelPanel()
 		.getJGraph()
 		.scrollCellToVisible(
-			(KMADEDefaultGraphCell) ((Tache) selectedTask)
+			(KMADEDefaultGraphCell) ((Task) selectedTask)
 				.getJTask());
     }
 
@@ -320,11 +320,11 @@ public final class SearchAdaptator {
 	return (current > 0);
     }
 
-    private static Tache replaceFromCriterias(String taskNameFind,
+    private static Task replaceFromCriterias(String taskNameFind,
 	    boolean wholeName, String replaceTaskName, String executant,
 	    String operateur, int inter, int facul) {
 	if (searchTache.size() != 0) {
-	    Tache myTask = searchTache.get(current);
+	    Task myTask = searchTache.get(current);
 	    if (wholeName) {
 		myTask.setName(replaceTaskName);
 	    } else {
@@ -338,14 +338,14 @@ public final class SearchAdaptator {
 			.getLocaleExecutantIntoExecutant(executant));
 	    }
 	    if (!operateur.equals("*")) {
-		myTask.setDecomposition(Decomposition
+		myTask.setOrdering(Decomposition
 			.getLocaleDecompositionIntoDecomposition(operateur));
 	    }
 	    if (inter != 0) {
 		myTask.setInterruptible(inter == 1 ? true : false);
 	    }
 	    if (facul != 0) {
-		myTask.setFacultatif(facul == 1 ? true : false);
+		myTask.setOptional(facul == 1 ? true : false);
 	    }
 	    return myTask;
 	} else {
@@ -353,7 +353,7 @@ public final class SearchAdaptator {
 	}
     }
 
-    private static boolean findFromCriterias(ArrayList<Tache> allTache,
+    private static boolean findFromCriterias(ArrayList<Task> allTache,
 	    String findTaskName, String executant, String operateur, int inter,
 	    int facul, boolean regExpression, boolean caseSensitive,
 	    boolean wholeWord) {
@@ -423,7 +423,7 @@ public final class SearchAdaptator {
 	return statut;
     }
 
-    private static ArrayList<Tache> getSearchTasks() {
+    private static ArrayList<Task> getSearchTasks() {
 	return searchTache;
     }
 }

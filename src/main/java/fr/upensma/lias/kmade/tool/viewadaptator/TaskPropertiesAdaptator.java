@@ -24,7 +24,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Frequence;
 import fr.upensma.lias.kmade.kmad.schema.tache.Importance;
 import fr.upensma.lias.kmade.kmad.schema.tache.Modalite;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskproperties.KMADETaskPropertiesPanel;
@@ -311,28 +311,27 @@ public final class TaskPropertiesAdaptator {
      *            : oid de la t�che s�lectionn�e
      */
     public static void setSelectedTaskAttributes() {
-	Tache tache = GraphicEditorAdaptator.getSelectedGraphicTask().getTask();
+	Task tache = GraphicEditorAdaptator.getSelectedGraphicTask().getTask();
 
 	KMADEMainFrame
 		.getProjectPanel()
 		.getPanelProprieteTache()
-		.displayTaskProperties(tache.getNumero(),
+		.displayTaskProperties(tache.getNumber(),
 			tache.getMotherTaskName(), tache.getName(),
-			 tache.getBut(), 
-			tache.getRessources(),
+			 tache.getGoal(), 
 			/* tache.getMedia(), */
 			tache.getLabelName(),
 			/* tache.getFeedBack(), */
-			 tache.getDuree(), 
-			tache.getObservation(), tache.getExecutant(),
-			tache.getModalite().getValue(),
-			tache.getFrequence().getValue(), tache.getCompFreq(),
+			 tache.getDuration(), 
+			tache.getDescription(), tache.getExecutant(),
+			tache.getModality().getValue(),
+			tache.getFrequency().getValue(), tache.getFrequencyValue(),
 			tache.getImportance().getValue(),
 			tache.getEventsName(), tache.getFacultatif(),
 			tache.isInterruptible(), tache.getDeclencheurName(),
-			tache.getActeurs(), tache.getPreExpression(),
+			tache.getActors(), tache.getPreExpression(),
 			tache.getEffetsDeBordExpression(),
-			tache.getDecomposition().getValue(),
+			tache.getOrdering().getValue(),
 			tache.getIteExpression());
 	TaskPropertiesAdaptator.updateTaskPropertiesPanel();
     }
@@ -368,9 +367,9 @@ public final class TaskPropertiesAdaptator {
 			GraphicEditorAdaptator.getSelectedGraphicTask()
 				.getTask().getEventsName(),
 			GraphicEditorAdaptator.getSelectedGraphicTask()
-				.getTask().getActeurs(),
+				.getTask().getActors(),
 			GraphicEditorAdaptator.getSelectedGraphicTask()
-				.getTask().getActeurSysteme(), newLabelArray);
+				.getTask().getActorSystem(), newLabelArray);
     }
 
     public static void setNameFromExpressTask(String name) {

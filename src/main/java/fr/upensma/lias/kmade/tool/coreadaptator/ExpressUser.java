@@ -21,10 +21,10 @@ import java.util.ArrayList;
 
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-import fr.upensma.lias.kmade.kmad.schema.tache.Acteur;
+import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Individu;
 import fr.upensma.lias.kmade.kmad.schema.tache.Organisation;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 
 /**
@@ -121,8 +121,8 @@ public class ExpressUser {
 	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Organisation");
 	Object task = InterfaceExpressJava.prendre(new Oid(oidTask));
-	Tache myTask = (Tache) task;
-	ArrayList<Acteur> myActor = myTask.getActeurs();
+	Task myTask = (Task) task;
+	ArrayList<Actor> myActor = myTask.getActors();
 	ArrayList<User> myUser = new ArrayList<User>();
 	for (int i = 0; i < myActor.size(); i++) {
 	    myUser.add(myActor.get(i).getUserRef());

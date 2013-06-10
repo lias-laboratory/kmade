@@ -1,6 +1,6 @@
 package fr.upensma.lias.kmade.tool.coreadaptator.prototype;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 
 /**
@@ -16,16 +16,16 @@ public class PROTOHistoric {
 
 
 
-    public static void addTask(Tache t){
+    public static void addTask(Task t){
 	
 	GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().getHistoricPanel().addNode(t);
     }
 
-    public static void addPrecondition(Tache t, boolean respected){
+    public static void addPrecondition(Task t, boolean respected){
 
     }
 
-    public static void addFinished(Tache t) {
+    public static void addFinished(Task t) {
     }
 
     public static void descendre() {

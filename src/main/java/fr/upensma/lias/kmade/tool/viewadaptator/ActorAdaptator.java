@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-import fr.upensma.lias.kmade.kmad.schema.tache.Acteur;
+import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressActeur;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
@@ -55,7 +55,7 @@ public class ActorAdaptator {
 
     public static String setOldActorSelectedTask(String oidActor, String newUser) {
 
-	Acteur m = (Acteur) InterfaceExpressJava.prendre(new Oid(oidActor));
+	Actor m = (Actor) InterfaceExpressJava.prendre(new Oid(oidActor));
 	User myUser = ExpressUser.getUserWithName(newUser);
 	if (!isUserInActors(myUser.getOid())) {
 	    m.delete();
@@ -78,7 +78,7 @@ public class ActorAdaptator {
     }
 
     private static boolean isUserInActors(Oid oidUser) {
-	ArrayList<Acteur> ma_liste = ExpressActeur
+	ArrayList<Actor> ma_liste = ExpressActeur
 		.extractActorFromTask(GraphicEditorAdaptator
 			.getSelectedExpressTask());
 	for (int i = 0; i < ma_liste.size(); i++) {

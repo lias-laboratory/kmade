@@ -20,7 +20,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator.simulation;
 import java.util.ArrayList;
 
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 
 /**
@@ -55,7 +55,7 @@ public class TokenRecordScenarioSimulation extends TokenSimulation {
 	refUser = u;
     }
 
-    public TokenRecordScenarioSimulation(Tache p, int paction) {
+    public TokenRecordScenarioSimulation(Task p, int paction) {
 	super(p, paction);
     }
 

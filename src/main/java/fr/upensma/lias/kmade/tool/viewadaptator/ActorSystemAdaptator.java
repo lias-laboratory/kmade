@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-import fr.upensma.lias.kmade.kmad.schema.tache.ActeurSysteme;
+import fr.upensma.lias.kmade.kmad.schema.tache.ActorSystem;
 import fr.upensma.lias.kmade.kmad.schema.tache.Materiel;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressActeurSysteme;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressMateriel;
@@ -56,7 +56,7 @@ public class ActorSystemAdaptator {
 
     public static String setOldActorSystemSelectedTask(String oidActor,
 	    String newUser) {
-	ActeurSysteme m = (ActeurSysteme) InterfaceExpressJava.prendre(new Oid(
+	ActorSystem m = (ActorSystem) InterfaceExpressJava.prendre(new Oid(
 		oidActor));
 	Materiel myUser = ExpressMateriel.getMaterielWithName(newUser);
 	if (!isMaterielInActorSystem(myUser.getOid())) {
@@ -81,7 +81,7 @@ public class ActorSystemAdaptator {
     }
 
     private static boolean isMaterielInActorSystem(Oid oidMateriel) {
-	ArrayList<ActeurSysteme> ma_liste = ExpressActeurSysteme
+	ArrayList<ActorSystem> ma_liste = ExpressActeurSysteme
 		.extractActorSystemFromTask(GraphicEditorAdaptator
 			.getSelectedExpressTask());
 	for (int i = 0; i < ma_liste.size(); i++) {

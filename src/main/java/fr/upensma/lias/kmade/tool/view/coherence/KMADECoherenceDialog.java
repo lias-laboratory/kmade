@@ -45,7 +45,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.toolutilities.InDevelopmentGlassPanel;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
@@ -289,13 +289,13 @@ public class KMADECoherenceDialog extends JDialog {
 	    case 1:
 		return (String) temp[1];
 	    case 2:
-		return ((Tache) temp[2]).getName();
+		return ((Task) temp[2]).getName();
 	    case 3:
 		return (Integer) temp[3];
 	    case 4:
 		return (Integer) temp[4];
 	    case 5:
-		return (Tache) temp[2];
+		return (Task) temp[2];
 	    }
 	    return "";
 	}

@@ -21,7 +21,7 @@ import java.util.Observer;
 
 import fr.upensma.lias.kmade.kmad.schema.expression.NodeExpression;
 import fr.upensma.lias.kmade.kmad.schema.expression.SemanticException;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.MyPrecondition;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.ParseException;
@@ -56,27 +56,27 @@ public final class ExpressPrecondition {
 	expressTaskObservable.notifyKMADEObserver(argv);
     }
 
-    public static void setPreconditionDescription(Tache pTache, String p) {
+    public static void setPreconditionDescription(Task pTache, String p) {
 	pTache.getPreExpression().setDescription(p);
     }
 
-    public static String getPreconditionDescription(Tache pTache) {
+    public static String getPreconditionDescription(Task pTache) {
 	return pTache.getPreExpression().getDescription();
     }
 
-    public static void setPrecondition(Tache pTache, NodeExpression node) {
+    public static void setPrecondition(Task pTache, NodeExpression node) {
 	pTache.getPreExpression().setNodeExpression(node);
 	notifyObservers();
     }
 
-    public static NodeExpression getPrecondition(Tache pTache) {
+    public static NodeExpression getPrecondition(Task pTache) {
 	return pTache.getPreExpression().getNodeExpression();
     }
 
     public static void makeAndCheckPreconditionOpenSPFFile() {
 	SwingWorker worker = new SwingWorker() {
 	    public Object construct() {
-		Tache[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
+		Task[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
 		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CHECK_ALL_PRECONDITIONS);
 		for (int i = 0; i < tacheToBeCreated.length
 			&& !ExpressPrecondition.isCanceled(); i++) {

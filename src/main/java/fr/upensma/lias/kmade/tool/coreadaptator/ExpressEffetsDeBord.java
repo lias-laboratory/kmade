@@ -23,7 +23,7 @@ import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.expression.CurrentObject;
 import fr.upensma.lias.kmade.kmad.schema.expression.NodeExpression;
 import fr.upensma.lias.kmade.kmad.schema.expression.SemanticException;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.EffetsDeBord;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.MyEffetsDeBord;
@@ -67,19 +67,19 @@ public class ExpressEffetsDeBord {
 	expressTaskObservable.notifyKMADEObserver(argv);
     }
 
-    public static void setEffetsDeBord(Tache pTache, NodeExpression node) {
+    public static void setEffetsDeBord(Task pTache, NodeExpression node) {
 	pTache.getEffetsDeBordExpression().setNodeExpression(node);
 	notifyObservers();
     }
 
-    public static NodeExpression getEffetsDeBord(Tache pTache) {
+    public static NodeExpression getEffetsDeBord(Task pTache) {
 	return pTache.getEffetsDeBordExpression().getNodeExpression();
     }
 
     public static void makeAndCheckEffetsDeBordOpenSPFFile() {
 	SwingWorker worker = new SwingWorker() {
 	    public Object construct() {
-		Tache[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
+		Task[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
 		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CHECK_ALL_EFFETSDEBORDS);
 		for (int i = 0; i < tacheToBeCreated.length
 			&& !ExpressEffetsDeBord.isCanceled(); i++) {
@@ -204,7 +204,7 @@ public class ExpressEffetsDeBord {
 	ExpressEffetsDeBord.done = done;
     }
 
-    public static void setEffetsDeBordDescription(Tache task,
+    public static void setEffetsDeBordDescription(Task task,
 	    String descriptionArea) {
 	task.getEffetsDeBordExpression().setDescription(descriptionArea);
     }

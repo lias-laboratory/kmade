@@ -17,7 +17,7 @@
 **********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator.simulation;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 
 /**
@@ -25,7 +25,7 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
  */
 public class TokenSimulation {
 
-    protected Tache myTask;
+    protected Task myTask;
 
     protected int action;
 
@@ -39,12 +39,12 @@ public class TokenSimulation {
 
     public static final int ABANDONNER = 4;
 
-    public TokenSimulation(Tache ptask, int paction) {
+    public TokenSimulation(Task ptask, int paction) {
 	this.myTask = ptask;
 	this.action = paction;
     }
 
-    public Tache getTask() {
+    public Task getTask() {
 	return myTask;
     }
 

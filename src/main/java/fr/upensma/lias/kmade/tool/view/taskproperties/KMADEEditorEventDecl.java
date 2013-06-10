@@ -25,7 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Evenement;
+import fr.upensma.lias.kmade.kmad.schema.tache.Event;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadEventObjectTable;
@@ -115,8 +115,8 @@ public class KMADEEditorEventDecl extends JPropertiesEditorDialog {
 		.toArray(temp)));
 	String evt="null";
 	if(row == KMADETaskPropertiesPanel.DECLENCHEMENT_TITLE_ELEMENT){
-		if(GraphicEditorAdaptator.getSelectedExpressTask().getDeclencheur()!=null)
-			evt = GraphicEditorAdaptator.getSelectedExpressTask().getDeclencheur().getName();
+		if(GraphicEditorAdaptator.getSelectedExpressTask().getRaisingEvent()!=null)
+			evt = GraphicEditorAdaptator.getSelectedExpressTask().getRaisingEvent().getName();
 	}
 	if(!evt.equals("null")){
 		myComboBox.setSelectedItem(evt);

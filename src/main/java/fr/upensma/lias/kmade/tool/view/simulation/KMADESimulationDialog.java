@@ -65,7 +65,7 @@ import org.jgraph.graph.GraphModel;
 import org.jgraph.graph.GraphSelectionModel;
 import org.jgraph.plaf.basic.BasicGraphUI;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.CurrentEvents.CurrentEvent;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.simulation.TokenSimulation;
@@ -434,7 +434,7 @@ public class KMADESimulationDialog extends JFrame {
 			KMADEConstant.ROW_HEIGHT));
     }
 
-    public Tache getSelectedTask() {
+    public Task getSelectedTask() {
 	Object temp = this.mySimulationGraph.getSelectionModel()
 		.getSelectionCell();
 	if (temp instanceof KMADEDefaultGraphCell) {

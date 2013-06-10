@@ -34,7 +34,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Acteur;
+import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Experience;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.toolutilities.DefaultListTableModel;
@@ -111,7 +111,7 @@ public class KMADEEditorActorDialog extends JPropertiesEditorDialog {
 	myTableListModel.getListTableData().clear();
 	myListTable.setCellEditor(0, "List", listOfUser);
 	for (int i = 0; i < myEventList.size(); i++) {
-	    Acteur myRef = (Acteur) myEventList.get(i);
+	    Actor myRef = (Actor) myEventList.get(i);
 	    Object[] myNew = {
 		    myRef.getName(),
 		    Experience.getEnumereIntoLocaleExperience(myRef

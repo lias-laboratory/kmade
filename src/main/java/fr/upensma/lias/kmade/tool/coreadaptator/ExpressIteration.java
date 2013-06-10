@@ -21,7 +21,7 @@ import java.util.Observer;
 
 import fr.upensma.lias.kmade.kmad.schema.expression.NodeExpression;
 import fr.upensma.lias.kmade.kmad.schema.expression.SemanticException;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.Iteration;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.MyIteration;
@@ -56,16 +56,16 @@ public final class ExpressIteration {
 	expressTaskObservable.notifyKMADEObserver(argv);
     }
 
-    public static void setIteration(Tache pTache, NodeExpression node) {
+    public static void setIteration(Task pTache, NodeExpression node) {
 	pTache.getIteExpression().setNodeExpression(node);
 	notifyObservers();
     }
 
-    public static NodeExpression getIteration(Tache pTache) {
+    public static NodeExpression getIteration(Task pTache) {
 	return pTache.getIteExpression().getNodeExpression();
     }
 
-    public static boolean isFinished(Tache myTache) {
+    public static boolean isFinished(Task myTache) {
 	return myTache.getIteExpression().isFinished();
 	/*
 	  if (myTache.getIteExpression().isVariableExpressionNode()) { return
@@ -75,7 +75,7 @@ public final class ExpressIteration {
 	 */
     }
 
-    public static void evaluateIteration(Tache myTache) {
+    public static void evaluateIteration(Task myTache) {
 	// TODO : prendre en compte le prédicat pour l'expression itération.
 	// si c'est un compteur il faut d�cr�menter
 	if (myTache.getIteExpression().isNumberVarient()) {
@@ -88,7 +88,7 @@ public final class ExpressIteration {
     public static void makeAndCheckIterationOpenSPFFile() {
 	SwingWorker worker = new SwingWorker() {
 	    public Object construct() {
-		Tache[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
+		Task[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
 		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CHECK_ALL_ITERATIONS);
 		for (int i = 0; i < tacheToBeCreated.length
 			&& !ExpressIteration.isCanceled(); i++) {
@@ -213,7 +213,7 @@ public final class ExpressIteration {
 	ExpressIteration.done = done;
     }
 
-    public static void setIterationDescription(Tache task,
+    public static void setIterationDescription(Task task,
 	    String descriptionArea) {
 	task.getIteExpression().setDescription(descriptionArea);
     }

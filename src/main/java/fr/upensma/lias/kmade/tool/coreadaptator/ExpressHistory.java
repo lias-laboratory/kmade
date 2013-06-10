@@ -29,7 +29,7 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.Groupe;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetAbstrait;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
 import fr.upensma.lias.kmade.kmad.schema.tache.StateSimulation;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.coreadaptator.simulation.StackState;
 import fr.upensma.lias.kmade.tool.coreadaptator.simulation.StackStateModel;
 import fr.upensma.lias.kmade.tool.coreadaptator.simulation.TokenSimulation;
@@ -138,11 +138,11 @@ public final class ExpressHistory {
     // **
     public static void saveStateHistory(TokenSimulation p) {
 	// All tasks from current task model
-	ArrayList<Tache> cellModel = ExpressTask.getTasksFromExpress();
+	ArrayList<Task> cellModel = ExpressTask.getTasksFromExpress();
 	// This list is used to store StateSimulation objects
 	TreeMap<Oid, StackState> myStateSimulationCollection = new TreeMap<Oid, StackState>();
 
-	for (Tache current : cellModel) {
+	for (Task current : cellModel) {
 	    try {
 		StackState myNew = new StackState((StateSimulation) current
 			.getStateSimulation().clone(), current
@@ -172,11 +172,11 @@ public final class ExpressHistory {
     }
 
     private static void loadStateHistoryAt(int indice) {
-	ArrayList<Tache> cellModel = ExpressTask.getTasksFromExpress();
+	ArrayList<Task> cellModel = ExpressTask.getTasksFromExpress();
 	TreeMap<Oid, StackState> temp = myHistoryStateSimulation.get(indice)
 		.getStateSimulationList();
 
-	for (Tache current : cellModel) {
+	for (Task current : cellModel) {
 	    current.setStateSimulation(temp.get(current.getOid())
 		    .getStateSimulation());
 	    // Au cas où il s'agit d'une action Execute et que l'itération est

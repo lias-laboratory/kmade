@@ -30,7 +30,7 @@ import javax.swing.event.DocumentListener;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.StateExecution;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.coreadaptator.prototask.Excution;
@@ -41,7 +41,7 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 
 public class KMADEProtoTaskMainPanel extends JFrame {
 	int gap = 30;
-	private ArrayList<Tache> displayTask = new ArrayList<Tache>();
+	private ArrayList<Task> displayTask = new ArrayList<Task>();
 	private JDesktopPane desktop;
 
 	public KMADEProtoTaskMainPanel() {
@@ -78,23 +78,23 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 
 	}
 
-	private ArrayList<Tache> getTaskInState(StateExecution state) {
-		ArrayList<Tache> root = ExpressTask.getRootTasks();
-		ArrayList<Tache> res = new ArrayList<Tache>();
-		for (Tache tache : root) {
-			res.addAll(getTaskInStateRec(state, new ArrayList<Tache>(), tache));
+	private ArrayList<Task> getTaskInState(StateExecution state) {
+		ArrayList<Task> root = ExpressTask.getRootTasks();
+		ArrayList<Task> res = new ArrayList<Task>();
+		for (Task tache : root) {
+			res.addAll(getTaskInStateRec(state, new ArrayList<Task>(), tache));
 		}
 
 		return res;
 
 	}
 
-	private ArrayList<Tache> getTaskInStateRec(StateExecution state,
-			ArrayList<Tache> prev, Tache t) {
+	private ArrayList<Task> getTaskInStateRec(StateExecution state,
+			ArrayList<Task> prev, Task t) {
 		if (t.getStateExecution() == state) {
 			prev.add(t);
 		}
-		for (Tache fils : t.getFils()) {
+		for (Task fils : t.getChildren()) {
 			prev = getTaskInStateRec(state, prev, fils);
 
 		}
@@ -104,8 +104,8 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 	private void starTest() {
 		// TODO Auto-generated method stub
 
-		ArrayList<Tache> active = getTaskInState(StateExecution.ACTIVE);
-		ArrayList<Tache> attentefin = getTaskInState(StateExecution.ATTENTEFIN);
+		ArrayList<Task> active = getTaskInState(StateExecution.ACTIVE);
+		ArrayList<Task> attentefin = getTaskInState(StateExecution.ATTENTEFIN);
 		// active.addAll(getTaskInState(StateExecution.ATTENTEFINKO));
 		System.out.println(getTaskInState(StateExecution.ACTIVABLE).size()+ "ACTIVABLE");
 		System.out.println(getTaskInState(StateExecution.ACTIVE).size()+ "ACTIVE");
@@ -128,7 +128,7 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 				+ "PASSEE");
 		System.out.println(getTaskInState(StateExecution.WAITEND).size()
 				+ "WAITEND");
-		for (Tache t : attentefin) {
+		for (Task t : attentefin) {
 			displayWaitEnd(t, gap);
 			if (gap > 500)
 				gap = 0;
@@ -137,7 +137,7 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 
 		}
 
-		for (Tache t : active) {
+		for (Task t : active) {
 			displayActive(t, gap);
 			if (gap > 500)
 				gap = 0;
@@ -147,15 +147,15 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 		}
 	}
 
-	private void displayWaitEnd(final Tache t, int gap2) {
+	private void displayWaitEnd(final Task t, int gap2) {
 		JInternalFrame frame = new JInternalFrame(t.getName(), true, false,
 				true, true);
 		frame.setBounds(gap, gap, 100, 100);
 		frame.setVisible(true);
 		desktop.add(frame);
 		frame.setLayout(new FlowLayout());
-		ArrayList<Tache> fils = t.getFils();
-		for (final Tache tache : fils) {
+		ArrayList<Task> fils = t.getChildren();
+		for (final Task tache : fils) {
 			JButton b = new JButton(tache.getName() + "lolilol");
 			// b.setName(tache.getName());
 			if (tache.getStateExecution() == StateExecution.ACTIVABLE) {
@@ -198,7 +198,7 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 
 	}
 
-	private void displayActive(Tache active, int gap) {
+	private void displayActive(Task active, int gap) {
 		System.out
 		.println(active.getName() + "  " + active.getStateExecution());
 
@@ -208,8 +208,8 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 		frame.setVisible(true);
 		desktop.add(frame);
 		frame.setLayout(new FlowLayout());
-		ArrayList<Tache> fils = active.getFils();
-		for (final Tache tache : fils) {
+		ArrayList<Task> fils = active.getChildren();
+		for (final Task tache : fils) {
 			JButton b = new JButton(tache.getName() + "lolilol");
 			// b.setName(tache.getName());
 			if (tache.getStateExecution() == StateExecution.ACTIVABLE) {

@@ -22,16 +22,16 @@ import fr.upensma.lias.kmade.kmad.schema.expression.VoidConstant;
 /**
  * @author Mickael BARON
  */
-public class EffetsDeBordExpression extends Expression {
+public class SideEffectExpression extends Expression {
 
     private static final long serialVersionUID = 1083101442297410483L;
 
-    public EffetsDeBordExpression() {
+    public SideEffectExpression() {
 	refNode = new VoidConstant();
 	chaine = refNode.getName();
     }
 
-    public EffetsDeBordExpression(String pre) {
+    public SideEffectExpression(String pre) {
 	this.chaine = pre;
 	if (this.chaine.equals("")) {
 	    refNode = new VoidConstant();

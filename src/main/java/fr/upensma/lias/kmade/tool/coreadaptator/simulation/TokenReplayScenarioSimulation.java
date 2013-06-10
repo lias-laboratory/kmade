@@ -19,7 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator.simulation;
 
 import java.util.ArrayList;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 
 /**
  * @author Mickael BARON
@@ -34,28 +34,28 @@ public class TokenReplayScenarioSimulation extends TokenRecordScenarioSimulation
 
     protected int state = 1;
 
-    protected ArrayList<Tache> myPossibleTasks = new ArrayList<Tache>();
+    protected ArrayList<Task> myPossibleTasks = new ArrayList<Task>();
 
     protected boolean notFounded;
 
-    public TokenReplayScenarioSimulation(Tache p, int paction) {
+    public TokenReplayScenarioSimulation(Task p, int paction) {
 	// La tâche trouvée est une tâche du modèle. Rien ne dit que c'est la
 	// bonne.
 	super(p, paction);
 	notFounded = (p == null);
     }
 
-    public TokenReplayScenarioSimulation(Tache p) {
+    public TokenReplayScenarioSimulation(Task p) {
 	this(p, -1);
-	myPossibleTasks = new ArrayList<Tache>();
+	myPossibleTasks = new ArrayList<Task>();
     }
 
     public TokenReplayScenarioSimulation() {
 	this(null, -1);
-	myPossibleTasks = new ArrayList<Tache>();
+	myPossibleTasks = new ArrayList<Task>();
     }
 
-    public TokenReplayScenarioSimulation(ArrayList<Tache> possibleTasks) {
+    public TokenReplayScenarioSimulation(ArrayList<Task> possibleTasks) {
 	this(null, -1);
 	myPossibleTasks = possibleTasks;
     }
@@ -99,8 +99,8 @@ public class TokenReplayScenarioSimulation extends TokenRecordScenarioSimulation
      * @param p
      * @return
      */
-    public boolean isActionable(ArrayList<Tache> p) {
-	for (Tache current : p) {
+    public boolean isActionable(ArrayList<Task> p) {
+	for (Task current : p) {
 	    if (current.getOid().get().equals(myTask.getOid().get())) {
 		return true;
 	    }

@@ -43,7 +43,7 @@ import org.xml.sax.SAXException;
 
 import fr.upensma.lias.kmade.KMADEToolConstant;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
@@ -76,7 +76,7 @@ public final class ExpressSimulationXML {
         }
 	}
 	
-	public static boolean saveScenario(String xmlName, ArrayList<TokenRecordScenarioSimulation> scenarioList, Tache rootTask) {
+	public static boolean saveScenario(String xmlName, ArrayList<TokenRecordScenarioSimulation> scenarioList, Task rootTask) {
 		try {
 			DocumentBuilderFactory fabrique = DocumentBuilderFactory.newInstance();
 			DocumentBuilder constructeur = fabrique.newDocumentBuilder();
@@ -98,7 +98,7 @@ public final class ExpressSimulationXML {
 		}
 	}
 	
-	private static Element writeHeadXML(Document document, Tache rootTask) {
+	private static Element writeHeadXML(Document document, Task rootTask) {
 		Element racine = document.createElement("scenario");
 		racine.setAttribute("comment", "Scenario Test");
 		racine.setAttribute("date", "Under Development");
@@ -232,7 +232,7 @@ public final class ExpressSimulationXML {
 	         // lecture du contenu d'un fichier XML avec DOM
 	         Document document = constructeur.parse(scenarioFile);
 	         Element node = document.getDocumentElement();
-             Tache rootTask = ExpressSimulationXML.readHeadXML(node);
+             Task rootTask = ExpressSimulationXML.readHeadXML(node);
              ArrayList<TokenReplayScenarioSimulation> ref = ExpressSimulationXML.readBodyXML(node);
              ReplayScenarioModel myReplayScenarioModel = new ReplayScenarioModel(ref,rootTask);
              return myReplayScenarioModel;
@@ -249,13 +249,13 @@ public final class ExpressSimulationXML {
         return new ReplayScenarioModel();
 	}
     
-    private static Tache readHeadXML(Element node) {
+    private static Task readHeadXML(Element node) {
 //        String p = "";
 //        p += node.getAttribute("coment");
 //        p += " " + node.getAttribute("date");
 //        p += " " + node.getAttribute("name");
         String idTask = node.getAttribute("idTask");
-        Tache myTask = ExpressTask.getTaskFromOid(idTask);
+        Task myTask = ExpressTask.getTaskFromOid(idTask);
         return myTask;
     }
     
@@ -270,13 +270,13 @@ public final class ExpressSimulationXML {
         			String nameTask = myElement.getAttribute("nameTask");
             
         			// A partir de l'OID du scénario enregistré, l'OID de la tâche et sa référence
-        			Tache myTask = ExpressTask.getTaskFromOid(idTask);
+        			Task myTask = ExpressTask.getTaskFromOid(idTask);
             
         			TokenReplayScenarioSimulation myTokenSimulation;
         			// Tache non trouvé.
         			if (myTask == null) {        
         				// Extraction des noms qui ressemblent à celui donnés dans le scénario.
-        				ArrayList<Tache> potentialTask = ExpressTask.getTasksFromName(nameTask);                
+        				ArrayList<Task> potentialTask = ExpressTask.getTasksFromName(nameTask);                
         				myTokenSimulation = new TokenReplayScenarioSimulation(potentialTask);
         			// Tache trouvée
         			} else {

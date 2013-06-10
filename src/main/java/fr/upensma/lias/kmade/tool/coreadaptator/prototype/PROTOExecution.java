@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.StateExecution;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
@@ -26,18 +26,18 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
  */
 public class PROTOExecution {
 
-	private static Tache currentTask;
-	private static Tache startTask;
+	private static Task currentTask;
+	private static Task startTask;
 
 	public static void startExecution() {
 		PROTOHistoric.clearHisto();
-		ArrayList<Tache> selected = GraphicEditorAdaptator.getSelectedTasks();
+		ArrayList<Task> selected = GraphicEditorAdaptator.getSelectedTasks();
 		if (selected.size() == 1) {
 			startTask = selected.get(0);
 			setAllChildStateExecution(selected.get(0), StateExecution.INACTIVE);
 			setCurrentTask(selected.get(0),true,null);			
 		}else{
-		ArrayList<Tache> root = ExpressTask.getRootTasks();
+		ArrayList<Task> root = ExpressTask.getRootTasks();
 		if (root.size() == 1) {
 			startTask = root.get(0);
 			// normal execution with one mother task
@@ -49,7 +49,7 @@ public class PROTOExecution {
 	}
 
 	//modification of task state
-	public static void setCurrentTask(Tache t, boolean historic,HashMap<String,ChoiceEnum> map) {
+	public static void setCurrentTask(Task t, boolean historic,HashMap<String,ChoiceEnum> map) {
 		int reponse = 42;
 		/*if(t.getPreExpression()!= null && t.getPreExpression().getDescription()!=null && !t.getPreExpression().getDescription().equals("")){
 			reponse = JOptionPane.showConfirmDialog(null, KMADEConstant.PROTOTYPING_TOOL_PRECONDITION_TEXT_PANE +" : "+ t.getPreExpression().getDescription(),KMADEConstant.PROTOTYPING_TOOL_PRECONDITION_TITLE_PANE, JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null);
@@ -135,8 +135,8 @@ public class PROTOExecution {
 			if(currentTask.getOrdonnancement() != Decomposition.ELE){
 				PROTOHistoric.addFinished(currentTask);
 			}
-			if (currentTask.getMotherTask() != null && !currentTask.equals(startTask)) {
-				currentTask = currentTask.getMotherTask();
+			if (currentTask.getMother() != null && !currentTask.equals(startTask)) {
+				currentTask = currentTask.getMother();
 				execution(map);
 			} else {
 				// TODO display simulation end
@@ -170,17 +170,17 @@ public class PROTOExecution {
 
 	}
 
-	public static void setAllChildStateExecution(Tache t, StateExecution s) {
-		if (t.getFils() != null) {
-			ArrayList<Tache> child = t.getFils();
-			for (Tache tache : child) {
+	public static void setAllChildStateExecution(Task t, StateExecution s) {
+		if (t.getChildren() != null) {
+			ArrayList<Task> child = t.getChildren();
+			for (Task tache : child) {
 				tache.setStateExecution(s);
 				setAllChildStateExecution(tache, s);
 			}
 		}
 	}
 
-	public static void finishedTask(Tache t,HashMap<String,ChoiceEnum> map) {
+	public static void finishedTask(Task t,HashMap<String,ChoiceEnum> map) {
 		if (currentTask.equals(t)) {
 			PROTOHistoric.remonter();
 			currentTask.setStateExecution(StateExecution.FINISHED);
@@ -204,14 +204,14 @@ public class PROTOExecution {
 	private static void alternatifCase(HashMap<String,ChoiceEnum> map) {
 		// si le choix a été fait la tâche ne peut que se terminer
 		boolean choice = false;
-		for (Tache t : currentTask.getFils()) {
+		for (Task t : currentTask.getChildren()) {
 			if (t.getStateExecution() == StateExecution.FINISHED) {
 				choice = true;
 			}
 		}
 		int number =1;
 		boolean onefinished = false;
-		for (Tache t : currentTask.getFils()) {
+		for (Task t : currentTask.getChildren()) {
 			if (t.getStateExecution() == StateExecution.FINISHED ) {
 				GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setExecutableTask(t,false,true,number++,false,ChoiceEnum.vrai);
 				onefinished = true;
@@ -241,14 +241,14 @@ public class PROTOExecution {
 
 	private static void sequentialCase(HashMap<String,ChoiceEnum> map) {
 		boolean futurActiveFound = false;
-		Tache lastfinished = null;
-		for(Tache t : currentTask.getFils()){
+		Task lastfinished = null;
+		for(Task t : currentTask.getChildren()){
 			if(t.getStateExecution() == StateExecution.FINISHED){
 				lastfinished = t;
 			}
 		}
 		int number = 1;
-		for (Tache t : currentTask.getFils()) {
+		for (Task t : currentTask.getChildren()) {
 			if (t.getStateExecution() == StateExecution.FINISHED) {
 				// il faut afficher cette sous tâche comme terminée
 				// faire affichage sous tâche non exécutable
@@ -257,7 +257,7 @@ public class PROTOExecution {
 
 				// si la tâche n'est pas terminée il faut regarder si la
 				// dernière active lançeable a été trouvée
-				if (futurActiveFound || currentTask.getFils().indexOf(lastfinished)>currentTask.getFils().indexOf(t)) {
+				if (futurActiveFound || currentTask.getChildren().indexOf(lastfinished)>currentTask.getChildren().indexOf(t)) {
 					// afficher la tâche comme non éxécutable
 					GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setExecutableTask(t,true,false,number++,false,ChoiceEnum.vrai);
 
@@ -302,7 +302,7 @@ public class PROTOExecution {
 	private static void noOrderCase(HashMap<String,ChoiceEnum> map) {
 		int nbFinished = 0;
 		int number = 1;
-		for (Tache t : currentTask.getFils()) {
+		for (Task t : currentTask.getChildren()) {
 			if (t.getStateExecution() == StateExecution.FINISHED) {
 				nbFinished++;
 				GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setExecutableTask(t,false,true,number++,false,ChoiceEnum.vrai);
@@ -325,7 +325,7 @@ public class PROTOExecution {
 				}
 			}
 		}
-		if (nbFinished == currentTask.getFils().size()
+		if (nbFinished == currentTask.getChildren().size()
 				&& currentTask.getStateExecution() != StateExecution.WAITEND) {
 			currentTask.setStateExecution(StateExecution.WAITEND);
 			execution(map);
@@ -342,7 +342,7 @@ public class PROTOExecution {
 		PROTOHistoric.deleteCurrentTask();
 		currentTask.setStateExecution(StateExecution.INACTIVE);
 		setAllChildStateExecution(currentTask, StateExecution.INACTIVE);
-		setCurrentTask(currentTask.getMotherTask(),false,map);
+		setCurrentTask(currentTask.getMother(),false,map);
 	}
 
 	public static void updateCondition(HashMap<String,ChoiceEnum> map){

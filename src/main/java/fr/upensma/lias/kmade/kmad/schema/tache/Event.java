@@ -31,7 +31,7 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
 /**
  * @author Vincent LUCQUIAUD and Mickael BARON
  **/
-public class Evenement implements Entity {
+public class Event implements Entity {
 
     private static final long serialVersionUID = -7501424700161825538L;
 
@@ -41,25 +41,25 @@ public class Evenement implements Entity {
 
     private String description;
 
-    private ArrayList<Tache> inverseTache = new ArrayList<Tache>();
+    private ArrayList<Task> inverseTache = new ArrayList<Task>();
 
-    public Evenement() {
+    public Event() {
 	name = "";
 	description = "";
     }
 
-    public Evenement(String name) {
+    public Event(String name) {
 	this.name = name;
 	this.description = "";
 
     }
 
-    public Evenement(String name, String description) {
+    public Event(String name, String description) {
 	this.name = name;
 	this.description = description;
     }
 
-    public Evenement(String name, String description, Oid oid) {
+    public Event(String name, String description, Oid oid) {
 	this.oid = oid;
 	this.name = name;
 	this.description = description;
@@ -67,7 +67,7 @@ public class Evenement implements Entity {
 
     public void delete() {
 	for (int i = 0; i < inverseTache.size(); i++) {
-	    Tache t = inverseTache.get(i);
+	    Task t = inverseTache.get(i);
 	    t.removeEvent(this);
 	}
 	InterfaceExpressJava.remove(oid);
@@ -76,7 +76,7 @@ public class Evenement implements Entity {
     public void affDelete() {
 	InterfaceExpressJava.getGestionWarning().addMessage(oid, 4);
 	for (int i = 0; i < inverseTache.size(); i++) {
-	    Tache t = inverseTache.get(i);
+	    Task t = inverseTache.get(i);
 	    InterfaceExpressJava.getGestionWarning().addMessage(
 		    oid,
 		    4,
@@ -85,11 +85,11 @@ public class Evenement implements Entity {
 	}
     }
 
-    public void addInverseTache(Tache a) {
+    public void addInverseTache(Task a) {
 	inverseTache.add(a);
     }
 
-    public void removeInverseTache(Tache a) {
+    public void removeInverseTache(Task a) {
 	inverseTache.remove(a);
     }
 
@@ -145,7 +145,7 @@ public class Evenement implements Entity {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Evenement");
 	for (int i = 0; i < objAbs.length; i++) {
-	    Evenement obj = (Evenement) objAbs[i];
+	    Event obj = (Event) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {
 		return false;
 	    }
@@ -176,7 +176,7 @@ public class Evenement implements Entity {
     public ArrayList<String> affProvoquer() {
 	ArrayList<String> stAff = new ArrayList<String>();
 	for (int i = 0; i < inverseTache.size(); i++) {
-	    Tache t = inverseTache.get(i);
+	    Task t = inverseTache.get(i);
 	    stAff.add(ExpressConstant.REMOVE_OF_THE_TASK_MESSAGE + " \""
 		    + t.getName() + "\"");
 	}

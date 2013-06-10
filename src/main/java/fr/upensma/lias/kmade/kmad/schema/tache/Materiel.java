@@ -42,7 +42,7 @@ public class Materiel implements Entity {
 
     private String imagePath = "";
 
-    private ArrayList<ActeurSysteme> inverseActeur = new ArrayList<ActeurSysteme>();
+    private ArrayList<ActorSystem> inverseActeur = new ArrayList<ActorSystem>();
 
     public Materiel() {
 	this("", "", null);
@@ -58,17 +58,17 @@ public class Materiel implements Entity {
 	this.oid = oid;
     }
 
-    public void addInverseActeurSysteme(ActeurSysteme a) {
+    public void addInverseActeurSysteme(ActorSystem a) {
 	inverseActeur.add(a);
     }
 
-    public void removeInverseActeurSysteme(ActeurSysteme a) {
+    public void removeInverseActeurSysteme(ActorSystem a) {
 	inverseActeur.remove(a);
     }
 
     public void delete() {
 	for (int i = 0; i < inverseActeur.size(); i++) {
-	    ActeurSysteme a = inverseActeur.get(i);
+	    ActorSystem a = inverseActeur.get(i);
 	    a.delete();
 	}
 	InterfaceExpressJava.remove(oid);
@@ -77,7 +77,7 @@ public class Materiel implements Entity {
     public void affDelete() {
 	InterfaceExpressJava.getGestionWarning().addMessage(oid, 16);
 	for (int i = 0; i < inverseActeur.size(); i++) {
-	    ActeurSysteme a = inverseActeur.get(i);
+	    ActorSystem a = inverseActeur.get(i);
 	    a.affDelete();
 	}
     }

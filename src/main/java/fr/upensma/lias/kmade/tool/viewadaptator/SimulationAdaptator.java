@@ -38,11 +38,11 @@ import fr.upensma.lias.kmade.kmad.schema.expression.SemanticErrorException;
 import fr.upensma.lias.kmade.kmad.schema.expression.SemanticException;
 import fr.upensma.lias.kmade.kmad.schema.expression.SemanticUnknownException;
 import fr.upensma.lias.kmade.kmad.schema.expression.UserExpression;
-import fr.upensma.lias.kmade.kmad.schema.tache.Acteur;
-import fr.upensma.lias.kmade.kmad.schema.tache.Evenement;
+import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
+import fr.upensma.lias.kmade.kmad.schema.tache.Event;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Expression;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressActeur;
@@ -82,7 +82,7 @@ public final class SimulationAdaptator {
 
     private static TokenSimulation currentSelectedTokenSimulation;
 
-    private static Tache currentUserEditTask;
+    private static Task currentUserEditTask;
 
     private static boolean userValueOk;
 
@@ -305,8 +305,8 @@ public final class SimulationAdaptator {
     }
 
     private static void initTaskModels() {
-	ArrayList<Tache> myTaskList = ExpressTask.getRootTasks();
-	for (Tache current : myTaskList) {
+	ArrayList<Task> myTaskList = ExpressTask.getRootTasks();
+	for (Task current : myTaskList) {
 	    ExpressSimulation.initSimulation(current);
 	}
 	GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
@@ -439,13 +439,13 @@ public final class SimulationAdaptator {
 		executantTab[1] = KMADEConstant.AUTHORIZED_EXECUTER_USER_MESSAGE;
 	    } else {
 		boolean trouve = false;
-		if (tokenSimulation.getTask().getActeurs().size() != 0) {
+		if (tokenSimulation.getTask().getActors().size() != 0) {
 		    int value = GraphicEditorAdaptator.getMainFrame()
 			    .getSimulationDialog().getSelectionUserListCombo();
 		    User selectUser = ExpressSimulation
 			    .getCurrentUserList(value);
-		    for (Acteur current : tokenSimulation.getTask()
-			    .getActeurs()) {
+		    for (Actor current : tokenSimulation.getTask()
+			    .getActors()) {
 			if (current.getUserRef().getName()
 				.equals(selectUser.getName())) {
 			    trouve = true;
@@ -469,7 +469,7 @@ public final class SimulationAdaptator {
 
 	// Evénement ...
 	String[] eventTab = new String[2];
-	Evenement eventTask = tokenSimulation.getTask().getDeclencheur();
+	Event eventTask = tokenSimulation.getTask().getRaisingEvent();
 	eventTab[0] = (eventTask == null ? KMADEConstant.NO_FIRING_EVENT_TINY_MESSAGE
 		: eventTask.getName());
 	if (toolbar.isEventSelected()) {
@@ -622,7 +622,7 @@ public final class SimulationAdaptator {
 	// Verification par rapport a la precondition, la effetsdebord et
 	// l'iteration.
 	currentTokenSimulation = tokenSimulation;
-	Tache myTask = currentTokenSimulation.getTask();
+	Task myTask = currentTokenSimulation.getTask();
 
 	ExpressHistory.saveStateHistory(tokenSimulation);
 	if (currentTokenSimulation.isExecuterAction()) {
@@ -735,29 +735,28 @@ public final class SimulationAdaptator {
 	    GraphicEditorAdaptator.setSelectedTask(myDefaultGraphCellRef);
 	    GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
 		    .showTaskProperties();
-	    Tache tache = myDefaultGraphCellRef.getTask();
+	    Task tache = myDefaultGraphCellRef.getTask();
 	    KMADEMainFrame
 		    .getProjectPanel()
 		    .getPanelProprieteTache()
-		    .displayTaskProperties(tache.getNumero(),
+		    .displayTaskProperties(tache.getNumber(),
 			    tache.getMotherTaskName(), tache.getName(),
-			     tache.getBut(), 
-			    tache.getRessources(),
+			     tache.getGoal(), 
 			    /* tache.getMedia(), */
 			    tache.getLabelName(),
 			    /* tache.getFeedBack(), */
-			    tache.getDuree(), 
-			    tache.getObservation(), tache.getExecutant(),
-			    tache.getModalite().getValue(),
-			    tache.getFrequence().getValue(),
-			    tache.getCompFreq(),
+			    tache.getDuration(), 
+			    tache.getDescription(), tache.getExecutant(),
+			    tache.getModality().getValue(),
+			    tache.getFrequency().getValue(),
+			    tache.getFrequencyValue(),
 			    tache.getImportance().getValue(),
-			    tache.getEventsName(), tache.isFacultatif(),
+			    tache.getEventsName(), tache.isOptional(),
 			    tache.isInterruptible(),
-			    tache.getDeclencheurName(), tache.getActeurs(),
+			    tache.getDeclencheurName(), tache.getActors(),
 			    tache.getPreExpression(),
 			    tache.getEffetsDeBordExpression(),
-			    tache.getDecomposition().getValue(),
+			    tache.getOrdering().getValue(),
 			    tache.getIteExpression());
 	    GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
 		    .getSimulationToolBar().setEnabledOneSelectedTask();
@@ -931,7 +930,7 @@ public final class SimulationAdaptator {
     }
 
     private static boolean searchAnyUserExpressionOrConcreteObjectType(
-	    Tache myTask) {
+	    Task myTask) {
 	// Préparation pour les valeurs utilisateurs de la précondition.
 	ArrayList<Object> myListPre = myTask.getPreExpression()
 		.getNodeExpression().getLinearExpression();
@@ -1269,7 +1268,7 @@ public final class SimulationAdaptator {
 	}
     }
 
-    private static void initReplayScenario(Tache rootTask) {
+    private static void initReplayScenario(Task rootTask) {
 	if (rootTask == null) {
 		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SELECT_TASK_TO_REPLAY_MESSAGE);
 	} else {

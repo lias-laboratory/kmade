@@ -19,21 +19,21 @@ package fr.upensma.lias.kmade.tool.coreadaptator.simulation;
 
 import java.util.ArrayList;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 
 /**
  * @author Mickael BARON
  */
 public class ReplayScenarioModel {
     
-    private Tache rootTask;
+    private Task rootTask;
     
     private ArrayList<TokenReplayScenarioSimulation> replayScenarioList = new ArrayList<TokenReplayScenarioSimulation>();
     
     public ReplayScenarioModel() {
     }
     
-    public ReplayScenarioModel(ArrayList<TokenReplayScenarioSimulation> replayScenarioList, Tache rootTask) {
+    public ReplayScenarioModel(ArrayList<TokenReplayScenarioSimulation> replayScenarioList, Task rootTask) {
         this.replayScenarioList = replayScenarioList;
         this.rootTask = rootTask;
     }
@@ -46,11 +46,11 @@ public class ReplayScenarioModel {
         replayScenarioList = p;
     }
 
-    public Tache getRootTask() {
+    public Task getRootTask() {
         return rootTask;
     }
 
-    public void setRootTask(Tache rootTask) {
+    public void setRootTask(Task rootTask) {
         this.rootTask = rootTask;
     }    
 }

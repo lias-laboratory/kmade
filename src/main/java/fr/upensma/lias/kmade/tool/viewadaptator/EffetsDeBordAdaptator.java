@@ -26,7 +26,7 @@ import fr.upensma.lias.kmade.kmad.schema.expression.SemanticException;
 import fr.upensma.lias.kmade.kmad.schema.expression.SemanticUnknownException;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.NumberValue;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.TypeStructure;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressEffetsDeBord;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressHistory;
@@ -130,7 +130,7 @@ public final class EffetsDeBordAdaptator {
 
     public static void evaluateEffetsDeBord(String text) {
     	KMADEHistoryMessageManager.printMessage(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
-	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
+	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 
 	boolean historySuccess = ExpressHistory.saveConcreteHistory();
@@ -173,7 +173,7 @@ public final class EffetsDeBordAdaptator {
     }
 
     private static void checkEffetsDeBordBuilder(String s) {
-	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
+	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	myCurrentTask.getEffetsDeBordExpression().setName(s);
 
@@ -233,7 +233,7 @@ public final class EffetsDeBordAdaptator {
 
     public static void initEffetsDeBord() {
 	// Active ou pas l'évaluation
-	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
+	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	if (myCurrentTask.getEffetsDeBordExpression().getNodeExpression() != null) {
 	    // Construire l'expression.

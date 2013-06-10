@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
@@ -67,7 +67,7 @@ public final class StatisticAdaptator {
      * Cette méthode devra être "threadée" pour plus d'efficacité
      */
     private static synchronized void checkStatisticModels() {
-	ArrayList<Tache> myTaskList = ExpressTask.getTasksFromExpress();
+	ArrayList<Task> myTaskList = ExpressTask.getTasksFromExpress();
 
 	myMessageList.add(getTaskCount(myTaskList));
 	ArrayList<Object[]> temp = getTaskExecutant(myTaskList);
@@ -82,14 +82,14 @@ public final class StatisticAdaptator {
 	});
     }
 
-    private static Object[] getTaskCount(ArrayList<Tache> myTaskList) {
+    private static Object[] getTaskCount(ArrayList<Task> myTaskList) {
 	Object[] temp = { KMADEConstant.COUNT_TASK_INTO_TASK_MODELS_MESSAGE,
 		myTaskList.size() };
 	return temp;
     }
 
     private static ArrayList<Object[]> getTaskExecutant(
-	    ArrayList<Tache> myTaskList) {
+	    ArrayList<Task> myTaskList) {
 	int unknownExe = 0;
 	int abstractExe = 0;
 	int userExe = 0;
@@ -101,7 +101,7 @@ public final class StatisticAdaptator {
 	int concurrentDec = 0;
 	int elementaryDec = 0;
 	int noOrderDec = 0;
-	for (Tache current : myTaskList) {
+	for (Task current : myTaskList) {
 	    if (current.getExecutant().equals(Executant.USER)) {
 		userExe++;
 	    } else if (current.getExecutant().equals(Executant.INCONNU)) {
@@ -114,17 +114,17 @@ public final class StatisticAdaptator {
 		abstractExe++;
 	    }
 
-	    if (current.getDecomposition().equals(Decomposition.ALT)) {
+	    if (current.getOrdering().equals(Decomposition.ALT)) {
 		choiceDec++;
-	    } else if (current.getDecomposition().equals(Decomposition.ELE)) {
+	    } else if (current.getOrdering().equals(Decomposition.ELE)) {
 		elementaryDec++;
-	    } else if (current.getDecomposition().equals(Decomposition.ET)) {
+	    } else if (current.getOrdering().equals(Decomposition.ET)) {
 		noOrderDec++;
-	    } else if (current.getDecomposition().equals(Decomposition.INCONNU)) {
+	    } else if (current.getOrdering().equals(Decomposition.INCONNU)) {
 		unknownDec++;
-	    } else if (current.getDecomposition().equals(Decomposition.PAR)) {
+	    } else if (current.getOrdering().equals(Decomposition.PAR)) {
 		concurrentDec++;
-	    } else if (current.getDecomposition().equals(Decomposition.SEQ)) {
+	    } else if (current.getOrdering().equals(Decomposition.SEQ)) {
 		enablingDec++;
 	    }
 	}

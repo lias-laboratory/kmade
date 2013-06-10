@@ -22,7 +22,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 
@@ -58,19 +58,19 @@ public class ExpressKMADTXT {
 	
 	private static void refreshString(){
 		myText = "";
-		ArrayList<Tache> rootTasks = ExpressTask.getRootTasks();
-		for (Tache tache : rootTasks) {
+		ArrayList<Task> rootTasks = ExpressTask.getRootTasks();
+		for (Task tache : rootTasks) {
 			saveKMADSimpleModelRecu(tache,0);
 		}		
 	}
 	
-	private static void saveKMADSimpleModelRecu(Tache t, int lvl){
+	private static void saveKMADSimpleModelRecu(Task t, int lvl){
 		for(int i = 0; i<lvl; i++){
 			myText += "    ";
 		}
-		myText += t.getNumero() +" - "+t.getName() + "\n";
+		myText += t.getNumber() +" - "+t.getName() + "\n";
 		lvl += 1;
-		for (Tache fils : t.getFils()) {
+		for (Task fils : t.getChildren()) {
 			saveKMADSimpleModelRecu(fils,lvl);
 		}
 		

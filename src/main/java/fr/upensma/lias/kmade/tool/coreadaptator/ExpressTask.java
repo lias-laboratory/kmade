@@ -24,11 +24,11 @@ import java.util.Observer;
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-import fr.upensma.lias.kmade.kmad.schema.tache.Acteur;
-import fr.upensma.lias.kmade.kmad.schema.tache.ActeurSysteme;
+import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
+import fr.upensma.lias.kmade.kmad.schema.tache.ActorSystem;
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
-import fr.upensma.lias.kmade.kmad.schema.tache.EffetsDeBordExpression;
-import fr.upensma.lias.kmade.kmad.schema.tache.Evenement;
+import fr.upensma.lias.kmade.kmad.schema.tache.SideEffectExpression;
+import fr.upensma.lias.kmade.kmad.schema.tache.Event;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Frequence;
 import fr.upensma.lias.kmade.kmad.schema.tache.Importance;
@@ -37,7 +37,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Media;
 import fr.upensma.lias.kmade.kmad.schema.tache.Modalite;
 import fr.upensma.lias.kmade.kmad.schema.tache.Point;
 import fr.upensma.lias.kmade.kmad.schema.tache.PreExpression;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEObservable;
 
 /**
@@ -61,19 +61,19 @@ public final class ExpressTask {
 	expressTaskObservable.notifyKMADEObserver(argv);
     }
 
-    public static ArrayList<Tache> getRootTasks() {
+    public static ArrayList<Task> getRootTasks() {
 	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Tache");
-	ArrayList<Tache> rootTasks = new ArrayList<Tache>();
+	ArrayList<Task> rootTasks = new ArrayList<Task>();
 	for (int i = 0; i < taches.length; i++) {
-	    if (((Tache) taches[i]).isRoot()) {
-		rootTasks.add((Tache) taches[i]);
+	    if (((Task) taches[i]).isRoot()) {
+		rootTasks.add((Task) taches[i]);
 	    }
 	}
 	return rootTasks;
     }
 
-    public static Tache getTaskFromOid(String oid) {
+    public static Task getTaskFromOid(String oid) {
 	if (oid.equals("")) {
 	    return null;
 	}
@@ -85,37 +85,37 @@ public final class ExpressTask {
 	}
 	// On teste pour savoir s'il s'agit bien d'un objet de type tâche.
 	try {
-	    return (Tache) toto;
+	    return (Task) toto;
 	} catch (Exception e) {
 	    return null;
 	}
     }
 
-    public static ArrayList<Tache> getTasksFromName(String name) {
-	ArrayList<Tache> myTaskName = new ArrayList<Tache>();
+    public static ArrayList<Task> getTasksFromName(String name) {
+	ArrayList<Task> myTaskName = new ArrayList<Task>();
 	Object[] toto = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Tache");
 
 	for (int i = 0; i < toto.length; i++) {
-	    if (((Tache) toto[i]).equals(name)) {
-		myTaskName.add((Tache) toto[i]);
+	    if (((Task) toto[i]).equals(name)) {
+		myTaskName.add((Task) toto[i]);
 	    }
 	}
 
 	return myTaskName;
     }
 
-    public static void clearPreExpression(Tache pTache) {
+    public static void clearPreExpression(Task pTache) {
 	pTache.setPreExpression(new PreExpression());
 	notifyObservers();
     }
 
-    public static void clearEffetsDeBordExpression(Tache pTache) {
-	pTache.setEffetsDeBordExpression(new EffetsDeBordExpression());
+    public static void clearEffetsDeBordExpression(Task pTache) {
+	pTache.setEffetsDeBordExpression(new SideEffectExpression());
 	notifyObservers();
     }
 
-    public static void clearIterExpression(Tache pTache) {
+    public static void clearIterExpression(Task pTache) {
 	pTache.setIterExpression(new IterExpression());
 	notifyObservers();
     }
@@ -123,22 +123,22 @@ public final class ExpressTask {
     /**
      * Méthode qui permet de retourner toutes les tâches du modèle Express.
      */
-    public static Tache[] getAllTaskFromExpress() {
+    public static Task[] getAllTaskFromExpress() {
 	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Tache");
-	Tache[] myNewTask = new Tache[taches.length];
+	Task[] myNewTask = new Task[taches.length];
 	for (int i = 0; i < taches.length; i++) {
-	    myNewTask[i] = (Tache) taches[i];
+	    myNewTask[i] = (Task) taches[i];
 	}
 	return myNewTask;
     }
 
-    public static ArrayList<Tache> getTasksFromExpress() {
+    public static ArrayList<Task> getTasksFromExpress() {
 	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Tache");
-	ArrayList<Tache> toto = new ArrayList<Tache>();
+	ArrayList<Task> toto = new ArrayList<Task>();
 	for (int i = 0; i < taches.length; i++) {
-	    toto.add((Tache) taches[i]);
+	    toto.add((Task) taches[i]);
 	}
 	return toto;
     }
@@ -147,14 +147,14 @@ public final class ExpressTask {
      * Cette methode permet de coller des elements du ClipBoard dans la base
      * Express.
      */
-    public static Tache[] pasteElementsFromClipBoard(java.awt.Point pt) {
+    public static Task[] pasteElementsFromClipBoard(java.awt.Point pt) {
 	counterClipboard++;
 	Object[] myTaskList = InterfaceExpressJava
 		.getAllReferencesOfEntityFromClipBoard("tache", "Tache");
 
-	Tache[] myNewTaskList = new Tache[myTaskList.length];
+	Task[] myNewTaskList = new Task[myTaskList.length];
 	// PG: correction de l'anomalie "NewTache dans la classe Tache
-	HashMap<Tache, Tache> myNewTasks = new HashMap<Tache, Tache>();
+	HashMap<Task, Task> myNewTasks = new HashMap<Task, Task>();
 	
 	// KMADEHistoryMessageManager.printMessage("nb tache arbre debut" + myTaskList.length);
 
@@ -163,7 +163,7 @@ public final class ExpressTask {
 	    // On cree un point et une tache.
 	    Point refPoint = (Point) InterfaceExpressJava
 		    .createEntityReferenceBack("tache", "Point");
-	    Tache refTache = (Tache) InterfaceExpressJava
+	    Task refTache = (Task) InterfaceExpressJava
 		    .createEntityReferenceBack("tache", "Tache");
 
 	    if (pt != null) {
@@ -171,8 +171,8 @@ public final class ExpressTask {
 		refPoint.setY(pt.y);
 	    } else {
 		// On pioche.
-		Integer x = ((Tache) myTaskList[i]).getPoint().getX();
-		Integer y = ((Tache) myTaskList[i]).getPoint().getY();
+		Integer x = ((Task) myTaskList[i]).getPoint().getX();
+		Integer y = ((Task) myTaskList[i]).getPoint().getY();
 
 		// On modifie le contenu.
 		refPoint.setX(new Integer(x.intValue()
@@ -184,53 +184,53 @@ public final class ExpressTask {
 	    refTache.setPoint(refPoint);
 
 	    // To save a reference between my old task and my new task
-	    myNewTasks.put((Tache) myTaskList[i], refTache) ; 
+	    myNewTasks.put((Task) myTaskList[i], refTache) ; 
 
 	    /**********************************************************
 	     * On effectue la relation Clipboard et modele Express. *
 	     **********************************************************/
-	    refTache.setName(((Tache) myTaskList[i]).getName()); // nom de la
+	    refTache.setName(((Task) myTaskList[i]).getName()); // nom de la
 								 // tache
-	    refTache.setDecomposition(((Tache) myTaskList[i])
-		    .getDecomposition()); // decomposition
-	    refTache.setExecutant(((Tache) myTaskList[i]).getExecutant()); // executant
+	    refTache.setOrdering(((Task) myTaskList[i])
+		    .getOrdering()); // decomposition
+	    refTache.setExecutant(((Task) myTaskList[i]).getExecutant()); // executant
 
 	    // interruption
-	    if (((Tache) myTaskList[i]).getInterruptible() == true) {
-		refTache.setInterruptible(((Tache) myTaskList[i])
+	    if (((Task) myTaskList[i]).getInterruptible() == true) {
+		refTache.setInterruptible(((Task) myTaskList[i])
 			.getInterruptible());
 	    }
 
 	    // Facultative
-	    if (((Tache) myTaskList[i]).getFacultatif() == true) {
-		refTache.setFacultatif(((Tache) myTaskList[i]).getFacultatif());
+	    if (((Task) myTaskList[i]).getFacultatif() == true) {
+		refTache.setOptional(((Task) myTaskList[i]).getFacultatif());
 	    }
 
-	    refTache.setPreExpression(((Tache) myTaskList[i])
+	    refTache.setPreExpression(((Task) myTaskList[i])
 		    .getPreExpression()); // precondition
-	    refTache.setEffetsDeBordExpression(((Tache) myTaskList[i])
+	    refTache.setEffetsDeBordExpression(((Task) myTaskList[i])
 		    .getEffetsDeBordExpression()); // effetsdebord
-	    refTache.setIterExpression(((Tache) myTaskList[i])
+	    refTache.setIterExpression(((Task) myTaskList[i])
 		    .getIteExpression()); // iteration
 
-	    refTache.setActeurs(((Tache) myTaskList[i]).getActeurs()); // acteurs
-	    refTache.setEvents(((Tache) myTaskList[i]).getEvents()); // evenements
+	    refTache.setActors(((Task) myTaskList[i]).getActors()); // acteurs
+	    refTache.setEvents(((Task) myTaskList[i]).getEvents()); // evenements
 
 	    myNewTaskList[i] = refTache;
 	}
 
 	// Links (mother and children) must be changed from clipboard tasks to new tasks
 	for (int i = 0; i < myTaskList.length; i++) {
-		ArrayList<Tache> mySubTasks = ((Tache) myTaskList[i]).getFils();
+		ArrayList<Task> mySubTasks = ((Task) myTaskList[i]).getChildren();
 		if (mySubTasks.size() != 0) {
-			ArrayList<Tache> myNewSubTasks = new ArrayList<Tache>();
+			ArrayList<Task> myNewSubTasks = new ArrayList<Task>();
 			for (int j = 0; j < mySubTasks.size(); j++) {
 				// get my new task through the old one 
-				Tache myNewTask=myNewTasks.get(mySubTasks.get(j));
+				Task myNewTask=myNewTasks.get(mySubTasks.get(j));
 				myNewSubTasks.add(myNewTask);
-				myNewTask.setMotherTask(myNewTaskList[i]);
+				myNewTask.setMother(myNewTaskList[i]);
 			}
-			myNewTaskList[i].setFils(myNewSubTasks);
+			myNewTaskList[i].setChildren(myNewSubTasks);
 		}
 	}
 
@@ -243,15 +243,15 @@ public final class ExpressTask {
      * @param taskOIDList
      * @param edgeOIDList
      */
-    public static Tache[] copyElementsIntoClipBoard(
-	    ArrayList<Tache> myTacheList, ArrayList<String[]> edgeOIDList) {
+    public static Task[] copyElementsIntoClipBoard(
+	    ArrayList<Task> myTacheList, ArrayList<String[]> edgeOIDList) {
 	// On nettoie le presse-papier.
 	counterClipboard = 0;
 	InterfaceExpressJava.clearClipBoard();
 
 	// Pour l'instant on fait une copie sans les autres attributs.
 	// Y a au moins le point puisqu'il doit etre cree par Express
-	Tache[] myNewTaskList = new Tache[myTacheList.size()];
+	Task[] myNewTaskList = new Task[myTacheList.size()];
 		
 	for (int i = 0; i < myTacheList.size(); i++) {
 	    // On pioche.
@@ -261,7 +261,7 @@ public final class ExpressTask {
 	    // On cr��
 	    Point refPoint = (Point) InterfaceExpressJava
 		    .createEntityReferenceBackIntoClipBoard("tache", "Point");
-	    Tache refTache = (Tache) InterfaceExpressJava
+	    Task refTache = (Task) InterfaceExpressJava
 		    .createEntityReferenceBackIntoClipBoard("tache", "Tache");
 
 	    // On integre
@@ -274,16 +274,16 @@ public final class ExpressTask {
 	     *******************************************/
 	    refTache.setName((myTacheList.get(i)).getName()); // nom
 	    refTache.setExecutant((myTacheList.get(i)).getExecutant());// executant
-	    refTache.setDecomposition((myTacheList.get(i)).getDecomposition());// decomposition
+	    refTache.setOrdering((myTacheList.get(i)).getOrdering());// decomposition
 	    refTache.setInterruptible((myTacheList.get(i)).getInterruptible());// interruption
-	    refTache.setFacultatif((myTacheList.get(i)).getFacultatif());// necessite
+	    refTache.setOptional((myTacheList.get(i)).getFacultatif());// necessite
 
 	    refTache.setPreExpression(myTacheList.get(i).getPreExpression());// precondition
 	    refTache.setEffetsDeBordExpression(myTacheList.get(i)
 		    .getEffetsDeBordExpression());// effetsdebord
 	    refTache.setIterExpression(myTacheList.get(i).getIteExpression());// iteration
 
-	    refTache.setActeurs(myTacheList.get(i).getActeurs()); // acteur
+	    refTache.setActors(myTacheList.get(i).getActors()); // acteur
 	    refTache.setEvents(myTacheList.get(i).getEvents()); // evenements
 
 	    /*****************
@@ -323,12 +323,12 @@ public final class ExpressTask {
 					// Ici on a vérifié qu'il y a une
 					// nouvelle tache qui doit etre
 					// connectee.
-					myNewTaskList[j].getFils().add(
+					myNewTaskList[j].getChildren().add(
 						myNewTaskList[k]);
 					// On n'oublie pas la reference de la
 					// sous-taches a la tache mere
 					myNewTaskList[k]
-						.setMotherTask(myNewTaskList[j]);
+						.setMother(myNewTaskList[j]);
 					trouveeFils = true;
 					edgeOIDList.remove(l);
 					if (l != 0)
@@ -363,8 +363,8 @@ public final class ExpressTask {
 	return myNewTaskList;
     }
 
-    public static Tache[] setTaskPoint(int x, int y, Tache myTache) {
-	Tache[] myTemp = myTache.modifierPoint(x, y);
+    public static Task[] setTaskPoint(int x, int y, Task myTache) {
+	Task[] myTemp = myTache.modifierPoint(x, y);
 	notifyObservers();
 	return myTemp;
     }
@@ -376,13 +376,13 @@ public final class ExpressTask {
      * @param y  : position ordonnee
      * @return Oid de la tache
      */
-    public static Tache addNewTask(int x, int y, Executant e) {
+    public static Task addNewTask(int x, int y, Executant e) {
 	Oid oidPoint = InterfaceExpressJava.createEntity("tache", "Point");
 	Oid oidTache = InterfaceExpressJava.createEntity("tache", "Tache");
 	Oid oidMedia = InterfaceExpressJava.createEntity("tache", "Media");
 
 	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
-	Tache t = (Tache) InterfaceExpressJava.prendre(oidTache);
+	Task t = (Task) InterfaceExpressJava.prendre(oidTache);
 	Media m = (Media) InterfaceExpressJava.prendre(oidMedia);
 	t.setExecutant(e);
 	t.setPoint(p);
@@ -403,7 +403,7 @@ public final class ExpressTask {
      *            : oid de la t�che fille
      * @return
      */
-    public static void addNewEdge(Tache taskMere, Tache taskFils) {
+    public static void addNewEdge(Task taskMere, Task taskFils) {
 	taskMere.addSubTask(taskFils);
 	notifyObservers();
     }
@@ -414,8 +414,8 @@ public final class ExpressTask {
      * @param oidTache
      * @return
      */
-    public static ArrayList<Tache> removeTask(Tache currentTask) {
-	ArrayList<Tache> myTemp = currentTask.removeTask();
+    public static ArrayList<Task> removeTask(Task currentTask) {
+	ArrayList<Task> myTemp = currentTask.removeTask();
 	notifyObservers();
 	return myTemp;
     }
@@ -427,8 +427,8 @@ public final class ExpressTask {
      * @param oidTacheFils
      * @return
      */
-    public static ArrayList<Tache> removeEdge(Tache tacheMere, Tache tacheFils) {
-	ArrayList<Tache> myTemp = tacheMere.removeSubTask(tacheFils);
+    public static ArrayList<Task> removeEdge(Task tacheMere, Task tacheFils) {
+	ArrayList<Task> myTemp = tacheMere.removeSubTask(tacheFils);
 	notifyObservers();
 	return myTemp;
     }
@@ -441,7 +441,7 @@ public final class ExpressTask {
      * @param name
      *            : nouveau nom de la t�che
      */
-    public static void setNameTask(Tache currentTask, String name) {
+    public static void setNameTask(Task currentTask, String name) {
 	currentTask.setName(name);
 	notifyObservers();
     }
@@ -452,8 +452,8 @@ public final class ExpressTask {
      * @param oid
      * @param but
      */
-    public static void setButTask(Tache currentTask, String but) {
-	currentTask.setBut(but);
+    public static void setButTask(Task currentTask, String but) {
+	currentTask.setGoal(but);
 	notifyObservers();
     }
 
@@ -463,8 +463,8 @@ public final class ExpressTask {
      * @param oid
      * @param res
      */
-    public static void setFeedbackTask(Tache currentTask, String res) {
-	currentTask.setFeedBack(res);
+    public static void setFeedbackTask(Task currentTask, String res) {
+	currentTask.setFeedback(res);
 	notifyObservers();
     }
 
@@ -474,8 +474,8 @@ public final class ExpressTask {
      * @param oid
      * @param res
      */
-    public static void setDurationTask(Tache currentTask, String res) {
-	currentTask.setDuree(res);
+    public static void setDurationTask(Task currentTask, String res) {
+	currentTask.setDuration(res);
 	notifyObservers();
     }
 
@@ -485,8 +485,8 @@ public final class ExpressTask {
      * @param oid
      * @param name
      */
-    public static void setObservationTask(Tache currentTask, String name) {
-	currentTask.setObservation(name);
+    public static void setObservationTask(Task currentTask, String name) {
+	currentTask.setDescription(name);
 	notifyObservers();
     }
 
@@ -496,17 +496,17 @@ public final class ExpressTask {
      * @param oid
      * @param name
      */
-    public static void setExecutingUserTask(Tache currentTask, Executant name) {
+    public static void setExecutingUserTask(Task currentTask, Executant name) {
 	if (name == null)
 	    return;
 	currentTask.setExecutant(name);
 	notifyObservers();
     }
 
-    public static void setFrequencyTask(Tache currentTask, Frequence valeur) {
+    public static void setFrequencyTask(Task currentTask, Frequence valeur) {
 	if (valeur == null)
 	    return;
-	currentTask.setFreq(valeur);
+	currentTask.setFrequency(valeur);
 	notifyObservers();
     }
 
@@ -516,8 +516,8 @@ public final class ExpressTask {
      * @param oid
      * @param valeur
      */
-    public static void setFrequencyValueTask(Tache currentTask, String valeur) {
-	currentTask.setCompFreq(valeur);
+    public static void setFrequencyValueTask(Task currentTask, String valeur) {
+	currentTask.setFrequencyValue(valeur);
 	notifyObservers();
     }
 
@@ -528,15 +528,15 @@ public final class ExpressTask {
      * @param sens
      * @param cogn
      */
-    public static void setModalityTask(Tache currentTask, Modalite sensOrCogn) {
-	currentTask.setModal(sensOrCogn);
+    public static void setModalityTask(Task currentTask, Modalite sensOrCogn) {
+	currentTask.setModality(sensOrCogn);
 	notifyObservers();
     }
 
-    public static void setSignificantTask(Tache currentTask, Importance valeur) {
+    public static void setSignificantTask(Task currentTask, Importance valeur) {
 	if (valeur == null)
 	    return;
-	currentTask.setImp(valeur);
+	currentTask.setImportance(valeur);
 	notifyObservers();
     }
 
@@ -547,8 +547,8 @@ public final class ExpressTask {
      * @param valeur
      * @return
      */
-    public static boolean addNewEventTask(Tache currentTask, String valeur) {
-	Evenement e = ExpressEvent.stringToEvent(valeur);
+    public static boolean addNewEventTask(Task currentTask, String valeur) {
+	Event e = ExpressEvent.stringToEvent(valeur);
 
 	if (currentTask.addEvent(e)) {
 	    notifyObservers();
@@ -557,10 +557,10 @@ public final class ExpressTask {
 	return false;
     }
 
-    public static boolean setEventTask(Tache currentTask, String oldvaleur,
+    public static boolean setEventTask(Task currentTask, String oldvaleur,
 	    String valeur) {
-	Evenement oldEvent = ExpressEvent.stringToEvent(oldvaleur);
-	Evenement newEvent = ExpressEvent.stringToEvent(valeur);
+	Event oldEvent = ExpressEvent.stringToEvent(oldvaleur);
+	Event newEvent = ExpressEvent.stringToEvent(valeur);
 
 	if (oldEvent == null || newEvent == null) {
 	    return false;
@@ -574,67 +574,67 @@ public final class ExpressTask {
 	return false;
     }
 
-    public static void setOptionalTask(Tache currentTask, Boolean valeur) {
-	currentTask.setFacultatif(valeur);
+    public static void setOptionalTask(Task currentTask, Boolean valeur) {
+	currentTask.setOptional(valeur);
 	notifyObservers();
     }
 
-    public static void setInterruptibleTask(Tache currentTask, Boolean valeur) {
+    public static void setInterruptibleTask(Task currentTask, Boolean valeur) {
 	currentTask.setInterruptible(valeur);
 	notifyObservers();
     }
 
-    public static void setDeclenchementTask(Tache currentTask, String valeur) {
+    public static void setDeclenchementTask(Task currentTask, String valeur) {
 	if (valeur == null)
 	    return;
-	currentTask.setDeclencheur(ExpressEvent.stringToEvent(valeur));
+	currentTask.setRaisingEvent(ExpressEvent.stringToEvent(valeur));
 	notifyObservers();
     }
 
-    public static void setOperatorTask(Tache currentTask, Decomposition valeur) {
-	currentTask.setDecomposition(valeur);
+    public static void setOperatorTask(Task currentTask, Decomposition valeur) {
+	currentTask.setOrdering(valeur);
 	notifyObservers();
     }
 
-    public static void removeEventTask(Tache currentTask, String valeur) {
-	Evenement e = ExpressEvent.stringToEvent(valeur);
+    public static void removeEventTask(Task currentTask, String valeur) {
+	Event e = ExpressEvent.stringToEvent(valeur);
 	currentTask.removeEvent(e);
 	notifyObservers();
     }
 
-    public static boolean addActor(Tache currentTask, String oidact) {
-	Acteur act = (Acteur) InterfaceExpressJava.prendre(new Oid(oidact));
-	boolean value = currentTask.addActeur(act);
+    public static boolean addActor(Task currentTask, String oidact) {
+	Actor act = (Actor) InterfaceExpressJava.prendre(new Oid(oidact));
+	boolean value = currentTask.addActor(act);
 	notifyObservers();
 	return value;
     }
 
-    public static boolean addActorSystem(Tache currentTask, String oidactSys) {
-	ActeurSysteme act = (ActeurSysteme) InterfaceExpressJava
+    public static boolean addActorSystem(Task currentTask, String oidactSys) {
+	ActorSystem act = (ActorSystem) InterfaceExpressJava
 		.prendre(new Oid(oidactSys));
-	boolean value = currentTask.addActeurSystem(act);
+	boolean value = currentTask.addActorSystem(act);
 	notifyObservers();
 	return value;
     }
 
     public static void removeActor(String oidAct) {
-	Acteur a = (Acteur) InterfaceExpressJava.prendre(new Oid(oidAct));
+	Actor a = (Actor) InterfaceExpressJava.prendre(new Oid(oidAct));
 	a.delete();
 	notifyObservers();
     }
 
     public static void removeActorSystem(String oidAct) {
-	ActeurSysteme a = (ActeurSysteme) InterfaceExpressJava.prendre(new Oid(
+	ActorSystem a = (ActorSystem) InterfaceExpressJava.prendre(new Oid(
 		oidAct));
 	a.delete();
 	notifyObservers();
     }
 
-    public static void removeAllActors(Tache ref) {
+    public static void removeAllActors(Task ref) {
 	// Have to make a copy of Actor List because we'r going to iterate on it
 	// and for each element an actor is deleted ...
-	Acteur[] toto = new Acteur[ref.getActeurs().size()];
-	toto = ref.getActeurs().toArray(toto);
+	Actor[] toto = new Actor[ref.getActors().size()];
+	toto = ref.getActors().toArray(toto);
 	for (int i = 0; i < toto.length; i++) {
 	    toto[i].delete();
 	}
@@ -642,19 +642,19 @@ public final class ExpressTask {
     }
 
     public static void affRemoveActeur(String oidAct) {
-	Acteur a = (Acteur) InterfaceExpressJava.prendre(new Oid(oidAct));
+	Actor a = (Actor) InterfaceExpressJava.prendre(new Oid(oidAct));
 	a.affDelete();
     }
 
     public static void affRemoveActeurSystem(String oidAct) {
-	ActeurSysteme a = (ActeurSysteme) InterfaceExpressJava.prendre(new Oid(
+	ActorSystem a = (ActorSystem) InterfaceExpressJava.prendre(new Oid(
 		oidAct));
 	a.affDelete();
 
     }
 
-    public static void affRemoveEvent(Tache currentTask, String maValue) {
-	Evenement e = ExpressEvent.stringToEvent(maValue);
+    public static void affRemoveEvent(Task currentTask, String maValue) {
+	Event e = ExpressEvent.stringToEvent(maValue);
 	InterfaceExpressJava.getGestionWarning().addMessage(
 		e.getOid(),
 		4,
@@ -662,7 +662,7 @@ public final class ExpressTask {
 			+ currentTask.getName() + "\"");
     }
 
-    public static void setLabelTask(Tache selectedExpressTask, String pLabel) {
+    public static void setLabelTask(Task selectedExpressTask, String pLabel) {
 	if (pLabel == null)
 	    return;
 	selectedExpressTask.setLabel(ExpressLabel.stringToLabel(pLabel));

@@ -19,12 +19,12 @@ package fr.upensma.lias.kmade.tool.viewadaptator;
 
 import java.util.ArrayList;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Acteur;
-import fr.upensma.lias.kmade.kmad.schema.tache.ActeurSysteme;
+import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
+import fr.upensma.lias.kmade.kmad.schema.tache.ActorSystem;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Experience;
 import fr.upensma.lias.kmade.kmad.schema.tache.Frequence;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskproperties.KMADEEnhancedTaskEditor;
@@ -37,15 +37,15 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.InDevelopmentGlassPanel;
 public final class TaskPropertiesEnhancedEditorAdaptator {
     private static KMADEEnhancedTaskEditor myRefTaskEditor = new KMADEEnhancedTaskEditor();
 
-    private static Tache motherTask;
+    private static Task motherTask;
 
-    private static Tache oldSisterTask;
+    private static Task oldSisterTask;
 
-    private static Tache youngSisterTask;
+    private static Task youngSisterTask;
 
-    private static Tache firstSonTask;
+    private static Task firstSonTask;
 
-    private static Tache currentEditedTask;
+    private static Task currentEditedTask;
 
     public static KMADEEnhancedTaskEditor getEnhancedTaskEditorFrame() {
 	return myRefTaskEditor;
@@ -86,17 +86,17 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 	myRefTaskEditor.setVisible(false);
     }
 
-    public static void setSelectedTaskAttributes(Tache current) {
+    public static void setSelectedTaskAttributes(Task current) {
 	currentEditedTask = current;
-	myRefTaskEditor.displayTaskProperties(currentEditedTask.getNumero(),
+	myRefTaskEditor.displayTaskProperties(currentEditedTask.getNumber(),
 		currentEditedTask.getMotherTaskName(), currentEditedTask
-			.getName(), currentEditedTask.getBut(),
-		currentEditedTask.getRessources(), currentEditedTask
-			.getFeedBack(), currentEditedTask.getDuree(),
-		currentEditedTask.getObservation(), currentEditedTask
-			.getExecutant(), currentEditedTask.getModalite(),
-		currentEditedTask.getFrequence(), currentEditedTask
-			.getCompFreq(), currentEditedTask.getImportance(),
+			.getName(), currentEditedTask.getGoal(),
+		currentEditedTask
+			.getFeedback(), currentEditedTask.getDuration(),
+		currentEditedTask.getDescription(), currentEditedTask
+			.getExecutant(), currentEditedTask.getModality(),
+		currentEditedTask.getFrequency(), currentEditedTask
+			.getFrequencyValue(), currentEditedTask.getImportance(),
 		TaskPropertiesAdaptator.getFiredEvents(), currentEditedTask
 			.getFacultatif(), currentEditedTask.isInterruptible(),
 		TaskPropertiesAdaptator.getAllEvents(), currentEditedTask
@@ -105,10 +105,10 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 		TaskPropertiesEnhancedEditorAdaptator.getActorSystemTable(),
 		currentEditedTask.getPreExpression().getName(),
 		currentEditedTask.getEffetsDeBordExpression().getName(),
-		currentEditedTask.getDecomposition(), currentEditedTask
+		currentEditedTask.getOrdering(), currentEditedTask
 			.getIteExpression().getName());
 
-	motherTask = currentEditedTask.getMotherTask();
+	motherTask = currentEditedTask.getMother();
 	oldSisterTask = currentEditedTask.getOldSisterTask();
 	youngSisterTask = currentEditedTask.getYoungSisterTask();
 	firstSonTask = currentEditedTask.getFirstSonTask();
@@ -119,7 +119,7 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 		    KMADEConstant.NO_NUMERO_TASK);
 	} else {
 	    myRefTaskEditor.setUpButton(true, motherTask.getName(),
-		    motherTask.getNumero());
+		    motherTask.getNumber());
 	}
 
 	if (oldSisterTask == null) {
@@ -128,7 +128,7 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 		    KMADEConstant.NO_NUMERO_TASK);
 	} else {
 	    myRefTaskEditor.setLeftButton(true, oldSisterTask.getName(),
-		    oldSisterTask.getNumero());
+		    oldSisterTask.getNumber());
 	}
 
 	if (youngSisterTask == null) {
@@ -137,7 +137,7 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 		    KMADEConstant.NO_NUMERO_TASK);
 	} else {
 	    myRefTaskEditor.setRightButton(true, youngSisterTask.getName(),
-		    youngSisterTask.getNumero());
+		    youngSisterTask.getNumber());
 	}
 
 	if (firstSonTask == null) {
@@ -146,7 +146,7 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 		    KMADEConstant.NO_NUMERO_TASK);
 	} else {
 	    myRefTaskEditor.setDownButton(true, firstSonTask.getName(),
-		    firstSonTask.getNumero());
+		    firstSonTask.getNumber());
 	}
 
 	// Mise à jour des activations des JRadioButton's
@@ -163,7 +163,7 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 	    myRefTaskEditor.setEnabledNecessityGroup();
 	}
 
-	if (currentEditedTask.getFrequence() == Frequence.INCONNU) {
+	if (currentEditedTask.getFrequency() == Frequence.INCONNU) {
 	    myRefTaskEditor.setDisabledFrequenceValue();
 	} else {
 	    myRefTaskEditor.setEnabledFrequenceValue();
@@ -180,7 +180,7 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 	ArrayList<String[]> myStringActeurList = new ArrayList<String[]>();
 
 	for (int i = 0; i < myActorList.size(); i++) {
-	    Acteur myActeur = (Acteur) (myActorList.get(i));
+	    Actor myActeur = (Actor) (myActorList.get(i));
 	    String[] myTab = new String[3];
 	    myTab[0] = myActeur.getName();
 	    myTab[1] = Experience.getEnumereIntoLocaleExperience(myActeur
@@ -197,7 +197,7 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 	ArrayList<String[]> myStringActeurSystemList = new ArrayList<String[]>();
 
 	for (int i = 0; i < myActorSystemList.size(); i++) {
-	    ActeurSysteme myActeurSysteme = (ActeurSysteme) (myActorSystemList
+	    ActorSystem myActeurSysteme = (ActorSystem) (myActorSystemList
 		    .get(i));
 	    String[] myTab = new String[3];
 	    myTab[0] = myActeurSysteme.getName();

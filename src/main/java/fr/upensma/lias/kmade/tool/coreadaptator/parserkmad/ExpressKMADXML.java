@@ -54,7 +54,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Machine;
 import fr.upensma.lias.kmade.kmad.schema.tache.Media;
 import fr.upensma.lias.kmade.kmad.schema.tache.Organisation;
 import fr.upensma.lias.kmade.kmad.schema.tache.ParcMachines;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
@@ -339,7 +339,7 @@ public final class ExpressKMADXML {
 			Element myElement = null;
 			// if the element is not a task or if it is the root task
 			if (!ClassName.contains(ExpressConstant.TASK_CLASS)
-					|| ((Tache) object).getNumero().startsWith(
+					|| ((Task) object).getNumber().startsWith(
 							ExpressConstant.ROOT_TASK_NAME)) {
 				myElement = ((Entity) object).toXML2(document);
 				KMADEHistoryMessageManager.printlnMessage(((Entity) object).toSPF());
@@ -785,11 +785,11 @@ public final class ExpressKMADXML {
 		Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 				"Tache");
 		for (int i = 0; i < taches.length; i++) {
-			if (((Tache) taches[i]).getMedia() == null) {
+			if (((Task) taches[i]).getMedia() == null) {
 				Oid oidMedia = InterfaceExpressJava.createEntity("tache",
 						"Media");
 				Media m = (Media) InterfaceExpressJava.prendre(oidMedia);
-				((Tache) taches[i]).setMedia(m);
+				((Task) taches[i]).setMedia(m);
 			}
 		}
 	}

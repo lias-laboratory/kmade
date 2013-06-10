@@ -29,7 +29,7 @@ import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.prototype.KMADEHistoricPanel.HistoricTask;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADETaskModelToolBar;
@@ -152,7 +152,7 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 		});
 	}
 
-	public void addNode(Tache t){
+	public void addNode(Task t){
 		//just for first task
 		if(last == null){
 			root.setUserObject(new HistoricTask(t));
@@ -167,9 +167,9 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 			((DefaultTreeModel)tree.getModel()).reload(last);
 			last = node;
 			if(t.isLeaf()){
-				if(t.getDuree()!=null && !t.getDuree().equals("")){
+				if(t.getDuration()!=null && !t.getDuration().equals("")){
 					try {
-						histoTask.duree = Integer.parseInt(t.getDuree());
+						histoTask.duree = Integer.parseInt(t.getDuration());
 					}catch (Exception e) {
 						histoTask.duree=0;
 					}
@@ -208,12 +208,12 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 		if (node == null){
 			return;
 		}
-		Tache task= ((HistoricTask) node.getUserObject()).getTask();
+		Task task= ((HistoricTask) node.getUserObject()).getTask();
 
 		displaytask(task);
 	}
 
-	private void displaytask(Tache task) {
+	private void displaytask(Task task) {
 		taskPanel.removeAll();
 		JPanel titlePanel = new JPanel();
 		TitledBorder titleborder = new TitledBorder(null,task.getName()+" : ",TitledBorder.CENTER, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
@@ -222,8 +222,8 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.PAGE_AXIS));
 
 		JTextArea duree;
-		if(task.getDuree()!=null && !task.getDuree().equals(""))
-			 duree = new JTextArea(KMADEConstant.PROTOTYPING_TOOL_DURATION +" : " + task.getDuree());
+		if(task.getDuration()!=null && !task.getDuration().equals(""))
+			 duree = new JTextArea(KMADEConstant.PROTOTYPING_TOOL_DURATION +" : " + task.getDuration());
 		else 
 			 duree = new JTextArea("");
 		duree.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
@@ -243,7 +243,7 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 		pre.setWrapStyleWord(true);
 
 		TitledBorder titleobservation = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_DESCRIPTION_TITLE + " : ",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
-		JTextArea desc = new JTextArea(task.getObservation());
+		JTextArea desc = new JTextArea(task.getDescription());
 		desc.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 		desc.setBorder(titleobservation);
 		desc.setEditable(false);
@@ -285,10 +285,10 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 	}
 	public class HistoricTask{
 		String name;
-		Tache t;
+		Task t;
 		public int duree = 0;
 
-		public HistoricTask(Tache t){
+		public HistoricTask(Task t){
 			duree = 0;
 			name =  t.getName();
 			this.t = t;
@@ -298,7 +298,7 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 			return name;
 		}
 
-		public Tache getTask(){
+		public Task getTask(){
 			return t;
 		}
 

@@ -25,7 +25,7 @@ import fr.upensma.lias.kmade.kmad.schema.expression.SemanticException;
 import fr.upensma.lias.kmade.kmad.schema.expression.SemanticUnknownException;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.NumberValue;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.TypeStructure;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressPrecondition;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
@@ -43,7 +43,7 @@ public final class PreconditionAdaptator {
 
     public static void initPrecondition() {
 	// Active ou pas l'évaluation
-	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
+	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	if (myCurrentTask.getPreExpression().getNodeExpression() != null) {
 	    // Construire l'expression
@@ -74,7 +74,7 @@ public final class PreconditionAdaptator {
 
     public static void evaluatePrecondition(String text) {
     	KMADEHistoryMessageManager.printMessage(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
-	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
+	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	try {
 	    myCurrentTask.getPreExpression().getNodeExpression()
@@ -107,7 +107,7 @@ public final class PreconditionAdaptator {
     }
 
     private static void checkPreconditionBuilder(String s) {
-	Tache myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
+	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	myCurrentTask.getPreExpression().setName(s);
 

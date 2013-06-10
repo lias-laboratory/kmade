@@ -45,7 +45,7 @@ import org.jgraph.graph.VertexView;
 
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADETaskModelPanel.MyBasicGraphUI;
@@ -463,7 +463,7 @@ public class KMADEVertexView extends VertexView {
 		 **************************************************************/
 		// L'ic�ne �v�nement
 		ImageIcon myImage_evt_in;
-		if (myGraphCell.getTask().getDeclencheur() != null) {
+		if (myGraphCell.getTask().getRaisingEvent() != null) {
 		    myImage_evt_in = KMADEVertexView.EVENEMENT_IN_IMAGE_ICON;
 		} else {
 		    myImage_evt_in = KMADEVertexView.EVENEMENT_IN_IMAGE_ICON_DISABLE;
@@ -506,7 +506,7 @@ public class KMADEVertexView extends VertexView {
 		String s_opt = KMADEConstant.VERTEX_OPT;
 		Rectangle2D ropt = fm_pre.getStringBounds(s_opt, f);
 
-		if (myGraphCell.getTask().isFacultatif()) {
+		if (myGraphCell.getTask().isOptional()) {
 		    f.setColor(Color.BLACK);
 		} else {
 		    f.setColor(Color.LIGHT_GRAY);
@@ -554,8 +554,8 @@ public class KMADEVertexView extends VertexView {
 		    String s_act = KMADEConstant.VERTEX_ACTOR;
 		    Rectangle2D ract = fm_pre.getStringBounds(s_act, f);
 
-		    if (myGraphCell.getTask().getActeurs() != null
-			    && myGraphCell.getTask().getActeurs().size() != 0) {
+		    if (myGraphCell.getTask().getActors() != null
+			    && myGraphCell.getTask().getActors().size() != 0) {
 			f.setColor(Color.BLACK);
 		    } else {
 			f.setColor(Color.LIGHT_GRAY);
@@ -821,9 +821,9 @@ public class KMADEVertexView extends VertexView {
 
 	    filsCoherent = true;
 
-	    if (myGraphCell.getTask().getMotherTask() != null
-		    || (myGraphCell.getTask().getFils() != null && myGraphCell
-			    .getTask().getFils().size() != 0)) {
+	    if (myGraphCell.getTask().getMother() != null
+		    || (myGraphCell.getTask().getChildren() != null && myGraphCell
+			    .getTask().getChildren().size() != 0)) {
 		tacheIsolee = false;
 	    } else {
 		tacheIsolee = true;
@@ -835,7 +835,7 @@ public class KMADEVertexView extends VertexView {
 		nomCorrect = true;
 	    }
 
-	    ArrayList<Tache> fils = myGraphCell.getTask().getFils();
+	    ArrayList<Task> fils = myGraphCell.getTask().getChildren();
 
 	    if (fils == null || fils.size() == 0) {
 
@@ -1055,7 +1055,7 @@ public class KMADEVertexView extends VertexView {
 
 	    if (rectOpt != null && rectOpt.contains(event.getPoint())) {
 		((KMADEDefaultGraphCell) cell.getCell()).getTask()
-			.setFacultatif(
+			.setOptional(
 				!((KMADEDefaultGraphCell) cell.getCell())
 					.getTask().getFacultatif());
 

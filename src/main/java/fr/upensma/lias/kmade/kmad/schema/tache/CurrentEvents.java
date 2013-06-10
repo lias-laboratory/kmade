@@ -44,14 +44,14 @@ public class CurrentEvents {
 	return toto;
     }
 
-    public void addEvent(Evenement p, Tache t) {
+    public void addEvent(Event p, Task t) {
 	if (p == null) {
 	    return;
 	}
 	myList.put(p.getOid().get(), new CurrentEvent(t, p));
     }
 
-    public boolean extractEvent(Evenement p) {
+    public boolean extractEvent(Event p) {
 	if (p == null) {
 	    return false;
 	}
@@ -59,7 +59,7 @@ public class CurrentEvents {
 	return true;
     }
 
-    public boolean isExistingEvent(Evenement p) {
+    public boolean isExistingEvent(Event p) {
 	if (p == null) {
 	    return false;
 	}
@@ -71,19 +71,19 @@ public class CurrentEvents {
     }
 
     public class CurrentEvent {
-	private Tache firingTask;
-	private Evenement firableEvent;
+	private Task firingTask;
+	private Event firableEvent;
 
-	public CurrentEvent(Tache t, Evenement e) {
+	public CurrentEvent(Task t, Event e) {
 	    this.firableEvent = e;
 	    this.firingTask = t;
 	}
 
-	public Evenement getFirableEvent() {
+	public Event getFirableEvent() {
 	    return firableEvent;
 	}
 
-	public Tache getFiringTask() {
+	public Task getFiringTask() {
 	    return firingTask;
 	}
     }

@@ -38,7 +38,7 @@ import fr.lri.swingstates.canvas.CStateMachine;
 import fr.lri.swingstates.canvas.CText;
 import fr.lri.swingstates.canvas.Canvas;
 import fr.lri.swingstates.sm.JStateMachine;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEVertexView;
@@ -318,7 +318,7 @@ public class PieMenuCreateTask extends Menu {
 		    // timer d'affichage
 		    armTimer(10, false);
 
-		    Tache[] newTasks = ExpressTask.getAllTaskFromExpress();
+		    Task[] newTasks = ExpressTask.getAllTaskFromExpress();
 		    /*
 		     * ExpressTask .pasteElementsFromClipBoard((Point)
 		     * pointDisplay);
@@ -413,7 +413,7 @@ public class PieMenuCreateTask extends Menu {
 
 			if (lastItemVisited
 				.equals(KMADEConstant.PASTE_ACTION_MESSAGE)) {
-			    Tache[] newTasks = ExpressTask
+			    Task[] newTasks = ExpressTask
 				    .getAllTaskFromExpress();
 			    // .pasteElementsFromClipBoard((Point)
 			    // pointDisplay);
@@ -497,7 +497,7 @@ public class PieMenuCreateTask extends Menu {
 			    tooltip = true;
 			    tagWhole.setDrawable(true);
 			    disarmTimer();
-			    Tache[] newTasks = ExpressTask
+			    Task[] newTasks = ExpressTask
 				    .getAllTaskFromExpress();
 			    // .pasteElementsFromClipBoard((Point)
 			    // pointDisplay);

@@ -21,19 +21,19 @@ import java.util.ArrayList;
 
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-import fr.upensma.lias.kmade.kmad.schema.tache.Acteur;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 
 /**
  * @author Mickael BARON
  */
 public class ExpressActeur {
-	public static String getActorList(Tache myRefTask) {
+	public static String getActorList(Task myRefTask) {
 		String toDisplay = "";
-		for (int i = 0; i < myRefTask.getActeurs().size(); i++) {
-			toDisplay += ((Acteur) myRefTask.getActeurs().get(i)).getName();
-			if (i < myRefTask.getActeurs().size() - 1) {
+		for (int i = 0; i < myRefTask.getActors().size(); i++) {
+			toDisplay += ((Actor) myRefTask.getActors().get(i)).getName();
+			if (i < myRefTask.getActors().size() - 1) {
 				toDisplay += ";";
 			}
 		}
@@ -42,7 +42,7 @@ public class ExpressActeur {
 
 	public static Oid createActor(Oid oidUser) {
 		Oid oidActor = InterfaceExpressJava.createEntity("tache", "Acteur");
-		Acteur a = (Acteur) InterfaceExpressJava.prendre(oidActor);
+		Actor a = (Actor) InterfaceExpressJava.prendre(oidActor);
 		User u = (User) InterfaceExpressJava.prendre(oidUser);
 		a.setUserRef(u);
 		u.addInverseActeur(a);
@@ -51,7 +51,7 @@ public class ExpressActeur {
 
 	public static String[] getActorFromOid(Oid actor) {
 		String[] myTable = new String[4];
-		Acteur a = (Acteur) InterfaceExpressJava.prendre(actor);
+		Actor a = (Actor) InterfaceExpressJava.prendre(actor);
 		myTable[0] = a.getName();
 		myTable[1] = a.getExperience().getValue();
 		myTable[2] = a.getCompetence();
@@ -66,15 +66,15 @@ public class ExpressActeur {
 	 * @param oidTacheSel
 	 * @return
 	 */
-	public static ArrayList<Acteur> extractActorFromTask(Tache current) {
+	public static ArrayList<Actor> extractActorFromTask(Task current) {
 		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 				"Acteur");
 
-		ArrayList<Acteur> empilActeur = new ArrayList<Acteur>();
+		ArrayList<Actor> empilActeur = new ArrayList<Actor>();
 		for (int i = 0; i < objs.length; i++) {
-			Acteur acteur = (Acteur) objs[i];
+			Actor acteur = (Actor) objs[i];
 			// Le Oid de la tache qui contient l'acteur i.
-			Tache a = acteur.getInverseTache();
+			Task a = acteur.getInverseTache();
 			if(a !=null){
 				String oidActeurTache   = a.getOid().get();
 				if (oidActeurTache.equals(current.getOid().get())) {
@@ -89,12 +89,12 @@ public class ExpressActeur {
 	}
 
 	public static void setActorExperience(String oid, String exp) {
-		Acteur m = (Acteur) InterfaceExpressJava.prendre(new Oid(oid));
+		Actor m = (Actor) InterfaceExpressJava.prendre(new Oid(oid));
 		m.setExperience(exp);
 	}
 
 	public static void setActorCompetence(String oid, String name) {
-		Acteur m = (Acteur) InterfaceExpressJava.prendre(new Oid(oid));
+		Actor m = (Actor) InterfaceExpressJava.prendre(new Oid(oid));
 		m.setCompetence(name);
 	}
 }

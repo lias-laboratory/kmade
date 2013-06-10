@@ -53,7 +53,7 @@ import javax.swing.event.ListSelectionListener;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEGraphCellEditor;
 import fr.upensma.lias.kmade.tool.view.toolutilities.InDevelopmentGlassPanel;
@@ -216,9 +216,9 @@ public class KMADEFindReplaceDialog extends JDialog {
 	myList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	myList.addListSelectionListener(new ListSelectionListener() {
 	    public void valueChanged(ListSelectionEvent e) {
-		if (myList.getSelectedValue() instanceof Tache) {
+		if (myList.getSelectedValue() instanceof Task) {
 		    SearchAdaptator.selectTasksFromOccurence(
-			    ((Tache) (myList.getSelectedValue())),
+			    ((Task) (myList.getSelectedValue())),
 			    myList.getSelectedIndex());
 		}
 	    }
@@ -318,9 +318,9 @@ public class KMADEFindReplaceDialog extends JDialog {
 	myListModel.removeAllElements();
     }
 
-    public void addElement(ArrayList<Tache> p) {
+    public void addElement(ArrayList<Task> p) {
 	myListModel.removeAllElements();
-	for (Tache current : p) {
+	for (Task current : p) {
 	    myListModel.addElement(current);
 	}
     }
@@ -367,9 +367,9 @@ public class KMADEFindReplaceDialog extends JDialog {
 		int index, boolean isSelected, boolean cellHasFocus) {
 	    String stringToDisplay = "";
 	    JLabel myLabel = new JLabel();
-	    if (value instanceof Tache) {
-		Tache myTemp = (Tache) value;
-		stringToDisplay = (index + 1) + " : " + myTemp.getNumero()
+	    if (value instanceof Task) {
+		Task myTemp = (Task) value;
+		stringToDisplay = (index + 1) + " : " + myTemp.getNumber()
 			+ " - " + myTemp.getName();
 
 		myLabel.setOpaque(true);

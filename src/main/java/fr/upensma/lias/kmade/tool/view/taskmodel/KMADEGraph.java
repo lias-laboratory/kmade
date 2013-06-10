@@ -484,14 +484,14 @@ public class KMADEGraph extends org.jgraph.JGraph {
 		    && select.getRectAct().contains(event.getPoint())) {
 		String S_act = KMADEConstant.VERTEX_ACTOR + ": ";
 		int t_list = ((KMADEDefaultGraphCell) cell).getTask()
-			.getActeursName().size();
+			.getActorsName().size();
 
 		if (t_list != 0) {
 		    S_act = ((KMADEDefaultGraphCell) cell).getTask()
-			    .getActeursName().get(0).toString();
+			    .getActorsName().get(0).toString();
 		    for (int i = 1; i < t_list; i++) {
 			String s_tmp = ((KMADEDefaultGraphCell) cell).getTask()
-				.getActeursName().get(i).toString();
+				.getActorsName().get(i).toString();
 			if (i == t_list) {
 			    S_act = S_act + s_tmp;
 			} else {

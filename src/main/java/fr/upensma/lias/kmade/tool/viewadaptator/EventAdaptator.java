@@ -19,7 +19,7 @@ package fr.upensma.lias.kmade.tool.viewadaptator;
 
 import java.util.ArrayList;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Evenement;
+import fr.upensma.lias.kmade.kmad.schema.tache.Event;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressEvent;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
@@ -88,7 +88,7 @@ public final class EventAdaptator {
     }
 
     public static void refreshReadEventTable() {
-	ArrayList<Evenement> myEvent = ExpressEvent.getEvents();
+	ArrayList<Event> myEvent = ExpressEvent.getEvents();
 	Object[][] myTab = new Object[myEvent.size()][2];
 	for (int i = 0; i < myEvent.size(); i++) {
 	    myTab[i][0] = myEvent.get(i).getName();
@@ -98,7 +98,7 @@ public final class EventAdaptator {
     }
 
     public static void updateEventView() {
-	ArrayList<Evenement> myList = ExpressEvent.getEvents();
+	ArrayList<Event> myList = ExpressEvent.getEvents();
 	for (int i = 0; i < myList.size(); i++) {
 	    GraphicEditorAdaptator.getEventObjectPanel().addEvent(
 		    myList.get(i).getName(), myList.get(i).getDescription(),

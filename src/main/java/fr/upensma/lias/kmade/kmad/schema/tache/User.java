@@ -69,7 +69,7 @@ public abstract class User implements Entity {
      * List of actors the user is involved in. 
      * CommentPG: Not sure it is very necessary and useful
      */
-    private ArrayList<Acteur> inverseActeur = new ArrayList<Acteur>();
+    private ArrayList<Actor> inverseActeur = new ArrayList<Actor>();
 
     /**
      * Empty constructor
@@ -125,7 +125,7 @@ public abstract class User implements Entity {
      * 
      * @param a the actor to add
      */
-    public void addInverseActeur(Acteur a) {
+    public void addInverseActeur(Actor a) {
 	inverseActeur.add(a);
     }
 
@@ -134,13 +134,13 @@ public abstract class User implements Entity {
      * 
      * @param a the actor to be removed
      */
-    public void removeInverseActeur(Acteur a) {
+    public void removeInverseActeur(Actor a) {
 	inverseActeur.remove(a);
     }
 
     public void delete() {
 	for (int i = 0; i < inverseActeur.size(); i++) {
-	    Acteur a = inverseActeur.get(i);
+	    Actor a = inverseActeur.get(i);
 	    a.delete();
 	}
 	InterfaceExpressJava.remove(oid);
@@ -149,7 +149,7 @@ public abstract class User implements Entity {
     public void affDelete() {
 	InterfaceExpressJava.getGestionWarning().addMessage(oid, 3);
 	for (int i = 0; i < inverseActeur.size(); i++) {
-	    Acteur a = inverseActeur.get(i);
+	    Actor a = inverseActeur.get(i);
 	    a.affDelete();
 	}
     }

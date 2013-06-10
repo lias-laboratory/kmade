@@ -51,7 +51,7 @@ public class Label implements Entity {
 
     private boolean isColorVisible;
 
-    private ArrayList<Tache> invTacheList = new ArrayList<Tache>();
+    private ArrayList<Task> invTacheList = new ArrayList<Task>();
 
     public Label() {
 	this.name = "";
@@ -61,17 +61,17 @@ public class Label implements Entity {
 	this.isColorVisible = true;
     }
 
-    public void addReverseTask(Tache p) {
+    public void addReverseTask(Task p) {
 	invTacheList.add(p);
     }
 
-    public void removeInversteTask(Tache p) {
+    public void removeInversteTask(Task p) {
 	invTacheList.remove(p);
     }
 
     public void delete() {
 	for (int i = 0; i < invTacheList.size(); i++) {
-	    Tache t = invTacheList.get(i);
+	    Task t = invTacheList.get(i);
 	    t.removeLabel();
 	}
 	InterfaceExpressJava.remove(oid);
@@ -80,7 +80,7 @@ public class Label implements Entity {
     public void affDelete() {
 	InterfaceExpressJava.getGestionWarning().addMessage(oid, 13);
 	for (int i = 0; i < invTacheList.size(); i++) {
-	    Tache t = invTacheList.get(i);
+	    Task t = invTacheList.get(i);
 	    InterfaceExpressJava.getGestionWarning().addMessage(
 		    oid,
 		    13,

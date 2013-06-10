@@ -31,7 +31,7 @@ import org.apache.velocity.app.Velocity;
 import org.jgraph.graph.DefaultGraphModel;
 import org.jgraph.graph.GraphLayoutCache;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.print.KMADEPrintingUserCardsPanel;
@@ -179,7 +179,7 @@ public final class PrintAdaptator {
 	return temp;
     }
 
-    public static void selectionUserCards(Tache r) {
+    public static void selectionUserCards(Task r) {
 	VelocityContext context = new VelocityContext();
 	context.put("GENERAL_TITLE",
 		KMADEConstant.GENERAL_INFORMATION_PANEL_TITLE_NAME);
@@ -217,20 +217,20 @@ public final class PrintAdaptator {
 		KMADEConstant.EFFETSDEBORD_LABEL_VALUE);
 	context.put("SYSTEM_USER_TITLE", KMADEConstant.MATERIEL_LABEL_NAME);
 
-	context.put("NUM", r.getNumero());
+	context.put("NUM", r.getNumber());
 	context.put("NAME", r.getName());
-	context.put("SUBTASKS", PrintAdaptator.getValues(r.getFils()));
-	context.put("DURATION", r.getDuree());
-	context.put("PURPOSE", r.getBut());
+	context.put("SUBTASKS", PrintAdaptator.getValues(r.getChildren()));
+	context.put("DURATION", r.getDuration());
+	context.put("PURPOSE", r.getGoal());
 	context.put("MEDIA", r.getMedia().getFileName());
 	context.put("LABEL", r.getLabel() == null ? "" : r.getLabel()
 		.toString());
-	context.put("DISPLAY", r.getFeedBack());
-	context.put("OBSERVATION", r.getObservation());
+	context.put("DISPLAY", r.getFeedback());
+	context.put("OBSERVATION", r.getDescription());
 	context.put("EXECUTANT", r.getExecutant().toString());
-	context.put("MODALITY", r.getModalite().toString());
-	context.put("FREQUENCY", r.getFrequence().toString());
-	context.put("FREQUENCYVALUE", r.getCompFreq());
+	context.put("MODALITY", r.getModality().toString());
+	context.put("FREQUENCY", r.getFrequency().toString());
+	context.put("FREQUENCYVALUE", r.getFrequencyValue());
 	context.put("IMPORTANCE", r.getImportance());
 	if (r.getFacultatif()) {
 	    context.put("OPTIONAL", KMADEConstant.OPTIONAL_NECESSITE_VALUE);
@@ -243,10 +243,10 @@ public final class PrintAdaptator {
 	    context.put("INTERRUPTIBLE", KMADEConstant.NO_INTERRUPTIBLE_VALUE);
 	}
 	context.put("EVENTTRIGGER", r.getEvents());
-	context.put("DECOMPOSITION", r.getDecomposition().toString());
-	context.put("ACTORS", PrintAdaptator.getValues(r.getActeurs()));
+	context.put("DECOMPOSITION", r.getOrdering().toString());
+	context.put("ACTORS", PrintAdaptator.getValues(r.getActors()));
 	context.put("ACTORSYSTEM",
-		PrintAdaptator.getValues(r.getActeurSysteme()));
+		PrintAdaptator.getValues(r.getActorSystem()));
 	context.put("PRECONDITION", r.getPreExpression().getName());
 	context.put("ITERATION", r.getIteExpression().getName());
 	context.put("GENERATEDEVENTS", PrintAdaptator.getValues(r.getEvents()));
@@ -261,28 +261,28 @@ public final class PrintAdaptator {
 	}
     }
 
-    public static String getSelectionUserCardsContent(Tache r) {
+    public static String getSelectionUserCardsContent(Task r) {
 	VelocityContext context = new VelocityContext();
-	context.put("NUM", r.getNumero());
+	context.put("NUM", r.getNumber());
 	context.put("NAME", r.getName());
-	context.put("SUBTASKS", PrintAdaptator.getValues(r.getFils()));
-	context.put("DURATION", r.getDuree());
-	context.put("PURPOSE", r.getBut());
+	context.put("SUBTASKS", PrintAdaptator.getValues(r.getChildren()));
+	context.put("DURATION", r.getDuration());
+	context.put("PURPOSE", r.getGoal());
 	context.put("MEDIA", r.getMedia().getFileName());
 	context.put("LABEL", r.getLabel() == null ? "" : r.getLabel()
 		.toString());
-	context.put("DISPLAY", r.getFeedBack());
-	context.put("OBSERVATION", r.getObservation());
+	context.put("DISPLAY", r.getFeedback());
+	context.put("OBSERVATION", r.getDescription());
 	context.put("EXECUTANT", r.getExecutant().toString());
-	context.put("MODALITY", r.getModalite().toString());
-	context.put("FREQUENCY", r.getFrequence().toString());
-	context.put("FREQUENCYVALUE", r.getCompFreq());
+	context.put("MODALITY", r.getModality().toString());
+	context.put("FREQUENCY", r.getFrequency().toString());
+	context.put("FREQUENCYVALUE", r.getFrequencyValue());
 	context.put("IMPORTANCE", r.getImportance());
 	context.put("OPTIONAL", r.getFacultatif());
 	context.put("INTERRUPTIBLE", r.getInterruptible());
 	context.put("EVENTTRIGGER", r.getEvents());
-	context.put("DECOMPOSITION", r.getDecomposition().toString());
-	context.put("ACTORS", PrintAdaptator.getValues(r.getActeurs()));
+	context.put("DECOMPOSITION", r.getOrdering().toString());
+	context.put("ACTORS", PrintAdaptator.getValues(r.getActors()));
 	context.put("PRECONDITION", r.getPreExpression().getName());
 	context.put("ITERATION", r.getIteExpression().getName());
 	context.put("GENERATEDEVENTS", PrintAdaptator.getValues(r.getEvents()));
@@ -333,7 +333,7 @@ public final class PrintAdaptator {
     }
 
     private static void buildTreeUserCard() {
-	ArrayList<Tache> rootTasks = ExpressTask.getRootTasks();
+	ArrayList<Task> rootTasks = ExpressTask.getRootTasks();
 	GraphicEditorAdaptator.getMainFrame().getPrintingFrame().getUserCards()
 		.setTasks(rootTasks);
     }

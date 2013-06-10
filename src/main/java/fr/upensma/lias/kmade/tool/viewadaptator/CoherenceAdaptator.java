@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEDefaultGraphCell;
@@ -69,14 +69,14 @@ public final class CoherenceAdaptator {
 
     public static void selectTaskFromError(Object valueAt) {
 	if (valueAt != null) {
-	    if (valueAt instanceof Tache) {
+	    if (valueAt instanceof Task) {
 		GraphicEditorAdaptator
 			.getTaskModelPanel()
 			.getJGraph()
 			.scrollCellToVisible(
-				(KMADEDefaultGraphCell) ((Tache) valueAt)
+				(KMADEDefaultGraphCell) ((Task) valueAt)
 					.getJTask());
-		GraphicEditorAdaptator.setSelectionTask((Tache) valueAt);
+		GraphicEditorAdaptator.setSelectionTask((Task) valueAt);
 	    }
 	}
     }
@@ -86,9 +86,9 @@ public final class CoherenceAdaptator {
 		.getTaskModelPanel()
 		.getJGraph()
 		.scrollCellToVisible(
-			(KMADEDefaultGraphCell) ((Tache) pmessage[TASK])
+			(KMADEDefaultGraphCell) ((Task) pmessage[TASK])
 				.getJTask());
-	GraphicEditorAdaptator.setSelectionTask((Tache) pmessage[TASK]);
+	GraphicEditorAdaptator.setSelectionTask((Task) pmessage[TASK]);
 	switch ((Integer) pmessage[LOCATION]) {
 	case HIERARCHICAL_TASK_MODEL: {
 	    break;
@@ -140,14 +140,14 @@ public final class CoherenceAdaptator {
     }
 
     private static void addErrorMessage(String message, int type, int location,
-	    Tache tache) {
+	    Task tache) {
 	Object[] temp = { CoherenceAdaptator.ERROR_PROBLEM, message, tache,
 		type, location };
 	myMessageList.add(temp);
     }
 
     private static void addWarningMessage(String message, int type,
-	    int location, Tache tache) {
+	    int location, Task tache) {
 	Object[] temp = { CoherenceAdaptator.WARNING_PROBLEM, message, tache,
 		type, location };
 	myMessageList.add(temp);
@@ -179,8 +179,8 @@ public final class CoherenceAdaptator {
      * Cette m�thode devra �tre "thread�e" pour plus d'efficacit�
      */
     private static synchronized void checkTaskModels() {
-	ArrayList<Tache> myTaskList = ExpressTask.getRootTasks();
-	for (Tache current : myTaskList) {
+	ArrayList<Task> myTaskList = ExpressTask.getRootTasks();
+	for (Task current : myTaskList) {
 	    // R�gles : hi�rarchie des t�ches
 	    if (current.isRoot() && current.isLeaf()) {
 		CoherenceAdaptator.addErrorMessage(
@@ -201,7 +201,7 @@ public final class CoherenceAdaptator {
 	});
     }
 
-    private static void checkObjectsTaskModel(Tache myTache) {
+    private static void checkObjectsTaskModel(Task myTache) {
 	if (myTache.getPreExpression().getNodeExpression() == null) {
 	    CoherenceAdaptator.addErrorMessage(
 		    KMADEConstant.PRECONDITION_EXPRESSION_MESSAGE_PROBLEM,
@@ -220,21 +220,21 @@ public final class CoherenceAdaptator {
 		    EXPRESSION_TYPE, ITERATION_DIALOG, myTache);
 	}
 
-	for (Tache subTasks : myTache.getFils()) {
+	for (Task subTasks : myTache.getChildren()) {
 	    CoherenceAdaptator.checkObjectsTaskModel(subTasks);
 	}
     }
 
-    private static void checkHiearchicalTaskModel(Tache myTache) {
+    private static void checkHiearchicalTaskModel(Task myTache) {
 	// Pas de t�che unique.
-	if (!myTache.isLeaf() && myTache.getFils().size() == 1) {
+	if (!myTache.isLeaf() && myTache.getChildren().size() == 1) {
 	    CoherenceAdaptator.addErrorMessage(
 		    KMADEConstant.NO_ONLY_ONE_SUBTASK_MESSAGE_PROBLEM,
 		    HIERARCHICAL_TYPE, HIERARCHICAL_TASK_MODEL, myTache);
 	}
 
 	if (myTache.isLeaf()
-		&& (myTache.getDecomposition() != Decomposition.ELE)) {
+		&& (myTache.getOrdering() != Decomposition.ELE)) {
 	    CoherenceAdaptator.addErrorMessage(
 		    KMADEConstant.ELEMENTARY_DECOMPOSITION_FOR_LEAF_TASK,
 		    HIERARCHICAL_TYPE, HIERARCHICAL_TASK_MODEL, myTache);
@@ -242,8 +242,8 @@ public final class CoherenceAdaptator {
 
 	// Op�rateur de d�composition non pr�cis�.
 	if (!myTache.isLeaf()
-		&& (myTache.getDecomposition() == Decomposition.ELE || myTache
-			.getDecomposition() == Decomposition.INCONNU)) {
+		&& (myTache.getOrdering() == Decomposition.ELE || myTache
+			.getOrdering() == Decomposition.INCONNU)) {
 	    CoherenceAdaptator.addErrorMessage(
 		    KMADEConstant.NO_DECOMPOSITION_SPECIFIED_MESSAGE_PROBLEM,
 		    HIERARCHICAL_TYPE, HIERARCHICAL_TASK_MODEL, myTache);
@@ -257,7 +257,7 @@ public final class CoherenceAdaptator {
 			HIERARCHICAL_TYPE, HIERARCHICAL_TASK_MODEL, myTache);
 	    } else {
 		if (!(myTache.getExecutant() == Executant.ABS)) {
-		    for (Tache subTasks : myTache.getFils()) {
+		    for (Task subTasks : myTache.getChildren()) {
 			if (subTasks.getExecutant() != myTache.getExecutant()) {
 			    CoherenceAdaptator
 				    .addWarningMessage(
@@ -271,7 +271,7 @@ public final class CoherenceAdaptator {
 	    }
 	}
 
-	for (Tache subTasks : myTache.getFils()) {
+	for (Task subTasks : myTache.getChildren()) {
 	    CoherenceAdaptator.checkHiearchicalTaskModel(subTasks);
 	}
     }

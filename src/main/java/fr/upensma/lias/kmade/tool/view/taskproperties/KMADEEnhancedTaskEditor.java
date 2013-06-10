@@ -71,7 +71,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Frequence;
 import fr.upensma.lias.kmade.kmad.schema.tache.Importance;
 import fr.upensma.lias.kmade.kmad.schema.tache.Modalite;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
 import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
@@ -619,7 +619,7 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
     }
 
     public void displayTaskProperties(String numero, String tacheMere,
-	    String name, String but, String res, String feed, String duree,
+	    String name, String but, String feed, String duree,
 	    String obs, Executant exec, Modalite mod, Frequence freq,
 	    String compFreq, Importance imp, String events, boolean facultatif,
 	    boolean interruptible, String[] allevents, String dec,
@@ -706,12 +706,12 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	this.fireEvents.setText(events);
 	this.refTableModel.setData(actRef);
 	this.refTableModelSys.setData(actRefSys);
-	if (Tache.canHaveActor(exec)) {
+	if (Task.canHaveActor(exec)) {
 	    this.acteurPanel.setVisible(true);
 	} else {
 	    this.acteurPanel.setVisible(false);
 	}
-	if (Tache.canHaveActorSystem(exec)) {
+	if (Task.canHaveActorSystem(exec)) {
 	    this.acteurSystemePanel.setVisible(true);
 	} else {
 	    this.acteurSystemePanel.setVisible(false);

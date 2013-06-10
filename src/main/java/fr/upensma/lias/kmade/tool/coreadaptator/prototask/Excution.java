@@ -7,7 +7,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.PreExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.StateCondition;
 import fr.upensma.lias.kmade.kmad.schema.tache.StateExecution;
-import fr.upensma.lias.kmade.kmad.schema.tache.Tache;
+import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 
 
@@ -22,12 +22,12 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
  */
 public class Excution{
 
-	public static void doTask(Tache t) throws ProtoTaskException {
+	public static void doTask(Task t) throws ProtoTaskException {
 		if(t.getStateExecution()==StateExecution.ACTIVABLE || t.getStateExecution()==StateExecution.ACTIVE){  
 			t.setStateExecution(StateExecution.ACTIVE);
 			takeCareOfMyChildren(t);
-			if(t.getMotherTask()!=null)
-				oneOfMyChildrenBecommeActive(t.getMotherTask());
+			if(t.getMother()!=null)
+				oneOfMyChildrenBecommeActive(t.getMother());
 
 			System.out.println("do TASK eNd + " + t.getStateExecution());
 
@@ -40,12 +40,12 @@ public class Excution{
 
 
 
-	public void cancelTask(Tache t) throws ProtoTaskException {
+	public void cancelTask(Task t) throws ProtoTaskException {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void suspendTask(Tache t) throws ProtoTaskException {
+	public void suspendTask(Task t) throws ProtoTaskException {
 		// TODO Auto-generated method stub
 
 	}
@@ -54,16 +54,16 @@ public class Excution{
 	/**
 	 * @param t
 	 */
-	private static void oneOfMyChildrenBecommeActive(Tache t) throws ProtoTaskException {
+	private static void oneOfMyChildrenBecommeActive(Task t) throws ProtoTaskException {
 
 		//je regarde mon ordonnancement et je met à jours mes filles si besoin et je me met en attente si besoin
 		Decomposition decompo = t.getOrdonnancement();
-		ArrayList<Tache> enfants ;
+		ArrayList<Task> enfants ;
 		switch (decompo) {
 		case ALT:
 			t.setStateExecution(StateExecution.ATTENTETASK);
-			enfants = t.getFils();
-			for (Tache fille : enfants) {
+			enfants = t.getChildren();
+			for (Task fille : enfants) {
 				switch (fille.getStateExecution()) {
 				case ATTENTEFIN:
 				case 	ATTENTEFINKO :
@@ -79,8 +79,8 @@ public class Excution{
 			throw new ProtoTaskException();
 		case ET:
 			t.setStateExecution(StateExecution.ATTENTETASK);
-			enfants = t.getFils();
-			for (Tache fille : enfants) {
+			enfants = t.getChildren();
+			for (Task fille : enfants) {
 				switch (fille.getStateExecution()) {
 				case ACTIVABLE:
 				case INACTIVABLE:
@@ -95,8 +95,8 @@ public class Excution{
 			throw new ProtoTaskException();
 		case PAR:
 			boolean canStartAChild = false;
-			enfants = t.getFils();
-			for (Tache fille : enfants) {
+			enfants = t.getChildren();
+			for (Task fille : enfants) {
 				switch (fille.getStateExecution()) {
 				case ACTIVABLE:
 				case INACTIVABLE:
@@ -112,8 +112,8 @@ public class Excution{
 			break;
 		case SEQ:
 			t.setStateExecution(StateExecution.ATTENTETASK);
-			enfants = t.getFils();
-			for (Tache fille : enfants) {
+			enfants = t.getChildren();
+			for (Task fille : enfants) {
 				switch (fille.getStateExecution()) {
 				case ACTIVABLE:
 				case INACTIVABLE:
@@ -130,13 +130,13 @@ public class Excution{
 	}
 
 
-	private static void takeCareOfMyChildren(Tache t) throws ProtoTaskException {
+	private static void takeCareOfMyChildren(Task t) throws ProtoTaskException {
 		Decomposition decompo = t.getOrdonnancement();
-		ArrayList<Tache> children;
+		ArrayList<Task> children;
 		switch (decompo) {
 		case ALT:
-			children = t.getFils();
-			for (Tache child : children) {
+			children = t.getChildren();
+			for (Task child : children) {
 				if(child.getStateExecution()==null)
 					child.setStateExecution(StateExecution.INACTIVE);
 				switch(child.getStateExecution()){
@@ -166,9 +166,9 @@ public class Excution{
 			waitEndTask(t);
 			break;
 		case ET:
-			children = t.getFils();
+			children = t.getChildren();
 			boolean oneActivable = true;
-			for (Tache child : children) {
+			for (Task child : children) {
 				if(child.getStateExecution()==null)
 					child.setStateExecution(StateExecution.INACTIVE);
 				switch(child.getStateExecution()){
@@ -197,8 +197,8 @@ public class Excution{
 		case INCONNU:
 			throw new ProtoTaskException();
 		case PAR:
-			children = t.getFils();
-			for (Tache child : children) {
+			children = t.getChildren();
+			for (Task child : children) {
 				if(child.getStateExecution()==null)
 					child.setStateExecution(StateExecution.INACTIVE);
 				switch(child.getStateExecution()){
@@ -225,10 +225,10 @@ public class Excution{
 			}
 			break;
 		case SEQ:					
-			children = t.getFils();
+			children = t.getChildren();
 			//permet de dire si la première tache non optionnel a été trouvé
 			boolean first = false;
-			for (Tache child : children) {
+			for (Task child : children) {
 				if(child.getStateExecution()==null)
 					child.setStateExecution(StateExecution.INACTIVE);
 				switch(child.getStateExecution()){
@@ -263,8 +263,8 @@ public class Excution{
 		default:
 			break;
 		}
-		children = t.getFils();
-		for (Tache child : children) {
+		children = t.getChildren();
+		for (Task child : children) {
 			if(child.getStateExecution()!=null)
 				System.out.println("fils : " + child.getStateExecution());
 		}
@@ -274,7 +274,7 @@ public class Excution{
 
 
 
-	private static void iCanBeActivable(Tache t) {
+	private static void iCanBeActivable(Task t) {
 		//TODO vérifier la precondition
 		//if the task has a condition
 		if(t.getPreExpression().getDescription()!=null && !t.getPreExpression().getDescription().equals("")){
@@ -295,7 +295,7 @@ public class Excution{
 
 
 	//
-	private static void waitEndTask(Tache t) {
+	private static void waitEndTask(Task t) {
 		//faire la gestion de 
 		System.out.println("waitend");
 
@@ -324,9 +324,9 @@ public class Excution{
 
 
 
-	public static void endTask(Tache t) throws ProtoTaskException {
+	public static void endTask(Task t) throws ProtoTaskException {
 		t.setStateExecution(StateExecution.FINISHED);
-		Tache mother = t.getMotherTask();
+		Task mother = t.getMother();
 		if(mother!=null)
 			oneOfMyChildrenBecomeFinish(mother);
 		else{
@@ -335,9 +335,9 @@ public class Excution{
 		}
 	}
 
-	private static void oneOfMyChildrenBecomeFinish(Tache t) throws ProtoTaskException{
+	private static void oneOfMyChildrenBecomeFinish(Task t) throws ProtoTaskException{
 		Decomposition decompo = t.getOrdonnancement();
-		ArrayList<Tache> enfants ;
+		ArrayList<Task> enfants ;
 		switch (decompo) {
 		case ALT:
 			waitEndTask(t);
@@ -346,9 +346,9 @@ public class Excution{
 			throw new ProtoTaskException();
 		case ET:
 			//t.setStateExecution(StateExecution.ATTENTETASK);
-			enfants = t.getFils();
+			enfants = t.getChildren();
 			int counter = 0;
-			for (Tache fille : enfants) {
+			for (Task fille : enfants) {
 				switch (fille.getStateExecution()) {
 				case ACTIVABLE:
 				case INACTIVABLE:
@@ -372,9 +372,9 @@ public class Excution{
 			throw new ProtoTaskException();
 		case PAR:
 			boolean canStartAChild = false;
-			enfants = t.getFils();
+			enfants = t.getChildren();
 			counter = 0;
-			for (Tache fille : enfants) {
+			for (Task fille : enfants) {
 				switch (fille.getStateExecution()) {
 				case ACTIVABLE:
 				case INACTIVABLE:
@@ -399,9 +399,9 @@ public class Excution{
 			break;
 		case SEQ:
 			t.setStateExecution(StateExecution.ATTENTETASK);
-			enfants = t.getFils();
+			enfants = t.getChildren();
 			counter = 0;
-			for (Tache fille : enfants) {
+			for (Task fille : enfants) {
 				switch (fille.getStateExecution()) {
 				case ACTIVABLE:
 				case INACTIVABLE:
@@ -433,9 +433,9 @@ public class Excution{
 
 
 	public static void resetScenario() {
-		ArrayList<Tache> root = ExpressTask.getRootTasks();
+		ArrayList<Task> root = ExpressTask.getRootTasks();
 		setAllTaskState(StateExecution.INACTIVE);
-		for (Tache tache : root) {
+		for (Task tache : root) {
 			tache.setStateExecution(StateExecution.ACTIVABLE);
 			try {
 				Excution.doTask(tache);
@@ -448,10 +448,10 @@ public class Excution{
 	}
 	
 	private static void setAllTaskState(StateExecution state){
-		ArrayList<Tache> root = ExpressTask.getRootTasks();
-		for (Tache tache : root) {
+		ArrayList<Task> root = ExpressTask.getRootTasks();
+		for (Task tache : root) {
 			tache.setStateExecution(state);
-			for(Tache t : tache.getFils()){
+			for(Task t : tache.getChildren()){
 				setStateRecu(t,state);
 			}
 		}
@@ -461,9 +461,9 @@ public class Excution{
 
 
 
-	private static void setStateRecu(Tache t, StateExecution state) {
+	private static void setStateRecu(Task t, StateExecution state) {
 		t.setStateExecution(state);
-		for(Tache f : t.getFils()){
+		for(Task f : t.getChildren()){
 			setStateRecu(f, state);
 		}
 		
