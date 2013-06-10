@@ -44,7 +44,7 @@ public class Task implements Entity {
 
     private static final long serialVersionUID = -7319483011074082713L;
 
-    public Oid oid = null;
+    private Oid oid = null;
 
     // Task type    
 		/** executant : Executant -> Enumerated values for the kind of 
@@ -63,11 +63,7 @@ public class Task implements Entity {
 	    /** goal : String -> The goal of the task. Can be null */
 	    private String goal = "";
 
-/*	    *//** resources : String -> Resources ne corespond à rien de connu
-	     *             a eliminer  *//*
-	    private String resources = "";
-
-*/    	/** feed : String -> Task feedback, not really used */
+    	/** feed : String -> Task feedback, not really used */
     	private String feedback = "";
 
 	    /** duration : String -> Task duration - can be of either form. 
@@ -89,7 +85,7 @@ public class Task implements Entity {
 	    private Importance importance = Importance.INCONNU;
 
 	    /** media : Audio-Video file, which illustrates the task */
-	    private Media idMedia = null;
+	    private Media media = null;
 
     // Dynamic attributes
 	    /** optional = Boolean -> is the task optional? - 
@@ -119,7 +115,7 @@ public class Task implements Entity {
 	     * the task is root, or if it is not attached to the tree */
 	    private Task mother = null;
 	    
-	    /** child : ArrayList<Tache> -> ordered list of sub-tasks */
+	    /** children : ArrayList<Tache> -> ordered list of sub-tasks */
 	    private ArrayList<Task> children = new ArrayList<Task>();
 
     // Actors
@@ -215,7 +211,7 @@ public class Task implements Entity {
 	this.mother = null;
 	this.number = ExpressConstant.ROOT_TASK_NAME;
 	this.point = null;
-	this.idMedia = null;
+	this.media = null;
 	this.raisingEvent = null;
 	this.label = null;
 	this.preExpression = new PreExpression();
@@ -260,11 +256,11 @@ public class Task implements Entity {
      */
 
     public Media getMedia() {
-	return this.idMedia;
+	return this.media;
     }
 
     public void setMedia(Media m) {
-	this.idMedia = m;
+	this.media = m;
     }
 
     public void setActors(ArrayList<Actor> e) {
@@ -281,6 +277,11 @@ public class Task implements Entity {
 	}
     }
 
+    /**
+     * Adds an actor to the list of actors. Must be unique in the list
+     * @param a the actor
+     * @return false if the actor already exists (same name) in the list
+     */
     public boolean addActor(Actor a) {
 	for (int i = 0; i < actors.size(); i++) {
 	    Actor act = actors.get(i);
@@ -294,6 +295,11 @@ public class Task implements Entity {
 
     }
 
+    /**
+     * Adds a System actor to the list of system actors. Must be unique in the list
+     * @param a the system actor
+     * @return false if the actor already exists (same oid) in the list
+     */
     public boolean addActorSystem(ActorSystem a) {
 	for (int i = 0; i < actorSystem.size(); i++) {
 	    ActorSystem act = actorSystem.get(i);
@@ -308,14 +314,12 @@ public class Task implements Entity {
 
     }
 
-    public void removeActeur(Actor a) {
+    public void removeActor(Actor a) {
 	actors.remove(a);
-	a = null;
     }
 
     public void removeActorSystem(ActorSystem a) {
 	actorSystem.remove(a);
-	a = null;
     }
 
     public void setEvents(ArrayList<Event> e) {
@@ -325,6 +329,11 @@ public class Task implements Entity {
 	}
     }
 
+    /**
+     * Adds an event to the list of fired events
+     * @param a the event to add
+     * @return false if the event already exists (ref)
+     */
     public boolean addEvent(Event a) {
 	if (events.indexOf(a) == -1) {
 	    events.add(a);
@@ -710,9 +719,9 @@ public class Task implements Entity {
     }
 
     /*
-     * Donne le numéro de la tache selon son positionnement dans les fils
+     * Compute the rank of child among children
      */
-    private static int place(Task leFils, Task laMere) {
+    private static int computeRank(Task leFils, Task laMere) {
 	int pointX = (leFils.point.x).intValue();
 	int px = 0;
 	int taille = laMere.children.size();
@@ -725,27 +734,26 @@ public class Task implements Entity {
     }
 
     /**
-     * 
+     * Adds a subtask to the task. Rank is outomatically computed
      * @param tachefils
-     * @return
      */
     public void addSubTask(Task tachefils) {
 	mereInverse(tachefils);
-	int place = place(tachefils, this);
-	children.add(place, tachefils);
-	this.setDeriveTaskNumero(place);
+	int rank = computeRank(tachefils, this);
+	children.add(rank, tachefils);
+	this.setDeriveTaskNumero(rank);
     }
 
     /**
-     * @param place
+     * @param rank
      */
-    private void setDeriveTaskNumero(int place) {
+    private void setDeriveTaskNumero(int rank) {
 	String s = this.number;
 	if (s.startsWith(ExpressConstant.ROOT_TASK_NAME))
 	    s = "";
 	if (this.mother == null)
 	    s = "";
-	for (int i = place; i < this.children.size(); i++) {
+	for (int i = rank; i < this.children.size(); i++) {
 	    Task tmp = (Task) this.children.get(i);
 	    if (s.length() == 0)
 		tmp.number = "" + (i + 1);
@@ -778,7 +786,7 @@ public class Task implements Entity {
 	int placeOld = mother.children.indexOf(this);
 	// Mickael BARON : Tache dec = (Tache) mere.fils.remove(placeOld);
 	mother.children.remove(placeOld);
-	int placeNew = place(this, mother);
+	int placeNew = computeRank(this, mother);
 	mother.children.add(placeNew, this);
 	int debut = 0;
 	if (placeNew == placeOld)
@@ -1124,7 +1132,7 @@ public class Task implements Entity {
 	// Media
 	nodeList = p.getElementsByTagName("id-task-media");
 	if (nodeList.item(0) != null) {
-	    this.idMedia = (Media) InterfaceExpressJava.bdd.prendre(new Oid(
+	    this.media = (Media) InterfaceExpressJava.bdd.prendre(new Oid(
 		    nodeList.item(0).getTextContent()));
 	}
 
@@ -1360,10 +1368,10 @@ public class Task implements Entity {
 	}
 	SPF = SPF + "),";
 	// Media
-	if (idMedia == null) {
+	if (media == null) {
 	    // Ne rien faire
 	} else {
-	    SPF = SPF + idMedia.oid.get() + ",";
+	    SPF = SPF + media.oid.get() + ",";
 	}
 	// Point
 	if (point == null) {
@@ -1504,7 +1512,7 @@ public class Task implements Entity {
     /**
      * @return Returns the refJTask.
      */
-    public Object getJTask() {
+    public Object getRefJTask() {
 	return refJTask;
     }
 
@@ -1512,7 +1520,7 @@ public class Task implements Entity {
      * @param refJTask
      *            The refJTask to set.
      */
-    public void setJTask(Object refJTask) {
+    public void setRefJTask(Object refJTask) {
 	this.refJTask = refJTask;
     }
 
@@ -1709,9 +1717,9 @@ public class Task implements Entity {
 	racine.setAttribute("classkmad", "tache.Tache");
 	racine.setAttribute("idkmad", oid.get());
 	// Media
-	if (this.idMedia != null && this.idMedia.isExisting()){
-	    racine.setAttribute("id-task-media", this.idMedia.getOid().get());
-	    racine.appendChild(this.idMedia.toXML2(doc));
+	if (this.media != null && this.media.isExisting()){
+	    racine.setAttribute("id-task-media", this.media.getOid().get());
+	    racine.appendChild(this.media.toXML2(doc));
 	}
 	// Event trigger
 	if (this.raisingEvent != null){
@@ -1779,7 +1787,7 @@ public class Task implements Entity {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 	// Media
 	if (p.hasAttribute("id-task-media)"))
-	    this.idMedia = (Media) InterfaceExpressJava.bdd.prendre(new Oid(p
+	    this.media = (Media) InterfaceExpressJava.bdd.prendre(new Oid(p
 		    .getAttribute("id-task-media")));
 	// Triggering Event
 	if (p.hasAttribute("id-task-eventtrigger"))

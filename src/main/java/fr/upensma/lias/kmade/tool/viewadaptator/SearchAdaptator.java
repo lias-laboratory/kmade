@@ -114,7 +114,7 @@ public final class SearchAdaptator {
 	GraphicEditorAdaptator.getMainFrame().getFindReplaceDialog()
 		.selectOccurenceAt(SearchAdaptator.getCurrent());
 	if (temp != null) {
-	    GraphicEditorAdaptator.updateGraphModel(temp.getJTask());
+	    GraphicEditorAdaptator.updateGraphModel(temp.getRefJTask());
 	}
     }
 
@@ -152,7 +152,7 @@ public final class SearchAdaptator {
     private static void disableFindFlag() {
 	ArrayList<Task> listCell = SearchAdaptator.getSearchTasks();
 	for (int i = 0; i < SearchAdaptator.getSearchTasks().size(); i++) {
-	    ((KMADEDefaultGraphCell) (listCell.get(i).getJTask()))
+	    ((KMADEDefaultGraphCell) (listCell.get(i).getRefJTask()))
 		    .setFlagSearch(false);
 	}
 	GraphicEditorAdaptator.updateGraphModel(SearchAdaptator
@@ -165,7 +165,7 @@ public final class SearchAdaptator {
 	KMADEDefaultGraphCell[] array = new KMADEDefaultGraphCell[taskList
 		.size()];
 	for (int i = 0; i < taskList.size(); i++) {
-	    array[i] = (KMADEDefaultGraphCell) (taskList.get(i).getJTask());
+	    array[i] = (KMADEDefaultGraphCell) (taskList.get(i).getRefJTask());
 	}
 	return array;
     }
@@ -259,7 +259,7 @@ public final class SearchAdaptator {
 		.getJGraph()
 		.scrollCellToVisible(
 			(KMADEDefaultGraphCell) ((Task) selectedTask)
-				.getJTask());
+				.getRefJTask());
     }
 
     public static void setToforward() {
@@ -412,7 +412,7 @@ public final class SearchAdaptator {
 
 	    if (a && b && c && d && e) {
 		statut = true;
-		((KMADEDefaultGraphCell) allTache.get(i).getJTask())
+		((KMADEDefaultGraphCell) allTache.get(i).getRefJTask())
 			.setFlagSearch(true);
 		SearchAdaptator.getSearchTasks().add(allTache.get(i));
 	    }

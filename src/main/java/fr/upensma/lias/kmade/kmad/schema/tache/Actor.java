@@ -79,27 +79,27 @@ public class Actor implements Entity {
      * @param o Oid unique Express identifier
      */
     public Actor(String exp, String comp, User u, Oid o) {
-	userRef = u;
-	experience = Experience.getValue(exp);
-	competence = comp;
-	this.oid = o;
+    	userRef = u;
+    	experience = Experience.getValue(exp);
+    	competence = comp;
+    	this.oid = o;
     }
 
     /**
      * Suppress the actor, deleting the inverse links in the user and the task
      */
     public void delete() {
-	userRef.removeInverseActeur(this);
-	inverseTache.removeActeur(this);
-	InterfaceExpressJava.remove(oid);
+    	userRef.removeInverseActeur(this);
+    	inverseTache.removeActor(this);
+    	InterfaceExpressJava.remove(oid);
     }
 
     public String getName() {
-	return userRef.getName();
+    	return userRef.getName();
     }
 
     public void affDelete() {
-	InterfaceExpressJava.getGestionWarning().addMessage(
+    	InterfaceExpressJava.getGestionWarning().addMessage(
 		oid,
 		9,
 		ExpressConstant.REMOVE_OF_THE_TASK_MESSAGE + " \""
@@ -107,7 +107,7 @@ public class Actor implements Entity {
     }
 
     public void setOid(Oid oid) {
-	this.oid = oid;
+    	this.oid = oid;
     }
 
     /**
@@ -117,43 +117,43 @@ public class Actor implements Entity {
      * @param a the task where the actor is defined
      */
     public void setInverseTache(Task a) {
-	this.inverseTache = a;
+    	this.inverseTache = a;
     }
 
     public Task getInverseTache() {
-	return inverseTache;
+    	return inverseTache;
     }
 
     public void setExperience(String s) {
-	experience = Experience.getValue(s);
+    	experience = Experience.getValue(s);
     }
 
     public Experience getExperience() {
-	return experience;
+    	return experience;
     }
 
     public void setCompetence(String s) {
-	competence = s;
+    	competence = s;
     }
 
     public String getCompetence() {
-	return competence;
+    	return competence;
     }
 
     public void setUserRef(User u) {
-	userRef = u;
+    	userRef = u;
     }
 
     public User getUserRef() {
-	return userRef;
+    	return userRef;
     }
 
     public Oid getOid() {
-	return oid;
+    	return oid;
     }
 
     public String toString() {
-	return userRef.toString();
+    	return userRef.toString();
     }
 
     public org.w3c.dom.Element toXML(Document doc) {

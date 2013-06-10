@@ -183,7 +183,7 @@ public final class GraphicEditorAdaptator {
 
     public static void setSelectionTask(Task myTask) {
 	GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().setSelectionCell(
-		myTask.getJTask());
+		myTask.getRefJTask());
     }
 
     public static void enabledMainFrameAfterSimulation() {

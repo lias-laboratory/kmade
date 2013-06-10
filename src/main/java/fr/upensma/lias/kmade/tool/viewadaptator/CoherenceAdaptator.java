@@ -75,7 +75,7 @@ public final class CoherenceAdaptator {
 			.getJGraph()
 			.scrollCellToVisible(
 				(KMADEDefaultGraphCell) ((Task) valueAt)
-					.getJTask());
+					.getRefJTask());
 		GraphicEditorAdaptator.setSelectionTask((Task) valueAt);
 	    }
 	}
@@ -87,7 +87,7 @@ public final class CoherenceAdaptator {
 		.getJGraph()
 		.scrollCellToVisible(
 			(KMADEDefaultGraphCell) ((Task) pmessage[TASK])
-				.getJTask());
+				.getRefJTask());
 	GraphicEditorAdaptator.setSelectionTask((Task) pmessage[TASK]);
 	switch ((Integer) pmessage[LOCATION]) {
 	case HIERARCHICAL_TASK_MODEL: {

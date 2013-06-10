@@ -712,7 +712,7 @@ public class KMADESimulationDialog extends JFrame {
 			if (!find
 				&& ((TokenSimulation) myRecordingPanel
 					.getActionListModel().getElementAt(i))
-					.getTask().getJTask() == toto) {
+					.getTask().getRefJTask() == toto) {
 			    firstIndex = i;
 			    find = true;
 			}
@@ -724,7 +724,7 @@ public class KMADESimulationDialog extends JFrame {
 				.isSelectionEmpty()) {
 			    if (((TokenSimulation) myRecordingPanel
 				    .getActionList().getSelectedValue())
-				    .getTask().getJTask() == toto) {
+				    .getTask().getRefJTask() == toto) {
 				return;
 			    } else {
 				myRecordingPanel

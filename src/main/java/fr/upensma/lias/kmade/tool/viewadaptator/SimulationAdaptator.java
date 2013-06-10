@@ -351,7 +351,7 @@ public final class SimulationAdaptator {
 		    .getGraphSimulation()
 		    .scrollCellToVisible(
 			    (KMADEDefaultGraphCell) (tokenSimulation.getTask()
-				    .getJTask()));
+				    .getRefJTask()));
 	}
     }
 
@@ -377,13 +377,13 @@ public final class SimulationAdaptator {
 		    .getGraphSimulation()
 		    .scrollCellToVisible(
 			    (KMADEDefaultGraphCell) (currentSelectedTokenSimulation
-				    .getTask().getJTask()));
+				    .getTask().getRefJTask()));
 	    GraphicEditorAdaptator
 		    .getMainFrame()
 		    .getSimulationDialog()
 		    .getGraphSimulation()
 		    .setSelectionCell(
-			    currentSelectedTokenSimulation.getTask().getJTask());
+			    currentSelectedTokenSimulation.getTask().getRefJTask());
 
 	    // Est-ce un Token pour l'exécution.
 	    if (currentSelectedTokenSimulation.isExecuterAction()) {

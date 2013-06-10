@@ -91,7 +91,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 
     public KMADEDefaultGraphCell(Task currentTask) {
 	this.myTask = currentTask;
-	this.myTask.setJTask(this);
+	this.myTask.setRefJTask(this);
 	this.oid = this.myTask.getOid().get();
 
 	this.motherPort = new KMADEDefaultPort("mother");
@@ -273,7 +273,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	ArrayList<KMADEDefaultGraphCell> myCell = new ArrayList<KMADEDefaultGraphCell>();
 
 	for (int i = 0; i < mySubTasks.size(); i++) {
-	    myCell.add((KMADEDefaultGraphCell) mySubTasks.get(i).getJTask());
+	    myCell.add((KMADEDefaultGraphCell) mySubTasks.get(i).getRefJTask());
 	}
 	return myCell;
     }
@@ -284,7 +284,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	ArrayList<KMADEDefaultGraphCell> mySubTasksTotal = new ArrayList<KMADEDefaultGraphCell>();
 	for (int i = 0; i < mySubTasks.size(); i++) {
 	    ArrayList<KMADEDefaultGraphCell> current = ((KMADEDefaultGraphCell) mySubTasks
-		    .get(i).getJTask()).getDescendantSubCells(onlyLeaf);
+		    .get(i).getRefJTask()).getDescendantSubCells(onlyLeaf);
 	    for (int j = 0; j < current.size(); j++) {
 		mySubTasksTotal.add(current.get(j));
 	    }
