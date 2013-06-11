@@ -30,7 +30,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Point;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
@@ -182,8 +182,8 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
     /**
      * @return Returns the executant.
      */
-    public Executant getExecutant() {
-	return myTask.getExecutant();
+    public Executor getExecutant() {
+	return myTask.getExecutor();
     }
 
     /**

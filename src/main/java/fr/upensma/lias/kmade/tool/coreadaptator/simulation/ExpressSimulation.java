@@ -29,7 +29,7 @@ import fr.upensma.lias.kmade.kmad.schema.expression.UserExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.Event;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Importance;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
@@ -99,7 +99,7 @@ public final class ExpressSimulation {
                     myTacheList.add(new TokenSimulation(myTache, TokenSimulation.INTERROMPRE));
                 }
             } else {                                
-                if (myTache.getExecutant().equals(Executant.SYS)) {
+                if (myTache.getExecutor().equals(Executor.SYS)) {
                     // Un exécutant système est interrompue automatiquement                    
                     // Vérifie avec la tache mere s'il existe une sous-tache de plus haute priorite
                     
@@ -131,7 +131,7 @@ public final class ExpressSimulation {
                 myTacheList.add(new TokenSimulation(myTache, TokenSimulation.EXECUTER));                
             }
             if (myTache.getStateSimulation().isPassive() && myTache.isOptional()) {
-            	if (!myTache.isRoot() && !myTache.getMother().getOrdering().equals(Decomposition.ALT) && !myTache.getExecutant().equals(Executant.SYS)) {
+            	if (!myTache.isRoot() && !myTache.getMother().getOrdering().equals(Decomposition.ALT) && !myTache.getExecutor().equals(Executor.SYS)) {
             		myTacheList.add(new TokenSimulation(myTache, TokenSimulation.PASSER));
 				}
             }
@@ -141,7 +141,7 @@ public final class ExpressSimulation {
         // No Leaf Task
 		if (myTache.getStateSimulation().isPassive()) {
 			if (myTache.isOptional()) {
-				if (!myTache.isRoot() && !myTache.getMother().getOrdering().equals(Decomposition.ALT) && !myTache.getExecutant().equals(Executant.SYS)) {
+				if (!myTache.isRoot() && !myTache.getMother().getOrdering().equals(Decomposition.ALT) && !myTache.getExecutor().equals(Executor.SYS)) {
 					myTacheList.add(new TokenSimulation(myTache, TokenSimulation.PASSER));
 				}
 			}
@@ -180,7 +180,7 @@ public final class ExpressSimulation {
     	 KMADEHistoryMessageManager.printMessage("  - " + KMADEConstant.USER_EXECUTION_CONSTRAINT_MESSAGE + " : ");
         if (exe) {
         	boolean trouve = false;
-        	boolean isSystem = myCurrentTask.getExecutant().equals(Executant.SYS);
+        	boolean isSystem = myCurrentTask.getExecutor().equals(Executor.SYS);
         	
 			if (myCurrentTask.getActors().size() != 0 && !isSystem) {				
 				User selectUser = ExpressSimulation.getCurrentUserList(value);

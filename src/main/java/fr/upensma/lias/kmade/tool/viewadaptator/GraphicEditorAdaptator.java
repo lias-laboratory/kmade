@@ -36,7 +36,7 @@ import org.jgraph.graph.GraphLayoutCache;
 
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
@@ -410,7 +410,7 @@ public final class GraphicEditorAdaptator {
 		.getJGraph().getScale());
 	int my = (int) (p.getY() / GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getScale());
-	GraphicEditorAdaptator.addNewTask(Executant.INCONNU,
+	GraphicEditorAdaptator.addNewTask(Executor.INCONNU,
 		centeredTask(new Point(mx, my)));
     }
 
@@ -419,7 +419,7 @@ public final class GraphicEditorAdaptator {
 		.getJGraph().getScale());
 	int my = (int) (p.getY() / GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getScale());
-	GraphicEditorAdaptator.addNewTask(Executant.ABS,
+	GraphicEditorAdaptator.addNewTask(Executor.ABS,
 		centeredTask(new Point(mx, my)));
     }
 
@@ -428,7 +428,7 @@ public final class GraphicEditorAdaptator {
 		.getJGraph().getScale());
 	int my = (int) (p.getY() / GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getScale());
-	GraphicEditorAdaptator.addNewTask(Executant.USER,
+	GraphicEditorAdaptator.addNewTask(Executor.USER,
 		centeredTask(new Point(mx, my)));
     }
 
@@ -437,7 +437,7 @@ public final class GraphicEditorAdaptator {
 		.getJGraph().getScale());
 	int my = (int) (p.getY() / GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getScale());
-	GraphicEditorAdaptator.addNewTask(Executant.SYS,
+	GraphicEditorAdaptator.addNewTask(Executor.SYS,
 		centeredTask(new Point(mx, my)));
     }
 
@@ -446,14 +446,14 @@ public final class GraphicEditorAdaptator {
 		.getJGraph().getScale());
 	int my = (int) (p.getY() / GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getScale());
-	GraphicEditorAdaptator.addNewTask(Executant.INT,
+	GraphicEditorAdaptator.addNewTask(Executor.INT,
 		centeredTask(new Point(mx, my)));
     }
 
     /**
      * Cette m�thode est appel�e � la suite de l'action Ajouter T�che.
      */
-    public static void addNewTask(Executant e, Point p) {
+    public static void addNewTask(Executor e, Point p) {
 	// A d�terminer ici les coordonn�es de cr�ation.
 	Task myTask = ExpressTask.addNewTask(p.x, p.y, e);
 	GraphicEditorAdaptator.addNewTask(myTask);
@@ -1442,7 +1442,7 @@ public final class GraphicEditorAdaptator {
     private static void applySameExecutant(Task myTask) {
 	for (Task current : myTask.getChildren()) {
 	    GraphicEditorAdaptator.applySameExecutant(current);
-	    current.setExecutant(myTask.getExecutant());
+	    current.setExecutor(myTask.getExecutor());
 	}
     }
 

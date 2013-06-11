@@ -29,12 +29,12 @@ import fr.upensma.lias.kmade.kmad.schema.tache.ActorSystem;
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.SideEffectExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.Event;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Frequence;
 import fr.upensma.lias.kmade.kmad.schema.tache.Importance;
 import fr.upensma.lias.kmade.kmad.schema.tache.IterExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.Media;
-import fr.upensma.lias.kmade.kmad.schema.tache.Modalite;
+import fr.upensma.lias.kmade.kmad.schema.tache.Modality;
 import fr.upensma.lias.kmade.kmad.schema.tache.Point;
 import fr.upensma.lias.kmade.kmad.schema.tache.PreExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
@@ -193,7 +193,7 @@ public final class ExpressTask {
 								 // tache
 	    refTache.setOrdering(((Task) myTaskList[i])
 		    .getOrdering()); // decomposition
-	    refTache.setExecutant(((Task) myTaskList[i]).getExecutant()); // executant
+	    refTache.setExecutor(((Task) myTaskList[i]).getExecutor()); // executant
 
 	    // interruption
 	    if (((Task) myTaskList[i]).getInterruptible() == true) {
@@ -273,7 +273,7 @@ public final class ExpressTask {
 	     * Les caracteristiques a copier.
 	     *******************************************/
 	    refTache.setName((myTacheList.get(i)).getName()); // nom
-	    refTache.setExecutant((myTacheList.get(i)).getExecutant());// executant
+	    refTache.setExecutor((myTacheList.get(i)).getExecutor());// executant
 	    refTache.setOrdering((myTacheList.get(i)).getOrdering());// decomposition
 	    refTache.setInterruptible((myTacheList.get(i)).getInterruptible());// interruption
 	    refTache.setOptional((myTacheList.get(i)).getFacultatif());// necessite
@@ -376,7 +376,7 @@ public final class ExpressTask {
      * @param y  : position ordonnee
      * @return Oid de la tache
      */
-    public static Task addNewTask(int x, int y, Executant e) {
+    public static Task addNewTask(int x, int y, Executor e) {
 	Oid oidPoint = InterfaceExpressJava.createEntity("tache", "Point");
 	Oid oidTache = InterfaceExpressJava.createEntity("tache", "Tache");
 	Oid oidMedia = InterfaceExpressJava.createEntity("tache", "Media");
@@ -384,7 +384,7 @@ public final class ExpressTask {
 	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
 	Task t = (Task) InterfaceExpressJava.prendre(oidTache);
 	Media m = (Media) InterfaceExpressJava.prendre(oidMedia);
-	t.setExecutant(e);
+	t.setExecutor(e);
 	t.setPoint(p);
 	t.setMedia(m);
 	p.x = new Integer(x);
@@ -496,10 +496,10 @@ public final class ExpressTask {
      * @param oid
      * @param name
      */
-    public static void setExecutingUserTask(Task currentTask, Executant name) {
+    public static void setExecutingUserTask(Task currentTask, Executor name) {
 	if (name == null)
 	    return;
-	currentTask.setExecutant(name);
+	currentTask.setExecutor(name);
 	notifyObservers();
     }
 
@@ -528,7 +528,7 @@ public final class ExpressTask {
      * @param sens
      * @param cogn
      */
-    public static void setModalityTask(Task currentTask, Modalite sensOrCogn) {
+    public static void setModalityTask(Task currentTask, Modality sensOrCogn) {
 	currentTask.setModality(sensOrCogn);
 	notifyObservers();
     }

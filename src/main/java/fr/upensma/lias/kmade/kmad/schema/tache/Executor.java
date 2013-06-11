@@ -26,7 +26,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 /**
  * @author Delphine AUTARD and Mickael BARON
  **/
-public enum Executant implements Enumere {
+public enum Executor implements Enumere {
     INCONNU("UNK", ExpressConstant.UNKNOWN_TASK_16_IMAGE), USER("USER",
 	    ExpressConstant.USER_TASK_16_IMAGE), SYS("SYS",
 	    ExpressConstant.FEEDBACK_TASK_16_IMAGE), INT("INT",
@@ -37,7 +37,7 @@ public enum Executant implements Enumere {
 
     private final String image;
 
-    private Executant(String s, String pimage) {
+    private Executor(String s, String pimage) {
 	enonce = s;
 	image = pimage;
     }
@@ -51,10 +51,10 @@ public enum Executant implements Enumere {
     }
 
     public String toString() {
-	return Executant.getEnumereIntoLocaleExecutant(enonce);
+	return Executor.getEnumereIntoLocaleExecutant(enonce);
     }
 
-    public static Executant getXMLExecutantValue(org.w3c.dom.Element p) {
+    public static Executor getXMLExecutantValue(org.w3c.dom.Element p) {
     	
 	NodeList nodeList = p.getElementsByTagName("task-executant");
 	if (nodeList.item(0) == null) {
@@ -62,7 +62,7 @@ public enum Executant implements Enumere {
 	}
 	String value = (String) nodeList.item(0).getTextContent();
 
-	for (Executant i : Executant.values()) {
+	for (Executor i : Executor.values()) {
 	    if (value.equalsIgnoreCase(i.enonce)) {
 		return i;
 	    }
@@ -70,7 +70,7 @@ public enum Executant implements Enumere {
 	return INCONNU;
     }
     
-    public static Executant getXMLExecutantValue2(org.w3c.dom.Element p) {
+    public static Executor getXMLExecutantValue2(org.w3c.dom.Element p) {
     	
 	NodeList nodeList = p.getElementsByTagName("task-executant");
 	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
@@ -80,7 +80,7 @@ public enum Executant implements Enumere {
 	}
 	String value = (String) nodeList.item(0).getTextContent();
 
-	for (Executant i : Executant.values()) {
+	for (Executor i : Executor.values()) {
 	    if (value.equalsIgnoreCase(i.enonce)) {
 		return i;
 	    }
@@ -88,8 +88,8 @@ public enum Executant implements Enumere {
 	return INCONNU;
     }
 
-    public static Executant getValue(String s) {
-	for (Executant i : Executant.values()) {
+    public static Executor getValue(String s) {
+	for (Executor i : Executor.values()) {
 	    if (s.equalsIgnoreCase(i.enonce)) {
 		return i;
 	    }
@@ -120,31 +120,31 @@ public enum Executant implements Enumere {
 
     public static String[] getImageLocaleExecutant() {
 	String[] myExecutantArray = new String[5];
-	myExecutantArray[0] = Executant.INCONNU.getImage();
-	myExecutantArray[1] = Executant.USER.getImage();
-	myExecutantArray[2] = Executant.SYS.getImage();
-	myExecutantArray[3] = Executant.INT.getImage();
-	myExecutantArray[4] = Executant.ABS.getImage();
+	myExecutantArray[0] = Executor.INCONNU.getImage();
+	myExecutantArray[1] = Executor.USER.getImage();
+	myExecutantArray[2] = Executor.SYS.getImage();
+	myExecutantArray[3] = Executor.INT.getImage();
+	myExecutantArray[4] = Executor.ABS.getImage();
 	return myExecutantArray;
     }
 
-    public static Executant getLocaleExecutantIntoExecutant(
+    public static Executor getLocaleExecutantIntoExecutant(
 	    String myStringExecutant) {
 	if (myStringExecutant.equals(ExpressConstant.UNKNOWN_EXECUTANT_NAME))
-	    return Executant.INCONNU;
+	    return Executor.INCONNU;
 	else if (myStringExecutant.equals(ExpressConstant.USER_EXECUTANT_NAME))
-	    return Executant.USER;
+	    return Executor.USER;
 	else if (myStringExecutant
 		.equals(ExpressConstant.SYSTEM_EXECUTANT_NAME))
-	    return Executant.SYS;
+	    return Executor.SYS;
 	else if (myStringExecutant
 		.equals(ExpressConstant.INTERACTION_EXECUTANT_NAME))
-	    return Executant.INT;
+	    return Executor.INT;
 	else if (myStringExecutant
 		.equals(ExpressConstant.ABSTRACT_EXECUTANT_NAME))
-	    return Executant.ABS;
+	    return Executor.ABS;
 	else
-	    return Executant.INCONNU;
+	    return Executor.INCONNU;
     }
 
     public static String getLocaleExecutantIntoEnumere(String myStringExecutant) {

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
 import fr.upensma.lias.kmade.kmad.schema.tache.ActorSystem;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Experience;
 import fr.upensma.lias.kmade.kmad.schema.tache.Frequence;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
@@ -94,13 +94,13 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 		currentEditedTask
 			.getFeedback(), currentEditedTask.getDuration(),
 		currentEditedTask.getDescription(), currentEditedTask
-			.getExecutant(), currentEditedTask.getModality(),
+			.getExecutor(), currentEditedTask.getModality(),
 		currentEditedTask.getFrequency(), currentEditedTask
 			.getFrequencyValue(), currentEditedTask.getImportance(),
 		TaskPropertiesAdaptator.getFiredEvents(), currentEditedTask
 			.getFacultatif(), currentEditedTask.isInterruptible(),
 		TaskPropertiesAdaptator.getAllEvents(), currentEditedTask
-			.getDeclencheurName(),
+			.getRaisingEventName(),
 		TaskPropertiesEnhancedEditorAdaptator.getActorTable(),
 		TaskPropertiesEnhancedEditorAdaptator.getActorSystemTable(),
 		currentEditedTask.getPreExpression().getName(),
@@ -150,14 +150,14 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 	}
 
 	// Mise à jour des activations des JRadioButton's
-	if ((currentEditedTask.getExecutant() == Executant.USER)
-		|| (currentEditedTask.getExecutant() == Executant.ABS)) {
+	if ((currentEditedTask.getExecutor() == Executor.USER)
+		|| (currentEditedTask.getExecutor() == Executor.ABS)) {
 	    myRefTaskEditor.setEnabledModalityGroup();
 	} else {
 	    myRefTaskEditor.setDisabledModalityGroup();
 	}
 
-	if ((currentEditedTask.getExecutant() == Executant.SYS)) {
+	if ((currentEditedTask.getExecutor() == Executor.SYS)) {
 	    myRefTaskEditor.setDisabledNecessityGroup();
 	} else {
 	    myRefTaskEditor.setEnabledNecessityGroup();

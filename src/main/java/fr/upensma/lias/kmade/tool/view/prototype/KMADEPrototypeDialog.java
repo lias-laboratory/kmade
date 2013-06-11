@@ -373,7 +373,7 @@ public class KMADEPrototypeDialog extends JFrame {
 		topPanel.add(Box.createVerticalStrut(2));
 		ImageIcon executantImage = null;
 		String executantText = "";
-		switch(currentTask.getExecutant()){
+		switch(currentTask.getExecutor()){
 		case ABS :
 				executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.ABSTRACT_TASK_48_IMAGE));
 				executantText += KMADEConstant.PROTOTYPING_TOOL_EXECUTANT_ABS;
@@ -513,7 +513,7 @@ public class KMADEPrototypeDialog extends JFrame {
 		name.setToolTipText(toolTip);
 		name.setFont(KMADEConstant.TASK_NAME_FONT);
 		ImageIcon executantImage = null;
-		switch(t.getExecutant()){
+		switch(t.getExecutor()){
 		case ABS : /* executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.ABSTRACT_TASK_16_IMAGE))*/; break;
 		case INCONNU:/*executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.UNKNOWN_TASK_16_IMAGE))*/;break;
 		case INT : executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.INTERACTIF_TASK_16_IMAGE));break;

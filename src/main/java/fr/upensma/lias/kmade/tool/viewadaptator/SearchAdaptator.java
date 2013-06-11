@@ -25,7 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
@@ -334,7 +334,7 @@ public final class SearchAdaptator {
 			.replaceAll(taskNameFind.toLowerCase(), replaceTaskName));
 	    }
 	    if (!executant.equals("*")) {
-		myTask.setExecutant(Executant
+		myTask.setExecutor(Executor
 			.getLocaleExecutantIntoExecutant(executant));
 	    }
 	    if (!operateur.equals("*")) {
@@ -404,7 +404,7 @@ public final class SearchAdaptator {
 
 	    c = (v || findTaskName.equalsIgnoreCase(""));
 	    // Exécutant
-	    d = (allTache.get(i).getExecutant().getValue() == Executant
+	    d = (allTache.get(i).getExecutor().getValue() == Executor
 		    .getLocaleExecutantIntoEnumere(executant) || executant == "*");
 	    // Opérateur
 	    e = (allTache.get(i).getOrdonnancement().getValue() == Decomposition

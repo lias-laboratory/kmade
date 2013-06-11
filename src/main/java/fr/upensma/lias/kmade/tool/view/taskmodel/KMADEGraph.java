@@ -529,7 +529,7 @@ public class KMADEGraph extends org.jgraph.JGraph {
 	    if (select.getRectEvenementIn() != null
 		    && select.getRectEvenementIn().contains(event.getPoint())) {
 		return (KMADEConstant.VERTEX_EVENT_IN_LETTER + ((KMADEDefaultGraphCell) cell)
-			.getTask().getDeclencheurName());
+			.getTask().getRaisingEventName());
 	    }
 
 	    /* Evt Out ok! */

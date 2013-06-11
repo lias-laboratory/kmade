@@ -40,7 +40,7 @@ import fr.upensma.lias.kmade.kmad.schema.expression.SemanticUnknownException;
 import fr.upensma.lias.kmade.kmad.schema.expression.UserExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Event;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Expression;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
@@ -420,8 +420,8 @@ public final class SimulationAdaptator {
 
 	// Utilisateur ...
 	String[] executantTab = new String[2];
-	boolean isSystem = tokenSimulation.getTask().getExecutant()
-		.equals(Executant.SYS);
+	boolean isSystem = tokenSimulation.getTask().getExecutor()
+		.equals(Executor.SYS);
 	if (isSystem) {
 	    executantTab[0] = KMADEConstant.ACTOR_NO_ELEMENT_INTO_TASK;
 	} else {
@@ -746,14 +746,14 @@ public final class SimulationAdaptator {
 			    tache.getLabelName(),
 			    /* tache.getFeedBack(), */
 			    tache.getDuration(), 
-			    tache.getDescription(), tache.getExecutant(),
+			    tache.getDescription(), tache.getExecutor(),
 			    tache.getModality().getValue(),
 			    tache.getFrequency().getValue(),
 			    tache.getFrequencyValue(),
 			    tache.getImportance().getValue(),
 			    tache.getEventsName(), tache.isOptional(),
 			    tache.isInterruptible(),
-			    tache.getDeclencheurName(), tache.getActors(),
+			    tache.getRaisingEventName(), tache.getActors(),
 			    tache.getPreExpression(),
 			    tache.getEffetsDeBordExpression(),
 			    tache.getOrdering().getValue(),

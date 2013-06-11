@@ -44,7 +44,7 @@ import javax.swing.ListCellRenderer;
 import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultGraphCellEditor;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.viewadaptator.TaskPropertiesEditorAdaptator;
 
@@ -123,7 +123,7 @@ public class KMADEGraphCellEditor extends DefaultGraphCellEditor implements Acti
 	if (cell instanceof KMADEDefaultGraphCell) {
 	    // Initialisation des valeurs.
 	    KMADEDefaultGraphCell myCell = (KMADEDefaultGraphCell) cell;
-	    if (myCell.getExecutant().equals(Executant.SYS)) {
+	    if (myCell.getExecutant().equals(Executor.SYS)) {
 		myFaculEditor.setEnabled(false);
 		myFaculEditor.setSelected(false);
 	    } else {
@@ -134,7 +134,7 @@ public class KMADEGraphCellEditor extends DefaultGraphCellEditor implements Acti
 	    myNameEditor.setText(myCell.getName());
 
 	    myNameEditor.selectAll();
-	    myCategorieEditor.setSelectedItem(Executant
+	    myCategorieEditor.setSelectedItem(Executor
 		    .getEnumereIntoLocaleExecutant(myCell.getExecutant()
 			    .getValue()));
 	    myDecompoEditor.setSelectedItem(myCell.getDecomposition());
@@ -188,7 +188,7 @@ public class KMADEGraphCellEditor extends DefaultGraphCellEditor implements Acti
 	public Component getListCellRendererComponent(JList list, Object value,
 		int index, boolean isSelected, boolean cellHasFocus) {
 	    String maValue = (String) value;
-	    int myInt = Executant.getLocaleExecutantAt(maValue);
+	    int myInt = Executor.getLocaleExecutantAt(maValue);
 	    this.setHorizontalAlignment(JLabel.LEFT);
 	    if (isSelected) {
 		setBackground(list.getSelectionBackground());

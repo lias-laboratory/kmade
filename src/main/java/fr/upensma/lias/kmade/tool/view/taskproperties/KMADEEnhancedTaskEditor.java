@@ -67,10 +67,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.AbstractTableModel;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Frequence;
 import fr.upensma.lias.kmade.kmad.schema.tache.Importance;
-import fr.upensma.lias.kmade.kmad.schema.tache.Modalite;
+import fr.upensma.lias.kmade.kmad.schema.tache.Modality;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
@@ -620,7 +620,7 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 
     public void displayTaskProperties(String numero, String tacheMere,
 	    String name, String but, String feed, String duree,
-	    String obs, Executant exec, Modalite mod, Frequence freq,
+	    String obs, Executor exec, Modality mod, Frequence freq,
 	    String compFreq, Importance imp, String events, boolean facultatif,
 	    boolean interruptible, String[] allevents, String dec,
 	    ArrayList<String[]> actRef, ArrayList<String[]> actRefSys,
@@ -633,23 +633,23 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	this.feedbackField.setText(feed);
 	this.dureeField.setText(duree);
 	this.observationArea.setText(obs);
-	if (exec == Executant.INCONNU) {
+	if (exec == Executor.INCONNU) {
 	    this.unkExecutant.setSelected(true);
-	} else if (exec == Executant.USER) {
+	} else if (exec == Executor.USER) {
 	    this.userExecutant.setSelected(true);
-	} else if (exec == Executant.SYS) {
+	} else if (exec == Executor.SYS) {
 	    this.sysExecutant.setSelected(true);
-	} else if (exec == Executant.INT) {
+	} else if (exec == Executor.INT) {
 	    this.intExecutant.setSelected(true);
-	} else if (exec == Executant.ABS) {
+	} else if (exec == Executor.ABS) {
 	    this.absExecutant.setSelected(true);
 	}
 
-	if (mod == Modalite.INCONNU) {
+	if (mod == Modality.INCONNU) {
 	    this.unkModalite.setSelected(true);
-	} else if (mod == Modalite.COGN) {
+	} else if (mod == Modality.COGN) {
 	    this.cogModalite.setSelected(true);
-	} else if (mod == Modalite.SENS) {
+	} else if (mod == Modality.SENS) {
 	    this.smModalite.setSelected(true);
 	}
 
@@ -1046,21 +1046,21 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 
 	modalityGroup.add(unkModalite);
 	unkModalite.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	unkModalite.setText(Modalite.getEnumereIntoLocaleModalite("UNK"));
+	unkModalite.setText(Modality.getEnumerateIntoLocalModality("UNK"));
 	unkModalite.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0,
 		0, 0));
 	unkModalite.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 	modalityGroup.add(smModalite);
 	smModalite.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	smModalite.setText(Modalite.getEnumereIntoLocaleModalite("SENS"));
+	smModalite.setText(Modality.getEnumerateIntoLocalModality("SENS"));
 	smModalite.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0,
 		0, 0));
 	smModalite.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 	modalityGroup.add(cogModalite);
 	cogModalite.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	cogModalite.setText(Modalite.getEnumereIntoLocaleModalite("COGN"));
+	cogModalite.setText(Modality.getEnumerateIntoLocalModality("COGN"));
 	cogModalite.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0,
 		0, 0));
 	cogModalite.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -1069,35 +1069,35 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 
 	executantGroup.add(unkExecutant);
 	unkExecutant.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	unkExecutant.setText(Executant.getEnumereIntoLocaleExecutant("UNK"));
+	unkExecutant.setText(Executor.getEnumereIntoLocaleExecutant("UNK"));
 	unkExecutant.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 		0, 0, 0));
 	unkExecutant.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 	executantGroup.add(userExecutant);
 	userExecutant.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	userExecutant.setText(Executant.getEnumereIntoLocaleExecutant("USER"));
+	userExecutant.setText(Executor.getEnumereIntoLocaleExecutant("USER"));
 	userExecutant.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 		0, 0, 0));
 	userExecutant.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 	executantGroup.add(sysExecutant);
 	sysExecutant.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	sysExecutant.setText(Executant.getEnumereIntoLocaleExecutant("SYS"));
+	sysExecutant.setText(Executor.getEnumereIntoLocaleExecutant("SYS"));
 	sysExecutant.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 		0, 0, 0));
 	sysExecutant.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 	executantGroup.add(intExecutant);
 	intExecutant.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	intExecutant.setText(Executant.getEnumereIntoLocaleExecutant("INT"));
+	intExecutant.setText(Executor.getEnumereIntoLocaleExecutant("INT"));
 	intExecutant.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 		0, 0, 0));
 	intExecutant.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 	executantGroup.add(absExecutant);
 	absExecutant.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	absExecutant.setText(Executant.getEnumereIntoLocaleExecutant("ABS"));
+	absExecutant.setText(Executor.getEnumereIntoLocaleExecutant("ABS"));
 	absExecutant.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 		0, 0, 0));
 	absExecutant.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -2171,15 +2171,15 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	feedbackLabel.setText(KMADEConstant.TASK_FEEDBACK_TITLE);
 	numLabel.setText(KMADEConstant.TASK_NUMBER_NAME_TITLE);
 	modaliteLabel.setText(KMADEConstant.MODALITY_NAME_TITLE + " :");
-	unkModalite.setText(Modalite.getEnumereIntoLocaleModalite("UNK"));
-	smModalite.setText(Modalite.getEnumereIntoLocaleModalite("SENS"));
-	cogModalite.setText(Modalite.getEnumereIntoLocaleModalite("COGN"));
+	unkModalite.setText(Modality.getEnumerateIntoLocalModality("UNK"));
+	smModalite.setText(Modality.getEnumerateIntoLocalModality("SENS"));
+	cogModalite.setText(Modality.getEnumerateIntoLocalModality("COGN"));
 	executantLabel.setText(KMADEConstant.EXECUTING_NAME_TITLE + " :");
-	unkExecutant.setText(Executant.getEnumereIntoLocaleExecutant("UNK"));
-	userExecutant.setText(Executant.getEnumereIntoLocaleExecutant("USER"));
-	sysExecutant.setText(Executant.getEnumereIntoLocaleExecutant("SYS"));
-	intExecutant.setText(Executant.getEnumereIntoLocaleExecutant("NUM"));
-	absExecutant.setText(Executant.getEnumereIntoLocaleExecutant("ABS"));
+	unkExecutant.setText(Executor.getEnumereIntoLocaleExecutant("UNK"));
+	userExecutant.setText(Executor.getEnumereIntoLocaleExecutant("USER"));
+	sysExecutant.setText(Executor.getEnumereIntoLocaleExecutant("SYS"));
+	intExecutant.setText(Executor.getEnumereIntoLocaleExecutant("NUM"));
+	absExecutant.setText(Executor.getEnumereIntoLocaleExecutant("ABS"));
 	unkImportance.setText(Importance.getEnumereIntoLocaleImportance("UNK"));
 	lowImportance.setText(Importance.getEnumereIntoLocaleImportance("LOW"));
 	middleImportance.setText(Importance

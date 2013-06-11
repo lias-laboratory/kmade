@@ -121,7 +121,7 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 					DefaultMutableTreeNode myNode = (DefaultMutableTreeNode)value;
 					ImageIcon executantImage = null;
 					if( myNode.getUserObject() instanceof HistoricTask){
-						switch(((HistoricTask) myNode.getUserObject()).getTask().getExecutant()){
+						switch(((HistoricTask) myNode.getUserObject()).getTask().getExecutor()){
 						case ABS :
 							executantImage =new ImageIcon(KMADETaskModelToolBar.class.getResource(KMADEConstant.ABSTRACT_TASK_16_IMAGE));
 							break;

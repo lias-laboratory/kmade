@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
@@ -102,15 +102,15 @@ public final class StatisticAdaptator {
 	int elementaryDec = 0;
 	int noOrderDec = 0;
 	for (Task current : myTaskList) {
-	    if (current.getExecutant().equals(Executant.USER)) {
+	    if (current.getExecutor().equals(Executor.USER)) {
 		userExe++;
-	    } else if (current.getExecutant().equals(Executant.INCONNU)) {
+	    } else if (current.getExecutor().equals(Executor.INCONNU)) {
 		unknownExe++;
-	    } else if (current.getExecutant().equals(Executant.INT)) {
+	    } else if (current.getExecutor().equals(Executor.INT)) {
 		interactExe++;
-	    } else if (current.getExecutant().equals(Executant.SYS)) {
+	    } else if (current.getExecutor().equals(Executor.SYS)) {
 		systemExe++;
-	    } else if (current.getExecutant().equals(Executant.ABS)) {
+	    } else if (current.getExecutor().equals(Executor.ABS)) {
 		abstractExe++;
 	    }
 

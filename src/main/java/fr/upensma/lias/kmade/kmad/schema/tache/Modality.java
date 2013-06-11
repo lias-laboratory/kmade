@@ -27,27 +27,27 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 /**
  * @authors Delphine AUTARD and Mickael BARON
  **/
-public enum Modalite implements Enumere {
+public enum Modality implements Enumere {
     INCONNU("UNK"), SENS("SENS"), COGN("COGN");
 
     private final String enonce;
 
-    private Modalite(String s) {
+    private Modality(String s) {
 	enonce = s;
     }
 
     public String toString() {
-	return Modalite.getEnumereIntoLocaleModalite(enonce);
+	return Modality.getEnumerateIntoLocalModality(enonce);
     }
 
-    public static Modalite getXMLModalityValue(org.w3c.dom.Element p) {
+    public static Modality getXMLModalityValue(org.w3c.dom.Element p) {
 	NodeList nodeList = p.getElementsByTagName("task-modality");
 	if (nodeList.item(0) == null) {
 	    return INCONNU;
 	}
 
 	String value = (String) nodeList.item(0).getTextContent();
-	for (Modalite i : Modalite.values()) {
+	for (Modality i : Modality.values()) {
 	    if (value.equalsIgnoreCase(i.enonce)) {
 		return i;
 	    }
@@ -55,8 +55,8 @@ public enum Modalite implements Enumere {
 	return INCONNU;
     }
 
-    public static Modalite getValue(String s) {
-	for (Modalite i : Modalite.values()) {
+    public static Modality getValue(String s) {
+	for (Modality i : Modality.values()) {
 	    if (s.equalsIgnoreCase(i.enonce)) {
 		return i;
 	    }
@@ -64,7 +64,7 @@ public enum Modalite implements Enumere {
 	return null;
     }
 
-    public static String[] getNameLocaleModalite() {
+    public static String[] getNameLocalModality() {
 	String[] myImportanceArray = new String[3];
 	myImportanceArray[0] = ExpressConstant.UNKNOWN_MODALITY_NAME;
 	myImportanceArray[1] = ExpressConstant.SENSORI_MODALITY_NAME;
@@ -72,7 +72,7 @@ public enum Modalite implements Enumere {
 	return myImportanceArray;
     }
 
-    public static String getLocaleModaliteIntoEnumere(String locale) {
+    public static String getLocaleModalityIntoEnumerate(String locale) {
 	if (locale.equals(ExpressConstant.UNKNOWN_MODALITY_NAME)) {
 	    return "UNK";
 	} else if (locale.equals(ExpressConstant.SENSORI_MODALITY_NAME)) {
@@ -83,7 +83,7 @@ public enum Modalite implements Enumere {
 	return "UNK";
     }
 
-    public static String getEnumereIntoLocaleModalite(String imp) {
+    public static String getEnumerateIntoLocalModality(String imp) {
 	if (imp.equals("UNK"))
 	    return ExpressConstant.UNKNOWN_MODALITY_NAME;
 	else if (imp.equals("SENS"))
@@ -114,7 +114,7 @@ public enum Modalite implements Enumere {
 	return this.toXML(doc);
     }
 
-	public static Modalite getXMLModalityValue2(Element p) {
+	public static Modality getXMLModalityValue2(Element p) {
 		NodeList nodeList = p.getElementsByTagName("task-modality");
 		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 			return INCONNU;}
@@ -123,7 +123,7 @@ public enum Modalite implements Enumere {
 		}
 
 		String value = (String) nodeList.item(0).getTextContent();
-		for (Modalite i : Modalite.values()) {
+		for (Modality i : Modality.values()) {
 		    if (value.equalsIgnoreCase(i.enonce)) {
 			return i;
 		    }

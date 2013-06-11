@@ -20,10 +20,10 @@ package fr.upensma.lias.kmade.tool.viewadaptator;
 import java.util.ArrayList;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Frequence;
 import fr.upensma.lias.kmade.kmad.schema.tache.Importance;
-import fr.upensma.lias.kmade.kmad.schema.tache.Modalite;
+import fr.upensma.lias.kmade.kmad.schema.tache.Modality;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
@@ -61,7 +61,7 @@ public final class TaskPropertiesAdaptator {
     }
     
 
-    public static void updateExecutantTypeRealTime(Executant myExecutant) {
+    public static void updateExecutantTypeRealTime(Executor myExecutant) {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
 		.setExecutantTypeRealTime(myExecutant);
     }
@@ -121,42 +121,42 @@ public final class TaskPropertiesAdaptator {
 
     public static void setUnknownExecutant() {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		.setExecutant(Executant.INCONNU);
+		.setExecutant(Executor.INCONNU);
     }
 
     public static void setUserExecutant() {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		.setExecutant(Executant.USER);
+		.setExecutant(Executor.USER);
     }
 
     public static void setSystemExecutant() {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		.setExecutant(Executant.SYS);
+		.setExecutant(Executor.SYS);
     }
 
     public static void setInteractifExecutant() {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		.setExecutant(Executant.INT);
+		.setExecutant(Executor.INT);
     }
 
     public static void setAbstractExecutant() {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		.setExecutant(Executant.ABS);
+		.setExecutant(Executor.ABS);
     }
 
     public static void setUnknownModalite() {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		.setModalite(Modalite.INCONNU.getValue());
+		.setModalite(Modality.INCONNU.getValue());
     }
 
     public static void setSensoriMotriceModalite() {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		.setModalite(Modalite.SENS.getValue());
+		.setModalite(Modality.SENS.getValue());
     }
 
     public static void setCognitiveModalite() {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		.setModalite(Modalite.COGN.getValue());
+		.setModalite(Modality.COGN.getValue());
     }
 
     public static void setUnknownImportance() {
@@ -323,12 +323,12 @@ public final class TaskPropertiesAdaptator {
 			tache.getLabelName(),
 			/* tache.getFeedBack(), */
 			 tache.getDuration(), 
-			tache.getDescription(), tache.getExecutant(),
+			tache.getDescription(), tache.getExecutor(),
 			tache.getModality().getValue(),
 			tache.getFrequency().getValue(), tache.getFrequencyValue(),
 			tache.getImportance().getValue(),
 			tache.getEventsName(), tache.getFacultatif(),
-			tache.isInterruptible(), tache.getDeclencheurName(),
+			tache.isInterruptible(), tache.getRaisingEventName(),
 			tache.getActors(), tache.getPreExpression(),
 			tache.getEffetsDeBordExpression(),
 			tache.getOrdering().getValue(),
@@ -405,7 +405,7 @@ public final class TaskPropertiesAdaptator {
 		GraphicEditorAdaptator.getSelectedExpressTask(), res);
     }
 
-    public static void setExecutingUserFromExpressTask(Executant res) {
+    public static void setExecutingUserFromExpressTask(Executor res) {
 	ExpressTask.setExecutingUserTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), res);
 	GraphicEditorAdaptator.updateSelectedTaskGraphModel();
@@ -421,7 +421,7 @@ public final class TaskPropertiesAdaptator {
 		GraphicEditorAdaptator.getSelectedExpressTask(), res);
     }
 
-    public static void setModalityFromExpressTask(Modalite sensOrCogn) {
+    public static void setModalityFromExpressTask(Modality sensOrCogn) {
 	ExpressTask.setModalityTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), sensOrCogn);
     }

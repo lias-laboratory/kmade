@@ -44,7 +44,7 @@ import org.jgraph.graph.VertexRenderer;
 import org.jgraph.graph.VertexView;
 
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
@@ -359,26 +359,26 @@ public class KMADEVertexView extends VertexView {
 		    (int) (zoom * rnum.getWidth()),
 		    (int) (zoom * rnum.getHeight()));
 	    // L'image
-	    Executant e = myGraphCell.getExecutant();
+	    Executor e = myGraphCell.getExecutant();
 	    myImage = KMADEVertexView.UNKNOWN_TASK_IMAGE_ICON;
-	    if (e == Executant.ABS) {
+	    if (e == Executor.ABS) {
 		if (myGraphCell.isFacultatif())
 		    myImage = KMADEVertexView.OPTIONAL_ABSTRACT_TASK_IMAGE_ICON;
 		else
 		    myImage = KMADEVertexView.ABSTRACT_TASK_IMAGE_ICON;
-	    } else if (e == Executant.INT) {
+	    } else if (e == Executor.INT) {
 		if (myGraphCell.isFacultatif())
 		    myImage = KMADEVertexView.OPTIONAL_INTERACTIF_TASK_IMAGE_ICON;
 		else
 		    myImage = KMADEVertexView.INTERACTIF_TASK_IMAGE_ICON;
-	    } else if (e == Executant.SYS) {
+	    } else if (e == Executor.SYS) {
 		myImage = KMADEVertexView.FEEDBACK_TASK_IMAGE_ICON;
-	    } else if (e == Executant.USER) {
+	    } else if (e == Executor.USER) {
 		if (myGraphCell.isFacultatif())
 		    myImage = KMADEVertexView.OPTIONAL_USER_TASK_IMAGE_ICON;
 		else
 		    myImage = KMADEVertexView.USER_TASK_IMAGE_ICON;
-	    } else if (e == Executant.INCONNU) {
+	    } else if (e == Executor.INCONNU) {
 		if (myGraphCell.isFacultatif())
 		    myImage = KMADEVertexView.OPTIONAL_UNKNOWN_TASK_IMAGE_ICON;
 		else

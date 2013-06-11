@@ -227,7 +227,7 @@ public final class PrintAdaptator {
 		.toString());
 	context.put("DISPLAY", r.getFeedback());
 	context.put("OBSERVATION", r.getDescription());
-	context.put("EXECUTANT", r.getExecutant().toString());
+	context.put("EXECUTANT", r.getExecutor().toString());
 	context.put("MODALITY", r.getModality().toString());
 	context.put("FREQUENCY", r.getFrequency().toString());
 	context.put("FREQUENCYVALUE", r.getFrequencyValue());
@@ -273,7 +273,7 @@ public final class PrintAdaptator {
 		.toString());
 	context.put("DISPLAY", r.getFeedback());
 	context.put("OBSERVATION", r.getDescription());
-	context.put("EXECUTANT", r.getExecutant().toString());
+	context.put("EXECUTANT", r.getExecutor().toString());
 	context.put("MODALITY", r.getModality().toString());
 	context.put("FREQUENCY", r.getFrequency().toString());
 	context.put("FREQUENCYVALUE", r.getFrequencyValue());

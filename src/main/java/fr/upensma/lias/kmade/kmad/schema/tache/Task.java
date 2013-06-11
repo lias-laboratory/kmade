@@ -49,11 +49,11 @@ public class Task implements Entity {
     // Task type    
 		/** executant : Executant -> Enumerated values for the kind of 
 		                      task (user, system, interactive, etc.) */
-		private Executant executant = Executant.INCONNU;
+		private Executor executor = Executor.INCONNU;
 
 		/** modality : Modalite -> Enumerated values for the modalities 
 		 *                    of user tasks */
-		private Modalite modality= Modalite.INCONNU;
+		private Modality modality= Modality.INCONNU;
     
     // Static attributes    
 	    /** name : String -> Name of the task - no need to be unique, 
@@ -198,9 +198,9 @@ public class Task implements Entity {
 	this.feedback = "";
 	this.duration = "";
 	this.description = "";
-	this.executant = Executant.INCONNU;
+	this.executor = Executor.INCONNU;
 	this.importance = Importance.INCONNU;
-	this.modality = Modalite.COGN;
+	this.modality = Modality.COGN;
 	this.frequency = Frequence.INCONNU;
 	this.frequencyValue = "";
 	this.events = new ArrayList<Event>();
@@ -354,12 +354,12 @@ public class Task implements Entity {
 	events.remove(a);
     }
 
-    public void setExecutant(Executant s) {
-	executant = s;
+    public void setExecutor(Executor s) {
+	executor = s;
     }
 
-    public Executant getExecutant() {
-	return this.executant;
+    public Executor getExecutor() {
+	return this.executor;
     }
 
     public void setFrequency(Frequence s) {
@@ -400,7 +400,7 @@ public class Task implements Entity {
 	}
     }
 
-    public void setModality(Modalite modalite) {
+    public void setModality(Modality modalite) {
 	modality = modalite;
     }
 
@@ -428,6 +428,9 @@ public class Task implements Entity {
 	return actorSystem;
     }
 
+    /**
+     * @return list of names of task' actors
+     */
     public ArrayList<String> getActorsName() {
 	ArrayList<String> lst = new ArrayList<String>();
 	for (int i = 0; i < actors.size(); i++) {
@@ -436,7 +439,7 @@ public class Task implements Entity {
 	return lst;
     }
 
-    public ArrayList<String> getActorSystemOid() {
+/*    public ArrayList<String> getActorSystemOid() {
 	ArrayList<String> lst = new ArrayList<String>();
 	for (int i = 0; i < actorSystem.size(); i++) {
 	    lst.add(actorSystem.get(i).oid.get());
@@ -451,16 +454,16 @@ public class Task implements Entity {
 	}
 	return lst;
     }
-
-    public ArrayList<Materiel> getMateriels() {
+*/
+/*    public ArrayList<Materiel> getMateriels() {
 	ArrayList<Materiel> lst = new ArrayList<Materiel>();
 	for (int i = 0; i < actorSystem.size(); i++) {
 	    lst.add(actorSystem.get(i).getMaterielRef());
 	}
 	return lst;
     }
-
-    public ArrayList<String> getActorsExp() {
+*/
+/*    public ArrayList<String> getActorsExp() {
 	ArrayList<String> lst = new ArrayList<String>();
 	for (int i = 0; i < actors.size(); i++) {
 	    lst.add(actors.get(i).getExperience().getValue());
@@ -474,28 +477,31 @@ public class Task implements Entity {
 	    lst.add(actorSystem.get(i).getExperience().getValue());
 	}
 	return lst;
-    }
+    }*/
 
-    public ArrayList<String> getActorsComp() {
+/*    public ArrayList<String> getActorsComp() {
 	ArrayList<String> lst = new ArrayList<String>();
 	for (int i = 0; i < actors.size(); i++) {
 	    lst.add(actors.get(i).getCompetence());
 	}
 	return lst;
     }
-
-    public ArrayList<String> getActorSystemComp() {
+*/
+/*    public ArrayList<String> getActorSystemComp() {
 	ArrayList<String> lst = new ArrayList<String>();
 	for (int i = 0; i < actorSystem.size(); i++) {
 	    lst.add(actorSystem.get(i).getCompetence());
 	}
 	return lst;
-    }
+    }*/
 
     public ArrayList<Event> getEvents() {
 	return this.events;
     }
 
+    /**
+     * @return the list of event names
+     */
     public ArrayList<String> getEventsName() {
 	ArrayList<String> lst = new ArrayList<String>();
 	for (int i = 0; i < events.size(); i++) {
@@ -518,7 +524,10 @@ public class Task implements Entity {
 	return this.raisingEvent;
     }
 
-    public String getDeclencheurName() {
+    /**
+     * @return the name of the raising event if it exists, else null string
+     */
+    public String getRaisingEventName() {
 	return this.raisingEvent != null ? this.getRaisingEvent().getName() : "";
     }
 
@@ -582,7 +591,7 @@ public class Task implements Entity {
 	return this.frequency;
     }
 
-    public Modalite getModality() {
+    public Modality getModality() {
 	return this.modality;
     }
 
@@ -764,7 +773,12 @@ public class Task implements Entity {
 	}
     }
 
-    public void fixerPoint(int x, int y) {
+    /**
+     * Sets the point value from elementary coordinates
+     * @param x X coordinate of the task
+     * @param y Y coordinate of the task
+     */
+    public void setPointFromCoordinates(int x, int y) {
 	this.point.x = new Integer(x);
 	this.point.y = new Integer(y);
     }
@@ -1149,7 +1163,7 @@ public class Task implements Entity {
 	}
 
 	// Executant
-	this.executant = Executant.getXMLExecutantValue(p);
+	this.executor = Executor.getXMLExecutantValue(p);
 
 	// Frequence
 	this.frequency = Frequence.getXMLFrequenceValue(p);
@@ -1164,7 +1178,7 @@ public class Task implements Entity {
 	this.importance = Importance.getXMLExecutantValue(p);
 
 	// Modality
-	this.modality = Modalite.getXMLModalityValue(p);
+	this.modality = Modality.getXMLModalityValue(p);
 
 	// Triggering Event
 	nodeList = p.getElementsByTagName("id-task-eventtrigger");
@@ -1319,7 +1333,7 @@ public class Task implements Entity {
 		+ name.replaceAll("'", "\\\\'") + "'" + "," + "'" + goal + "'"
 		+ "," + "'" /*+ resources + "'"*/ + "," + "'" + feedback + "'" + ","
 		+ "'" + duration + "'" + "," + "'" + description + "'" + ","
-		+ executant.toSPF() + "," + frequency.toSPF() + ",'" + frequencyValue
+		+ executor.toSPF() + "," + frequency.toSPF() + ",'" + frequencyValue
 		+ "'," + importance.toSPF() + "," + modality.toSPF() + ",";
 	if (raisingEvent != null)
 	    SPF = SPF + raisingEvent.oid.get() + ",";
@@ -1572,8 +1586,8 @@ public class Task implements Entity {
 	return (this.mother == null);
     }
 
-    public static boolean canHaveActor(Executant ex) {
-	if (ex == Executant.SYS) {
+    public static boolean canHaveActor(Executor ex) {
+	if (ex == Executor.SYS) {
 	    return false;
 	} else {
 	    return true;
@@ -1581,11 +1595,11 @@ public class Task implements Entity {
     }
 
     public boolean canHaveActor() {
-	return canHaveActor(executant);
+	return canHaveActor(executor);
     }
 
-    public static boolean canHaveActorSystem(Executant ex) {
-	if (ex == Executant.USER) {
+    public static boolean canHaveActorSystem(Executor ex) {
+	if (ex == Executor.USER) {
 	    return false;
 	} else {
 	    return true;
@@ -1646,7 +1660,7 @@ public class Task implements Entity {
 	    racine.appendChild(kmadElement);
 	//}
 	// Executant
-	racine.appendChild(this.executant.toXML2(doc));
+	racine.appendChild(this.executor.toXML2(doc));
 	// Frequency
 	if (!this.frequency.equals(Frequence.INCONNU)) {
 	    racine.appendChild(this.frequency.toXML2(doc));
@@ -1662,7 +1676,7 @@ public class Task implements Entity {
 	    racine.appendChild(this.importance.toXML2(doc));
 	}
 	// Modality
-	if (!this.modality.equals(Modalite.INCONNU)) {
+	if (!this.modality.equals(Modality.INCONNU)) {
 	    racine.appendChild(this.modality.toXML2(doc));
 	}
 	// Optional
@@ -1895,7 +1909,7 @@ public class Task implements Entity {
 	}
 
 	// Executant
-	this.executant = Executant.getXMLExecutantValue2(p);
+	this.executor = Executor.getXMLExecutantValue2(p);
 	// Frequence
 	this.frequency = Frequence.getXMLFrequenceValue2(p);
 	// Valeur de la Frequence
@@ -1908,7 +1922,7 @@ public class Task implements Entity {
 	// Importance
 	this.importance = Importance.getXMLExecutantValue2(p);
 	// Modality
-	this.modality = Modalite.getXMLModalityValue2(p);
+	this.modality = Modality.getXMLModalityValue2(p);
 	// Optional
 	nodeList = p.getElementsByTagName("task-optional");
 	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){

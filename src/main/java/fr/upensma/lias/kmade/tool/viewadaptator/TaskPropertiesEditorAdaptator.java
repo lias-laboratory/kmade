@@ -17,7 +17,7 @@
 **********************************************************************************/
 package fr.upensma.lias.kmade.tool.viewadaptator;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEVertexView;
 
 /**
@@ -30,9 +30,9 @@ public final class TaskPropertiesEditorAdaptator {
     }
 
     public static void setExecutantInTaskProperties(String value) {
-	Executant myExec = Executant.getLocaleExecutantIntoExecutant(value);
+	Executor myExec = Executor.getLocaleExecutantIntoExecutant(value);
 	KMADEVertexView.editor.setEnableFaculEditor(!myExec
-		.equals(Executant.SYS));
+		.equals(Executor.SYS));
 	TaskPropertiesAdaptator.updateExecutantTypeRealTime(myExec);
     }
 

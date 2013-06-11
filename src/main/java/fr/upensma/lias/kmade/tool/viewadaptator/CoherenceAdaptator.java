@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
@@ -251,14 +251,14 @@ public final class CoherenceAdaptator {
 
 	// Les sous-t�ches doivent �tre de m�me cat�gorie que la t�che m�re.
 	if (!myTache.isLeaf()) {
-	    if (myTache.getExecutant() == Executant.INCONNU) {
+	    if (myTache.getExecutor() == Executor.INCONNU) {
 		CoherenceAdaptator.addWarningMessage(
 			KMADEConstant.NO_EXECUTANT_SPECIFIED_MESSAGE_WARNING,
 			HIERARCHICAL_TYPE, HIERARCHICAL_TASK_MODEL, myTache);
 	    } else {
-		if (!(myTache.getExecutant() == Executant.ABS)) {
+		if (!(myTache.getExecutor() == Executor.ABS)) {
 		    for (Task subTasks : myTache.getChildren()) {
-			if (subTasks.getExecutant() != myTache.getExecutant()) {
+			if (subTasks.getExecutor() != myTache.getExecutor()) {
 			    CoherenceAdaptator
 				    .addWarningMessage(
 					    KMADEConstant.SUBTASKS_EXECUTANT_DIFFERENT_MESSAGE_WARNING,

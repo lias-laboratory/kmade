@@ -38,11 +38,11 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
 import fr.upensma.lias.kmade.kmad.schema.tache.ActorSystem;
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
 import fr.upensma.lias.kmade.kmad.schema.tache.SideEffectExpression;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Frequence;
 import fr.upensma.lias.kmade.kmad.schema.tache.Importance;
 import fr.upensma.lias.kmade.kmad.schema.tache.IterExpression;
-import fr.upensma.lias.kmade.kmad.schema.tache.Modalite;
+import fr.upensma.lias.kmade.kmad.schema.tache.Modality;
 import fr.upensma.lias.kmade.kmad.schema.tache.PreExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
@@ -192,12 +192,12 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		KMADEConstant.EXECUTING_NAME_TITLE,
 		KMADEConstant.EXECUTING_NAME_LEGEND_TITLE, "",
 		JPropertiesTable.COMBO_TEXT, true,
-		Executant.getNameLocaleExecutant());
+		Executor.getNameLocaleExecutant());
 	taskProperties[MODALITY_NAME_TITLE_ELEMENT] = new PropertiesObject(
 		KMADEConstant.MODALITY_NAME_TITLE,
 		KMADEConstant.MODALITY_NAME_LEGEND_TITLE, "",
 		JPropertiesTable.COMBO_TEXT, true,
-		Modalite.getNameLocaleModalite());
+		Modality.getNameLocalModality());
 	taskProperties[FREQUENCY_NAME_TITLE_ELEMENT] = new PropertiesObject(
 		KMADEConstant.FREQUENCY_NAME_TITLE,
 		KMADEConstant.FREQUENCY_NAME_LEGEND_TITLE, "",
@@ -575,8 +575,8 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		    break;
 		}
 		case EXECUTING_NAME_TITLE_ELEMENT: {
-		    Executant mySelectedExecutant = Executant
-			    .getValue(Executant
+		    Executor mySelectedExecutant = Executor
+			    .getValue(Executor
 				    .getLocaleExecutantIntoEnumere((String) aValue));
 		    // Modification de l'attribut acteur.
 		    if (Task.canHaveActor(mySelectedExecutant)) {
@@ -596,9 +596,9 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 			    USER_TITLE_ELEMENT);
 		    super.setValueAt(aValue, rowIndex, columnIndex);
 
-		    if (mySelectedExecutant.equals(Executant.SYS)
-			    || mySelectedExecutant.equals(Executant.ABS)
-			    || mySelectedExecutant.equals(Executant.INT)) {
+		    if (mySelectedExecutant.equals(Executor.SYS)
+			    || mySelectedExecutant.equals(Executor.ABS)
+			    || mySelectedExecutant.equals(Executor.INT)) {
 			informationTable[MODALITY_NAME_TITLE_ELEMENT]
 				.setEditable(false);
 		    } else {
@@ -614,7 +614,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 			    SCHEDULING_TITLE_ELEMENT, 1));
 		    Decomposition dec = Decomposition.getValue(Decomposition
 			    .getLocaleDecompositionIntoEnumere(decompValue));
-		    if (mySelectedExecutant.equals(Executant.SYS)
+		    if (mySelectedExecutant.equals(Executor.SYS)
 			    || dec.equals(Decomposition.ALT)) {
 			this.setValueAt(
 				false,
@@ -645,9 +645,9 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		}
 		case MODALITY_NAME_TITLE_ELEMENT: {
 		    if (!isInit) {
-			Modalite mySelectedModalite = Modalite
-				.getValue(Modalite
-					.getLocaleModaliteIntoEnumere((String) aValue));
+			Modality mySelectedModalite = Modality
+				.getValue(Modality
+					.getLocaleModalityIntoEnumerate((String) aValue));
 			TaskPropertiesAdaptator
 				.setModalityFromExpressTask(mySelectedModalite);
 		    }
@@ -742,10 +742,10 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 				    .getLocaleDecompositionIntoEnumere((String) aValue));
 		    String executant = ((String) myTaskPropertiesModel
 			    .getValueAt(EXECUTING_NAME_TITLE_ELEMENT, 1));
-		    Executant myExecutant = Executant.getValue(Executant
+		    Executor myExecutant = Executor.getValue(Executor
 			    .getLocaleExecutantIntoEnumere(executant));
 
-		    if (myExecutant.equals(Executant.SYS)
+		    if (myExecutant.equals(Executor.SYS)
 			    || dec.equals(Decomposition.ALT)) {
 			informationTable[NECESSITE_TITLE_ELEMENT]
 				.setEditable(false);
@@ -808,7 +808,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
     public void displayTaskProperties(String numero, String tacheMere,
 	    String name,String but, /* Media media, */
 	    String label, /* String feed, */ String duree, 
-	    String obs, Executant exec, String mod, String freq,
+	    String obs, Executor exec, String mod, String freq,
 	    String compFreq, String imp, ArrayList<String> events,
 	    Boolean facultatif, Boolean interruptible, String dec,
 	    ArrayList<Actor> actRef, PreExpression prec,
@@ -835,10 +835,10 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 	myTaskPropertiesModel.setInitValueAt(obs,
 		TASK_OBSERVATION_TITLE_ELEMENT);
 	myTaskPropertiesModel.setInitValueAt(
-		Executant.getEnumereIntoLocaleExecutant(exec.getValue()),
+		Executor.getEnumereIntoLocaleExecutant(exec.getValue()),
 		EXECUTING_NAME_TITLE_ELEMENT);
 	myTaskPropertiesModel.setInitValueAt(
-		Modalite.getEnumereIntoLocaleModalite(mod),
+		Modality.getEnumerateIntoLocalModality(mod),
 		MODALITY_NAME_TITLE_ELEMENT);
 	myTaskPropertiesModel.setInitValueAt(
 		Frequence.getEnumereIntoLocaleFrequence(freq),
@@ -894,9 +894,9 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 	myTaskPropertiesModel.setValueAt(n, TASK_NAME_TITLE_ELEMENT, 1);
     }
 
-    public void setExecutantTypeRealTime(Executant myExecutant) {
+    public void setExecutantTypeRealTime(Executor myExecutant) {
 	myTaskPropertiesModel
-		.setValueAt(Executant.getEnumereIntoLocaleExecutant(myExecutant
+		.setValueAt(Executor.getEnumereIntoLocaleExecutant(myExecutant
 			.getValue()), EXECUTING_NAME_TITLE_ELEMENT, 1);
     }
 
@@ -972,15 +972,15 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		TASK_OBSERVATION_TITLE_ELEMENT, 1));
     }
 
-    public void setExecutant(Executant exec) {
+    public void setExecutant(Executor exec) {
 	myTaskPropertiesModel.setValueAt(
-		Executant.getEnumereIntoLocaleExecutant(exec.getValue()),
+		Executor.getEnumereIntoLocaleExecutant(exec.getValue()),
 		EXECUTING_NAME_TITLE_ELEMENT, 1);
     }
 
     public void setModalite(String mod) {
 	myTaskPropertiesModel.setValueAt(
-		Modalite.getEnumereIntoLocaleModalite(mod),
+		Modality.getEnumerateIntoLocalModality(mod),
 		MODALITY_NAME_TITLE_ELEMENT, 1);
     }
 

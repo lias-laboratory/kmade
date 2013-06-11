@@ -37,7 +37,7 @@ import fr.lri.swingstates.canvas.CStateMachine;
 import fr.lri.swingstates.canvas.CText;
 import fr.lri.swingstates.canvas.Canvas;
 import fr.lri.swingstates.sm.JStateMachine;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEDefaultEdge;
@@ -353,24 +353,24 @@ public class PieMenuEditExecutant extends Menu {
 			    if (lastItemVisited
 				    .equals(KMADEConstant.UNKNOWN_TASK_MESSAGE)) {
 				ExpressTask.setExecutingUserTask(
-					cell.getTask(), Executant.INCONNU);
+					cell.getTask(), Executor.INCONNU);
 
 			    } else if (lastItemVisited
 				    .equals(KMADEConstant.USER_TASK_MESSAGE)) {
 				ExpressTask.setExecutingUserTask(
-					cell.getTask(), Executant.USER);
+					cell.getTask(), Executor.USER);
 			    } else if (lastItemVisited
 				    .equals(KMADEConstant.ABSTRACT_TASK_MESSAGE)) {
 				ExpressTask.setExecutingUserTask(
-					cell.getTask(), Executant.ABS);
+					cell.getTask(), Executor.ABS);
 			    } else if (lastItemVisited
 				    .equals(KMADEConstant.INTERACTION_TASK_MESSAGE)) {
 				ExpressTask.setExecutingUserTask(
-					cell.getTask(), Executant.INT);
+					cell.getTask(), Executor.INT);
 			    } else if (lastItemVisited
 				    .equals(KMADEConstant.FEEDBACK_TASK_MESSAGE)) {
 				ExpressTask.setExecutingUserTask(
-					cell.getTask(), Executant.SYS);
+					cell.getTask(), Executor.SYS);
 			    }
 
 			    KMADEMainFrame.getProjectPanel()

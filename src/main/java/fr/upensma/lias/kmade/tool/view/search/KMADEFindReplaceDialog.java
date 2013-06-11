@@ -52,7 +52,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import fr.upensma.lias.kmade.kmad.schema.tache.Decomposition;
-import fr.upensma.lias.kmade.kmad.schema.tache.Executant;
+import fr.upensma.lias.kmade.kmad.schema.tache.Executor;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEGraphCellEditor;
@@ -469,9 +469,9 @@ public class KMADEFindReplaceDialog extends JDialog {
 	    this.add(Box.createRigidArea(new Dimension(0, 15)));
 
 	    // Le JPanel pour l'executant et l'opérateur
-	    executantName = Executant.getNameLocaleExecutant();
+	    executantName = Executor.getNameLocaleExecutant();
 	    executantImage = new ImageIcon[executantName.length];
-	    String[] executantTempImage = Executant.getImageLocaleExecutant();
+	    String[] executantTempImage = Executor.getImageLocaleExecutant();
 	    for (int i = 0; i < executantName.length; i++) {
 		executantImage[i] = new ImageIcon(
 			KMADEGraphCellEditor.class
@@ -562,7 +562,7 @@ public class KMADEFindReplaceDialog extends JDialog {
 		}
 		if (maValue != "*") {
 
-		    int myInt = Executant.getLocaleExecutantAt(maValue);
+		    int myInt = Executor.getLocaleExecutantAt(maValue);
 		    ImageIcon icon = executantImage[myInt];
 		    setIcon(icon);
 		    setText(maValue);
