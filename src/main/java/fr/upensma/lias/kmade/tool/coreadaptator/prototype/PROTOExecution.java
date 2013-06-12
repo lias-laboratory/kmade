@@ -91,7 +91,7 @@ public class PROTOExecution {
 			return;
 		case ACTIVE:
 			// depend of ordonnancement
-			switch (currentTask.getOrdonnancement()) {
+			switch (currentTask.getOrdering()) {
 			case ELE:
 				// Elementary task have to change in WAIT_END state
 				elementarycase(map);
@@ -113,7 +113,7 @@ public class PROTOExecution {
 			}
 			break;
 		case WAITEND:
-			switch (currentTask.getOrdonnancement()) {
+			switch (currentTask.getOrdering()) {
 			case SEQ:
 				sequentialCase(map);
 				break;
@@ -132,7 +132,7 @@ public class PROTOExecution {
 			break;
 		case FINISHED:
 			// if the task is in finish state we need to go up in the tree
-			if(currentTask.getOrdonnancement() != Decomposition.ELE){
+			if(currentTask.getOrdering() != Decomposition.ELE){
 				PROTOHistoric.addFinished(currentTask);
 			}
 			if (currentTask.getMother() != null && !currentTask.equals(startTask)) {
@@ -149,18 +149,18 @@ public class PROTOExecution {
 
 
 	private static void iteration(HashMap<String, ChoiceEnum> map) {
-		if((currentTask.getIteExpression().getDescription()!= null) && !currentTask.getIteExpression().getDescription().equals("") 
-				&& (map!=null && map.get(currentTask.getIteExpression().getDescription())==ChoiceEnum.vrai)){	
+		if((currentTask.getIterExpression().getDescription()!= null) && !currentTask.getIterExpression().getDescription().equals("") 
+				&& (map!=null && map.get(currentTask.getIterExpression().getDescription())==ChoiceEnum.vrai)){	
 			GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setIterationEnabled(currentTask,true,ChoiceEnum.vrai);
 		}else{
-			if((currentTask.getIteExpression().getDescription()== null) || currentTask.getIteExpression().getDescription().equals("") ){
+			if((currentTask.getIterExpression().getDescription()== null) || currentTask.getIterExpression().getDescription().equals("") ){
 				GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setIterationEnabled(currentTask,false,ChoiceEnum.indeterminee);
 			}else{
 				ChoiceEnum choiceE;
-				if(map==null || map.get(currentTask.getIteExpression().getDescription())==null){
+				if(map==null || map.get(currentTask.getIterExpression().getDescription())==null){
 					choiceE = ChoiceEnum.indeterminee;
 				}else{
-					choiceE = map.get(currentTask.getIteExpression().getDescription());
+					choiceE = map.get(currentTask.getIterExpression().getDescription());
 				}
 				GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().setIterationEnabled(currentTask,true,choiceE);
 			}}

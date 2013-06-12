@@ -211,7 +211,7 @@ public final class ExpressTask {
 	    refTache.setEffetsDeBordExpression(((Task) myTaskList[i])
 		    .getEffetsDeBordExpression()); // effetsdebord
 	    refTache.setIterExpression(((Task) myTaskList[i])
-		    .getIteExpression()); // iteration
+		    .getIterExpression()); // iteration
 
 	    refTache.setActors(((Task) myTaskList[i]).getActors()); // acteurs
 	    refTache.setEvents(((Task) myTaskList[i]).getEvents()); // evenements
@@ -281,7 +281,7 @@ public final class ExpressTask {
 	    refTache.setPreExpression(myTacheList.get(i).getPreExpression());// precondition
 	    refTache.setEffetsDeBordExpression(myTacheList.get(i)
 		    .getEffetsDeBordExpression());// effetsdebord
-	    refTache.setIterExpression(myTacheList.get(i).getIteExpression());// iteration
+	    refTache.setIterExpression(myTacheList.get(i).getIterExpression());// iteration
 
 	    refTache.setActors(myTacheList.get(i).getActors()); // acteur
 	    refTache.setEvents(myTacheList.get(i).getEvents()); // evenements

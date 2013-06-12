@@ -517,13 +517,13 @@ public class KMADEGraph extends org.jgraph.JGraph {
 	    /* Rep(iteration) ok ! */
 	    if (select.getRectRep() != null
 		    && select.getRectRep().contains(event.getPoint())) {
-		if (((KMADEDefaultGraphCell) cell).getTask().getIteExpression()
+		if (((KMADEDefaultGraphCell) cell).getTask().getIterExpression()
 			.getDescription().equals("")) {
 		    return (KMADEConstant.VERTEX_ITERATION + ": " + ((KMADEDefaultGraphCell) cell)
-			    .getTask().getIteExpression().toSPF().toString());
+			    .getTask().getIterExpression().toSPF().toString());
 		}
 		return (KMADEConstant.VERTEX_ITERATION + ": " + ((KMADEDefaultGraphCell) cell)
-			.getTask().getIteExpression().getDescription());
+			.getTask().getIterExpression().getDescription());
 	    }
 	    /* Evt In ok! */
 	    if (select.getRectEvenementIn() != null

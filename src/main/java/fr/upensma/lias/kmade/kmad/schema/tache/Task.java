@@ -374,6 +374,9 @@ public class Task implements Entity {
 	importance = s;
     }
 
+    /**
+     * @return the name of the label, or null if no label
+     */
     public String getLabelName() {
 	return ((this.label == null) ? "" : this.label.getName());
     }
@@ -555,6 +558,9 @@ public class Task implements Entity {
 	this.mother = pMere;
     }
 
+    /**
+     * @return the name of the mother, or NO_MOTHER_TASK_NAME_MESSAGE if null
+     */
     public String getMotherTaskName() {
 	if (this.mother == null) {
 	    return KMADEConstant.NO_MOTHER_TASK_NAME_MESSAGE;
@@ -595,10 +601,6 @@ public class Task implements Entity {
 	return this.modality;
     }
 
-    public Decomposition getOrdonnancement() {
-	return this.ordering;
-    }
-
     public Importance getImportance() {
 	return this.importance;
     }
@@ -607,7 +609,12 @@ public class Task implements Entity {
 	return number;
     }
 
-    public int getPlace() {
+    /**
+     * The index is the numbered position of the child, starting from 0
+     * -1 if root task
+     * @return the index of the child among children
+     */
+    public int indexOf() {
 	return (mother == null) ? -1 : this.mother.children.indexOf(this);
     }
 
@@ -1448,42 +1455,51 @@ public class Task implements Entity {
 	this.point = point;
     }
 
-    public Task getOldSisterTask() {
+    /**
+     * @return the next child task in the list, null if none
+     */
+    public Task getNextChildTask() {
 	if (this.mother == null) {
 	    return null;
 	}
-	ArrayList<Task> mySon = this.mother.getChildren();
-	if (mySon == null) {
+	ArrayList<Task> children = this.mother.getChildren();
+	if (children == null) {
 	    return null;
 	}
-	int index = mySon.indexOf(this);
-	if (index <= 0) {
+	int myIndex = children.indexOf(this);
+	if (myIndex <= 0) {
 	    return null;
 	}
-	return (mySon.get(index - 1));
+	return (children.get(myIndex - 1));
     }
 
-    public Task getYoungSisterTask() {
+    /**
+     * @return the previous child task in the list, null if none
+     */
+    public Task getPreviousChildTask() {
 	if (this.mother == null) {
 	    return null;
 	}
-	ArrayList<Task> mySon = this.mother.getChildren();
-	if (mySon == null) {
+	ArrayList<Task> children = this.mother.getChildren();
+	if (children == null) {
 	    return null;
 	}
-	int index = mySon.indexOf(this);
-	if (index >= mySon.size() - 1) {
+	int myIndex = children.indexOf(this);
+	if (myIndex >= children.size() - 1) {
 	    return null;
 	}
-	return (mySon.get(index + 1));
+	return (children.get(myIndex + 1));
     }
 
-    public Task getFirstSonTask() {
-	ArrayList<Task> mySon = this.getChildren();
-	if (mySon == null || mySon.size() == 0) {
+    /**
+     * @return the first child of the task, null if none
+     */
+    public Task getFirstChildTask() {
+	ArrayList<Task> myChildren = this.getChildren();
+	if (myChildren == null || myChildren.size() == 0) {
 	    return null;
 	}
-	return (mySon.get(0));
+	return (myChildren.get(0));
     }
 
     /**
@@ -1562,7 +1578,7 @@ public class Task implements Entity {
 	this.sideEffectExpression = effetsDeBordExpression;
     }
 
-    public IterExpression getIteExpression() {
+    public IterExpression getIterExpression() {
 	return iterExpression;
     }
 
@@ -1721,7 +1737,7 @@ public class Task implements Entity {
 	kmadElement.setTextContent(this.iterExpression.getName());
 	racine.appendChild(kmadElement);
 	// Iteration Description
-	if (!this.getIteExpression().getDescription().equals("")) {
+	if (!this.getIterExpression().getDescription().equals("")) {
 	    kmadElement = doc.createElement("task-descriptioniteration");
 	    kmadElement.setTextContent(this.iterExpression.getDescription());
 	    racine.appendChild(kmadElement);

@@ -562,12 +562,12 @@ public final class SimulationAdaptator {
 			.getExpressionEffetsDeBordComboList(), pCompoPost);
 
 	// Préparation pour les valeurs utilisateurs de l'itération.
-	ArrayList<Object> myListIter = currentUserEditTask.getIteExpression()
+	ArrayList<Object> myListIter = currentUserEditTask.getIterExpression()
 		.getNodeExpression().getLinearExpression();
 	ArrayList<JComponent> pCompoIter = new ArrayList<JComponent>();
 	SimulationAdaptator.buildAnyUserExpressionOrConcreteObjectType(
 		myListIter, refInputDialog.getExpressionIterationFieldList(),
-		currentUserEditTask.getIteExpression().getObjectValues(),
+		currentUserEditTask.getIterExpression().getObjectValues(),
 		currentUserEditTask.getPreExpression().isLocked(),
 		refInputDialog.getExpressionIterationComboList(), pCompoIter);
 
@@ -757,7 +757,7 @@ public final class SimulationAdaptator {
 			    tache.getPreExpression(),
 			    tache.getEffetsDeBordExpression(),
 			    tache.getOrdering().getValue(),
-			    tache.getIteExpression());
+			    tache.getIterExpression());
 	    GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
 		    .getSimulationToolBar().setEnabledOneSelectedTask();
 	} else {
@@ -833,7 +833,7 @@ public final class SimulationAdaptator {
     }
 
     public static void switchLockOrUnlockIterationUserValuesAndConcreteObjects() {
-	Expression myIterExpression = currentUserEditTask.getIteExpression();
+	Expression myIterExpression = currentUserEditTask.getIterExpression();
 	if (myIterExpression.isLocked()) {
 	    // Débloquer le tout.
 	    refInputDialog.setEnabledIterationFieldAndComboComponents(true);
@@ -884,7 +884,7 @@ public final class SimulationAdaptator {
 		    currentUserEditTask.getEffetsDeBordExpression());
 	    SimulationAdaptator.storeUserValues(
 		    refInputDialog.getExpressionIterationFieldList(),
-		    currentUserEditTask.getIteExpression());
+		    currentUserEditTask.getIterExpression());
 
 	    // Stocke les objets concrets choisis par l'utilisateur.
 	    SimulationAdaptator.storeUserConcreteObjects(
@@ -895,7 +895,7 @@ public final class SimulationAdaptator {
 		    currentUserEditTask.getEffetsDeBordExpression());
 	    SimulationAdaptator.storeUserConcreteObjects(
 		    refInputDialog.getExpressionIterationComboList(),
-		    currentUserEditTask.getIteExpression());
+		    currentUserEditTask.getIterExpression());
 
 	    SimulationAdaptator.enabledMainFrameAfterEdition();
 	    refInputDialog.closeInputUserConcreteDialog();
@@ -956,13 +956,13 @@ public final class SimulationAdaptator {
 			pCompoPost);
 
 	// Préparation pour les valeurs utilisateurs de l'itération.
-	ArrayList<Object> myListIter = myTask.getIteExpression()
+	ArrayList<Object> myListIter = myTask.getIterExpression()
 		.getNodeExpression().getLinearExpression();
 	ArrayList<JComponent> pCompoIter = new ArrayList<JComponent>();
 	valeur |= SimulationAdaptator
 		.buildAnyUserExpressionOrConcreteObjectType(myListIter,
 			refInputDialog.getExpressionIterationFieldList(),
-			myTask.getIteExpression().getObjectValues(), myTask
+			myTask.getIterExpression().getObjectValues(), myTask
 				.getPreExpression().isLocked(), refInputDialog
 				.getExpressionIterationComboList(), pCompoIter);
 
@@ -1186,7 +1186,7 @@ public final class SimulationAdaptator {
 		    .setObjectValues(tokenSimulation.getUserValuePre());
 	    tokenSimulation.getTask().getEffetsDeBordExpression()
 		    .setObjectValues(tokenSimulation.getUserValuePost());
-	    tokenSimulation.getTask().getIteExpression()
+	    tokenSimulation.getTask().getIterExpression()
 		    .setObjectValues(tokenSimulation.getUserValueIter());
 	}
 

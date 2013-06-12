@@ -332,7 +332,7 @@ public final class TaskPropertiesAdaptator {
 			tache.getActors(), tache.getPreExpression(),
 			tache.getEffetsDeBordExpression(),
 			tache.getOrdering().getValue(),
-			tache.getIteExpression());
+			tache.getIterExpression());
 	TaskPropertiesAdaptator.updateTaskPropertiesPanel();
     }
 
@@ -488,6 +488,6 @@ public final class TaskPropertiesAdaptator {
 		.getPanelProprieteTache()
 		.setIterationInModel(
 			GraphicEditorAdaptator.getSelectedGraphicTask()
-				.getTask().getIteExpression());
+				.getTask().getIterExpression());
     }
 }

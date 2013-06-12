@@ -65,9 +65,9 @@ public final class IterationAdaptator {
 	// Active ou pas l'�valuation
 	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
-	if (myCurrentTask.getIteExpression().getNodeExpression() != null) {
+	if (myCurrentTask.getIterExpression().getNodeExpression() != null) {
 	    // Construire l'expression.
-	    ArrayList<Object> myList = myCurrentTask.getIteExpression()
+	    ArrayList<Object> myList = myCurrentTask.getIterExpression()
 		    .getNodeExpression().getLinearExpression();
 	    KMADEEditorPrePostIterDialog.getIterationPanel()
 		    .enabledEvaluateControl(myList);
@@ -89,7 +89,7 @@ public final class IterationAdaptator {
     private static void checkIterationBuilder(String s) {
 	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
-	myCurrentTask.getIteExpression().setName(s);
+	myCurrentTask.getIterExpression().setName(s);
 
 	// Transformation de la cha�ne de caract�res en flux de caract�res.
 	java.io.StringReader sr = new java.io.StringReader(s);
@@ -171,21 +171,21 @@ public final class IterationAdaptator {
 	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
 		.getTask();
 	try {
-	    myCurrentTask.getIteExpression().getNodeExpression()
+	    myCurrentTask.getIterExpression().getNodeExpression()
 		    .evaluateNode(null);
 	    KMADEEditorPrePostIterDialog
 		    .getIterationPanel()
 		    .giveResult(
-			    (myCurrentTask.getIteExpression().isFinished() ? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE
+			    (myCurrentTask.getIterExpression().isFinished() ? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE
 				    : KMADEConstant.STOP_LOOP_ITERATION_MESSAGE)
 				    + " =");
 	    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_EVAL_OK_MESSAGE);
 	    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.VALUE_MESSAGE
 			    + " = "
-			    + myCurrentTask.getIteExpression()
+			    + myCurrentTask.getIterExpression()
 				    .getNodeExpression().getNodeValue()
 			    + " , "
-			    + (myCurrentTask.getIteExpression()
+			    + (myCurrentTask.getIterExpression()
 				    .isLoopProgress() ? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE
 				    : KMADEConstant.STOP_LOOP_ITERATION_MESSAGE));
 	} catch (SemanticErrorException e) {

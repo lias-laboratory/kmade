@@ -146,7 +146,7 @@ public final class ExpressHistory {
 	    try {
 		StackState myNew = new StackState((StateSimulation) current
 			.getStateSimulation().clone(), current
-			.getIteExpression().getIterationVariant());
+			.getIterExpression().getIterationVariant());
 		myStateSimulationCollection.put(current.getOid(), myNew);
 	    } catch (CloneNotSupportedException e) {
 		e.printStackTrace();
@@ -181,8 +181,8 @@ public final class ExpressHistory {
 		    .getStateSimulation());
 	    // Au cas où il s'agit d'une action Execute et que l'itération est
 	    // un variant
-	    if (current.getIteExpression().isVariableExpressionNode()) {
-		current.getIteExpression().setIterationVariant(
+	    if (current.getIterExpression().isVariableExpressionNode()) {
+		current.getIterExpression().setIterationVariant(
 			temp.get(current.getOid()).getVariant());
 	    }
 	}

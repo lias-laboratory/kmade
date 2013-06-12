@@ -266,7 +266,7 @@ public class KMADEProtoTaskDialog extends JFrame {
 		preconditionScroll.setBorder(titleprecondition);
 
 		//Iteration
-		String iteration =  currentTask.getIteExpression().getDescription();
+		String iteration =  currentTask.getIterExpression().getDescription();
 		JTextArea iterationLabel = new JTextArea(iteration);
 		iterationLabel.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 		iterationLabel.setEditable(false);
@@ -502,7 +502,7 @@ public class KMADEProtoTaskDialog extends JFrame {
 	public void setIterationEnabled(Task t,boolean existed, ChoiceEnum enabled) {
 		trueFalseIndeterminateGroupButton groupButton;
 		if(existed){
-			groupButton = new trueFalseIndeterminateGroupButton(t.getIteExpression().getDescription(),t.getIteExpression().getDescription(),enabled,true,false);
+			groupButton = new trueFalseIndeterminateGroupButton(t.getIterExpression().getDescription(),t.getIterExpression().getDescription(),enabled,true,false);
 			conditionBox.add(groupButton);
 
 			JPanel repeatPanel = new JPanel();

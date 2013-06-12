@@ -590,9 +590,9 @@ public class KMADEVertexView extends VertexView {
 		String s_rep = KMADEConstant.VERTEX_ITERATION;
 
 		Rectangle2D rrep = fm_pre.getStringBounds(s_rep, f);
-		myGraphCell.getTask().getIteExpression().setInitIterationVariant();
-		if((!myGraphCell.getTask().getIteExpression().getName().equals("[1]"))||
-				(myGraphCell.getTask().getIteExpression().getDescription()!=null && !myGraphCell.getTask().getIteExpression().getDescription().equals(""))
+		myGraphCell.getTask().getIterExpression().setInitIterationVariant();
+		if((!myGraphCell.getTask().getIterExpression().getName().equals("[1]"))||
+				(myGraphCell.getTask().getIterExpression().getDescription()!=null && !myGraphCell.getTask().getIterExpression().getDescription().equals(""))
 				){
 			f.setColor(Color.BLACK);
 		}else{

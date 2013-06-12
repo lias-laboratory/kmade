@@ -159,7 +159,7 @@ public final class ExpressSimulation {
 
     public static void initSimulation(Task task) {
         task.getStateSimulation().setNotAccessible();
-        task.getIteExpression().setInitIterationVariant();
+        task.getIterExpression().setInitIterationVariant();
         for (Task current : task.getChildren()) {
             ExpressSimulation.initSimulation(current);
         }

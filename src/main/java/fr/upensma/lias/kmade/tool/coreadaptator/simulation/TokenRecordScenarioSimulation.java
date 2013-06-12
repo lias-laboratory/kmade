@@ -46,7 +46,7 @@ public class TokenRecordScenarioSimulation extends TokenSimulation {
 	myUserValuePre = p.getTask().getPreExpression().getObjectValues();
 	myUserValuePost = p.getTask().getEffetsDeBordExpression()
 		.getObjectValues();
-	myUserValueIter = p.getTask().getIteExpression().getObjectValues();
+	myUserValueIter = p.getTask().getIterExpression().getObjectValues();
 	// TODO : les objets concrets ...
     }
 

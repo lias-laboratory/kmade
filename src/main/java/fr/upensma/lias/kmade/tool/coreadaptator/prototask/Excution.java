@@ -57,7 +57,7 @@ public class Excution{
 	private static void oneOfMyChildrenBecommeActive(Task t) throws ProtoTaskException {
 
 		//je regarde mon ordonnancement et je met à jours mes filles si besoin et je me met en attente si besoin
-		Decomposition decompo = t.getOrdonnancement();
+		Decomposition decompo = t.getOrdering();
 		ArrayList<Task> enfants ;
 		switch (decompo) {
 		case ALT:
@@ -131,7 +131,7 @@ public class Excution{
 
 
 	private static void takeCareOfMyChildren(Task t) throws ProtoTaskException {
-		Decomposition decompo = t.getOrdonnancement();
+		Decomposition decompo = t.getOrdering();
 		ArrayList<Task> children;
 		switch (decompo) {
 		case ALT:
@@ -336,7 +336,7 @@ public class Excution{
 	}
 
 	private static void oneOfMyChildrenBecomeFinish(Task t) throws ProtoTaskException{
-		Decomposition decompo = t.getOrdonnancement();
+		Decomposition decompo = t.getOrdering();
 		ArrayList<Task> enfants ;
 		switch (decompo) {
 		case ALT:

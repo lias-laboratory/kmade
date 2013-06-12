@@ -250,7 +250,7 @@ public class KMADEHistoricPanel extends JPanel  implements TreeSelectionListener
 		desc.setLineWrap(true);
 		desc.setWrapStyleWord(true);
 		TitledBorder titleIter = new TitledBorder(null,KMADEConstant.PROTOTYPING_TOOL_ITERATION_TOOLTIP+" : ",TitledBorder.LEFT, TitledBorder.TOP, KMADEConstant.TITLE_PROTO_TASK_FONT);
-		JTextArea iter = new JTextArea(task.getIteExpression().getDescription());
+		JTextArea iter = new JTextArea(task.getIterExpression().getDescription());
 		iter.setFont(KMADEConstant.TEXT_PROTO_TASK_FONT);
 		iter.setBorder(titleIter);
 		iter.setEditable(false);

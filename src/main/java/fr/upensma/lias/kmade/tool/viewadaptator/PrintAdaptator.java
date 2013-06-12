@@ -248,7 +248,7 @@ public final class PrintAdaptator {
 	context.put("ACTORSYSTEM",
 		PrintAdaptator.getValues(r.getActorSystem()));
 	context.put("PRECONDITION", r.getPreExpression().getName());
-	context.put("ITERATION", r.getIteExpression().getName());
+	context.put("ITERATION", r.getIterExpression().getName());
 	context.put("GENERATEDEVENTS", PrintAdaptator.getValues(r.getEvents()));
 	context.put("EFFETSDEBORD", r.getEffetsDeBordExpression().getName());
 
@@ -284,7 +284,7 @@ public final class PrintAdaptator {
 	context.put("DECOMPOSITION", r.getOrdering().toString());
 	context.put("ACTORS", PrintAdaptator.getValues(r.getActors()));
 	context.put("PRECONDITION", r.getPreExpression().getName());
-	context.put("ITERATION", r.getIteExpression().getName());
+	context.put("ITERATION", r.getIterExpression().getName());
 	context.put("GENERATEDEVENTS", PrintAdaptator.getValues(r.getEvents()));
 	context.put("EFFETSDEBORD", r.getEffetsDeBordExpression().getName());
 

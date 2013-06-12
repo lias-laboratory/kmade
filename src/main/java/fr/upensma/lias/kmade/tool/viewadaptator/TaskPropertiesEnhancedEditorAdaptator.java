@@ -106,12 +106,12 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 		currentEditedTask.getPreExpression().getName(),
 		currentEditedTask.getEffetsDeBordExpression().getName(),
 		currentEditedTask.getOrdering(), currentEditedTask
-			.getIteExpression().getName());
+			.getIterExpression().getName());
 
 	motherTask = currentEditedTask.getMother();
-	oldSisterTask = currentEditedTask.getOldSisterTask();
-	youngSisterTask = currentEditedTask.getYoungSisterTask();
-	firstSonTask = currentEditedTask.getFirstSonTask();
+	oldSisterTask = currentEditedTask.getNextChildTask();
+	youngSisterTask = currentEditedTask.getPreviousChildTask();
+	firstSonTask = currentEditedTask.getFirstChildTask();
 
 	if (motherTask == null) {
 	    myRefTaskEditor.setUpButton(false,

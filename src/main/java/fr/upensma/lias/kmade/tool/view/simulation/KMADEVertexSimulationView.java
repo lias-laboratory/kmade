@@ -77,7 +77,7 @@ public class KMADEVertexSimulationView extends KMADEVertexView {
 		.getCell();
 	String message = "";
 	if (myGraphCell.getTask().getStateSimulation().isActive()) {
-	    if (myGraphCell.getTask().getIteExpression().isMoreOneIteration()) {
+	    if (myGraphCell.getTask().getIterExpression().isMoreOneIteration()) {
 		message = KMADEConstant.ACTIVE_ITERATION_STATE_TASK_SIMULATION_MESSAGE;
 	    } else {
 		message = KMADEConstant.ACTIVE_STATE_TASK_SIMULATION_MESSAGE;
@@ -85,7 +85,7 @@ public class KMADEVertexSimulationView extends KMADEVertexView {
 	} else if (myGraphCell.getTask().getStateSimulation().isFinished()) {
 	    message = KMADEConstant.FINISHED_STATE_TASK_SIMULATION_MESSAGE;
 	} else if (myGraphCell.getTask().getStateSimulation().isPassive()) {
-	    if (myGraphCell.getTask().getIteExpression().isMoreOneIteration()) {
+	    if (myGraphCell.getTask().getIterExpression().isMoreOneIteration()) {
 		message = KMADEConstant.ACTIVE_ITERATION_STATE_TASK_SIMULATION_MESSAGE;
 		;
 	    } else {
@@ -117,7 +117,7 @@ public class KMADEVertexSimulationView extends KMADEVertexView {
 	} else if (myGraphCell.getTask().getStateSimulation().isFinished()) {
 	    stateTaskColor = KMADEVertexSimulationView.FINISHED_COLOR;
 	} else if (myGraphCell.getTask().getStateSimulation().isPassive()) {
-	    if (myGraphCell.getTask().getIteExpression().isMoreOneIteration()) {
+	    if (myGraphCell.getTask().getIterExpression().isMoreOneIteration()) {
 		stateTaskColor = KMADEVertexSimulationView.ACTIVE_COLOR;
 	    } else {
 		stateTaskColor = KMADEVertexSimulationView.PASSIVE_COLOR;
@@ -208,24 +208,24 @@ public class KMADEVertexSimulationView extends KMADEVertexView {
 
     protected String getIterationName(KMADEDefaultGraphCell myGraphCell) {
 	String iteration = KMADEConstant.VERTEX_ITER_LETTER;
-	if (myGraphCell.getTask().getIteExpression().isErrorInExpression()) {
+	if (myGraphCell.getTask().getIterExpression().isErrorInExpression()) {
 	    iteration += KMADEConstant.ERROR_ITERATION_VIEW_MESSAGE;
 	} else {
-	    if (myGraphCell.getTask().getIteExpression()
+	    if (myGraphCell.getTask().getIterExpression()
 		    .isVariableExpressionNode()) {
 		iteration += String.valueOf(myGraphCell.getTask()
-			.getIteExpression().getIterationVariant())
+			.getIterExpression().getIterationVariant())
 			+ "/"
-			+ myGraphCell.getTask().getIteExpression()
+			+ myGraphCell.getTask().getIterExpression()
 				.getNodeExpression().getNodeValue();
 	    } else {
 		if (myGraphCell.getTask().getStateSimulation().isActive()
 			|| myGraphCell.getTask().getStateSimulation()
 				.isPassive()) {
 		    try {
-			myGraphCell.getTask().getIteExpression()
+			myGraphCell.getTask().getIterExpression()
 				.getNodeExpression().evaluateNode(null);
-			iteration += myGraphCell.getTask().getIteExpression()
+			iteration += myGraphCell.getTask().getIterExpression()
 				.getNodeExpression().getNodeValue();
 		    } catch (SemanticErrorException e) {
 			iteration += KMADEConstant.ERROR_ITERATION_VIEW_MESSAGE;

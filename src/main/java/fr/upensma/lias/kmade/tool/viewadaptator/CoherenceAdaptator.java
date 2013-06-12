@@ -214,7 +214,7 @@ public final class CoherenceAdaptator {
 		    EXPRESSION_TYPE, POST_CONDITION_DIALOG, myTache);
 	}
 
-	if (myTache.getIteExpression().getNodeExpression() == null) {
+	if (myTache.getIterExpression().getNodeExpression() == null) {
 	    CoherenceAdaptator.addErrorMessage(
 		    KMADEConstant.ITERATION_EXPRESSION_MESSAGE_PROBLEM,
 		    EXPRESSION_TYPE, ITERATION_DIALOG, myTache);

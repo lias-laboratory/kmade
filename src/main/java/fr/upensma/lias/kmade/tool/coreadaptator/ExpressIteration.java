@@ -57,16 +57,16 @@ public final class ExpressIteration {
     }
 
     public static void setIteration(Task pTache, NodeExpression node) {
-	pTache.getIteExpression().setNodeExpression(node);
+	pTache.getIterExpression().setNodeExpression(node);
 	notifyObservers();
     }
 
     public static NodeExpression getIteration(Task pTache) {
-	return pTache.getIteExpression().getNodeExpression();
+	return pTache.getIterExpression().getNodeExpression();
     }
 
     public static boolean isFinished(Task myTache) {
-	return myTache.getIteExpression().isFinished();
+	return myTache.getIterExpression().isFinished();
 	/*
 	  if (myTache.getIteExpression().isVariableExpressionNode()) { return
 	  (myTache.getIteExpression().getIterationVariant() <= 0); } else {
@@ -78,8 +78,8 @@ public final class ExpressIteration {
     public static void evaluateIteration(Task myTache) {
 	// TODO : prendre en compte le prédicat pour l'expression itération.
 	// si c'est un compteur il faut d�cr�menter
-	if (myTache.getIteExpression().isNumberVarient()) {
-	    myTache.getIteExpression().decreaseCounter();
+	if (myTache.getIterExpression().isNumberVarient()) {
+	    myTache.getIterExpression().decreaseCounter();
 	} else {
 	    // on ne fait rien?
 	}
@@ -92,7 +92,7 @@ public final class ExpressIteration {
 		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CHECK_ALL_ITERATIONS);
 		for (int i = 0; i < tacheToBeCreated.length
 			&& !ExpressIteration.isCanceled(); i++) {
-		    String iteration = tacheToBeCreated[i].getIteExpression()
+		    String iteration = tacheToBeCreated[i].getIterExpression()
 			    .getName();
 		    // Transformation de la cha�ne de caract�res en flux de
 		    // caract�res.
@@ -215,6 +215,6 @@ public final class ExpressIteration {
 
     public static void setIterationDescription(Task task,
 	    String descriptionArea) {
-	task.getIteExpression().setDescription(descriptionArea);
+	task.getIterExpression().setDescription(descriptionArea);
     }
 }

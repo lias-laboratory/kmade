@@ -407,7 +407,7 @@ public final class SearchAdaptator {
 	    d = (allTache.get(i).getExecutor().getValue() == Executor
 		    .getLocaleExecutantIntoEnumere(executant) || executant == "*");
 	    // Opérateur
-	    e = (allTache.get(i).getOrdonnancement().getValue() == Decomposition
+	    e = (allTache.get(i).getOrdering().getValue() == Decomposition
 		    .getLocaleDecompositionIntoEnumere(operateur) || operateur == "*");
 
 	    if (a && b && c && d && e) {
