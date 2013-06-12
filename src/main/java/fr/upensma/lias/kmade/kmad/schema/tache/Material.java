@@ -30,7 +30,7 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
 /**
  * @author Delphine AUTARD and Mickael BARON
  **/
-public class Materiel implements Entity {
+public class Material implements Entity {
 
     private static final long serialVersionUID = 4380917017782960768L;
 
@@ -42,33 +42,33 @@ public class Materiel implements Entity {
 
     private String imagePath = "";
 
-    private ArrayList<ActorSystem> inverseActeur = new ArrayList<ActorSystem>();
+    private ArrayList<ActorSystem> reverseActor = new ArrayList<ActorSystem>();
 
-    public Materiel() {
+    public Material() {
 	this("", "", null);
     }
 
-    public Materiel(String name, Oid oid) {
+    public Material(String name, Oid oid) {
 	this(name, "", oid);
     }
 
-    public Materiel(String name, String description, Oid oid) {
+    public Material(String name, String description, Oid oid) {
 	this.name = name;
 	this.description = description;
 	this.oid = oid;
     }
 
-    public void addInverseActeurSysteme(ActorSystem a) {
-	inverseActeur.add(a);
+    public void addReverseActorSystem(ActorSystem a) {
+	reverseActor.add(a);
     }
 
-    public void removeInverseActeurSysteme(ActorSystem a) {
-	inverseActeur.remove(a);
+    public void removeReverseActorSystem(ActorSystem a) {
+	reverseActor.remove(a);
     }
 
     public void delete() {
-	for (int i = 0; i < inverseActeur.size(); i++) {
-	    ActorSystem a = inverseActeur.get(i);
+	for (int i = 0; i < reverseActor.size(); i++) {
+	    ActorSystem a = reverseActor.get(i);
 	    a.delete();
 	}
 	InterfaceExpressJava.remove(oid);
@@ -76,8 +76,8 @@ public class Materiel implements Entity {
 
     public void affDelete() {
 	InterfaceExpressJava.getGestionWarning().addMessage(oid, 16);
-	for (int i = 0; i < inverseActeur.size(); i++) {
-	    ActorSystem a = inverseActeur.get(i);
+	for (int i = 0; i < reverseActor.size(); i++) {
+	    ActorSystem a = reverseActor.get(i);
 	    a.affDelete();
 	}
     }
@@ -150,7 +150,7 @@ public class Materiel implements Entity {
 	Object[] objAbs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"ParcMachines");
 	for (int i = 0; i < objAbs.length; i++) {
-	    Materiel obj = (Materiel) objAbs[i];
+	    Material obj = (Material) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.getName())) {
 		return false;
 	    }
@@ -162,7 +162,7 @@ public class Materiel implements Entity {
 	    }
 	}
 	for (int i = 0; i < objAbs2.length; i++) {
-	    ParcMachines obj = (ParcMachines) objAbs2[i];
+	    ParkMachines obj = (ParkMachines) objAbs2[i];
 	    if (s.equalsIgnoreCase(obj.getName())) {
 		return false;
 	    }
@@ -170,7 +170,7 @@ public class Materiel implements Entity {
 	return true;
     }
 
-    public static String propositionNom(String n) {
+    public static String proposeName(String n) {
 	boolean ok = false;
 	int cpt = 0;
 	// n = n.replace(" ", "_");

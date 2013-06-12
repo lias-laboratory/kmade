@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Machine;
-import fr.upensma.lias.kmade.kmad.schema.tache.Materiel;
-import fr.upensma.lias.kmade.kmad.schema.tache.ParcMachines;
+import fr.upensma.lias.kmade.kmad.schema.tache.Material;
+import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
 
 /**
  * @author Mickael BARON
@@ -38,7 +38,7 @@ public class ExpressMateriel {
 	int length = objs1.length + objs2.length;
 	String[] lst = new String[length];
 	for (int i = 0; i < objs1.length; i++) {
-	    ParcMachines obj = (ParcMachines) objs1[i];
+	    ParkMachines obj = (ParkMachines) objs1[i];
 	    lst[i] = obj.getName();
 	}
 	for (int i = objs1.length; i < length; i++) {
@@ -48,15 +48,15 @@ public class ExpressMateriel {
 	return lst;
     }
 
-    public static ArrayList<Materiel> getMateriels() {
-	ArrayList<Materiel> lst = new ArrayList<Materiel>();
+    public static ArrayList<Material> getMateriels() {
+	ArrayList<Material> lst = new ArrayList<Material>();
 	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Machine");
 	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"ParcMachines");
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
-	    ParcMachines obj = (ParcMachines) objs1[i];
+	    ParkMachines obj = (ParkMachines) objs1[i];
 	    lst.add(obj);
 	}
 	for (int i = objs1.length; i < length; i++) {
@@ -66,14 +66,14 @@ public class ExpressMateriel {
 	return lst;
     }
 
-    public static Materiel getMaterielWithName(String name) {
+    public static Material getMaterielWithName(String name) {
 	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Machine");
 	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"ParcMachines");
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
-	    ParcMachines obj = (ParcMachines) objs1[i];
+	    ParkMachines obj = (ParkMachines) objs1[i];
 	    if (obj.getName().equals(name)) {
 		return obj;
 	    }
@@ -88,18 +88,18 @@ public class ExpressMateriel {
     }
 
     public static String setMaterielName(String oid, String name) {
-	Materiel m = (Materiel) InterfaceExpressJava.prendre(new Oid(oid));
+	Material m = (Material) InterfaceExpressJava.prendre(new Oid(oid));
 	m.setName(name);
 	return m.getName();
     }
 
     public static void setMaterielDescription(String oid, String desc) {
-	Materiel m = (Materiel) InterfaceExpressJava.prendre(new Oid(oid));
+	Material m = (Material) InterfaceExpressJava.prendre(new Oid(oid));
 	m.setDescription(desc);
     }
 
     public static void setMaterielImage(String oid, String path) {
-	Materiel m = (Materiel) InterfaceExpressJava.prendre(new Oid(oid));
+	Material m = (Material) InterfaceExpressJava.prendre(new Oid(oid));
 	m.setImage(path);
     }
 }

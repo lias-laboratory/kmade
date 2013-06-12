@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
-import fr.upensma.lias.kmade.kmad.schema.tache.Individu;
+import fr.upensma.lias.kmade.kmad.schema.tache.Person;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressIndividu;
 
 public class ExpressIndividuTest {
@@ -63,20 +63,20 @@ public class ExpressIndividuTest {
 
 	@Test
 	public void testGetIndividus() {
-		ArrayList<Individu> ai = ExpressIndividu.getIndividus();
+		ArrayList<Person> ai = ExpressIndividu.getIndividus();
 		assertTrue(ai.size()==2);
 	}
 
 	@Test
 	// Ce test permet aussi de vérifier les Set
 	public void testGetIndividuWithName() {
-		Individu i1  = ExpressIndividu.getIndividuWithName(nom1);
+		Person i1  = ExpressIndividu.getIndividuWithName(nom1);
 		assertTrue(i1.getImage()==image1);
 		assertTrue(i1.getName()==nom1);
 		assertTrue(i1.getRole()==role1);
 		assertTrue(i1.getStatut()==statut1);
 		
-		Individu i2  = ExpressIndividu.getIndividuWithName(nom2);
+		Person i2  = ExpressIndividu.getIndividuWithName(nom2);
 		assertTrue(i2.getImage()==image2);
 		assertTrue(i2.getName()==nom2);
 		assertTrue(i2.getRole()==role2);
@@ -86,7 +86,7 @@ public class ExpressIndividuTest {
 	@Test
 	public void testDeleteIndividu() {
 		ExpressIndividu.deleteIndividu(oidIndividu1);
-		ArrayList<Individu> ai = ExpressIndividu.getIndividus();
+		ArrayList<Person> ai = ExpressIndividu.getIndividus();
 		assertTrue(ai.size()==1);
 	}
 

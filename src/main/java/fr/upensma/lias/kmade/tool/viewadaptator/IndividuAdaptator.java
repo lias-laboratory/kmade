@@ -19,7 +19,7 @@ package fr.upensma.lias.kmade.tool.viewadaptator;
 
 import java.util.ArrayList;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Individu;
+import fr.upensma.lias.kmade.kmad.schema.tache.Person;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressIndividu;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadIndividuObjectTable;
@@ -93,7 +93,7 @@ public final class IndividuAdaptator {
     }
 
     public static void updateIndividuView() {
-	ArrayList<Individu> myList = ExpressIndividu.getIndividus();
+	ArrayList<Person> myList = ExpressIndividu.getIndividus();
 	for (int i = 0; i < myList.size(); i++) {
 	    KMADEMainFrame
 		    .getProjectPanel()

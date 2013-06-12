@@ -49,11 +49,11 @@ import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.KMADXMLParserException;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-import fr.upensma.lias.kmade.kmad.schema.tache.Individu;
+import fr.upensma.lias.kmade.kmad.schema.tache.Person;
 import fr.upensma.lias.kmade.kmad.schema.tache.Machine;
 import fr.upensma.lias.kmade.kmad.schema.tache.Media;
-import fr.upensma.lias.kmade.kmad.schema.tache.Organisation;
-import fr.upensma.lias.kmade.kmad.schema.tache.ParcMachines;
+import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
+import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
@@ -734,12 +734,12 @@ public final class ExpressKMADXML {
 		// le chargement n'a pas mis les individus au seins des organisations
 		Object[] indObj = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 				"Individu");
-		Individu[] ind = new Individu[indObj.length];
+		Person[] ind = new Person[indObj.length];
 		for (int i = 0; i < ind.length; i++) {
-			ind[i] = (Individu) indObj[i];
+			ind[i] = (Person) indObj[i];
 		}
 		for (int i = 0; i < ind.length; i++) {
-			ArrayList<Organisation> org = ind[i].getOrganisations();
+			ArrayList<Organization> org = ind[i].getOrganisations();
 			for (int j = 0; j < org.size(); j++) {
 				org.get(j).addMember(ind[i]);
 			}
@@ -754,7 +754,7 @@ public final class ExpressKMADXML {
 			mach[i] = (Machine) machobj[i];
 		}
 		for (int i = 0; i < mach.length; i++) {
-			ArrayList<ParcMachines> parc = mach[i].getMemberOf();
+			ArrayList<ParkMachines> parc = mach[i].getMemberOf();
 			for (int j = 0; j < parc.size(); j++) {
 				parc.get(j).addMember(mach[i]);
 			}
@@ -771,7 +771,7 @@ public final class ExpressKMADXML {
 			// la version actuelle de KMADE ne permet l'utilisation d'User en
 			// tant que tel, il faut que ce soit un Individu ou une organisation
 			// On cr��r un Individu � partir de l'user
-			Individu indi = new Individu(user[i].getName(),
+			Person indi = new Person(user[i].getName(),
 					user[i].getStatut(), user[i].getRole(), user[i].getImage(),
 					user[i].getOid());
 			// on supprime l'User de la bdd

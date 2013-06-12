@@ -21,12 +21,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
-import fr.upensma.lias.kmade.kmad.schema.tache.Enumere;
+import fr.upensma.lias.kmade.kmad.schema.tache.Enumerated;
 
 /**
  * @author Vincent LUCQUIAUD and Mickael BARON
  **/
-public enum TypeStructure implements Enumere {
+public enum TypeStructure implements Enumerated {
     BOOLEAN_STRUCT("BoolValue"), ENUM_STRUCT("EnumValue"), NUMBER_STRUCT(
 	    "NumberValue"), INTERVAL_STRUCT("IntervalleValue"), STRING_STRUCT(
 	    "StrValue");

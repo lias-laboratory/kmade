@@ -19,7 +19,7 @@ package fr.upensma.lias.kmade.tool.viewadaptator;
 
 import java.util.ArrayList;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.ParcMachines;
+import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressParcMachines;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadParcMachinesObjectTable;
@@ -96,7 +96,7 @@ public final class ParcMachinesAdaptator {
     }
 
     public static void updateParcMachinesView() {
-	ArrayList<ParcMachines> myList = ExpressParcMachines.getParcsMachines();
+	ArrayList<ParkMachines> myList = ExpressParcMachines.getParcsMachines();
 	for (int i = 0; i < myList.size(); i++) {
 	    KMADEMainFrame
 		    .getProjectPanel()

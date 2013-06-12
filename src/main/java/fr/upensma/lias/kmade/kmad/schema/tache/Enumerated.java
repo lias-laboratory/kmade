@@ -23,7 +23,7 @@ import org.w3c.dom.Element;
 /**
  * @author Delphine AUTARD and Mickael BARON
  **/
-public interface Enumere {    
+public interface Enumerated {    
     
    String toSPF();    
    

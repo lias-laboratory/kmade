@@ -85,11 +85,11 @@ public class Event implements Entity {
 	}
     }
 
-    public void addInverseTache(Task a) {
+    public void addReverseTask(Task a) {
 	inverseTache.add(a);
     }
 
-    public void removeInverseTache(Task a) {
+    public void removeReverseTask(Task a) {
 	inverseTache.remove(a);
     }
 
@@ -183,7 +183,7 @@ public class Event implements Entity {
 	return stAff;
     }
 
-    public static String propositionNom(String n) {
+    public static String proposeName(String n) {
 	boolean ok = false;
 	int cpt = 0;
 	// n = n.replace(" ", "_");

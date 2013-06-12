@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.ActorSystem;
-import fr.upensma.lias.kmade.kmad.schema.tache.Materiel;
+import fr.upensma.lias.kmade.kmad.schema.tache.Material;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressActeurSysteme;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressMateriel;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
@@ -58,7 +58,7 @@ public class ActorSystemAdaptator {
 	    String newUser) {
 	ActorSystem m = (ActorSystem) InterfaceExpressJava.prendre(new Oid(
 		oidActor));
-	Materiel myUser = ExpressMateriel.getMaterielWithName(newUser);
+	Material myUser = ExpressMateriel.getMaterielWithName(newUser);
 	if (!isMaterielInActorSystem(myUser.getOid())) {
 	    m.delete();
 	    Oid oidNewActor = ExpressActeurSysteme.createActorSystem(myUser
@@ -94,7 +94,7 @@ public class ActorSystemAdaptator {
     }
 
     public static String[] addNewActorSystem(String materiel) {
-	Materiel myMateriel = ExpressMateriel.getMaterielWithName(materiel);
+	Material myMateriel = ExpressMateriel.getMaterielWithName(materiel);
 	if (!isMaterielInActorSystem(myMateriel.getOid())) {
 	    Oid oidNewActor = ExpressActeurSysteme.createActorSystem(myMateriel
 		    .getOid());

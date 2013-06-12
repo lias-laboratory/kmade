@@ -325,7 +325,7 @@ public class Task implements Entity {
     public void setEvents(ArrayList<Event> e) {
 	events = e;
 	for (int i = 0; i < events.size(); i++) {
-	    events.get(i).addInverseTache(this);
+	    events.get(i).addReverseTask(this);
 	}
     }
 
@@ -337,7 +337,7 @@ public class Task implements Entity {
     public boolean addEvent(Event a) {
 	if (events.indexOf(a) == -1) {
 	    events.add(a);
-	    a.addInverseTache(this);
+	    a.addReverseTask(this);
 	    return true;
 	}
 	return false;
@@ -512,12 +512,12 @@ public class Task implements Entity {
 
     public void setRaisingEvent(Event e) {
 	if (raisingEvent != null) {
-	    raisingEvent.removeInverseTache(this);
+	    raisingEvent.removeReverseTask(this);
 	}
 
 	raisingEvent = e;
 	if (e != null)
-	    raisingEvent.addInverseTache(this);
+	    raisingEvent.addReverseTask(this);
     }
 
     public Event getRaisingEvent() {
@@ -702,11 +702,11 @@ public class Task implements Entity {
 
 	// 6. Supprimer relation avec les Ã©vÃ©nements.
 	if (this.raisingEvent != null) {
-	    this.raisingEvent.removeInverseTache(this);
+	    this.raisingEvent.removeReverseTask(this);
 	}
 
 	for (Event current : events) {
-	    current.removeInverseTache(this);
+	    current.removeReverseTask(this);
 	}
 
 	// 7. Supprimer relation avec les actors (les supprimer)
@@ -1186,7 +1186,7 @@ public class Task implements Entity {
 	    Event event = (Event) InterfaceExpressJava.bdd
 		    .prendre(new Oid(nodeList.item(0).getTextContent()));
 	    this.raisingEvent = event;
-	    this.raisingEvent.addInverseTache(this);
+	    this.raisingEvent.addReverseTask(this);
 	}
 
 	// Generated Events
@@ -1199,7 +1199,7 @@ public class Task implements Entity {
 			    .prendre(new Oid(nodeListEvent.item(i)
 				    .getTextContent()));
 		    this.events.add(event);
-		    event.addInverseTache(this);
+		    event.addReverseTask(this);
 		}
 	    }
 	}
@@ -1812,7 +1812,7 @@ public class Task implements Entity {
 	    for (int i = 0; i < events.length; i++) {
 		Event event = (Event) InterfaceExpressJava.bdd.prendre(new Oid(events[i]));
 		this.events.add(event);
-		event.addInverseTache(this);
+		event.addReverseTask(this);
 	    }
 	}
 	// Actors

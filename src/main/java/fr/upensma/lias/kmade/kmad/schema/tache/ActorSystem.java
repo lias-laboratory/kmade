@@ -36,7 +36,7 @@ public class ActorSystem implements Entity {
 
     public Oid oid = null;
 
-    private Materiel userRef;
+    private Material userRef;
 
     private Experience experience = Experience.INCONNU;
 
@@ -50,7 +50,7 @@ public class ActorSystem implements Entity {
 	competence = "";
     }
 
-    public ActorSystem(String exp, String comp, Materiel u, Oid o) {
+    public ActorSystem(String exp, String comp, Material u, Oid o) {
 	userRef = u;
 	experience = Experience.getValue(exp);
 	competence = comp;
@@ -58,7 +58,7 @@ public class ActorSystem implements Entity {
     }
 
     public void delete() {
-	userRef.removeInverseActeurSysteme(this);
+	userRef.removeReverseActorSystem(this);
 	inverseTache.removeActorSystem(this);
 	InterfaceExpressJava.remove(oid);
     }
@@ -132,7 +132,7 @@ public class ActorSystem implements Entity {
 	nodeList = p.getElementsByTagName("id-userSystem");
 	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		nodeList = null;}
-	this.userRef = (Materiel) InterfaceExpressJava.bdd.prendre(new Oid(
+	this.userRef = (Material) InterfaceExpressJava.bdd.prendre(new Oid(
 		nodeList.item(0).getTextContent()));
     }
 
@@ -163,11 +163,11 @@ public class ActorSystem implements Entity {
 	return competence;
     }
 
-    public void setMaterielRef(Materiel u) {
+    public void setMaterielRef(Material u) {
 	userRef = u;
     }
 
-    public Materiel getMaterielRef() {
+    public Material getMaterielRef() {
 	return userRef;
     }
 
@@ -179,7 +179,7 @@ public class ActorSystem implements Entity {
 	return inverseTache;
     }
 
-    public Materiel getUserSystemRef() {
+    public Material getUserSystemRef() {
 	return userRef;
     }
 
@@ -204,7 +204,7 @@ public class ActorSystem implements Entity {
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
 	this.oid = new Oid(p.getAttribute("idkmad"));
-	this.userRef = (Materiel) InterfaceExpressJava.bdd.prendre(new Oid(p
+	this.userRef = (Material) InterfaceExpressJava.bdd.prendre(new Oid(p
 		.getAttribute("id-user")));
 	this.experience = Experience.getXMLExperienceValue(p);
 

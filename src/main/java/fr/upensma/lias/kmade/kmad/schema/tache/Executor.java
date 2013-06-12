@@ -26,7 +26,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 /**
  * @author Delphine AUTARD and Mickael BARON
  **/
-public enum Executor implements Enumere {
+public enum Executor implements Enumerated {
     INCONNU("UNK", ExpressConstant.UNKNOWN_TASK_16_IMAGE), USER("USER",
 	    ExpressConstant.USER_TASK_16_IMAGE), SYS("SYS",
 	    ExpressConstant.FEEDBACK_TASK_16_IMAGE), INT("INT",

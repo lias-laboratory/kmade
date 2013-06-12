@@ -27,7 +27,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 /**
  * @author Delphine AUTARD and Mickael BARON
  **/
-public enum Frequence implements Enumere {
+public enum Frequence implements Enumerated {
     INCONNU("UNK"), ELEVE("HIGH"), MOYENNE("AVERAGE"), FAIBLE("LOW");
 
     private final String enonce;

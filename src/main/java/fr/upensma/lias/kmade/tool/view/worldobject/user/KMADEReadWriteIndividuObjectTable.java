@@ -43,8 +43,8 @@ import javax.swing.table.TableCellRenderer;
 
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-import fr.upensma.lias.kmade.kmad.schema.tache.Individu;
-import fr.upensma.lias.kmade.kmad.schema.tache.Organisation;
+import fr.upensma.lias.kmade.kmad.schema.tache.Person;
+import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.RegularExpression;
 import fr.upensma.lias.kmade.tool.view.toolutilities.DefaultListTableModel;
@@ -403,7 +403,7 @@ public class KMADEReadWriteIndividuObjectTable extends JScrollPane implements La
 						    .getResource(KMADEConstant.ASK_DIALOG_IMAGE)),
 				    null, name);
 		} else { // l'expression est ok
-		    if (Individu.isUniqueName(name)) {
+		    if (Person.isUniqueName(name)) {
 			// si le nom est unique, le nom est correct et possible
 			needVerif = false;
 		    } else {
@@ -416,7 +416,7 @@ public class KMADEReadWriteIndividuObjectTable extends JScrollPane implements La
 					new ImageIcon(
 						GraphicEditorAdaptator.class
 							.getResource(KMADEConstant.ASK_DIALOG_IMAGE)),
-					null, Individu.propositionNom(name));
+					null, Person.propositionNom(name));
 		    }
 		}
 	    }
@@ -447,9 +447,9 @@ public class KMADEReadWriteIndividuObjectTable extends JScrollPane implements La
 									 // et
 									 // etat.
 		// r�cup�ration du tableau des organisations
-		Individu i = (Individu) InterfaceExpressJava.prendre(new Oid(
+		Person i = (Person) InterfaceExpressJava.prendre(new Oid(
 			newIndividuObject));
-		ArrayList<Organisation> org = i.getOrganisations();
+		ArrayList<Organization> org = i.getOrganisations();
 		// nom ,statut, Role, image , Organisation , oid , Boolean
 		Object[] tempo = { value, "", "", couple, org,
 			newIndividuObject, false };
@@ -505,7 +505,7 @@ public class KMADEReadWriteIndividuObjectTable extends JScrollPane implements La
 
     // (Utilis� lors du chargement d'un fichier KMADe.)
     public void addIndividu(String name, String statut, String role,
-	    String image, ArrayList<Organisation> org, String oid) {
+	    String image, ArrayList<Organization> org, String oid) {
 	ImageIcon myCurrent;
 	if (image == null || image.equals("")) {
 	    myCurrent = UNKNOWN_INDIVIDU_IMAGEICON;

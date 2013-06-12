@@ -19,7 +19,7 @@ package fr.upensma.lias.kmade.tool.viewadaptator;
 
 import java.util.ArrayList;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.Organisation;
+import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressOrganisation;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadOrganisationObjectTable;
@@ -100,7 +100,7 @@ public final class OrganisationAdaptator {
     }
 
     public static void updateOrganisationView() {
-	ArrayList<Organisation> myList = ExpressOrganisation.getOrganisations();
+	ArrayList<Organization> myList = ExpressOrganisation.getOrganisations();
 	for (int i = 0; i < myList.size(); i++) {
 	    KMADEMainFrame
 		    .getProjectPanel()

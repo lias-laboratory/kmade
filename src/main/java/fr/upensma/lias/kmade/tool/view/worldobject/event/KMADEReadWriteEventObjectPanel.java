@@ -124,7 +124,7 @@ public class KMADEReadWriteEventObjectPanel extends JScrollPane implements Langu
 					new ImageIcon(
 						GraphicEditorAdaptator.class
 							.getResource(KMADEConstant.ASK_DIALOG_IMAGE)),
-					null, Event.propositionNom(name));
+					null, Event.proposeName(name));
 		    }
 		}
 	    }

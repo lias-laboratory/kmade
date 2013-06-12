@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Machine;
-import fr.upensma.lias.kmade.kmad.schema.tache.ParcMachines;
+import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
 
 /**
  * @author Mickael BARON
@@ -36,13 +36,13 @@ public class ExpressParcMachines{
 
     public static void deleteParcMachines(String oid) {
 
-	ParcMachines m = (ParcMachines) InterfaceExpressJava.prendre(new Oid(
+	ParkMachines m = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oid));
 	m.delete();
     }
 
     public static void affRemoveParcMachines(String oid) {
-	ParcMachines m = (ParcMachines) InterfaceExpressJava.prendre(new Oid(
+	ParkMachines m = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oid));
 	m.affDelete();
     }
@@ -52,28 +52,28 @@ public class ExpressParcMachines{
 		"ParcMachines");
 	String[] lst = new String[objs.length];
 	for (int i = 0; i < objs.length; i++) {
-	    ParcMachines obj = (ParcMachines) objs[i];
+	    ParkMachines obj = (ParkMachines) objs[i];
 	    lst[i] = obj.getName();
 	}
 	return lst;
     }
 
-    public static ArrayList<ParcMachines> getParcsMachines() {
-	ArrayList<ParcMachines> lst = new ArrayList<ParcMachines>();
+    public static ArrayList<ParkMachines> getParcsMachines() {
+	ArrayList<ParkMachines> lst = new ArrayList<ParkMachines>();
 	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"ParcMachines");
 	for (int i = 0; i < objs.length; i++) {
-	    ParcMachines obj = (ParcMachines) objs[i];
+	    ParkMachines obj = (ParkMachines) objs[i];
 	    lst.add(obj);
 	}
 	return lst;
     }
 
-    public static ParcMachines getParcMachinesWithName(String name) {
+    public static ParkMachines getParcMachinesWithName(String name) {
 	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"ParcMachines");
 	for (int i = 0; i < objs.length; i++) {
-	    ParcMachines obj = (ParcMachines) objs[i];
+	    ParkMachines obj = (ParkMachines) objs[i];
 	    if (obj.getName().equals(name)) {
 		return obj;
 	    }
@@ -82,20 +82,20 @@ public class ExpressParcMachines{
     }
 
     public static String setParcMachinesName(String oid, String name) {
-	ParcMachines m = (ParcMachines) InterfaceExpressJava.prendre(new Oid(
+	ParkMachines m = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oid));
 	m.setName(name);
 	return m.getName();
     }
 
     public static void setParcMachinesDescription(String oid, String desc) {
-	ParcMachines m = (ParcMachines) InterfaceExpressJava.prendre(new Oid(
+	ParkMachines m = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oid));
 	m.setDescription(desc);
     }
 
     public static void setParcMachinesImage(String oid, String path) {
-	ParcMachines m = (ParcMachines) InterfaceExpressJava.prendre(new Oid(
+	ParkMachines m = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oid));
 	m.setImage(path);
     }
@@ -103,7 +103,7 @@ public class ExpressParcMachines{
     public static void addParcMachinesMember(String oidParcMachines,
 	    String oidMachine) {
 	Machine i = (Machine) InterfaceExpressJava.prendre(new Oid(oidMachine));
-	ParcMachines o = (ParcMachines) InterfaceExpressJava.prendre(new Oid(
+	ParkMachines o = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oidParcMachines));
 	// on les ajoutes mutuellement
 	i.addToParc(o);
@@ -112,7 +112,7 @@ public class ExpressParcMachines{
 
     public static void removeMachineOfParc(String oidParc, String oidMachine) {
 	Machine i = (Machine) InterfaceExpressJava.prendre(new Oid(oidMachine));
-	ParcMachines o = (ParcMachines) InterfaceExpressJava.prendre(new Oid(
+	ParkMachines o = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oidParc));
 	// on les retire mutuellement
 	i.removeToParc(o);
@@ -121,10 +121,10 @@ public class ExpressParcMachines{
 
     public static Object[][] getMachineIntoTab(String oid) {
 
-	ParcMachines o;
+	ParkMachines o;
 	try {
 	    // r�cup�ration du parc
-	    o = (ParcMachines) InterfaceExpressJava.prendre(new Oid(oid));
+	    o = (ParkMachines) InterfaceExpressJava.prendre(new Oid(oid));
 	    // r�cup�ration de ses Machines
 	    ArrayList<Machine> myMachine = o.getMember();
 	    Object[][] res = new Object[myMachine.size()][Machine
@@ -144,7 +144,7 @@ public class ExpressParcMachines{
 	    ArrayList<Object[]> restmp = new ArrayList<Object[]>();
 
 	    // R�cup�ration de l'ParcMachines
-	    ParcMachines m = (ParcMachines) InterfaceExpressJava
+	    ParkMachines m = (ParkMachines) InterfaceExpressJava
 		    .prendre(new Oid(oid));
 	    // R�cup�ration de toutes les Machines
 	    Object[] tabObj = (Object[]) InterfaceExpressJava
@@ -165,7 +165,7 @@ public class ExpressParcMachines{
 	    }
 
 	    // construction du resultat � partir de l'arrayList
-	    Object[][] res = new Object[restmp.size()][ParcMachines
+	    Object[][] res = new Object[restmp.size()][ParkMachines
 		    .toArrayLenght()];
 	    for (int i = 0; i < restmp.size(); i++) {
 		res[i] = restmp.get(i);

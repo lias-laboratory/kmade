@@ -28,21 +28,21 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
 /**
  * @author Mickael BARON
  */
-public class ParcMachines extends Materiel {
+public class ParkMachines extends Material {
 
     private static final long serialVersionUID = -4187152840289735872L;
 
     private ArrayList<Machine> inverseMember = new ArrayList<Machine>();
 
-    public ParcMachines() {
+    public ParkMachines() {
 	super();
     }
 
-    public ParcMachines(String name, Oid oid) {
+    public ParkMachines(String name, Oid oid) {
 	super(name, oid);
     }
 
-    public ParcMachines(String name, String description, Oid oid) {
+    public ParkMachines(String name, String description, Oid oid) {
 	super(name, description, oid);
     }
 

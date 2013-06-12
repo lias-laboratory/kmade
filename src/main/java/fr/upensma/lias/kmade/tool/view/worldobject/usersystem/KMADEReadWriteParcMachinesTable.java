@@ -44,7 +44,7 @@ import javax.swing.table.TableCellRenderer;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Machine;
-import fr.upensma.lias.kmade.kmad.schema.tache.ParcMachines;
+import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.RegularExpression;
 import fr.upensma.lias.kmade.tool.view.toolutilities.DefaultListTableModel;
@@ -403,7 +403,7 @@ public class KMADEReadWriteParcMachinesTable extends JScrollPane implements Lang
 						    .getResource(KMADEConstant.ASK_DIALOG_IMAGE)),
 				    null, name);
 		} else { // l'expression est ok
-		    if (ParcMachines.isUniqueName(name)) {
+		    if (ParkMachines.isUniqueName(name)) {
 			// si le nom est unique, le nom est correct et possible
 			needVerif = false;
 		    } else {
@@ -416,7 +416,7 @@ public class KMADEReadWriteParcMachinesTable extends JScrollPane implements Lang
 					new ImageIcon(
 						GraphicEditorAdaptator.class
 							.getResource(KMADEConstant.ASK_DIALOG_IMAGE)),
-					null, ParcMachines.propositionNom(name));
+					null, ParkMachines.proposeName(name));
 		    }
 		}
 	    }
@@ -447,7 +447,7 @@ public class KMADEReadWriteParcMachinesTable extends JScrollPane implements Lang
 									     // et
 									     // etat.
 		// recup�ration de la liste des parcMachines
-		ParcMachines parc = (ParcMachines) InterfaceExpressJava
+		ParkMachines parc = (ParkMachines) InterfaceExpressJava
 			.prendre(new Oid(newParcMachinesObject));
 		ArrayList<Machine> machine = parc.getMember();
 		// nom ,descritpion, image , Machines , oid , Boolean

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.ActorSystem;
-import fr.upensma.lias.kmade.kmad.schema.tache.Materiel;
+import fr.upensma.lias.kmade.kmad.schema.tache.Material;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 
 /**
@@ -46,9 +46,9 @@ public class ExpressActeurSysteme {
 		"ActeurSysteme");
 	ActorSystem a = (ActorSystem) InterfaceExpressJava
 		.prendre(oidActorSystem);
-	Materiel u = (Materiel) InterfaceExpressJava.prendre(oidUserSystem);
+	Material u = (Material) InterfaceExpressJava.prendre(oidUserSystem);
 	a.setMaterielRef(u);
-	u.addInverseActeurSysteme(a);
+	u.addReverseActorSystem(a);
 	return (oidActorSystem);
     }
 

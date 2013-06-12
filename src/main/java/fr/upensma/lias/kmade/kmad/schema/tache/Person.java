@@ -35,19 +35,19 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  * @author Mickael BARON
  * @author [Comment] Patrick GIRARD
  */
-public class Individu extends User {
+public class Person extends User {
 
     private static final long serialVersionUID = 144972651724436715L;
 
     /**
      * List of organizations the individual is member of
      */
-    private ArrayList<Organisation> memberOf = new ArrayList<Organisation>();
+    private ArrayList<Organization> memberOf = new ArrayList<Organization>();
 
     /**
      * Empty constructor
      */
-    public Individu() {
+    public Person() {
 	super();
     }
 
@@ -57,7 +57,7 @@ public class Individu extends User {
      * @param name name of the individual
      * @param oid unique Express identifier
      */
-    public Individu(String name, Oid oid) {
+    public Person(String name, Oid oid) {
 	super(name, "", "", "", oid);
     }
 
@@ -69,7 +69,7 @@ public class Individu extends User {
      * @param r role
      * @param oid unique Express identifier
      */
-    public Individu(String name, String st, String r, Oid oid) {
+    public Person(String name, String st, String r, Oid oid) {
 	super(name, st, r, "", oid);
     }
 
@@ -82,7 +82,7 @@ public class Individu extends User {
      * @param pi image path
      * @param oid unique Express identifier
      */
-    public Individu(String name, String st, String r, String pi, Oid oid) {
+    public Person(String name, String st, String r, String pi, Oid oid) {
 	super(name, st, r, pi, oid);
     }
 
@@ -105,7 +105,7 @@ public class Individu extends User {
      * 
      * @param org the organization to register
      */
-    public void addOrganization(Organisation org) {
+    public void addOrganization(Organization org) {
 	if (!memberOf.contains(org)) {
 	    memberOf.add(org);
 	}
@@ -117,7 +117,7 @@ public class Individu extends User {
      * 
      * @return an ArrayList which contains all organizations the individual is member of
      */
-    public ArrayList<Organisation> getOrganisations() {
+    public ArrayList<Organization> getOrganisations() {
 	return memberOf;
     }
 
@@ -127,7 +127,7 @@ public class Individu extends User {
      * 
      * @param org the organization to be removed
      */
-    public void removeOrganisation(Organisation org) {
+    public void removeOrganisation(Organization org) {
 	memberOf.remove(org);
     }
 
@@ -209,7 +209,7 @@ public class Individu extends User {
 
 	if (kmadIndividuOrganisation.item(0) != null) {
 	    for (int i = 0; i < kmadIndividuOrganisation.getLength(); i++) {
-		this.addOrganization((Organisation) InterfaceExpressJava.bdd
+		this.addOrganization((Organization) InterfaceExpressJava.bdd
 			.prendre(new Oid(kmadIndividuOrganisation.item(i)
 				.getTextContent())));
 	    }
@@ -313,7 +313,7 @@ public class Individu extends User {
 	if(p.hasAttribute("id-organisation")){
 	    String[] kmadIndividuOrganisation = p.getAttribute("id-organisation").split(" ");
 	    for (int i = 0; i < kmadIndividuOrganisation.length; i++) {
-		this.addOrganization((Organisation) InterfaceExpressJava.bdd
+		this.addOrganization((Organization) InterfaceExpressJava.bdd
 			.prendre(new Oid(kmadIndividuOrganisation[i])));
 	    }
 	}

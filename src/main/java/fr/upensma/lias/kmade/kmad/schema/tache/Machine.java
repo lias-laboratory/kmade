@@ -29,11 +29,11 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
 /**
  * @author Mickael BARON
  */
-public class Machine extends Materiel {
+public class Machine extends Material {
 
     private static final long serialVersionUID = 144972651724436715L;
 
-    private ArrayList<ParcMachines> memberOf = new ArrayList<ParcMachines>();
+    private ArrayList<ParkMachines> memberOf = new ArrayList<ParkMachines>();
 
     private Boolean isComputer = true;
 
@@ -67,17 +67,17 @@ public class Machine extends Materiel {
      * 
      * @param parc
      */
-    public void addToParc(ParcMachines parc) {
+    public void addToParc(ParkMachines parc) {
 	if (!memberOf.contains(parc)) {
 	    memberOf.add(parc);
 	}
     }
 
-    public ArrayList<ParcMachines> getMemberOf() {
+    public ArrayList<ParkMachines> getMemberOf() {
 	return memberOf;
     }
 
-    public void removeToParc(ParcMachines parc) {
+    public void removeToParc(ParkMachines parc) {
 	memberOf.remove(parc);
     }
 
@@ -160,7 +160,7 @@ public class Machine extends Materiel {
 
 	if (kmadMachineParc.item(0) != null) {
 	    for (int i = 0; i < kmadMachineParc.getLength(); i++) {
-		this.addToParc((ParcMachines) InterfaceExpressJava.bdd
+		this.addToParc((ParkMachines) InterfaceExpressJava.bdd
 			.prendre(new Oid(kmadMachineParc.item(i)
 				.getTextContent())));
 	    }
@@ -263,7 +263,7 @@ public class Machine extends Materiel {
 	if (p.hasAttribute("id-parcMachine")) {
 	    String[] parc = p.getAttribute("id-parcMachine").split(" ");
 	    for (int i = 0; i < parc.length; i++) {
-		this.addToParc((ParcMachines) InterfaceExpressJava.bdd
+		this.addToParc((ParkMachines) InterfaceExpressJava.bdd
 			.prendre(new Oid(parc[i])));
 	    }
 	}

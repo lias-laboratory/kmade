@@ -35,19 +35,19 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  * @author Mickael BARON
  * @author [Comment] Patrick GIRARD
  */
-public class Organisation extends User {
+public class Organization extends User {
 
     private static final long serialVersionUID = -4187152840289735872L;
 
     /**
      * List of individuals who are member of the organization
      */
-    private ArrayList<Individu> inverseMember = new ArrayList<Individu>();
+    private ArrayList<Person> inverseMember = new ArrayList<Person>();
 
     /**
      * Empty constructor
      */
-    public Organisation() {
+    public Organization() {
 	super();
     }
 
@@ -56,7 +56,7 @@ public class Organisation extends User {
      * @param name name of the individual
      * @param oid unique Express identifier
      */
-    public Organisation(String name, Oid oid) {
+    public Organization(String name, Oid oid) {
 	super(name, "", "", "", oid);
     }
 
@@ -67,7 +67,7 @@ public class Organisation extends User {
      * @param r role
      * @param oid unique Express identifier
      */
-    public Organisation(String name, String st, String r, Oid oid) {
+    public Organization(String name, String st, String r, Oid oid) {
 	super(name, st, r, "", oid);
     }
 
@@ -79,7 +79,7 @@ public class Organisation extends User {
      * @param pi image path
      * @param oid unique Express identifier
      */
-    public Organisation(String name, String st, String r, String pi, Oid oid) {
+    public Organization(String name, String st, String r, String pi, Oid oid) {
 	super(name, st, r, pi, oid);
     }
 
@@ -104,7 +104,7 @@ public class Organisation extends User {
      * 
      * @param ind Individu -> the individual to add to the organization
      */
-    public void addMember(Individu ind) {
+    public void addMember(Person ind) {
 		if (!inverseMember.contains(ind)) {
 		    inverseMember.add(ind);
 		}
@@ -115,7 +115,7 @@ public class Organisation extends User {
      * Warning: no verification is done to verify if it where already a member
      * @param ind : Individu -> The inidividual to remove
      */
-    public void removeIndividu(Individu ind) {
+    public void removeIndividu(Person ind) {
     	inverseMember.remove(ind);
     }
 
@@ -125,7 +125,7 @@ public class Organisation extends User {
      * 
      * @return an ArrayList which contains all individuals who are members
      */
-    public ArrayList<Individu> getMembers() {
+    public ArrayList<Person> getMembers() {
     	return inverseMember;
     }
 

@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
-import fr.upensma.lias.kmade.kmad.schema.tache.Organisation;
+import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressIndividu;
 import fr.upensma.lias.kmade.tool.coreadaptator.ExpressOrganisation;
 
@@ -119,14 +119,14 @@ public class ExpressOrganisationTest {
 
 	@Test
 	public void testGetOrganisation() {
-		ArrayList<Organisation> ai = ExpressOrganisation.getOrganisations();
+		ArrayList<Organization> ai = ExpressOrganisation.getOrganisations();
 		assertTrue(ai.size()==3);
 	}
 
 	@Test
 	// Ce test permet aussi de vérifier les Set
 	public void testGetOrganisationWithName() {
-		Organisation o1  = ExpressOrganisation.getOrganisationWithName(onom1);
+		Organization o1  = ExpressOrganisation.getOrganisationWithName(onom1);
 		assertTrue(o1.getImage()==oimage1);
 		assertTrue(o1.getName()==onom1);
 		assertTrue(o1.getRole()==orole1);
@@ -136,7 +136,7 @@ public class ExpressOrganisationTest {
 		assertTrue(o1.getMembers().get(0).toString()==nom1);
 
 
-		Organisation o2  = ExpressOrganisation.getOrganisationWithName(onom2);
+		Organization o2  = ExpressOrganisation.getOrganisationWithName(onom2);
 		assertTrue(o2.getImage()==oimage2);
 		assertTrue(o2.getName()==onom2);
 		assertTrue(o2.getRole()==orole2);
@@ -162,7 +162,7 @@ public class ExpressOrganisationTest {
 	@Test
 	public void testDeleteOrgansation() {
 		ExpressOrganisation.deleteOrganisation(oidorga1);
-		ArrayList<Organisation> ai = ExpressOrganisation.getOrganisations();
+		ArrayList<Organization> ai = ExpressOrganisation.getOrganisations();
 		assertTrue(ai.size()==2);
 
 	}

@@ -221,13 +221,13 @@ public abstract class User implements Entity {
 	    }
 	}
 	for (int i = 0; i < objAbs1.length; i++) {
-	    Individu obj = (Individu) objAbs1[i];
+	    Person obj = (Person) objAbs1[i];
 	    if (s.equalsIgnoreCase(obj.getName())) {
 		return false;
 	    }
 	}
 	for (int i = 0; i < objAbs2.length; i++) {
-	    Organisation obj = (Organisation) objAbs2[i];
+	    Organization obj = (Organization) objAbs2[i];
 	    if (s.equalsIgnoreCase(obj.getName())) {
 		return false;
 	    }

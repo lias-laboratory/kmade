@@ -27,7 +27,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 /**
  * @authors Delphine AUTARD and Mickael BARON
  **/
-public enum Modality implements Enumere {
+public enum Modality implements Enumerated {
     INCONNU("UNK"), SENS("SENS"), COGN("COGN");
 
     private final String enonce;

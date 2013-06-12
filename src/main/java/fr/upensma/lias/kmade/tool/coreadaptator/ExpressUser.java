@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
-import fr.upensma.lias.kmade.kmad.schema.tache.Individu;
-import fr.upensma.lias.kmade.kmad.schema.tache.Organisation;
+import fr.upensma.lias.kmade.kmad.schema.tache.Person;
+import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 
@@ -58,11 +58,11 @@ public class ExpressUser {
 	int length = objs1.length + objs2.length;
 	String[] lst = new String[length];
 	for (int i = 0; i < objs1.length; i++) {
-	    Organisation obj = (Organisation) objs1[i];
+	    Organization obj = (Organization) objs1[i];
 	    lst[i] = obj.getName();
 	}
 	for (int i = objs1.length; i < length; i++) {
-	    Individu obj = (Individu) objs2[i - objs1.length];
+	    Person obj = (Person) objs2[i - objs1.length];
 	    lst[i] = obj.getName();
 	}
 	return lst;
@@ -76,11 +76,11 @@ public class ExpressUser {
 		"Organisation");
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
-	    Organisation obj = (Organisation) objs1[i];
+	    Organization obj = (Organization) objs1[i];
 	    lst.add(obj);
 	}
 	for (int i = objs1.length; i < length; i++) {
-	    Individu obj = (Individu) objs2[i - objs1.length];
+	    Person obj = (Person) objs2[i - objs1.length];
 	    lst.add(obj);
 	}
 	return lst;
@@ -93,13 +93,13 @@ public class ExpressUser {
 		"Organisation");
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
-	    Organisation obj = (Organisation) objs1[i];
+	    Organization obj = (Organization) objs1[i];
 	    if (obj.getName().equals(name)) {
 		return obj;
 	    }
 	}
 	for (int i = objs1.length; i < length; i++) {
-	    Individu obj = (Individu) objs2[i - objs1.length];
+	    Person obj = (Person) objs2[i - objs1.length];
 	    if (obj.getName().equals(name)) {
 		return obj;
 	    }
@@ -130,13 +130,13 @@ public class ExpressUser {
 
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
-	    Organisation obj = (Organisation) objs1[i];
+	    Organization obj = (Organization) objs1[i];
 	    if (!myUser.contains(obj)) {
 		lst.add(obj.getName());
 	    }
 	}
 	for (int i = objs1.length; i < length; i++) {
-	    Individu obj = (Individu) objs2[i - objs1.length];
+	    Person obj = (Person) objs2[i - objs1.length];
 	    if (!myUser.contains(obj)) {
 		lst.add(obj.getName());
 	    }

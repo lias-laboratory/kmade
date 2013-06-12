@@ -27,7 +27,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 /**
  * @author Delphine AUTARD and Mickael BARON
  **/
-public enum Decomposition implements Enumere {
+public enum Decomposition implements Enumerated {
     SEQ("SEQ"), PAR("PAR"), ELE("LEAF"), INCONNU("UNK"), ALT("ALT"), ET("ENT");
 
     private final String enonce;

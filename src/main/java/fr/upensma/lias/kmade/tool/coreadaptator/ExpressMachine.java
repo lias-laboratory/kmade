@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Machine;
-import fr.upensma.lias.kmade.kmad.schema.tache.ParcMachines;
+import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
 
 /**
  * @author Mickael BARON
@@ -106,7 +106,7 @@ public class ExpressMachine {
     public static void addMachineInParcMachines(String oidMachine,
 	    String oidParcMachines) {
 	Machine i = (Machine) InterfaceExpressJava.prendre(new Oid(oidMachine));
-	ParcMachines o = (ParcMachines) InterfaceExpressJava.prendre(new Oid(
+	ParkMachines o = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oidParcMachines));
 	// on les ajoutes mutuellement
 	i.addToParc(o);
@@ -116,7 +116,7 @@ public class ExpressMachine {
     public static void removeMachineInParcMachines(String oidMachine,
 	    String oidParcMachines) {
 	Machine i = (Machine) InterfaceExpressJava.prendre(new Oid(oidMachine));
-	ParcMachines o = (ParcMachines) InterfaceExpressJava.prendre(new Oid(
+	ParkMachines o = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oidParcMachines));
 	// on les ajoutes mutuellement
 	i.removeToParc(o);
@@ -137,8 +137,8 @@ public class ExpressMachine {
 	try {
 	    m = (Machine) InterfaceExpressJava.prendre(new Oid(oid));
 	    // r�cup�ration de ses organisations
-	    ArrayList<ParcMachines> myParc = m.getMemberOf();
-	    Object[][] res = new Object[myParc.size()][ParcMachines
+	    ArrayList<ParkMachines> myParc = m.getMemberOf();
+	    Object[][] res = new Object[myParc.size()][ParkMachines
 		    .toArrayLenght()];
 	    for (int i = 0; i < myParc.size(); i++) {
 		res[i] = myParc.get(i).toArray();
@@ -167,9 +167,9 @@ public class ExpressMachine {
 	    Object[] tabObj = (Object[]) InterfaceExpressJava
 		    .prendreAllOidOfEntity("tache", "ParcMachines");
 	    // cast des objets r�cup�r�s en organisation
-	    ParcMachines[] tabParc = new ParcMachines[tabObj.length];
+	    ParkMachines[] tabParc = new ParkMachines[tabObj.length];
 	    for (int i = 0; i < tabParc.length; i++) {
-		tabParc[i] = (ParcMachines) tabObj[i];
+		tabParc[i] = (ParkMachines) tabObj[i];
 	    }
 
 	    // pour tous les parcs
@@ -182,7 +182,7 @@ public class ExpressMachine {
 	    }
 
 	    // construction du resultat � partir de l'arrayList
-	    Object[][] res = new Object[restmp.size()][ParcMachines
+	    Object[][] res = new Object[restmp.size()][ParkMachines
 		    .toArrayLenght()];
 	    for (int i = 0; i < restmp.size(); i++) {
 		res[i] = restmp.get(i);

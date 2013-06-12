@@ -44,7 +44,7 @@ import javax.swing.table.TableCellRenderer;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Machine;
-import fr.upensma.lias.kmade.kmad.schema.tache.ParcMachines;
+import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.coreadaptator.parserexpression.RegularExpression;
 import fr.upensma.lias.kmade.tool.view.toolutilities.DefaultListTableModel;
@@ -418,7 +418,7 @@ public class KMADEReadWriteMachineObjectTable  extends JScrollPane implements La
 					new ImageIcon(
 						GraphicEditorAdaptator.class
 							.getResource(KMADEConstant.ASK_DIALOG_IMAGE)),
-					null, Machine.propositionNom(name));
+					null, Machine.proposeName(name));
 		    }
 		}
 	    }
@@ -451,7 +451,7 @@ public class KMADEReadWriteMachineObjectTable  extends JScrollPane implements La
 		// r�cup�ration de la liste des parcs de la machine
 		Machine mach = (Machine) InterfaceExpressJava.prendre(new Oid(
 			newMachineObject));
-		ArrayList<ParcMachines> parcs = mach.getMemberOf();
+		ArrayList<ParkMachines> parcs = mach.getMemberOf();
 		// construction de la ligne
 		Object[] tempo = { value, "", true, couple, parcs,
 			newMachineObject, false };
@@ -508,7 +508,7 @@ public class KMADEReadWriteMachineObjectTable  extends JScrollPane implements La
 
     // (Utilis� lors du chargement d'un fichier KMADe.)
     public void addMachine(String name, String description, String isComputer,
-	    String image, ArrayList<ParcMachines> parc, String oid) {
+	    String image, ArrayList<ParkMachines> parc, String oid) {
 	ImageIcon myCurrent;
 	if (image == null || image.equals("")) {
 	    myCurrent = UNKNOWN_MACHINE_IMAGEICON;

@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-import fr.upensma.lias.kmade.kmad.schema.tache.Individu;
-import fr.upensma.lias.kmade.kmad.schema.tache.Organisation;
+import fr.upensma.lias.kmade.kmad.schema.tache.Person;
+import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
 
 /**
  * @author Mickael BARON
@@ -34,12 +34,12 @@ public class ExpressIndividu{
     }
 
     public static void deleteIndividu(String oid) {
-	Individu m = (Individu) InterfaceExpressJava.prendre(new Oid(oid));
+	Person m = (Person) InterfaceExpressJava.prendre(new Oid(oid));
 	m.delete();
     }
 
     public static void affRemoveIndividu(String oid) {
-	Individu m = (Individu) InterfaceExpressJava.prendre(new Oid(oid));
+	Person m = (Person) InterfaceExpressJava.prendre(new Oid(oid));
 	m.affDelete();
     }
 
@@ -48,28 +48,28 @@ public class ExpressIndividu{
 		"Individu");
 	String[] lst = new String[objs.length];
 	for (int i = 0; i < objs.length; i++) {
-	    Individu obj = (Individu) objs[i];
+	    Person obj = (Person) objs[i];
 	    lst[i] = obj.getName();
 	}
 	return lst;
     }
 
-    public static ArrayList<Individu> getIndividus() {
-	ArrayList<Individu> lst = new ArrayList<Individu>();
+    public static ArrayList<Person> getIndividus() {
+	ArrayList<Person> lst = new ArrayList<Person>();
 	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Individu");
 	for (int i = 0; i < objs.length; i++) {
-	    Individu obj = (Individu) objs[i];
+	    Person obj = (Person) objs[i];
 	    lst.add(obj);
 	}
 	return lst;
     }
 
-    public static Individu getIndividuWithName(String name) {
+    public static Person getIndividuWithName(String name) {
 	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Individu");
 	for (int i = 0; i < objs.length; i++) {
-	    Individu obj = (Individu) objs[i];
+	    Person obj = (Person) objs[i];
 	    if (obj.getName().equals(name)) {
 		return obj;
 	    }
@@ -78,31 +78,31 @@ public class ExpressIndividu{
     }
 
     public static String setIndividuName(String oid, String name) {
-	Individu m = (Individu) InterfaceExpressJava.prendre(new Oid(oid));
+	Person m = (Person) InterfaceExpressJava.prendre(new Oid(oid));
 	m.setName(name);
 	return m.getName();
     }
 
     public static void setIndividuStatut(String oid, String st) {
-	Individu m = (Individu) InterfaceExpressJava.prendre(new Oid(oid));
+	Person m = (Person) InterfaceExpressJava.prendre(new Oid(oid));
 	m.setStatut(st);
     }
 
     public static void setIndividuRole(String oid, String r) {
-	Individu m = (Individu) InterfaceExpressJava.prendre(new Oid(oid));
+	Person m = (Person) InterfaceExpressJava.prendre(new Oid(oid));
 	m.setRole(r);
     }
 
     public static void setIndividuImage(String oid, String r) {
-	Individu m = (Individu) InterfaceExpressJava.prendre(new Oid(oid));
+	Person m = (Person) InterfaceExpressJava.prendre(new Oid(oid));
 	m.setImage(r);
     }
 
     public static void addIndividuInOrganisation(String oidIndividu,
 	    String oidOrganisation) {
-	Individu i = (Individu) InterfaceExpressJava.prendre(new Oid(
+	Person i = (Person) InterfaceExpressJava.prendre(new Oid(
 		oidIndividu));
-	Organisation o = (Organisation) InterfaceExpressJava.prendre(new Oid(
+	Organization o = (Organization) InterfaceExpressJava.prendre(new Oid(
 		oidOrganisation));
 	// on les ajoutes mutuellement
 	i.addOrganization(o);
@@ -111,9 +111,9 @@ public class ExpressIndividu{
 
     public static void removeIndividuInOrganisation(String oidIndividu,
 	    String oidOrganisation) {
-	Individu i = (Individu) InterfaceExpressJava.prendre(new Oid(
+	Person i = (Person) InterfaceExpressJava.prendre(new Oid(
 		oidIndividu));
-	Organisation o = (Organisation) InterfaceExpressJava.prendre(new Oid(
+	Organization o = (Organization) InterfaceExpressJava.prendre(new Oid(
 		oidOrganisation));
 	// on les ajoutes mutuellement
 	i.removeOrganisation(o);
@@ -134,12 +134,12 @@ public class ExpressIndividu{
 	    return resnul;
 	}
 	// R�cup�ration de l'individu
-	Individu m;
+	Person m;
 	try {
-	    m = (Individu) InterfaceExpressJava.prendre(new Oid(oid));
+	    m = (Person) InterfaceExpressJava.prendre(new Oid(oid));
 	    // Récupération de ses organisations.
-	    ArrayList<Organisation> myOrga = m.getOrganisations();
-	    Object[][] res = new Object[myOrga.size()][Organisation
+	    ArrayList<Organization> myOrga = m.getOrganisations();
+	    Object[][] res = new Object[myOrga.size()][Organization
 		    .toArrayLenght()];
 	    for (int i = 0; i < myOrga.size(); i++) {
 		res[i] = myOrga.get(i).toArray();
@@ -168,14 +168,14 @@ public class ExpressIndividu{
 	ArrayList<Object[]> restmp = new ArrayList<Object[]>();
 
 	// R�cup�ration de l'individu
-	Individu m = (Individu) InterfaceExpressJava.prendre(new Oid(oid));
+	Person m = (Person) InterfaceExpressJava.prendre(new Oid(oid));
 	// R�cup�ration de toutes les organisations
 	Object[] tabObj = (Object[]) InterfaceExpressJava
 		.prendreAllOidOfEntity("tache", "Organisation");
 	// cast des objets r�cup�r�s en organisation
-	Organisation[] tabOrg = new Organisation[tabObj.length];
+	Organization[] tabOrg = new Organization[tabObj.length];
 	for (int i = 0; i < tabOrg.length; i++) {
-	    tabOrg[i] = (Organisation) tabObj[i];
+	    tabOrg[i] = (Organization) tabObj[i];
 	}
 
 	// pour toutes les organisations
@@ -188,7 +188,7 @@ public class ExpressIndividu{
 	}
 
 	// construction du resultat � partir de l'arrayList
-	Object[][] res = new Object[restmp.size()][Organisation.toArrayLenght()];
+	Object[][] res = new Object[restmp.size()][Organization.toArrayLenght()];
 	for (int i = 0; i < restmp.size(); i++) {
 	    res[i] = restmp.get(i);
 	}

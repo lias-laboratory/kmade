@@ -30,7 +30,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
  * L'ordre croissant des valeurs est INCONNU-EXPERT-MOYEN-NOVICE
  * @author Delphine AUTARD and Mickaël BARON
  **/
-public enum Experience implements Enumere {
+public enum Experience implements Enumerated {
     INCONNU("UNK"), EXPERT("HIGH"), MOYEN("MIDDLE"), NOVICE("LOW");
 
     private final String enonce;

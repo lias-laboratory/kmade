@@ -27,7 +27,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 /**
  * @author Delphine AUTARD and Mickael BARON
  **/
-public enum Importance implements Enumere {
+public enum Importance implements Enumerated {
     INCONNU("UNK"), PEU("LOW"), ASSEZ("AVERAGE"), TRES("HIGH");
 
     private final String enonce;
