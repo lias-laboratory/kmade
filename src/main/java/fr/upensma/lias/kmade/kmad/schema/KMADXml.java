@@ -25,7 +25,7 @@ import org.w3c.dom.Element;
  */
 public interface KMADXml {
     
-    Element toXML(Document doc) throws Exception;
+// not used yet    Element toXML(Document doc) throws Exception;
     
     //Added by Joachim TROUVERIE to correspond to the new version of the dtd
     Element toXML2 (Document doc) throws Exception;

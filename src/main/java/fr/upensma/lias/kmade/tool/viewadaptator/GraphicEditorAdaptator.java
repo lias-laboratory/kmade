@@ -651,7 +651,7 @@ public final class GraphicEditorAdaptator {
 	// On cache le JPanel li� � l'�dition des attributs de t�ches.
 	TaskPropertiesAdaptator.hideTaskProperties();
 	// Suppression dans Express avec tous ces liens.
-	ExpressTask.removeTask(((KMADEDefaultGraphCell) currentCell).getTask());
+	ExpressTask.removeTask(currentCell.getTask());
 
 	// Partie graphique (Ces deux ancres avec tous les liens)
 	// La tâche avec les deux ancres.

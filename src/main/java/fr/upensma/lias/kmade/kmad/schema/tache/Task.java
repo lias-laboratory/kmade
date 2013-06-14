@@ -40,6 +40,10 @@ import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ChoiceEnum;
  * @author pgirard
  *
  */
+/**
+ * @author pgirard
+ *
+ */
 public class Task implements Entity {
 
     private static final long serialVersionUID = -7319483011074082713L;
@@ -343,10 +347,18 @@ public class Task implements Entity {
 	return false;
     }
 
+    /**
+     * @param a the event
+     * @return true if the event is in the list of events the task may generate
+     */
     public boolean isEventHere(Event a) {
 	return (events.indexOf(a) != -1);
     }
 
+    /**
+     * Remove the event from the list AND the raisingEvent
+     * @param a
+     */
     public void removeEvent(Event a) {
 	if (raisingEvent == a) {
 	    raisingEvent = null;
@@ -631,12 +643,12 @@ public class Task implements Entity {
     }
 
     /**
-     * Cette mï¿½thode permet de supprimer une sous-tï¿½che.
+     * Cuts off the subtask from her mother
      * 
      * @param tachefils
      * @return
      */
-    public ArrayList<Task> removeSubTask(Task tachefils) {
+    public ArrayList<Task> disconnectSubTask(Task tachefils) {
 	// 1. supprimer la reference Ã  la tÃ¢che mere
 	// 2. supprimer la reference aux taches filles
 	// 3. modifier le numero de chaque tache fille
@@ -707,7 +719,7 @@ public class Task implements Entity {
 	// 5. supprimer Point
 	InterfaceExpressJava.remove(this.point.oid);
 
-	// 6. Supprimer relation avec les Ã©vÃ©nements.
+	// 6. Supprimer relation avec les evenements.
 	if (this.raisingEvent != null) {
 	    this.raisingEvent.removeReverseTask(this);
 	}
@@ -754,7 +766,7 @@ public class Task implements Entity {
      * @param tachefils
      */
     public void addSubTask(Task tachefils) {
-	mereInverse(tachefils);
+	setMother(tachefils);
 	int rank = computeRank(tachefils, this);
 	children.add(rank, tachefils);
 	this.setDeriveTaskNumero(rank);
@@ -780,50 +792,48 @@ public class Task implements Entity {
 	}
     }
 
-    /**
+/*    /**
      * Sets the point value from elementary coordinates
      * @param x X coordinate of the task
      * @param y Y coordinate of the task
-     */
+     *//*
     public void setPointFromCoordinates(int x, int y) {
 	this.point.x = new Integer(x);
 	this.point.y = new Integer(y);
     }
-
+*/
     /**
-     * revoie les oids ï¿½ mettre ï¿½ jours si il y a eu des modification dans
-     * la numerotation d'une tÃ¢che mÃ¨re valable pour le "collage" et le
-     * "dÃ©collage"
-     * 
+     * returns the list of tasks which must be modified 
+     * because of new coordinates
      * @param x
      * @param y
-     * @return
+     * @return the list of tasks
      */
-    public Task[] modifierPoint(int x, int y) {
-	this.point.x = new Integer(x);
-	this.point.y = new Integer(y);
-	if (mother == null)
-	    return null;
-	int placeOld = mother.children.indexOf(this);
-	// Mickael BARON : Tache dec = (Tache) mere.fils.remove(placeOld);
-	mother.children.remove(placeOld);
-	int placeNew = computeRank(this, mother);
-	mother.children.add(placeNew, this);
-	int debut = 0;
-	if (placeNew == placeOld)
-	    return null;
-	if (placeNew < placeOld)
-	    debut = placeNew;
-	if (placeOld < placeNew)
-	    debut = placeOld;
-	mother.setDeriveTaskNumero(debut);
+    public Task[] getTasksToModify(int x, int y) {
+    	this.point.x = new Integer(x);
+    	this.point.y = new Integer(y);
+    	if (mother == null)
+    		return null;
+    	int placeOld = mother.children.indexOf(this);
+    	// Mickael BARON : Tache dec = (Tache) mere.fils.remove(placeOld);
+    	mother.children.remove(placeOld);
+    	int placeNew = computeRank(this, mother);
+    	mother.children.add(placeNew, this);
+    	int debut = 0;
+    	if (placeNew == placeOld)
+    		return null;
+    	if (placeNew < placeOld)
+    		debut = placeNew;
+    	if (placeOld < placeNew)
+    		debut = placeOld;
+    	mother.setDeriveTaskNumero(debut);
 
-	int taille = mother.children.size();
-	Task[] taches = new Task[taille];
-	for (int i = 0; i < taille; i++) {
-	    taches[i] = ((Task) mother.children.get(i));
-	}
-	return taches;
+    	int taille = mother.children.size();
+    	Task[] taches = new Task[taille];
+    	for (int i = 0; i < taille; i++) {
+    		taches[i] = ((Task) mother.children.get(i));
+    	}
+    	return taches;
     }
 
     public String toString() {
@@ -831,11 +841,11 @@ public class Task implements Entity {
     }
 
     // obsolete method, used to create XML viles V1
-    public org.w3c.dom.Element toXML(Document doc) {
+/*    public org.w3c.dom.Element toXML(Document doc) {
     	Element racine = doc.createElement("task");
     	return racine;
     }
-/*	obsolete
+*//*	obsolete
 	Element racine = doc.createElement("task");
 	racine.setAttribute("classkmad", "tache.Tache");
 	racine.setAttribute("idkmad", oid.get());
@@ -1408,26 +1418,6 @@ public class Task implements Entity {
 	return SPF;
     }
 
-    /**
-     * 
-     * @param tache
-     */
-    protected void mereInverse(Task tache) {
-	tache.mother = this;
-    }
-
-/*    *//**
-     * 
-     * @return
-     *//*
-    public Task getMother() {
-	return this.mother;
-    }
-
-*/    /**
-     * 
-     * @param oid
-     */
     public void setOid(Oid oid) {
 	this.oid = oid;
     }
@@ -1436,21 +1426,10 @@ public class Task implements Entity {
 	return oid;
     }
 
-    /**
-     * Cette mï¿½thode retourne le point de la tï¿½che.
-     * 
-     * @return Returns the point.
-     */
     public Point getPoint() {
 	return point;
     }
 
-    /**
-     * Cette mï¿½thode modifie le point de la tï¿½che.
-     * 
-     * @param point
-     *            The point to set.
-     */
     public void setPoint(Point point) {
 	this.point = point;
     }
@@ -1573,7 +1552,7 @@ public class Task implements Entity {
 	return sideEffectExpression;
     }
 
-    public void setEffetsDeBordExpression(
+    public void setSideEffetExpression(
 	    SideEffectExpression effetsDeBordExpression) {
 	this.sideEffectExpression = effetsDeBordExpression;
     }
@@ -1594,10 +1573,16 @@ public class Task implements Entity {
 	this.stateSimulation = pSimulation;
     }
 
+    /**
+     * @return true if the task have no child
+     */
     public boolean isLeaf() {
 	return this.getChildren() != null ? this.getChildren().size() == 0 : true;
     }
 
+    /**
+     * @return true if the task is root
+     */
     public boolean isRoot() {
 	return (this.mother == null);
     }
@@ -1866,7 +1851,7 @@ public class Task implements Entity {
 		else{
 		    this.children.add((Task) InterfaceExpressJava.bdd
 			    .prendre(new Oid(son[i])));
-		    this.mereInverse((Task) InterfaceExpressJava.bdd
+		    this.setMother((Task) InterfaceExpressJava.bdd
 			    .prendre(new Oid(son[i])));
 		}
 	    }

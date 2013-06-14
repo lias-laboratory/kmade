@@ -111,7 +111,7 @@ public final class ExpressTask {
     }
 
     public static void clearEffetsDeBordExpression(Task pTache) {
-	pTache.setEffetsDeBordExpression(new SideEffectExpression());
+	pTache.setSideEffetExpression(new SideEffectExpression());
 	notifyObservers();
     }
 
@@ -208,7 +208,7 @@ public final class ExpressTask {
 
 	    refTache.setPreExpression(((Task) myTaskList[i])
 		    .getPreExpression()); // precondition
-	    refTache.setEffetsDeBordExpression(((Task) myTaskList[i])
+	    refTache.setSideEffetExpression(((Task) myTaskList[i])
 		    .getEffetsDeBordExpression()); // effetsdebord
 	    refTache.setIterExpression(((Task) myTaskList[i])
 		    .getIterExpression()); // iteration
@@ -279,7 +279,7 @@ public final class ExpressTask {
 	    refTache.setOptional((myTacheList.get(i)).getFacultatif());// necessite
 
 	    refTache.setPreExpression(myTacheList.get(i).getPreExpression());// precondition
-	    refTache.setEffetsDeBordExpression(myTacheList.get(i)
+	    refTache.setSideEffetExpression(myTacheList.get(i)
 		    .getEffetsDeBordExpression());// effetsdebord
 	    refTache.setIterExpression(myTacheList.get(i).getIterExpression());// iteration
 
@@ -364,7 +364,7 @@ public final class ExpressTask {
     }
 
     public static Task[] setTaskPoint(int x, int y, Task myTache) {
-	Task[] myTemp = myTache.modifierPoint(x, y);
+	Task[] myTemp = myTache.getTasksToModify(x, y);
 	notifyObservers();
 	return myTemp;
     }
@@ -428,7 +428,7 @@ public final class ExpressTask {
      * @return
      */
     public static ArrayList<Task> removeEdge(Task tacheMere, Task tacheFils) {
-	ArrayList<Task> myTemp = tacheMere.removeSubTask(tacheFils);
+	ArrayList<Task> myTemp = tacheMere.disconnectSubTask(tacheFils);
 	notifyObservers();
 	return myTemp;
     }

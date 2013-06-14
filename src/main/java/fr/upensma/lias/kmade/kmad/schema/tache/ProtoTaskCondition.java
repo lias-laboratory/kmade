@@ -131,12 +131,5 @@ public class ProtoTaskCondition implements Entity{
 		this.value = value;
 	}
 
-	@Override
-	public Element toXML(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 	
 }
