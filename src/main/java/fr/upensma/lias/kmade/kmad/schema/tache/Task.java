@@ -758,7 +758,7 @@ public class Task implements Entity {
      * @param tachefils
      */
     public void addSubTask(Task tachefils) {
-	setMother(tachefils);
+	tachefils.setMother(this);
 	int rank = computeRank(tachefils, this);
 	children.add(rank, tachefils);
 	this.setDeriveTaskNumero(rank);
