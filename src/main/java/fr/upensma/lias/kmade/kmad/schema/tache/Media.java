@@ -21,6 +21,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
@@ -109,44 +110,6 @@ public class Media implements Entity {
     public boolean oidIsAnyMissing(Element p) throws Exception {
 	return false;
     }
-
-/*    public Element toXML(Document doc) throws Exception {
-	Element racine = doc.createElement("media");
-	racine.setAttribute("classkmad", "tache.Media");
-	racine.setAttribute("idkmad", oid.get());
-
-	Element currentElement = doc.createElement("media-existing");
-	currentElement.setTextContent(Boolean.toString(this.isExisting));
-	racine.appendChild(currentElement);
-
-	if (this.isExisting) {
-	    currentElement = doc.createElement("media-filename");
-	    currentElement.setTextContent(this.fileName);
-	    racine.appendChild(currentElement);
-
-	    if (!this.path.equals("")) {
-		currentElement = doc.createElement("media-path");
-		currentElement.setTextContent(this.path);
-		racine.appendChild(currentElement);
-	    }
-
-	    if (this.startMark != -1) {
-		currentElement = doc.createElement("media-startmark");
-		currentElement.setTextContent(Integer.toString(this.startMark));
-		racine.appendChild(currentElement);
-	    }
-
-	    if (this.finishMark != -1) {
-		currentElement = doc.createElement("media-finishmark");
-		currentElement
-			.setTextContent(Integer.toString(this.finishMark));
-		racine.appendChild(currentElement);
-	    }
-	}
-
-	return racine;
-    }
-*/
     
     public String getFileName() {
 	return fileName;
@@ -193,7 +156,7 @@ public class Media implements Entity {
 	// TODO Auto-generated method stub
 	if (this.existing) {
 	    Element racine = doc.createElement("media");
-	    racine.setAttribute("classkmad", "tache.Media");
+	    racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.MEDIA_CLASS);
 	    racine.setAttribute("idkmad", oid.get());
 
 	    Element currentElement = doc.createElement("media-existing");

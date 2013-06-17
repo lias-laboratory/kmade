@@ -23,6 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
@@ -225,7 +226,7 @@ public class Person extends User {
     public Element toXML2(Document doc) throws Exception {
 	// TODO Auto-generated method stub
 	Element racine = doc.createElement("Individu");
-	racine.setAttribute("classkmad", "tache.Individu");
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.PERSON_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 
 	if (this.organizations.size() != 0) {

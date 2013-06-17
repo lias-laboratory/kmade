@@ -103,26 +103,6 @@ public class Material implements Entity {
 	return name;
     }
 
-/*    public org.w3c.dom.Element toXML(Document doc) {
-	Element racine = doc.createElement("materiel");
-	racine.setAttribute("classkmad", "tache.Materiel");
-	racine.setAttribute("idkmad", oid.get());
-
-	Element kmadUserName = doc.createElement("materiel-name");
-	kmadUserName.setTextContent(this.getName());
-	racine.appendChild(kmadUserName);
-
-	if (!this.getDescription().equals("")) {
-	    Element kmadUserDescription = doc
-		    .createElement("materiel-description");
-	    kmadUserDescription.setTextContent(this.getDescription());
-	    racine.appendChild(kmadUserDescription);
-	}
-
-	return racine;
-    }
-*/
-
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;
     }
@@ -210,7 +190,7 @@ public class Material implements Entity {
     @Override
     public Element toXML2(Document doc) throws Exception {
     	Element racine = doc.createElement("materiel");
-    	racine.setAttribute("classkmad", "tache.Materiel");
+    	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.MATERIAL_CLASS);
     	racine.setAttribute("idkmad", oid.get());
 
     	Element kmadUserName = doc.createElement("materiel-name");

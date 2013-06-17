@@ -533,7 +533,7 @@ public class InterfaceExpressJava {
 	} catch (ClassNotFoundException c) {
 	    try {
 		entity = Class.forName(KMADEToolConstant.PACKAGE_PATH_NAME
-			+ "tache." + nameEntity);
+			+ ExpressConstant.CORE_PACKAGE + "." + nameEntity);
 	    } catch (ClassNotFoundException t) {
 		try {
 		    entity = Class.forName(KMADEToolConstant.PACKAGE_PATH_NAME

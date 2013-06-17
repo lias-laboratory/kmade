@@ -182,8 +182,8 @@ public class ActorSystem implements Entity {
     @Override
     public Element toXML2(Document doc) throws Exception {
 	// TODO Auto-generated method stub
-	Element racine = doc.createElement("actor");
-	racine.setAttribute("classkmad", "tache.Acteur");
+	Element racine = doc.createElement("actorSystem");
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.ACTOR_SYSTEM_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 	racine.setAttribute("id-user", this.materialRef.getOid().get());
 

@@ -99,7 +99,7 @@ public class Event implements Entity {
 
     public org.w3c.dom.Element toXML2(Document doc) {
 	Element racine = doc.createElement("event");
-	racine.setAttribute("classkmad", "tache.Evenement");
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.EVENT_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 
 	Element kmadEventName = doc.createElement("event-name");

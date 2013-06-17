@@ -21,6 +21,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
@@ -106,7 +107,7 @@ public class Point implements Entity {
 	@Override
 	public Element toXML2(Document doc) throws Exception {
         Element racine = doc.createElement("point");
-        racine.setAttribute("classkmad", "tache.Point");
+        racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.POINT_CLASS);
         racine.setAttribute("idkmad", oid.get());
         
         Element kmadPointx = doc.createElement("point-x");

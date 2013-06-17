@@ -299,7 +299,7 @@ public abstract class User implements Entity {
     @Override
 	public Element toXML2(Document doc) throws Exception {
     	Element racine = doc.createElement("user");
-    	racine.setAttribute("classkmad", "tache.User");
+    	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.USER_CLASS);
     	racine.setAttribute("idkmad", oid.get());
 
     	Element kmadUserName = doc.createElement("user-name");

@@ -23,6 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
@@ -184,7 +185,7 @@ public class Machine extends Material {
 
     public org.w3c.dom.Element toXML2(Document doc) {
 	Element racine = doc.createElement("Machine");
-	racine.setAttribute("classkmad", "tache.Machine");
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.MACHINE_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 	if (!this.memberOf.isEmpty()) {
 	    String list = new String("");

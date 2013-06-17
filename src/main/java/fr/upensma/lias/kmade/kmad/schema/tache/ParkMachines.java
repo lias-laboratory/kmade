@@ -23,6 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
@@ -122,7 +123,7 @@ public class ParkMachines extends Material {
 
     public Element toXML2(Document doc) throws Exception {
     	Element racine = doc.createElement("ParcMachines");
-    	racine.setAttribute("classkmad", "tache.ParcMachines");
+    	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.MACHINE_PARK_CLASS);
     	racine.setAttribute("idkmad", oid.get());
 
     	Element kmadParcName = doc.createElement("parcMachines-name");

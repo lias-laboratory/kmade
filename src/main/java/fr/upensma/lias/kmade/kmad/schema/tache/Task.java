@@ -36,19 +36,11 @@ import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ChoiceEnum;
  * @author [Renaming] Patrick GIRARD
  * @author [Comment] Patrick GIRARD
  **/
-/**
- * @author pgirard
- *
- */
-/**
- * @author pgirard
- *
- */
 public class Task implements Entity {
 
     private static final long serialVersionUID = -7319483011074082713L;
 
-    private Oid oid = null;
+    public Oid oid = null;
 
     // Task type    
 		/** executant : Executant -> Enumerated values for the kind of 
@@ -163,7 +155,7 @@ public class Task implements Entity {
 	    /** Graphical position of the task on the graphical layout */
 	    private Point point = null;
 
-	    /** noPoint : Boolean -> States if the oint owns a valid graphical 
+	    /** noPoint : Boolean -> States if the point owns a valid graphical 
 	     * 					position or no. Default false */
 	    private boolean noPoint = false;
 
@@ -840,215 +832,7 @@ public class Task implements Entity {
 	return this.number + " - " + name;
     }
 
-    // obsolete method, used to create XML viles V1
-/*    public org.w3c.dom.Element toXML(Document doc) {
-    	Element racine = doc.createElement("task");
-    	return racine;
-    }
-*//*	obsolete
-	Element racine = doc.createElement("task");
-	racine.setAttribute("classkmad", "tache.Tache");
-	racine.setAttribute("idkmad", oid.get());
-
-	// Name
-	Element kmadElement = doc.createElement("task-name");
-	kmadElement.setTextContent(this.name);
-	racine.appendChild(kmadElement);
-
-	// But
-	if (!this.goal.equals("")) {
-	    kmadElement = doc.createElement("task-purpose");
-	    kmadElement.setTextContent(this.goal);
-	    racine.appendChild(kmadElement);
-	}
-
-	// Media
-	if (this.idMedia != null) {
-	    kmadElement = doc.createElement("id-task-media");
-	    kmadElement.setTextContent(this.idMedia.getOid().get());
-	    racine.appendChild(kmadElement);
-	}
-
-	// Duration
-	if (!this.duration.equals("")) {
-	    kmadElement = doc.createElement("task-duration");
-	    kmadElement.setTextContent(this.duration);
-	    racine.appendChild(kmadElement);
-	}
-
-	// Media
-	if (!this.media.equals("")) {
-	    kmadElement = doc.createElement("task-media");
-	    kmadElement.setTextContent(this.media);
-	    racine.appendChild(kmadElement);
-	}
-
-	// Resources
-	if (!this.resources.equals("")) {
-	    kmadElement = doc.createElement("task-resources");
-	    kmadElement.setTextContent(this.resources);
-	    racine.appendChild(kmadElement);
-	}
-
-	// Feedback
-	if (!this.feedback.equals("")) {
-	    kmadElement = doc.createElement("task-feedback");
-	    kmadElement.setTextContent(this.feedback);
-	    racine.appendChild(kmadElement);
-	}
-
-	// Observation
-	if (!this.description.equals("")) {
-	    kmadElement = doc.createElement("task-observation");
-	    kmadElement.setTextContent(this.description);
-	    racine.appendChild(kmadElement);
-	}
-
-	// Executant
-	racine.appendChild(this.executant.toXML(doc));
-
-	// Frequency
-	if (!this.frequency.equals(Frequence.INCONNU)) {
-	    racine.appendChild(this.frequency.toXML(doc));
-	}
-
-	// Frequency Value
-	if (!this.frequencyValue.equals("")) {
-	    kmadElement = doc.createElement("task-compfrequency");
-	    kmadElement.setTextContent(this.frequencyValue);
-	    racine.appendChild(kmadElement);
-	}
-
-	// Importance
-	if (!this.importance.equals(Importance.INCONNU)) {
-	    racine.appendChild(this.importance.toXML(doc));
-	}
-
-	// Modality
-	if (!this.modality.equals(Modalite.INCONNU)) {
-	    racine.appendChild(this.modality.toXML(doc));
-	}
-
-	// EventTrigger
-	if (this.raisingEvent != null) {
-	    kmadElement = doc.createElement("id-task-eventtrigger");
-	    kmadElement.setTextContent(this.raisingEvent.getOid().get());
-	    racine.appendChild(kmadElement);
-	}
-
-	// Events
-	if (this.events.size() != 0) {
-	    Element eventList = doc.createElement("id-task-events-list");
-	    for (int i = 0; i < this.events.size(); i++) {
-		Element idEvent = doc.createElement("id-task-event");
-		idEvent.setTextContent(events.get(i).getOid().get());
-		eventList.appendChild(idEvent);
-	    }
-	    racine.appendChild(eventList);
-	}
-
-	// Optional
-	kmadElement = doc.createElement("task-optional");
-	kmadElement.setTextContent(this.optional.toString());
-	racine.appendChild(kmadElement);
-
-	// Interruptible
-	kmadElement = doc.createElement("task-interruptible");
-	kmadElement.setTextContent(this.interruptible.toString());
-	racine.appendChild(kmadElement);
-
-	// Decomposition
-	racine.appendChild(this.ordering.toXML(doc));
-
-	// Actors
-	if (this.actors.size() != 0) {
-	    Element actorsList = doc.createElement("id-task-actors-list");
-	    for (int i = 0; i < this.actors.size(); i++) {
-		Element idActor = doc.createElement("id-task-actor");
-		idActor.setTextContent(this.actors.get(i).getOid().get());
-		actorsList.appendChild(idActor);
-	    }
-	    racine.appendChild(actorsList);
-	}
-	// Actors system
-	if (this.actorSystem.size() != 0) {
-	    Element actorSystemList = doc
-		    .createElement("id-task-actorSystem-list");
-	    for (int i = 0; i < this.actorSystem.size(); i++) {
-		Element idActor = doc.createElement("id-task-actorSystem");
-		idActor.setTextContent(this.actorSystem.get(i).getOid().get());
-		actorSystemList.appendChild(idActor);
-	    }
-	    racine.appendChild(actorSystemList);
-	}
-
-	// Sub-tasks
-	if (this.children.size() != 0) {
-	    Element subTasksList = doc.createElement("id-task-subtasks-list");
-	    for (int i = 0; i < this.children.size(); i++) {
-		Element idActor = doc.createElement("id-task-subtask");
-		idActor.setTextContent(this.children.get(i).getOid().get());
-		subTasksList.appendChild(idActor);
-	    }
-	    racine.appendChild(subTasksList);
-	}
-
-	// Point
-	kmadElement = doc.createElement("id-task-point");
-	kmadElement.setTextContent(this.point.getOid().get());
-	racine.appendChild(kmadElement);
-
-	// Label
-	if (this.label != null) {
-	    kmadElement = doc.createElement("id-task-label");
-	    kmadElement.setTextContent(this.label.getOid().get());
-	    racine.appendChild(kmadElement);
-	}
-
-	// Precondition
-	kmadElement = doc.createElement("task-precondition");
-	kmadElement.setTextContent(this.preExpression.getName());
-	racine.appendChild(kmadElement);
-
-	// Precondition Description
-	if (!this.getPreExpression().getDescription().equals("")) {
-	    kmadElement = doc.createElement("task-descriptionprecondition");
-	    kmadElement.setTextContent(this.preExpression.getDescription());
-	    racine.appendChild(kmadElement);
-	}
-
-	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
-	// postcondition de la V2 !
-	// ils sont rï¿½server aux effets de bord de la v1!
-	// EffetsDeBord
-	kmadElement = doc.createElement("task-effetsdebord");
-	kmadElement.setTextContent(this.sideEffectExpression.getName());
-	racine.appendChild(kmadElement);
-
-	// EffetsDeBord Description
-	if (!this.getEffetsDeBordExpression().getDescription().equals("")) {
-	    kmadElement = doc.createElement("task-descriptioneffetsdebord");
-	    kmadElement.setTextContent(this.sideEffectExpression
-		    .getDescription());
-	    racine.appendChild(kmadElement);
-	}
-
-	// Iteration
-	kmadElement = doc.createElement("task-iteration");
-	kmadElement.setTextContent(this.iterExpression.getName());
-	racine.appendChild(kmadElement);
-
-	// Iteration Description
-	if (!this.getIteExpression().getDescription().equals("")) {
-	    kmadElement = doc.createElement("task-descriptioniteration");
-	    kmadElement.setTextContent(this.iterExpression.getDescription());
-	    racine.appendChild(kmadElement);
-	}
-
-	return racine;
-    }
-*/
-    
+     
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	NodeList nodeList = p.getElementsByTagName("id-task-eventtrigger");
 	if (nodeList.item(0) != null) {
@@ -1729,7 +1513,7 @@ public class Task implements Entity {
 	}
 	
 	//Attributes
-	racine.setAttribute("classkmad", "tache.Tache");
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.TASK_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 	// Media
 	if (this.media != null && this.media.isExisting()){

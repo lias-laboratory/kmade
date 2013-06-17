@@ -152,7 +152,7 @@ public class Label implements Entity {
     @Override
     public Element toXML2(Document doc) throws Exception {
 	Element racine = doc.createElement("label");
-	racine.setAttribute("classkmad", "tache.Label");
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.LABEL_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 
 	Element currentElement = doc.createElement("label-name");

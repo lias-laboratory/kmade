@@ -23,6 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
@@ -203,7 +204,7 @@ public class Organization extends User {
 
     public Element toXML2(Document doc) throws Exception {
     	Element racine = doc.createElement("Organisation");
-    	racine.setAttribute("classkmad", "tache.Organisation");
+    	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.ORGANIZATION_CLASS);
     	racine.setAttribute("idkmad", oid.get());
 
     	Element kmadOrganisationName = doc.createElement("organisation-name");
