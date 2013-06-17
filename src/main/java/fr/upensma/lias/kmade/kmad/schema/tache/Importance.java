@@ -85,7 +85,7 @@ public enum Importance implements Enumerated {
 	return myImportanceArray;
     }
 
-    public static String getLocaleImportanceIntoEnumere(String locale) {
+    public static String getLocaleImportanceIntoEnumerate(String locale) {
 	if (locale.equals(ExpressConstant.UNKNOWN_IMPORTANCE_NAME)) {
 	    return "UNK";
 	} else if (locale.equals(ExpressConstant.HIGH_IMPORTANCE_NAME)) {

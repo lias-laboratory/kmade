@@ -47,7 +47,7 @@ public class ExpressActeurSysteme {
 	ActorSystem a = (ActorSystem) InterfaceExpressJava
 		.prendre(oidActorSystem);
 	Material u = (Material) InterfaceExpressJava.prendre(oidUserSystem);
-	a.setMaterielRef(u);
+	a.setMaterialRef(u);
 	u.addReverseActorSystem(a);
 	return (oidActorSystem);
     }
@@ -72,7 +72,7 @@ public class ExpressActeurSysteme {
 	for (int i = 0; i < objs.length; i++) {
 	    ActorSystem acteursysteme = (ActorSystem) objs[i];
 	    // Le Oid de la tache qui contient l'acteur i.
-	    String oidActeurTache = acteursysteme.getInverseTache().getOid()
+	    String oidActeurTache = acteursysteme.getReverseTask().getOid()
 		    .get();
 
 	    if (oidActeurTache.equals(current.getOid().get())) {

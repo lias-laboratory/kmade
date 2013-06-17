@@ -41,7 +41,7 @@ public class Event implements Entity {
 
     private String description;
 
-    private ArrayList<Task> inverseTache = new ArrayList<Task>();
+    private ArrayList<Task> reverseTask = new ArrayList<Task>();
 
     public Event() {
 	name = "";
@@ -66,8 +66,8 @@ public class Event implements Entity {
     }
 
     public void delete() {
-	for (int i = 0; i < inverseTache.size(); i++) {
-	    Task t = inverseTache.get(i);
+	for (int i = 0; i < reverseTask.size(); i++) {
+	    Task t = reverseTask.get(i);
 	    t.removeEvent(this);
 	}
 	InterfaceExpressJava.remove(oid);
@@ -75,8 +75,8 @@ public class Event implements Entity {
 
     public void affDelete() {
 	InterfaceExpressJava.getGestionWarning().addMessage(oid, 4);
-	for (int i = 0; i < inverseTache.size(); i++) {
-	    Task t = inverseTache.get(i);
+	for (int i = 0; i < reverseTask.size(); i++) {
+	    Task t = reverseTask.get(i);
 	    InterfaceExpressJava.getGestionWarning().addMessage(
 		    oid,
 		    4,
@@ -86,18 +86,18 @@ public class Event implements Entity {
     }
 
     public void addReverseTask(Task a) {
-	inverseTache.add(a);
+	reverseTask.add(a);
     }
 
     public void removeReverseTask(Task a) {
-	inverseTache.remove(a);
+	reverseTask.remove(a);
     }
 
     public void setOid(Oid oid) {
 	this.oid = oid;
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+    public org.w3c.dom.Element toXML2(Document doc) {
 	Element racine = doc.createElement("event");
 	racine.setAttribute("classkmad", "tache.Evenement");
 	racine.setAttribute("idkmad", oid.get());
@@ -116,6 +116,7 @@ public class Event implements Entity {
 	return racine;
     }
 
+    
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;
     }
@@ -141,6 +142,10 @@ public class Event implements Entity {
 	return this.name;
     }
 
+    /**
+     * @param s the name of the event
+     * @return true if the name is unique among task names and event names
+     */
     public static boolean isUniqueName(String s) {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
 		"Evenement");
@@ -173,7 +178,8 @@ public class Event implements Entity {
 	name = n;
     }
 
-    public ArrayList<String> affProvoquer() {
+/*  not used - what is the purpose ?
+ 	public ArrayList<String> affProvoquer() {
 	ArrayList<String> stAff = new ArrayList<String>();
 	for (int i = 0; i < inverseTache.size(); i++) {
 	    Task t = inverseTache.get(i);
@@ -182,7 +188,7 @@ public class Event implements Entity {
 	}
 	return stAff;
     }
-
+*/
     public static String proposeName(String n) {
 	boolean ok = false;
 	int cpt = 0;
@@ -201,12 +207,12 @@ public class Event implements Entity {
 	return n;
     }
 
-    @Override
+/*    @Override
     public Element toXML2(Document doc) throws Exception {
 	// TODO Auto-generated method stub
 	return toXML(doc);
     }
-
+*/
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
     	this.oid = new Oid(p.getAttribute("idkmad"));

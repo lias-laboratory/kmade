@@ -56,7 +56,7 @@ public class Machine extends Material {
 
     public void delete() {
 	for (int i = 0; i < memberOf.size(); i++) {
-	    memberOf.get(i).removeToParc(this);
+	    memberOf.get(i).removeFromPark(this);
 	}
 	super.delete();
     }
@@ -65,11 +65,11 @@ public class Machine extends Material {
      * Enregistre que la machine fait partie du parcMachine parc Le parc ne sait
      * pas que la machine en fait partie
      * 
-     * @param parc
+     * @param park
      */
-    public void addToParc(ParkMachines parc) {
-	if (!memberOf.contains(parc)) {
-	    memberOf.add(parc);
+    public void addToPark(ParkMachines park) {
+	if (!memberOf.contains(park)) {
+	    memberOf.add(park);
 	}
     }
 
@@ -77,11 +77,11 @@ public class Machine extends Material {
 	return memberOf;
     }
 
-    public void removeToParc(ParkMachines parc) {
+    public void removeToPark(ParkMachines parc) {
 	memberOf.remove(parc);
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+/*    public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("Machine");
 	racine.setAttribute("classkmad", "tache.Machine");
 	racine.setAttribute("idkmad", oid.get());
@@ -118,6 +118,7 @@ public class Machine extends Material {
 	}
 	return racine;
     }
+*/
 
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	NodeList userValue = p.getElementsByTagName("id-parcMachine");
@@ -160,7 +161,7 @@ public class Machine extends Material {
 
 	if (kmadMachineParc.item(0) != null) {
 	    for (int i = 0; i < kmadMachineParc.getLength(); i++) {
-		this.addToParc((ParkMachines) InterfaceExpressJava.bdd
+		this.addToPark((ParkMachines) InterfaceExpressJava.bdd
 			.prendre(new Oid(kmadMachineParc.item(i)
 				.getTextContent())));
 	    }
@@ -263,7 +264,7 @@ public class Machine extends Material {
 	if (p.hasAttribute("id-parcMachine")) {
 	    String[] parc = p.getAttribute("id-parcMachine").split(" ");
 	    for (int i = 0; i < parc.length; i++) {
-		this.addToParc((ParkMachines) InterfaceExpressJava.bdd
+		this.addToPark((ParkMachines) InterfaceExpressJava.bdd
 			.prendre(new Oid(parc[i])));
 	    }
 	}

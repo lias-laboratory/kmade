@@ -90,7 +90,7 @@ public class ExpressOrganisation{
     public static void setOrganisationStatut(String oid, String st) {
 	Organization m = (Organization) InterfaceExpressJava.prendre(new Oid(
 		oid));
-	m.setStatut(st);
+	m.setStatus(st);
     }
 
     public static void setOrganisationRole(String oid, String r) {

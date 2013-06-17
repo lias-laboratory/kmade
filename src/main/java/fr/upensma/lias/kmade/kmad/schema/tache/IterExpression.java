@@ -34,11 +34,11 @@ public class IterExpression extends Expression {
 
     public IterExpression() {
 	refNode = new NumberVariant();
-	this.chaine = refNode.getName();
+	this.value = refNode.getName();
     }
 
     public IterExpression(String value) {
-	this.chaine = value;
+	this.value = value;
     }
 
     public boolean isMoreOneIteration() {

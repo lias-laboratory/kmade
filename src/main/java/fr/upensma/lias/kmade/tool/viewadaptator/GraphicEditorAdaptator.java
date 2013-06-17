@@ -757,8 +757,8 @@ public final class GraphicEditorAdaptator {
 		if (monPoint != null) {
 		    KMADEDefaultGraphCell myCell = (KMADEDefaultGraphCell) cellSelected;
 		    // Old position values
-		    int x = myCell.getPoint().x;
-		    int y = myCell.getPoint().y;
+		    int x = myCell.getPoint().getX();
+		    int y = myCell.getPoint().getY();
 		    ExpressTask.setTaskPoint((int) monPoint.getX(),(int) monPoint.getY(), myCell.getTask());
 		    if (!myCell.isSonExpanded() || MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().isMagnet()) {
 			int dx = x - (int) monPoint.getX();

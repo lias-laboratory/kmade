@@ -74,13 +74,13 @@ public class ExpressIndividuTest {
 		assertTrue(i1.getImage()==image1);
 		assertTrue(i1.getName()==nom1);
 		assertTrue(i1.getRole()==role1);
-		assertTrue(i1.getStatut()==statut1);
+		assertTrue(i1.getStatus()==statut1);
 		
 		Person i2  = ExpressIndividu.getIndividuWithName(nom2);
 		assertTrue(i2.getImage()==image2);
 		assertTrue(i2.getName()==nom2);
 		assertTrue(i2.getRole()==role2);
-		assertTrue(i2.getStatut()==statut2);
+		assertTrue(i2.getStatus()==statut2);
 		
 	}
 	@Test

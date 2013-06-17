@@ -469,9 +469,9 @@ public class KMADEFindReplaceDialog extends JDialog {
 	    this.add(Box.createRigidArea(new Dimension(0, 15)));
 
 	    // Le JPanel pour l'executant et l'opérateur
-	    executantName = Executor.getNameLocaleExecutant();
+	    executantName = Executor.getNameLocaleExecutor();
 	    executantImage = new ImageIcon[executantName.length];
-	    String[] executantTempImage = Executor.getImageLocaleExecutant();
+	    String[] executantTempImage = Executor.getImageLocaleExecutor();
 	    for (int i = 0; i < executantName.length; i++) {
 		executantImage[i] = new ImageIcon(
 			KMADEGraphCellEditor.class
@@ -562,7 +562,7 @@ public class KMADEFindReplaceDialog extends JDialog {
 		}
 		if (maValue != "*") {
 
-		    int myInt = Executor.getLocaleExecutantAt(maValue);
+		    int myInt = Executor.getLocaleExecutorAt(maValue);
 		    ImageIcon icon = executantImage[myInt];
 		    setIcon(icon);
 		    setText(maValue);

@@ -85,7 +85,7 @@ public class ActorSystemAdaptator {
 		.extractActorSystemFromTask(GraphicEditorAdaptator
 			.getSelectedExpressTask());
 	for (int i = 0; i < ma_liste.size(); i++) {
-	    Oid oidActeurUser = ma_liste.get(i).getMaterielRef().getOid();
+	    Oid oidActeurUser = ma_liste.get(i).getMaterialRef().getOid();
 	    if (oidActeurUser.equals(oidMateriel)) {
 		return true;
 	    }

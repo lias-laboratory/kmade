@@ -106,7 +106,7 @@ public class ExpressParcMachines{
 	ParkMachines o = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oidParcMachines));
 	// on les ajoutes mutuellement
-	i.addToParc(o);
+	i.addToPark(o);
 	o.addMember(i);
     }
 
@@ -115,8 +115,8 @@ public class ExpressParcMachines{
 	ParkMachines o = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oidParc));
 	// on les retire mutuellement
-	i.removeToParc(o);
-	o.removeToParc(i);
+	i.removeToPark(o);
+	o.removeFromPark(i);
     }
 
     public static Object[][] getMachineIntoTab(String oid) {
@@ -126,7 +126,7 @@ public class ExpressParcMachines{
 	    // r�cup�ration du parc
 	    o = (ParkMachines) InterfaceExpressJava.prendre(new Oid(oid));
 	    // r�cup�ration de ses Machines
-	    ArrayList<Machine> myMachine = o.getMember();
+	    ArrayList<Machine> myMachine = o.getMembers();
 	    Object[][] res = new Object[myMachine.size()][Machine
 		    .toArrayLenght()];
 	    for (int i = 0; i < myMachine.size(); i++) {

@@ -135,7 +135,7 @@ public class KMADEGraphCellEditor extends DefaultGraphCellEditor implements Acti
 
 	    myNameEditor.selectAll();
 	    myCategorieEditor.setSelectedItem(Executor
-		    .getEnumereIntoLocaleExecutant(myCell.getExecutant()
+		    .getEnumereIntoLocaleExecutor(myCell.getExecutant()
 			    .getValue()));
 	    myDecompoEditor.setSelectedItem(myCell.getDecomposition());
 	}
@@ -188,7 +188,7 @@ public class KMADEGraphCellEditor extends DefaultGraphCellEditor implements Acti
 	public Component getListCellRendererComponent(JList list, Object value,
 		int index, boolean isSelected, boolean cellHasFocus) {
 	    String maValue = (String) value;
-	    int myInt = Executor.getLocaleExecutantAt(maValue);
+	    int myInt = Executor.getLocaleExecutorAt(maValue);
 	    this.setHorizontalAlignment(JLabel.LEFT);
 	    if (isSelected) {
 		setBackground(list.getSelectionBackground());

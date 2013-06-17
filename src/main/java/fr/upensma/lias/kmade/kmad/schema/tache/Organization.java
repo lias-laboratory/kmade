@@ -42,7 +42,7 @@ public class Organization extends User {
     /**
      * List of individuals who are member of the organization
      */
-    private ArrayList<Person> inverseMember = new ArrayList<Person>();
+    private ArrayList<Person> reverseMember = new ArrayList<Person>();
 
     /**
      * Empty constructor
@@ -91,8 +91,8 @@ public class Organization extends User {
      */
     public void delete() {
 	// supprimer l'individu des organisations
-	for (int i = 0; i < inverseMember.size(); i++) {
-	    inverseMember.get(i).removeOrganisation(this);
+	for (int i = 0; i < reverseMember.size(); i++) {
+	    reverseMember.get(i).removeOrganisation(this);
 	}
 	super.delete();
     }
@@ -105,8 +105,8 @@ public class Organization extends User {
      * @param ind Individu -> the individual to add to the organization
      */
     public void addMember(Person ind) {
-		if (!inverseMember.contains(ind)) {
-		    inverseMember.add(ind);
+		if (!reverseMember.contains(ind)) {
+		    reverseMember.add(ind);
 		}
     }
 
@@ -116,7 +116,7 @@ public class Organization extends User {
      * @param ind : Individu -> The inidividual to remove
      */
     public void removeIndividu(Person ind) {
-    	inverseMember.remove(ind);
+    	reverseMember.remove(ind);
     }
 
     /**
@@ -126,7 +126,7 @@ public class Organization extends User {
      * @return an ArrayList which contains all individuals who are members
      */
     public ArrayList<Person> getMembers() {
-    	return inverseMember;
+    	return reverseMember;
     }
 
     /**
@@ -137,14 +137,14 @@ public class Organization extends User {
      */
     public Object[] toArray() {
 	String s = "";
-	for (int i = 0; i < inverseMember.size(); i++) {
-	    s += inverseMember.get(i).getName();
-	    if (i != inverseMember.size() - 1) {
+	for (int i = 0; i < reverseMember.size(); i++) {
+	    s += reverseMember.get(i).getName();
+	    if (i != reverseMember.size() - 1) {
 		s += ", ";
 	    }
 	}
 
-	Object[] res = { super.oid.get(), super.getName(), super.getStatut(),
+	Object[] res = { super.oid.get(), super.getName(), super.getStatus(),
 		super.getRole(), super.getImage(), s };
 	return res;
     }
@@ -160,7 +160,7 @@ public class Organization extends User {
     }
 
 
-    public org.w3c.dom.Element toXML(Document doc) {
+/*    public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("Organisation");
 	racine.setAttribute("classkmad", "tache.Organisation");
 	racine.setAttribute("idkmad", oid.get());
@@ -190,24 +190,25 @@ public class Organization extends User {
 	    racine.appendChild(kmadOrganisationImagePath);
 	}
 
-	/*
+	
 	 * seul les individus stocks les organisations dans le fichier XML
 	 * if(this.inverseMember.size()!=0){ for(int i =0;
 	 * i<inverseMember.size();i++){ Element idOrganisation =
 	 * doc.createElement("id-Organisation");
 	 * idOrganisation.setTextContent(inverseMember.get(i).getOid().get());
 	 * racine.appendChild(idOrganisation); } }
-	 */
+	 
 	return racine;
     }
-
+*/
+    
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;
     }
 
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 	this.oid = new Oid(p.getAttribute("idkmad"));
-	inverseMember.clear();
+	reverseMember.clear();
 	NodeList kmadOrganisationName = p
 		.getElementsByTagName("organisation-name");
 	if (kmadOrganisationName.item(0) != null)
@@ -216,7 +217,7 @@ public class Organization extends User {
 	NodeList kmadOrganisationStatut = p
 		.getElementsByTagName("organisation-statut");
 	if (kmadOrganisationStatut.item(0) != null)
-	    super.setStatut(kmadOrganisationStatut.item(0).getTextContent());
+	    super.setStatus(kmadOrganisationStatut.item(0).getTextContent());
 
 	NodeList kmadOrganisationRole = p
 		.getElementsByTagName("organisation-role");
@@ -239,7 +240,7 @@ public class Organization extends User {
 	 * inverseMember.size()-1) s += ","; } s += ")";
 	 */
 	return oid.get() + "=Organisation('" + super.getName() + "','"
-		+ super.getStatut() + "','" + super.getRole() + "','"
+		+ super.getStatus() + "','" + super.getRole() + "','"
 		+ super.getImage() + s + "');";
     }
 
@@ -252,10 +253,10 @@ public class Organization extends User {
     	kmadOrganisationName.setTextContent(this.getName());
     	racine.appendChild(kmadOrganisationName);
 
-    	if (!this.getStatut().equals("")) {
+    	if (!this.getStatus().equals("")) {
     	    Element kmadOrganisationStatut = doc
     		    .createElement("organisation-statut");
-    	    kmadOrganisationStatut.setTextContent(this.getStatut());
+    	    kmadOrganisationStatut.setTextContent(this.getStatus());
     	    racine.appendChild(kmadOrganisationStatut);
     	}
 
@@ -286,7 +287,7 @@ public class Organization extends User {
 
     public void createObjectFromXMLElement2(Element p) throws Exception {
     	this.oid = new Oid(p.getAttribute("idkmad"));
-    	inverseMember.clear();
+    	reverseMember.clear();
     	NodeList kmadOrganisationName = p
     		.getElementsByTagName("organisation-name");
     	if(kmadOrganisationName.item(0).getParentNode() != p){
@@ -299,7 +300,7 @@ public class Organization extends User {
     	if(kmadOrganisationStatut.item(0).getParentNode() != p){
     		kmadOrganisationStatut = null;}
     	if (kmadOrganisationStatut.item(0) != null)
-    	    super.setStatut(kmadOrganisationStatut.item(0).getTextContent());
+    	    super.setStatus(kmadOrganisationStatut.item(0).getTextContent());
 
     	NodeList kmadOrganisationRole = p
     		.getElementsByTagName("organisation-role");

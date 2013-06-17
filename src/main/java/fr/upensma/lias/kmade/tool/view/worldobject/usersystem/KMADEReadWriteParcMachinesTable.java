@@ -449,7 +449,7 @@ public class KMADEReadWriteParcMachinesTable extends JScrollPane implements Lang
 		// recup�ration de la liste des parcMachines
 		ParkMachines parc = (ParkMachines) InterfaceExpressJava
 			.prendre(new Oid(newParcMachinesObject));
-		ArrayList<Machine> machine = parc.getMember();
+		ArrayList<Machine> machine = parc.getMembers();
 		// nom ,descritpion, image , Machines , oid , Boolean
 		Object[] tempo = { value, "", couple, machine,
 			newParcMachinesObject, false };

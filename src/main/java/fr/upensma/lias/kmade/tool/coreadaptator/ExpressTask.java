@@ -387,8 +387,8 @@ public final class ExpressTask {
 	t.setExecutor(e);
 	t.setPoint(p);
 	t.setMedia(m);
-	p.x = new Integer(x);
-	p.y = new Integer(y);
+	p.setX(new Integer(x));
+	p.setY(new Integer(y));
 
 	notifyObservers();
 	return t;

@@ -85,7 +85,7 @@ public class ExpressIndividu{
 
     public static void setIndividuStatut(String oid, String st) {
 	Person m = (Person) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setStatut(st);
+	m.setStatus(st);
     }
 
     public static void setIndividuRole(String oid, String r) {

@@ -34,11 +34,11 @@ public class PreExpression extends Expression {
 
 	public PreExpression() {
 		refNode = new BooleanConstant();
-		this.chaine = refNode.getName();
+		this.value = refNode.getName();
 	}
 
 	public PreExpression(String pre) {
-		this.chaine = pre;
+		this.value = pre;
 	}
 	
 	
@@ -54,7 +54,7 @@ public class PreExpression extends Expression {
 			String delim = "[\\^]";
 			String[] tokens = description.split(delim);
 			String formal = tokens[0];
-			ArrayList<String> exp = new ArrayList<String>();
+			// ArrayList<String> exp = new ArrayList<String>();
 			String delimFormal = "[=]";
 			String[] formalDecomp = formal.split(delimFormal);
 			int number = 0;

@@ -34,7 +34,7 @@ public abstract class Expression implements Serializable {
 
     protected ArrayList<String> myObjectValues = new ArrayList<String>();
 
-    protected String chaine = "";
+    protected String value = "";
 
     protected boolean locked = false;
 
@@ -77,15 +77,15 @@ public abstract class Expression implements Serializable {
     }
 
     public String toSPF() {
-	return chaine;
+	return value;
     }
 
     public String getName() {
-	return chaine;
+	return value;
     }
 
     public void setName(String pname) {
-	chaine = pname;
+	value = pname;
     }
 
     /**

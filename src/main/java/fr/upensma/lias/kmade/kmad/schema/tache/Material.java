@@ -102,7 +102,7 @@ public class Material implements Entity {
 	return name;
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+/*    public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("materiel");
 	racine.setAttribute("classkmad", "tache.Materiel");
 	racine.setAttribute("idkmad", oid.get());
@@ -120,6 +120,7 @@ public class Material implements Entity {
 
 	return racine;
     }
+*/
 
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;

@@ -156,7 +156,7 @@ public class ExpressUser {
 
     public static void setUserStatut(String oid, String st) {
 	User m = (User) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setStatut(st);
+	m.setStatus(st);
     }
 
     public static void setUserRole(String oid, String r) {

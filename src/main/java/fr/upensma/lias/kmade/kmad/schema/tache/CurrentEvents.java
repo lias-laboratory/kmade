@@ -22,23 +22,24 @@ import java.util.Collection;
 import java.util.HashMap;
 
 /**
+ * Class used by the simulator to manage events
  * @author Mickael BARON
  */
 public class CurrentEvents {
 
-    private HashMap<String, CurrentEvent> myList;
+    private HashMap<String, CurrentEvent> events;
 
     public CurrentEvents() {
-	myList = new HashMap<String, CurrentEvent>();
+	events = new HashMap<String, CurrentEvent>();
     }
 
     public CurrentEvent[] getAllCurrentEvents() {
-	CurrentEvent[] toto = new CurrentEvent[myList.values().size()];
-	Collection<CurrentEvent> teoto = myList.values();
+	CurrentEvent[] toto = new CurrentEvent[events.values().size()];
+	Collection<CurrentEvent> teoto = events.values();
 	toto = teoto.toArray(toto);
 	ArrayList<CurrentEvent> temp = new ArrayList<CurrentEvent>(
-		myList.values());
-	for (int i = 0; i < myList.values().size(); i++) {
+		events.values());
+	for (int i = 0; i < events.values().size(); i++) {
 	    toto[i] = temp.get(i);
 	}
 	return toto;
@@ -48,14 +49,14 @@ public class CurrentEvents {
 	if (p == null) {
 	    return;
 	}
-	myList.put(p.getOid().get(), new CurrentEvent(t, p));
+	events.put(p.getOid().get(), new CurrentEvent(t, p));
     }
 
     public boolean extractEvent(Event p) {
 	if (p == null) {
 	    return false;
 	}
-	myList.remove(p.getOid().get());
+	events.remove(p.getOid().get());
 	return true;
     }
 
@@ -63,11 +64,11 @@ public class CurrentEvents {
 	if (p == null) {
 	    return false;
 	}
-	return (myList.get(p.getOid().get()) != null);
+	return (events.get(p.getOid().get()) != null);
     }
 
     public void clearAllEvents() {
-	myList.clear();
+	events.clear();
     }
 
     public class CurrentEvent {

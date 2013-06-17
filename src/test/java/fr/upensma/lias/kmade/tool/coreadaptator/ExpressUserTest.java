@@ -115,7 +115,7 @@ public class ExpressUserTest {
 		assertTrue(o1.getImage()==oimage1);
 		assertTrue(o1.getName()==onom1);
 		assertTrue(o1.getRole()==orole1);
-		assertTrue(o1.getStatut()==ostatut1);
+		assertTrue(o1.getStatus()==ostatut1);
 		//vérification que o1 contient bien 1 membre et qu'il a pour nom nom1
 		
 		// on ne test pas le cast puisque l'on sait que l'on doit récupérer une organisation
@@ -127,7 +127,7 @@ public class ExpressUserTest {
 		assertTrue(o2.getImage()==oimage2);
 		assertTrue(o2.getName()==onom2);
 		assertTrue(o2.getRole()==orole2);
-		assertTrue(o2.getStatut()==ostatut2);
+		assertTrue(o2.getStatus()==ostatut2);
 		//vérification que o2 contient bien 2 membres et qu'ils ont pour nom nom1 puis nom2
 
 		assertTrue(((Organization) o2).getMembers().size()==2);
@@ -139,7 +139,7 @@ public class ExpressUserTest {
 		assertTrue(i1.getImage()==image1);
 		assertTrue(i1.getName()==nom1);
 		assertTrue(i1.getRole()==role1);
-		assertTrue(i1.getStatut()==statut1);
+		assertTrue(i1.getStatus()==statut1);
 		
 	}
 	
@@ -156,7 +156,7 @@ public class ExpressUserTest {
 		//on récupère l'org2 pour vérifié que le nom est bien changé
 		User i1 =ExpressUser.getUserWithName(nom1);
 		assertTrue(i1.getName()==nom1);
-		assertTrue(i1.getStatut()==statut2);
+		assertTrue(i1.getStatus()==statut2);
 		
 	}
 }

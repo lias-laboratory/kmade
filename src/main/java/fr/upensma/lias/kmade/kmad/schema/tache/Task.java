@@ -270,14 +270,14 @@ public class Task implements Entity {
     public void setActors(ArrayList<Actor> e) {
 	actors = e;
 	for (int i = 0; i < actors.size(); i++) {
-	    actors.get(i).setInverseTache(this);
+	    actors.get(i).setReverseTask(this);
 	}
     }
 
     public void setActorSystem(ArrayList<ActorSystem> e) {
 	actorSystem = e;
 	for (int i = 0; i < actors.size(); i++) {
-	    actors.get(i).setInverseTache(this);
+	    actors.get(i).setReverseTask(this);
 	}
     }
 
@@ -294,7 +294,7 @@ public class Task implements Entity {
 	    }
 	}
 	actors.add(a);
-	a.setInverseTache(this);
+	a.setReverseTask(this);
 	return true;
 
     }
@@ -307,13 +307,13 @@ public class Task implements Entity {
     public boolean addActorSystem(ActorSystem a) {
 	for (int i = 0; i < actorSystem.size(); i++) {
 	    ActorSystem act = actorSystem.get(i);
-	    if (act.getMaterielRef().getOid()
-		    .equals(a.getMaterielRef().getOid())) {
+	    if (act.getMaterialRef().getOid()
+		    .equals(a.getMaterialRef().getOid())) {
 		return false;
 	    }
 	}
 	actorSystem.add(a);
-	a.setInverseTache(this);
+	a.setReverseTask(this);
 	return true;
 
     }
@@ -750,11 +750,11 @@ public class Task implements Entity {
      * Compute the rank of child among children
      */
     private static int computeRank(Task leFils, Task laMere) {
-	int pointX = (leFils.point.x).intValue();
+	int pointX = (leFils.point.getX()).intValue();
 	int px = 0;
 	int taille = laMere.children.size();
 	for (int i = 0; i < taille; i++) {
-	    px = (((Task) laMere.children.get(i)).point.x).intValue();
+	    px = (((Task) laMere.children.get(i)).point.getX()).intValue();
 	    if (pointX < (px))
 		return i;
 	}
@@ -810,8 +810,8 @@ public class Task implements Entity {
      * @return the list of tasks
      */
     public Task[] getTasksToModify(int x, int y) {
-    	this.point.x = new Integer(x);
-    	this.point.y = new Integer(y);
+    	this.point.setX(new Integer(x));
+    	this.point.setY(new Integer(y));
     	if (mother == null)
     		return null;
     	int placeOld = mother.children.indexOf(this);
@@ -1180,7 +1180,7 @@ public class Task implements Entity {
 	}
 
 	// Executant
-	this.executor = Executor.getXMLExecutantValue(p);
+	this.executor = Executor.getXMLExecutorValue(p);
 
 	// Frequence
 	this.frequency = Frequence.getXMLFrequenceValue(p);
@@ -1242,7 +1242,7 @@ public class Task implements Entity {
 			    .prendre(new Oid(nodeListActors.item(i)
 				    .getTextContent()));
 		    this.actors.add(acteur);
-		    acteur.setInverseTache(this);
+		    acteur.setReverseTask(this);
 		}
 	    }
 	}
@@ -1257,7 +1257,7 @@ public class Task implements Entity {
 			    .prendre(new Oid(nodeListActors.item(i)
 				    .getTextContent()));
 		    this.actorSystem.add(actorSystem);
-		    actorSystem.setInverseTache(this);
+		    actorSystem.setReverseTask(this);
 		}
 	    }
 	}
@@ -1821,7 +1821,7 @@ public class Task implements Entity {
 	    String[] actors = p.getAttribute("id-task-actors-list").split(" ");
 	    for (int i = 0; i < actors.length; i++) {
 		this.addActor((Actor) InterfaceExpressJava.bdd.prendre(new Oid(actors[i])));
-		this.actors.get(i).setInverseTache(this);
+		this.actors.get(i).setReverseTask(this);
 	    }
 	}
 	// Actors system
@@ -1831,7 +1831,7 @@ public class Task implements Entity {
 	    for (int i = 0; i < actorSys.length; i++) {
 		this.addActorSystem((ActorSystem) InterfaceExpressJava.bdd
 			.prendre(new Oid(actorSys[i])));
-		this.actorSystem.get(i).setInverseTache(this);
+		this.actorSystem.get(i).setReverseTask(this);
 	    }
 	}
 	// Point (coordonnée)
@@ -1910,7 +1910,7 @@ public class Task implements Entity {
 	}
 
 	// Executant
-	this.executor = Executor.getXMLExecutantValue2(p);
+	this.executor = Executor.getXMLExecutorValue2(p);
 	// Frequence
 	this.frequency = Frequence.getXMLFrequenceValue2(p);
 	// Valeur de la Frequence

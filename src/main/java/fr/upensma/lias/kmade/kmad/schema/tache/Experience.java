@@ -33,7 +33,7 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 public enum Experience implements Enumerated {
     INCONNU("UNK"), EXPERT("HIGH"), MOYEN("MIDDLE"), NOVICE("LOW");
 
-    private final String enonce;
+    private final String value;
 
     /**
      * Constructeur de la classe
@@ -42,7 +42,7 @@ public enum Experience implements Enumerated {
      * @param s chaine de caractere supposee representer l'enumere
      */
     private Experience(String s) {
-	enonce = s;
+	value = s;
     }
 
     /**
@@ -51,7 +51,7 @@ public enum Experience implements Enumerated {
      */
     public static Experience getValue(String s) {
 	for (Experience i : Experience.values()) {
-	    if (s.equalsIgnoreCase(i.enonce)) {
+	    if (s.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
@@ -83,7 +83,7 @@ public enum Experience implements Enumerated {
 	    return ExpressConstant.UNKNOWN_EXPERIENCE_NAME;
     }
 
-    public static String getLocaleExperienceIntoEnumere(String experience) {
+    public static String getLocaleExperienceIntoEnumerate(String experience) {
 	if (experience.equals(ExpressConstant.UNKNOWN_EXPERIENCE_NAME)) {
 	    return "UNK";
 	} else if (experience.equals(ExpressConstant.HIGH_EXPERIENCE_NAME)) {
@@ -96,9 +96,9 @@ public enum Experience implements Enumerated {
 	return "UNK";
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+    public org.w3c.dom.Element toXML2(Document doc) {
 	Element kmadActorExperience = doc.createElement("actor-experience");
-	kmadActorExperience.setTextContent(this.enonce);
+	kmadActorExperience.setTextContent(this.value);
 	return kmadActorExperience;
     }
 
@@ -112,7 +112,7 @@ public enum Experience implements Enumerated {
 	String value = (String) nodeList.item(0).getTextContent();
 
 	for (Experience i : Experience.values()) {
-	    if (value.equalsIgnoreCase(i.enonce)) {
+	    if (value.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
@@ -120,15 +120,11 @@ public enum Experience implements Enumerated {
     }
 
     public String toSPF() {
-	return "." + enonce + ".";
+	return "." + value + ".";
     }
 
     public String getValue() {
-	return enonce;
+	return value;
     }
 
-    public org.w3c.dom.Element toXML2(Document doc) {
-	// TODO Auto-generated method stub
-	return this.toXML(doc);
-    }
 }

@@ -335,7 +335,7 @@ public final class SearchAdaptator {
 	    }
 	    if (!executant.equals("*")) {
 		myTask.setExecutor(Executor
-			.getLocaleExecutantIntoExecutant(executant));
+			.getLocaleExecutorIntoExecutor(executant));
 	    }
 	    if (!operateur.equals("*")) {
 		myTask.setOrdering(Decomposition
@@ -405,7 +405,7 @@ public final class SearchAdaptator {
 	    c = (v || findTaskName.equalsIgnoreCase(""));
 	    // Exécutant
 	    d = (allTache.get(i).getExecutor().getValue() == Executor
-		    .getLocaleExecutantIntoEnumere(executant) || executant == "*");
+		    .getLocaleExecutorIntoEnumere(executant) || executant == "*");
 	    // Opérateur
 	    e = (allTache.get(i).getOrdering().getValue() == Decomposition
 		    .getLocaleDecompositionIntoEnumere(operateur) || operateur == "*");

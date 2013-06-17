@@ -30,7 +30,7 @@ public final class TaskPropertiesEditorAdaptator {
     }
 
     public static void setExecutantInTaskProperties(String value) {
-	Executor myExec = Executor.getLocaleExecutantIntoExecutant(value);
+	Executor myExec = Executor.getLocaleExecutorIntoExecutor(value);
 	KMADEVertexView.editor.setEnableFaculEditor(!myExec
 		.equals(Executor.SYS));
 	TaskPropertiesAdaptator.updateExecutantTypeRealTime(myExec);

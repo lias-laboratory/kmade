@@ -28,14 +28,14 @@ public class SideEffectExpression extends Expression {
 
     public SideEffectExpression() {
 	refNode = new VoidConstant();
-	chaine = refNode.getName();
+	value = refNode.getName();
     }
 
     public SideEffectExpression(String pre) {
-	this.chaine = pre;
-	if (this.chaine.equals("")) {
+	this.value = pre;
+	if (this.value.equals("")) {
 	    refNode = new VoidConstant();
-	    chaine = refNode.getName();
+	    value = refNode.getName();
 	}
     }
 }

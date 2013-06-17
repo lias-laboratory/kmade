@@ -107,7 +107,7 @@ public final class OrganisationAdaptator {
 		    .getOrganisationPanel()
 		    .getOrganizationObjectTable()
 		    .addOrganization(myList.get(i).getName(),
-			    myList.get(i).getStatut(), myList.get(i).getRole(),
+			    myList.get(i).getStatus(), myList.get(i).getRole(),
 			    myList.get(i).getImage(),
 			    myList.get(i).getMembers(),
 			    myList.get(i).getOid().get());

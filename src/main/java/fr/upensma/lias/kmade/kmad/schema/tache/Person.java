@@ -42,7 +42,7 @@ public class Person extends User {
     /**
      * List of organizations the individual is member of
      */
-    private ArrayList<Organization> memberOf = new ArrayList<Organization>();
+    private ArrayList<Organization> organizations = new ArrayList<Organization>();
 
     /**
      * Empty constructor
@@ -92,8 +92,8 @@ public class Person extends User {
      * @see fr.upensma.lias.kmade.kmad.schema.tache.User#delete()
      */
     public void delete() {
-	for (int i = 0; i < memberOf.size(); i++) {
-	    memberOf.get(i).removeIndividu(this);
+	for (int i = 0; i < organizations.size(); i++) {
+	    organizations.get(i).removeIndividu(this);
 	}
 	super.delete();
     }
@@ -106,8 +106,8 @@ public class Person extends User {
      * @param org the organization to register
      */
     public void addOrganization(Organization org) {
-	if (!memberOf.contains(org)) {
-	    memberOf.add(org);
+	if (!organizations.contains(org)) {
+	    organizations.add(org);
 	}
     }
 
@@ -118,7 +118,7 @@ public class Person extends User {
      * @return an ArrayList which contains all organizations the individual is member of
      */
     public ArrayList<Organization> getOrganisations() {
-	return memberOf;
+	return organizations;
     }
 
     /**
@@ -128,10 +128,10 @@ public class Person extends User {
      * @param org the organization to be removed
      */
     public void removeOrganisation(Organization org) {
-	memberOf.remove(org);
+	organizations.remove(org);
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+/*    public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("Individu");
 	racine.setAttribute("classkmad", "tache.Individu");
 	racine.setAttribute("idkmad", oid.get());
@@ -167,7 +167,8 @@ public class Person extends User {
 	}
 	return racine;
     }
-
+*/
+    
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	NodeList userValue = p.getElementsByTagName("id-organisation");
 	for (int i = 0; i < userValue.getLength(); i++) {
@@ -191,7 +192,7 @@ public class Person extends User {
 	NodeList kmadIndividuStatut = p.getElementsByTagName("individu-statut");
 
 	if (kmadIndividuStatut.item(0) != null)
-	    super.setStatut(kmadIndividuStatut.item(0).getTextContent());
+	    super.setStatus(kmadIndividuStatut.item(0).getTextContent());
 
 	NodeList kmadIndividuRole = p.getElementsByTagName("individu-role");
 
@@ -218,14 +219,14 @@ public class Person extends User {
 
     public String toSPF() {
 	String s = new String("(");
-	for (int i = 0; i < memberOf.size(); i++) {
-	    s = s + "#" + memberOf.get(i).getOid().toString();
-	    if (i != memberOf.size() - 1)
+	for (int i = 0; i < organizations.size(); i++) {
+	    s = s + "#" + organizations.get(i).getOid().toString();
+	    if (i != organizations.size() - 1)
 		s += ",";
 	}
 	s += ")";
 	return oid.get() + "=Individu('" + super.getName() + "','"
-		+ super.getStatut() + "','" + super.getRole() + "','"
+		+ super.getStatus() + "','" + super.getRole() + "','"
 		+ super.getImage() + "','" + s + "');";
     }
 
@@ -237,14 +238,14 @@ public class Person extends User {
      */
     public Object[] toArray() {
 	String s = "";
-	for (int i = 0; i < memberOf.size(); i++) {
-	    s += memberOf.get(i).getName();
-	    if (i != memberOf.size() - 1) {
+	for (int i = 0; i < organizations.size(); i++) {
+	    s += organizations.get(i).getName();
+	    if (i != organizations.size() - 1) {
 		s += ", ";
 	    }
 	}
 
-	Object[] res = { super.oid.get(), super.getName(), super.getStatut(),
+	Object[] res = { super.oid.get(), super.getName(), super.getStatus(),
 		super.getRole(), super.getImage(), s };
 	return res;
     }
@@ -265,10 +266,10 @@ public class Person extends User {
 	racine.setAttribute("classkmad", "tache.Individu");
 	racine.setAttribute("idkmad", oid.get());
 
-	if (this.memberOf.size() != 0) {
+	if (this.organizations.size() != 0) {
 	    String list = new String("");
-	    for (int i = 0; i < memberOf.size(); i++) {
-		list += memberOf.get(i).getOid().get() + " ";
+	    for (int i = 0; i < organizations.size(); i++) {
+		list += organizations.get(i).getOid().get() + " ";
 	    }
 	    racine.setAttribute("id-organisation", list);
 	}
@@ -277,9 +278,9 @@ public class Person extends User {
 	kmadIndividuName.setTextContent(this.getName());
 	racine.appendChild(kmadIndividuName);
 
-	if (!this.getStatut().equals("")) {
+	if (!this.getStatus().equals("")) {
 	    Element kmadIndividuStatut = doc.createElement("individu-statut");
-	    kmadIndividuStatut.setTextContent(this.getStatut());
+	    kmadIndividuStatut.setTextContent(this.getStatus());
 	    racine.appendChild(kmadIndividuStatut);
 	}
 
@@ -295,10 +296,10 @@ public class Person extends User {
 	    kmadIndividuImagePath.setTextContent(this.getImage());
 	    racine.appendChild(kmadIndividuImagePath);
 	}
-	if (this.memberOf.size() != 0) {
-	    for (int i = 0; i < memberOf.size(); i++) {
+	if (this.organizations.size() != 0) {
+	    for (int i = 0; i < organizations.size(); i++) {
 		Element idOrganisation = doc.createElement("id-organisation");
-		idOrganisation.setTextContent(memberOf.get(i).getOid().get());
+		idOrganisation.setTextContent(organizations.get(i).getOid().get());
 		racine.appendChild(idOrganisation);
 	    }
 	}
@@ -309,7 +310,7 @@ public class Person extends User {
     public void createObjectFromXMLElement2(Element p) throws Exception {
 	// TODO Auto-generated method stub
 	this.oid = new Oid(p.getAttribute("idkmad"));
-	memberOf.clear();
+	organizations.clear();
 	if(p.hasAttribute("id-organisation")){
 	    String[] kmadIndividuOrganisation = p.getAttribute("id-organisation").split(" ");
 	    for (int i = 0; i < kmadIndividuOrganisation.length; i++) {
@@ -328,7 +329,7 @@ public class Person extends User {
 	if(kmadIndividuStatut.item(0).getParentNode() != p){
 		kmadIndividuStatut = null;}
 	if (kmadIndividuStatut.item(0) != null)
-	    super.setStatut(kmadIndividuStatut.item(0).getTextContent());
+	    super.setStatus(kmadIndividuStatut.item(0).getTextContent());
 
 	NodeList kmadIndividuRole = p.getElementsByTagName("individu-role");
 	if(kmadIndividuRole.item(0).getParentNode() != p){

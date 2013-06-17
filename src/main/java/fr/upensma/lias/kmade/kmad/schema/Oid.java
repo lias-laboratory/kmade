@@ -39,7 +39,7 @@ public class Oid implements Comparable<Object>, Serializable {
     }
 
     public Oid(String st) {
-    	//Previous and actual version of the dtd
+    	//Previous and current version of the dtd
 	if (st.charAt(0) != '#' && st.charAt(0) != 'K') {
 	    KMADEHistoryMessageManager.printlnError("Erreur dans chaine pour oid st=" + st);
 	}

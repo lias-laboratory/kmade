@@ -30,18 +30,18 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 public enum Decomposition implements Enumerated {
     SEQ("SEQ"), PAR("PAR"), ELE("LEAF"), INCONNU("UNK"), ALT("ALT"), ET("ENT");
 
-    private final String enonce;
+    private final String value;
 
     private Decomposition(String s) {
-	enonce = s;
+	value = s;
     }
 
     public String toString() {
-	return Decomposition.getEnumereIntoLocaleDecomposition(enonce);
+	return Decomposition.getEnumereIntoLocaleDecomposition(value);
     }
 
     public String getValue() {
-	return enonce;
+	return value;
     }
 
     public static Decomposition getXMLModalityValue(org.w3c.dom.Element p) {
@@ -52,7 +52,7 @@ public enum Decomposition implements Enumerated {
 	String value = (String) nodeList.item(0).getTextContent();
 
 	for (Decomposition i : Decomposition.values()) {
-	    if (value.equalsIgnoreCase(i.enonce)) {
+	    if (value.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
@@ -61,25 +61,21 @@ public enum Decomposition implements Enumerated {
 
     public static Decomposition getValue(String s) {
 	for (Decomposition i : Decomposition.values()) {
-	    if (s.equalsIgnoreCase(i.enonce)) {
+	    if (s.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
 	return null;
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
-	Element kmadTaskDecomposition = doc.createElement("task-decomposition");
-	kmadTaskDecomposition.setTextContent(this.enonce);
-	return kmadTaskDecomposition;
-    }
-    
     public org.w3c.dom.Element toXML2(Document doc) {
-	return this.toXML(doc);
+	Element kmadTaskDecomposition = doc.createElement("task-decomposition");
+	kmadTaskDecomposition.setTextContent(this.value);
+	return kmadTaskDecomposition;
     }
 
     public String toSPF() {
-	return "." + enonce + ".";
+	return "." + value + ".";
     }
 
     public static String[] getNameLocaleDecomposition() {
@@ -155,7 +151,7 @@ public enum Decomposition implements Enumerated {
 		String value = (String) nodeList.item(0).getTextContent();
 
 		for (Decomposition i : Decomposition.values()) {
-		    if (value.equalsIgnoreCase(i.enonce)) {
+		    if (value.equalsIgnoreCase(i.value)) {
 			return i;
 		    }
 		}

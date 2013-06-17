@@ -39,11 +39,12 @@ public class ExpressEvent {
 	e.delete();
     }
 
-    public static ArrayList<String> getForeseeableEvent(String oid) {
+/*  not used - what is the purpose ???
+ 	public static ArrayList<String> getForeseeableEvent(String oid) {
 	Event e = (Event) InterfaceExpressJava.prendre(new Oid(oid));
 	return e.affProvoquer();
     }
-
+*/
     public static void affRemoveEvent(String oid) {
 	Event e = (Event) InterfaceExpressJava.prendre(new Oid(oid));
 	e.affDelete();

@@ -224,7 +224,7 @@ public class KMADEEditorActorSystemDialog extends JPropertiesEditorDialog {
 		}
 		case 1: {
 		    ActorSystemAdaptator.setActorSystemExperience(oidRow,
-			    Experience.getLocaleExperienceIntoEnumere(value));
+			    Experience.getLocaleExperienceIntoEnumerate(value));
 		    break;
 		}
 		case 2: {

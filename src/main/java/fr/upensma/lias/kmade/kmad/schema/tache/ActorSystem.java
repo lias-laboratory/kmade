@@ -36,35 +36,35 @@ public class ActorSystem implements Entity {
 
     public Oid oid = null;
 
-    private Material userRef;
+    private Material materialRef;
 
     private Experience experience = Experience.INCONNU;
 
     private String competence = "";
 
-    private Task inverseTache;
+    private Task reverseTask;
 
     public ActorSystem() {
-	userRef = null;
+	materialRef = null;
 	experience = Experience.INCONNU;
 	competence = "";
     }
 
     public ActorSystem(String exp, String comp, Material u, Oid o) {
-	userRef = u;
+	materialRef = u;
 	experience = Experience.getValue(exp);
 	competence = comp;
 	this.oid = o;
     }
 
     public void delete() {
-	userRef.removeReverseActorSystem(this);
-	inverseTache.removeActorSystem(this);
+	materialRef.removeReverseActorSystem(this);
+	reverseTask.removeActorSystem(this);
 	InterfaceExpressJava.remove(oid);
     }
 
     public String getName() {
-	return userRef.getName();
+	return materialRef.getName();
     }
 
     public void affDelete() {
@@ -72,22 +72,22 @@ public class ActorSystem implements Entity {
 		oid,
 		15,
 		ExpressConstant.REMOVE_OF_THE_TASK_MESSAGE + " \""
-			+ inverseTache.getName() + "\"");
+			+ reverseTask.getName() + "\"");
     }
 
     public void setOid(Oid oid) {
 	this.oid = oid;
     }
 
-    public void setInverseTache(Task a) {
-	this.inverseTache = a;
+    public void setReverseTask(Task a) {
+	this.reverseTask = a;
     }
 
     public String toString() {
-	return userRef.toString();
+	return materialRef.toString();
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+/*    public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("actorSystem");
 	racine.setAttribute("classkmad", "tache.ActeurSysteme");
 	racine.setAttribute("idkmad", oid.get());
@@ -106,7 +106,7 @@ public class ActorSystem implements Entity {
 	racine.appendChild(idUser);
 	return racine;
     }
-
+*/
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) throws Exception,
 	    KMADXMLParserException {
 	NodeList nodeList = p.getElementsByTagName("id-userSystem");
@@ -132,15 +132,15 @@ public class ActorSystem implements Entity {
 	nodeList = p.getElementsByTagName("id-userSystem");
 	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
 		nodeList = null;}
-	this.userRef = (Material) InterfaceExpressJava.bdd.prendre(new Oid(
+	this.materialRef = (Material) InterfaceExpressJava.bdd.prendre(new Oid(
 		nodeList.item(0).getTextContent()));
     }
 
     public String toSPF() {
 	String SPF = oid.get() + "=" + "Acteur System" + "("
 		+ experience.toSPF() + "," + "'" + competence + "'" + ",";
-	if (userRef != null)
-	    SPF = SPF + userRef.getOid().get();
+	if (materialRef != null)
+	    SPF = SPF + materialRef.getOid().get();
 	else
 	    SPF = SPF + "$";
 	SPF = SPF + ");";
@@ -163,24 +163,20 @@ public class ActorSystem implements Entity {
 	return competence;
     }
 
-    public void setMaterielRef(Material u) {
-	userRef = u;
+    public void setMaterialRef(Material u) {
+	materialRef = u;
     }
 
-    public Material getMaterielRef() {
-	return userRef;
+    public Material getMaterialRef() {
+	return materialRef;
     }
 
     public Oid getOid() {
 	return oid;
     }
 
-    public Task getInverseTache() {
-	return inverseTache;
-    }
-
-    public Material getUserSystemRef() {
-	return userRef;
+    public Task getReverseTask() {
+	return reverseTask;
     }
 
     @Override
@@ -189,7 +185,7 @@ public class ActorSystem implements Entity {
 	Element racine = doc.createElement("actor");
 	racine.setAttribute("classkmad", "tache.Acteur");
 	racine.setAttribute("idkmad", oid.get());
-	racine.setAttribute("id-user", this.userRef.getOid().get());
+	racine.setAttribute("id-user", this.materialRef.getOid().get());
 
 	racine.appendChild(experience.toXML2(doc));
 	if (!this.competence.equals("")) {
@@ -204,7 +200,7 @@ public class ActorSystem implements Entity {
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
 	this.oid = new Oid(p.getAttribute("idkmad"));
-	this.userRef = (Material) InterfaceExpressJava.bdd.prendre(new Oid(p
+	this.materialRef = (Material) InterfaceExpressJava.bdd.prendre(new Oid(p
 		.getAttribute("id-user")));
 	this.experience = Experience.getXMLExperienceValue(p);
 

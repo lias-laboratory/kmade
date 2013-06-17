@@ -53,7 +53,7 @@ public abstract class User implements Entity {
     /**
      * statut : String -> a semantically free "status" to be used for the User
      */
-    private String statut = "";
+    private String status = "";
 
     /**
      * role : String -> a semantically free "role" to be used for the User
@@ -69,7 +69,7 @@ public abstract class User implements Entity {
      * List of actors the user is involved in. 
      * CommentPG: Not sure it is very necessary and useful
      */
-    private ArrayList<Actor> inverseActeur = new ArrayList<Actor>();
+    private ArrayList<Actor> reverseActors = new ArrayList<Actor>();
 
     /**
      * Empty constructor
@@ -111,7 +111,7 @@ public abstract class User implements Entity {
      */
     public User(String name, String st, String r, String pi, Oid oid) {
 	this.name = name;
-	this.statut = st;
+	this.status = st;
 	this.role = r;
 	this.imagePath = pi;
 	this.oid = oid;
@@ -125,8 +125,8 @@ public abstract class User implements Entity {
      * 
      * @param a the actor to add
      */
-    public void addInverseActeur(Actor a) {
-	inverseActeur.add(a);
+    public void addReverseActor(Actor a) {
+	reverseActors.add(a);
     }
 
     /**
@@ -135,12 +135,12 @@ public abstract class User implements Entity {
      * @param a the actor to be removed
      */
     public void removeInverseActeur(Actor a) {
-	inverseActeur.remove(a);
+	reverseActors.remove(a);
     }
 
     public void delete() {
-	for (int i = 0; i < inverseActeur.size(); i++) {
-	    Actor a = inverseActeur.get(i);
+	for (int i = 0; i < reverseActors.size(); i++) {
+	    Actor a = reverseActors.get(i);
 	    a.delete();
 	}
 	InterfaceExpressJava.remove(oid);
@@ -148,8 +148,8 @@ public abstract class User implements Entity {
 
     public void affDelete() {
 	InterfaceExpressJava.getGestionWarning().addMessage(oid, 3);
-	for (int i = 0; i < inverseActeur.size(); i++) {
-	    Actor a = inverseActeur.get(i);
+	for (int i = 0; i < reverseActors.size(); i++) {
+	    Actor a = reverseActors.get(i);
 	    a.affDelete();
 	}
     }
@@ -162,12 +162,12 @@ public abstract class User implements Entity {
 	name = n;
     }
 
-    public String getStatut() {
-	return statut;
+    public String getStatus() {
+	return status;
     }
 
-    public void setStatut(String n) {
-	statut = n;
+    public void setStatus(String n) {
+	status = n;
     }
 
     public void setImage(String n) {
@@ -261,7 +261,7 @@ public abstract class User implements Entity {
 	return n;
     }
     
-    public org.w3c.dom.Element toXML(Document doc) {
+/*    public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("user");
 	racine.setAttribute("classkmad", "tache.User");
 	racine.setAttribute("idkmad", oid.get());
@@ -270,9 +270,9 @@ public abstract class User implements Entity {
 	kmadUserName.setTextContent(this.getName());
 	racine.appendChild(kmadUserName);
 
-	if (!this.getStatut().equals("")) {
+	if (!this.getStatus().equals("")) {
 	    Element kmadUserStatut = doc.createElement("user-statut");
-	    kmadUserStatut.setTextContent(this.getStatut());
+	    kmadUserStatut.setTextContent(this.getStatus());
 	    racine.appendChild(kmadUserStatut);
 	}
 
@@ -290,7 +290,8 @@ public abstract class User implements Entity {
 
 	return racine;
     }
-
+*/
+    
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;
     }
@@ -304,7 +305,7 @@ public abstract class User implements Entity {
 
 	NodeList kmadUserStatut = p.getElementsByTagName("user-statut");
 	if (kmadUserStatut.item(0) != null)
-	    this.statut = kmadUserStatut.item(0).getTextContent();
+	    this.status = kmadUserStatut.item(0).getTextContent();
 
 	NodeList kmadUserRole = p.getElementsByTagName("user-role");
 	if (kmadUserRole.item(0) != null)
@@ -317,7 +318,7 @@ public abstract class User implements Entity {
     }
 
     public String toSPF() {
-	return oid.get() + "=User('" + name + "','" + statut + "','" + role
+	return oid.get() + "=User('" + name + "','" + status + "','" + role
 		+ "','" + this.imagePath + "');";
     }
 
@@ -335,9 +336,9 @@ public abstract class User implements Entity {
     	kmadUserName.setTextContent(this.getName());
     	racine.appendChild(kmadUserName);
 
-    	if (!this.getStatut().equals("")) {
+    	if (!this.getStatus().equals("")) {
     	    Element kmadUserStatut = doc.createElement("user-statut");
-    	    kmadUserStatut.setTextContent(this.getStatut());
+    	    kmadUserStatut.setTextContent(this.getStatus());
     	    racine.appendChild(kmadUserStatut);
     	}
 
@@ -370,7 +371,7 @@ public abstract class User implements Entity {
 		 if(kmadUserStatut.item(0).getParentNode() != p){
 			 kmadUserStatut = null;}
 		if (kmadUserStatut.item(0) != null)
-		    this.statut = kmadUserStatut.item(0).getTextContent();
+		    this.status = kmadUserStatut.item(0).getTextContent();
 
 		NodeList kmadUserRole = p.getElementsByTagName("user-role");
 		 if(kmadUserRole.item(0).getParentNode() != p){

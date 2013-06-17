@@ -33,7 +33,7 @@ public class Media implements Entity {
 
     public Oid oid = null;
 
-    private boolean isExisting = false;
+    private boolean existing = false;
 
     private String fileName = "";
 
@@ -48,7 +48,7 @@ public class Media implements Entity {
 	this.path = "";
 	this.startMark = -1;
 	this.finishMark = -1;
-	this.isExisting = false;
+	this.existing = false;
     }
 
     public String getName() {
@@ -65,7 +65,7 @@ public class Media implements Entity {
 
     public String toSPF() {
 	return oid.get() + "=Media('" + fileName + "','" + path + "','"
-		+ startMark + "','" + this.finishMark + "',." + this.isExisting
+		+ startMark + "','" + this.finishMark + "',." + this.existing
 		+ ".);";
     }
 
@@ -74,7 +74,7 @@ public class Media implements Entity {
 
 	NodeList nodeList = p.getElementsByTagName("media-existing");
 	if (nodeList.item(0) != null)
-	    this.isExisting = Boolean.parseBoolean(nodeList.item(0)
+	    this.existing = Boolean.parseBoolean(nodeList.item(0)
 		    .getTextContent());
 
 	nodeList = p.getElementsByTagName("media-filename");
@@ -110,7 +110,7 @@ public class Media implements Entity {
 	return false;
     }
 
-    public Element toXML(Document doc) throws Exception {
+/*    public Element toXML(Document doc) throws Exception {
 	Element racine = doc.createElement("media");
 	racine.setAttribute("classkmad", "tache.Media");
 	racine.setAttribute("idkmad", oid.get());
@@ -146,7 +146,8 @@ public class Media implements Entity {
 
 	return racine;
     }
-
+*/
+    
     public String getFileName() {
 	return fileName;
     }
@@ -164,11 +165,11 @@ public class Media implements Entity {
     }
 
     public boolean isExisting() {
-	return isExisting;
+	return existing;
     }
 
     public void setExisting(boolean isExisting) {
-	this.isExisting = isExisting;
+	this.existing = isExisting;
     }
 
     public String getPath() {
@@ -190,13 +191,13 @@ public class Media implements Entity {
     @Override
     public Element toXML2(Document doc) throws Exception {
 	// TODO Auto-generated method stub
-	if (this.isExisting) {
+	if (this.existing) {
 	    Element racine = doc.createElement("media");
 	    racine.setAttribute("classkmad", "tache.Media");
 	    racine.setAttribute("idkmad", oid.get());
 
 	    Element currentElement = doc.createElement("media-existing");
-	    currentElement.setTextContent(Boolean.toString(this.isExisting));
+	    currentElement.setTextContent(Boolean.toString(this.existing));
 	    racine.appendChild(currentElement);
 
 	    currentElement = doc.createElement("media-filename");
@@ -237,7 +238,7 @@ public class Media implements Entity {
     	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
     		nodeList = null;}
     	if (nodeList.item(0) != null)
-    	    this.isExisting = Boolean.parseBoolean(nodeList.item(0)
+    	    this.existing = Boolean.parseBoolean(nodeList.item(0)
     		    .getTextContent());
 
     	nodeList = p.getElementsByTagName("media-filename");

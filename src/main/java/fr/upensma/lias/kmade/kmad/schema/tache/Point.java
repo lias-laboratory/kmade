@@ -33,9 +33,9 @@ public class Point implements Entity {
 
     public Oid oid;
 
-    public Integer x = null;
+    private Integer x = null;
 
-    public Integer y = null;
+    private Integer y = null;
 
     public Point() {
     }
@@ -46,7 +46,7 @@ public class Point implements Entity {
         this.oid = oid;
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {        
+/*    public org.w3c.dom.Element toXML(Document doc) {        
         Element racine = doc.createElement("point");
         racine.setAttribute("classkmad", "tache.Point");
         racine.setAttribute("idkmad", oid.get());
@@ -61,6 +61,7 @@ public class Point implements Entity {
         
         return racine;
     }
+*/
     
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
         return false;

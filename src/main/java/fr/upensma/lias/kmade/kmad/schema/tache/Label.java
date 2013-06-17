@@ -149,7 +149,8 @@ public class Label implements Entity {
 	return true;
     }
 
-    public Element toXML(Document doc) throws Exception {
+    @Override
+    public Element toXML2(Document doc) throws Exception {
 	Element racine = doc.createElement("label");
 	racine.setAttribute("classkmad", "tache.Label");
 	racine.setAttribute("idkmad", oid.get());
@@ -286,12 +287,6 @@ public class Label implements Entity {
 	}
 	return n;
     }
-
-    @Override
-	public Element toXML2(Document doc) throws Exception {
-		// TODO Auto-generated method stub
-		return toXML(doc);
-	}
 
 	@Override
 	public void createObjectFromXMLElement2(Element p) throws Exception {

@@ -100,7 +100,7 @@ public final class IndividuAdaptator {
 		    .tableIndividu()
 		    .getIndividuObjectTable()
 		    .addIndividu(myList.get(i).getName(),
-			    myList.get(i).getStatut(), myList.get(i).getRole(),
+			    myList.get(i).getStatus(), myList.get(i).getRole(),
 			    myList.get(i).getImage(),
 			    myList.get(i).getOrganisations(),
 			    myList.get(i).getOid().get());

@@ -32,7 +32,7 @@ public class ParkMachines extends Material {
 
     private static final long serialVersionUID = -4187152840289735872L;
 
-    private ArrayList<Machine> inverseMember = new ArrayList<Machine>();
+    private ArrayList<Machine> members = new ArrayList<Machine>();
 
     public ParkMachines() {
 	super();
@@ -48,8 +48,8 @@ public class ParkMachines extends Material {
 
     public void delete() {
 	// supprimer le parc des machines
-	for (int i = 0; i < inverseMember.size(); i++) {
-	    inverseMember.get(i).removeToParc(this);
+	for (int i = 0; i < members.size(); i++) {
+	    members.get(i).removeToPark(this);
 	}
 	super.delete();
     }
@@ -61,20 +61,20 @@ public class ParkMachines extends Material {
      * @param machine
      */
     public void addMember(Machine machine) {
-	if (!inverseMember.contains(machine)) {
-	    inverseMember.add(machine);
+	if (!members.contains(machine)) {
+	    members.add(machine);
 	}
     }
 
-    public void removeToParc(Machine machine) {
-	inverseMember.remove(machine);
+    public void removeFromPark(Machine machine) {
+	members.remove(machine);
     }
 
-    public ArrayList<Machine> getMember() {
-	return inverseMember;
+    public ArrayList<Machine> getMembers() {
+	return members;
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+/*    public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("ParcMachines");
 	racine.setAttribute("classkmad", "tache.ParcMachines");
 	racine.setAttribute("idkmad", oid.get());
@@ -100,14 +100,15 @@ public class ParkMachines extends Material {
 
 	return racine;
     }
-
+*/
+    
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;
     }
 
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 	this.oid = new Oid(p.getAttribute("idkmad"));
-	inverseMember.clear();
+	members.clear();
 
 	NodeList kmadParcName = p.getElementsByTagName("parcMachines-name");
 	if (kmadParcName.item(0) != null)
@@ -131,9 +132,9 @@ public class ParkMachines extends Material {
 
     public Object[] toArray() {
 	String s = "";
-	for (int i = 0; i < inverseMember.size(); i++) {
-	    s += inverseMember.get(i).getName();
-	    if (i != inverseMember.size() - 1) {
+	for (int i = 0; i < members.size(); i++) {
+	    s += members.get(i).getName();
+	    if (i != members.size() - 1) {
 		s += ", ";
 	    }
 	}
@@ -176,7 +177,7 @@ public class ParkMachines extends Material {
 
     public void createObjectFromXMLElement2(Element p) throws Exception {
     	this.oid = new Oid(p.getAttribute("idkmad"));
-    	inverseMember.clear();
+    	members.clear();
 
     	NodeList kmadParcName = p.getElementsByTagName("parcMachines-name");
     	if(kmadParcName.item(0).getParentNode() != p){

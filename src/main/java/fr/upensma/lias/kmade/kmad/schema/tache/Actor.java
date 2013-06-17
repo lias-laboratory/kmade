@@ -60,7 +60,7 @@ public class Actor implements Entity {
     /**
      * Reverse link to the task where the actor is defined
      */
-    private Task inverseTache;
+    private Task reverseTask;
 
     public Actor() {
 	userRef = null;
@@ -90,7 +90,7 @@ public class Actor implements Entity {
      */
     public void delete() {
     	userRef.removeInverseActeur(this);
-    	inverseTache.removeActor(this);
+    	reverseTask.removeActor(this);
     	InterfaceExpressJava.remove(oid);
     }
 
@@ -103,7 +103,7 @@ public class Actor implements Entity {
 		oid,
 		9,
 		ExpressConstant.REMOVE_OF_THE_TASK_MESSAGE + " \""
-			+ inverseTache.getName() + "\"");
+			+ reverseTask.getName() + "\"");
     }
 
     public void setOid(Oid oid) {
@@ -116,12 +116,12 @@ public class Actor implements Entity {
      * 
      * @param a the task where the actor is defined
      */
-    public void setInverseTache(Task a) {
-    	this.inverseTache = a;
+    public void setReverseTask(Task a) {
+    	this.reverseTask = a;
     }
 
     public Task getInverseTache() {
-    	return inverseTache;
+    	return reverseTask;
     }
 
     public void setExperience(String s) {
@@ -156,7 +156,7 @@ public class Actor implements Entity {
     	return userRef.toString();
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+/*    public org.w3c.dom.Element toXML(Document doc) {
 	Element racine = doc.createElement("actor");
 	racine.setAttribute("classkmad", "tache.Acteur");
 	racine.setAttribute("idkmad", oid.get());
@@ -174,7 +174,7 @@ public class Actor implements Entity {
 	racine.appendChild(idUser);
 	return racine;
     }
-
+*/
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) throws Exception,
 	    KMADXMLParserException {
 	NodeList nodeList = p.getElementsByTagName("id-user");

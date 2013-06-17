@@ -192,7 +192,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		KMADEConstant.EXECUTING_NAME_TITLE,
 		KMADEConstant.EXECUTING_NAME_LEGEND_TITLE, "",
 		JPropertiesTable.COMBO_TEXT, true,
-		Executor.getNameLocaleExecutant());
+		Executor.getNameLocaleExecutor());
 	taskProperties[MODALITY_NAME_TITLE_ELEMENT] = new PropertiesObject(
 		KMADEConstant.MODALITY_NAME_TITLE,
 		KMADEConstant.MODALITY_NAME_LEGEND_TITLE, "",
@@ -577,7 +577,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		case EXECUTING_NAME_TITLE_ELEMENT: {
 		    Executor mySelectedExecutant = Executor
 			    .getValue(Executor
-				    .getLocaleExecutantIntoEnumere((String) aValue));
+				    .getLocaleExecutorIntoEnumere((String) aValue));
 		    // Modification de l'attribut acteur.
 		    if (Task.canHaveActor(mySelectedExecutant)) {
 			informationTable[USER_TITLE_ELEMENT].setEditable(true);
@@ -656,7 +656,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		case FREQUENCY_NAME_TITLE_ELEMENT: {
 		    Frequence mySelectedExecutant = Frequence
 			    .getValue(Frequence
-				    .getLocaleFrequenceIntoEnumere((String) aValue));
+				    .getLocaleFrequenceIntoEnumerate((String) aValue));
 		    if (mySelectedExecutant.equals(Frequence.INCONNU)) {
 			informationTable[FREQUENCY_VALUE_NAME_TITLE_ELEMENT]
 				.setEditable(false);
@@ -669,7 +669,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		    if (!isInit) {
 			Frequence mySelectedFrequence = Frequence
 				.getValue(Frequence
-					.getLocaleFrequenceIntoEnumere((String) aValue));
+					.getLocaleFrequenceIntoEnumerate((String) aValue));
 			TaskPropertiesAdaptator
 				.setFrequencyFromExpressTask(mySelectedFrequence);
 		    }
@@ -686,7 +686,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		    if (!isInit) {
 			Importance mySelectedImportance = Importance
 				.getValue(Importance
-					.getLocaleImportanceIntoEnumere((String) aValue));
+					.getLocaleImportanceIntoEnumerate((String) aValue));
 			TaskPropertiesAdaptator
 				.setSignificantFromExpressTask(mySelectedImportance);
 		    }
@@ -743,7 +743,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 		    String executant = ((String) myTaskPropertiesModel
 			    .getValueAt(EXECUTING_NAME_TITLE_ELEMENT, 1));
 		    Executor myExecutant = Executor.getValue(Executor
-			    .getLocaleExecutantIntoEnumere(executant));
+			    .getLocaleExecutorIntoEnumere(executant));
 
 		    if (myExecutant.equals(Executor.SYS)
 			    || dec.equals(Decomposition.ALT)) {
@@ -835,7 +835,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 	myTaskPropertiesModel.setInitValueAt(obs,
 		TASK_OBSERVATION_TITLE_ELEMENT);
 	myTaskPropertiesModel.setInitValueAt(
-		Executor.getEnumereIntoLocaleExecutant(exec.getValue()),
+		Executor.getEnumereIntoLocaleExecutor(exec.getValue()),
 		EXECUTING_NAME_TITLE_ELEMENT);
 	myTaskPropertiesModel.setInitValueAt(
 		Modality.getEnumerateIntoLocalModality(mod),
@@ -896,7 +896,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 
     public void setExecutantTypeRealTime(Executor myExecutant) {
 	myTaskPropertiesModel
-		.setValueAt(Executor.getEnumereIntoLocaleExecutant(myExecutant
+		.setValueAt(Executor.getEnumereIntoLocaleExecutor(myExecutant
 			.getValue()), EXECUTING_NAME_TITLE_ELEMENT, 1);
     }
 
@@ -974,7 +974,7 @@ public final class KMADETaskPropertiesPanel extends JPanel implements LanguageFa
 
     public void setExecutant(Executor exec) {
 	myTaskPropertiesModel.setValueAt(
-		Executor.getEnumereIntoLocaleExecutant(exec.getValue()),
+		Executor.getEnumereIntoLocaleExecutor(exec.getValue()),
 		EXECUTING_NAME_TITLE_ELEMENT, 1);
     }
 

@@ -27,8 +27,8 @@ public interface Enumerated {
     
    String toSPF();    
    
-   Element toXML(Document doc);
-   
+/*   Element toXML(Document doc);
+*/   
    //Added by Joachim TROUVERIE to correspond to the new version of the dtd
    Element toXML2(Document doc);
    

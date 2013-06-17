@@ -30,14 +30,14 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 public enum Modality implements Enumerated {
     INCONNU("UNK"), SENS("SENS"), COGN("COGN");
 
-    private final String enonce;
+    private final String value;
 
     private Modality(String s) {
-	enonce = s;
+	value = s;
     }
 
     public String toString() {
-	return Modality.getEnumerateIntoLocalModality(enonce);
+	return Modality.getEnumerateIntoLocalModality(value);
     }
 
     public static Modality getXMLModalityValue(org.w3c.dom.Element p) {
@@ -48,7 +48,7 @@ public enum Modality implements Enumerated {
 
 	String value = (String) nodeList.item(0).getTextContent();
 	for (Modality i : Modality.values()) {
-	    if (value.equalsIgnoreCase(i.enonce)) {
+	    if (value.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
@@ -57,7 +57,7 @@ public enum Modality implements Enumerated {
 
     public static Modality getValue(String s) {
 	for (Modality i : Modality.values()) {
-	    if (s.equalsIgnoreCase(i.enonce)) {
+	    if (s.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
@@ -94,24 +94,19 @@ public enum Modality implements Enumerated {
 	    return ExpressConstant.UNKNOWN_MODALITY_NAME;
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+    @Override
+    public org.w3c.dom.Element toXML2(Document doc) {
 	Element kmadTaskModality = doc.createElement("task-modality");
-	kmadTaskModality.setTextContent(this.enonce);
+	kmadTaskModality.setTextContent(this.value);
 	return kmadTaskModality;
     }
 
     public String toSPF() {
-	return "." + enonce + ".";
+	return "." + value + ".";
     }
 
     public String getValue() {
-	return enonce;
-    }
-
-    @Override
-    public Element toXML2(Document doc) {
-	// TODO Auto-generated method stub
-	return this.toXML(doc);
+	return value;
     }
 
 	public static Modality getXMLModalityValue2(Element p) {
@@ -124,7 +119,7 @@ public enum Modality implements Enumerated {
 
 		String value = (String) nodeList.item(0).getTextContent();
 		for (Modality i : Modality.values()) {
-		    if (value.equalsIgnoreCase(i.enonce)) {
+		    if (value.equalsIgnoreCase(i.value)) {
 			return i;
 		    }
 		}

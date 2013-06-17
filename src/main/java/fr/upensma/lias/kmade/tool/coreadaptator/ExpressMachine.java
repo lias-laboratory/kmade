@@ -109,7 +109,7 @@ public class ExpressMachine {
 	ParkMachines o = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oidParcMachines));
 	// on les ajoutes mutuellement
-	i.addToParc(o);
+	i.addToPark(o);
 	o.addMember(i);
     }
 
@@ -119,8 +119,8 @@ public class ExpressMachine {
 	ParkMachines o = (ParkMachines) InterfaceExpressJava.prendre(new Oid(
 		oidParcMachines));
 	// on les ajoutes mutuellement
-	i.removeToParc(o);
-	o.removeToParc(i);
+	i.removeToPark(o);
+	o.removeFromPark(i);
 
     }
 
@@ -176,7 +176,7 @@ public class ExpressMachine {
 	    for (int i = 0; i < tabParc.length; i++) {
 		// on regarde si le parc � pour membre la macine, si non on
 		// l'ajoute � notre r�sultat
-		if (!tabParc[i].getMember().contains(m)) {
+		if (!tabParc[i].getMembers().contains(m)) {
 		    restmp.add(tabParc[i].toArray());
 		}
 	    }

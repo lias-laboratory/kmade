@@ -27,21 +27,21 @@ public class ProtoTaskCondition implements Entity{
 	private static final long serialVersionUID = 988021647708284024L;
 
 	public Oid oid = null;
-	private String texte;
+	private String text;
 	private StateCondition value;
 	
 	ProtoTaskCondition(){
-		texte ="";
+		text ="";
 		value = StateCondition.INDETERMINATE;
 	}
 	
 	ProtoTaskCondition(String texte){
-		this.texte=texte;
+		this.text=texte;
 		value = StateCondition.INDETERMINATE;
 	}
 	
 	ProtoTaskCondition(String texte, StateCondition value){
-		this.texte=texte;
+		this.text=texte;
 		this.value = value;
 	}
 	
@@ -115,12 +115,12 @@ public class ProtoTaskCondition implements Entity{
 		return null;
 	}
 
-	public String getTexte() {
-		return texte;
+	public String getText() {
+		return text;
 	}
 
-	public void setTexte(String texte) {
-		this.texte = texte;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public StateCondition getValue() {

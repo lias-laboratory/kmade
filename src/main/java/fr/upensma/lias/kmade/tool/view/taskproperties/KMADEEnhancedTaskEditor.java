@@ -1069,35 +1069,35 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 
 	executantGroup.add(unkExecutant);
 	unkExecutant.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	unkExecutant.setText(Executor.getEnumereIntoLocaleExecutant("UNK"));
+	unkExecutant.setText(Executor.getEnumereIntoLocaleExecutor("UNK"));
 	unkExecutant.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 		0, 0, 0));
 	unkExecutant.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 	executantGroup.add(userExecutant);
 	userExecutant.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	userExecutant.setText(Executor.getEnumereIntoLocaleExecutant("USER"));
+	userExecutant.setText(Executor.getEnumereIntoLocaleExecutor("USER"));
 	userExecutant.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 		0, 0, 0));
 	userExecutant.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 	executantGroup.add(sysExecutant);
 	sysExecutant.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	sysExecutant.setText(Executor.getEnumereIntoLocaleExecutant("SYS"));
+	sysExecutant.setText(Executor.getEnumereIntoLocaleExecutor("SYS"));
 	sysExecutant.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 		0, 0, 0));
 	sysExecutant.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 	executantGroup.add(intExecutant);
 	intExecutant.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	intExecutant.setText(Executor.getEnumereIntoLocaleExecutant("INT"));
+	intExecutant.setText(Executor.getEnumereIntoLocaleExecutor("INT"));
 	intExecutant.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 		0, 0, 0));
 	intExecutant.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
 	executantGroup.add(absExecutant);
 	absExecutant.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 10));
-	absExecutant.setText(Executor.getEnumereIntoLocaleExecutant("ABS"));
+	absExecutant.setText(Executor.getEnumereIntoLocaleExecutor("ABS"));
 	absExecutant.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,
 		0, 0, 0));
 	absExecutant.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -2175,11 +2175,11 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	smModalite.setText(Modality.getEnumerateIntoLocalModality("SENS"));
 	cogModalite.setText(Modality.getEnumerateIntoLocalModality("COGN"));
 	executantLabel.setText(KMADEConstant.EXECUTING_NAME_TITLE + " :");
-	unkExecutant.setText(Executor.getEnumereIntoLocaleExecutant("UNK"));
-	userExecutant.setText(Executor.getEnumereIntoLocaleExecutant("USER"));
-	sysExecutant.setText(Executor.getEnumereIntoLocaleExecutant("SYS"));
-	intExecutant.setText(Executor.getEnumereIntoLocaleExecutant("NUM"));
-	absExecutant.setText(Executor.getEnumereIntoLocaleExecutant("ABS"));
+	unkExecutant.setText(Executor.getEnumereIntoLocaleExecutor("UNK"));
+	userExecutant.setText(Executor.getEnumereIntoLocaleExecutor("USER"));
+	sysExecutant.setText(Executor.getEnumereIntoLocaleExecutor("SYS"));
+	intExecutant.setText(Executor.getEnumereIntoLocaleExecutor("NUM"));
+	absExecutant.setText(Executor.getEnumereIntoLocaleExecutor("ABS"));
 	unkImportance.setText(Importance.getEnumereIntoLocaleImportance("UNK"));
 	lowImportance.setText(Importance.getEnumereIntoLocaleImportance("LOW"));
 	middleImportance.setText(Importance

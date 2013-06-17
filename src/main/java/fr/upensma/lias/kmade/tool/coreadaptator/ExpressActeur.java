@@ -45,7 +45,7 @@ public class ExpressActeur {
 		Actor a = (Actor) InterfaceExpressJava.prendre(oidActor);
 		User u = (User) InterfaceExpressJava.prendre(oidUser);
 		a.setUserRef(u);
-		u.addInverseActeur(a);
+		u.addReverseActor(a);
 		return (oidActor);
 	}
 

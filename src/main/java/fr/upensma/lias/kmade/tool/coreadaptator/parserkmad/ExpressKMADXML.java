@@ -772,7 +772,7 @@ public final class ExpressKMADXML {
 			// tant que tel, il faut que ce soit un Individu ou une organisation
 			// On cr��r un Individu � partir de l'user
 			Person indi = new Person(user[i].getName(),
-					user[i].getStatut(), user[i].getRole(), user[i].getImage(),
+					user[i].getStatus(), user[i].getRole(), user[i].getImage(),
 					user[i].getOid());
 			// on supprime l'User de la bdd
 			InterfaceExpressJava.remove(user[i].getOid());

@@ -105,7 +105,7 @@ public final class ParcMachinesAdaptator {
 		    .addParcMachines(myList.get(i).getName(),
 			    myList.get(i).getDescription(),
 			    myList.get(i).getImage(),
-			    myList.get(i).getMember(),
+			    myList.get(i).getMembers(),
 			    myList.get(i).getOid().get());
 	}
     }

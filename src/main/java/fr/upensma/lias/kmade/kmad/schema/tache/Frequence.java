@@ -30,23 +30,23 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 public enum Frequence implements Enumerated {
     INCONNU("UNK"), ELEVE("HIGH"), MOYENNE("AVERAGE"), FAIBLE("LOW");
 
-    private final String enonce;
+    private final String value;
 
     private Frequence(String s) {
-	enonce = s;
+	value = s;
     }
 
     public String getValue() {
-	return enonce;
+	return value;
     }
 
     public String toString() {
-	return Frequence.getEnumereIntoLocaleFrequence(enonce);
+	return Frequence.getEnumereIntoLocaleFrequence(value);
     }
 
     public static Frequence getValue(String s) {
 	for (Frequence i : Frequence.values()) {
-	    if (s.equalsIgnoreCase(i.enonce)) {
+	    if (s.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
@@ -61,7 +61,7 @@ public enum Frequence implements Enumerated {
 	String value = (String) nodeList.item(0).getTextContent();
 
 	for (Frequence i : Frequence.values()) {
-	    if (value.equalsIgnoreCase(i.enonce)) {
+	    if (value.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
@@ -90,7 +90,7 @@ public enum Frequence implements Enumerated {
 	    return ExpressConstant.UNKNOWN_FREQUENCY_NAME;
     }
 
-    public static String getLocaleFrequenceIntoEnumere(String frequence) {
+    public static String getLocaleFrequenceIntoEnumerate(String frequence) {
 	if (frequence.equals(ExpressConstant.UNKNOWN_FREQUENCY_NAME)) {
 	    return "UNK";
 	} else if (frequence.equals(ExpressConstant.HIGH_FREQUENCY_NAME)) {
@@ -103,21 +103,17 @@ public enum Frequence implements Enumerated {
 	return "UNK";
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+    @Override
+    public org.w3c.dom.Element toXML2(Document doc) {
 	Element kmadTaskFrequency = doc.createElement("task-frequency");
-	kmadTaskFrequency.setTextContent(this.enonce);
+	kmadTaskFrequency.setTextContent(this.value);
 	return kmadTaskFrequency;
     }
 
     public String toSPF() {
-	return "." + enonce + ".";
+	return "." + value + ".";
     }
 
-    @Override
-    public Element toXML2(Document doc) {
-	// TODO Auto-generated method stub
-	return this.toXML(doc);
-    }
 
 	public static Frequence getXMLFrequenceValue2(Element p) {
 		NodeList nodeList = p.getElementsByTagName("task-frequency");
@@ -129,7 +125,7 @@ public enum Frequence implements Enumerated {
 		String value = (String) nodeList.item(0).getTextContent();
 
 		for (Frequence i : Frequence.values()) {
-		    if (value.equalsIgnoreCase(i.enonce)) {
+		    if (value.equalsIgnoreCase(i.value)) {
 			return i;
 		    }
 		}

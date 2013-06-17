@@ -33,12 +33,12 @@ public enum Executor implements Enumerated {
 	    ExpressConstant.INTERACTIF_TASK_16_IMAGE), ABS("ABS",
 	    ExpressConstant.ABSTRACT_TASK_16_IMAGE);
 
-    private final String enonce;
+    private final String value;
 
     private final String image;
 
     private Executor(String s, String pimage) {
-	enonce = s;
+	value = s;
 	image = pimage;
     }
 
@@ -47,14 +47,14 @@ public enum Executor implements Enumerated {
     }
 
     public String getValue() {
-	return enonce;
+	return value;
     }
 
     public String toString() {
-	return Executor.getEnumereIntoLocaleExecutant(enonce);
+	return Executor.getEnumereIntoLocaleExecutor(value);
     }
 
-    public static Executor getXMLExecutantValue(org.w3c.dom.Element p) {
+    public static Executor getXMLExecutorValue(org.w3c.dom.Element p) {
     	
 	NodeList nodeList = p.getElementsByTagName("task-executant");
 	if (nodeList.item(0) == null) {
@@ -63,14 +63,14 @@ public enum Executor implements Enumerated {
 	String value = (String) nodeList.item(0).getTextContent();
 
 	for (Executor i : Executor.values()) {
-	    if (value.equalsIgnoreCase(i.enonce)) {
+	    if (value.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
 	return INCONNU;
     }
     
-    public static Executor getXMLExecutantValue2(org.w3c.dom.Element p) {
+    public static Executor getXMLExecutorValue2(org.w3c.dom.Element p) {
     	
 	NodeList nodeList = p.getElementsByTagName("task-executant");
 	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
@@ -81,7 +81,7 @@ public enum Executor implements Enumerated {
 	String value = (String) nodeList.item(0).getTextContent();
 
 	for (Executor i : Executor.values()) {
-	    if (value.equalsIgnoreCase(i.enonce)) {
+	    if (value.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
@@ -90,109 +90,109 @@ public enum Executor implements Enumerated {
 
     public static Executor getValue(String s) {
 	for (Executor i : Executor.values()) {
-	    if (s.equalsIgnoreCase(i.enonce)) {
+	    if (s.equalsIgnoreCase(i.value)) {
 		return i;
 	    }
 	}
 	return null;
     }
 
-    public org.w3c.dom.Element toXML(Document doc) {
+    public org.w3c.dom.Element toXML2(Document doc) {
 	Element kmadTaskExecutant = doc.createElement("task-executant");
-	kmadTaskExecutant.setTextContent(this.enonce);
+	kmadTaskExecutant.setTextContent(this.value);
 	return kmadTaskExecutant;
     }
 
     public String toSPF() {
-	return "." + enonce + ".";
+	return "." + value + ".";
     }
 
     // Retourne un tableau de String.
-    public static String[] getNameLocaleExecutant() {
-	String[] myExecutantArray = new String[5];
-	myExecutantArray[0] = ExpressConstant.UNKNOWN_EXECUTANT_NAME;
-	myExecutantArray[1] = ExpressConstant.USER_EXECUTANT_NAME;
-	myExecutantArray[2] = ExpressConstant.SYSTEM_EXECUTANT_NAME;
-	myExecutantArray[3] = ExpressConstant.INTERACTION_EXECUTANT_NAME;
-	myExecutantArray[4] = ExpressConstant.ABSTRACT_EXECUTANT_NAME;
-	return myExecutantArray;
+    public static String[] getNameLocaleExecutor() {
+	String[] myExecutorArray = new String[5];
+	myExecutorArray[0] = ExpressConstant.UNKNOWN_EXECUTANT_NAME;
+	myExecutorArray[1] = ExpressConstant.USER_EXECUTANT_NAME;
+	myExecutorArray[2] = ExpressConstant.SYSTEM_EXECUTANT_NAME;
+	myExecutorArray[3] = ExpressConstant.INTERACTION_EXECUTANT_NAME;
+	myExecutorArray[4] = ExpressConstant.ABSTRACT_EXECUTANT_NAME;
+	return myExecutorArray;
     }
 
-    public static String[] getImageLocaleExecutant() {
-	String[] myExecutantArray = new String[5];
-	myExecutantArray[0] = Executor.INCONNU.getImage();
-	myExecutantArray[1] = Executor.USER.getImage();
-	myExecutantArray[2] = Executor.SYS.getImage();
-	myExecutantArray[3] = Executor.INT.getImage();
-	myExecutantArray[4] = Executor.ABS.getImage();
-	return myExecutantArray;
+    public static String[] getImageLocaleExecutor() {
+	String[] myExecutorArray = new String[5];
+	myExecutorArray[0] = Executor.INCONNU.getImage();
+	myExecutorArray[1] = Executor.USER.getImage();
+	myExecutorArray[2] = Executor.SYS.getImage();
+	myExecutorArray[3] = Executor.INT.getImage();
+	myExecutorArray[4] = Executor.ABS.getImage();
+	return myExecutorArray;
     }
 
-    public static Executor getLocaleExecutantIntoExecutant(
-	    String myStringExecutant) {
-	if (myStringExecutant.equals(ExpressConstant.UNKNOWN_EXECUTANT_NAME))
+    public static Executor getLocaleExecutorIntoExecutor(
+	    String myStringExecutor) {
+	if (myStringExecutor.equals(ExpressConstant.UNKNOWN_EXECUTANT_NAME))
 	    return Executor.INCONNU;
-	else if (myStringExecutant.equals(ExpressConstant.USER_EXECUTANT_NAME))
+	else if (myStringExecutor.equals(ExpressConstant.USER_EXECUTANT_NAME))
 	    return Executor.USER;
-	else if (myStringExecutant
+	else if (myStringExecutor
 		.equals(ExpressConstant.SYSTEM_EXECUTANT_NAME))
 	    return Executor.SYS;
-	else if (myStringExecutant
+	else if (myStringExecutor
 		.equals(ExpressConstant.INTERACTION_EXECUTANT_NAME))
 	    return Executor.INT;
-	else if (myStringExecutant
+	else if (myStringExecutor
 		.equals(ExpressConstant.ABSTRACT_EXECUTANT_NAME))
 	    return Executor.ABS;
 	else
 	    return Executor.INCONNU;
     }
 
-    public static String getLocaleExecutantIntoEnumere(String myStringExecutant) {
-	if (myStringExecutant.equals(ExpressConstant.UNKNOWN_EXECUTANT_NAME))
+    public static String getLocaleExecutorIntoEnumere(String myStringExecutor) {
+	if (myStringExecutor.equals(ExpressConstant.UNKNOWN_EXECUTANT_NAME))
 	    return "UNK";
-	else if (myStringExecutant.equals(ExpressConstant.USER_EXECUTANT_NAME))
+	else if (myStringExecutor.equals(ExpressConstant.USER_EXECUTANT_NAME))
 	    return "USER";
-	else if (myStringExecutant
+	else if (myStringExecutor
 		.equals(ExpressConstant.SYSTEM_EXECUTANT_NAME))
 	    return "SYS";
-	else if (myStringExecutant
+	else if (myStringExecutor
 		.equals(ExpressConstant.INTERACTION_EXECUTANT_NAME))
 	    return "INT";
-	else if (myStringExecutant
+	else if (myStringExecutor
 		.equals(ExpressConstant.ABSTRACT_EXECUTANT_NAME))
 	    return "ABS";
 	else
 	    return "UNK";
     }
 
-    public static int getLocaleExecutantAt(String myStringExecutant) {
-	if (myStringExecutant.equals(ExpressConstant.UNKNOWN_EXECUTANT_NAME))
+    public static int getLocaleExecutorAt(String myStringExecutor) {
+	if (myStringExecutor.equals(ExpressConstant.UNKNOWN_EXECUTANT_NAME))
 	    return 0;
-	else if (myStringExecutant.equals(ExpressConstant.USER_EXECUTANT_NAME))
+	else if (myStringExecutor.equals(ExpressConstant.USER_EXECUTANT_NAME))
 	    return 1;
-	else if (myStringExecutant
+	else if (myStringExecutor
 		.equals(ExpressConstant.SYSTEM_EXECUTANT_NAME))
 	    return 2;
-	else if (myStringExecutant
+	else if (myStringExecutor
 		.equals(ExpressConstant.INTERACTION_EXECUTANT_NAME))
 	    return 3;
-	else if (myStringExecutant
+	else if (myStringExecutor
 		.equals(ExpressConstant.ABSTRACT_EXECUTANT_NAME))
 	    return 4;
 	else
 	    return 0;
     }
 
-    public static String getEnumereIntoLocaleExecutant(String myStringExecutant) {
-	if (myStringExecutant.equals("UNK"))
+    public static String getEnumereIntoLocaleExecutor(String myStringExecutor) {
+	if (myStringExecutor.equals("UNK"))
 	    return ExpressConstant.UNKNOWN_EXECUTANT_NAME;
-	else if (myStringExecutant.equals("USER"))
+	else if (myStringExecutor.equals("USER"))
 	    return ExpressConstant.USER_EXECUTANT_NAME;
-	else if (myStringExecutant.equals("SYS"))
+	else if (myStringExecutor.equals("SYS"))
 	    return ExpressConstant.SYSTEM_EXECUTANT_NAME;
-	else if (myStringExecutant.equals("INT"))
+	else if (myStringExecutor.equals("INT"))
 	    return ExpressConstant.INTERACTION_EXECUTANT_NAME;
-	else if (myStringExecutant.equals("ABS"))
+	else if (myStringExecutor.equals("ABS"))
 	    return ExpressConstant.ABSTRACT_EXECUTANT_NAME;
 	else
 	    return null;
@@ -213,9 +213,4 @@ public enum Executor implements Enumerated {
 	    return 0;
     }
 
-    @Override
-    public Element toXML2(Document doc) {
-	// TODO Auto-generated method stub
-	return this.toXML(doc);
-    }
 }
