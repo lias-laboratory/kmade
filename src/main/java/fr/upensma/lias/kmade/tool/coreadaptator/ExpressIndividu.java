@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Person;
@@ -29,7 +30,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
  */
 public class ExpressIndividu{
     public static String createIndividu() {
-	Oid oidUser = InterfaceExpressJava.createEntity("tache", "Individu");
+	Oid oidUser = InterfaceExpressJava.createEntity("tache", ExpressConstant.PERSON_ENTITY);
 	return (oidUser.get());
     }
 
@@ -44,8 +45,7 @@ public class ExpressIndividu{
     }
 
     public static String[] getIndividusName() {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Individu");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache", ExpressConstant.PERSON_ENTITY);
 	String[] lst = new String[objs.length];
 	for (int i = 0; i < objs.length; i++) {
 	    Person obj = (Person) objs[i];
@@ -56,8 +56,7 @@ public class ExpressIndividu{
 
     public static ArrayList<Person> getIndividus() {
 	ArrayList<Person> lst = new ArrayList<Person>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Individu");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache", ExpressConstant.PERSON_ENTITY);
 	for (int i = 0; i < objs.length; i++) {
 	    Person obj = (Person) objs[i];
 	    lst.add(obj);
@@ -66,8 +65,7 @@ public class ExpressIndividu{
     }
 
     public static Person getIndividuWithName(String name) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Individu");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache", ExpressConstant.PERSON_ENTITY);
 	for (int i = 0; i < objs.length; i++) {
 	    Person obj = (Person) objs[i];
 	    if (obj.getName().equals(name)) {
