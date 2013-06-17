@@ -138,8 +138,8 @@ public class Label implements Entity {
     }
 
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Label");
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.LABEL_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Label obj = (Label) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.getName())) {

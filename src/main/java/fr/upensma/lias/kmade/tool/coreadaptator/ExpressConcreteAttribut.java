@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.AttributAbstrait;
@@ -32,8 +33,8 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
 public class ExpressConcreteAttribut {
     public static ArrayList<AttributConcret> getConcreteAttr() {
 	ArrayList<AttributConcret> lst = new ArrayList<AttributConcret>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet",
-		"AttributConcret");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
+			ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    AttributConcret obj = (AttributConcret) objs[i];
 	    lst.add(obj);
@@ -52,8 +53,8 @@ public class ExpressConcreteAttribut {
 	ArrayList<AttributAbstrait> listattributabs = objAbs
 		.getInverseAttributsAbs();
 	for (int i = 0; i < listattributabs.size(); i++) {
-	    Oid oidAttribut = InterfaceExpressJava.createEntity("metaobjet",
-		    "AttributConcret");
+	    Oid oidAttribut = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	    		ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 	    AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava
 		    .prendre(oidAttribut);
 	    AttributAbstrait abstractAttribut = listattributabs.get(i);
@@ -72,8 +73,8 @@ public class ExpressConcreteAttribut {
      */
     public static void addConcreteAttribut(AttributAbstrait attributabs,
 	    ObjetConcret ObjConc) {
-	Oid oidAttribut = InterfaceExpressJava.createEntity("metaobjet",
-		"AttributConcret");
+	Oid oidAttribut = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 	AttributConcret attribut = (AttributConcret) InterfaceExpressJava
 		.prendre(oidAttribut);
 	attribut.setObjConcDe(ObjConc);

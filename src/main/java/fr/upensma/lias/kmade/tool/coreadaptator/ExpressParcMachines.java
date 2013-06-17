@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Machine;
@@ -30,7 +31,8 @@ import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
 public class ExpressParcMachines{
     public static String createParcMachines() {
 	Oid oidUser = InterfaceExpressJava
-		.createEntity("tache", "ParcMachines");
+		.createEntity(ExpressConstant.CORE_PACKAGE, 
+	    		ExpressConstant.MACHINE_PARK_CLASS);
 	return (oidUser.get());
     }
 
@@ -48,8 +50,8 @@ public class ExpressParcMachines{
     }
 
     public static String[] getParcMachinesName() {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"ParcMachines");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, 
+    		ExpressConstant.MACHINE_PARK_CLASS);
 	String[] lst = new String[objs.length];
 	for (int i = 0; i < objs.length; i++) {
 	    ParkMachines obj = (ParkMachines) objs[i];
@@ -60,8 +62,8 @@ public class ExpressParcMachines{
 
     public static ArrayList<ParkMachines> getParcsMachines() {
 	ArrayList<ParkMachines> lst = new ArrayList<ParkMachines>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"ParcMachines");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, 
+    		ExpressConstant.MACHINE_PARK_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    ParkMachines obj = (ParkMachines) objs[i];
 	    lst.add(obj);
@@ -70,8 +72,8 @@ public class ExpressParcMachines{
     }
 
     public static ParkMachines getParcMachinesWithName(String name) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"ParcMachines");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, 
+    		ExpressConstant.MACHINE_PARK_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    ParkMachines obj = (ParkMachines) objs[i];
 	    if (obj.getName().equals(name)) {
@@ -148,7 +150,8 @@ public class ExpressParcMachines{
 		    .prendre(new Oid(oid));
 	    // R�cup�ration de toutes les Machines
 	    Object[] tabObj = (Object[]) InterfaceExpressJava
-		    .prendreAllOidOfEntity("tache", "Machine");
+		    .prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+					ExpressConstant.MACHINE_CLASS);
 	    // cast des objet r�cup�r� en Machines
 	    Machine[] tabMach = new Machine[tabObj.length];
 	    for (int i = 0; i < tabMach.length; i++) {

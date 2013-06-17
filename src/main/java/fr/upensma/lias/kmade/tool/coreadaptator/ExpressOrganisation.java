@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Person;
@@ -30,7 +31,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
 public class ExpressOrganisation{
     public static String createOrganisation() {
 	Oid oidUser = InterfaceExpressJava
-		.createEntity("tache", "Organisation");
+		.createEntity(ExpressConstant.CORE_PACKAGE, ExpressConstant.ORGANIZATION_CLASS);
 	return (oidUser.get());
     }
 
@@ -47,8 +48,8 @@ public class ExpressOrganisation{
     }
 
     public static String[] getOrganisationsName() {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Organisation");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.ORGANIZATION_CLASS);
 	String[] lst = new String[objs.length];
 	for (int i = 0; i < objs.length; i++) {
 	    Organization obj = (Organization) objs[i];
@@ -59,8 +60,8 @@ public class ExpressOrganisation{
 
     public static ArrayList<Organization> getOrganisations() {
 	ArrayList<Organization> lst = new ArrayList<Organization>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Organisation");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.ORGANIZATION_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Organization obj = (Organization) objs[i];
 	    lst.add(obj);
@@ -69,8 +70,8 @@ public class ExpressOrganisation{
     }
 
     public static Organization getOrganisationWithName(String name) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Organisation");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.ORGANIZATION_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Organization obj = (Organization) objs[i];
 	    if (obj.getName().equals(name)) {
@@ -143,7 +144,7 @@ public class ExpressOrganisation{
 		    .prendre(new Oid(oid));
 	    // Récupération de toutes les individus
 	    Object[] tabObj = (Object[]) InterfaceExpressJava
-		    .prendreAllOidOfEntity("tache", "Individu");
+		    .prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, ExpressConstant.PERSON_CLASS);
 	    // cast des objet récupéré en individus
 	    Person[] tabInd = new Person[tabObj.length];
 	    for (int i = 0; i < tabInd.length; i++) {

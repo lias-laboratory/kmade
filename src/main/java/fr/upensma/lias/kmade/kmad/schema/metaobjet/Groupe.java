@@ -283,7 +283,8 @@ public class Groupe implements Entity {
 
     public static boolean isUniqueName(String s) {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "Groupe");
+			ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.GROUP_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Groupe obj = (Groupe) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {

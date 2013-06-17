@@ -152,7 +152,7 @@ public final class Intervalle extends TypeAbs implements Entity {
 
     public static boolean isUniqueName(String s) {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "Intervalle");
+		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.RANGE_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Intervalle obj = (Intervalle) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {
@@ -164,7 +164,7 @@ public final class Intervalle extends TypeAbs implements Entity {
 
     public static boolean isUnique() {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "Intervalle");
+			ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.RANGE_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Intervalle obj = (Intervalle) objAbs[i];
 	    if (!isUniqueName(obj.name))

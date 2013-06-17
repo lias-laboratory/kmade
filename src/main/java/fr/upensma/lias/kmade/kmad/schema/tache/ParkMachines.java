@@ -73,34 +73,6 @@ public class ParkMachines extends Material {
     public ArrayList<Machine> getMembers() {
 	return members;
     }
-
-/*    public org.w3c.dom.Element toXML(Document doc) {
-	Element racine = doc.createElement("ParcMachines");
-	racine.setAttribute("classkmad", "tache.ParcMachines");
-	racine.setAttribute("idkmad", oid.get());
-
-	Element kmadParcName = doc.createElement("parcMachines-name");
-	kmadParcName.setTextContent(this.getName());
-	racine.appendChild(kmadParcName);
-
-	if (!this.getDescription().equals("")) {
-	    Element kmadParcDescription = doc
-		    .createElement("parcMachines-description");
-	    kmadParcDescription.setTextContent(this.getDescription());
-	    racine.appendChild(kmadParcDescription);
-	}
-
-	if (!super.getImage().equals("")) {
-	    Element kmadParcImagePath = doc
-		    .createElement("parcMachines-imagepath");
-	    kmadParcImagePath.setTextContent(super.getImage());
-	    racine.appendChild(kmadParcImagePath);
-	}
-	// seul les machines stocks les parcs dans le XML
-
-	return racine;
-    }
-*/
     
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;

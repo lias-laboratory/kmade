@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.AttributAbstrait;
@@ -106,8 +107,8 @@ public class ReplaceFunction extends BinaryFunction implements ConcreteObjectTyp
 
 	if (groupeStored.getName().equals(groupeAttributed.getName())) {
 	    // Cr�ation de l'objet concret
-	    Oid oidObjConc = InterfaceExpressJava.createEntity("metaobjet",
-		    "ObjetConcret");
+	    Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+	    		ExpressConstant.CONCRETE_OBJECT_CLASS);
 	    // R�cup�re l'objet Abstrait
 	    ObjetAbstrait abstractObject = (ObjetAbstrait) InterfaceExpressJava
 		    .prendre(groupeStored.getOid());
@@ -128,8 +129,8 @@ public class ReplaceFunction extends BinaryFunction implements ConcreteObjectTyp
 		    .getInverseAttributsAbs();
 	    boolean etat = false;
 	    for (int i = 0; i < listattributabs.size(); i++) {
-		Oid oidAttribut = InterfaceExpressJava.createEntity(
-			"metaobjet", "AttributConcret");
+		Oid oidAttribut = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+	    		ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 		AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava
 			.prendre(oidAttribut);
 		AttributAbstrait abstractAttribut = listattributabs.get(i);

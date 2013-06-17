@@ -130,44 +130,6 @@ public class Person extends User {
     public void removeOrganisation(Organization org) {
 	organizations.remove(org);
     }
-
-/*    public org.w3c.dom.Element toXML(Document doc) {
-	Element racine = doc.createElement("Individu");
-	racine.setAttribute("classkmad", "tache.Individu");
-	racine.setAttribute("idkmad", oid.get());
-
-	Element kmadIndividuName = doc.createElement("individu-name");
-	kmadIndividuName.setTextContent(this.getName());
-	racine.appendChild(kmadIndividuName);
-
-	if (!this.getStatut().equals("")) {
-	    Element kmadIndividuStatut = doc.createElement("individu-statut");
-	    kmadIndividuStatut.setTextContent(this.getStatut());
-	    racine.appendChild(kmadIndividuStatut);
-	}
-
-	if (!this.getRole().equals("")) {
-	    Element kmadIndividuRole = doc.createElement("individu-role");
-	    kmadIndividuRole.setTextContent(this.getRole());
-	    racine.appendChild(kmadIndividuRole);
-	}
-
-	if (!this.getImage().equals("")) {
-	    Element kmadIndividuImagePath = doc
-		    .createElement("individu-imagepath");
-	    kmadIndividuImagePath.setTextContent(this.getImage());
-	    racine.appendChild(kmadIndividuImagePath);
-	}
-	if (this.memberOf.size() != 0) {
-	    for (int i = 0; i < memberOf.size(); i++) {
-		Element idOrganisation = doc.createElement("id-organisation");
-		idOrganisation.setTextContent(memberOf.get(i).getOid().get());
-		racine.appendChild(idOrganisation);
-	    }
-	}
-	return racine;
-    }
-*/
     
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	NodeList userValue = p.getElementsByTagName("id-organisation");

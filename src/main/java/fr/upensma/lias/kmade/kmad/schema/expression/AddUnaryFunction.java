@@ -82,8 +82,8 @@ public class AddUnaryFunction extends UnaryFunction {
 
 	if (groupeStored.getName().equals(groupeAttributed.getName())) {
 	    // Création de l'objet concret
-	    Oid oidObjConc = InterfaceExpressJava.createEntity("metaobjet",
-		    "ObjetConcret");
+	    Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+	    		ExpressConstant.CONCRETE_OBJECT_CLASS);
 	    // Récupère l'objet Abstrait
 	    ObjetAbstrait abstractObject = (ObjetAbstrait) InterfaceExpressJava
 		    .prendre(groupeStored.getOid());
@@ -106,7 +106,8 @@ public class AddUnaryFunction extends UnaryFunction {
 	    boolean etat = false;
 	    for (int i = 0; i < listattributabs.size(); i++) {
 		Oid oidAttribut = InterfaceExpressJava.createEntity(
-			"metaobjet", "AttributConcret");
+				ExpressConstant.METAOBJECT_PACKAGE,
+	    		ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 		AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava
 			.prendre(oidAttribut);
 		AttributAbstrait abstractAttribut = listattributabs.get(i);

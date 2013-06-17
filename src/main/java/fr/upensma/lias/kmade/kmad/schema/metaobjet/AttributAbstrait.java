@@ -316,8 +316,8 @@ public class AttributAbstrait implements Entity {
     }
 
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "AttributAbstrait");
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity( ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.ABSTRACT_ATTRIBUTE_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    AttributAbstrait obj = (AttributAbstrait) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {

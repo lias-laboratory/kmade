@@ -20,6 +20,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.KMADConcreteHistory;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
@@ -63,7 +64,7 @@ public final class ExpressHistory {
 
     public static boolean saveConcreteHistory() {
 	Object[] coTab = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "ObjetConcret");
+		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.CONCRETE_OBJECT_CLASS);
 
 	KMADConcreteHistory refHistory = new KMADConcreteHistory(coTab);
 	myHistoryDB.add(0, refHistory);
@@ -82,7 +83,7 @@ public final class ExpressHistory {
 
     private static void removeConcreteObject() {
 	Object[] tabCon = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "ObjetConcret");
+		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.CONCRETE_OBJECT_CLASS);
 
 	for (int i = 0; i < tabCon.length; i++) {
 	    ObjetConcret occurrent = (ObjetConcret) tabCon[i];
@@ -96,19 +97,19 @@ public final class ExpressHistory {
 
     private static void removeLinkBetweenConcreteWithAbstract() {
 	Object[] aoTab = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "ObjetAbstrait");
+		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.ABSTRACT_OBJECT_CLASS);
 	for (int i = 0; i < aoTab.length; i++) {
 	    ((ObjetAbstrait) aoTab[i]).removeAllConcreteObject();
 	}
 
-	Object[] gTab = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet",
-		"Groupe");
+	Object[] gTab = InterfaceExpressJava.prendreAllOidOfEntity(	
+			ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.GROUP_CLASS);
 	for (int i = 0; i < gTab.length; i++) {
 	    ((Groupe) gTab[i]).getEnsemble().removeAllConcreteObject();
 	}
 
 	Object[] aaTab = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "AttributAbstrait");
+			ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.ABSTRACT_ATTRIBUTE_CLASS);
 	for (int i = 0; i < aaTab.length; i++) {
 	    ((AttributAbstrait) aaTab[i]).removeAllConcreteAttribut();
 	}

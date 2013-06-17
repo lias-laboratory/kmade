@@ -147,8 +147,8 @@ public class Event implements Entity {
      * @return true if the name is unique among task names and event names
      */
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Evenement");
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.EVENT_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Event obj = (Event) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {

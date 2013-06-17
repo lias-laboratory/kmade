@@ -17,6 +17,7 @@
 **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.tache;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import java.util.ArrayList;
 
 
@@ -208,12 +209,12 @@ public abstract class User implements Entity {
      * @return false if the name already exists, else true
      */
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"User");
-	Object[] objAbs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Individu");
-	Object[] objAbs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Organisation");
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.USER_CLASS);
+	Object[] objAbs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.PERSON_CLASS);
+	Object[] objAbs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.ORGANIZATION_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    User obj = (User) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.getName())) {
@@ -260,38 +261,7 @@ public abstract class User implements Entity {
 	}
 	return n;
     }
-    
-/*    public org.w3c.dom.Element toXML(Document doc) {
-	Element racine = doc.createElement("user");
-	racine.setAttribute("classkmad", "tache.User");
-	racine.setAttribute("idkmad", oid.get());
-
-	Element kmadUserName = doc.createElement("user-name");
-	kmadUserName.setTextContent(this.getName());
-	racine.appendChild(kmadUserName);
-
-	if (!this.getStatus().equals("")) {
-	    Element kmadUserStatut = doc.createElement("user-statut");
-	    kmadUserStatut.setTextContent(this.getStatus());
-	    racine.appendChild(kmadUserStatut);
-	}
-
-	if (!this.getRole().equals("")) {
-	    Element kmadUserRole = doc.createElement("user-role");
-	    kmadUserRole.setTextContent(this.getRole());
-	    racine.appendChild(kmadUserRole);
-	}
-
-	if (!this.getImage().equals("")) {
-	    Element kmadUserImagePath = doc.createElement("user-imagepath");
-	    kmadUserImagePath.setTextContent(this.getImage());
-	    racine.appendChild(kmadUserImagePath);
-	}
-
-	return racine;
-    }
-*/
-    
+        
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;
     }

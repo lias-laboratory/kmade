@@ -97,7 +97,7 @@ public class InterfaceExpressJava {
     	for (Iterator<Oid> i = InterfaceExpressJava.bdd.keySet().iterator(); i.hasNext();){
     		Oid oid = i.next();
     		String ClassName = InterfaceExpressJava.bdd.prendre(oid).getClass().getName();
-    		if(ClassName.contains("metaobjet"))
+    		if(ClassName.contains(ExpressConstant.METAOBJECT_PACKAGE))
     			bdd.remove(InterfaceExpressJava.bdd.prendre(oid));
     	}
     }

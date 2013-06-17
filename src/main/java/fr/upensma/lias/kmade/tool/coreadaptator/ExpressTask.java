@@ -62,8 +62,8 @@ public final class ExpressTask {
     }
 
     public static ArrayList<Task> getRootTasks() {
-	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Tache");
+	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.TASK_CLASS);
 	ArrayList<Task> rootTasks = new ArrayList<Task>();
 	for (int i = 0; i < taches.length; i++) {
 	    if (((Task) taches[i]).isRoot()) {
@@ -93,8 +93,8 @@ public final class ExpressTask {
 
     public static ArrayList<Task> getTasksFromName(String name) {
 	ArrayList<Task> myTaskName = new ArrayList<Task>();
-	Object[] toto = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Tache");
+	Object[] toto = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.TASK_CLASS);
 
 	for (int i = 0; i < toto.length; i++) {
 	    if (((Task) toto[i]).equals(name)) {
@@ -124,8 +124,8 @@ public final class ExpressTask {
      * Méthode qui permet de retourner toutes les tâches du modèle Express.
      */
     public static Task[] getAllTaskFromExpress() {
-	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Tache");
+	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.TASK_CLASS);
 	Task[] myNewTask = new Task[taches.length];
 	for (int i = 0; i < taches.length; i++) {
 	    myNewTask[i] = (Task) taches[i];
@@ -134,8 +134,8 @@ public final class ExpressTask {
     }
 
     public static ArrayList<Task> getTasksFromExpress() {
-	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Tache");
+	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.TASK_CLASS);
 	ArrayList<Task> toto = new ArrayList<Task>();
 	for (int i = 0; i < taches.length; i++) {
 	    toto.add((Task) taches[i]);
@@ -150,7 +150,8 @@ public final class ExpressTask {
     public static Task[] pasteElementsFromClipBoard(java.awt.Point pt) {
 	counterClipboard++;
 	Object[] myTaskList = InterfaceExpressJava
-		.getAllReferencesOfEntityFromClipBoard("tache", "Tache");
+		.getAllReferencesOfEntityFromClipBoard(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.TASK_CLASS);
 
 	Task[] myNewTaskList = new Task[myTaskList.length];
 	// PG: correction de l'anomalie "NewTache dans la classe Tache
@@ -162,9 +163,9 @@ public final class ExpressTask {
 	    // KMADEHistoryMessageManager.printMessage("Collage a partir du PP2 " + myTaskList[i]);
 	    // On cree un point et une tache.
 	    Point refPoint = (Point) InterfaceExpressJava
-		    .createEntityReferenceBack("tache", "Point");
+		    .createEntityReferenceBack(ExpressConstant.CORE_PACKAGE,ExpressConstant.POINT_CLASS);
 	    Task refTache = (Task) InterfaceExpressJava
-		    .createEntityReferenceBack("tache", "Tache");
+		    .createEntityReferenceBack(ExpressConstant.CORE_PACKAGE,ExpressConstant.TASK_CLASS);
 
 	    if (pt != null) {
 		refPoint.setX(pt.x);
@@ -260,9 +261,11 @@ public final class ExpressTask {
 
 	    // On cr��
 	    Point refPoint = (Point) InterfaceExpressJava
-		    .createEntityReferenceBackIntoClipBoard("tache", "Point");
+		    .createEntityReferenceBackIntoClipBoard(ExpressConstant.CORE_PACKAGE,
+					ExpressConstant.POINT_CLASS);
 	    Task refTache = (Task) InterfaceExpressJava
-		    .createEntityReferenceBackIntoClipBoard("tache", "Tache");
+		    .createEntityReferenceBackIntoClipBoard(ExpressConstant.CORE_PACKAGE,
+		    		ExpressConstant.TASK_CLASS);
 
 	    // On integre
 	    refPoint.setX(new Integer(x.intValue()));
@@ -377,9 +380,12 @@ public final class ExpressTask {
      * @return Oid de la tache
      */
     public static Task addNewTask(int x, int y, Executor e) {
-	Oid oidPoint = InterfaceExpressJava.createEntity("tache", "Point");
-	Oid oidTache = InterfaceExpressJava.createEntity("tache", "Tache");
-	Oid oidMedia = InterfaceExpressJava.createEntity("tache", "Media");
+	Oid oidPoint = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.POINT_CLASS);
+	Oid oidTache = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.TASK_CLASS);
+	Oid oidMedia = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE, 
+    		ExpressConstant.MEDIA_CLASS);
 
 	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
 	Task t = (Task) InterfaceExpressJava.prendre(oidTache);

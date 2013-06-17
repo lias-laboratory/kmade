@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import org.w3c.dom.Document;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
@@ -131,7 +132,8 @@ public class Element implements Entity {
 
     public static boolean isUnique() {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "Element");
+			ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.ELEMENT_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    AttributAbstrait obj = (AttributAbstrait) objAbs[i];
 	    if (!isUniqueName(obj.getName(), obj.oid.get()))

@@ -47,6 +47,7 @@ import org.jgraph.graph.AttributeMap;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphConstants;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.AttributConcret;
@@ -91,7 +92,8 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 
 	this.group = o;
 
-	Oid oidPoint = InterfaceExpressJava.createEntity("tache", "Point");
+	Oid oidPoint = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.POINT_CLASS);
 	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
 	p.setX(x);
 	p.setY(y);
@@ -233,7 +235,7 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 	    this.box = new JComboBox();
 
 	    final Object[] objets = InterfaceExpressJava.prendreAllOidOfEntity(
-		    "metaobjet", "ObjetAbstrait");
+	    	ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.ABSTRACT_OBJECT_CLASS);
 	    for (int i = 0; i < objets.length; i++) {
 		this.box.addItem((ObjetAbstrait) objets[i]);
 	    }

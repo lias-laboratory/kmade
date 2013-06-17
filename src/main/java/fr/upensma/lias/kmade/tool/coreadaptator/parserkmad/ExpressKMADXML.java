@@ -317,7 +317,7 @@ public final class ExpressKMADXML {
 			//and if the class is a part of the object package
 			for (int j = 0; j < ExpressConstant.MOTHER_CLASSES.length; j++) {
 				if (thisClassName.contains(ExpressConstant.MOTHER_CLASSES[j])
-						&& thisClassName.contains(ExpressConstant.OBJECTS_PACKAGE)) {
+						&& thisClassName.contains(ExpressConstant.METAOBJECT_PACKAGE)) {
 					writeBodyXMLByObject(o, document, racine);
 				}
 			}
@@ -732,8 +732,8 @@ public final class ExpressKMADXML {
 		// Individu et organisation
 
 		// le chargement n'a pas mis les individus au seins des organisations
-		Object[] indObj = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-				"Individu");
+		Object[] indObj = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.PERSON_CLASS);
 		Person[] ind = new Person[indObj.length];
 		for (int i = 0; i < ind.length; i++) {
 			ind[i] = (Person) indObj[i];
@@ -747,8 +747,8 @@ public final class ExpressKMADXML {
 		// Machine et parc
 
 		// le chargement n'a pas mis les machines dans les parcs
-		Object[] machobj = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-				"Machine");
+		Object[] machobj = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.MACHINE_CLASS);
 		Machine[] mach = new Machine[machobj.length];
 		for (int i = 0; i < mach.length; i++) {
 			mach[i] = (Machine) machobj[i];
@@ -760,9 +760,9 @@ public final class ExpressKMADXML {
 			}
 		}
 
-		// changement de tout les User(ancienne version) en Individu
-		Object[] userObj = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-				"User");
+		// changement de tout les User(ancienne version) en Person
+		Object[] userObj = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.USER_CLASS);
 		User[] user = new User[userObj.length];
 		for (int i = 0; i < userObj.length; i++) {
 			user[i] = (User) userObj[i];
@@ -782,11 +782,11 @@ public final class ExpressKMADXML {
 		}
 
 		// Media Part
-		Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-				"Tache");
+		Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.TASK_CLASS);
 		for (int i = 0; i < taches.length; i++) {
 			if (((Task) taches[i]).getMedia() == null) {
-				Oid oidMedia = InterfaceExpressJava.createEntity("tache",
+				Oid oidMedia = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
 						"Media");
 				Media m = (Media) InterfaceExpressJava.prendre(oidMedia);
 				((Task) taches[i]).setMedia(m);

@@ -156,25 +156,6 @@ public class Actor implements Entity {
     	return userRef.toString();
     }
 
-/*    public org.w3c.dom.Element toXML(Document doc) {
-	Element racine = doc.createElement("actor");
-	racine.setAttribute("classkmad", "tache.Acteur");
-	racine.setAttribute("idkmad", oid.get());
-
-	racine.appendChild(experience.toXML(doc));
-
-	if (!this.competence.equals("")) {
-	    Element kmadActorCompetence = doc.createElement("actor-competence");
-	    kmadActorCompetence.setTextContent(this.competence);
-	    racine.appendChild(kmadActorCompetence);
-	}
-
-	Element idUser = doc.createElement("id-user");
-	idUser.setTextContent(this.userRef.getOid().get());
-	racine.appendChild(idUser);
-	return racine;
-    }
-*/
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) throws Exception,
 	    KMADXMLParserException {
 	NodeList nodeList = p.getElementsByTagName("id-user");

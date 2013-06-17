@@ -81,45 +81,6 @@ public class Machine extends Material {
 	memberOf.remove(parc);
     }
 
-/*    public org.w3c.dom.Element toXML(Document doc) {
-	Element racine = doc.createElement("Machine");
-	racine.setAttribute("classkmad", "tache.Machine");
-	racine.setAttribute("idkmad", oid.get());
-
-	Element kmadMachineName = doc.createElement("machine-name");
-	kmadMachineName.setTextContent(this.getName());
-	racine.appendChild(kmadMachineName);
-
-	if (!this.getDescription().equals("")) {
-	    Element kmadMachineDescription = doc
-		    .createElement("machine-description");
-	    kmadMachineDescription.setTextContent(this.getDescription());
-	    racine.appendChild(kmadMachineDescription);
-	}
-
-	Element kmadMachineDescription = doc
-		.createElement("machine-isComputer");
-	kmadMachineDescription.setTextContent(isComputer.toString());
-	racine.appendChild(kmadMachineDescription);
-
-	if (!super.getImage().equals("")) {
-	    Element kmadMachineImagePath = doc
-		    .createElement("machine-imagepath");
-	    kmadMachineImagePath.setTextContent(super.getImage());
-	    racine.appendChild(kmadMachineImagePath);
-	}
-
-	if (this.memberOf.size() != 0) {
-	    for (int i = 0; i < memberOf.size(); i++) {
-		Element idMachine = doc.createElement("id-parcMachine");
-		idMachine.setTextContent(memberOf.get(i).getOid().get());
-		racine.appendChild(idMachine);
-	    }
-	}
-	return racine;
-    }
-*/
-
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	NodeList userValue = p.getElementsByTagName("id-parcMachine");
 	for (int i = 0; i < userValue.getLength(); i++) {

@@ -20,6 +20,7 @@ package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
@@ -79,20 +80,20 @@ public class AttributConcret implements Entity, Cloneable {
 
 	if (typeStructure.equals(TypeStructure.STRING_STRUCT)) {
 	    Oid oid = InterfaceExpressJava
-		    .createEntity("metaobjet", "StrValue");
+		    .createEntity(ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.STRING_VALUE_CLASS);
 	    StrValue val = (StrValue) InterfaceExpressJava.prendre(oid);
 	    val.setValeur("");
 	    this.valeur = val;
 
 	} else if (typeStructure.equals(TypeStructure.NUMBER_STRUCT)) {
-	    Oid oid = InterfaceExpressJava.createEntity("metaobjet",
-		    "NumberValue");
+	    Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	    		ExpressConstant.NUMBER_VALUE_CLASS);
 	    NumberValue val = (NumberValue) InterfaceExpressJava.prendre(oid);
 	    val.setValeur("0");
 	    this.valeur = val;
 	} else if (typeStructure.equals(TypeStructure.BOOLEAN_STRUCT)) {
-	    Oid oid = InterfaceExpressJava.createEntity("metaobjet",
-		    "BoolValue");
+	    Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	    		ExpressConstant.BOOLEAN_VALUE_CLASS);
 	    BoolValue val = (BoolValue) InterfaceExpressJava.prendre(oid);
 	    val.setValeur("true");
 	    this.valeur = val;
@@ -104,8 +105,8 @@ public class AttributConcret implements Entity, Cloneable {
 
 	if (typeStructure.equals(TypeStructure.STRING_STRUCT)) {
 	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity("metaobjet",
-			"StrValue");
+		Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+				ExpressConstant.STRING_VALUE_CLASS);
 		StrValue val = (StrValue) InterfaceExpressJava.prendre(oid);
 		val.setValeur(v);
 		this.valeur = val;
@@ -121,8 +122,8 @@ public class AttributConcret implements Entity, Cloneable {
 		return true;
 	    }
 	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity("metaobjet",
-			"NumberValue");
+		Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	    		ExpressConstant.NUMBER_VALUE_CLASS);
 		NumberValue val = (NumberValue) InterfaceExpressJava
 			.prendre(oid);
 		val.setValeur(v);
@@ -134,8 +135,8 @@ public class AttributConcret implements Entity, Cloneable {
 	    Enumeration enu = (Enumeration) this.attributAbsDe.getTypeRef();
 	    Element el = enu.getElement(v);
 	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity("metaobjet",
-			"EnumValue");
+		Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	    		ExpressConstant.ENUM_VALUE_CLASS);
 		EnumValue val = (EnumValue) InterfaceExpressJava.prendre(oid);
 		val.setEnumeration(enu);
 		val.setElement(el);
@@ -147,8 +148,8 @@ public class AttributConcret implements Entity, Cloneable {
 	} else if (typeStructure.equals(TypeStructure.INTERVAL_STRUCT)) {
 	    Intervalle inter = (Intervalle) this.attributAbsDe.getTypeRef();
 	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity("metaobjet",
-			"IntervalleValue");
+		Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	    		ExpressConstant.RANGE_VALUE_CLASS);
 		IntervalleValue val = (IntervalleValue) InterfaceExpressJava
 			.prendre(oid);
 		val.setIntervalle(inter);
@@ -160,8 +161,8 @@ public class AttributConcret implements Entity, Cloneable {
 	    }
 	} else if (typeStructure.equals(TypeStructure.BOOLEAN_STRUCT)) {
 	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity("metaobjet",
-			"BoolValue");
+		Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	    		ExpressConstant.BOOLEAN_VALUE_CLASS);
 		BoolValue val = (BoolValue) InterfaceExpressJava.prendre(oid);
 		val.setValeur(v);
 		this.valeur = val;

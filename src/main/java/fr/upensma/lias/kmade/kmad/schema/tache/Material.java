@@ -23,6 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
@@ -144,12 +145,12 @@ public class Material implements Entity {
     }
 
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Materiel");
-	Object[] objAbs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Machine");
-	Object[] objAbs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"ParcMachines");
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.MATERIAL_CLASS);
+	Object[] objAbs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.MACHINE_CLASS);
+	Object[] objAbs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.MACHINE_PARK_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Material obj = (Material) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.getName())) {

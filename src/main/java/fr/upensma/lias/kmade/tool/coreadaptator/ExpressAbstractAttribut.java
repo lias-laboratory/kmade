@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.AttributAbstrait;
@@ -69,7 +70,8 @@ public class ExpressAbstractAttribut {
      * @return
      */
     public static String createAbstractAttribut(Oid oidobjAbs) {
-        Oid oidAttributAbs = InterfaceExpressJava.createEntity("metaobjet", "AttributAbstrait");
+        Oid oidAttributAbs = InterfaceExpressJava.createEntity(		
+        		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.ABSTRACT_ATTRIBUTE_CLASS);
         ObjetAbstrait objAbs = (ObjetAbstrait) InterfaceExpressJava.prendre(oidobjAbs);
         AttributAbstrait attrib = (AttributAbstrait) InterfaceExpressJava.prendre(oidAttributAbs);
         attrib.setUtiliseeparClass(objAbs);

@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Event;
@@ -30,7 +31,8 @@ import fr.upensma.lias.kmade.kmad.schema.tache.CurrentEvents.CurrentEvent;
  */
 public class ExpressEvent {
     public static String createEvent() {
-	Oid oidEvent = InterfaceExpressJava.createEntity("tache", "Evenement");
+	Oid oidEvent = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.EVENT_CLASS);
 	return (oidEvent.get());
     }
 
@@ -63,8 +65,8 @@ public class ExpressEvent {
 
     public static ArrayList<Event> getEvents() {
 	ArrayList<Event> lst = new ArrayList<Event>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Evenement");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.EVENT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Event obj = (Event) objs[i];
 	    lst.add(obj);
@@ -74,8 +76,8 @@ public class ExpressEvent {
 
     public static ArrayList<String> getEventsName() {
 	ArrayList<String> lst = new ArrayList<String>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Evenement");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.EVENT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Event obj = (Event) objs[i];
 	    lst.add(obj.getName());
@@ -84,8 +86,8 @@ public class ExpressEvent {
     }
 
     public static Event stringToEvent(String s) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Evenement");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.EVENT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Event obj = (Event) objs[i];
 	    if (obj.getName().equals(s)) {

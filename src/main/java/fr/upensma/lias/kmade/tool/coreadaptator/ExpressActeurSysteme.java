@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.ActorSystem;
@@ -42,8 +43,8 @@ public class ExpressActeurSysteme {
     }
 
     public static Oid createActorSystem(Oid oidUserSystem) {
-	Oid oidActorSystem = InterfaceExpressJava.createEntity("tache",
-		"ActeurSysteme");
+	Oid oidActorSystem = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.ACTOR_SYSTEM_CLASS);
 	ActorSystem a = (ActorSystem) InterfaceExpressJava
 		.prendre(oidActorSystem);
 	Material u = (Material) InterfaceExpressJava.prendre(oidUserSystem);
@@ -65,8 +66,8 @@ public class ExpressActeurSysteme {
 
     public static ArrayList<ActorSystem> extractActorSystemFromTask(
 	    Task current) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"ActeurSysteme");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.ACTOR_SYSTEM_CLASS);
 
 	ArrayList<ActorSystem> empilActeur = new ArrayList<ActorSystem>();
 	for (int i = 0; i < objs.length; i++) {

@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Actor;
@@ -34,7 +35,8 @@ public class ExpressUser {
     // pour créer un utilisateur il faut créer soit un individu, soit une
     // organisation
     public static String createUser() {
-	Oid oidUser = InterfaceExpressJava.createEntity("tache", "User");
+	Oid oidUser = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.USER_CLASS);
 	return (oidUser.get());
     }
 
@@ -51,10 +53,10 @@ public class ExpressUser {
     }
 
     public static String[] getUsersName() {
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Individu");
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Organisation");
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.PERSON_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.ORGANIZATION_CLASS);
 	int length = objs1.length + objs2.length;
 	String[] lst = new String[length];
 	for (int i = 0; i < objs1.length; i++) {
@@ -70,10 +72,10 @@ public class ExpressUser {
 
     public static ArrayList<User> getUsers() {
 	ArrayList<User> lst = new ArrayList<User>();
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Individu");
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Organisation");
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.PERSON_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.ORGANIZATION_CLASS);
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
 	    Organization obj = (Organization) objs1[i];
@@ -87,10 +89,10 @@ public class ExpressUser {
     }
 
     public static User getUserWithName(String name) {
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Individu");
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Organisation");
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.PERSON_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.ORGANIZATION_CLASS);
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
 	    Organization obj = (Organization) objs1[i];
@@ -116,10 +118,10 @@ public class ExpressUser {
      */
     public static String[] getUsersNoActorName(String oidTask) {
 	ArrayList<String> lst = new ArrayList<String>();
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Individu");
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Organisation");
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.PERSON_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.ORGANIZATION_CLASS);
 	Object task = InterfaceExpressJava.prendre(new Oid(oidTask));
 	Task myTask = (Task) task;
 	ArrayList<Actor> myActor = myTask.getActors();

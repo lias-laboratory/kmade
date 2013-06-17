@@ -45,6 +45,7 @@ import org.jgraph.JGraph;
 import org.jgraph.graph.AttributeMap;
 import org.jgraph.graph.GraphConstants;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.AttributConcret;
@@ -80,7 +81,8 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
     public ConcreteObjectCell(ObjetConcret o, int x, int y) {
 	super(o, x, y);
 	this.item = o;
-	Oid oidPoint = InterfaceExpressJava.createEntity("tache", "Point");
+	Oid oidPoint = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.POINT_CLASS);
 	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
 	p.setX(x);
 	p.setY(y);

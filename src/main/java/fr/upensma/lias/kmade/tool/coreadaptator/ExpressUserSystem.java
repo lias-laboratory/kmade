@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Machine;
@@ -31,10 +32,10 @@ import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
 public class ExpressUserSystem {
 
     public static String[] getUserSystemName() {
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Machine");
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"ParcMachines");
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.MACHINE_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, 
+    		ExpressConstant.MACHINE_PARK_CLASS);
 	int length = objs1.length + objs2.length;
 	String[] lst = new String[length];
 	for (int i = 0; i < objs1.length; i++) {
@@ -50,10 +51,10 @@ public class ExpressUserSystem {
 
     public static ArrayList<Material> getUserSystem() {
 	ArrayList<Material> lst = new ArrayList<Material>();
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Machine");
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"ParcMachines");
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.MACHINE_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, 
+    		ExpressConstant.MACHINE_PARK_CLASS);
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
 	    ParkMachines obj = (ParkMachines) objs1[i];
@@ -67,10 +68,10 @@ public class ExpressUserSystem {
     }
 
     public static Material getUserSystemWithName(String name) {
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Machine");
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"ParcMachines");
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.MACHINE_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, 
+    		ExpressConstant.MACHINE_PARK_CLASS);
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
 	    ParkMachines obj = (ParkMachines) objs1[i];

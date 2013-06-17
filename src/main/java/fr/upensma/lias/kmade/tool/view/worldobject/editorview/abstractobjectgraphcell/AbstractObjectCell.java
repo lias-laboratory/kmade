@@ -23,6 +23,7 @@ import java.util.Map;
 import org.jgraph.graph.AttributeMap;
 import org.jgraph.graph.GraphConstants;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetAbstrait;
@@ -50,7 +51,8 @@ public class AbstractObjectCell extends ObjectDefaultGraphCell {
     public AbstractObjectCell(ObjetAbstrait o, int x, int y) {
 	super(o, x, y);
 	this.item = (ObjetAbstrait) o;
-	Oid oidPoint = InterfaceExpressJava.createEntity("tache", "Point");
+	Oid oidPoint = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.POINT_CLASS);
 	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
 	p.setX(x);
 	p.setY(y);

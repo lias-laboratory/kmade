@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.Groupe;
@@ -31,8 +32,8 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
 public class ExpressConcreteObject {    
     public static ArrayList<ObjetConcret> getConcreteObj() {
 	ArrayList<ObjetConcret> lst = new ArrayList<ObjetConcret>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet",
-		"ObjetConcret");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.CONCRETE_OBJECT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    ObjetConcret obj = (ObjetConcret) objs[i];
 	    lst.add(obj);
@@ -42,8 +43,8 @@ public class ExpressConcreteObject {
 
     public static ArrayList<String> getConcreteObjName() {
 	ArrayList<String> lst = new ArrayList<String>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet",
-		"ObjetConcret");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.CONCRETE_OBJECT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    ObjetConcret obj = (ObjetConcret) objs[i];
 	    lst.add(obj.getName());
@@ -60,8 +61,8 @@ public class ExpressConcreteObject {
      * @return
      */
     public static String createConcreteObject(Oid oidObjAbs, Oid oidG) {
-	Oid oidObjConc = InterfaceExpressJava.createEntity("metaobjet",
-		"ObjetConcret");
+	Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.CONCRETE_OBJECT_CLASS);
 
 	ObjetAbstrait abstractObject = (ObjetAbstrait) InterfaceExpressJava
 		.prendre(oidObjAbs);
@@ -139,8 +140,8 @@ public class ExpressConcreteObject {
      */
     public static ObjetConcret createConcreteObject(Oid oidObjAbs, Groupe g,
 	    String concreteObjectName) {
-	Oid oidObjConc = InterfaceExpressJava.createEntity("metaobjet",
-		"ObjetConcret");
+	Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.CONCRETE_OBJECT_CLASS);
 
 	ObjetAbstrait abstractObject = (ObjetAbstrait) InterfaceExpressJava
 		.prendre(oidObjAbs);

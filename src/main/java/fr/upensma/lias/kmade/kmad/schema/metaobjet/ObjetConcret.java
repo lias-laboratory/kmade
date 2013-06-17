@@ -23,6 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
@@ -269,7 +270,7 @@ public class ObjetConcret implements Entity, Cloneable {
 
     public static boolean isUniqueName(String s) {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "ObjetConcret");
+			ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.CONCRETE_OBJECT_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    ObjetConcret obj = (ObjetConcret) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {

@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.Element;
@@ -29,8 +30,8 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.Enumeration;
  */
 public class ExpressEnumElement {    
     public static String creerElement(Oid oidEnumeration) {
-	Oid oidElement = InterfaceExpressJava.createEntity("metaobjet",
-		"Element");
+	Oid oidElement = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.ELEMENT_CLASS);
 	Enumeration enumeration = (Enumeration) InterfaceExpressJava
 		.prendre(oidEnumeration);
 	Element element = (Element) InterfaceExpressJava.prendre(oidElement);

@@ -151,7 +151,8 @@ public final class Enumeration extends TypeAbs {
 
     public static boolean isUniqueName(String s) {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "Enumeration");
+			ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.ENUMERATION_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Enumeration obj = (Enumeration) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {
@@ -163,7 +164,8 @@ public final class Enumeration extends TypeAbs {
 
     public static boolean isUnique() {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "Enumeration");
+			ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.ENUMERATION_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Enumeration obj = (Enumeration) objAbs[i];
 	    if (!isUniqueName(obj.name))

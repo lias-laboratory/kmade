@@ -20,6 +20,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Label;
@@ -29,7 +30,8 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Label;
  */
 public final class ExpressLabel {
     public static String createLabel() {
-	Oid oidEvent = InterfaceExpressJava.createEntity("tache", "Label");
+	Oid oidEvent = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.LABEL_CLASS);
 	return (oidEvent.get());
     }
 
@@ -61,8 +63,8 @@ public final class ExpressLabel {
 
     public static ArrayList<Label> getLabels() {
 	ArrayList<Label> lst = new ArrayList<Label>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Label");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.LABEL_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Label obj = (Label) objs[i];
 	    lst.add(obj);
@@ -72,8 +74,8 @@ public final class ExpressLabel {
 
     public static ArrayList<String> getLabelsNameList() {
 	ArrayList<String> lst = new ArrayList<String>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Label");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.LABEL_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Label obj = (Label) objs[i];
 	    lst.add(obj.getName());
@@ -82,8 +84,8 @@ public final class ExpressLabel {
     }
 
     public static String[] getLabelsNameArray() {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Label");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.LABEL_CLASS);
 	String[] array = new String[objs.length];
 	for (int i = 0; i < objs.length; i++) {
 	    Label obj = (Label) objs[i];
@@ -93,8 +95,8 @@ public final class ExpressLabel {
     }
 
     public static Label stringToLabel(String s) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("tache",
-		"Label");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.LABEL_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Label obj = (Label) objs[i];
 	    if (obj.getName().equals(s)) {

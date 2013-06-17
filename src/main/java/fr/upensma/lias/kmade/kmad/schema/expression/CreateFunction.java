@@ -42,8 +42,8 @@ public class CreateFunction extends BinaryFunction {
 	super.evaluateNode(ref);
 
 	ObjetConcret myRef = null;
-	Oid oidObjConc = InterfaceExpressJava.createEntity("metaobjet",
-		"ObjetConcret");
+	Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.CONCRETE_OBJECT_CLASS);
 	ObjetConcret concreteObject = (ObjetConcret) InterfaceExpressJava
 		.prendre(oidObjConc);
 	concreteObject.setName(this.rightNode.getNodeValue().toString());
@@ -57,8 +57,8 @@ public class CreateFunction extends BinaryFunction {
 	ArrayList<AttributAbstrait> listattributabs = concreteObject
 		.getUtiliseParClass().getInverseAttributsAbs();
 	for (int i = 0; i < listattributabs.size(); i++) {
-	    Oid oidAttribut = InterfaceExpressJava.createEntity("metaobjet",
-		    "AttributConcret");
+	    Oid oidAttribut = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+	    		ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 	    AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava
 		    .prendre(oidAttribut);
 	    AttributAbstrait abstractAttribut = listattributabs.get(i);

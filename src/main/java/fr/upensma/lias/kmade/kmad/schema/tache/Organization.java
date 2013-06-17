@@ -159,49 +159,6 @@ public class Organization extends User {
 	return 5;
     }
 
-
-/*    public org.w3c.dom.Element toXML(Document doc) {
-	Element racine = doc.createElement("Organisation");
-	racine.setAttribute("classkmad", "tache.Organisation");
-	racine.setAttribute("idkmad", oid.get());
-
-	Element kmadOrganisationName = doc.createElement("organisation-name");
-	kmadOrganisationName.setTextContent(this.getName());
-	racine.appendChild(kmadOrganisationName);
-
-	if (!this.getStatut().equals("")) {
-	    Element kmadOrganisationStatut = doc
-		    .createElement("organisation-statut");
-	    kmadOrganisationStatut.setTextContent(this.getStatut());
-	    racine.appendChild(kmadOrganisationStatut);
-	}
-
-	if (!this.getRole().equals("")) {
-	    Element kmadOrganisationRole = doc
-		    .createElement("organisation-role");
-	    kmadOrganisationRole.setTextContent(this.getRole());
-	    racine.appendChild(kmadOrganisationRole);
-	}
-
-	if (!this.getImage().equals("")) {
-	    Element kmadOrganisationImagePath = doc
-		    .createElement("organisation-imagepath");
-	    kmadOrganisationImagePath.setTextContent(this.getImage());
-	    racine.appendChild(kmadOrganisationImagePath);
-	}
-
-	
-	 * seul les individus stocks les organisations dans le fichier XML
-	 * if(this.inverseMember.size()!=0){ for(int i =0;
-	 * i<inverseMember.size();i++){ Element idOrganisation =
-	 * doc.createElement("id-Organisation");
-	 * idOrganisation.setTextContent(inverseMember.get(i).getOid().get());
-	 * racine.appendChild(idOrganisation); } }
-	 
-	return racine;
-    }
-*/
-    
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;
     }

@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.Intervalle;
@@ -28,8 +29,8 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.Intervalle;
  */
 public class ExpressInterval { 
     public static String createInterval() {
-	Oid oidIntervalle = InterfaceExpressJava.createEntity("metaobjet",
-		"Intervalle");
+	Oid oidIntervalle = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.RANGE_CLASS);
 	return (oidIntervalle.get());
     }
 
@@ -65,8 +66,8 @@ public class ExpressInterval {
     }
 
     public static String[][] getArrayIntervals() {
-	Object[] intervalles = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "Intervalle");
+	Object[] intervalles = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.RANGE_CLASS);
 	if (intervalles.length == 0)
 	    return null;
 	String[][] s = new String[intervalles.length][2];
@@ -80,8 +81,8 @@ public class ExpressInterval {
 
     public static ArrayList<Intervalle> getIntervals() {
 	ArrayList<Intervalle> lst = new ArrayList<Intervalle>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet",
-		"Intervalle");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.RANGE_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Intervalle obj = (Intervalle) objs[i];
 	    lst.add(obj);
@@ -90,8 +91,8 @@ public class ExpressInterval {
     }
 
     public static Intervalle getInterval(String name) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet",
-		"Intervalle");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.RANGE_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Intervalle obj = (Intervalle) objs[i];
 	    if (obj.getName().equals(name)) {

@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.Enumeration;
@@ -28,8 +29,8 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.Enumeration;
  */
 public class ExpressEnum {    
     public static String createEnum() {
-	Oid oidEnumeration = InterfaceExpressJava.createEntity("metaobjet",
-		"Enumeration");
+	Oid oidEnumeration = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.ENUMERATION_CLASS);
 	return (oidEnumeration.get());
     }
 
@@ -47,8 +48,8 @@ public class ExpressEnum {
 
     public static ArrayList<Enumeration> getEnums() {
 	ArrayList<Enumeration> lst = new ArrayList<Enumeration>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet",
-		"Enumeration");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.ENUMERATION_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Enumeration obj = (Enumeration) objs[i];
 	    lst.add(obj);
@@ -71,7 +72,7 @@ public class ExpressEnum {
 
     public static String[][] getArrayEnum() {
 	Object[] enumerations = InterfaceExpressJava.prendreAllOidOfEntity(
-		"metaobjet", "Enumeration");
+			ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.ENUMERATION_CLASS);
 	if (enumerations.length == 0)
 	    return null;
 	String[][] s = new String[enumerations.length][2];
@@ -84,8 +85,8 @@ public class ExpressEnum {
     }
 
     public static Enumeration getEnum(String name) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet",
-		"Enumeration");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.ENUMERATION_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Enumeration obj = (Enumeration) objs[i];
 	    if (obj.getName().equalsIgnoreCase(name)) {

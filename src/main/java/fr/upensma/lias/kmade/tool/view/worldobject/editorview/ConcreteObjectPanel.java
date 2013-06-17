@@ -42,6 +42,7 @@ import org.jgraph.graph.DefaultGraphModel;
 import org.jgraph.graph.GraphConstants;
 import org.jgraph.graph.GraphModel;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.ExpressDB;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
@@ -177,7 +178,8 @@ public class ConcreteObjectPanel extends JPanel implements MouseMotionListener,
 			ObjetAbstrait ref = ((ObjetAbstrait) ((AbstractObjectCell) cell)
 				.getObject());
 			Oid oidObjCon = InterfaceExpressJava.createEntity(
-				"metaobjet", "ObjetConcret");
+					ExpressConstant.METAOBJECT_PACKAGE, 
+					ExpressConstant.CONCRETE_OBJECT_CLASS);
 			ObjetConcret o = (ObjetConcret) InterfaceExpressJava.bdd
 				.prendre(oidObjCon);
 			o.setName(ref.getName() + " concret");

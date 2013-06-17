@@ -45,23 +45,6 @@ public class Point implements Entity {
         this.y = y;
         this.oid = oid;
     }
-
-/*    public org.w3c.dom.Element toXML(Document doc) {        
-        Element racine = doc.createElement("point");
-        racine.setAttribute("classkmad", "tache.Point");
-        racine.setAttribute("idkmad", oid.get());
-        
-        Element kmadPointx = doc.createElement("point-x");
-        kmadPointx.setTextContent(this.getX().toString());
-        racine.appendChild(kmadPointx);
-        
-        Element kmadPointy = doc.createElement("point-y");
-        kmadPointy.setTextContent(this.getY().toString());
-        racine.appendChild(kmadPointy);
-        
-        return racine;
-    }
-*/
     
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
         return false;

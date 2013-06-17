@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.project.GeneralInformation;
@@ -31,7 +32,8 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
  */
 public class ExpressProjectManager {
     public static String createProjectManager() {
-	Oid oidObjAbs = InterfaceExpressJava.createEntity("project", "Project");
+	Oid oidObjAbs = InterfaceExpressJava.createEntity(ExpressConstant.PROJECT_PACKAGE, 
+    	ExpressConstant.PROJECT_CLASS);
 	return (oidObjAbs.get());
     }
 
@@ -54,8 +56,8 @@ public class ExpressProjectManager {
     }
 
     public static String getProjectManager() {
-	Object[] temp = InterfaceExpressJava.prendreAllOidOfEntity("project",
-		"Project");
+	Object[] temp = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.PROJECT_PACKAGE, 
+    	ExpressConstant.PROJECT_CLASS);
 	return ((Project) temp[0]).getOid().get();
     }
 
@@ -65,8 +67,8 @@ public class ExpressProjectManager {
     }
 
     public static String createInterviewIndex(Oid oidProject) {
-	Oid oidInterviewIndex = InterfaceExpressJava.createEntity("project",
-		"InterviewIndex");
+	Oid oidInterviewIndex = InterfaceExpressJava.createEntity(ExpressConstant.PROJECT_PACKAGE, 
+    	ExpressConstant.INTERVIEW_CLASS);
 	InterviewIndex objInterviewIndex = (InterviewIndex) InterfaceExpressJava
 		.prendre(oidInterviewIndex);
 	Project objProject = (Project) InterfaceExpressJava.prendre(oidProject);
@@ -80,8 +82,8 @@ public class ExpressProjectManager {
 	    String interviewed, String placeInformation, String statut,
 	    String seniority, String date, String interviewType,
 	    String searchedInformations, String interviewerName) {
-	Oid oidInterviewIndex = InterfaceExpressJava.createEntity("project",
-		"InterviewIndex");
+	Oid oidInterviewIndex = InterfaceExpressJava.createEntity(ExpressConstant.PROJECT_PACKAGE, 
+    	ExpressConstant.INTERVIEW_CLASS);
 	InterviewIndex objInterviewIndex = (InterviewIndex) InterfaceExpressJava
 		.prendre(oidInterviewIndex);
 	objInterviewIndex.setInterviewedName(interviewed);
@@ -104,7 +106,7 @@ public class ExpressProjectManager {
 	    String entreprise, String site, String typePost, String date,
 	    String resources, String justification) {
 	Oid oidGeneralInformation = InterfaceExpressJava.createEntity(
-		"project", "GeneralInformation");
+		ExpressConstant.PROJECT_PACKAGE, ExpressConstant.GENERAL_INFORMATION_CLASS);
 	GeneralInformation objGeneralInformation = (GeneralInformation) InterfaceExpressJava
 		.prendre(oidGeneralInformation);
 
@@ -124,7 +126,7 @@ public class ExpressProjectManager {
 
     public static String createGeneralInformation(Oid oidProject) {
 	Oid oidGeneralInformation = InterfaceExpressJava.createEntity(
-		"project", "GeneralInformation");
+			ExpressConstant.PROJECT_PACKAGE, ExpressConstant.GENERAL_INFORMATION_CLASS);
 	GeneralInformation objGeneralInformation = (GeneralInformation) InterfaceExpressJava
 		.prendre(oidGeneralInformation);
 	Project objProject = (Project) InterfaceExpressJava.prendre(oidProject);

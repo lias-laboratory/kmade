@@ -19,6 +19,7 @@ package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
 
+import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.AttributAbstrait;
@@ -30,8 +31,8 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class ExpressAbstractObject {
     public static String createAbstractObject() {
-	Oid oidObjAbs = InterfaceExpressJava.createEntity("metaobjet",
-		"ObjetAbstrait");
+	Oid oidObjAbs = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.ABSTRACT_OBJECT_CLASS);
 	return (oidObjAbs.get());
     }
 
@@ -63,8 +64,8 @@ public class ExpressAbstractObject {
 
     public static ArrayList<ObjetAbstrait> getAbstractObjects() {
 	ArrayList<ObjetAbstrait> lst = new ArrayList<ObjetAbstrait>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet",
-		"ObjetAbstrait");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.ABSTRACT_OBJECT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    ObjetAbstrait obj = (ObjetAbstrait) objs[i];
 	    lst.add(obj);
@@ -73,8 +74,8 @@ public class ExpressAbstractObject {
     }
 
     public static Object[][] getAbsObjIntoTab() {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity("metaobjet",
-		"ObjetAbstrait");
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.ABSTRACT_OBJECT_CLASS);
 	Object[][] tabObj = new Object[objs.length][3];
 	for (int i = 0; i < objs.length; i++) {
 	    ObjetAbstrait obj = (ObjetAbstrait) objs[i];
