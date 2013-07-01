@@ -17,6 +17,9 @@
 **********************************************************************************/
 package fr.upensma.lias.kmade;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Mickael BARON
  */
@@ -36,4 +39,27 @@ public class KMADEToolConstant {
     public static final String VERSION_VALUE = "1.2";
 
     public static String PACKAGE_PATH_NAME = "fr.upensma.lias.kmade.kmad.schema.";		
+    
+	public static final Map<String, String> MAP_CLASS = createMap();
+
+	private static  Map<String, String> createMap(){
+		Map<String, String>  map = new HashMap<String,String>();
+		map.put("IntValue", "NumberValue"); // change for 1.0 -> 1.1 or before 1.0 to 1.0
+		//change for 1.21
+		map.put("tache.Tache","tache.Task");
+		map.put("tache.Acteur", "tache.Actor");
+		map.put("tache.ActeurSysteme", "tache.ActorSystem");
+		map.put("tache.Evenement", "tache.CurrentEvents");
+		map.put("tache.Evenement", "tache.Decomposition");
+		map.put("tache.Enumere", "tache.Enumerated");
+		map.put("tache.Evenement", "tache.Event");
+		map.put("tache.Executant", "tache.Executor");
+		map.put("tache.Materiel", "tache.Material");
+		map.put("tache.Modalite", "tache.Modality");
+		map.put("tache.ParcMachines", "tache.ParkMachines");
+		map.put("tache.Individu", "tache.Person");
+		map.put("tache.EffetsDeBordExpression", "tache.SideEffectExpression");
+		return map;
+	}
+
 }
