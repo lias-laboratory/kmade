@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -49,11 +50,11 @@ import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.KMADXMLParserException;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-import fr.upensma.lias.kmade.kmad.schema.tache.Person;
 import fr.upensma.lias.kmade.kmad.schema.tache.Machine;
 import fr.upensma.lias.kmade.kmad.schema.tache.Media;
 import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
 import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
+import fr.upensma.lias.kmade.kmad.schema.tache.Person;
 import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
@@ -478,18 +479,22 @@ public final class ExpressKMADXML {
 
 	private static Entity createOidInstance(Element currentElement)
 			throws KMADXMLParserException {
+		String classkmad = currentElement.getAttribute("classkmad");
 		String classe = KMADEToolConstant.PACKAGE_PATH_NAME
-				+ currentElement.getAttribute("classkmad");
+				+ classkmad;
 
 		Class<?> entity = null;
+		//try to create the entity with the name in the file
 		try {
 			entity = Class.forName(classe);
 		} catch (ClassNotFoundException e) {
-
-			if (classe.equals("kmade.nmda.schema.metaobjet.IntValue")) {
+			//if the class doesn't exist look at a match with an old name
+			Map <String, String> map = KMADEToolConstant.MAP_CLASS;
+			String newClass = map.get(classkmad);
+			if(newClass !=null ){
 				try {
 					entity = Class
-							.forName("kmade.nmda.schema.metaobjet.NumberValue");
+							.forName(KMADEToolConstant.PACKAGE_PATH_NAME+newClass);
 				} catch (ClassNotFoundException e1) {
 					throw new KMADXMLParserException(
 							ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
@@ -646,9 +651,9 @@ public final class ExpressKMADXML {
 				if(!oidIsAnyMissing){
 
 					try {
-							newInstance.createObjectFromXMLElement2(myElement);
-							InterfaceExpressJava.bdd.mettre(new Oid(idTask),newInstance);
-							myEntities.remove(newInstance);
+						newInstance.createObjectFromXMLElement2(myElement);
+						InterfaceExpressJava.bdd.mettre(new Oid(idTask),newInstance);
+						myEntities.remove(newInstance);
 						break;
 					} catch (Exception e) {
 						//TODO lot of exception because code archi ...
