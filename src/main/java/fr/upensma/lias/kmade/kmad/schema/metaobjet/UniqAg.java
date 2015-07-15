@@ -1,6 +1,6 @@
 /*********************************************************************************
 * This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
 * 
 * KMADe is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published by
@@ -25,7 +25,8 @@ import org.w3c.dom.Document;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * @authors Delphine AUTARD and Mickael BARON (baron@ensma.fr ou baron.mickael@gmail.com)
+ * @author Delphine AUTARD 
+ * @author Mickael BARON 
  **/
 public class UniqAg extends Agregat {
 

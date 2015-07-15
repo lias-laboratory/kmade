@@ -1,25 +1,24 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.tache;
 
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import java.util.ArrayList;
-
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,16 +29,17 @@ import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * Abstract class which allows to manipulate the same way individuals or groups of individuals, 
- * which can be defined as sub-classes 
- * The class provides for a name, a role, a status, all three are free texts, the semantics of which should be
- * defined by the task model designer for each project. 
- * The last attribute is the imagePath, which is supposed to represent the physical path for an image which can
- * be used in the interface of K-MADe to personalize it
+ * Abstract class which allows to manipulate the same way individuals or groups
+ * of individuals, which can be defined as sub-classes The class provides for a
+ * name, a role, a status, all three are free texts, the semantics of which
+ * should be defined by the task model designer for each project. The last
+ * attribute is the imagePath, which is supposed to represent the physical path
+ * for an image which can be used in the interface of K-MADe to personalize it
  * 
- * @author Delphine AUTARD and Mickael BARON
- * @author [Comment] Patrick GIRARD
- **/
+ * @author Delphine AUTARD 
+ * @author Mickael BARON
+ * @author Patrick GIRARD
+ */
 public abstract class User implements Entity {
 
     private static final long serialVersionUID = 4380917017782960768L;
@@ -67,8 +67,8 @@ public abstract class User implements Entity {
     private String imagePath = "";
 
     /**
-     * List of actors the user is involved in. 
-     * CommentPG: Not sure it is very necessary and useful
+     * List of actors the user is involved in. CommentPG: Not sure it is very
+     * necessary and useful
      */
     private ArrayList<Actor> reverseActors = new ArrayList<Actor>();
 
@@ -82,8 +82,10 @@ public abstract class User implements Entity {
     /**
      * Constructor with name an oid
      * 
-     * @param name name of the individual
-     * @param oid unique Express identifier
+     * @param name
+     *            name of the individual
+     * @param oid
+     *            unique Express identifier
      */
     public User(String name, Oid oid) {
 	this(name, "", "", "", oid);
@@ -92,10 +94,14 @@ public abstract class User implements Entity {
     /**
      * Constructor without image path
      * 
-     * @param name name of the individual
-     * @param st status
-     * @param r role
-     * @param oid unique Express identifier
+     * @param name
+     *            name of the individual
+     * @param st
+     *            status
+     * @param r
+     *            role
+     * @param oid
+     *            unique Express identifier
      */
     public User(String name, String st, String r, Oid oid) {
 	this(name, st, r, "", oid);
@@ -104,11 +110,16 @@ public abstract class User implements Entity {
     /**
      * Complete constructor
      * 
-     * @param name name of the individual
-     * @param st status
-     * @param r role
-     * @param pi image path
-     * @param oid unique Express identifier
+     * @param name
+     *            name of the individual
+     * @param st
+     *            status
+     * @param r
+     *            role
+     * @param pi
+     *            image path
+     * @param oid
+     *            unique Express identifier
      */
     public User(String name, String st, String r, String pi, Oid oid) {
 	this.name = name;
@@ -119,12 +130,13 @@ public abstract class User implements Entity {
     }
 
     /**
-     * Builds the link between an actor and its user. No verification is made on the 
-     * correctness of the link
-     * CommentPG: I am not sure of the interest of this inverse link. It seems not used at all, 
-     * and there is no way to use the list of actors related to a user...
+     * Builds the link between an actor and its user. No verification is made on
+     * the correctness of the link CommentPG: I am not sure of the interest of
+     * this inverse link. It seems not used at all, and there is no way to use
+     * the list of actors related to a user...
      * 
-     * @param a the actor to add
+     * @param a
+     *            the actor to add
      */
     public void addReverseActor(Actor a) {
 	reverseActors.add(a);
@@ -133,7 +145,8 @@ public abstract class User implements Entity {
     /**
      * Removes an actor from the reverse list of actors
      * 
-     * @param a the actor to be removed
+     * @param a
+     *            the actor to be removed
      */
     public void removeInverseActeur(Actor a) {
 	reverseActors.remove(a);
@@ -194,6 +207,7 @@ public abstract class User implements Entity {
     @Override
     /*
      * Returns the name of the User
+     * 
      * @see java.lang.Object#toString()
      */
     public String toString() {
@@ -201,19 +215,21 @@ public abstract class User implements Entity {
     }
 
     /**
-     * Utilitary static function able to verify in the whole express model that a name is unique among
-     * all existing users (User, Individu, Organisation classes). 
-     * Warning: The method ignore case for characters
+     * Utilitary static function able to verify in the whole express model that
+     * a name is unique among all existing users (User, Individu, Organisation
+     * classes). Warning: The method ignore case for characters
      * 
-     * @param s the name to verify
+     * @param s
+     *            the name to verify
      * @return false if the name already exists, else true
      */
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.USER_CLASS);
-	Object[] objAbs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-		ExpressConstant.PERSON_CLASS);
-	Object[] objAbs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.USER_CLASS);
+	Object[] objAbs1 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.PERSON_CLASS);
+	Object[] objAbs2 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE,
 		ExpressConstant.ORGANIZATION_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    User obj = (User) objAbs[i];
@@ -237,11 +253,12 @@ public abstract class User implements Entity {
     }
 
     /**
-     * Static method to calculate a new name composed by a supposed not unique name and a 
-     * numerical value. For example, if the name Patrick already exists, it will search for Patrick_1, 
-     * and Patrick_2 if needed, and so on.
+     * Static method to calculate a new name composed by a supposed not unique
+     * name and a numerical value. For example, if the name Patrick already
+     * exists, it will search for Patrick_1, and Patrick_2 if needed, and so on.
      * 
-     * @param n the name to modify to become unique
+     * @param n
+     *            the name to modify to become unique
      * @return a unique name based on the first one
      */
     public static String propositionNom(String n) {
@@ -261,7 +278,7 @@ public abstract class User implements Entity {
 	}
 	return n;
     }
-        
+
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;
     }
@@ -297,68 +314,73 @@ public abstract class User implements Entity {
     }
 
     @Override
-	public Element toXML2(Document doc) throws Exception {
-    	Element racine = doc.createElement("user");
-    	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.USER_CLASS);
-    	racine.setAttribute("idkmad", oid.get());
+    public Element toXML2(Document doc) throws Exception {
+	Element racine = doc.createElement("user");
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "."
+		+ ExpressConstant.USER_CLASS);
+	racine.setAttribute("idkmad", oid.get());
 
-    	Element kmadUserName = doc.createElement("user-name");
-    	kmadUserName.setTextContent(this.getName());
-    	racine.appendChild(kmadUserName);
+	Element kmadUserName = doc.createElement("user-name");
+	kmadUserName.setTextContent(this.getName());
+	racine.appendChild(kmadUserName);
 
-    	if (!this.getStatus().equals("")) {
-    	    Element kmadUserStatut = doc.createElement("user-statut");
-    	    kmadUserStatut.setTextContent(this.getStatus());
-    	    racine.appendChild(kmadUserStatut);
-    	}
-
-    	if (!this.getRole().equals("")) {
-    	    Element kmadUserRole = doc.createElement("user-role");
-    	    kmadUserRole.setTextContent(this.getRole());
-    	    racine.appendChild(kmadUserRole);
-    	}
-
-    	if (!this.getImage().equals("")) {
-    	    Element kmadUserImagePath = doc.createElement("user-imagepath");
-    	    kmadUserImagePath.setTextContent(this.getImage());
-    	    racine.appendChild(kmadUserImagePath);
-    	}
-
-    	return racine;
+	if (!this.getStatus().equals("")) {
+	    Element kmadUserStatut = doc.createElement("user-statut");
+	    kmadUserStatut.setTextContent(this.getStatus());
+	    racine.appendChild(kmadUserStatut);
 	}
 
-	@Override
-	public void createObjectFromXMLElement2(Element p) throws Exception {
-		this.oid = new Oid(p.getAttribute("idkmad"));
-
-		NodeList kmadUserName = p.getElementsByTagName("user-name");
-		 if(kmadUserName.item(0).getParentNode() != p){
-			 kmadUserName = null;}
-		if (kmadUserName.item(0) != null)
-		    this.name = kmadUserName.item(0).getTextContent();
-
-		NodeList kmadUserStatut = p.getElementsByTagName("user-statut");
-		 if(kmadUserStatut.item(0).getParentNode() != p){
-			 kmadUserStatut = null;}
-		if (kmadUserStatut.item(0) != null)
-		    this.status = kmadUserStatut.item(0).getTextContent();
-
-		NodeList kmadUserRole = p.getElementsByTagName("user-role");
-		 if(kmadUserRole.item(0).getParentNode() != p){
-			 kmadUserRole = null;}
-		if (kmadUserRole.item(0) != null)
-		    this.role = kmadUserRole.item(0).getTextContent();
-
-		NodeList kmadUserImagePath = p.getElementsByTagName("user-imagepath");
-		 if(kmadUserImagePath.item(0).getParentNode() != p){
-			 kmadUserImagePath = null;}
-		if (kmadUserImagePath.item(0) != null)
-		    this.imagePath = kmadUserImagePath.item(0).getTextContent();
-
+	if (!this.getRole().equals("")) {
+	    Element kmadUserRole = doc.createElement("user-role");
+	    kmadUserRole.setTextContent(this.getRole());
+	    racine.appendChild(kmadUserRole);
 	}
 
-	@Override
-	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		return false;
+	if (!this.getImage().equals("")) {
+	    Element kmadUserImagePath = doc.createElement("user-imagepath");
+	    kmadUserImagePath.setTextContent(this.getImage());
+	    racine.appendChild(kmadUserImagePath);
 	}
+
+	return racine;
+    }
+
+    @Override
+    public void createObjectFromXMLElement2(Element p) throws Exception {
+	this.oid = new Oid(p.getAttribute("idkmad"));
+
+	NodeList kmadUserName = p.getElementsByTagName("user-name");
+	if (kmadUserName.item(0).getParentNode() != p) {
+	    kmadUserName = null;
+	}
+	if (kmadUserName.item(0) != null)
+	    this.name = kmadUserName.item(0).getTextContent();
+
+	NodeList kmadUserStatut = p.getElementsByTagName("user-statut");
+	if (kmadUserStatut.item(0).getParentNode() != p) {
+	    kmadUserStatut = null;
+	}
+	if (kmadUserStatut.item(0) != null)
+	    this.status = kmadUserStatut.item(0).getTextContent();
+
+	NodeList kmadUserRole = p.getElementsByTagName("user-role");
+	if (kmadUserRole.item(0).getParentNode() != p) {
+	    kmadUserRole = null;
+	}
+	if (kmadUserRole.item(0) != null)
+	    this.role = kmadUserRole.item(0).getTextContent();
+
+	NodeList kmadUserImagePath = p.getElementsByTagName("user-imagepath");
+	if (kmadUserImagePath.item(0).getParentNode() != p) {
+	    kmadUserImagePath = null;
+	}
+	if (kmadUserImagePath.item(0) != null)
+	    this.imagePath = kmadUserImagePath.item(0).getTextContent();
+
+    }
+
+    @Override
+    public boolean oidIsAnyMissing2(Element p) throws Exception {
+	return false;
+    }
 }

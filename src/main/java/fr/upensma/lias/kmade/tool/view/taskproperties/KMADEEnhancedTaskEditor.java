@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.view.taskproperties;
 
 import java.awt.AlphaComposite;
@@ -30,6 +30,7 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -84,7 +85,8 @@ import fr.upensma.lias.kmade.tool.viewadaptator.TaskPropertiesEnhancedEditorAdap
 /**
  * @author Mickael BARON
  */
-public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, KeyListener, MouseListener, LanguageFactory {
+public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener,
+	KeyListener, MouseListener, LanguageFactory {
 
     private static final long serialVersionUID = -2083164606554606839L;
 
@@ -308,14 +310,17 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	nameField.addKeyListener(this);
 	numField.setEditable(false);
 	dureeField.addKeyListener(this);
-	
-	  purposeField.setEditable(true); purposeField.addActionListener(new
-	  ActionListener() { public void actionPerformed(ActionEvent e) {
-	  TaskPropertiesEnhancedEditorAdaptator.setPurpose(); } });
-	  purposeField.addMouseListener(this);
-	  purposeField.addKeyListener(this);
-	  purposeField.setBackground(nameField.getBackground());
-	 
+
+	purposeField.setEditable(true);
+	purposeField.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		TaskPropertiesEnhancedEditorAdaptator.setPurpose();
+	    }
+	});
+	purposeField.addMouseListener(this);
+	purposeField.addKeyListener(this);
+	purposeField.setBackground(nameField.getBackground());
+
 	/*
 	 * feedbackField.setEditable(false); feedbackField.addActionListener(new
 	 * ActionListener() { public void actionPerformed(ActionEvent e) {
@@ -323,9 +328,9 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	 * feedbackField.addMouseListener(this);
 	 * feedbackField.setBackground(nameField.getBackground());
 	 */
-	
-	 observationArea.addMouseListener(this);
-	 observationArea.addKeyListener(this);
+
+	observationArea.addMouseListener(this);
+	observationArea.addKeyListener(this);
 	unkModalite.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		TaskPropertiesEnhancedEditorAdaptator.setUnknownModalite();
@@ -516,8 +521,14 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	acteurSystemeTable.setModel(refTableModelSys);
 
 	objetsListPanel.setEditable(false);
-	this.setPreferredSize(new Dimension(900, 900));
-	KMADEToolUtilities.setCenteredInScreen(this);
+	Dimension dim = new Dimension(900, 900);
+	if (Toolkit.getDefaultToolkit().getScreenSize().height < dim.height) {
+	    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+	    this.setLocation(0, 0);
+	} else {
+	    this.setSize(new Dimension(900, 900));
+	    KMADEToolUtilities.setCenteredInScreen(this);
+	}
     }
 
     public void launchAnimation(String taskName) {
@@ -619,9 +630,9 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
     }
 
     public void displayTaskProperties(String numero, String tacheMere,
-	    String name, String but, String feed, String duree,
-	    String obs, Executor exec, Modality mod, Frequence freq,
-	    String compFreq, Importance imp, String events, boolean facultatif,
+	    String name, String but, String feed, String duree, String obs,
+	    Executor exec, Modality mod, Frequence freq, String compFreq,
+	    Importance imp, String events, boolean facultatif,
 	    boolean interruptible, String[] allevents, String dec,
 	    ArrayList<String[]> actRef, ArrayList<String[]> actRefSys,
 	    String prec, String post, Decomposition decomposition, String it) {
@@ -1930,17 +1941,20 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	    TaskPropertiesEnhancedEditorAdaptator
 		    .setNameInTaskProperties(nameField.getText());
 	}
-	if(keyEvent.getSource() == purposeField){
-		TaskPropertiesEnhancedEditorAdaptator.setPurposeInTaskProperties(purposeField.getText());
+	if (keyEvent.getSource() == purposeField) {
+	    TaskPropertiesEnhancedEditorAdaptator
+		    .setPurposeInTaskProperties(purposeField.getText());
 	}
-	if(keyEvent.getSource() == observationArea){
-		TaskPropertiesEnhancedEditorAdaptator.setObservationInTaskProperties(observationArea.getText());
+	if (keyEvent.getSource() == observationArea) {
+	    TaskPropertiesEnhancedEditorAdaptator
+		    .setObservationInTaskProperties(observationArea.getText());
 	}
-	
-	  if (keyEvent.getSource() == dureeField) {
-	  TaskPropertiesEnhancedEditorAdaptator
-	  .setDureeInTaskProperties(dureeField.getText()); }
-	 
+
+	if (keyEvent.getSource() == dureeField) {
+	    TaskPropertiesEnhancedEditorAdaptator
+		    .setDureeInTaskProperties(dureeField.getText());
+	}
+
 	if (keyEvent.getSource() == valeurFrequenceField) {
 	    TaskPropertiesEnhancedEditorAdaptator
 		    .setFrequencyValueInTaskProperties(valeurFrequenceField
@@ -1958,12 +1972,14 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener, K
 	    return;
 	}
 	if (e.getSource() == purposeField) {
-	  TaskPropertiesEnhancedEditorAdaptator.setPurpose(); }
-	//if (e.getSource() == feedbackField) {
-	//  TaskPropertiesEnhancedEditorAdaptator.setFeedBack(); } 
-	if  (e.getSource() == observationArea) {
-	  TaskPropertiesEnhancedEditorAdaptator.setObservation(); }
-	 
+	    TaskPropertiesEnhancedEditorAdaptator.setPurpose();
+	}
+	// if (e.getSource() == feedbackField) {
+	// TaskPropertiesEnhancedEditorAdaptator.setFeedBack(); }
+	if (e.getSource() == observationArea) {
+	    TaskPropertiesEnhancedEditorAdaptator.setObservation();
+	}
+
 	if (e.getSource() == fireEvents) {
 	    EventAdaptator.editedFromEnhancedFrame();
 	    TaskPropertiesEnhancedEditorAdaptator.setFiredEvents();

@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.interfaceexpressjava;
 
 import java.io.File;
@@ -22,6 +22,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -45,7 +46,7 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
 /**
  * @author Mickael BARON
  */
-public class InterfaceExpressJava {  
+public class InterfaceExpressJava {
 
     private static boolean done = false;
 
@@ -69,6 +70,10 @@ public class InterfaceExpressJava {
 
     public static ExpressDB bdd = new ExpressDB();
 
+    /* AG */
+    public static ArrayDeque<ExpressDB> toUndo = new ArrayDeque<ExpressDB>();
+    public static ArrayDeque<ExpressDB> toRedo = new ArrayDeque<ExpressDB>();
+
     private static final ClipBoardDB MY_CLIP_BOARD = new ClipBoardDB();
 
     public static CurrentObject getCurrentObject() {
@@ -89,17 +94,19 @@ public class InterfaceExpressJava {
     public static void clearCurrentProject() {
 	bdd.clear();
     }
-    
+
     /**
      * Cette methode permet d'effacer les objets de la bdd
      */
     public static void clearCurrentItems() {
-    	for (Iterator<Oid> i = InterfaceExpressJava.bdd.keySet().iterator(); i.hasNext();){
-    		Oid oid = i.next();
-    		String ClassName = InterfaceExpressJava.bdd.prendre(oid).getClass().getName();
-    		if(ClassName.contains(ExpressConstant.METAOBJECT_PACKAGE))
-    			bdd.remove(InterfaceExpressJava.bdd.prendre(oid));
-    	}
+	for (Iterator<Oid> i = InterfaceExpressJava.bdd.keySet().iterator(); i
+		.hasNext();) {
+	    Oid oid = i.next();
+	    String ClassName = InterfaceExpressJava.bdd.prendre(oid).getClass()
+		    .getName();
+	    if (ClassName.contains(ExpressConstant.METAOBJECT_PACKAGE))
+		bdd.remove(InterfaceExpressJava.bdd.prendre(oid));
+	}
     }
 
     /**
@@ -147,8 +154,9 @@ public class InterfaceExpressJava {
 	try {
 	    entity = Class.forName(classe);
 	} catch (ClassNotFoundException e) {
-		KMADEHistoryMessageManager.printlnError(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
-		    + " : " + classe);
+	    KMADEHistoryMessageManager
+		    .printlnError(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
+			    + " : " + classe);
 	    KMADEHistoryMessageManager.printlnError(e.getMessage());
 	}
 
@@ -220,8 +228,9 @@ public class InterfaceExpressJava {
 	try {
 	    entity = Class.forName(classe);
 	} catch (ClassNotFoundException e) {
-	    KMADEHistoryMessageManager.printlnError(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
-		    + classe);
+	    KMADEHistoryMessageManager
+		    .printlnError(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
+			    + classe);
 	    KMADEHistoryMessageManager.printlnError(e.getMessage());
 	}
 
@@ -258,8 +267,9 @@ public class InterfaceExpressJava {
 	try {
 	    entity = Class.forName(classe);
 	} catch (ClassNotFoundException e) {
-	    KMADEHistoryMessageManager.printlnError(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
-		    + classe);
+	    KMADEHistoryMessageManager
+		    .printlnError(ExpressConstant.CLASS_LOADER_PROBLEM_MESSAGE
+			    + classe);
 	    KMADEHistoryMessageManager.printlnError(e);
 	}
 
@@ -588,7 +598,8 @@ public class InterfaceExpressJava {
 	    } else if (ch[0].equalsIgnoreCase("NULL")) {
 		lesArgs[compteur] = null;
 	    } else {
-		KMADEHistoryMessageManager.printlnError("Type inconnu :" + ch[0]);
+		KMADEHistoryMessageManager.printlnError("Type inconnu :"
+			+ ch[0]);
 		System.exit(0);
 	    }
 	    compteur++;

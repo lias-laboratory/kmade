@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -28,13 +28,13 @@ import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * The Individual class stands for human beings involved in the task analysis process. 
- * The class inherits from User to allow using Individuals or Organizations as Actors
- * The only responsibility of this class is to maintain the list or organization an
- * individual belongs to.
+ * The Individual class stands for human beings involved in the task analysis
+ * process. The class inherits from User to allow using Individuals or
+ * Organizations as Actors The only responsibility of this class is to maintain
+ * the list or organization an individual belongs to.
  * 
  * @author Mickael BARON
- * @author [Comment] Patrick GIRARD
+ * @author Patrick GIRARD
  */
 public class Person extends User {
 
@@ -55,8 +55,10 @@ public class Person extends User {
     /**
      * Constructor with only a name and an oid
      * 
-     * @param name name of the individual
-     * @param oid unique Express identifier
+     * @param name
+     *            name of the individual
+     * @param oid
+     *            unique Express identifier
      */
     public Person(String name, Oid oid) {
 	super(name, "", "", "", oid);
@@ -65,10 +67,14 @@ public class Person extends User {
     /**
      * Constructor with an empty image path
      * 
-     * @param name name of the individual
-     * @param st status
-     * @param r role
-     * @param oid unique Express identifier
+     * @param name
+     *            name of the individual
+     * @param st
+     *            status
+     * @param r
+     *            role
+     * @param oid
+     *            unique Express identifier
      */
     public Person(String name, String st, String r, Oid oid) {
 	super(name, st, r, "", oid);
@@ -77,11 +83,16 @@ public class Person extends User {
     /**
      * Complete constructor
      * 
-     * @param name name of the individual
-     * @param st status
-     * @param r role
-     * @param pi image path
-     * @param oid unique Express identifier
+     * @param name
+     *            name of the individual
+     * @param st
+     *            status
+     * @param r
+     *            role
+     * @param pi
+     *            image path
+     * @param oid
+     *            unique Express identifier
      */
     public Person(String name, String st, String r, String pi, Oid oid) {
 	super(name, st, r, pi, oid);
@@ -100,11 +111,12 @@ public class Person extends User {
     }
 
     /**
-     * Registers the organization from which the individual is supposed to be member
-     * A verification is made for avoiding duplication
-     * Warning: the reverse registering is not done at this step
+     * Registers the organization from which the individual is supposed to be
+     * member A verification is made for avoiding duplication Warning: the
+     * reverse registering is not done at this step
      * 
-     * @param org the organization to register
+     * @param org
+     *            the organization to register
      */
     public void addOrganization(Organization org) {
 	if (!organizations.contains(org)) {
@@ -113,25 +125,27 @@ public class Person extends User {
     }
 
     /**
-     * Gives the list of organizations the individual is member of
-     * Warning: it is a reference on the list itself. Be careful not to modify it
+     * Gives the list of organizations the individual is member of Warning: it
+     * is a reference on the list itself. Be careful not to modify it
      * 
-     * @return an ArrayList which contains all organizations the individual is member of
+     * @return an ArrayList which contains all organizations the individual is
+     *         member of
      */
     public ArrayList<Organization> getOrganisations() {
 	return organizations;
     }
 
     /**
-     * Removes the organization from the organization it was member
-     * Warning: no verification is made on the existence of the organization
+     * Removes the organization from the organization it was member Warning: no
+     * verification is made on the existence of the organization
      * 
-     * @param org the organization to be removed
+     * @param org
+     *            the organization to be removed
      */
     public void removeOrganisation(Organization org) {
 	organizations.remove(org);
     }
-    
+
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	NodeList userValue = p.getElementsByTagName("id-organisation");
 	for (int i = 0; i < userValue.getLength(); i++) {
@@ -196,8 +210,8 @@ public class Person extends User {
     /**
      * Returns an array containing all characteristics of an individual
      * 
-     * @return an array of Object, which contains all attributes of superclass, plus a list of group name the individual
-     * is member of 
+     * @return an array of Object, which contains all attributes of superclass,
+     *         plus a list of group name the individual is member of
      */
     public Object[] toArray() {
 	String s = "";
@@ -214,9 +228,10 @@ public class Person extends User {
     }
 
     /**
-     * This function is supposed to give the size of the array returned by the "toArray" method
-     * It returns always 5 !
-     * Warning: Very dangerous implementation
+     * This function is supposed to give the size of the array returned by the
+     * "toArray" method It returns always 5 ! Warning: Very dangerous
+     * implementation
+     * 
      * @return 5
      */
     public static int toArrayLenght() {
@@ -226,7 +241,8 @@ public class Person extends User {
     public Element toXML2(Document doc) throws Exception {
 	// TODO Auto-generated method stub
 	Element racine = doc.createElement("Individu");
-	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.PERSON_CLASS);
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "."
+		+ ExpressConstant.PERSON_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 
 	if (this.organizations.size() != 0) {
@@ -262,7 +278,8 @@ public class Person extends User {
 	if (this.organizations.size() != 0) {
 	    for (int i = 0; i < organizations.size(); i++) {
 		Element idOrganisation = doc.createElement("id-organisation");
-		idOrganisation.setTextContent(organizations.get(i).getOid().get());
+		idOrganisation.setTextContent(organizations.get(i).getOid()
+			.get());
 		racine.appendChild(idOrganisation);
 	    }
 	}
@@ -274,8 +291,9 @@ public class Person extends User {
 	// TODO Auto-generated method stub
 	this.oid = new Oid(p.getAttribute("idkmad"));
 	organizations.clear();
-	if(p.hasAttribute("id-organisation")){
-	    String[] kmadIndividuOrganisation = p.getAttribute("id-organisation").split(" ");
+	if (p.hasAttribute("id-organisation")) {
+	    String[] kmadIndividuOrganisation = p.getAttribute(
+		    "id-organisation").split(" ");
 	    for (int i = 0; i < kmadIndividuOrganisation.length; i++) {
 		this.addOrganization((Organization) InterfaceExpressJava.bdd
 			.prendre(new Oid(kmadIndividuOrganisation[i])));
@@ -283,31 +301,36 @@ public class Person extends User {
 	}
 
 	NodeList kmadIndividuName = p.getElementsByTagName("individu-name");
-	if(kmadIndividuName.item(0).getParentNode() != p){
-		kmadIndividuName = null;}
+	if (kmadIndividuName.item(0).getParentNode() != p) {
+	    kmadIndividuName = null;
+	}
 	if (kmadIndividuName.item(0) != null)
 	    super.setName(kmadIndividuName.item(0).getTextContent());
 
 	NodeList kmadIndividuStatut = p.getElementsByTagName("individu-statut");
-	if(kmadIndividuStatut.item(0).getParentNode() != p){
-		kmadIndividuStatut = null;}
+	if (kmadIndividuStatut.item(0).getParentNode() != p) {
+	    kmadIndividuStatut = null;
+	}
 	if (kmadIndividuStatut.item(0) != null)
 	    super.setStatus(kmadIndividuStatut.item(0).getTextContent());
 
 	NodeList kmadIndividuRole = p.getElementsByTagName("individu-role");
-	if(kmadIndividuRole.item(0).getParentNode() != p){
-		kmadIndividuRole = null;}
+	if (kmadIndividuRole.item(0).getParentNode() != p) {
+	    kmadIndividuRole = null;
+	}
 	if (kmadIndividuRole.item(0) != null)
 	    super.setRole(kmadIndividuRole.item(0).getTextContent());
 
-	NodeList kmadIndividuImagePath = p.getElementsByTagName("individu-imagepath");
-	if(kmadIndividuImagePath.item(0).getParentNode() != p){
-		kmadIndividuImagePath = null;}
+	NodeList kmadIndividuImagePath = p
+		.getElementsByTagName("individu-imagepath");
+	if (kmadIndividuImagePath.item(0).getParentNode() != p) {
+	    kmadIndividuImagePath = null;
+	}
 	if (kmadIndividuImagePath.item(0) != null)
 	    super.setImage(kmadIndividuImagePath.item(0).getTextContent());
 
     }
-    
+
     public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
 
 	if (p.hasAttribute("id-organisation")) {

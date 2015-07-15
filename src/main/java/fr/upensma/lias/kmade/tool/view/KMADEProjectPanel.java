@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.view;
 
 import java.awt.BorderLayout;
@@ -33,6 +33,7 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
 import fr.upensma.lias.kmade.tool.view.toolutilities.VerticalTextIcon;
 import fr.upensma.lias.kmade.tool.view.worldobject.abstractobject.KMADEReadWriteAbstractTypeObjectPanel;
 import fr.upensma.lias.kmade.tool.view.worldobject.concreteobject.KMADEReadWriteConcreteObjectPanel;
+import fr.upensma.lias.kmade.tool.view.worldobject.condition.KMADEReadWriteConditionObjectPanel;
 import fr.upensma.lias.kmade.tool.view.worldobject.event.KMADEReadWriteEventObjectPanel;
 import fr.upensma.lias.kmade.tool.view.worldobject.label.KMADELabelPanel;
 import fr.upensma.lias.kmade.tool.view.worldobject.user.KMADEReadWriteIndividuObjectPanel;
@@ -55,6 +56,8 @@ public class KMADEProjectPanel extends JPanel implements LanguageFactory {
     private final KMADEReadWriteAbstractTypeObjectPanel tablesEDM = new KMADEReadWriteAbstractTypeObjectPanel();
 
     private final KMADEReadWriteIndividuObjectPanel tableIndividu = new KMADEReadWriteIndividuObjectPanel();
+
+    private final KMADEReadWriteConditionObjectPanel tableCondition = new KMADEReadWriteConditionObjectPanel();
 
     private final KMADEReadWriteMachineObjectPanel tableMachine = new KMADEReadWriteMachineObjectPanel();
 
@@ -98,6 +101,10 @@ public class KMADEProjectPanel extends JPanel implements LanguageFactory {
 	return this.tableIndividu;
     }
 
+    public KMADEReadWriteConditionObjectPanel getConditionPanel() {
+	return this.tableCondition;
+    }
+
     public KMADEReadWriteOrganisationObjectPanel getOrganisationPanel() {
 	return tableOrganisation;
     }
@@ -120,11 +127,79 @@ public class KMADEProjectPanel extends JPanel implements LanguageFactory {
 
     public KMADEProjectPanel() {
 	super();
-	boolean top = true; // permet de mettre les onglets a gauche ou en haut
-			    // (le haut n'est pas fini d'impl�ment�
-	// /!\ les onglets � gauche ne fonctionne pas correctement !
+	boolean v2 = false;
+	// UNDO FOR Prototask V2
+	// v2=true;
+	if (v2) {
+	    tabpaneProjet = new JTabbedPane();
+	    /* 0 espace de tache */tabpaneProjet.addTab(
+		    KMADEConstant.TASK_DESCRIPTION_TABBEDPANE_TITLE_NAME,
+		    taskDescriptionPanel);
+	    /* 1 condition */
+	    tabpaneProjet.addTab(
+		    KMADEConstant.CONDITION_TABBEDPANE_TITLE_MESSAGE,
+		    tableCondition);
 
-	if (top) {
+	    /* 2 objet abstrait */tabpaneProjet.addTab(
+		    KMADEConstant.ABSTRACT_OBJECT_TABBEDPANE_TITLE_NAME,
+		    tablesEDM);
+	    /* 3 objet concret */tabpaneProjet.addTab(
+		    KMADEConstant.CONCRETE_TASK_OBJECT_TABBEDPANE_TITLE_NAME,
+		    concreteObjectPanel);
+	    /* 4 individus */tabpaneProjet
+		    .addTab(KMADEConstant.INDIVIDU_TABBEDPANE_TITLE_NAME,
+			    tableIndividu);
+	    /* 5 organisation */tabpaneProjet.addTab(
+		    KMADEConstant.ORGANIZATION_TABBEDPANE_TITLE_NAME,
+		    tableOrganisation);
+	    /* 6 machines */tabpaneProjet.addTab(
+		    KMADEConstant.MACHINE_TABBEDPANE_TITLE_NAME, tableMachine);
+	    /* 7 parcs machine */tabpaneProjet.addTab(
+		    KMADEConstant.PARCMACHINES_TABBEDPANE_TITLE_NAME,
+		    tableParcMachines);
+	    /* 8 event */tabpaneProjet.addTab(
+		    KMADEConstant.EVENT_TABBEDPANE_TITLE_NAME, tableEvent);
+	    /* 9 label */tabpaneProjet.addTab(
+		    KMADEConstant.LABEL_TITLE_MESSAGE, refLabelPanel);
+
+	    tabpaneProjet.addChangeListener(new ChangeListener() {
+		public void stateChanged(ChangeEvent e) {
+		    if (tabpaneProjet.getSelectedIndex() == 0) {
+			GraphicEditorAdaptator.getMainFrame()
+				.getApplicationToolBar().getEditorsToolBar()
+				.setVisible(true);
+			if (GraphicEditorAdaptator.getSelectedGraphicTask() == null) {
+			} else {
+			    TaskPropertiesAdaptator.updateTaskPropertiesPanel();
+			}
+		    } else {
+			GraphicEditorAdaptator.getMainFrame()
+				.getApplicationToolBar().getEditorsToolBar()
+				.setVisible(false);
+			if (tabpaneProjet.getSelectedIndex() == 3) {
+			    ConcreteObjectPanelAdaptator
+				    .updateConcreteObjectView();
+			}
+			// permet la mise � jour des onglets utilisateurs et
+			// equipements pour que les mises � jour effectuer dans
+			// l'un
+			// le soit dans l'autre
+			if (tabpaneProjet.getSelectedIndex() == 4) {
+			    tableIndividu.refreshActiveIndividu();
+			}
+			if (tabpaneProjet.getSelectedIndex() == 5) {
+			    tableOrganisation.refreshActiveOrganisation();
+			}
+			if (tabpaneProjet.getSelectedIndex() == 6) {
+			    tableMachine.refreshActiveMachine();
+			}
+			if (tabpaneProjet.getSelectedIndex() == 7) {
+			    tableParcMachines.refreshActiveParcMachines();
+			}
+		    }
+		}
+	    });
+	} else {
 	    tabpaneProjet = new JTabbedPane();
 	    /* 0 espace de tache */tabpaneProjet.addTab(
 		    KMADEConstant.TASK_DESCRIPTION_TABBEDPANE_TITLE_NAME,
@@ -151,75 +226,45 @@ public class KMADEProjectPanel extends JPanel implements LanguageFactory {
 	    /* 8 label */tabpaneProjet.addTab(
 		    KMADEConstant.LABEL_TITLE_MESSAGE, refLabelPanel);
 
-	} else {
-	    tabpaneProjet = new JTabbedPane(JTabbedPane.LEFT);
-	    tabpaneProjet.addTab(null, new VerticalTextIcon(
-		    KMADEConstant.TASK_DESCRIPTION_TABBEDPANE_TITLE_NAME,
-		    false, this), taskDescriptionPanel);
-	    tabpaneProjet.addTab(null, new VerticalTextIcon(
-		    KMADEConstant.ABSTRACT_OBJECT_TABBEDPANE_TITLE_NAME, false,
-		    this), tablesEDM);
-	    tabpaneProjet.addTab(null, new VerticalTextIcon(
-		    KMADEConstant.CONCRETE_TASK_OBJECT_TABBEDPANE_TITLE_NAME,
-		    false, this), concreteObjectPanel);
-	    tabpaneProjet.addTab(null, new VerticalTextIcon(
-		    KMADEConstant.INDIVIDU_TABBEDPANE_TITLE_NAME, false, this),
-		    tableIndividu);
-	    tabpaneProjet.addTab(null, new VerticalTextIcon(
-		    KMADEConstant.ORGANIZATION_TABBEDPANE_TITLE_NAME, false,
-		    this), tableOrganisation);
-	    tabpaneProjet.addTab(null, new VerticalTextIcon(
-		    KMADEConstant.MACHINE_TABBEDPANE_TITLE_NAME, false, this),
-		    tableMachine);
-	    tabpaneProjet.addTab(null, new VerticalTextIcon(
-		    KMADEConstant.PARCMACHINES_TABBEDPANE_TITLE_NAME, false,
-		    this), tableParcMachines);
-	    tabpaneProjet.addTab(null, new VerticalTextIcon(
-		    KMADEConstant.EVENT_TABBEDPANE_TITLE_NAME, false, this),
-		    tableEvent);
-	    tabpaneProjet.addTab(null, new VerticalTextIcon(
-		    KMADEConstant.LABEL_TITLE_MESSAGE, false, this),
-		    refLabelPanel);
-
-	    tabpaneProjet.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-	}
-
-	tabpaneProjet.addChangeListener(new ChangeListener() {
-	    public void stateChanged(ChangeEvent e) {
-		if (tabpaneProjet.getSelectedIndex() == 0) {
-		    GraphicEditorAdaptator.getMainFrame()
-			    .getApplicationToolBar().getEditorsToolBar()
-			    .setVisible(true);
-		    if (GraphicEditorAdaptator.getSelectedGraphicTask() == null) {
+	    tabpaneProjet.addChangeListener(new ChangeListener() {
+		public void stateChanged(ChangeEvent e) {
+		    if (tabpaneProjet.getSelectedIndex() == 0) {
+			GraphicEditorAdaptator.getMainFrame()
+				.getApplicationToolBar().getEditorsToolBar()
+				.setVisible(true);
+			if (GraphicEditorAdaptator.getSelectedGraphicTask() == null) {
+			} else {
+			    TaskPropertiesAdaptator.updateTaskPropertiesPanel();
+			}
 		    } else {
-			TaskPropertiesAdaptator.updateTaskPropertiesPanel();
-		    }
-		} else {
-		    GraphicEditorAdaptator.getMainFrame()
-			    .getApplicationToolBar().getEditorsToolBar()
-			    .setVisible(false);
-		    if (tabpaneProjet.getSelectedIndex() == 2) {
-			ConcreteObjectPanelAdaptator.updateConcreteObjectView();
-		    }
-		    // permet la mise � jour des onglets utilisateurs et
-		    // equipements pour que les mises � jour effectuer dans l'un
-		    // le soit dans l'autre
-		    if (tabpaneProjet.getSelectedIndex() == 3) {
-			tableIndividu.refreshActiveIndividu();
-		    }
-		    if (tabpaneProjet.getSelectedIndex() == 4) {
-			tableOrganisation.refreshActiveOrganisation();
-		    }
-		    if (tabpaneProjet.getSelectedIndex() == 5) {
-			tableMachine.refreshActiveMachine();
-		    }
-		    if (tabpaneProjet.getSelectedIndex() == 6) {
-			tableParcMachines.refreshActiveParcMachines();
+			GraphicEditorAdaptator.getMainFrame()
+				.getApplicationToolBar().getEditorsToolBar()
+				.setVisible(false);
+			if (tabpaneProjet.getSelectedIndex() == 2) {
+			    ConcreteObjectPanelAdaptator
+				    .updateConcreteObjectView();
+			}
+			// permet la mise � jour des onglets utilisateurs et
+			// equipements pour que les mises � jour effectuer dans
+			// l'un
+			// le soit dans l'autre
+			if (tabpaneProjet.getSelectedIndex() == 3) {
+			    tableIndividu.refreshActiveIndividu();
+			}
+			if (tabpaneProjet.getSelectedIndex() == 4) {
+			    tableOrganisation.refreshActiveOrganisation();
+			}
+			if (tabpaneProjet.getSelectedIndex() == 5) {
+			    tableMachine.refreshActiveMachine();
+			}
+			if (tabpaneProjet.getSelectedIndex() == 6) {
+			    tableParcMachines.refreshActiveParcMachines();
+			}
 		    }
 		}
-	    }
-	});
+	    });
 
+	}
 	this.setMinimumSize(new Dimension(300, 300));
 	this.setLayout(new BorderLayout());
 	this.add(tabpaneProjet, BorderLayout.CENTER);
@@ -236,27 +281,28 @@ public class KMADEProjectPanel extends JPanel implements LanguageFactory {
 	tabpaneProjet.setIconAt(0, new VerticalTextIcon(
 		KMADEConstant.TASK_DESCRIPTION_TABBEDPANE_TITLE_NAME, false,
 		this));
-	tabpaneProjet.setIconAt(1, new VerticalTextIcon(
+	tabpaneProjet.setIconAt(2, new VerticalTextIcon(
 		KMADEConstant.ABSTRACT_OBJECT_TABBEDPANE_TITLE_NAME, false,
 		this));
-	tabpaneProjet.setIconAt(2, new VerticalTextIcon(
+	tabpaneProjet.setIconAt(3, new VerticalTextIcon(
 		KMADEConstant.CONCRETE_TASK_OBJECT_TABBEDPANE_TITLE_NAME,
 		false, this));
-	tabpaneProjet.setIconAt(3, new VerticalTextIcon(
-		KMADEConstant.INDIVIDU_TABBEDPANE_TITLE_NAME, false, this));
 	tabpaneProjet.setIconAt(4, new VerticalTextIcon(
-		KMADEConstant.ORGANIZATION_TABBEDPANE_TITLE_NAME, false, this));
+		KMADEConstant.INDIVIDU_TABBEDPANE_TITLE_NAME, false, this));
 	tabpaneProjet.setIconAt(5, new VerticalTextIcon(
-		KMADEConstant.MACHINE_TABBEDPANE_TITLE_NAME, false, this));
+		KMADEConstant.ORGANIZATION_TABBEDPANE_TITLE_NAME, false, this));
 	tabpaneProjet.setIconAt(6, new VerticalTextIcon(
-		KMADEConstant.PARCMACHINES_TABBEDPANE_TITLE_NAME, false, this));
+		KMADEConstant.MACHINE_TABBEDPANE_TITLE_NAME, false, this));
 	tabpaneProjet.setIconAt(7, new VerticalTextIcon(
-		KMADEConstant.EVENT_TABBEDPANE_TITLE_NAME, false, this));
+		KMADEConstant.PARCMACHINES_TABBEDPANE_TITLE_NAME, false, this));
 	tabpaneProjet.setIconAt(8, new VerticalTextIcon(
+		KMADEConstant.EVENT_TABBEDPANE_TITLE_NAME, false, this));
+	tabpaneProjet.setIconAt(9, new VerticalTextIcon(
 		KMADEConstant.LABEL_TITLE_MESSAGE, false, this));
 	taskDescriptionPanel.notifLocalisationModification();
 	tablesEDM.notifLocalisationModification();
 	tableIndividu.notifLocalisationModification();
+	tableCondition.notifLocalisationModification();
 	tableOrganisation.notifLocalisationModification();
 	tableMachine.notifLocalisationModification();
 	tableParcMachines.notifLocalisationModification();

@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -25,6 +25,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -385,8 +386,8 @@ public final class GraphicEditorAdaptator {
     }
 
     private static Point centeredTask(Point p) {
-//	FontMetrics fname = TASK_MODEL_PANEL
-//		.getFontMetrics(KMADEConstant.TASK_NAME_FONT);
+	// FontMetrics fname = TASK_MODEL_PANEL
+	// .getFontMetrics(KMADEConstant.TASK_NAME_FONT);
 	/*
 	 * ancienne version du code -> int width =
 	 * SwingUtilities.computeStringWidth(fname,
@@ -419,8 +420,8 @@ public final class GraphicEditorAdaptator {
 		.getJGraph().getScale());
 	int my = (int) (p.getY() / GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getScale());
-	GraphicEditorAdaptator.addNewTask(Executor.ABS,
-		centeredTask(new Point(mx, my)));
+	GraphicEditorAdaptator.addNewTask(Executor.ABS, centeredTask(new Point(
+		mx, my)));
     }
 
     public static void addNewUserTask(Point p) {
@@ -437,8 +438,8 @@ public final class GraphicEditorAdaptator {
 		.getJGraph().getScale());
 	int my = (int) (p.getY() / GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getScale());
-	GraphicEditorAdaptator.addNewTask(Executor.SYS,
-		centeredTask(new Point(mx, my)));
+	GraphicEditorAdaptator.addNewTask(Executor.SYS, centeredTask(new Point(
+		mx, my)));
     }
 
     public static void addNewInteractionTask(Point p) {
@@ -446,8 +447,8 @@ public final class GraphicEditorAdaptator {
 		.getJGraph().getScale());
 	int my = (int) (p.getY() / GraphicEditorAdaptator.TASK_MODEL_PANEL
 		.getJGraph().getScale());
-	GraphicEditorAdaptator.addNewTask(Executor.INT,
-		centeredTask(new Point(mx, my)));
+	GraphicEditorAdaptator.addNewTask(Executor.INT, centeredTask(new Point(
+		mx, my)));
     }
 
     /**
@@ -460,9 +461,9 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette m�thode est utilis�e � la fois � la cr�ation d'une
-     * t�che par l'utilisateur et � la cr�ation d'une t�che par
-     * l'application (chargement).
+     * Cette m�thode est utilis�e � la fois � la cr�ation d'une t�che par
+     * l'utilisateur et � la cr�ation d'une t�che par l'application
+     * (chargement).
      * 
      * @param pTask
      */
@@ -527,8 +528,8 @@ public final class GraphicEditorAdaptator {
     }
 
     /**
-     * Cette methode permet d'effectuer un lien graphique entre deux taches
-     * dans le presse-papier.
+     * Cette methode permet d'effectuer un lien graphique entre deux taches dans
+     * le presse-papier.
      * 
      * @param oidMere
      * @param oidFils
@@ -633,6 +634,21 @@ public final class GraphicEditorAdaptator {
 			    .getGraphLayoutCache()
 			    .insertEdge(edge, source, target);
 
+		    /* AG */
+		    /*
+		     * Récuperer l'etat actuel est le mettre dans la pile pour
+		     * le Undo
+		     */
+		    Vector<Object> vec = new Vector<Object>();
+		    vec.add(edge);
+		    vec.add(sourceCell);
+		    vec.add(targetCell);
+		    GraphicEditorAdaptator.getTaskModelPanel()
+			    .getUndoRedoManager().whatUndo.push("Edge");
+		    GraphicEditorAdaptator.getTaskModelPanel()
+			    .getUndoRedoManager().getObjToUndo().push(edge);
+		    /**/
+
 		    successed = true;
 		}
 	    }
@@ -685,6 +701,17 @@ public final class GraphicEditorAdaptator {
 	KMADEDefaultGraphCell motherCell = ((KMADEDefaultEdge) currentEdge)
 		.getMotherCell();
 
+	/* AG */
+	String oidMother = motherCell.getOid();
+	String oidSon = ((KMADEDefaultEdge) currentEdge).getSonCell().getOid();
+
+	Vector<Object> edgeToRemove = new Vector<Object>();
+	edgeToRemove.add(oidMother);
+	edgeToRemove.add(oidSon);
+	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
+		.getObjToUndo().push(edgeToRemove);
+	/**/
+
 	// Suppression dans Express du lien.
 	ExpressTask.removeEdge(motherCell.getTask(),
 		((KMADEDefaultEdge) currentEdge).getSonCell().getTask());
@@ -694,6 +721,11 @@ public final class GraphicEditorAdaptator {
 		.getGraphLayoutCache().remove(new Object[] { currentEdge });
 	GraphicEditorAdaptator.TASK_MODEL_PANEL.getJGraph().getModel()
 		.remove(new Object[] { currentEdge });
+
+	/* AG */
+	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
+		.push("EdgeRemove");
+	/**/
     }
 
     /**
@@ -753,18 +785,23 @@ public final class GraphicEditorAdaptator {
 	    if (cellSelected instanceof KMADEDefaultGraphCell) {
 
 		// Get cell point
-		Point2D monPoint = GraphicEditorAdaptator.getPointFromCell(cellSelected);
+		Point2D monPoint = GraphicEditorAdaptator
+			.getPointFromCell(cellSelected);
 		if (monPoint != null) {
 		    KMADEDefaultGraphCell myCell = (KMADEDefaultGraphCell) cellSelected;
 		    // Old position values
 		    int x = myCell.getPoint().getX();
 		    int y = myCell.getPoint().getY();
-		    ExpressTask.setTaskPoint((int) monPoint.getX(),(int) monPoint.getY(), myCell.getTask());
-		    if (!myCell.isSonExpanded() || MAIN_FRAME.getApplicationToolBar().getEditorsToolBar().isMagnet()) {
+		    ExpressTask.setTaskPoint((int) monPoint.getX(),
+			    (int) monPoint.getY(), myCell.getTask());
+		    if (!myCell.isSonExpanded()
+			    || MAIN_FRAME.getApplicationToolBar()
+				    .getEditorsToolBar().isMagnet()) {
 			int dx = x - (int) monPoint.getX();
 			int dy = y - (int) monPoint.getY();
 
-			ArrayList<KMADEDefaultGraphCell> toto = myCell.getDescendantSubCells(false);
+			ArrayList<KMADEDefaultGraphCell> toto = myCell
+				.getDescendantSubCells(false);
 			for (int i = 0; i < toto.size(); i++) {
 			    if (toto.get(i) != myCell) {
 				toto.get(i).setDeltaPoint(dx, dy);
@@ -1040,7 +1077,8 @@ public final class GraphicEditorAdaptator {
 		if (GraphicEditorAdaptator.canceled) {
 		    return null;
 		} else {
-		    KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CREATE_GRAPHICAL_EDGES_MESSAGE);
+		    KMADEHistoryMessageManager
+			    .printlnMessage(KMADEConstant.CREATE_GRAPHICAL_EDGES_MESSAGE);
 		    // Effacer les anciennes valeurs dans les Tables (Graphique)
 		    GraphicEditorAdaptator.done = true;
 		}
@@ -1093,10 +1131,12 @@ public final class GraphicEditorAdaptator {
 		    GraphicEditorAdaptator.showOrHideGrid(false);
 		}
 	    } else {
-		KMADEHistoryMessageManager.printlnError(KMADEConstant.INPUT_GRID_SIZE_ERROR_MESSAGE);
+		KMADEHistoryMessageManager
+			.printlnError(KMADEConstant.INPUT_GRID_SIZE_ERROR_MESSAGE);
 	    }
 	} catch (Exception ee) {
-	    KMADEHistoryMessageManager.printlnError(KMADEConstant.INPUT_GRID_SIZE_ERROR_MESSAGE);
+	    KMADEHistoryMessageManager
+		    .printlnError(KMADEConstant.INPUT_GRID_SIZE_ERROR_MESSAGE);
 	}
     }
 
@@ -1292,6 +1332,7 @@ public final class GraphicEditorAdaptator {
 
 	boolean isRemoved = false;
 	boolean allAnswer = false;
+	boolean condition = true;
 	for (int i = 0; i < r.length; i++) {
 	    if (r[i] != list.size()) {
 		Object[] tempoValue = list.get(r[i]);
@@ -1332,6 +1373,8 @@ public final class GraphicEditorAdaptator {
 		    LabelAdaptator.affRemoveLabel(maValue);
 		} else if (type.equals("ActorSystem")) {
 		    ActorSystemAdaptator.affRemoveActeurSystem(maValue);
+		} else if (type.equals("Condition")) {
+		    condition = ConditionAdaptator.affRemoveCondition(maValue);
 		}
 
 		String[] lstWarning = InterfaceExpressJava.getGestionWarning()
@@ -1343,7 +1386,11 @@ public final class GraphicEditorAdaptator {
 		    else
 			s = s + "\n" + lstWarning[j];
 		}
-
+		if (!condition) {
+		    int reponse = CustomOptionDialog
+			    .showAllConfirmDeleteDialog(myOwner, title, s);
+		    return false;
+		}
 		if (!allAnswer) {
 		    int reponse = CustomOptionDialog
 			    .showAllConfirmDeleteDialog(myOwner, title, s);
@@ -1378,6 +1425,8 @@ public final class GraphicEditorAdaptator {
 			AbstractObjectAdaptator.removeAbstractObject(maValue);
 		    } else if (type.equals("Enumeration")) {
 			EnumAdaptator.removeEnum(maValue);
+		    } else if (type.equals("Condition")) {
+			ConditionAdaptator.removeCondition(maValue);
 		    } else if (type.equals("Group")) {
 			GroupAdaptator.removeGroup(maValue);
 		    } else if (type.equals("Attribut")) {

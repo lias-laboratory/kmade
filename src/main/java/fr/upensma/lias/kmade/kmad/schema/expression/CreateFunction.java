@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.expression;
 
 import java.util.ArrayList;
@@ -42,8 +42,9 @@ public class CreateFunction extends BinaryFunction {
 	super.evaluateNode(ref);
 
 	ObjetConcret myRef = null;
-	Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
-    		ExpressConstant.CONCRETE_OBJECT_CLASS);
+	Oid oidObjConc = InterfaceExpressJava.createEntity(
+		ExpressConstant.METAOBJECT_PACKAGE,
+		ExpressConstant.CONCRETE_OBJECT_CLASS);
 	ObjetConcret concreteObject = (ObjetConcret) InterfaceExpressJava
 		.prendre(oidObjConc);
 	concreteObject.setName(this.rightNode.getNodeValue().toString());
@@ -57,8 +58,9 @@ public class CreateFunction extends BinaryFunction {
 	ArrayList<AttributAbstrait> listattributabs = concreteObject
 		.getUtiliseParClass().getInverseAttributsAbs();
 	for (int i = 0; i < listattributabs.size(); i++) {
-	    Oid oidAttribut = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
-	    		ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
+	    Oid oidAttribut = InterfaceExpressJava.createEntity(
+		    ExpressConstant.METAOBJECT_PACKAGE,
+		    ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 	    AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava
 		    .prendre(oidAttribut);
 	    AttributAbstrait abstractAttribut = listattributabs.get(i);

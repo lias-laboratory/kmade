@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,164 +27,187 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
+import fr.upensma.lias.kmade.kmad.schema.metaobjet.ProtoTaskCondition;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
-import fr.upensma.lias.kmade.tool.coreadaptator.prototype.ChoiceEnum;
 
 /**
  * 
- * @author Vincent LUCQUIAUD and Mickael BARON
- * @author [Renaming] Patrick GIRARD
- * @author [Comment] Patrick GIRARD
- **/
+ * @author Vincent LUCQUIAUD
+ * @author Mickael BARON
+ * @author Patrick GIRARD
+ */
 public class Task implements Entity {
 
     private static final long serialVersionUID = -7319483011074082713L;
 
     public Oid oid = null;
 
-    // Task type    
-		/** executant : Executant -> Enumerated values for the kind of 
-		                      task (user, system, interactive, etc.) */
-		private Executor executor = Executor.INCONNU;
+    // Task type
+    /**
+     * executant : Executant -> Enumerated values for the kind of task (user,
+     * system, interactive, etc.)
+     */
+    private Executor executor = Executor.INCONNU;
 
-		/** modality : Modalite -> Enumerated values for the modalities 
-		 *                    of user tasks */
-		private Modality modality= Modality.INCONNU;
-    
-    // Static attributes    
-	    /** name : String -> Name of the task - no need to be unique, 
-	     *                    but cannot be null */
-	    private String name = ExpressConstant.NEW_NAME_TASK;
+    /**
+     * modality : Modalite -> Enumerated values for the modalities of user tasks
+     */
+    private Modality modality = Modality.INCONNU;
 
-	    /** goal : String -> The goal of the task. Can be null */
-	    private String goal = "";
+    // Static attributes
+    /**
+     * name : String -> Name of the task - no need to be unique, but cannot be
+     * null
+     */
+    private String name = ExpressConstant.NEW_NAME_TASK;
 
-    	/** feed : String -> Task feedback, not really used */
-    	private String feedback = "";
+    /** goal : String -> The goal of the task. Can be null */
+    private String goal = "";
 
-	    /** duration : String -> Task duration - can be of either form. 
-	     *                     If only a number, can be interpreted */
-	    private String duration = "";
+    /** feed : String -> Task feedback, not really used */
+    private String feedback = "";
 
-	    /** description : String -> informal description of the task. 
-	     *                      Can be null, but not recommended */
-	    private String description = "";
+    /**
+     * duration : String -> Task duration - can be of either form. If only a
+     * number, can be interpreted
+     */
+    private String duration = "";
 
-	    /** frequency : Frequence -> Enumerated value for frequency */
-	    private Frequence frequency = Frequence.INCONNU;
-	    
-	    /** frequencyValue : String -> Value for the frequency. 
-	     *                      Free text, no interpretation */
-	    private String frequencyValue = "";
+    /**
+     * description : String -> informal description of the task. Can be null,
+     * but not recommended
+     */
+    private String description = "";
 
-	    /** importance : Importance -> Enumerated value for importance */
-	    private Importance importance = Importance.INCONNU;
+    /** frequency : Frequence -> Enumerated value for frequency */
+    private Frequence frequency = Frequence.INCONNU;
 
-	    /** media : Audio-Video file, which illustrates the task */
-	    private Media media = null;
+    /**
+     * frequencyValue : String -> Value for the frequency. Free text, no
+     * interpretation
+     */
+    private String frequencyValue = "";
+
+    /** importance : Importance -> Enumerated value for importance */
+    private Importance importance = Importance.INCONNU;
+
+    /** media : Audio-Video file, which illustrates the task */
+    private Media media = null;
 
     // Dynamic attributes
-	    /** optional = Boolean -> is the task optional? - 
-	     * 						default value false  */
-	    private Boolean optional = false;
+    /**
+     * optional = Boolean -> is the task optional? - default value false
+     */
+    private Boolean optional = false;
 
-	    /** interruptible : Boolean -> is the task interruptible - 
-	     * 						default value false */
-	    private Boolean interruptible = false;
+    /**
+     * interruptible : Boolean -> is the task interruptible - default value
+     * false
+     */
+    private Boolean interruptible = false;
 
-	    /** ordering : Decomposition -> Enumerated value for task 
-	     * 				ordering, including leaf */
-	    private Decomposition ordering;
-	    
+    /**
+     * ordering : Decomposition -> Enumerated value for task ordering, including
+     * leaf
+     */
+    private Decomposition ordering;
+
     // Structural attributes
-	    
-	    /** number : String -> computed value for the numbering of tasks: 
-	     * 						root, 1, 1.1, 1.1.1, etc.  
-	     * Warning: no setter, so setting numbers is made at several places ! */
-	    private String number = null;
 
-	    /** label : Label -> Free characterization of tasks, 
-	     * 						associated to a color  */
-	    private Label label;
+    /**
+     * number : String -> computed value for the numbering of tasks: root, 1,
+     * 1.1, 1.1.1, etc. Warning: no setter, so setting numbers is made at
+     * several places !
+     */
+    private String number = null;
 
-	    /** mother : Task -> Super-task of the current task. Null if 
-	     * the task is root, or if it is not attached to the tree */
-	    private Task mother = null;
-	    
-	    /** children : ArrayList<Tache> -> ordered list of sub-tasks */
-	    private ArrayList<Task> children = new ArrayList<Task>();
+    /**
+     * label : Label -> Free characterization of tasks, associated to a color
+     */
+    private Label label;
+
+    /**
+     * mother : Task -> Super-task of the current task. Null if the task is
+     * root, or if it is not attached to the tree
+     */
+    private Task mother = null;
+
+    /** children : ArrayList<Tache> -> ordered list of sub-tasks */
+    private ArrayList<Task> children = new ArrayList<Task>();
 
     // Actors
-	    
-	    /** Actors : ArrayList<Acteur> -> Human actors involved 
-	     *  						in the task*/
-	    /**
-	     * 
-	     */
-	    private ArrayList<Actor> actors = new ArrayList<Actor>();
 
-	    /** actorSystem : ArrayList<actorSystem> -> 
-	     * 					System actors involved in the task   */
-	    private ArrayList<ActorSystem> actorSystem = 
-	    						new ArrayList<ActorSystem>();
+    /**
+     * Actors : ArrayList<Acteur> -> Human actors involved in the task
+     */
+    /**
+	 * 
+	 */
+    private ArrayList<Actor> actors = new ArrayList<Actor>();
+
+    /**
+     * actorSystem : ArrayList<actorSystem> -> System actors involved in the
+     * task
+     */
+    private ArrayList<ActorSystem> actorSystem = new ArrayList<ActorSystem>();
 
     // Expression management
 
-	    /** preExpression : PreExpression -> Precondition of the task  */
-	    private PreExpression preExpression;
+    /** preExpression : PreExpression -> Precondition of the task */
+    private PreExpression preExpression;
 
-	    /**citerExpression : IterExpression -> condition for the 
-	     * 			iteration of the task */
-	    private IterExpression iterExpression;
+    /**
+     * iterExpression : IterExpression -> condition for the iteration of the
+     * task
+     */
+    private IterExpression iterExpression;
 
-	    /** effetsDeBordExpression : EffetsDeBordExpression -> 
-	     * 						Side effects for the task (action)   */
-	    private SideEffectExpression sideEffectExpression;
+    /**
+     * effetsDeBordExpression : EffetsDeBordExpression -> Side effects for the
+     * task (action)
+     */
+    private SideEffectExpression sideEffectExpression;
 
-    // Event management    
-	    /** lstEvent : ArrayList<Evenement> -> list of event  
-	     * 					the task may fire. Often empty   */
-	    private ArrayList<Event> events = 
-	    					new ArrayList<Event>();
-	    
-	    /**  declencheur : Evenement -> the possible firing event. 
-	     * 						May be null  */
-	    private Event raisingEvent = null;
-	    
+    // Event management
+    /**
+     * lstEvent : ArrayList<Evenement> -> list of event the task may fire. Often
+     * empty
+     */
+    private ArrayList<Event> events = new ArrayList<Event>();
+
+    /**
+     * declencheur : Evenement -> the possible firing event. May be null
+     */
+    private Event raisingEvent = null;
+
     // Graphical attributes
-	    /** Graphical position of the task on the graphical layout */
-	    private Point point = null;
+    /** Graphical position of the task on the graphical layout */
+    private Point point = null;
 
-	    /** noPoint : Boolean -> States if the point owns a valid graphical 
-	     * 					position or no. Default false */
-	    private boolean noPoint = false;
+    /**
+     * noPoint : Boolean -> States if the point owns a valid graphical position
+     * or no. Default false
+     */
+    private boolean noPoint = false;
 
-	    // Graphical optimization
-	    /** refJTask : GraphicCell reference of the graphical view of the task
-	     * used to optimize visualization
-	     */
-	    private Object refJTask = null;
+    // Graphical optimization
+    /**
+     * refJTask : GraphicCell reference of the graphical view of the task used
+     * to optimize visualization
+     */
+    private Object refJTask = null;
 
     // Attributes for prototyping and simulating
 
-	    private StateSimulation stateSimulation;
-    
-	    //PROTOTASK
-	    private StateExecution stateExecution;
-    
-	    //PROTOTASK
-	    private ChoiceEnum IterationValue = ChoiceEnum.indeterminee;
+    // simulation
+    private StateSimulation stateSimulation = new StateSimulation();
 
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
+    // PROTOTASK
+    private StateExecution stateExecution;
+
+    // PROTOTASK
+    // private ChoiceEnum IterationValue = ChoiceEnum.indeterminee;
+
     /**
      * Creation d'une tache avec des valeurs par defaut.
      */
@@ -213,12 +236,13 @@ public class Task implements Entity {
 	this.preExpression = new PreExpression();
 	this.sideEffectExpression = new SideEffectExpression();
 	this.iterExpression = new IterExpression();
-	this.stateSimulation = new StateSimulation();
-	this.stateSimulation = new StateSimulation();
+	/*
+	 * this.stateSimulation = new StateSimulation(); this.stateSimulation =
+	 * new StateSimulation();
+	 */
 
     }
 
- 
     /*
      * public Tache( String name, String but, String res, String f, String
      * duree, String obs, String exe, String freq, String comp, String imp,
@@ -275,7 +299,9 @@ public class Task implements Entity {
 
     /**
      * Adds an actor to the list of actors. Must be unique in the list
-     * @param a the actor
+     * 
+     * @param a
+     *            the actor
      * @return false if the actor already exists (same name) in the list
      */
     public boolean addActor(Actor a) {
@@ -292,8 +318,11 @@ public class Task implements Entity {
     }
 
     /**
-     * Adds a System actor to the list of system actors. Must be unique in the list
-     * @param a the system actor
+     * Adds a System actor to the list of system actors. Must be unique in the
+     * list
+     * 
+     * @param a
+     *            the system actor
      * @return false if the actor already exists (same oid) in the list
      */
     public boolean addActorSystem(ActorSystem a) {
@@ -327,7 +356,9 @@ public class Task implements Entity {
 
     /**
      * Adds an event to the list of fired events
-     * @param a the event to add
+     * 
+     * @param a
+     *            the event to add
      * @return false if the event already exists (ref)
      */
     public boolean addEvent(Event a) {
@@ -340,7 +371,8 @@ public class Task implements Entity {
     }
 
     /**
-     * @param a the event
+     * @param a
+     *            the event
      * @return true if the event is in the list of events the task may generate
      */
     public boolean isEventHere(Event a) {
@@ -349,6 +381,7 @@ public class Task implements Entity {
 
     /**
      * Remove the event from the list AND the raisingEvent
+     * 
      * @param a
      */
     public void removeEvent(Event a) {
@@ -446,61 +479,40 @@ public class Task implements Entity {
 	return lst;
     }
 
-/*    public ArrayList<String> getActorSystemOid() {
-	ArrayList<String> lst = new ArrayList<String>();
-	for (int i = 0; i < actorSystem.size(); i++) {
-	    lst.add(actorSystem.get(i).oid.get());
-	}
-	return lst;
-    }
+    /*
+     * public ArrayList<String> getActorSystemOid() { ArrayList<String> lst =
+     * new ArrayList<String>(); for (int i = 0; i < actorSystem.size(); i++) {
+     * lst.add(actorSystem.get(i).oid.get()); } return lst; }
+     * 
+     * public ArrayList<User> getUsers() { ArrayList<User> lst = new
+     * ArrayList<User>(); for (int i = 0; i < actors.size(); i++) {
+     * lst.add(actors.get(i).getUserRef()); } return lst; }
+     */
+    /*
+     * public ArrayList<Materiel> getMateriels() { ArrayList<Materiel> lst = new
+     * ArrayList<Materiel>(); for (int i = 0; i < actorSystem.size(); i++) {
+     * lst.add(actorSystem.get(i).getMaterielRef()); } return lst; }
+     */
+    /*
+     * public ArrayList<String> getActorsExp() { ArrayList<String> lst = new
+     * ArrayList<String>(); for (int i = 0; i < actors.size(); i++) {
+     * lst.add(actors.get(i).getExperience().getValue()); } return lst; }
+     * 
+     * public ArrayList<String> getActorSystemxp() { ArrayList<String> lst = new
+     * ArrayList<String>(); for (int i = 0; i < actorSystem.size(); i++) {
+     * lst.add(actorSystem.get(i).getExperience().getValue()); } return lst; }
+     */
 
-    public ArrayList<User> getUsers() {
-	ArrayList<User> lst = new ArrayList<User>();
-	for (int i = 0; i < actors.size(); i++) {
-	    lst.add(actors.get(i).getUserRef());
-	}
-	return lst;
-    }
-*/
-/*    public ArrayList<Materiel> getMateriels() {
-	ArrayList<Materiel> lst = new ArrayList<Materiel>();
-	for (int i = 0; i < actorSystem.size(); i++) {
-	    lst.add(actorSystem.get(i).getMaterielRef());
-	}
-	return lst;
-    }
-*/
-/*    public ArrayList<String> getActorsExp() {
-	ArrayList<String> lst = new ArrayList<String>();
-	for (int i = 0; i < actors.size(); i++) {
-	    lst.add(actors.get(i).getExperience().getValue());
-	}
-	return lst;
-    }
-
-    public ArrayList<String> getActorSystemxp() {
-	ArrayList<String> lst = new ArrayList<String>();
-	for (int i = 0; i < actorSystem.size(); i++) {
-	    lst.add(actorSystem.get(i).getExperience().getValue());
-	}
-	return lst;
-    }*/
-
-/*    public ArrayList<String> getActorsComp() {
-	ArrayList<String> lst = new ArrayList<String>();
-	for (int i = 0; i < actors.size(); i++) {
-	    lst.add(actors.get(i).getCompetence());
-	}
-	return lst;
-    }
-*/
-/*    public ArrayList<String> getActorSystemComp() {
-	ArrayList<String> lst = new ArrayList<String>();
-	for (int i = 0; i < actorSystem.size(); i++) {
-	    lst.add(actorSystem.get(i).getCompetence());
-	}
-	return lst;
-    }*/
+    /*
+     * public ArrayList<String> getActorsComp() { ArrayList<String> lst = new
+     * ArrayList<String>(); for (int i = 0; i < actors.size(); i++) {
+     * lst.add(actors.get(i).getCompetence()); } return lst; }
+     */
+    /*
+     * public ArrayList<String> getActorSystemComp() { ArrayList<String> lst =
+     * new ArrayList<String>(); for (int i = 0; i < actorSystem.size(); i++) {
+     * lst.add(actorSystem.get(i).getCompetence()); } return lst; }
+     */
 
     public ArrayList<Event> getEvents() {
 	return this.events;
@@ -535,7 +547,8 @@ public class Task implements Entity {
      * @return the name of the raising event if it exists, else null string
      */
     public String getRaisingEventName() {
-	return this.raisingEvent != null ? this.getRaisingEvent().getName() : "";
+	return this.raisingEvent != null ? this.getRaisingEvent().getName()
+		: "";
     }
 
     public String getName() {
@@ -614,8 +627,9 @@ public class Task implements Entity {
     }
 
     /**
-     * The index is the numbered position of the child, starting from 0
-     * -1 if root task
+     * The index is the numbered position of the child, starting from 0 -1 if
+     * root task
+     * 
      * @return the index of the child among children
      */
     public int indexOf() {
@@ -629,8 +643,8 @@ public class Task implements Entity {
     public Boolean isInterruptible() {
 	return this.interruptible;
     }
-    
-    public boolean hasNoPoint(){
+
+    public boolean hasNoPoint() {
 	return this.noPoint;
     }
 
@@ -755,6 +769,7 @@ public class Task implements Entity {
 
     /**
      * Adds a subtask to the task. Rank is outomatically computed
+     * 
      * @param tachefils
      */
     public void addSubTask(Task tachefils) {
@@ -784,55 +799,55 @@ public class Task implements Entity {
 	}
     }
 
-/*    /**
-     * Sets the point value from elementary coordinates
+    /*
+     * /** Sets the point value from elementary coordinates
+     * 
      * @param x X coordinate of the task
+     * 
      * @param y Y coordinate of the task
      *//*
-    public void setPointFromCoordinates(int x, int y) {
-	this.point.x = new Integer(x);
-	this.point.y = new Integer(y);
-    }
-*/
+        * public void setPointFromCoordinates(int x, int y) { this.point.x = new
+        * Integer(x); this.point.y = new Integer(y); }
+        */
     /**
-     * returns the list of tasks which must be modified 
-     * because of new coordinates
+     * returns the list of tasks which must be modified because of new
+     * coordinates
+     * 
      * @param x
      * @param y
      * @return the list of tasks
      */
     public Task[] getTasksToModify(int x, int y) {
-    	this.point.setX(new Integer(x));
-    	this.point.setY(new Integer(y));
-    	if (mother == null)
-    		return null;
-    	int placeOld = mother.children.indexOf(this);
-    	// Mickael BARON : Tache dec = (Tache) mere.fils.remove(placeOld);
-    	mother.children.remove(placeOld);
-    	int placeNew = computeRank(this, mother);
-    	mother.children.add(placeNew, this);
-    	int debut = 0;
-    	if (placeNew == placeOld)
-    		return null;
-    	if (placeNew < placeOld)
-    		debut = placeNew;
-    	if (placeOld < placeNew)
-    		debut = placeOld;
-    	mother.setDeriveTaskNumero(debut);
+	this.point.setX(new Integer(x));
+	this.point.setY(new Integer(y));
+	if (mother == null)
+	    return null;
+	int placeOld = mother.children.indexOf(this);
+	// Mickael BARON : Tache dec = (Tache) mere.fils.remove(placeOld);
+	mother.children.remove(placeOld);
+	int placeNew = computeRank(this, mother);
+	mother.children.add(placeNew, this);
+	int debut = 0;
+	if (placeNew == placeOld)
+	    return null;
+	if (placeNew < placeOld)
+	    debut = placeNew;
+	if (placeOld < placeNew)
+	    debut = placeOld;
+	mother.setDeriveTaskNumero(debut);
 
-    	int taille = mother.children.size();
-    	Task[] taches = new Task[taille];
-    	for (int i = 0; i < taille; i++) {
-    		taches[i] = ((Task) mother.children.get(i));
-    	}
-    	return taches;
+	int taille = mother.children.size();
+	Task[] taches = new Task[taille];
+	for (int i = 0; i < taille; i++) {
+	    taches[i] = ((Task) mother.children.get(i));
+	}
+	return taches;
     }
 
     public String toString() {
 	return this.number + " - " + name;
     }
 
-     
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	NodeList nodeList = p.getElementsByTagName("id-task-eventtrigger");
 	if (nodeList.item(0) != null) {
@@ -984,8 +999,8 @@ public class Task implements Entity {
 	// Triggering Event
 	nodeList = p.getElementsByTagName("id-task-eventtrigger");
 	if (nodeList.item(0) != null) {
-	    Event event = (Event) InterfaceExpressJava.bdd
-		    .prendre(new Oid(nodeList.item(0).getTextContent()));
+	    Event event = (Event) InterfaceExpressJava.bdd.prendre(new Oid(
+		    nodeList.item(0).getTextContent()));
 	    this.raisingEvent = event;
 	    this.raisingEvent.addReverseTask(this);
 	}
@@ -1087,15 +1102,15 @@ public class Task implements Entity {
 	// EffetsDeBord
 	nodeList = p.getElementsByTagName("task-effetsdebord");
 	if (nodeList.item(0) != null) {
-	    this.sideEffectExpression = new SideEffectExpression(nodeList
-		    .item(0).getTextContent());
+	    this.sideEffectExpression = new SideEffectExpression(nodeList.item(
+		    0).getTextContent());
 	}
 	// attention il ne faut pas utiliser le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-postcondition");
 	if (nodeList.item(0) != null) {
-	    this.sideEffectExpression = new SideEffectExpression(nodeList
-		    .item(0).getTextContent());
+	    this.sideEffectExpression = new SideEffectExpression(nodeList.item(
+		    0).getTextContent());
 	}
 
 	// attention il ne faut pas utiliser le tag postcondition pour les
@@ -1120,8 +1135,8 @@ public class Task implements Entity {
 	// Iteration Description
 	nodeList = p.getElementsByTagName("task-descriptioniteration");
 	if (nodeList.item(0) != null) {
-	    this.iterExpression
-		    .setDescription(nodeList.item(0).getTextContent());
+	    this.iterExpression.setDescription(nodeList.item(0)
+		    .getTextContent());
 	}
     }
 
@@ -1132,10 +1147,11 @@ public class Task implements Entity {
     public String toSPF() {
 	String SPF = oid.get() + "=" + "Tache" + "(" + "'"
 		+ name.replaceAll("'", "\\\\'") + "'" + "," + "'" + goal + "'"
-		+ "," + "'" /*+ resources + "'"*/ + "," + "'" + feedback + "'" + ","
-		+ "'" + duration + "'" + "," + "'" + description + "'" + ","
-		+ executor.toSPF() + "," + frequency.toSPF() + ",'" + frequencyValue
-		+ "'," + importance.toSPF() + "," + modality.toSPF() + ",";
+		+ "," + "'" /* + resources + "'" */+ "," + "'" + feedback + "'"
+		+ "," + "'" + duration + "'" + "," + "'" + description + "'"
+		+ "," + executor.toSPF() + "," + frequency.toSPF() + ",'"
+		+ frequencyValue + "'," + importance.toSPF() + ","
+		+ modality.toSPF() + ",";
 	if (raisingEvent != null)
 	    SPF = SPF + raisingEvent.oid.get() + ",";
 	else
@@ -1194,10 +1210,12 @@ public class Task implements Entity {
 	} else {
 	    SPF = SPF + point.oid.get() + ",";
 	}
-	SPF = SPF + ",'" + preExpression.getName().replaceAll("'", "\\\\'")
+	SPF = SPF + ",'"
+		+ preExpression.getFormalText().replaceAll("'", "\\\\'") + "',"
+		+ "'"
+		+ sideEffectExpression.getFormalText().replaceAll("'", "\\\\'")
 		+ "'," + "'"
-		+ sideEffectExpression.getName().replaceAll("'", "\\\\'")
-		+ "'," + "'" + iterExpression.getName().replaceAll("'", "\\\\'")
+		+ iterExpression.getFormalText().replaceAll("'", "\\\\'")
 		+ "')";
 	return SPF;
     }
@@ -1361,7 +1379,8 @@ public class Task implements Entity {
      * @return true if the task have no child
      */
     public boolean isLeaf() {
-	return this.getChildren() != null ? this.getChildren().size() == 0 : true;
+	return this.getChildren() != null ? this.getChildren().size() == 0
+		: true;
     }
 
     /**
@@ -1391,7 +1410,6 @@ public class Task implements Entity {
 	}
     }
 
-
     public void setStateExecution(StateExecution stateExecution) {
 	this.stateExecution = stateExecution;
     }
@@ -1399,7 +1417,6 @@ public class Task implements Entity {
     public StateExecution getStateExecution() {
 	return stateExecution;
     }
-
 
     /**
      * Same as "toXML" method adapted to the new dtd
@@ -1410,7 +1427,7 @@ public class Task implements Entity {
     public Element toXML2(Document doc) throws Exception {
 	// Arguments
 	Element racine = doc.createElement("task");
-	
+
 	// Elements
 	// Name
 	Element kmadElement = doc.createElement("task-name");
@@ -1439,11 +1456,11 @@ public class Task implements Entity {
 	    racine.appendChild(kmadElement);
 	}
 	// Observation
-	//if (!this.observation.equals("")) {
-	    kmadElement = doc.createElement("task-observation");
-	    kmadElement.setTextContent(this.description);
-	    racine.appendChild(kmadElement);
-	//}
+	// if (!this.observation.equals("")) {
+	kmadElement = doc.createElement("task-observation");
+	kmadElement.setTextContent(this.description);
+	racine.appendChild(kmadElement);
+	// }
 	// Executant
 	racine.appendChild(this.executor.toXML2(doc));
 	// Frequency
@@ -1476,7 +1493,7 @@ public class Task implements Entity {
 	racine.appendChild(this.ordering.toXML2(doc));
 	// Precondition
 	kmadElement = doc.createElement("task-precondition");
-	kmadElement.setTextContent(this.preExpression.getName());
+	kmadElement.setTextContent(this.preExpression.getFormalText());
 	racine.appendChild(kmadElement);
 	// Precondition Description
 	if (!this.getPreExpression().getDescription().equals("")) {
@@ -1484,14 +1501,24 @@ public class Task implements Entity {
 	    kmadElement.setTextContent(this.preExpression.getDescription());
 	    racine.appendChild(kmadElement);
 	}
+	if (this.getPreExpression().getProtoTaskConditionExpression()
+		.getValue().getOid() != null) {
+	    kmadElement = doc.createElement("task-prototaskPrecondition");
+	    kmadElement.setTextContent(this.getPreExpression()
+		    .getProtoTaskConditionExpression().getValue().getOid()
+		    .get());
+	    racine.appendChild(kmadElement);
+	}
+
 	// attention il ne faut pas utilise le tag postcondition pour les
 	// postcondition de la V2 !
 	// ils sont reserver aux effets de bord de la v1!
 	// EffetsDeBord
 	// ATTENTION optionnal in the v3
-	if (!this.sideEffectExpression.getName().equals("Void")) {
+	if (!this.sideEffectExpression.getFormalText().equals("Void")) {
 	    kmadElement = doc.createElement("task-effetsdebord");
-	    kmadElement.setTextContent(this.sideEffectExpression.getName());
+	    kmadElement.setTextContent(this.sideEffectExpression
+		    .getFormalText());
 	    racine.appendChild(kmadElement);
 	}
 	// EffetsDeBord Description
@@ -1503,7 +1530,7 @@ public class Task implements Entity {
 	}
 	// Iteration
 	kmadElement = doc.createElement("task-iteration");
-	kmadElement.setTextContent(this.iterExpression.getName());
+	kmadElement.setTextContent(this.iterExpression.getFormalText());
 	racine.appendChild(kmadElement);
 	// Iteration Description
 	if (!this.getIterExpression().getDescription().equals("")) {
@@ -1511,17 +1538,25 @@ public class Task implements Entity {
 	    kmadElement.setTextContent(this.iterExpression.getDescription());
 	    racine.appendChild(kmadElement);
 	}
-	
-	//Attributes
-	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.TASK_CLASS);
+	if (this.getIterExpression().getProtoTaskConditionExpression()
+		.getValue().getOid() != null) {
+	    kmadElement = doc.createElement("task-prototaskIteration");
+	    kmadElement.setTextContent(this.getIterExpression()
+		    .getProtoTaskConditionExpression().getValue().getOid()
+		    .get());
+	    racine.appendChild(kmadElement);
+	}
+	// Attributes
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "."
+		+ ExpressConstant.TASK_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 	// Media
-	if (this.media != null && this.media.isExisting()){
+	if (this.media != null && this.media.isExisting()) {
 	    racine.setAttribute("id-task-media", this.media.getOid().get());
 	    racine.appendChild(this.media.toXML2(doc));
 	}
 	// Event trigger
-	if (this.raisingEvent != null){
+	if (this.raisingEvent != null) {
 	    racine.setAttribute("id-task-eventtrigger", this.raisingEvent
 		    .getOid().get());
 	}
@@ -1529,7 +1564,7 @@ public class Task implements Entity {
 	racine.setAttribute("id-task-point", this.point.getOid().get());
 	racine.appendChild(this.point.toXML2(doc));
 	// Label
-	if (this.label != null){
+	if (this.label != null) {
 	    racine.setAttribute("id-task-label", this.label.getOid().get());
 	}
 	// Events
@@ -1567,22 +1602,22 @@ public class Task implements Entity {
 	    }
 	    racine.setAttribute("id-task-subtasks-list", list);
 	}
-	
+
 	return racine;
 
     }
 
-    
     /**
      * Same as "createObjectFromXMLElement" method adapted to the new dtd
+     * 
      * @author Joachim TROUVERIE
      */
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-      	this.events.clear();
-        this.actors.clear();
-        this.actorSystem.clear();
-        this.children.clear();
+	this.events.clear();
+	this.actors.clear();
+	this.actorSystem.clear();
+	this.children.clear();
 	this.oid = new Oid(p.getAttribute("idkmad"));
 	// Media
 	if (p.hasAttribute("id-task-media)"))
@@ -1590,12 +1625,14 @@ public class Task implements Entity {
 		    .getAttribute("id-task-media")));
 	// Triggering Event
 	if (p.hasAttribute("id-task-eventtrigger"))
-	    this.raisingEvent = (Event) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-task-eventtrigger")));
+	    this.raisingEvent = (Event) InterfaceExpressJava.bdd
+		    .prendre(new Oid(p.getAttribute("id-task-eventtrigger")));
 	// Generated Events
 	if (p.hasAttribute("id-task-events-list")) {
 	    String[] events = p.getAttribute("id-task-events-list").split(" ");
 	    for (int i = 0; i < events.length; i++) {
-		Event event = (Event) InterfaceExpressJava.bdd.prendre(new Oid(events[i]));
+		Event event = (Event) InterfaceExpressJava.bdd.prendre(new Oid(
+			events[i]));
 		this.events.add(event);
 		event.addReverseTask(this);
 	    }
@@ -1604,7 +1641,8 @@ public class Task implements Entity {
 	if (p.hasAttribute("id-task-actors-list")) {
 	    String[] actors = p.getAttribute("id-task-actors-list").split(" ");
 	    for (int i = 0; i < actors.length; i++) {
-		this.addActor((Actor) InterfaceExpressJava.bdd.prendre(new Oid(actors[i])));
+		this.addActor((Actor) InterfaceExpressJava.bdd.prendre(new Oid(
+			actors[i])));
 		this.actors.get(i).setReverseTask(this);
 	    }
 	}
@@ -1628,20 +1666,26 @@ public class Task implements Entity {
 	// Subtasks
 	if (p.hasAttribute("id-task-subtasks-list")) {
 	    String[] son = p.getAttribute("id-task-subtasks-list").split(" ");
+	    ArrayList<String> set = new ArrayList<String>();
 	    for (int i = 0; i < son.length; i++) {
-		if(!noPoint)
+		if (!set.contains(son[i])) {
+		    set.add(son[i]);
+		}
+	    }
+
+	    for (int i = 0; i < set.size(); i++) {
+		if (!noPoint)
 		    this.addSubTask((Task) InterfaceExpressJava.bdd
-			    .prendre(new Oid(son[i])));
-		else{
+			    .prendre(new Oid(set.get(i))));
+		else {
 		    this.children.add((Task) InterfaceExpressJava.bdd
-			    .prendre(new Oid(son[i])));
+			    .prendre(new Oid(set.get(i))));
 		    this.setMother((Task) InterfaceExpressJava.bdd
-			    .prendre(new Oid(son[i])));
+			    .prendre(new Oid(set.get(i))));
 		}
 	    }
 	}
-	
-	
+
 	// Label
 	if (p.hasAttribute("id-task-label"))
 	    this.label = (Label) InterfaceExpressJava.bdd.prendre(new Oid(p
@@ -1650,46 +1694,58 @@ public class Task implements Entity {
 	// Elements
 	// Name
 	NodeList nodeList = p.getElementsByTagName("task-name");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	this.name = nodeList.item(0).getTextContent();
 	// Numero
 
 	nodeList = p.getElementsByTagName("task-numero");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	this.number = nodeList.item(0).getTextContent();
 
 	// Purpose
 	nodeList = p.getElementsByTagName("task-purpose");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
-	if (nodeList!= null && nodeList.item(0) != null) {
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList != null && nodeList.item(0) != null) {
 	    this.goal = nodeList.item(0).getTextContent();
 	}
 
 	// Duration
 	nodeList = p.getElementsByTagName("task-duration");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
-	if (nodeList!= null && nodeList.item(0) != null) {
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList != null && nodeList.item(0) != null) {
 	    this.duration = nodeList.item(0).getTextContent();
 	}
 
 	// Feedback
 	nodeList = p.getElementsByTagName("task-feedback");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
-	if (nodeList!= null && nodeList.item(0) != null) {
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList != null && nodeList.item(0) != null) {
 	    this.feedback = nodeList.item(0).getTextContent();
 	}
 	// Observation
 	nodeList = p.getElementsByTagName("task-observation");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
-	 if(nodeList == null){
-		 this.description = "";
-	 } else if (nodeList.item(0) != null) {
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList == null) {
+	    this.description = "";
+	} else if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}
 
@@ -1699,9 +1755,11 @@ public class Task implements Entity {
 	this.frequency = Frequence.getXMLFrequenceValue2(p);
 	// Valeur de la Frequence
 	nodeList = p.getElementsByTagName("task-compfrequency");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
-	if (nodeList!= null && nodeList.item(0) != null) {
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList != null && nodeList.item(0) != null) {
 	    this.frequencyValue = nodeList.item(0).getTextContent();
 	}
 	// Importance
@@ -1710,84 +1768,132 @@ public class Task implements Entity {
 	this.modality = Modality.getXMLModalityValue2(p);
 	// Optional
 	nodeList = p.getElementsByTagName("task-optional");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	this.optional = new Boolean(nodeList.item(0).getTextContent());
 	// Interruptible
 	nodeList = p.getElementsByTagName("task-interruptible");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	this.interruptible = new Boolean(nodeList.item(0).getTextContent());
 	// Decomposition
 	this.ordering = Decomposition.getXMLDecompositionValue2(p);
 	// Precondition
 	nodeList = p.getElementsByTagName("task-precondition");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
-	if (nodeList!= null && nodeList.item(0) != null) {
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList != null && nodeList.item(0) != null) {
 	    this.preExpression = new PreExpression(nodeList.item(0)
 		    .getTextContent());
 	}
-	
 
 	// Precondition Description
 	nodeList = p.getElementsByTagName("task-descriptionprecondition");
-	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		nodeList = null;}
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	if (nodeList.item(0) != null) {
 	    this.preExpression
 		    .setDescription(nodeList.item(0).getTextContent());
 	}
 
+	// precondition ProtoTask
+	nodeList = p.getElementsByTagName("task-prototaskPrecondition");
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList.item(0) != null) {
+
+	    this.getPreExpression()
+		    .getProtoTaskConditionExpression()
+		    .setValue(
+			    (ProtoTaskCondition) InterfaceExpressJava.bdd
+				    .prendre(new Oid(nodeList.item(0)
+					    .getTextContent())));
+	}
 	// EffetsDeBord
 
 	nodeList = p.getElementsByTagName("task-effetsdebord");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
-	if (nodeList!= null && nodeList.item(0) != null) {
-	    this.sideEffectExpression = new SideEffectExpression(nodeList
-		    .item(0).getTextContent());
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList != null && nodeList.item(0) != null) {
+	    this.sideEffectExpression = new SideEffectExpression(nodeList.item(
+		    0).getTextContent());
 	}
 	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-postcondition");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	if (nodeList.item(0) != null) {
-	    this.sideEffectExpression = new SideEffectExpression(nodeList
-		    .item(0).getTextContent());
+	    this.sideEffectExpression = new SideEffectExpression(nodeList.item(
+		    0).getTextContent());
 	}
 	// attention il ne faut pas utilisï¿½ le tag postcondition pour les
 	// postcondition de la V2 !
 	nodeList = p.getElementsByTagName("task-descriptionpostcondition");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
-	if (nodeList!= null && nodeList.item(0) != null) {
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList != null && nodeList.item(0) != null) {
 	    this.sideEffectExpression.setDescription(nodeList.item(0)
 		    .getTextContent());
 	}
 
 	// EffetsDeBord Description
 	nodeList = p.getElementsByTagName("task-descriptioneffetsdebord");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
-	if (nodeList!= null&& nodeList.item(0) != null) {
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList != null && nodeList.item(0) != null) {
 	    this.sideEffectExpression.setDescription(nodeList.item(0)
 		    .getTextContent());
 	}
 	// Iteration
 	nodeList = p.getElementsByTagName("task-iteration");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	this.iterExpression = new IterExpression(nodeList.item(0)
 		.getTextContent());
 	// Iteration Description
 	nodeList = p.getElementsByTagName("task-descriptioniteration");
-	 if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		 nodeList = null;}
-	if (nodeList!= null && nodeList.item(0) != null) {
-	    this.iterExpression
-		    .setDescription(nodeList.item(0).getTextContent());
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList != null && nodeList.item(0) != null) {
+	    this.iterExpression.setDescription(nodeList.item(0)
+		    .getTextContent());
+	}
+	nodeList = p.getElementsByTagName("task-prototaskIteration");
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
+	if (nodeList.item(0) != null) {
+
+	    this.getIterExpression()
+		    .getProtoTaskConditionExpression()
+		    .setValue(
+			    (ProtoTaskCondition) InterfaceExpressJava.bdd
+				    .prendre(new Oid(nodeList.item(0)
+					    .getTextContent())));
 	}
 
     }
@@ -1799,7 +1905,6 @@ public class Task implements Entity {
      */
     @Override
     public boolean oidIsAnyMissing2(Element p) throws Exception {
-	// TODO Auto-generated method stub
 	// Event Trigger
 	if (p.hasAttribute("id-task-eventtrigger")) {
 	    String nodeList = p.getAttribute("id-task-eventtrigger");
@@ -1854,7 +1959,7 @@ public class Task implements Entity {
 	if (p.hasAttribute("id-task-point")) {
 	    String nodeList = p.getAttribute("id-task-point");
 	    if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
-	    	return false;
+		return false;
 	    }
 	}
 	// Label
@@ -1865,27 +1970,35 @@ public class Task implements Entity {
 	    }
 
 	}
-
+	// prototask condition
+	if (p.hasAttribute("task-prototaskPrecondition")) {
+	    String nodeList = p.getAttribute("task-prototaskPrecondition");
+	    if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
+		return true;
+	    }
+	}
+	if (p.hasAttribute("task-prototaskIteration")) {
+	    String nodeList = p.getAttribute("task-prototaskIteration");
+	    if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
+		return true;
+	    }
+	}
 	return false;
 
     }
 
-    //prototask
-	/*public ChoiceEnum getPreconditionValue() {
-		return getPreExpression().getPreconditionValue();
-	}
-	//prototask
-	public void setPreconditionValue(ChoiceEnum preconditionValue) {
-		getPreExpression().setPreconditionValue(preconditionValue);
-	}
-*/
-	public ChoiceEnum getIterationValue() {
-		return IterationValue;
-	}
-
-	public void setIterationValue(ChoiceEnum iterationValue) {
-		IterationValue = iterationValue;
-	}
-
+    // prototask
+    /*
+     * public ChoiceEnum getPreconditionValue() { return
+     * getPreExpression().getPreconditionValue(); } //prototask public void
+     * setPreconditionValue(ChoiceEnum preconditionValue) {
+     * getPreExpression().setPreconditionValue(preconditionValue); }
+     */
+    /*
+     * public ChoiceEnum getIterationValue() { return IterationValue; }
+     * 
+     * public void setIterationValue(ChoiceEnum iterationValue) { IterationValue
+     * = iterationValue; }
+     */
 
 }

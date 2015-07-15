@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.parser.spf;
 
 import java.io.BufferedReader;
@@ -167,7 +167,7 @@ public final class ParserSPF {
     private String extractEnum(String s) throws Exception {
 	String enumm = "";
 	if (s.charAt(0) != '.') {
-		 KMADEHistoryMessageManager.printlnMessage("Erreur dans l'enum \n");
+	    KMADEHistoryMessageManager.printlnMessage("Erreur dans l'enum \n");
 	    throw new Exception();
 	}
 	int ptr = 1;
@@ -179,7 +179,8 @@ public final class ParserSPF {
 
     public String extractOid(String s) throws Exception {
 	if (s.charAt(0) != '#') {
-		 KMADEHistoryMessageManager.printlnMessage("Erreur dans l'OID +> " + s);
+	    KMADEHistoryMessageManager.printlnMessage("Erreur dans l'OID +> "
+		    + s);
 	    throw new Exception();
 	}
 	String oid = "#";
@@ -202,7 +203,7 @@ public final class ParserSPF {
     private String extractString(String s) throws Exception {
 	String chaine = "";
 	if (s.charAt(0) != '\'') {
-		 KMADEHistoryMessageManager.printlnMessage("Erreur dans chaine \n");
+	    KMADEHistoryMessageManager.printlnMessage("Erreur dans chaine \n");
 	    throw new Exception();
 	}
 	int ptr = 1;

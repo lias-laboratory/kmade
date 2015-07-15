@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,44 +27,52 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  * 
  * @author Joachim TROUVERIE
  */
-public class ListCell extends GroupDefaultGraphCell{
-
+public class ListCell extends GroupDefaultGraphCell {
 
     private static final long serialVersionUID = -5284774279616678598L;
-    
+
     @SuppressWarnings("unused")
     private ListeAg list;
-    
+
     /**
      * First constructor for the cell (the point is not created yet)
-     * @param list represented by the cell
-     * @param point x in the graph
-     * @param point y in the graph
+     * 
+     * @param list
+     *            represented by the cell
+     * @param point
+     *            x in the graph
+     * @param point
+     *            y in the graph
      */
     public ListCell(Groupe object, int x, int y) {
 	super(object, x, y);
 	this.list = (ListeAg) object.getEnsemble();
     }
-    
+
     /**
      * Second constructor for the cell (the point is already yet)
-     * @param list represented by the cell
-     * @param point in the graph
+     * 
+     * @param list
+     *            represented by the cell
+     * @param point
+     *            in the graph
      */
     public ListCell(Groupe object, Point p) {
 	super(object, p);
 	this.list = (ListeAg) object.getEnsemble();
     }
-    
+
     /**
      * Method to set the selected cell in the group
-     * @param index of the cell
+     * 
+     * @param index
+     *            of the cell
      */
     @Override
     public void setSelectedIndex(int i) {
-	if(i != -1){
+	if (i != -1) {
 	    this.selectedIndex = 0;
-	}
-	else this.selectedIndex = i;
+	} else
+	    this.selectedIndex = i;
     }
 }

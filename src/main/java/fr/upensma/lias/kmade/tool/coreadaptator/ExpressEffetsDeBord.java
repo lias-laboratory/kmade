@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.Observer;
@@ -80,11 +80,12 @@ public class ExpressEffetsDeBord {
 	SwingWorker worker = new SwingWorker() {
 	    public Object construct() {
 		Task[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
-		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CHECK_ALL_EFFETSDEBORDS);
+		KMADEHistoryMessageManager
+			.printlnMessage(KMADEConstant.CHECK_ALL_EFFETSDEBORDS);
 		for (int i = 0; i < tacheToBeCreated.length
 			&& !ExpressEffetsDeBord.isCanceled(); i++) {
 		    String effetsdebord = tacheToBeCreated[i]
-			    .getEffetsDeBordExpression().getName();
+			    .getEffetsDeBordExpression().getFormalText();
 		    // Transformation de la cha�ne de caract�res en flux de
 		    // caract�res.
 		    java.io.StringReader sr = new java.io.StringReader(
@@ -94,7 +95,8 @@ public class ExpressEffetsDeBord {
 		    try {
 			NodeExpression ref = parser.expression();
 			if (ref == null) {
-				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PARSER_PROBLEM_MESSAGE);
+			    KMADEHistoryMessageManager
+				    .printlnMessage(KMADEConstant.PARSER_PROBLEM_MESSAGE);
 			    ExpressEffetsDeBord.setEffetsDeBord(
 				    tacheToBeCreated[i], null);
 			} else {
@@ -103,7 +105,8 @@ public class ExpressEffetsDeBord {
 				    tacheToBeCreated[i], ref);
 			}
 		    } catch (SemanticException e) {
-		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
+			KMADEHistoryMessageManager
+				.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -114,7 +117,8 @@ public class ExpressEffetsDeBord {
 			ExpressEffetsDeBord.setEffetsDeBord(
 				tacheToBeCreated[i], null);
 		    } catch (ParseException e) {
-		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
+			KMADEHistoryMessageManager
+				.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -125,7 +129,8 @@ public class ExpressEffetsDeBord {
 			ExpressEffetsDeBord.setEffetsDeBord(
 				tacheToBeCreated[i], null);
 		    } catch (TokenMgrError e) {
-		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
+			KMADEHistoryMessageManager
+				.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -136,7 +141,8 @@ public class ExpressEffetsDeBord {
 			ExpressEffetsDeBord.setEffetsDeBord(
 				tacheToBeCreated[i], null);
 		    } catch (Error e) {
-		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
+			KMADEHistoryMessageManager
+				.printlnMessage(KMADEConstant.EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -150,7 +156,8 @@ public class ExpressEffetsDeBord {
 		}
 
 		if (!ExpressEffetsDeBord.isCanceled()) {
-			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.EFFETSDEBORD_CHECKED_AND_BUILT_MESSAGE);
+		    KMADEHistoryMessageManager
+			    .printlnMessage(KMADEConstant.EFFETSDEBORD_CHECKED_AND_BUILT_MESSAGE);
 		    ExpressEffetsDeBord.done = true;
 		}
 		return null;

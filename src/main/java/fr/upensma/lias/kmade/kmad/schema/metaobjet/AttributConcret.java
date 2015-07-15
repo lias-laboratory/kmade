@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -24,9 +24,6 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
-
-
-
 
 /**
  * @author Mickael BARON
@@ -79,21 +76,24 @@ public class AttributConcret implements Entity, Cloneable {
 	}
 
 	if (typeStructure.equals(TypeStructure.STRING_STRUCT)) {
-	    Oid oid = InterfaceExpressJava
-		    .createEntity(ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.STRING_VALUE_CLASS);
+	    Oid oid = InterfaceExpressJava.createEntity(
+		    ExpressConstant.METAOBJECT_PACKAGE,
+		    ExpressConstant.STRING_VALUE_CLASS);
 	    StrValue val = (StrValue) InterfaceExpressJava.prendre(oid);
 	    val.setValeur("");
 	    this.valeur = val;
 
 	} else if (typeStructure.equals(TypeStructure.NUMBER_STRUCT)) {
-	    Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
-	    		ExpressConstant.NUMBER_VALUE_CLASS);
+	    Oid oid = InterfaceExpressJava.createEntity(
+		    ExpressConstant.METAOBJECT_PACKAGE,
+		    ExpressConstant.NUMBER_VALUE_CLASS);
 	    NumberValue val = (NumberValue) InterfaceExpressJava.prendre(oid);
 	    val.setValeur("0");
 	    this.valeur = val;
 	} else if (typeStructure.equals(TypeStructure.BOOLEAN_STRUCT)) {
-	    Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
-	    		ExpressConstant.BOOLEAN_VALUE_CLASS);
+	    Oid oid = InterfaceExpressJava.createEntity(
+		    ExpressConstant.METAOBJECT_PACKAGE,
+		    ExpressConstant.BOOLEAN_VALUE_CLASS);
 	    BoolValue val = (BoolValue) InterfaceExpressJava.prendre(oid);
 	    val.setValeur("true");
 	    this.valeur = val;
@@ -105,8 +105,9 @@ public class AttributConcret implements Entity, Cloneable {
 
 	if (typeStructure.equals(TypeStructure.STRING_STRUCT)) {
 	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
-				ExpressConstant.STRING_VALUE_CLASS);
+		Oid oid = InterfaceExpressJava.createEntity(
+			ExpressConstant.METAOBJECT_PACKAGE,
+			ExpressConstant.STRING_VALUE_CLASS);
 		StrValue val = (StrValue) InterfaceExpressJava.prendre(oid);
 		val.setValeur(v);
 		this.valeur = val;
@@ -122,8 +123,9 @@ public class AttributConcret implements Entity, Cloneable {
 		return true;
 	    }
 	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
-	    		ExpressConstant.NUMBER_VALUE_CLASS);
+		Oid oid = InterfaceExpressJava.createEntity(
+			ExpressConstant.METAOBJECT_PACKAGE,
+			ExpressConstant.NUMBER_VALUE_CLASS);
 		NumberValue val = (NumberValue) InterfaceExpressJava
 			.prendre(oid);
 		val.setValeur(v);
@@ -135,8 +137,9 @@ public class AttributConcret implements Entity, Cloneable {
 	    Enumeration enu = (Enumeration) this.attributAbsDe.getTypeRef();
 	    Element el = enu.getElement(v);
 	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
-	    		ExpressConstant.ENUM_VALUE_CLASS);
+		Oid oid = InterfaceExpressJava.createEntity(
+			ExpressConstant.METAOBJECT_PACKAGE,
+			ExpressConstant.ENUM_VALUE_CLASS);
 		EnumValue val = (EnumValue) InterfaceExpressJava.prendre(oid);
 		val.setEnumeration(enu);
 		val.setElement(el);
@@ -148,8 +151,9 @@ public class AttributConcret implements Entity, Cloneable {
 	} else if (typeStructure.equals(TypeStructure.INTERVAL_STRUCT)) {
 	    Intervalle inter = (Intervalle) this.attributAbsDe.getTypeRef();
 	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
-	    		ExpressConstant.RANGE_VALUE_CLASS);
+		Oid oid = InterfaceExpressJava.createEntity(
+			ExpressConstant.METAOBJECT_PACKAGE,
+			ExpressConstant.RANGE_VALUE_CLASS);
 		IntervalleValue val = (IntervalleValue) InterfaceExpressJava
 			.prendre(oid);
 		val.setIntervalle(inter);
@@ -161,8 +165,9 @@ public class AttributConcret implements Entity, Cloneable {
 	    }
 	} else if (typeStructure.equals(TypeStructure.BOOLEAN_STRUCT)) {
 	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
-	    		ExpressConstant.BOOLEAN_VALUE_CLASS);
+		Oid oid = InterfaceExpressJava.createEntity(
+			ExpressConstant.METAOBJECT_PACKAGE,
+			ExpressConstant.BOOLEAN_VALUE_CLASS);
 		BoolValue val = (BoolValue) InterfaceExpressJava.prendre(oid);
 		val.setValeur(v);
 		this.valeur = val;
@@ -221,23 +226,27 @@ public class AttributConcret implements Entity, Cloneable {
     }
 
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
-	NodeList userValue = p.getElementsByTagName("id-concreteattribut-concreteobject");
+	NodeList userValue = p
+		.getElementsByTagName("id-concreteattribut-concreteobject");
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
 	}
 
-	userValue = p.getElementsByTagName("id-concreteattribut-abstractattribut");
-	if(userValue.item(0).getParentNode() != p){
-		userValue = null;}
+	userValue = p
+		.getElementsByTagName("id-concreteattribut-abstractattribut");
+	if (userValue.item(0).getParentNode() != p) {
+	    userValue = null;
+	}
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
 	}
 
 	userValue = p.getElementsByTagName("id-concreteattribut-value");
-	if(userValue.item(0).getParentNode() != p){
-		userValue = null;}
+	if (userValue.item(0).getParentNode() != p) {
+	    userValue = null;
+	}
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
@@ -248,22 +257,30 @@ public class AttributConcret implements Entity, Cloneable {
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
-	NodeList nodeList = p.getElementsByTagName("id-concreteattribut-concreteobject");
-	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		nodeList = null;}
+	NodeList nodeList = p
+		.getElementsByTagName("id-concreteattribut-concreteobject");
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	this.setObjConcDe((ObjetConcret) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent())));
 
-	nodeList = p.getElementsByTagName("id-concreteattribut-abstractattribut");
-	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		nodeList = null;}
+	nodeList = p
+		.getElementsByTagName("id-concreteattribut-abstractattribut");
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	this.setAttributDe((AttributAbstrait) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent())));
 	this.name = this.attributAbsDe.getName();
 
 	nodeList = p.getElementsByTagName("id-concreteattribut-value");
-	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		nodeList = null;}
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	if (nodeList.item(0) != null) {
 	    this.valeur = (ValeurType) InterfaceExpressJava.bdd
 		    .prendre(new Oid(nodeList.item(0).getTextContent()));
@@ -346,8 +363,8 @@ public class AttributConcret implements Entity, Cloneable {
 
 	racine.setAttribute("id-concreteattribut-value", this.valeur.getOid()
 		.get());
-	
-	//To write the attribute's value as a child
+
+	// To write the attribute's value as a child
 	racine.appendChild(this.valeur.toXML2(doc));
 
 	return racine;

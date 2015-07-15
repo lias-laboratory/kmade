@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -35,8 +35,8 @@ public class ExpressUser {
     // pour créer un utilisateur il faut créer soit un individu, soit une
     // organisation
     public static String createUser() {
-	Oid oidUser = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.USER_CLASS);
+	Oid oidUser = InterfaceExpressJava.createEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.USER_CLASS);
 	return (oidUser.get());
     }
 
@@ -53,10 +53,11 @@ public class ExpressUser {
     }
 
     public static String[] getUsersName() {
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.PERSON_CLASS);
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.ORGANIZATION_CLASS);
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.PERSON_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.ORGANIZATION_CLASS);
 	int length = objs1.length + objs2.length;
 	String[] lst = new String[length];
 	for (int i = 0; i < objs1.length; i++) {
@@ -72,10 +73,11 @@ public class ExpressUser {
 
     public static ArrayList<User> getUsers() {
 	ArrayList<User> lst = new ArrayList<User>();
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.PERSON_CLASS);
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.ORGANIZATION_CLASS);
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.PERSON_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.ORGANIZATION_CLASS);
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
 	    Organization obj = (Organization) objs1[i];
@@ -89,10 +91,11 @@ public class ExpressUser {
     }
 
     public static User getUserWithName(String name) {
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.PERSON_CLASS);
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.ORGANIZATION_CLASS);
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.PERSON_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.ORGANIZATION_CLASS);
 	int length = objs1.length + objs2.length;
 	for (int i = 0; i < objs1.length; i++) {
 	    Organization obj = (Organization) objs1[i];
@@ -118,10 +121,11 @@ public class ExpressUser {
      */
     public static String[] getUsersNoActorName(String oidTask) {
 	ArrayList<String> lst = new ArrayList<String>();
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.PERSON_CLASS);
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.ORGANIZATION_CLASS);
+	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.PERSON_CLASS);
+	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.ORGANIZATION_CLASS);
 	Object task = InterfaceExpressJava.prendre(new Oid(oidTask));
 	Task myTask = (Task) task;
 	ArrayList<Actor> myActor = myTask.getActors();

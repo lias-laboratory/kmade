@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.view.preferences;
 
 import java.awt.BorderLayout;
@@ -22,6 +22,7 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -34,7 +35,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
-
 
 import com.l2fprod.common.swing.JButtonBar;
 
@@ -165,10 +165,14 @@ public class KMADEPreferencesDialog extends JDialog {
 	this.getContentPane().add(BorderLayout.WEST, toolbar);
 	this.getContentPane().add(BorderLayout.CENTER, panelCenter);
 	this.getContentPane().add(BorderLayout.SOUTH, panelSouth);
-
-	this.setSize(new Dimension(600, 500));
-	KMADEToolUtilities.setCenteredInScreen(this);
-
+	Dimension dim = new Dimension(600, 500);
+	if (Toolkit.getDefaultToolkit().getScreenSize().height < dim.height) {
+	    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+	    this.setLocation(0, 0);
+	} else {
+	    this.setSize(new Dimension(600, 500));
+	    KMADEToolUtilities.setCenteredInScreen(this);
+	}
     }
 
     private JPanel makePanel(String title) {

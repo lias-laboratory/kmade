@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.view.simulation;
 
 import java.awt.BorderLayout;
@@ -23,6 +23,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
@@ -48,7 +49,6 @@ import javax.swing.JViewport;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
-
 
 import org.jgraph.JGraph;
 import org.jgraph.event.GraphSelectionEvent;
@@ -432,6 +432,15 @@ public class KMADESimulationDialog extends JFrame {
 			GraphicEditorAdaptator.class
 				.getResource(KMADEConstant.USER_UNKNOWN_IMAGE),
 			KMADEConstant.ROW_HEIGHT));
+	Dimension dim = new Dimension(1800, 1000);
+
+	if (Toolkit.getDefaultToolkit().getScreenSize().height < dim.height) {
+	    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+	    this.setLocation(0, 0);
+	} else {
+	    this.setPreferredSize(dim);
+	    KMADEToolUtilities.setCenteredInScreen(this);
+	}
     }
 
     public Task getSelectedTask() {

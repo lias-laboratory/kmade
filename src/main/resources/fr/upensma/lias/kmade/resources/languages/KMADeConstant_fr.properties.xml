@@ -3,1105 +3,1190 @@
 <properties>
 
 
-<!--  HTML FILE -->
- <entry key="DEBUG_KMADE_HTML">kmadedebug_fr.html</entry> 
-<entry key="HELP_KMADE_HTML">kmadehelp_fr.html</entry>
-<entry key="HELP_KMAD_HTML">kmadhelp_fr.html</entry>
-<entry key="HISTORY_KMADE_HTML">kmadehistory_fr.html</entry>
-<entry key="UNDER_DEVELOPMENT_START_HTML">kmadeudstart_fr.html</entry>
-<entry key="UNDER_DEVELOPMENT_START_TITLE">KMADe est en cours de développement ...</entry>
+	<!-- HTML FILE -->
+	<entry key="DEBUG_KMADE_HTML">kmadedebug_fr.html</entry>
+	<entry key="HELP_KMADE_HTML">kmadehelp_fr.html</entry>
+	<entry key="HELP_KMAD_HTML">kmadhelp_fr.html</entry>
+	<entry key="HISTORY_KMADE_HTML">kmadehistory_fr.html</entry>
+	<entry key="UNDER_DEVELOPMENT_START_HTML">kmadeudstart_fr.html</entry>
+	<entry key="UNDER_DEVELOPMENT_START_TITLE">KMADe est en cours de développement ...</entry>
 
 
 
-<!--  String Value -->
-<entry key="VERTEX_ITER_LETTER">I</entry>
-<entry key="VERTEX_STATE_LETTER">S:</entry>
-<entry key="VERTEX_NUM">N:</entry>
-<entry key="VERTEX_EVENT_IN_LETTER">IN:</entry>
-<entry key="VERTEX_EVENT_OUT_LETTER">OUT:</entry>
-<entry key="VERTEX_PRECONDITION">PRE</entry>
-<entry key="VERTEX_ITERATION">ITER</entry>
-<entry key="VERTEX_OPT">OPT</entry>
-<entry key="VERTEX_INTERRUPTIBLE">INTER</entry>
-<entry key="VERTEX_ACTOR">ACTEUR</entry>
-<entry key="VERTEX_EFFETSDEBORD">ACTION</entry>
-<entry key="VERTEX_DESCRIPTION">DESC</entry>
+	<!-- String Value -->
+	<entry key="VERTEX_ITER_LETTER">I</entry>
+	<entry key="VERTEX_STATE_LETTER">S:</entry>
+	<entry key="VERTEX_NUM">N:</entry>
+	<entry key="VERTEX_EVENT_IN_LETTER">IN:</entry>
+	<entry key="VERTEX_EVENT_OUT_LETTER">OUT:</entry>
+	<entry key="VERTEX_PRECONDITION">PRE</entry>
+	<entry key="VERTEX_ITERATION">ITER</entry>
+	<entry key="VERTEX_OPT">OPT</entry>
+	<entry key="VERTEX_INTERRUPTIBLE">INTER</entry>
+	<entry key="VERTEX_ACTOR">ACTEUR</entry>
+	<entry key="VERTEX_EFFETSDEBORD">ACTION</entry>
+	<entry key="VERTEX_DESCRIPTION">DESC</entry>
 
 
-<!--  Title Value -->
-<entry key="FENETRE_PRINCIPALE_TITLE_NAME">K-MADe (Kernel of Model for Activity Description environment) - FR</entry>
-<entry key="ABOUT_TITLE_NAME">A Propos de</entry>
-<entry key="TASK_DESCRIPTION_TABBEDPANE_TITLE_NAME">Espace Tâches</entry>
-<entry key="ABSTRACT_OBJECT_TABBEDPANE_TITLE_NAME">Objets Abstraits</entry>
-<entry key="USER_TABBEDPANE_TITLE_NAME">Acteurs</entry>
-<entry key="INDIVIDU_TABBEDPANE_TITLE_NAME">Individus</entry>
-<entry key="ORGANIZATION_TABBEDPANE_TITLE_NAME">Organisations</entry>
-<entry key="MACHINE_TABBEDPANE_TITLE_NAME">Machines</entry>
-<entry key="PARCMACHINES_TABBEDPANE_TITLE_NAME">Parcs de Machines</entry>
-<entry key="EVENT_TABBEDPANE_TITLE_NAME">Evénements</entry>
-<entry key="CONCRETE_TASK_OBJECT_TABBEDPANE_TITLE_NAME">Objets Concrets</entry>
-<entry key="PREVIEW_WINDOW_TITLE_NAME">Fenêtre d'aperçu</entry>
-<entry key="INFO_DEBUG_TITLE_NAME">Informations de développement</entry>
-<entry key="HELP_KMADE_TITLE_NAME">Aide : K-MADe</entry>
-<entry key="HELP_KMAD_TITLE_NAME">Aide : modèle K-MAD</entry>
-<entry key="HISTORY_TITLE_NAME">Histoire de K-MADe</entry>
-<entry key="ABSTRACT_OBJECT_TITLE_NAME">Editeur Objets Abstraits</entry>
-<entry key="CONCRETE_OBJECT_TITLE_NAME">Editeur Objets Concrets</entry>
-<entry key="USER_TITLE_NAME">Editeur Utilisateurs</entry>
-<entry key="INDIVIDU_TITLE_NAME">Editeur Individus</entry>
-<entry key="ORGANIZATION_TITLE_NAME">Editeur Organisations</entry>
-<entry key="MACHINE_TITLE_NAME">Editeur Machine</entry>
-<entry key="PARCMACHINES_TITLE_NAME"> Editeur Parc de Machines</entry>
-<entry key="EVENT_TITLE_NAME">Editeur Evénements</entry>
-<entry key="TASK_MODEL_TITLE_NAME">Arbre de Tâches</entry>
-<entry key="PREFERENCES_TITLE_NAME">Préférences...</entry>
-<entry key="COMPLETE_EDITOR_TITLE_NAME">Editeur complet de tâches</entry>
-<entry key="CLIPBOARD_TITLE_NAME">Aperçu du Presse-Papier</entry>
-<entry key="LOAD_MONITOR_TITLE_NAME">Moniteur de chargement de projet K-MAD</entry>
-<entry key="SAVE_MONITOR_TITLE_NAME">Moniteur d'enregistrement de projet K-MAD</entry>
-<entry key="EDITOR_TEXT_TITLE_NAME">Editeur du contenu de l'attribut</entry>
-<entry key="EVENT_TASK_LINKED_TITLE_NAME">Liaison Tache/Evénement</entry>
-<entry key="ACTOR_CREATE_TITLE_NAME">Création des acteurs</entry>
-<entry key="ACTORSYSTEM_CREATE_TITLE_NAME">Création des acteurs systèmes</entry>
-<entry key="PRINT_PREVIEW_WINDOW_TITLE_NAME">Aperçu d'impression</entry>
-<entry key="PROJECT_DIALOG_TITLE_NAME">Gestion des interviews</entry>
+	<!-- Title Value -->
+	<entry key="FENETRE_PRINCIPALE_TITLE_NAME">K-MADe (Kernel of Model for Activity Description
+		environment) - FR</entry>
+	<entry key="ABOUT_TITLE_NAME">A Propos de</entry>
+	<entry key="TASK_DESCRIPTION_TABBEDPANE_TITLE_NAME">Espace Tâches</entry>
+	<entry key="ABSTRACT_OBJECT_TABBEDPANE_TITLE_NAME">Objets Abstraits</entry>
+	<entry key="USER_TABBEDPANE_TITLE_NAME">Acteurs</entry>
+	<entry key="INDIVIDU_TABBEDPANE_TITLE_NAME">Individus</entry>
+	<entry key="ORGANIZATION_TABBEDPANE_TITLE_NAME">Organisations</entry>
+	<entry key="MACHINE_TABBEDPANE_TITLE_NAME">Machines</entry>
+	<entry key="PARCMACHINES_TABBEDPANE_TITLE_NAME">Parcs de Machines</entry>
+	<entry key="CONDITION_TABBEDPANE_TITLE_MESSAGE">Condition</entry>
+	<entry key="EVENT_TABBEDPANE_TITLE_NAME">Evénements</entry>
+	<entry key="CONCRETE_TASK_OBJECT_TABBEDPANE_TITLE_NAME">Objets Concrets</entry>
+	<entry key="PREVIEW_WINDOW_TITLE_NAME">Fenêtre d'aperçu</entry>
+	<entry key="INFO_DEBUG_TITLE_NAME">Informations de développement</entry>
+	<entry key="HELP_KMADE_TITLE_NAME">Aide : K-MADe</entry>
+	<entry key="HELP_KMAD_TITLE_NAME">Aide : modèle K-MAD</entry>
+	<entry key="HISTORY_TITLE_NAME">Histoire de K-MADe</entry>
+	<entry key="ABSTRACT_OBJECT_TITLE_NAME">Editeur Objets Abstraits</entry>
+	<entry key="CONCRETE_OBJECT_TITLE_NAME">Editeur Objets Concrets</entry>
+	<entry key="USER_TITLE_NAME">Editeur Utilisateurs</entry>
+	<entry key="INDIVIDU_TITLE_NAME">Editeur Individus</entry>
+	<entry key="ORGANIZATION_TITLE_NAME">Editeur Organisations</entry>
+	<entry key="MACHINE_TITLE_NAME">Editeur Machine</entry>
+	<entry key="PARCMACHINES_TITLE_NAME"> Editeur Parc de Machines</entry>
+	<entry key="EVENT_TITLE_NAME">Editeur Evénements</entry>
+	<entry key="TASK_MODEL_TITLE_NAME">Arbre de Tâches</entry>
+	<entry key="PREFERENCES_TITLE_NAME">Préférences...</entry>
+	<entry key="COMPLETE_EDITOR_TITLE_NAME">Editeur complet de tâches</entry>
+	<entry key="CLIPBOARD_TITLE_NAME">Aperçu du Presse-Papier</entry>
+	<entry key="LOAD_MONITOR_TITLE_NAME">Moniteur de chargement de projet K-MAD</entry>
+	<entry key="SAVE_MONITOR_TITLE_NAME">Moniteur d'enregistrement de projet K-MAD</entry>
+	<entry key="EDITOR_TEXT_TITLE_NAME">Editeur du contenu de l'attribut</entry>
+	<entry key="EVENT_TASK_LINKED_TITLE_NAME">Liaison Tache/Evénement</entry>
+	<entry key="ACTOR_CREATE_TITLE_NAME">Création des acteurs</entry>
+	<entry key="ACTORSYSTEM_CREATE_TITLE_NAME">Création des acteurs systèmes</entry>
+	<entry key="PRINT_PREVIEW_WINDOW_TITLE_NAME">Aperçu d'impression</entry>
+	<entry key="PROJECT_DIALOG_TITLE_NAME">Gestion des interviews</entry>
 
 
-<entry key="BAD_CHARACTER_TEXT">Erreur dans le nom</entry>
-<entry key="BAD_CARACTER_TITLE">Nom incorrect</entry>
-<entry key="SAME_NAME_TEXT">Ce nom est déjà utilisé</entry>
-<entry key="SAME_NAME_TITLE">Nom identique</entry>
-    
-    
-
-<entry key="BACK_TO_EDITOR">Retour vers l'éditeur de</entry>
-<entry key="ABSTRACT_OBJECT_NAME_TABLE">Nom</entry>
-<entry key="ABSTRACT_OBJECT_OBSERVATION_TABLE">Description</entry>
-<entry key="ABSTRACT_OBJECT_NEW_OBJECT_TABLE">Ajouter un objet abstrait ...</entry>
-<entry key="ABSTRACT_OBJECT_TITLE_TABLE">Objet Abstrait</entry>
-<entry key="ABSTRACT_OBJECT_REMOVE_MESSAGE_TITLE">Suppression d'objet(s) abstrait(s)</entry>
-<entry key="ABSTRACT_OBJECT_LIST_MESSAGE_TITLE">Liste Objets Abstraits</entry>
+	<entry key="BAD_CHARACTER_TEXT">Erreur dans le nom</entry>
+	<entry key="BAD_CARACTER_TITLE">Nom incorrect</entry>
+	<entry key="SAME_NAME_TEXT">Ce nom est déjà utilisé</entry>
+	<entry key="SAME_NAME_TITLE">Nom identique</entry>
 
 
 
-<entry key="ABSTRACT_GROUP_NAME_TABLE">Nom</entry>
-<entry key="ABSTRACT_GROUP_DESCRIPTION_TABLE">Description</entry>
-<entry key="ABSTRACT_GROUP_SET_TYPE_TABLE">Type d'ensemble</entry>
-<entry key="ABSTRACT_GROUP_NEW_OBJECT_TABLE">Ajouter un groupe ...</entry>
-<entry key="ABSTRACT_GROUP_TITLE_TABLE">Groupe de</entry>
-<entry key="ABSTRACT_GROUP_REMOVE_MESSAGE_TITLE">Suppression de groupe(s)</entry>
+	<entry key="BACK_TO_EDITOR">Retour vers l'éditeur de</entry>
+	<entry key="ABSTRACT_OBJECT_NAME_TABLE">Nom</entry>
+	<entry key="ABSTRACT_OBJECT_OBSERVATION_TABLE">Description</entry>
+	<entry key="ABSTRACT_OBJECT_NEW_OBJECT_TABLE">Ajouter un objet abstrait ...</entry>
+	<entry key="ABSTRACT_OBJECT_TITLE_TABLE">Objet Abstrait</entry>
+	<entry key="ABSTRACT_OBJECT_REMOVE_MESSAGE_TITLE">Suppression d'objet(s) abstrait(s)</entry>
+	<entry key="ABSTRACT_OBJECT_LIST_MESSAGE_TITLE">Liste Objets Abstraits</entry>
+
+
+
+	<entry key="ABSTRACT_GROUP_NAME_TABLE">Nom</entry>
+	<entry key="ABSTRACT_GROUP_DESCRIPTION_TABLE">Description</entry>
+	<entry key="ABSTRACT_GROUP_SET_TYPE_TABLE">Type d'ensemble</entry>
+	<entry key="ABSTRACT_GROUP_NEW_OBJECT_TABLE">Ajouter un groupe ...</entry>
+	<entry key="ABSTRACT_GROUP_TITLE_TABLE">Groupe de</entry>
+	<entry key="ABSTRACT_GROUP_REMOVE_MESSAGE_TITLE">Suppression de groupe(s)</entry>
+
+
+
+	<entry key="ABSTRACT_ATTRIBUT_NAME_TABLE">Nom</entry>
+	<entry key="ABSTRACT_ATTRIBUT_DESCRIPTION_TABLE">Description</entry>
+	<entry key="ABSTRACT_ATTRIBUT_TYPE_TABLE">Type</entry>
+	<entry key="ABSTRACT_ATTRIBUT_TYPE_NAME_TABLE">Valeur du type</entry>
+	<entry key="ABSTRACT_ATTRIBUT_NEW_OBJECT_TABLE">Ajouter un attribut abstrait ...</entry>
+	<entry key="ABSTRACT_ATTRIBUT_TITLE_TABLE">Attribut de</entry>
+	<entry key="ABSTRACT_ATTRIBUT_ENUMERATE_EDIT_TABLE">Editer énuméré ...</entry>
+	<entry key="ABSTRACT_ATTRIBUT_INTERVAL_EDIT_TABLE">Editer intervalle ...</entry>
+	<entry key="ABSTRACT_ATTRIBUT_REMOVE_MESSAGE_TITLE">Suppression d'attribut(s) abstrait(s)</entry>
+
+
+
+	<entry key="ENUMERATION_NAME_TABLE">Nom énuméré</entry>
+	<entry key="ENUMERATION_DESCRIPTION_TABLE">Description</entry>
+	<entry key="ENUMERATION_NEW_OBJECT_TABLE">Ajouter un énuméré ...</entry>
+	<entry key="ENUMERATION_TITLE_TABLE">Enumération</entry>
+	<entry key="ENUMERATION_REMOVE_MESSAGE_TITLE">Suppression d'énuméré(s)</entry>
+
+
+
+	<entry key="ELEMENT_NAME_TABLE">Nom</entry>
+	<entry key="ELEMENT_NEW_OBJECT_TABLE">Ajouter un élément ...</entry>
+	<entry key="ELEMENT_REMOVE_MESSAGE_TITLE">Suppression d'élément(s) d'un énuméré</entry>
+
+
+
+	<entry key="INTERVALLE_TITLE_TABLE">Intervalle</entry>
+	<entry key="INTERVALLE_NAME_TABLE">Nom</entry>
+	<entry key="INTERVALLE_DESCRIPTION_TABLE">Description</entry>
+	<entry key="INTERVALLE_MIN_VALUE_TABLE">Valeur min</entry>
+	<entry key="INTERVALLE_MAX_VALUE_TABLE">Valeur max</entry>
+	<entry key="INTERVALLE_NEW_OBJECT_TABLE">Ajouter un intervalle</entry>
+	<entry key="INTERVALLE_REMOVE_MESSAGE_TITLE">Suppression d'intervalle(s)</entry>
+
+
+
+	<entry key="CONCRETE_ABSTRACT_OBJECT_TITLE_TABLE">Objet Abstrait</entry>
+	<entry key="CONCRETE_OBJECT_TITLE_TABLE">Objet Concret</entry>
+	<entry key="CONCRETE_OBJECT_NAME_TABLE">Nom</entry>
+	<entry key="CONCRETE_OBJECT_OBSERVATION_TABLE">Description</entry>
+	<entry key="CONCRETE_OBJECT_GROUPE_TABLE">Groupe</entry>
+	<entry key="CONCRETE_OBJECT_GROUPE_NAME">groupe</entry>
+	<entry key="NO_CONCRETE_OBJECT_GROUPE_NAME">Aucun</entry>
+	<entry key="CONCRETE_NEW_OBJECT_TABLE">Ajouter un objet concret ...</entry>
+	<entry key="CONCRETE_NONEW_ROW_TABLE">Ajout impossible car pas de groupe disponible</entry>
+	<entry key="CONCRETE_OBJECT_REMOVE_MESSAGE_TITLE">Suppression d'objet(s) concret(s)</entry>
+
+
+
+	<entry key="CONCRETE_ATTRIBUT_NAME_TABLE">Nom</entry>
+	<entry key="CONCRETE_ATTRIBUT_VALUE_TABLE">Valeur</entry>
+	<entry key="CONCRETE_ATTRIBUT_NOINIT_TABLE">Attribut non initialisé</entry>
+	<entry key="CONCRETE_ATTRIBUT_TITLE_TABLE">Attribut concret de</entry>
+
+
+
+	<entry key="EVENT_NAME_TABLE">Nom</entry>
+	<entry key="EVENT_DESCRIPTION_TABLE">Description</entry>
+	<entry key="EVENT_NEW_ROW_TABLE">Ajouter un événement ...</entry>
+	<entry key="EVENT_NONEW_ROW_TABLE">Ajout impossible car pas d'événement disponible</entry>
+	<entry key="EVENT_REMOVE_INTO_TASK">Suppression d'événements d'une tâche</entry>
+	<entry key="EVENT_REMOVE_NAME_TITLE">Suppression d'événement(s)</entry>
+	<entry key="EVENT_NO_ELEMENT_INTO_TASK">Pas d'événement associé</entry>
+
+
+
+	<entry key="USER_NAME_TABLE">Nom</entry>
+	<entry key="USER_STATUS_TABLE">Statut</entry>
+	<entry key="USER_ROLE_TABLE">Rôle</entry>
+	<entry key="USER_PHOTO_TABLE">Photo</entry>
+	<entry key="USER_MEMBERS">Membre(s)</entry>
+	<entry key="USER_NEW_ROW_TABLE">Ajouter un utilisateur ...</entry>
+	<entry key="USER_REMOVE_NAME_TITLE">Suppression d'utilisateur(s)</entry>
+	<entry key="USER_CHOOSE_IMAGE_MESSAGE">Choisir ...</entry>
+	<entry key="USER_DISPLAY_IMAGE_MESSAGE">Afficher image</entry>
+	<entry key="USER_DISPLAY_PATH_IMAGE_MESSAGE">Afficher chemin</entry>
+	<entry key="USER_DISPLAY_DEFAULT_IMAGE_MESSAGE">Afficher image défaut</entry>
+	<entry key="USER_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Afficher chemin erroné</entry>
+	<entry key="USER_CLEAR_IMAGE_MESSAGE">Effacer image</entry>
+
+
+	<entry key="INDIVIDU_NAME_TABLE">Nom</entry>
+	<entry key="INDIVIDU_STATUS_TABLE">Statut </entry>
+	<entry key="INDIVIDU_ROLE_TABLE">Rôle</entry>
+	<entry key="INDIVIDU_PHOTO_TABLE">Photo</entry>
+	<entry key="INDIVIDU_NEW_ROW_TABLE">Ajouter un individu ...</entry>
+	<entry key="INDIVIDU_REMOVE_NAME_TITLE">Suppression d'individu(s)</entry>
+	<entry key="INDIVIDU_CHOOSE_IMAGE_MESSAGE">Choisir ...</entry>
+	<entry key="INDIVIDU_DISPLAY_IMAGE_MESSAGE">Afficher image</entry>
+	<entry key="INDIVIDU_DISPLAY_PATH_IMAGE_MESSAGE">Afficher chemin</entry>
+	<entry key="INDIVIDU_DISPLAY_DEFAULT_IMAGE_MESSAGE">Afficher image défaut</entry>
+	<entry key="INDIVIDU_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Afficher chemin erroné</entry>
+	<entry key="INDIVIDU_CLEAR_IMAGE_MESSAGE">Effacer image</entry>
+	<entry key="INDIVIDU_ORGANIZATION_TABLE">Organisation(s)</entry>
+	<entry key="INDIVIDU_OTHERS">Autre(s)</entry>
+
+
+	<entry key="ORGANIZATION_NAME_TABLE">Nom</entry>
+	<entry key="ORGANIZATION_STATUS_TABLE">Statut</entry>
+	<entry key="ORGANIZATION_ROLE_TABLE">Rôle</entry>
+	<entry key="ORGANIZATION_PHOTO_TABLE">Logo</entry>
+	<entry key="ORGANIZATION_NEW_ROW_TABLE">Ajouter une organisation ...</entry>
+	<entry key="ORGANIZATION_REMOVE_NAME_TITLE">Suppression d'organisation</entry>
+	<entry key="ORGANIZATION_CHOOSE_IMAGE_MESSAGE">Choisir ...</entry>
+	<entry key="ORGANIZATION_DISPLAY_IMAGE_MESSAGE">Afficher Image</entry>
+	<entry key="ORGANIZATION_DISPLAY_PATH_IMAGE_MESSAGE">Afficher Chemin</entry>
+	<entry key="ORGANIZATION_DISPLAY_DEFAULT_IMAGE_MESSAGE">Afficher Image Défaut</entry>
+	<entry key="ORGANIZATION_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Afficher Chemin Erroné</entry>
+	<entry key="ORGANIZATION_CLEAR_IMAGE_MESSAGE">Effacer Image</entry>
+	<entry key="ORGANIZATION_MEMBERS_TABLE">Membre(s)</entry>
+	<entry key="ORGANIZATION_OTHERS">Autre(s)	</entry>
+
+
+
+	<entry key="MACHINE_NAME_TABLE">Nom</entry>
+	<entry key="MACHINE_DESCRIPTION_TABLE">Description</entry>
+	<entry key="MACHINE_ISCOMPUTER_TABLE">est informatisé</entry>
+	<entry key="MACHINE_IMAGE_TABLE">Image</entry>
+	<entry key="MACHINE_NEW_ROW_TABLE">Ajouter une machine</entry>
+	<entry key="MACHINE_REMOVE_NAME_TITLE">Suppression d'une machine</entry>
+	<entry key="MACHINE_CHOOSE_IMAGE_MESSAGE">Choisir ...</entry>
+	<entry key="MACHINE_DISPLAY_IMAGE_MESSAGE">Afficher Image</entry>
+	<entry key="MACHINE_DISPLAY_PATH_IMAGE_MESSAGE">Afficher Chemin</entry>
+	<entry key="MACHINE_DISPLAY_DEFAULT_IMAGE_MESSAGE">Afficher Image Défaut</entry>
+	<entry key="MACHINE_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Afficher Chemin Erroné</entry>
+	<entry key="MACHINE_CLEAR_IMAGE_MESSAGE">Effacer Image</entry>
+	<entry key="MACHINE_PARCS_TABLE">Parcs de machines</entry>
+	<entry key="MACHINE_OTHERS">Autre(s)</entry>
+
+
+
+	<entry key="PARCMACHINES_NAME_TABLE">Nom</entry>
+	<entry key="PARCMACHINES_DESCRIPTION_TABLE">Description</entry>
+	<entry key="PARCMACHINES_IMAGE_TABLE">Image</entry>
+	<entry key="PARCMACHINES_NEW_ROW_TABLE">Ajouter un parc de machines</entry>
+	<entry key="PARCMACHINES_REMOVE_NAME_TITLE">Suppression d'un parc de machines</entry>
+	<entry key="PARCMACHINES_CHOOSE_IMAGE_MESSAGE">Choisir ...</entry>
+	<entry key="PARCMACHINES_DISPLAY_IMAGE_MESSAGE">Afficher Image</entry>
+	<entry key="PARCMACHINES_DISPLAY_PATH_IMAGE_MESSAGE">Afficher Chemin</entry>
+	<entry key="PARCMACHINES_DISPLAY_DEFAULT_IMAGE_MESSAGE">Afficher Image Défaut</entry>
+	<entry key="PARCMACHINES_DISPLAY_BAD_PATH_IMAGE_MESSAGE"> Afficher Chemin Erroné</entry>
+	<entry key="PARCMACHINES_CLEAR_IMAGE_MESSAGE">Effacer Image</entry>
+	<entry key="PARCMACHINES_MACHINE_TABLE">Machine(s)</entry>
+	<entry key="PARCMACHINES_OTHERS">Autre(s)</entry>
+
+
+
+
+	<entry key="LABEL_TITLE_MESSAGE">Libellés</entry>
+	<entry key="LABEL_REMOVE_NAME_TITLE">Suppression de libellés</entry>
+	<entry key="LABEL_NUMERO_TITLE">Numéro</entry>
+	<entry key="LABEL_NAME_TITLE">Nom </entry>
+	<entry key="LABEL_DESCRIPTION_TITLE">Description</entry>
+	<entry key="LABEL_COLOR_TITLE">Couleur</entry>
+	<entry key="LABEL_IS_VISIBLE_COLOR_TITLE">Couleur Visible</entry>
+	<entry key="LABEL_IS_VISIBLE_TITLE">Visible</entry>
+	<entry key="LABEL_ADD_NEW_LABEL_TITLE">Ajouter un libellé ...</entry>
+	<entry key="LABEL_EDITOR_TITLE">Editeur Libellé</entry>
+
+
+
+	<entry key="ACTOR_NAME_TABLE">Nom</entry>
+	<entry key="ACTOR_EXPERIENCE_TABLE">Expérience</entry>
+	<entry key="ACTOR_COMPETENCE_TABLE">Compétence</entry>
+	<entry key="ACTOR_NEW_ROW_TABLE">Ajouter un acteur ...</entry>
+	<entry key="ACTOR_NONEW_ROW_TABLE">Ajout impossible d'acteur car pas d'utilisateur
+		disponible</entry>
+	<entry key="ACTOR_NO_ELEMENT_INTO_TASK">Pas d'acteur associé</entry>
+	<entry key="ACTOR_REMOVE_NAME_TITLE">Suppression d'acteur(s)</entry>
+	<entry key="ACTOR_REMOVE_ALL_NAME_TITLE">Suppression de l'ensemble des acteurs</entry>
+
+	<entry key="ACTORSYSTEM_NAME_TABLE">Nom</entry>
+	<entry key="ACTORSYSTEM_EXPERIENCE_TABLE">Expérience	</entry>
+	<entry key="ACTORSYSTEM_COMPETENCE_TABLE">Compétence</entry>
+	<entry key="ACTORSYSTEM_NEW_ROW_TABLE">Ajouter un acteur système ...</entry>
+	<entry key="ACTORSYSTEM_NONEW_ROW_TABLE">Ajout impossible d'acteur système car pas de machines
+		disponible</entry>
+	<entry key="ACTORSYSTEM_NO_ELEMENT_INTO_TASK"> Pas d'acteur système associé</entry>
+	<entry key="ACTORSYSTEM_REMOVE_NAME_TITLE">Suppression d'acteur(s) système(s)</entry>
+	<entry key="ACTORSYSTEM_REMOVE_ALL_NAME_TITLE">Suppression de l'ensemble des acteurs systèmes</entry>
+
+
+	<entry key="NO_SELECTED_TASK_MESSAGE">Pas de tâche Sélectionnée</entry>
+	<entry key="PROPERTIES_MESSAGE">Caractéristiques</entry>
+	<entry key="GENERAL_TABBEDPANE_TITLE_NAME">Général</entry>
+	<entry key="NO_VALUE_LEGEND_MESSAGE">pas de valeur</entry>
+	<entry key="NO_CARACTERISTIC_SELECTED_MESSAGE">Caractéristique non sélectionnée</entry>
+	<entry key="ERROR_CARACTERISTIC_MESSAGE">Erreur</entry>
+
+
+
+	<entry key="TASK_ATTRIBUT_NAME">Tâche</entry>
+	<entry key="GENERAL_INFORMATION_PANEL_TITLE_NAME">Générales</entry>
+	<entry key="GENERAL_INFORMATION_PANEL_LEGEND_TITLE_NAME">Les caractéristiques générales sont les premières
+		renseignées et sont prévues pour être décrites par l'ensemble des
+		intervenants de l'analyse d'une activité. Ces caractéristiques sont
+		informelles et ne font pas références à des objets de l'état du monde</entry>
+	<entry key="TASK_NUMBER_NAME_TITLE">Numéro</entry>
+	<entry key="TASK_NUMBER_SHORT_NAME_TITLE">Num</entry>
+	<entry key="TASK_NUMBER_NAME_LEGEND_TITLE">Pour chaque tâche d'un arbre de tâche un numéro unique
+		est défini. Il contient la profondeur de la tâche et sa position parmi
+		ses tâches soeurs. Ce numéro est calculé automatiquement par l'outil
+		et n'est pas éditable</entry>
+	<entry key="NO_MOTHER_TASK_NAME_MESSAGE">Pas de tâche mère</entry>
+	<entry key="SUB_TASK_PARENT_NAME_TITLE">Sous-tâche</entry>
+	<entry key="SUB_TASK_PARENT_NAME_LEGEND_TITLE">Précise la tâche mère de cette tâche</entry>
+	<entry key="TASK_NAME_TITLE">Nom</entry>
+	<entry key="TASK_NAME_LEGEND_TITLE">Désigne le nom de la tâche donné par l'analyste</entry>
+	<entry key="TASK_PURPOSE_TITLE">But</entry>
+	<entry key="TASK_PURPOSE_LEGEND_TITLE">Désigne l'objectif assigné à la tâche</entry>
+	<entry key="TASK_MULTIMEDIA_PURPOSE_TITLE">Multimédia (désactivé)</entry>
+	<entry key="TASK_MULTIMEDIA_PURPOSE_LEGEND_TITLE">Cette caractéristique permet de compléter le but d'une
+		tâche par une information multimédia (vidéo ou un son)</entry>
+	<entry key="TASK_MULTIMEDIA_ERROR_FILE_MESSAGE">Problème : média introuvable</entry>
+	<entry key="TASK_LABEL_TITLE">Libellé</entry>
+	<entry key="TASK_LABEL_LEGEND_TITLE">Cette caractéristique permet d'étiqueter une tâche de
+		manière à pouvoir identifier des tâches d'un modèle K-MAD. Un libellé
+		ou également appelé label permet notamment d'associer une couleur</entry>
+	<entry key="TASK_OBJECTS_TITLE">Objets</entry>
+	<entry key="TASK_OBJECTS_LEGEND_TITLE">Cette caractéristique permet de lister l'ensemble des
+		objets utilisés par une tâche</entry>
+	<entry key="TASK_FEEDBACK_TITLE">Affichage (désactivé)</entry>
+	<entry key="TASK_FEEDBACK_LEGEND_TITLE">Cette caractéristique permet la description des effets
+		observables (ou souhaitables) par l'utilisateur pendant la réalisation
+		d'une tâche. C'est la réponse du système à l'utilisateur</entry>
+	<entry key="TASK_DURATION_TITLE">Durée</entry>
+	<entry key="TASK_DURATION_LEGEND_TITLE">Caractérise la durée de la tâche. Toutes sortes
+		d'informations relatives au temps sont acceptées</entry>
+	<entry key="TASK_OBSERVATION_TITLE">Description</entry>
+	<entry key="TASK_OBSERVATION_LEGEND_TITLE">Description</entry>
+	<entry key="EXECUTING_NAME_TITLE">Exécutant</entry>
+	<entry key="EXECUTING_NAME_LEGEND_TITLE">Précise qui réalise la tâche. Les valeurs possibles
+		sont « Utilisateur, Système, Interactif et Abstrait, Inconnue »</entry>
+	<entry key="MODALITY_NAME_TITLE">Modalité</entry>
+	<entry key="MODALITY_NAME_LEGEND_TITLE">Précise la nature de l'action de l'exécutant «
+		Utilisateur »</entry>
+	<entry key="FREQUENCY_NAME_TITLE">Fréquence</entry>
+	<entry key="FREQUENCY_NAME_LEGEND_TITLE">Cette caractéristique tient lieu d'appréciation, du
+		caractère répétitif de la tâche</entry>
+	<entry key="FREQUENCY_VALUE_NAME_TITLE">Valeur Fréquence</entry>
+	<entry key="FREQUENCY_VALUE_NAME_LEGEND_TITLE">Cette caractéristique permet de donner une valeur à la
+		fréquence</entry>
+	<entry key="IMPORTANT_NAME_TITLE">Importance</entry>
+	<entry key="IMPORTANT_NAME_LEGEND_TITLE">Précise l'aspect priorité de la tâche par rapport aux
+		autres tâches soeurs</entry>
+	<entry key="SENSORI_MOTRICE_NAME_TITLE">Sensori-motrice</entry>
+	<entry key="COGNITIVE_NAME_TITLE">Cognitive    </entry>
+
+
+
+	<entry key="SCHEDULE_PANEL_TITLE_NAME">Ordonnancement</entry>
+	<entry key="NECESSITE_LABEL_NAME">Nécessité</entry>
+	<entry key="NECESSITE_LABEL_LEGEND_NAME">Indique si la tâche est obligatoire ou facultative.
+		Une tâche obligatoire doit être exécutée alors qu'une tâche
+		facultative peut être omise</entry>
+	<entry key="INTERRUPTIBLE_LABEL_NAME">Interruptible</entry>
+	<entry key="INTERRUPTIBLE_LABEL_LEGEND_NAME">Indique si la tâche est interruptible ou pas</entry>
+	<entry key="DECLENCHEMENT_LABEL_NAME">Déclenchement</entry>
+	<entry key="DECLENCHEMENT_LABEL_LEGEND_NAME">Cette caractéristique indique que l'exécution de la
+		tâche est contrainte par un événement</entry>
+	<entry key="UTILISATEUR_LABEL_NAME">Acteur(s)</entry>
+	<entry key="UTILISATEUR_LABEL_LEGEND_NAME">Cette caractéristique contient la liste des
+		utilisateurs autorisée à exécuter la tâche</entry>
+	<entry key="SCHEDULE_LABEL_NAME">Décomposition</entry>
+	<entry key="SCHEDULE_LABEL_LEGEND_NAME">Cette caractéristique détermine la façon dont les
+		sous-tâches d'une tâche mère vont être exécutées</entry>
+	<entry key="OPTIONAL_NECESSITE_VALUE">Optionnelle</entry>
+	<entry key="NO_OPTIONAL_NECESSITE_VALUE">Obligatoire</entry>
+	<entry key="INTERRUPTIBLE_VALUE">Interruptible</entry>
+	<entry key="NO_INTERRUPTIBLE_VALUE">Non interruptible</entry>
+	<entry key="PRECONDITION_LABEL_VALUE">Précondition</entry>
+	<entry key="PRECONDITION_LABEL_LEGEND_VALUE">Cette caractéristique indique que l'exécutation de la
+		tâche est contrainte par une condition. Cette condition est relative
+		aux objets manipulés par l'utilisateur : les objets de l'état du monde</entry>
+	<entry key="ITERATION_LABEL_VALUE">Itération</entry>
+	<entry key="ITERATION_LABEL_LEGEND_VALUE">Cette caractéristique précise l'aspect itératif d'une
+		tâche pouvant être exécutée plusieurs fois ou devant être exécutée
+		jusqu'à la satisfaction d'une condition. Cette condition est relative
+		aux objets manipulés par l'utilisateur</entry>
+	<entry key="MATERIEL_LABEL_NAME">Acteur(s) Système(s)</entry>
+	<entry key="MATERIEL_LABEL_LEGEND"> Cette caractéristique contient la liste des machines
+		autorisée à exécuter la tâche</entry>
+
+
+
+	<entry key="POSTCONDITION_PANEL_TITLE_NAME">Effets de bord</entry>
+	<entry key="EFFETSDEBORD_LABEL_VALUE">Actions</entry>
+	<entry key="EFFETSDEBORD_LABEL_LEGEND_VALUE">Cette caractéristique modifie les objets de l'état du
+		monde</entry>
+	<entry key="EVENT_NAME_TITLE">Evénement</entry>
+	<entry key="EVENT_NAME_LEGEND_TITLE">Cette caractéristique engendre un ensemble
+		d'événements</entry>
+
+
+
+	<entry key="MEDIA_FILE_NAME">Fichier média</entry>
+	<entry key="MEDIA_FILE_LENGTH">Taille média (ko)</entry>
+	<entry key="MEDIA_LENGTH">Durée média (m:s)</entry>
+	<entry key="MEDIA_START_TAG">Repère départ (m:s)</entry>
+	<entry key="MEDIA_FINISH_TAG">Repère fin (m:s)</entry>
+	<entry key="MEDIA_NO_INFORMATION_PANEL_MESSAGE">Aucune Information</entry>
+	<entry key="INFORMATION_MEDIA_TITLE_NAME">Informations</entry>
+	<entry key="MEDIA_TITLE_NAME">Média</entry>
+	<entry key="NO_MEDIA_FILE_MESSAGE">Aucun fichier média</entry>
+	<entry key="QUICK_TIME_NO_INSTALLED_ERROR_MESSAGE">Pas de prise en compte vidéo : Installer QuickTime</entry>
+	<entry key="CONTROLE_MEDIA_TITLE_NAME">Contrôle</entry>
+
+
+
+	<entry key="EXECUTION_CONDITION_TITLE_NAME">Conditions d'éxécution</entry>
+	<entry key="OBJECT_LIST_TITLE_NAME">Liste des objets</entry>
+	<entry key="POSTCONDITION_TITLE_NAME">Postcondition</entry>
+	<entry key="EFFETSDEBORD_TITLE_NAME">Action</entry>
+	<entry key="NO_MOTHER_TASK_MESSAGE">Aucune tâche mère</entry>
+	<entry key="NO_LEFT_TASK_MESSAGE">Aucune grande tâche (tâche à gauche)</entry>
+	<entry key="NO_RIGHT_TASK_MESSAGE">Aucune petite tâche (tâche à droite)</entry>
+	<entry key="NO_SUB_TASK_MESSAGE">Aucune sous-tâche</entry>
+	<entry key="NO_NUMERO_TASK">Pas de numéro</entry>
+
+
+
+	<entry key="INTERVIEWED_NAME_TABLE">Interviewé</entry>
+	<entry key="PLACE_INFORMATION_TABLE">Coordonnées</entry>
+	<entry key="STATUT_TABLE">Statut</entry>
+	<entry key="SENIORITY_TABLE">Ancienneté</entry>
+	<entry key="DATE_TABLE">Date</entry>
+	<entry key="INTERVIEW_TYPE_TABLE">Type de recueil</entry>
+	<entry key="SEARCHED_INFORMATIONS_TABLE">Informations</entry>
+	<entry key="INTERVIEW_NAME_TABLE">Interviewer</entry>
+	<entry key="INTERVIEW_NEW_OBJECT_TABLE">Ajouter une interview ...   </entry>
+	<entry key="GENERAL_DESCRIPTION_PROJECT_DIALOG_TITLE">Description générale</entry>
+	<entry key="COMPANY_LABEL_NAME">Entreprise</entry>
+	<entry key="SITE_LABEL_NAME">Site</entry>
+	<entry key="POSTE_TYPE_LABEL_NAME">Type de Poste</entry>
+	<entry key="DATE_STUDY">Date du cas étudié</entry>
+	<entry key="OTHER_RESOURCES">Autres Resources</entry>
+	<entry key="INTERVIEWED_DESCRIPTION_PROJECT_DIALOG_TITLE">Description des interviewés</entry>
+	<entry key="JUSTIFICATION_PROJECT_DIALOG_TITLE">Justification de l'étude de cas (en quoi ce cas
+		reflète un problème de charge)</entry>
+	<entry key="REMOVE_INTERVIEW_MESSAGE_TITLE">Suppression d'interview(s)</entry>
+	<entry key="ASK_REMOVE_INTERVIEW_MESSAGE_TITLE">Souhaitez-vous supprimer l'interview de</entry>
+
+
+
+	<entry key="EDITOR_MESSAGE_TITLE">Editeur de caractéristiques</entry>
+	<entry key="EDITOR_OPERATOR_NAME">Décomposition</entry>
+	<entry key="EDITOR_NAME_NAME">Nom</entry>
+	<entry key="EDITOR_EXECUTANT_NAME">Exécutant</entry>
+
+
+
+	<entry key="EXTENSION_EXPRESS_FILTER_NAME">Fichier Express (*.spf)</entry>
+	<entry key="EXTENSION_KMADE_FILTER_NAME">Fichier K-MAD (*.kxml)</entry>
+	<entry key="SET_EXISTING_PROJECT_LONG_MESSAGE">Modification des propriétés du projet</entry>
+	<entry key="SET_EXISTING_PROJECT_SHORT_MESSAGE">Propriétés</entry>
+	<entry key="STATE_LOAD_TITLE_NAME">Etat</entry>
+	<entry key="ELEMENT_PARSE_PROBLEM_MESSAGE">Problème avec l'élément</entry>
+	<entry key="XML_PARSER_PROBLEM_MESSAGE">Problème avec le ParserXML</entry>
+	<entry key="XML_PARSER_MISSING_ELEMENT_PROBLEM_MESSAGE">entités manquantes dans le fichier XML</entry>
+
+
+
+	<entry key="OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME">Chargement d'un projet K-MAD annulé</entry>
+	<entry key="OPEN_ERROR_FILE">Erreur d'ouverture d'un projet K-MAD</entry>
+	<entry key="OPEN_EXPRESS_OK_FILE">Ouverture du projet K-MAD réussi : </entry>
+	<entry key="OPEN_EXPRESS_NO_OK_FILE">Erreur d'ouverture du projet K-MAD : </entry>
+	<entry key="EXPRESS_OBJECTS_TITLE_MESSAGE">Objets de l'utilisateur</entry>
+	<entry key="GRAPHICAL_OBJECTS_MESSAGE">Objets graphiques</entry>
+	<entry key="CREATE_GRAPHICAL_TASKS_MESSAGE">Création des tâches graphiques</entry>
+	<entry key="CREATE_GRAPHICAL_EDGES_MESSAGE">Création des liens</entry>
+	<entry key="LOAD_PROJECT_FINISHED_MESSAGE">Chargement terminé</entry>
+	<entry key="LOAD_CONSOLE_TITLE_NAME">Console de chargement</entry>
+	<entry key="IMPLICIT_STOP_LOAD_SPF_FILE">Chargement stoppé : Problème dans la création des
+		objets de l'utilisateur</entry>
+	<entry key="EXPLICIT_STOP_LOAD_SPF_FILE_DURING_OBJECT">Chargement annulé : Suppression des objets Express</entry>
+	<entry key="EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT">Chargement annulé : Suppression des objets Express et
+		Graphiques</entry>
+
+
+
+	<entry key="SAVE_CANCELLED_EXPRESS_FILECHOOSER_NAME">Enregistrement du projet K-MAD courant annulé</entry>
+	<entry key="WRITE_EXPRESS_ERROR_FILE">Erreur d'enregistrement du projet K-MAD : </entry>
+	<entry key="WRITE_ERROR_FILE">Erreur d'enregistrement d'un projet K-MAD</entry>
+	<entry key="WRITE_EXPRESS_OK_FILE">Enregistrement du projet K-MAD réussi : </entry>
+	<entry key="WRITE_EXPRESS_NO_OK_FILE">Enregistrement du projet K-MAD échoué :</entry>
+	<entry key="WRITE_BEFORE_OPEN_PROJECT_MESSAGE">Enregistrer le projet courant avant l'ouverture d'un
+		projet existant</entry>
+	<entry key="WRITE_BEFORE_EXIT_TOOL_MESSAGE">Enregistrer le projet courant avant de quitter</entry>
+	<entry key="WRITE_BEFORE_NEW_PROJECT_MESSAGE">Enregistrer le projet courant \n avant de créer un
+		nouveau projet</entry>
+	<entry key="WRITE_BEFORE_CLOSE_PROJECT_MESSAGE">Enregistrer le projet courant \n avant de le fermer</entry>
+	<entry key="WRITE_BEFORE_CHANGE_LOCALE_MESSAGE">Enregistrer le projet avant \n de changer la
+		localisation</entry>
+	<entry key="SAVE_CONSOLE_TITLE_NAME">Console d'enregistrement</entry>
+	<entry key="SAVE_PROJECT_FINISHED_MESSAGE">Enregistrement terminé</entry>
+	<entry key="IMPLICIT_STOP_SAVE_FILE_MESSAGE">Enregistrement stoppé : Problème dans l'enregistrement
+		des objets de l'utilisateur</entry>
+	<entry key="EXPLICIT_STOP_SAVE_FILE_MESSAGE">Enregistrement annulé : Suppression des objets K-MAD</entry>
+
+
+
+	<entry key="ENTITY_LIST_DIALOG_TITLE">Moniteur des objets de l'état du monde</entry>
+	<entry key="FORCE_ENTITY_LIST_ACTION_MESSAGE">Mise à jour</entry>
+
+
+
+	<entry key="GENERAL_TABBED_NAME">Général</entry>
+	<entry key="TASK_MODEL_EDITOR_TABBED_NAME">Tâches</entry>
+	<entry key="TASK_MODEL_EDITOR_TABBED_LONG_NAME">Editeur de Tâches</entry>
+	<entry key="TREE_EDITOR_TABBED_NAME">Arbres</entry>
+	<entry key="TREE_EDITOR_TABBED_LONG_NAME">Editeur d'Arbres</entry>
+	<entry key="GENERAL_PANEL_CONFIGURATION_PANEL_NAME">Configuration</entry>
+	<entry key="GENERAL_PANEL_AUTOMATIC_SAVE_LABEL">Sauvegarde automatique :</entry>
+	<entry key="GENERAL_PANEL_BUG_MESSAGE_LABEL">Envoyer un rapport de bugs </entry>
+	<entry key="GENERAL_PANEL_GARBAGE_COLLECTOR_LABEL">Appler le garbage collector :</entry>
+	<entry key="GENERAL_PANEL_SPLASH_SREEN_LABEL">Affichage Splash Screen</entry>
+	<entry key="GENERAL_PANEL_LANGUAGE_PANEL_NAME">Langue</entry>
+	<entry key="GENERAL_PANEL_LANGUAGE_LABEL">Choix de la langue :</entry>
+	<entry key="GENERAL_PANEL_KEYS_PANEL_NAME">Raccourcis</entry>
+	<entry key="GENERAL_PANEL_ZOOM_LABEL">Pas de zoom</entry>
+	<entry key="TASK_PANEL_NAME_PANEL_NAME">Nom</entry>
+	<entry key="TASK_PANEL_NAME_FONT_NAME_LABEL">Police :</entry>
+	<entry key="TASK_PANEL_NAME_FONT_SIZE_LABEL">Taille :</entry>
+	<entry key="TASK_PANEL_NAME_FONT_STYLE_LABEL">Style :</entry>
+	<entry key="TASK_PANEL_NAME_FONT_COLOR_LABEL">Couleur :</entry>
+	<entry key="TASK_PANEL_NAME_BACKGROUND_COLOR_LABEL">Couleur d'arrière plan :    </entry>
+	<entry key="TASK_PANEL_DECOMPOSITION_PANEL_NAME">Décomposition</entry>
+	<entry key="TASK_PANEL_MODEL_PANEL_NAME">Style Prédéfini</entry>
+	<entry key="TASK_PANEL_MODEL_CHOICE_LABEL">Choix :</entry>
+	<entry key="TASK_PANEL_MODEL_SAVE_BUTTON_LABEL">Sauvegarde</entry>
+	<entry key="TASK_PANEL_MODEL_LOAD_BUTTON_LABEL">Chargement</entry>
+	<entry key="TASK_PANEL_OPTIONS_PANEL_NAME">Options</entry>
+	<entry key="TASK_PANEL_OPTIONS_TRIGGER_EVENT_LABEL">Montrer la caractéristique déclenchement dans la vue
+		d'une tâche</entry>
+	<entry key="TASK_PANEL_OPTIONS_ACTOR_TASK_LABEL">Montrer la caractéristique acteur dans la vue d'une
+		tâche</entry>
+	<entry key="TASK_PANEL_PREVIEW_PANEL_NAME">Aperçu</entry>
+	<entry key="TASK_TREE_PANEL_LAYOUT_PANEL_NAME">Agencement</entry>
+	<entry key="TASK_TREE_PANEL_LAYOUT_ORIENTATION_LABEL">Orientation de l'arbre</entry>
+	<entry key="TASK_TREE_PANEL_LAYOUT_DISTANCE_LABEL">Distance entre les noeuds</entry>
+	<entry key="TASK_TREE_PANEL_LAYOUT_SELECTION_COLOR_LABEL">Couleur de sélection d'une tâche</entry>
+	<entry key="TASK_TREE_PANEL_LAYOUT_LEVEL_DISTANCE_LABEL">Hauteur des liens</entry>
+	<entry key="TASK_TREE_PANEL_OPTIONS_PANEL_NAME">Options</entry>
+	<entry key="TASK_TREE_PANEL_OPTIONS_ORTHOGONAL_EDGE_LABEL">Orthogonalité des liens</entry>
+
+
+
+	<entry key="COLOR_NO_COLOR">Aucune</entry>
+	<entry key="COLOR_BLUE">Bleu</entry>
+	<entry key="COLOR_GREEN">Vert</entry>
+	<entry key="COLOR_RED">Rouge</entry>
+	<entry key="COLOR_BLACK">Noir</entry>
+	<entry key="COLOR_YELLOW">Jaune</entry>
+	<entry key="COLOR_WHITE">Blanc</entry>
+
+
+
+	<entry key="ARIAL_FONT">Arial</entry>
+	<entry key="TIMES_FONT">Times New Roman</entry>
+	<entry key="TAHOMA_FONT">Tahoma</entry>
+
+
+
+	<entry key="STYLE_PLAIN">Normal</entry>
+	<entry key="STYLE_BOLD">Gras</entry>
+	<entry key="STYLE_ITALIC">Italique</entry>
+	<entry key="STYLE_BOLD_ITALIC">Gras+Italique</entry>
+
+
+
+	<entry key="FRENCH_LANGUAGE">Français</entry>
+	<entry key="ENGLISH_LANGUAGE">Anglais</entry>
+	<entry key="FRENCH_LANGUAGE_INFO">Français</entry>
+	<entry key="ENGLISH_LANGUAGE_INFO">English</entry>
+
+
+	<entry key="YES_MESSAGE">Oui</entry>
+	<entry key="NO_MESSAGE">Non</entry>
+	<entry key="ALL_MESSAGE">Tout</entry>
+	<entry key="VALID_MESSAGE">Valider</entry>
+	<entry key="APPLY_MESSAGE">Appliquer</entry>
+	<entry key="CANCEL_MESSAGE">Annuler</entry>
+	<entry key="SAVE_AS_MESSAGE">Enregistrer sous ...</entry>
+	<entry key="OVERWRITE_FILE_MESSAGE">Remplacer fichier existant ?</entry>
+	<entry key="GO_BACK_MESSAGE">Fermer</entry>
+	<entry key="CONFIRMATION_DIALOG_MESSAGE">Message de confirmation</entry>
+	<entry key="BROWSE_DIRECTORY_OR_FILE_MESSAGE">Parcourir</entry>
+	<entry key="REMOVE_MESSAGE">Supprimer</entry>
+
+
+
+	<entry key="FILE_MENU_MESSAGE">Fichier</entry>
+	<entry key="EDITING_MENU_MESSAGE">Edition</entry>
+	<entry key="VIEW_MENU_MESSAGE">Visualisation</entry>
+	<entry key="PROJECT_MENU_MESSAGE">Projet</entry>
+	<entry key="HELP_MENU_MESSAGE">Aide</entry>
+	<entry key="TOOLS_MENU_MESSAGE">Outils	</entry>
+	<entry key="NEW_PROJECT_ACTION_MESSAGE">Nouveau projet</entry>
+	<entry key="OPEN_PROJECT_ACTION_MESSAGE">Ouvrir projet</entry>
+	<entry key="SAVE_PROJECT_ACTION_MESSAGE">Enregistrer</entry>
+	<entry key="SAVE_PROJECT_AS_ACTION_MESSAGE">Enregistrer sous ...</entry>
+	<entry key="CLOSE_PROJECT_ACTION_MESSAGE">Fermer</entry>
+	<entry key="PRINT_PROJECT_ACTION_MESSAGE">Imprimer</entry>
+	<entry key="EXIT_ACTION_MESSAGE">Quitter</entry>
+	<entry key="HIDE_GRID_ACTION_MESSAGE">Cacher grille</entry>
+	<entry key="SHOW_GRID_ACTION_MESSAGE">Montrer grille</entry>
+	<entry key="CHOICE_GRID_SIZE_MESSAGE">Choisir taille de la grille</entry>
+	<entry key="HIDE_RULE_ACTION_MESSAGE">Cacher règle</entry>
+	<entry key="SHOW_RULE_ACTION_MESSAGE">Montrer règle</entry>
+	<entry key="PREFERENCE_ACTION_MESSAGE">Préférences...</entry>
+	<entry key="DEBUG_INFO_ACTION_MESSAGE">Info de développement</entry>
+	<entry key="ABOUT_ACTION_MESSAGE">A Propos ...</entry>
+	<entry key="HELP_MODEL_ACTION_MESSAGE">Aide sur K-MAD</entry>
+	<entry key="HELP_TOOL_ACTION_MESSAGE">Aide sur K-MADe</entry>
+	<entry key="HISTORY_ACTION_MESSAGE">Histoire de K-MADe</entry>
+	<entry key="UNDO_ACTION_MESSAGE">Annuler</entry>
+	<entry key="REDO_ACTION_MESSAGE">Rétablir</entry>
+	<entry key="CUT_ACTION_MESSAGE">Couper</entry>
+	<entry key="COPY_ACTION_MESSAGE">Copier</entry>
+	<entry key="PASTE_ACTION_MESSAGE">Coller</entry>
+	<entry key="SHOW_CLIPBOARD_MESSAGE">Afficher fenêtre presse-papier</entry>
+	<entry key="SEARCH_ACTION_MESSAGE">Recherche avancée ...</entry>
+	<entry key="SIMULATION_ACTION_MESSAGE">Simulation</entry>
+	<entry key="INTERROGATION_ACTION_MESSAGE">Statistiques</entry>
+	<entry key="CHECK_COHERENCE_ACTION_MESSAGE">Vérification grammaire</entry>
+	<entry key="ENTITY_LIST_ACTION_MESSAGE">Liste des entités de l'état du monde</entry>
+	<entry key="VERSION_MESSAGE">Version</entry>
+	<entry key="MESSAGES_MESSAGE">Messages</entry>
+	<entry key="ERREURS_MESSAGE">Erreurs</entry>
+	<entry key="FIND_REPLACE_ACTION_MESSAGE">Chercher/Remplacer</entry>
+	<entry key="GRID_SIZE_ACTION_MESSAGE">Taille de la grille (compris entre 1 et 40)</entry>
+	<entry key="INPUT_GRID_SIZE_MESSAGE">Choix de la taille de la grille</entry>
+	<entry key="INPUT_GRID_SIZE_ERROR_MESSAGE">Valeur de la grille non conforme</entry>
+	<entry key="NEW_UNKNOWN_TASK_ACTION_MESSAGE">Nouvelle tâche inconnue</entry>
+	<entry key="NEW_ABSTRACT_TASK_ACTION_MESSAGE">Nouvelle tâche abstraite</entry>
+	<entry key="NEW_INTERACTION_TASK_ACTION_MESSAGE">Nouvelle tâche interaction</entry>
+	<entry key="NEW_FEEDBACK_TASK_ACTION_MESSAGE">Nouvelle tâche système</entry>
+	<entry key="NEW_USER_TASK_ACTION_MESSAGE">Nouvelle tâche utilisateur</entry>
+	<entry key="EDIT_TASK_ACTION_MESSAGE">Edition de la tâche</entry>
+	<entry key="COMPLETE_EDIT_TASK_ACTION_MESSAGE">Edition complète de la tâche</entry>
+
+	<entry key="COMPLETE_EDIT_TASK_ACTION_MESSAGE_PIE_MENU">Edition complète</entry>
+
+	<entry key="UNKNOWN_TASK_MESSAGE">Inconnue</entry>
+	<entry key="ABSTRACT_TASK_MESSAGE">Abstraite</entry>
+	<entry key="INTERACTION_TASK_MESSAGE">Interaction</entry>
+	<entry key="FEEDBACK_TASK_MESSAGE">Systeme</entry>
+	<entry key="USER_TASK_MESSAGE">Utilisateur</entry>
+
+	<entry key="DELETE_CELL_ACTION_MESSAGE">Supprimer élément(s) sélectionné(s)</entry>
+	<entry key="DELETE_CELL_ACTION_MESSAGE_PIE_MENU">Supprimer</entry>
+	<entry key="PREVIEW_WINDOW_ACTION_MESSAGE">Afficher fenêtre aperçue</entry>
+	<entry key="ZOOM_IN_ACTION_MESSAGE">Agrandissement du modèle de tâches (+)</entry>
+	<entry key="ZOOM_OUT_ACTION_MESSAGE">Dégrossissement du modèle de tâches (-)</entry>
+	<entry key="ZOOM_DEFAULT_ACTION_MESSAGE">Taille du modèle de tâches par défaut</entry>
+	<entry key="ZOOM_GLOBAL_ACTION_MESSAGE">Vue globale du modèle de tâches</entry>
+	<entry key="MAGNET_OPTION_ACTION_MESSAGE">Activer/Désactiver l'aimant</entry>
+	<entry key="JUSTIFY_OPTION_ACTION_MESSAGE">Respatialisation d'une tâche</entry>
+	<entry key="SAME_EXECUTANT_MESSAGE">Uniformisation des sous exécutants   </entry>
+	<entry key="VISIBLE_LABEL_ACTION_MESSAGE">Activer/Désactiver l'affichage des libellés</entry>
+	<entry key="COLOR_LABEL_ACTION_MESSAGE">Activer/Désactiver la couleur des libellés</entry>
+
+
+
+	<entry key="TREE_TASK_PRINT_TITLE_MESSAGE">Arbre de tâches</entry>
+	<entry key="USER_CARDS_PRINT_TITLE_MESSAGE">Fiches d'analyse</entry>
+	<entry key="OBJECTS_PRINT_TITLE_MESSAGE">Objets du monde</entry>
+	<entry key="PRINT_ACTION_MESSAGE">Impression</entry>
+	<entry key="LAYOUT_PRINT_ACTION_MESSAGE">Mise en page</entry>
+	<entry key="PRINT_PREVIEW_ACTION_MESSAGE">Aperçu avant impression</entry>
+	<entry key="PDF_EXPORT_ACTION_MESSAGE">Exporter en PDF</entry>
+	<entry key="EPS_EXPORT_ACTION_MESSAGE">Exporter en EPS</entry>
+	<entry key="PORTRAIT_ACTION_MESSAGE">Portrait</entry>
+	<entry key="LANDSCAPE_ACTION_MESSAGE">Paysage</entry>
+	<entry key="SCALE_ACTION_MESSAGE">Echelle</entry>
+	<entry key="INPUT_SCALE_ACTION_MESSAGE">Choix de la valeur de l'échelle</entry>
+	<entry key="PREVIEW_ZOOM_ACTION_MESSAGE">Agrandissement/Dégrossissement de l'aperçu</entry>
+	<entry key="SAVE_HISTORIC_ACTION_MESSAGE">Sauver historique</entry>
+	<entry key="CLEAR_HISTORIC_ACTION_MESSAGE">Effacer historique</entry>
+
+
+
+	<entry key="PRINT_SCALE_ADAPT_MESSAGE">Adapter au modèle</entry>
+	<entry key="PRINT_SCALE_PERSONALIZE_MESSAGE">Personnaliser...</entry>
+	<entry key="RESET_ACTION_MESSAGE">Reset</entry>
+	<entry key="CONCRETE_OBJECTS_LIST_MESSAGE">Liste Objets</entry>
+	<entry key="EDITOR_PRE_TITLE_NAME">Editeur Precondition</entry>
+	<entry key="EDITOR_POST_TITLE_NAME">Editeur Action</entry>
+	<entry key="EDITOR_ITER_TITLE_NAME">Editeur Iteration</entry>
+	<entry key="CAUSE_MESSAGE"> CAUSE</entry>
+	<entry key="VALUE_MESSAGE"> RESULTAT</entry>
+	<entry key="CHECK_ACTION_MESSAGE">Vérification de l'expression</entry>
+	<entry key="EVALUATE_ACTION_MESSAGE">Evaluation de l'expression</entry>
+	<entry key="STRING_TO_INTEGER">Erreur : impossible de transformer le texte en entier</entry>
+	<entry key="STRING_TO_NUMBER">Erreur : impossible de transformer le texte en nombre</entry>
+	<entry key="NO_EXPRESSION_MESSAGE">Aucune expression</entry>
+	<entry key="NO_FIRST_EXPRESSION_MESSAGE">Expression non booléenne ne peut être utilisée toute
+		seule</entry>
+	<entry key="MISSING_USER_VALUE_MESSAGE">Valeur(s) utilisateur manquante(s)</entry>
+	<entry key="PARSER_PROBLEM_MESSAGE">Problème dans le module d'analyse grammaticale</entry>
+	<entry key="LEXICAL_ERROR_MESSAGE">Erreur lexicale</entry>
+	<entry key="SYNTAXICAL_ERROR_MESSAGE">Erreur syntaxique</entry>
+	<entry key="SEMANTICAL_ERROR_MESSAGE">Erreur sémantique</entry>
+	<entry key="LINE_MESSAGE">ligne</entry>
+	<entry key="COLUMN_MESSAGE">colonne</entry>
+	<entry key="ENCOUNTERED_CHAR_MESSAGE">caractère rencontré</entry>
+	<entry key="ENCOUNTERED_TOKEN_MESSAGE">texte rencontré</entry>
+	<entry key="CHECK_ALL_PRECONDITIONS">Vérification des préconditions ...</entry>
+	<entry key="PRECONDITION_OK_MESSAGE">précondition correcte</entry>
+	<entry key="PRECONDITION_NO_OK_MESSAGE">précondition non correcte</entry>
+	<entry key="PRECONDITION_EVAL_OK_MESSAGE">précondition évaluée</entry>
+	<entry key="PRECONDITION_EVAL_NO_OK_MESSAGE">précondition non évaluée</entry>
+	<entry key="PRECONDITION_OF_TASK_OK_MESSAGE">Précondition correcte pour la tâche</entry>
+	<entry key="PRECONDITION_OF_TASK_NO_OK_MESSAGE">Précondition incorrecte pour la tâche</entry>
+	<entry key="PRECONDITION_ERROR_MESSAGE">Erreur sur la précondition</entry>
+	<entry key="NOT_YET_CHECKED_PRECONDITION_MESSAGE">Précondition non vérifiée</entry>
+	<entry key="PRECONDITION_CHECKED_AND_BUILT_MESSAGE">Vérification et création des préconditions terminées</entry>
+	<entry key="PRECONDITION_PROGRESSBAR_MESSAGE">Vérification et construction des préconditions</entry>
+	<entry key="EXIT_WITHOUT_SAVE_MESSAGE">Quitter en modifiant l'état du modèle. L'historique
+		des modifications sera initialisé</entry>
+	<entry key="CHECK_ALL_EFFETSDEBORDS">Vérification des actions ...</entry>
+	<entry key="EFFETSDEBORD_OK_MESSAGE">Action correcte</entry>
+	<entry key="EFFETSDEBORD_NO_OK_MESSAGE">Action non correcte</entry>
+	<entry key="EFFETSDEBORD_EVAL_OK_MESSAGE">Action évaluée et modèle K-MAD modifié</entry>
+	<entry key="EFFETSDEBORD_EVAL_NO_OK_MESSAGE">Action non évaluée</entry>
+	<entry key="EFFETSDEBORD_OF_TASK_OK_MESSAGE">Action correcte pour la tâche</entry>
+	<entry key="EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE">Action incorrecte pour la tâche</entry>
+	<entry key="EFFETSDEBORD_ERROR_MESSAGE">Erreur sur l'action</entry>
+	<entry key="NOT_YET_CHECKED_EFFETSDEBORD_MESSAGE">Action non vérifiée</entry>
+	<entry key="EFFETSDEBORD_CHECKED_AND_BUILT_MESSAGE">Vérification et création des actions terminées</entry>
+	<entry key="EFFETSDEBORD_PROGRESSBAR_MESSAGE">Vérification et construction des actions</entry>
+	<entry key="EFFETSDEBORD_CONCRETE_OBJECT_TITLE_MESSAGE">Objet Concret</entry>
+	<entry key="EFFETSDEBORD_HISTORY_TITLE_MESSAGE">Historique de K-MAD</entry>
+	<entry key="EFFETSDEBORD_LOAD_STATE_MESSAGE">Charger</entry>
+	<entry key="NO_SELECTED_HISTORIC_MESSAGE">Historique non sélectionné</entry>
+	<entry key="HISTORIC_LOADED_MESSAGE">Historique chargée</entry>
+	<entry key="HISTORIC_NO_LOADED_MESSAGE">Historique non chargée</entry>
+	<entry key="CHECK_ALL_ITERATIONS">Vérification des itérations ...</entry>
+	<entry key="ITERATION_OK_MESSAGE">itération correcte</entry>
+	<entry key="ITERATION_NO_OK_MESSAGE">itération non correcte</entry>
+	<entry key="ITERATION_EVAL_OK_MESSAGE">itération évaluée</entry>
+	<entry key="ITERATION_EVAL_NO_OK_MESSAGE">itération non évaluée</entry>
+	<entry key="NOT_YET_CHECKED_ITERATION_MESSAGE">Itération non vérifiée</entry>
+	<entry key="STOP_LOOP_ITERATION_MESSAGE">Itération terminée</entry>
+	<entry key="CONTINUE_LOOP_ITERATION_MESSAGE">Itération en cours</entry>
+	<entry key="ITERATION_MESSAGE">ITERATION</entry>
+	<entry key="ITERATION_ERROR_MESSAGE">Erreur sur l'itération</entry>
+	<entry key="ITERATION_OF_TASK_OK_MESSAGE">Itération correcte pour la tâche</entry>
+	<entry key="ITERATION_OF_TASK_NO_OK_MESSAGE">Itération incorrecte pour la tâche</entry>
+	<entry key="ITERATION_CHECKED_AND_BUILT_MESSAGE">Vérification et création des itérations terminées</entry>
+	<entry key="ITERATION_PROGRESSBAR_MESSAGE">Vérification et construction des itérations</entry>
+
+
+
+	<entry key="CLEAR_EXPRESSION_MESSAGE">Effacer</entry>
+	<entry key="CHECK_VALIDATE_MESSAGE">Vérifier</entry>
+	<entry key="EVALUATE_FORCE1_MESSAGE">Evaluer</entry>
+	<entry key="PRECONDITION_EDITION_MESSAGE">Edition de la précondition</entry>
+	<entry key="EFFETSDEBORD_EDITION_MESSAGE">Edition d'action</entry>
+	<entry key="ITERATION_EDITION_MESSAGE">Edition de l'itération</entry>
+	<entry key="PRECONDITION_TEXTUEL_EDITION_MESSAGE">Edition textuelle de la précondition</entry>
+	<entry key="EFFETSDEBORD_TEXTUEL_EDITION_MESSAGE">Edition textuelle d'action</entry>
+	<entry key="ITERATION_TEXTUEL_EDITION_MESSAGE">Edition textuelle de l'itération</entry>
+	<entry key="LITTERAUX_TITLE_MESSAGE">Littéraux</entry>
+	<entry key="OPERATORS_TITLE_MESSAGE">Opérateurs</entry>
+	<entry key="FUNCTIONS_TITLE_MESSAGE">Fonctions</entry>
+	<entry key="ITERATORS_TITLE_MESSAGE">Itérateurs</entry>
+	<entry key="LOOP_VARIANT_MESSAGE">Variant Boucle</entry>
+
+
+
+	<entry key="WRITE_TXT_FILE_OK">Enregistrement du fichier texte réussi : </entry>
+	<entry key="WRITE_TXT_FILE_ERROR">Erreur d'enregistrement du fichier texte</entry>
+	<entry key="SAVE_CANCELLED_TEXT_FILECHOOSER_NAME">Enregistrement du fichier texte annulé</entry>
+	<entry key="SEARCH_NAME_NAME">Nom de la Tâche</entry>
+	<entry key="WHOLE_TASK_NAME_OPTION_REPLACE_MESSAGE">Nom complet</entry>
+	<entry key="SEARCH_FAC_NAME">Tâche optionnelle</entry>
+	<entry key="SEARCH_INT_NAME">Tâche interruptible</entry>
+	<entry key="EXTENSION_TEXT_FILTER_SEARCH_NAME">Fichier texte (*.txt)</entry>
+	<entry key="SEARCH_MESSAGE_TITLE">Outil de recherche ...</entry>
+	<entry key="FIND_MESSAGE">Rechercher</entry>
+	<entry key="REPLACE_MESSAGE">Remplacer avec</entry>
+	<entry key="DIRECTION_FIND_MESSAGE">Direction</entry>
+	<entry key="FORWARD_DIRECTION_FIND_MESSAGE">En Avant</entry>
+	<entry key="BACKWARD_DIRECTION_FIND_MESSAGE">En Arrière</entry>
+	<entry key="SCOPE_FIND_MESSAGE">Etendu</entry>
+	<entry key="ALL_FIND_MESSAGE">Toutes</entry>
+	<entry key="SELECTION_FIND_MESSAGE">Sélection</entry>
+	<entry key="OPTION_FIND_MESSAGE">Options</entry>
+	<entry key="CASE_SENSITIVE_OPTIONS_FIND_MESSAGE">Sensible à la case</entry>
+	<entry key="WHOLE_TASK_NAME_OPTIONS_FIND_MESSAGE">Nom de tâche complet</entry>
+	<entry key="REGULAR_EXPRESSIONS_OPTIONS_FIND_MESSAGE">Expressions régulières</entry>
+	<entry key="SEARCH_RESULT_FIND_MESSAGE">Résultat Recherche</entry>
+	<entry key="FIND_ACTION_FIND_MESSAGE">Chercher</entry>
+	<entry key="SAVE_OCCURENCES_ACTION_FIND_MESSAGE">Enregistrer Occurences</entry>
+	<entry key="REPLACE_NEXT_ACTION_FIND_MESSAGE">Remplacer/Suivant</entry>
+	<entry key="REPLACE_PREVIOUS_ACTION_FIND_MESSAGE">Remplacer/Précédent</entry>
+	<entry key="REPLACE_ACTION_FIND_MESSAGE">Remplacer</entry>
+	<entry key="REPLACE_ALL_ACTION_FIND_MESSAGE">Remplacer tout</entry>
+	<entry key="TASK_NOT_FOUNDED_ACCORDING_FIND_CRITERIAS">Tâche non trouvée</entry>
+	<entry key="COUNT_TASKS_FOUNDED_MESSAGE">Nombre de tâches</entry>
+
+
+
+	<entry key="SIMULATION_TITLE_MESSAGE">Simulation</entry>
+	<entry key="ERROR_ITERATION_VIEW_MESSAGE">Erreur</entry>
+	<entry key="PREDICAT_ITERATION_VIEW_MESSAGE">Prédicat</entry>
+	<entry key="USER_VALUE_ITERATION_VIEW_MESSAGE">Val. Utilisateur</entry>
+	<entry key="SCENARIO_FILTER_NAME">Fichier de scénario</entry>
+	<entry key="ACTIONS_SIMULATION_MESSAGE">Actions</entry>
+	<entry key="EDIT_USER_VALUES_SIMULATION_MESSAGE">Editer Valeurs Utilisateur</entry>
+	<entry key="RECORD_SCENARIO_MESSAGE">Enregistrer scénario </entry>
+	<entry key="OPEN_CANCELLED_SCENARIO_FILECHOOSER_NAME">Chargement d'un scénario annulé</entry>
+	<entry key="SAVE_CANCELLED_SCENARIO_FILECHOOSER_NAME">Enregistrement d'un scénario annulé</entry>
+	<entry key="SUCCEEDED_SAVE_SCENARIO_MESSAGE">Enregistrement du scénario réussi</entry>
+	<entry key="NO_SUCCEEDED_SAVE_SCENARIO_MESSAGE">Enregistrement du scénario échoué</entry>
+	<entry key="AUTHORIZED_EXECUTER_USER_MESSAGE">Autorisée</entry>
+	<entry key="NO_AUTHORIZED_EXECUTER_USER_MESSAGE">Non Autorisée</entry>
+	<entry key="DISABLED_CONSTRAINT_MESSAGE">Désactivée</entry>
+	<entry key="EVENT_TITLE_MESSAGE">Evénements</entry>
+	<entry key="NO_CONCRETE_OBJECT">Aucun object concret courant</entry>
+	<entry key="NO_FIRING_EVENT_MESSAGE">Aucun Evénement Provoqué</entry>
+	<entry key="NO_FIRING_EVENT_TINY_MESSAGE">Aucun Evénement</entry>
+	<entry key="FIRABLE_EVENT_STATE_MESSAGE">Déclenchable</entry>
+	<entry key="NO_FIRABLE_EVENT_STATE_MESSAGE">Non Déclenchable</entry>
+	<entry key="NO_SELECTED_ACTION_FOR_CONSTRAINTS_MESSAGE">Aucune action "exécuter" sélectionnée</entry>
+	<entry key="NO_SELECTED_SCENARIO_ACTION_FOR_CONSTRAINTS_MESSAGE">Aucune action "exécuter" du scénario sélectionnée</entry>
+	<entry key="CONSTRAINTS_TITLE_MESSAGE">Contraintes</entry>
+	<entry key="SOURCE_TASK_EVENT_MESSAGE">Tâche</entry>
+	<entry key="NO_USER_MESSAGE">Aucun Utilisateur</entry>
+	<entry key="EXECUTING_USER_TITLE_MESSAGE">Utilisateur</entry>
+	<entry key="CONSTRAINTS_NAME_COLUMN_NAME">Nom</entry>
+	<entry key="CONSTRAINTS_VALEUR_COLUMN_NAME">Valeur</entry>
+	<entry key="CONSTRAINTS_STATE_COLUMN_NAME">Etat</entry>
+	<entry key="PRECONDITION_CONSTRAINTS_RESPECTED_STATE_MESSAGE">Respectée</entry>
+	<entry key="PRECONDITION_CONSTRAINTS_NO_RESPECTED_STATE_MESSAGE">Non Respectée</entry>
+	<entry key="PRECONDITION_CONSTRAINTS_ERROR_STATE_MESSAGE">Erreur</entry>
+	<entry key="PRECONDITION_CONSTRAINTS_NEED_VALUES_STATE_MESSAGE">Besoin Valeur(s)</entry>
+	<entry key="EFFETSDEBORD_EXECUTED_STATE_MESSAGE">Exécutée</entry>
+	<entry key="EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE">Non Exécutée</entry>
+	<entry key="USER_VALUES_TITLE">Editeur des Valeurs Utilisateurs</entry>
+	<entry key="PRECONDITION_USER_EDITION_MESSAGE">Valeurs utilisateur de la précondition</entry>
+	<entry key="EFFETSDEBORD_USER_EDITION_MESSAGE">Valeurs utilisateur d'action</entry>
+	<entry key="ITERATION_USER_EDITION_MESSAGE">Valeurs utilisateur de l'itération</entry>
+	<entry key="TRIGGER_VALID_TASK_MESSAGE">Déclencher</entry>
+	<entry key="NO_TRIGGER_CANCEL_TASK_MESSAGE">Annuler Déclenchement</entry>
+	<entry key="EXECUTE_TASK_TRAITEMENT_MESSAGE">Traitement de la tâche</entry>
+	<entry key="EXECUTION_CONSTRAINT_MESSAGE">Contraintes d'exécutation</entry>
+	<entry key="USER_EXECUTION_CONSTRAINT_MESSAGE">Utilisateur</entry>
+	<entry key="CAN_EXECUTE_TASK_MESSAGE">peut exécuter la tâche</entry>
+	<entry key="CAN_NOT_EXECUTE_TASK_MESSAGE">ne peut pas exécuter la tâche</entry>
+	<entry key="EVENT_TRIGGER_CONSTRAINT_MESSAGE">Evénement</entry>
+	<entry key="NO_TRIGGER_EVENT_CONSTRAINT_MESSAGE">Aucun d'événement déclencheur</entry>
+	<entry key="CAN_TRIGGER_TASK_MESSAGE">déclenche la tâche</entry>
+	<entry key="CAN_NOT_TRIGGER_CONSTRAINT_MESSAGE">non généré et ne peut déclencher la tâche</entry>
+	<entry key="PRECONDITION_CONSTRAINT_MESSAGE">Précondition</entry>
+	<entry key="ACTION_CONSTRAINT_MESSAGE">Effets de bord</entry>
+	<entry key="GENERATE_EVENTS_CONSTRAINT_MESSAGE">Génération Evénements</entry>
+	<entry key="NO_GENERATED_EVENTS_CONSTRAINT_MESSAGE">Pas d'événement généré</entry>
+	<entry key="EFFETSDEBORD_CONSTRAINT_MESSAGE">Actions</entry>
+	<entry key="USER_VALUES_MISSING_OR_WRONG_MESSAGE">Valeur(s) utilisateur manquante(s) ou erronée(s)</entry>
+	<entry key="CONCRETE_OBJECT_NO_SELECTED_MESSAGE">Objet(s) concret(s) non sélectionné(s)</entry>
+	<entry key="USER_VALUES_PROBLEM_MESSAGE">Problème Valeurs Utilisateur</entry>
+	<entry key="FINISHED_SCENARIO_PROBLEM_MESSAGE">Scénario Terminée</entry>
+	<entry key="FINISHED_SIMULATION_PROBLEM_MESSAGE">Simulation Terminée</entry>
+	<entry key="FINISHED_SCENARIO_AND_SIMULATION_PROBLEM_MESSAGE">Simulation et scénario Terminés</entry>
+	<entry key="SELECT_TASK_TO_REPLAY_MESSAGE">Veuillez selectionner une tache</entry>
+	<entry key="ITERATION_FINISH_NO_ACTION">Itération términée, aucun effet de bord n'est exécuté</entry>
+
+
+	<entry key="EXECUTE_ACTION_SIMULATION_MESSAGE">Exécuter</entry>
+	<entry key="PASS_ACTION_SIMULATION_MESSAGE">Passer</entry>
+	<entry key="SUSPEND_ACTION_SIMULATION_MESSAGE">Interrompre</entry>
+	<entry key="RESUME_ACTION_SIMULATION_MESSAGE">Reprendre</entry>
+	<entry key="NO_RESUME_ACTION_SIMULATION_MESSAGE">Abandonner</entry>
+
+
+
+	<entry key="ACTIVE_STATE_TASK_SIMULATION_MESSAGE">Active</entry>
+	<entry key="ACTIVE_ITERATION_STATE_TASK_SIMULATION_MESSAGE">ActiveIte</entry>
+	<entry key="FINISHED_STATE_TASK_SIMULATION_MESSAGE">Terminée</entry>
+	<entry key="PASSIVE_STATE_TASK_SIMULATION_MESSAGE">Passive</entry>
+	<entry key="NO_ACCESSIBLE_STATE_TASK_SIMULATION_MESSAGE">Inactive</entry>
+	<entry key="PASSED_STATE_TASK_SIMULATION_MESSAGE">Passée</entry>
+	<entry key="SUSPENDED_STATE_TASK_SIMULATION_MESSAGE">Suspendue</entry>
+	<entry key="NO_RESUMED_STATE_TASK_SIMULATION_MESSAGE">Abandonnée</entry>
+
+
+
+	<entry key="RECORD_TITLE_MESSAGE">Enregistrement</entry>
+	<entry key="RECORD_BUILDING_SCENARION_MESSAGE">Scénario Courant</entry>
+	<entry key="RECORD_AVAILABLE_ACTIONABLE_MESSAGE">Actions Disponibles</entry>
+	<entry key="FINISHED_RECORD_SIMULATION_MESSAGE">Simulation du modèle de tâches K-MAD terminée :
+		scénario disponible ...</entry>
+	<entry key="NO_SELECTED_TASK_BEFORE_RECORD_SIMULATION_MESSAGE">Veuillez selectionner une tâche</entry>
+
+
+	<entry key="REPLAY_TITLE_MESSAGE">Rejeu</entry>
+	<entry key="REPLAY_SLOW_TEMPO">Lent</entry>
+	<entry key="REPLAY_MODERATE_TEMPO">Modéré</entry>
+	<entry key="REPLAY_SPEED_TEMPO">Rapide</entry>
+	<entry key="SCENARIO_REPLAY_MESSAGE">Scénario à Rejouer</entry>
+	<entry key="REPLAY_OPTIONS_MESSAGE">Options de rejeu</entry>
+	<entry key="REPLAY_KEEP_USER_VALUES_MESSAGE">Conserver valeurs</entry>
+	<entry key="REPLAY_TEMPO_MESSAGE">Tempo</entry>
+	<entry key="NO_ROOT_TASK_PROBLEM_MESSAGE">Pas de tâche racine</entry>
+	<entry key="NO_FOUNDED_TASK_TO_REPLAY_PROBLEM_MESSAGE">Tâche non trouvée</entry>
+	<entry key="CAN_NOT_EXECUTE_TASK_TO_REPLAY_PROBLEM_MESSAGE">Ne peut exécuter cette tâche tout de suite</entry>
+
+	<entry key="CONFIG_ERROR_DOM">Erreur de configuration du parseur DOM</entry>
+	<entry key="CALL_NEW_DOCUMENT_BUILDER">lors de l'appel à  fabrique.newDocumentBuilder()</entry>
+	<entry key="SIMULATION_PARSING_ERROR">Erreur lors du parsing du document</entry>
+	<entry key="CALL_CONSTRUCTEUR_PARSE">lors de l'appel à  construteur.parse(xml)</entry>
+	<entry key="SIMULATION_IO_ERROR">Erreur d'entrée/sortie</entry>
+
+
+	<entry key="PROJECT_LEADER_MESSAGE">Responsable du Projet</entry>
+	<entry key="DEVELOPMENT_QUERING_TOOL_MESSAGE">Développement K-MADe et Interrogation K-MAD</entry>
+	<entry key="KMAD_SPECIFY_MESSAGE">Spécification du modèle K-MAD</entry>
+	<entry key="KMAD_ADAPTATOR_MESSAGE">Adaptateur du modèle K-MAD</entry>
+	<entry key="JAVA_GRAPHIC_LIBRARIES_MESSAGE">Bibliothèques Utilisées</entry>
+	<entry key="KMADE_TEAM_MESSAGE">Participants</entry>
+	<entry key="JAVA_LIBRARIES_MESSAGE">Bibliothèques</entry>
+
+	<!-- Event -->
+	<entry key="EVENT_TRIGGER">Evénement déclenché</entry>
+	<entry key="EVENT_ENABLE">Evénement disponible</entry>
+
+
+	<entry key="COHERENCE_INTRO_ERROR">L'outil de cohérence a détecté</entry>
+	<entry key="COHERENCE_ONE_ERROR">erreur</entry>
+	<entry key="COHERENCE_SOME_ERROR">erreurs</entry>
+	<entry key="COHERENCE_INTER">et</entry>
+	<entry key="COHERENCE_ONE_WARNING">warning</entry>
+	<entry key="COHERENCE_SOME_WARNING">warnings</entry>
+	<entry key="COHERENCE_VERIFICATION_TITLE">Simulation refusée ...</entry>
+
+
+	<entry key="NO_ALONE_MESSAGE_PROBLEM">Pas de tâche seule</entry>
+	<entry key="PRECONDITION_EXPRESSION_MESSAGE_PROBLEM">Problème dans l'expression de la précondition</entry>
+	<entry key="EFFETSDEBORD_EXPRESSION_MESSAGE_PROBLEM">Problème dans l'expression d'action</entry>
+	<entry key="ITERATION_EXPRESSION_MESSAGE_PROBLEM">Problème dans l'expression de l'itération</entry>
+	<entry key="NO_ONLY_ONE_SUBTASK_MESSAGE_PROBLEM">Pas de sous tâche unique</entry>
+	<entry key="INVALID_DECOMPOSITION_MESSAGE_PROBLEM">Decomposition invalide</entry>
+	<entry key="NO_DECOMPOSITION_SPECIFIED_MESSAGE_PROBLEM">Décomposition non précisée</entry>
+	<entry key="TASK_HAS_NO_NAME_MESSAGE_PROBLEM">Entrez un nom pour la tache</entry>
+	<entry key="ELEMENTARY_DECOMPOSITION_FOR_LEAF_TASK">Décomposition doit être élémentaire pour une tâche
+		feuille</entry>
+	<entry key="NO_EXECUTANT_SPECIFIED_MESSAGE_WARNING">Exécutant non défini</entry>
+	<entry key="SUBTASKS_EXECUTANT_DIFFERENT_MESSAGE_WARNING">Exécutant différent</entry>
+	<entry key="HIERARCHY_TYPE_MESSAGE">Hiérarchie</entry>
+	<entry key="EXPRESSION_TYPE_MESSAGE">Expression</entry>
+	<entry key="TASKS_SPACE_LOCATION_MESSAGE">Espace de tâches</entry>
+	<entry key="PRECONDITION_LOCATION_MESSAGE">Précondition</entry>
+	<entry key="EFFETSDEBORD_LOCATION_MESSAGE">Action</entry>
+	<entry key="ITERATION_LOCATION_MESSAGE">Itération</entry>
+	<entry key="COHERENCE_TITLE_MESSAGE">Vérification grammaire</entry>
+	<entry key="COHERENCE_CHECK_MESSAGE">Vérifier grammaire</entry>
+	<entry key="ERRORS_TITLE_MESSAGE">Erreurs et Avertissements</entry>
+	<entry key="MESSAGE_ERROR_COLUMN_NAME">Message</entry>
+	<entry key="TASK_NAME_COLUMN_NAME">Tâche</entry>
+	<entry key="ERROR_TYPE_COLUMN_NAME">Type</entry>
+	<entry key="LOCATION_COLUMN_NAME">Localisation</entry>
+
+
+
+	<entry key="COUNT_TASK_INTO_TASK_MODELS_MESSAGE">Nombre de tâches dans l'espace de tâches</entry>
+	<entry key="COUNT_USER_TASK_MESSAGE">Nombre d'exécutant de type utilisateur    </entry>
+	<entry key="COUNT_UNKNOWN_TASK_MESSAGE">Nombre d'exécutant de type inconnu</entry>
+	<entry key="COUNT_SYSTEM_TASK_MESSAGE">Nombre d'exécutant de type système</entry>
+	<entry key="COUNT_ABSTRACT_TASK_MESSAGE">Nombre d'exécutant de type abstrait</entry>
+	<entry key="COUNT_INTERACT_TASK_MESSAGE">Nombre d'exécutant de type interaction</entry>
+	<entry key="COUNT_UNKNOWN_DEC_TASK_MESSAGE">Nombre de décomposition de type inconnu</entry>
+	<entry key="COUNT_ENABLING_DEC_TASK_MESSAGE">Nombre de décomposition de type séquenciel</entry>
+	<entry key="COUNT_CHOICE_DEC_TASK_MESSAGE">Nombre de décomposition de type alternatif</entry>
+	<entry key="COUNT_CONCURRENT_DEC_TASK_MESSAGE">Nombre de décomposition de type parallèle</entry>
+	<entry key="COUNT_ELEMENTARY_DEC_TASK_MESSAGE">Nombre de décomposition de type élémentaire</entry>
+	<entry key="COUNT_NO_ORDER_DEC_TASK_MESSAGE">Nombre de décomposition de type pas d'ordre</entry>
+	<entry key="STATISTIC_TITLE">Outil de Statistiques</entry>
+	<entry key="TYPE_STATISTIC_MESSAGE">Type</entry>
+	<entry key="RESULT_STATISTIC_MESSAGE">Resultat</entry>
+	<entry key="REFRESH_STATISTIC_MESSAGE">Mise à jour</entry>
+
+
+
+
+
+	<entry key="ATTRIBUT_NOT_FOUND_EXPRESSION_EXCEPTION_MESSAGE">Type de l'Attribut Non Trouvé</entry>
+	<entry key="GROUP_NOT_FOUND_EXPRESSION_EXCEPTION_MESSAGE">Groupe non trouvé</entry>
+
+	<entry key="NEW_NAME_TASK">Nom de la tâche</entry>
+	<entry key="ROOT_TASK_NAME">Racine   </entry>
+	<entry key="SINGLETON_NAME">Unique</entry>
+	<entry key="STACK_NAME">Pile</entry>
+	<entry key="SET_NAME">Ensemble</entry>
+	<entry key="LIST_NAME">Liste</entry>
+	<entry key="ARRAY_NAME">Tableau</entry>
+	<entry key="BOOLEAN_NAME">Booléen</entry>
+	<entry key="ENUMERATION_NAME">Enumération</entry>
+	<entry key="INTEGER_NAME">Entier</entry>
+	<entry key="NUMBER_NAME">Nombre</entry>
+	<entry key="INTERVALLE_NAME">Intervalle</entry>
+	<entry key="STRING_NAME">Texte</entry>
+	<entry key="UNKNOWN_EXECUTANT_NAME">Inconnu</entry>
+	<entry key="SYSTEM_EXECUTANT_NAME">Système</entry>
+	<entry key="INTERACTION_EXECUTANT_NAME">Interactif</entry>
+	<entry key="USER_EXECUTANT_NAME">Utilisateur</entry>
+	<entry key="ABSTRACT_EXECUTANT_NAME">Abstrait</entry>
+	<entry key="UNKNOWN_IMPORTANCE_NAME">Non déterminée</entry>
+	<entry key="HIGH_IMPORTANCE_NAME">Très importante</entry>
+	<entry key="AVERAGE_IMPORTANCE_NAME">Assez importante</entry>
+	<entry key="LOW_IMPORTANCE_NAME">Peu importante</entry>
+	<entry key="UNKNOWN_FREQUENCY_NAME">Non déterminée</entry>
+	<entry key="HIGH_FREQUENCY_NAME">Elevée</entry>
+	<entry key="AVERAGE_FREQUENCY_NAME">Moyenne</entry>
+	<entry key="LOW_FREQUENCY_NAME">Faible</entry>
+	<entry key="UNKNOWN_MODALITY_NAME">Nom déterminée</entry>
+	<entry key="SENSORI_MODALITY_NAME">Sensori-Motrice</entry>
+	<entry key="COGNITIF_MODALITY_NAME">Cognitive</entry>
+	<entry key="UNKNOWN_EXPERIENCE_NAME">Nom déterminée</entry>
+	<entry key="HIGH_EXPERIENCE_NAME">Expert</entry>
+	<entry key="AVERAGE_EXPERIENCE_NAME">Moyenne</entry>
+	<entry key="LOW_EXPERIENCE_NAME">Novice</entry>
+	<entry key="OPERATOR_NAME">Décomposition</entry>
+	<entry key="ALTERNATIF_LONG_NAME">Alternatif</entry>
+	<entry key="PARALLELE_LONG_NAME">Parallèle</entry>
+	<entry key="SEQUENTIEL_LONG_NAME">Séquentiel</entry>
+	<entry key="NO_ORDER_LONG_NAME">Pas d'ordre</entry>
+	<entry key="LEAF_LONG_NAME">Elémentaire</entry>
+	<entry key="UNKNOWN_LONG_NAME">Inconnu</entry>
+
+
+	<!-- ProtoTask Condition -->
+	<entry key="TRUE">Vrai</entry>
+	<entry key="FALSE">Faux</entry>
+	<entry key="INDETERMINATE">Indeterminée</entry>
+
+	<entry key="REMOVE_ABSTRACT_OBJECT">Suppression de l'objet abstrait</entry>
+	<entry key="REMOVE_ABSTRACT_ATTRIBUT">Suppression de l'attribut abstrait</entry>
+	<entry key="REMOVE_GROUP">Suppression du groupe</entry>
+	<entry key="REMOVE_USER">Suppression de l'utilisateur</entry>
+	<entry key="REMOVE_EVENT">Suppression de l'événement</entry>
+	<entry key="REMOVE_CONCRETE_OBJECT">Suppression de l'objet concret</entry>
+	<entry key="REMOVE_CONCRETE_ATTRIBUT">Suppression de l'attribut concret</entry>
+	<entry key="NO_USED_GROUP_ATTRIBUT">Groupe ou attribut abstrait jamais utilisés</entry>
+	<entry key="NO_USED_ABSTRACT_OBJECT">Objet abstrait jamais utilisé</entry>
+	<entry key="REMOVE_ACTOR">Suppression de l'acteur</entry>
+	<entry key="REMOVE_ACTOR_SYSTEM">Suppression de l'acteur système</entry>
+	<entry key="REMOVE_MATERIEL">Suppression de l'équipement</entry>
+	<entry key="REMOVE_ENUMERATION">Suppression de l'énumération</entry>
+	<entry key="REMOVE_ELEMENT">Suppression de l'élément</entry>
+	<entry key="REMOVE_INTERVALLE">Suppression de l'intervalle</entry>
+	<entry key="REMOVE_LABEL">Suppression du libellé</entry>
+	<entry key="CHANGE_AGREGAT">Modification du type d'ensemble</entry>
+	<entry key="REMOVE_OF_THE_TASK_MESSAGE">de la tâche</entry>
+	<entry key="REMOVE_OF_THE_ABSTRACT_ATTRIBUT_MESSAGE">de l'attribut abstrait</entry>
+	<entry key="REMOVE_OF_THE_ABSTRACT_OBJECT_MESSAGE">de l'objet abstrait</entry>
+	<entry key="GROUP_MESSAGE">Groupe</entry>
+	<entry key="CONCRETE_OBJECT_MESSAGE">OC</entry>
+	<entry key="FROM_GROUP_MESSAGE">du groupe</entry>
+	<entry key="ATTRIBUT_ABSTRAIT">Attribut abstrait</entry>
+	<entry key="NOT_FOUNDED_ERROR">non trouvé</entry>
+	<entry key="INTEGER_STRING_COMPARISON_OPERATOR_ERROR">Conversion de la chaîne de caractères en entier
+		impossible</entry>
+	<entry key="INTEGER_STRINGS_COMPARISON_OPERATOR_ERROR">Conversion des chaînes de caractères en entier
+		impossible</entry>
+	<entry key="COMPARISON_OPERATOR_ERROR">Problème de typage pour la décomposition de
+		comparaison</entry>
+	<entry key="BOOLEAN_IS_NEEDED_ERROR">Fonction nécessite une expression booléenne comme
+		paramètre</entry>
+	<entry key="NO_SAME_ABSTRACT_OBJECT">Les groupes ont des objets abstraits différents</entry>
+	<entry key="TYPAGE_ERROR">Les types sont différents</entry>
+	<entry key="TYPE_NOT_A_NUMBER">Les types doivent être des nombres</entry>
+	<entry key="TYPE_NEED_BOOLEAN">Le type doit être booléen</entry>
+	<entry key="TYPE_PLUS_ASSIGNMENT">Les types doivent être deux nombres ou deux textes</entry>
+
+
+	<entry key="CLASS_LOADER_PROBLEM_MESSAGE">Probleme avec la classe Java</entry>
+	<entry key="ENTITY_NO_EXIST_PROBLEM_MESSAGE">Entity n'existe pas</entry>
+
+
+
+	<entry key="NO_VERSION">Aucune version n'est précisée dans le fichier chargé</entry>
+	<entry key="NEW_SAVE_NEW_FORMAT">Attention toute nouvelle sauvegarde se fera au nouveau
+		format</entry>
+	<entry key="VERSION_USE">Vous utilisez la version : </entry>
+	<entry key="VERSION_FILE">Vous chargez un fichier avec la version : </entry>
+	<entry key="NOT_SAME_VERSION">La version que vous essayez de charger n'est pas la
+		même que celle de l'outil</entry>
+
+
+	<entry key="OBJECTS_VISUALIZATION_WINDOW_NAME">Objets KMADe</entry>
+	<entry key="OPEN_ITEMS_FILE">Charger un fichier d'objets</entry>
+	<entry key="CAN_SAVE_PROJECT">Vous pouvez sauver le projet ou les objets en cours</entry>
+	<entry key="CAN_NOT_SAVE_PROJECT">Vous ne pouvez pas sauver le projet ou les objets en
+		cours</entry>
+
+
+	<entry key="EMPTY_CELL_NAME">VIDE</entry>
+	<entry key="NEW_ABSTRACT_OBJECT_TEXT">Créer un nouvel objet abstrait</entry>
+	<entry key="REMOVE_ABSTRACT_OBJECT_TEXT">Supprimer l'objet abstrait sélectionné</entry>
+	<entry key="NEW_OBJECT_NAME">Nouvel objet</entry>
+	<entry key="NO_SELECTED_OBJECT">Pas d'objet sélectionné</entry>
+	<entry key="GENERALITY">Généralités</entry>
+	<entry key="ATTRIBUTES_NAME">Attributs</entry>
+	<entry key="ADD_ATTRIBUTE">Ajouter un nouvel attribut</entry>
+	<entry key="REMOVE_ATTRIBUTE">Supprimer un attribut</entry>
+
+
+	<entry key="EDIT_CONCRETE_OBJECT_ACTION_MESSAGE">Editer l'objet concret </entry>
+	<entry key="EDIT_OBJECTS_ACTION_MESSAGE">Ouvrir la fenêtre d'édition des objets</entry>
+	<entry key="OBJECT_INSERTION_ERROR">Le groupe n'est pas concordant avec l'objet abstrait
+		duquel est instancié l'objet</entry>
+	<entry key="NEW_GROUP_NAME">Nouveau groupe</entry>
+	<entry key="NEW_STACK_ACTION_MESSAGE">Ajouter une nouvelle pile</entry>
+	<entry key="NEW_SET_ACTION_MESSAGE">Ajouter un nouvel ensemble</entry>
+	<entry key="NEW_ARRAY_ACTION_MESSAGE">Ajouter un nouveau tableau</entry>
+	<entry key="NEW_LIST_ACTION_MESSAGE">Ajouter une nouvelle liste</entry>
+	<entry key="NEW_SINGLETON_ACTION_MESSAGE">Ajouter un nouveau singleton</entry>
+	<entry key="EDIT_GROUP_ACTION_MESSAGE">Editer le groupe</entry>
+	<entry key="EDIT_GROUP_AND_CONCRETE_ACTION_MESSAGE">Editer le groupe ou l'objet concret</entry>
+	<entry key="DELETE_GROUP_AND_CONCRETE_ACTION_MESSAGE">Supprimer le groupe ou l'objet concret</entry>
+
+
+	<!-- Prototyping tool -->
+	<!-- <entry key="PROTOTYPING_TOOL_TITLE_NAME">ProtoTask</entry> -->
+	<entry key="PROTOTYPING_TOOL_TITLE_NAME">ProtoTask</entry>
+	<entry key="PROTOTYPING_TOOL_RESET">Recommencer</entry>
+	<entry key="PROTOTYPING_TOOL_CURRENT_TASK">Tâche en cours</entry>
+	<entry key="PROTOTYPING_TOOL_NAME_TITLE">Nom</entry>
+	<entry key="PROTOTYPING_TOOL_NAME_TOOLTIP">Le nom de la tâche</entry>
+	<entry key="PROTOTYPING_TOOL_EXECUTANT_ABS">La tâche se décompose en plusieurs sous tâches</entry>
+	<entry key="PROTOTYPING_TOOL_EXECUTANT_INCONNU">La tâche est réalisée par \"inconnu\"</entry>
+	<entry key="PROTOTYPING_TOOL_EXECUTANT_INT">La tâche est réalisée par l'utilisateur sur le système</entry>
+	<entry key="PROTOTYPING_TOOL_EXECUTANT_SYS">La tâche est réalisée par le système</entry>
+	<entry key="PROTOTYPING_TOOL_EXECUTANT_USER">La tâche est réalisée par l'utilisateur,
+		indépendamment du système</entry>
+	<entry key="PROTOTYPING_TOOL_EXECUTANT_TOOLTIP">L'exécutant de la tâche</entry>
+	<entry key="PROTOTYPING_TOOL_DECOMPOSITION_TITLE">Décomposition de la tâche</entry>
+	<entry key="PROTOTYPING_TOOL_PRECONDITION_TITLE">Prérequis d'éxécution</entry>
+	<entry key="PROTOTYPING_TOOL_PRECONDITION_TOOLTIP">Condition pour l'éxécution de la tâche</entry>
+	<entry key="PROTOTYPING_TOOL_ITERATION_TITLE">Prérequis de répétition</entry>
+	<entry key="PROTOTYPING_TOOL_ITERATION_TOOLTIP">Condition pour la répétition de la tâche</entry>
+	<entry key="PROTOTYPING_TOOL_DESCRIPTION_TITLE">Description de la tâche</entry>
+	<entry key="PROTOTYPING_TOOL_DESCRIPTION_TOOLTIP">Description textuelle de la tâche</entry>
+	<entry key="PROTOTYPING_TOOL_SUBTASK_DECOMP">(...)</entry>
+	<entry key="PROTOTYPING_TOOL_SUBTASK_DECOMP_TOOLTIP1">Cette sous-tâche se décompose en</entry>
+	<entry key="PROTOTYPING_TOOL_SUBTASK_DECOMP_TOOLTIP2">tâche(s)</entry>
+	<entry key="PROTOTYPING_TOOL_SUBTASK_TERMINAL_TOOLTIP">Cette sous-tâche ne se décompose pas</entry>
+	<entry key="PROTOTYPING_TOOL_SUBTASK_DESCRIPTION_TOOLTIP">Description</entry>
+	<entry key="PROTOTYPING_TOOL_SUBTASK_PRECONDITION">Prérequis</entry>
+	<entry key="PROTOTYPING_TOOL_CANCEL_BUTTON">Annuler</entry>
+	<entry key="PROTOTYPING_TOOL_END_BUTTON">Terminer</entry>
+	<entry key="PROTOTYPING_TOOL_VALIDATE_END_BUTTON">Valider et Terminer</entry>
+	<entry key="PROTOTYPING_TOOL_CONTROL_TITLE">Contrôle</entry>
+	<entry key="PROTOTYPING_TOOL_ITERATION_BUTTON">Faire de nouveau</entry>
+	<entry key="PROTOTYPING_TOOL_MENU_TITLE">ProtoTask 1.0</entry>
+	<entry key="PROTOTYPING_TOOL_MENU_TOOLTIP">ProtoTask 1.0</entry>
+	<entry key="PROTOTYPING_TOOL_PRECONDITION_TEXT_PANE">Prérequis</entry>
+	<entry key="PROTOTYPING_TOOL_PRECONDITION_TITLE_PANE">Vérification du prérequis</entry>
+	<entry key="PROTOTYPING_TOOL_PASSIVE_INACTIVE_ERROR">Erreur : la tâche en cours n'a pas le bon état</entry>
+	<entry key="PROTOTYPING_TOOL_END_ERROR">Impossible de terminer la tâche</entry>
+	<entry key="PROTOTYPING_TOOL_TRUE">Vrai</entry>
+	<entry key="PROTOTYPING_TOOL_FALSE">Faux</entry>
+	<entry key="PROTOTYPING_TOOL_INDETERMINATE">Indeterminé</entry>
+	<entry key="PROTOTYPING_TOOL_HISTORY">Historique</entry>
+	<entry key="PROTOTYPING_TOOL_HISTORY_DESCRIPTION">Description</entry>
+	<entry key="PROTOTYPING_TOOL_DURATION">Duration</entry>
+
+	<entry key="PRECONDITION_TAB_FORMAL">Condition formelle</entry>
+	<entry key="PRECONDITION_TAB_PROTOTASK">Condition ProtoTask</entry>
+	<entry key="PROTOTASK_CONDITION_DESCRIPTION">Description</entry>
+	<entry key="PROTOTASK_CONDITION_DEFAULT_VALUE">Valeur par défault</entry>
+	<entry key="CONDITION_WORLD_TITLE">Condition(s) disponible(s)</entry>
+	<entry key="CONDITION_ADD_MESSAGE">Ajouter un condition</entry>
+	<entry key="CONDITION_REMOVE_NAME_TITLE">Supprimer la/les condition(s)</entry>
 
 	
-
-<entry key="ABSTRACT_ATTRIBUT_NAME_TABLE">Nom</entry>
-<entry key="ABSTRACT_ATTRIBUT_DESCRIPTION_TABLE">Description</entry>
-<entry key="ABSTRACT_ATTRIBUT_TYPE_TABLE">Type</entry>
-<entry key="ABSTRACT_ATTRIBUT_TYPE_NAME_TABLE">Valeur du type</entry>
-<entry key="ABSTRACT_ATTRIBUT_NEW_OBJECT_TABLE">Ajouter un attribut abstrait ...</entry>
-<entry key="ABSTRACT_ATTRIBUT_TITLE_TABLE">Attribut de</entry>
-<entry key="ABSTRACT_ATTRIBUT_ENUMERATE_EDIT_TABLE">Editer énuméré ...</entry>
-<entry key="ABSTRACT_ATTRIBUT_INTERVAL_EDIT_TABLE">Editer intervalle ...</entry>
-<entry key="ABSTRACT_ATTRIBUT_REMOVE_MESSAGE_TITLE">Suppression d'attribut(s) abstrait(s)</entry>
-
-	
-
-<entry key="ENUMERATION_NAME_TABLE">Nom énuméré</entry>
-<entry key="ENUMERATION_DESCRIPTION_TABLE">Description</entry>
-<entry key="ENUMERATION_NEW_OBJECT_TABLE">Ajouter un énuméré ...</entry>
-<entry key="ENUMERATION_TITLE_TABLE">Enumération</entry>
-<entry key="ENUMERATION_REMOVE_MESSAGE_TITLE">Suppression d'énuméré(s)</entry>
-
-    
-
-<entry key="ELEMENT_NAME_TABLE">Nom</entry>
-<entry key="ELEMENT_NEW_OBJECT_TABLE">Ajouter un élément ...</entry>
-<entry key="ELEMENT_REMOVE_MESSAGE_TITLE">Suppression d'élément(s) d'un énuméré</entry>
-
-    
-
-<entry key="INTERVALLE_TITLE_TABLE">Intervalle</entry>
-<entry key="INTERVALLE_NAME_TABLE">Nom</entry>
-<entry key="INTERVALLE_DESCRIPTION_TABLE">Description</entry>
-<entry key="INTERVALLE_MIN_VALUE_TABLE">Valeur min</entry>
-<entry key="INTERVALLE_MAX_VALUE_TABLE">Valeur max</entry>
-<entry key="INTERVALLE_NEW_OBJECT_TABLE">Ajouter un intervalle</entry>
-<entry key="INTERVALLE_REMOVE_MESSAGE_TITLE">Suppression d'intervalle(s)</entry>
-
-    
-
-<entry key="CONCRETE_ABSTRACT_OBJECT_TITLE_TABLE">Objet Abstrait</entry>
-<entry key="CONCRETE_OBJECT_TITLE_TABLE">Objet Concret</entry>
-<entry key="CONCRETE_OBJECT_NAME_TABLE">Nom</entry>
-<entry key="CONCRETE_OBJECT_OBSERVATION_TABLE">Description</entry>
-<entry key="CONCRETE_OBJECT_GROUPE_TABLE">Groupe</entry>
-<entry key="CONCRETE_OBJECT_GROUPE_NAME">groupe</entry>
-<entry key="NO_CONCRETE_OBJECT_GROUPE_NAME">Aucun</entry>
-<entry key="CONCRETE_NEW_OBJECT_TABLE">Ajouter un objet concret ...</entry>
-<entry key="CONCRETE_NONEW_ROW_TABLE">Ajout impossible car pas de groupe disponible</entry>
-<entry key="CONCRETE_OBJECT_REMOVE_MESSAGE_TITLE">Suppression d'objet(s) concret(s)</entry>
-
-    
-
-<entry key="CONCRETE_ATTRIBUT_NAME_TABLE">Nom</entry>
-<entry key="CONCRETE_ATTRIBUT_VALUE_TABLE">Valeur</entry>
-<entry key="CONCRETE_ATTRIBUT_NOINIT_TABLE">Attribut non initialisé</entry>
-<entry key="CONCRETE_ATTRIBUT_TITLE_TABLE">Attribut concret de</entry>
-
-    
-
-<entry key="EVENT_NAME_TABLE">Nom</entry>
-<entry key="EVENT_DESCRIPTION_TABLE">Description</entry>
-<entry key="EVENT_NEW_ROW_TABLE">Ajouter un événement ...</entry>
-<entry key="EVENT_NONEW_ROW_TABLE">Ajout impossible car pas d'événement disponible</entry>
-<entry key="EVENT_REMOVE_INTO_TASK">Suppression d'événements d'une tâche</entry>
-<entry key="EVENT_REMOVE_NAME_TITLE">Suppression d'événement(s)</entry>
-<entry key="EVENT_NO_ELEMENT_INTO_TASK">Pas d'événement associé</entry>
-
-    
-
-<entry key="USER_NAME_TABLE">Nom</entry>
-<entry key="USER_STATUS_TABLE">Statut</entry>
-<entry key="USER_ROLE_TABLE">Rôle</entry>
-<entry key="USER_PHOTO_TABLE">Photo</entry>
-<entry key="USER_MEMBERS">Membre(s)</entry>
-<entry key="USER_NEW_ROW_TABLE">Ajouter un utilisateur ...</entry>
-<entry key="USER_REMOVE_NAME_TITLE">Suppression d'utilisateur(s)</entry>
-<entry key="USER_CHOOSE_IMAGE_MESSAGE">Choisir ...</entry>
-<entry key="USER_DISPLAY_IMAGE_MESSAGE">Afficher image</entry>
-<entry key="USER_DISPLAY_PATH_IMAGE_MESSAGE">Afficher chemin</entry>
-<entry key="USER_DISPLAY_DEFAULT_IMAGE_MESSAGE">Afficher image défaut</entry>
-<entry key="USER_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Afficher chemin erroné</entry>
-<entry key="USER_CLEAR_IMAGE_MESSAGE">Effacer image</entry>
-
-
-<entry key="INDIVIDU_NAME_TABLE">Nom</entry>
-<entry key="INDIVIDU_STATUS_TABLE">Statut </entry>
-<entry key="INDIVIDU_ROLE_TABLE">Rôle</entry>
-<entry key="INDIVIDU_PHOTO_TABLE">Photo</entry>
-<entry key="INDIVIDU_NEW_ROW_TABLE">Ajouter un individu ...</entry>
-<entry key="INDIVIDU_REMOVE_NAME_TITLE">Suppression d'individu(s)</entry>
-<entry key="INDIVIDU_CHOOSE_IMAGE_MESSAGE">Choisir ...</entry>
-<entry key="INDIVIDU_DISPLAY_IMAGE_MESSAGE">Afficher image</entry>
-<entry key="INDIVIDU_DISPLAY_PATH_IMAGE_MESSAGE">Afficher chemin</entry>
-<entry key="INDIVIDU_DISPLAY_DEFAULT_IMAGE_MESSAGE">Afficher image défaut</entry>
-<entry key="INDIVIDU_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Afficher chemin erroné</entry>
-<entry key="INDIVIDU_CLEAR_IMAGE_MESSAGE">Effacer image</entry>
-<entry key="INDIVIDU_ORGANIZATION_TABLE">Organisation(s)</entry>
-<entry key="INDIVIDU_OTHERS">Autre(s)</entry>
-
-
-<entry key="ORGANIZATION_NAME_TABLE">Nom</entry>
-<entry key="ORGANIZATION_STATUS_TABLE">Statut</entry>
-<entry key="ORGANIZATION_ROLE_TABLE">Rôle</entry>
-<entry key="ORGANIZATION_PHOTO_TABLE">Logo</entry>
-<entry key="ORGANIZATION_NEW_ROW_TABLE">Ajouter une organisation ...</entry>
-<entry key="ORGANIZATION_REMOVE_NAME_TITLE">Suppression d'organisation</entry>
-<entry key="ORGANIZATION_CHOOSE_IMAGE_MESSAGE">Choisir ...</entry>
-<entry key="ORGANIZATION_DISPLAY_IMAGE_MESSAGE">Afficher Image</entry>
-<entry key="ORGANIZATION_DISPLAY_PATH_IMAGE_MESSAGE">Afficher Chemin</entry>
-<entry key="ORGANIZATION_DISPLAY_DEFAULT_IMAGE_MESSAGE">Afficher Image Défaut</entry>
-<entry key="ORGANIZATION_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Afficher Chemin Erroné</entry>
-<entry key="ORGANIZATION_CLEAR_IMAGE_MESSAGE">Effacer Image</entry>
-<entry key="ORGANIZATION_MEMBERS_TABLE">Membre(s)</entry>
-<entry key="ORGANIZATION_OTHERS">Autre(s)	</entry>
-
-
-
-<entry key="MACHINE_NAME_TABLE">Nom</entry>
-<entry key="MACHINE_DESCRIPTION_TABLE">Description</entry>
-<entry key="MACHINE_ISCOMPUTER_TABLE">est informatisé</entry>
-<entry key="MACHINE_IMAGE_TABLE">Image</entry>
-<entry key="MACHINE_NEW_ROW_TABLE">Ajouter une machine</entry>
-<entry key="MACHINE_REMOVE_NAME_TITLE">Suppression d'une machine</entry>
-<entry key="MACHINE_CHOOSE_IMAGE_MESSAGE">Choisir ...</entry>
-<entry key="MACHINE_DISPLAY_IMAGE_MESSAGE">Afficher Image</entry>
-<entry key="MACHINE_DISPLAY_PATH_IMAGE_MESSAGE">Afficher Chemin</entry>
-<entry key="MACHINE_DISPLAY_DEFAULT_IMAGE_MESSAGE">Afficher Image Défaut</entry>
-<entry key="MACHINE_DISPLAY_BAD_PATH_IMAGE_MESSAGE">Afficher Chemin Erroné</entry>
-<entry key="MACHINE_CLEAR_IMAGE_MESSAGE">Effacer Image</entry>
-<entry key="MACHINE_PARCS_TABLE">Parcs de machines</entry>
-<entry key="MACHINE_OTHERS">Autre(s)</entry>
-
-
-
-<entry key="PARCMACHINES_NAME_TABLE">Nom</entry>
-<entry key="PARCMACHINES_DESCRIPTION_TABLE">Description</entry>
-<entry key="PARCMACHINES_IMAGE_TABLE">Image</entry>
-<entry key="PARCMACHINES_NEW_ROW_TABLE">Ajouter un parc de machines</entry>
-<entry key="PARCMACHINES_REMOVE_NAME_TITLE">Suppression d'un parc de machines</entry>
-<entry key="PARCMACHINES_CHOOSE_IMAGE_MESSAGE">Choisir ...</entry>
-<entry key="PARCMACHINES_DISPLAY_IMAGE_MESSAGE">Afficher Image</entry>
-<entry key="PARCMACHINES_DISPLAY_PATH_IMAGE_MESSAGE">Afficher Chemin</entry>
-<entry key="PARCMACHINES_DISPLAY_DEFAULT_IMAGE_MESSAGE">Afficher Image Défaut</entry>
-<entry key="PARCMACHINES_DISPLAY_BAD_PATH_IMAGE_MESSAGE"> Afficher Chemin Erroné</entry>
-<entry key="PARCMACHINES_CLEAR_IMAGE_MESSAGE">Effacer Image</entry>
-<entry key="PARCMACHINES_MACHINE_TABLE">Machine(s)</entry>
-<entry key="PARCMACHINES_OTHERS">Autre(s)</entry>
-
-
-
-
-<entry key="LABEL_TITLE_MESSAGE">Libellés</entry>
-<entry key="LABEL_REMOVE_NAME_TITLE">Suppression de libellés</entry>
-<entry key="LABEL_NUMERO_TITLE">Numéro</entry>
-<entry key="LABEL_NAME_TITLE">Nom </entry>
-<entry key="LABEL_DESCRIPTION_TITLE">Description</entry>
-<entry key="LABEL_COLOR_TITLE">Couleur</entry>
-<entry key="LABEL_IS_VISIBLE_COLOR_TITLE">Couleur Visible</entry>
-<entry key="LABEL_IS_VISIBLE_TITLE">Visible</entry>
-<entry key="LABEL_ADD_NEW_LABEL_TITLE">Ajouter un libellé ...</entry>
-<entry key="LABEL_EDITOR_TITLE">Editeur Libellé</entry>
-    
-    
-
-<entry key="ACTOR_NAME_TABLE">Nom</entry>
-<entry key="ACTOR_EXPERIENCE_TABLE">Expérience</entry>
-<entry key="ACTOR_COMPETENCE_TABLE">Compétence</entry>
-<entry key="ACTOR_NEW_ROW_TABLE">Ajouter un acteur ...</entry>
-<entry key="ACTOR_NONEW_ROW_TABLE">Ajout impossible d'acteur car pas d'utilisateur disponible</entry>
-<entry key="ACTOR_NO_ELEMENT_INTO_TASK">Pas d'acteur associé</entry>
-<entry key="ACTOR_REMOVE_NAME_TITLE">Suppression d'acteur(s)</entry>
-<entry key="ACTOR_REMOVE_ALL_NAME_TITLE">Suppression de l'ensemble des acteurs</entry>
-
-<entry key="ACTORSYSTEM_NAME_TABLE">Nom</entry>
-<entry key="ACTORSYSTEM_EXPERIENCE_TABLE">Expérience	</entry>
-<entry key="ACTORSYSTEM_COMPETENCE_TABLE">Compétence</entry>
-<entry key="ACTORSYSTEM_NEW_ROW_TABLE">Ajouter un acteur système ...</entry>
-<entry key="ACTORSYSTEM_NONEW_ROW_TABLE">Ajout impossible d'acteur système car pas de machines disponible</entry>
-<entry key="ACTORSYSTEM_NO_ELEMENT_INTO_TASK"> Pas d'acteur système associé</entry>
-<entry key="ACTORSYSTEM_REMOVE_NAME_TITLE">Suppression d'acteur(s) système(s)</entry>
-<entry key="ACTORSYSTEM_REMOVE_ALL_NAME_TITLE">Suppression de l'ensemble des acteurs systèmes</entry>
-       
-
-<entry key="NO_SELECTED_TASK_MESSAGE">Pas de tâche Sélectionnée</entry>
-<entry key="PROPERTIES_MESSAGE">Caractéristiques</entry>
-<entry key="GENERAL_TABBEDPANE_TITLE_NAME">Général</entry>
-<entry key="NO_VALUE_LEGEND_MESSAGE">pas de valeur</entry>
-<entry key="NO_CARACTERISTIC_SELECTED_MESSAGE">Caractéristique non sélectionnée</entry>
-<entry key="ERROR_CARACTERISTIC_MESSAGE">Erreur</entry>
-
-	
-
-<entry key="TASK_ATTRIBUT_NAME">Tâche</entry>
-<entry key="GENERAL_INFORMATION_PANEL_TITLE_NAME">Générales</entry>
-<entry key="GENERAL_INFORMATION_PANEL_LEGEND_TITLE_NAME">Les caractéristiques générales sont les premières renseignées et sont prévues pour être décrites par l'ensemble des intervenants de l'analyse d'une activité. Ces caractéristiques sont informelles et ne font pas références à des objets de l'état du monde</entry>
-<entry key="TASK_NUMBER_NAME_TITLE">Numéro</entry>
-<entry key="TASK_NUMBER_SHORT_NAME_TITLE">Num</entry>
-<entry key="TASK_NUMBER_NAME_LEGEND_TITLE">Pour chaque tâche d'un arbre de tâche un numéro unique est défini. Il contient la profondeur de la tâche et sa position parmi ses tâches soeurs. Ce numéro est calculé automatiquement par l'outil et n'est pas éditable</entry>
-<entry key="NO_MOTHER_TASK_NAME_MESSAGE">Pas de tâche mère</entry>
-<entry key="SUB_TASK_PARENT_NAME_TITLE">Sous-tâche</entry>
-<entry key="SUB_TASK_PARENT_NAME_LEGEND_TITLE">Précise la tâche mère de cette tâche</entry>
-<entry key="TASK_NAME_TITLE">Nom</entry>
-<entry key="TASK_NAME_LEGEND_TITLE">Désigne le nom de la tâche donné par l'analyste</entry>
-<entry key="TASK_PURPOSE_TITLE">But</entry>
-<entry key="TASK_PURPOSE_LEGEND_TITLE">Désigne l'objectif assigné à la tâche</entry>
-<entry key="TASK_MULTIMEDIA_PURPOSE_TITLE">Multimédia (désactivé)</entry>
-<entry key="TASK_MULTIMEDIA_PURPOSE_LEGEND_TITLE">Cette caractéristique permet de compléter le but d'une tâche par une information multimédia (vidéo ou un son)</entry>
-<entry key="TASK_MULTIMEDIA_ERROR_FILE_MESSAGE">Problème : média introuvable</entry>
-<entry key="TASK_LABEL_TITLE">Libellé</entry>
-<entry key="TASK_LABEL_LEGEND_TITLE">Cette caractéristique permet d'étiqueter une tâche de manière à pouvoir identifier des tâches d'un modèle K-MAD. Un libellé ou également appelé label permet notamment d'associer une couleur</entry>
-<entry key="TASK_OBJECTS_TITLE">Objets</entry>
-<entry key="TASK_OBJECTS_LEGEND_TITLE">Cette caractéristique permet de lister l'ensemble des objets utilisés par une tâche</entry>
-<entry key="TASK_FEEDBACK_TITLE">Affichage (désactivé)</entry>
-<entry key="TASK_FEEDBACK_LEGEND_TITLE">Cette caractéristique permet la description des effets observables (ou souhaitables) par l'utilisateur pendant la réalisation d'une tâche. C'est la réponse du système à l'utilisateur</entry>
-<entry key="TASK_DURATION_TITLE">Durée</entry>
-<entry key="TASK_DURATION_LEGEND_TITLE">Caractérise la durée de la tâche. Toutes sortes d'informations relatives au temps sont acceptées</entry>
-<entry key="TASK_OBSERVATION_TITLE">Description</entry>
-<entry key="TASK_OBSERVATION_LEGEND_TITLE">Description</entry>
-<entry key="EXECUTING_NAME_TITLE">Exécutant</entry>
-<entry key="EXECUTING_NAME_LEGEND_TITLE">Précise qui réalise la tâche. Les valeurs possibles sont « Utilisateur, Système, Interactif et Abstrait, Inconnue »</entry>
-<entry key="MODALITY_NAME_TITLE">Modalité</entry>
-<entry key="MODALITY_NAME_LEGEND_TITLE">Précise la nature de l'action de l'exécutant « Utilisateur »</entry>
-<entry key="FREQUENCY_NAME_TITLE">Fréquence</entry>
-<entry key="FREQUENCY_NAME_LEGEND_TITLE">Cette caractéristique tient lieu d'appréciation, du caractère répétitif de la tâche</entry>
-<entry key="FREQUENCY_VALUE_NAME_TITLE">Valeur Fréquence</entry>
-<entry key="FREQUENCY_VALUE_NAME_LEGEND_TITLE">Cette caractéristique permet de donner une valeur à la fréquence</entry>
-<entry key="IMPORTANT_NAME_TITLE">Importance</entry>
-<entry key="IMPORTANT_NAME_LEGEND_TITLE">Précise l'aspect priorité de la tâche par rapport aux autres tâches soeurs</entry>
-<entry key="SENSORI_MOTRICE_NAME_TITLE">Sensori-motrice</entry>
-<entry key="COGNITIVE_NAME_TITLE">Cognitive    </entry>
-    
-
-
-<entry key="SCHEDULE_PANEL_TITLE_NAME">Ordonnancement</entry>
-<entry key="NECESSITE_LABEL_NAME">Nécessité</entry>
-<entry key="NECESSITE_LABEL_LEGEND_NAME">Indique si la tâche est obligatoire ou facultative. Une tâche obligatoire doit être exécutée alors qu'une tâche facultative peut être omise</entry>
-<entry key="INTERRUPTIBLE_LABEL_NAME">Interruptible</entry>
-<entry key="INTERRUPTIBLE_LABEL_LEGEND_NAME">Indique si la tâche est interruptible ou pas</entry>
-<entry key="DECLENCHEMENT_LABEL_NAME">Déclenchement</entry>
-<entry key="DECLENCHEMENT_LABEL_LEGEND_NAME">Cette caractéristique indique que l'exécution de la tâche est contrainte par un événement</entry>
-<entry key="UTILISATEUR_LABEL_NAME">Acteur(s)</entry>
-<entry key="UTILISATEUR_LABEL_LEGEND_NAME">Cette caractéristique contient la liste des utilisateurs autorisée à exécuter la tâche</entry>
-<entry key="SCHEDULE_LABEL_NAME">Décomposition</entry>
-<entry key="SCHEDULE_LABEL_LEGEND_NAME">Cette caractéristique détermine la façon dont les sous-tâches d'une tâche mère vont être exécutées</entry>
-<entry key="OPTIONAL_NECESSITE_VALUE">Optionnelle</entry>
-<entry key="NO_OPTIONAL_NECESSITE_VALUE">Obligatoire</entry>
-<entry key="INTERRUPTIBLE_VALUE">Interruptible</entry>
-<entry key="NO_INTERRUPTIBLE_VALUE">Non interruptible</entry>
-<entry key="PRECONDITION_LABEL_VALUE">Précondition</entry>
-<entry key="PRECONDITION_LABEL_LEGEND_VALUE">Cette caractéristique indique que l'exécutation de la tâche est contrainte par une condition. Cette condition est relative aux objets manipulés par l'utilisateur : les objets de l'état du monde</entry>
-<entry key="ITERATION_LABEL_VALUE">Itération</entry>
-<entry key="ITERATION_LABEL_LEGEND_VALUE">Cette caractéristique précise l'aspect itératif d'une tâche pouvant être exécutée plusieurs fois ou devant être exécutée jusqu'à la satisfaction d'une condition. Cette condition est relative aux objets manipulés par l'utilisateur</entry>
-<entry key="MATERIEL_LABEL_NAME">Acteur(s) Système(s)</entry>
-<entry key="MATERIEL_LABEL_LEGEND"> Cette caractéristique contient la liste des machines autorisée à exécuter la tâche</entry>
-
-    
-
-<entry key="POSTCONDITION_PANEL_TITLE_NAME">Effets de bord</entry>
-<entry key="EFFETSDEBORD_LABEL_VALUE">Actions</entry>
-<entry key="EFFETSDEBORD_LABEL_LEGEND_VALUE">Cette caractéristique modifie les objets de l'état du monde</entry>
-<entry key="EVENT_NAME_TITLE">Evénement</entry>
-<entry key="EVENT_NAME_LEGEND_TITLE">Cette caractéristique engendre un ensemble d'événements</entry>
-        
-        
-
-<entry key="MEDIA_FILE_NAME">Fichier média</entry>
-<entry key="MEDIA_FILE_LENGTH">Taille média (ko)</entry>
-<entry key="MEDIA_LENGTH">Durée média (m:s)</entry>
-<entry key="MEDIA_START_TAG">Repère départ (m:s)</entry>
-<entry key="MEDIA_FINISH_TAG">Repère fin (m:s)</entry>
-<entry key="MEDIA_NO_INFORMATION_PANEL_MESSAGE">Aucune Information</entry>
-<entry key="INFORMATION_MEDIA_TITLE_NAME">Informations</entry>
-<entry key="MEDIA_TITLE_NAME">Média</entry>
-<entry key="NO_MEDIA_FILE_MESSAGE">Aucun fichier média</entry>
-<entry key="QUICK_TIME_NO_INSTALLED_ERROR_MESSAGE">Pas de prise en compte vidéo : Installer QuickTime</entry>
-<entry key="CONTROLE_MEDIA_TITLE_NAME">Contrôle</entry>
-        
-                
-
-<entry key="EXECUTION_CONDITION_TITLE_NAME">Conditions d'éxécution</entry>
-<entry key="OBJECT_LIST_TITLE_NAME">Liste des objets</entry>
-<entry key="POSTCONDITION_TITLE_NAME">Postcondition</entry>
-<entry key="EFFETSDEBORD_TITLE_NAME">Action</entry>
-<entry key="NO_MOTHER_TASK_MESSAGE">Aucune tâche mère</entry>
-<entry key="NO_LEFT_TASK_MESSAGE">Aucune grande tâche (tâche à gauche)</entry>
-<entry key="NO_RIGHT_TASK_MESSAGE">Aucune petite tâche (tâche à droite)</entry>
-<entry key="NO_SUB_TASK_MESSAGE">Aucune sous-tâche</entry>
-<entry key="NO_NUMERO_TASK">Pas de numéro</entry>
-
-    
-
-<entry key="INTERVIEWED_NAME_TABLE">Interviewé</entry>
-<entry key="PLACE_INFORMATION_TABLE">Coordonnées</entry>
-<entry key="STATUT_TABLE">Statut</entry>
-<entry key="SENIORITY_TABLE">Ancienneté</entry>
-<entry key="DATE_TABLE">Date</entry>
-<entry key="INTERVIEW_TYPE_TABLE">Type de recueil</entry>
-<entry key="SEARCHED_INFORMATIONS_TABLE">Informations</entry>
-<entry key="INTERVIEW_NAME_TABLE">Interviewer</entry>
-<entry key="INTERVIEW_NEW_OBJECT_TABLE">Ajouter une interview ...   </entry>
-<entry key="GENERAL_DESCRIPTION_PROJECT_DIALOG_TITLE">Description générale</entry>
-<entry key="COMPANY_LABEL_NAME">Entreprise</entry>
-<entry key="SITE_LABEL_NAME">Site</entry>
-<entry key="POSTE_TYPE_LABEL_NAME">Type de Poste</entry>
-<entry key="DATE_STUDY">Date du cas étudié</entry>
-<entry key="OTHER_RESOURCES">Autres Resources</entry>
-<entry key="INTERVIEWED_DESCRIPTION_PROJECT_DIALOG_TITLE">Description des interviewés</entry>
-<entry key="JUSTIFICATION_PROJECT_DIALOG_TITLE">Justification de l'étude de cas (en quoi ce cas reflète un problème de charge)</entry>
-<entry key="REMOVE_INTERVIEW_MESSAGE_TITLE">Suppression d'interview(s)</entry>
-<entry key="ASK_REMOVE_INTERVIEW_MESSAGE_TITLE">Souhaitez-vous supprimer l'interview de</entry>
-    
-    
-
-<entry key="EDITOR_MESSAGE_TITLE">Editeur de caractéristiques</entry>
-<entry key="EDITOR_OPERATOR_NAME">Décomposition</entry>
-<entry key="EDITOR_NAME_NAME">Nom</entry>
-<entry key="EDITOR_EXECUTANT_NAME">Exécutant</entry>
-    
-    
-
-<entry key="EXTENSION_EXPRESS_FILTER_NAME">Fichier Express (*.spf)</entry>
-<entry key="EXTENSION_KMADE_FILTER_NAME">Fichier K-MAD (*.kxml)</entry>
-<entry key="SET_EXISTING_PROJECT_LONG_MESSAGE">Modification des propriétés du projet</entry>
-<entry key="SET_EXISTING_PROJECT_SHORT_MESSAGE">Propriétés</entry>
-<entry key="STATE_LOAD_TITLE_NAME">Etat</entry>
-<entry key="ELEMENT_PARSE_PROBLEM_MESSAGE">Problème avec l'élément</entry>
-<entry key="XML_PARSER_PROBLEM_MESSAGE">Problème avec le ParserXML</entry>
-<entry key="XML_PARSER_MISSING_ELEMENT_PROBLEM_MESSAGE">entités manquantes dans le fichier XML</entry>
-
-
-
-<entry key="OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME">Chargement d'un projet K-MAD annulé</entry>
-<entry key="OPEN_ERROR_FILE">Erreur d'ouverture d'un projet K-MAD</entry>
-<entry key="OPEN_EXPRESS_OK_FILE">Ouverture du projet K-MAD réussi : </entry>
-<entry key="OPEN_EXPRESS_NO_OK_FILE">Erreur d'ouverture du projet K-MAD : </entry>
-<entry key="EXPRESS_OBJECTS_TITLE_MESSAGE">Objets de l'utilisateur</entry>
-<entry key="GRAPHICAL_OBJECTS_MESSAGE">Objets graphiques</entry>
-<entry key="CREATE_GRAPHICAL_TASKS_MESSAGE">Création des tâches graphiques</entry>
-<entry key="CREATE_GRAPHICAL_EDGES_MESSAGE">Création des liens</entry>
-<entry key="LOAD_PROJECT_FINISHED_MESSAGE">Chargement terminé</entry>
-<entry key="LOAD_CONSOLE_TITLE_NAME">Console de chargement</entry>
-<entry key="IMPLICIT_STOP_LOAD_SPF_FILE">Chargement stoppé : Problème dans la création des objets de l'utilisateur</entry>
-<entry key="EXPLICIT_STOP_LOAD_SPF_FILE_DURING_OBJECT">Chargement annulé : Suppression des objets Express</entry>
-<entry key="EXPLICIT_STOP_LOAD_SPF_FILE_DURING_GRAPHICAL_OBJECT">Chargement annulé : Suppression des objets Express et Graphiques</entry>
-
-
-
-<entry key="SAVE_CANCELLED_EXPRESS_FILECHOOSER_NAME">Enregistrement du projet K-MAD courant annulé</entry>
-<entry key="WRITE_EXPRESS_ERROR_FILE">Erreur d'enregistrement du projet K-MAD : </entry>
-<entry key="WRITE_ERROR_FILE">Erreur d'enregistrement d'un projet K-MAD</entry>
-<entry key="WRITE_EXPRESS_OK_FILE">Enregistrement du projet K-MAD réussi : </entry>
-<entry key="WRITE_EXPRESS_NO_OK_FILE">Enregistrement du projet K-MAD échoué :</entry>
-<entry key="WRITE_BEFORE_OPEN_PROJECT_MESSAGE">Enregistrer le projet courant avant l'ouverture d'un projet existant</entry>
-<entry key="WRITE_BEFORE_EXIT_TOOL_MESSAGE">Enregistrer le projet courant avant de quitter</entry>
-<entry key="WRITE_BEFORE_NEW_PROJECT_MESSAGE">Enregistrer le projet courant \n avant de créer un nouveau projet</entry>
-<entry key="WRITE_BEFORE_CLOSE_PROJECT_MESSAGE">Enregistrer le projet courant \n avant de le fermer</entry>
-<entry key="WRITE_BEFORE_CHANGE_LOCALE_MESSAGE">Enregistrer le projet avant \n de changer la localisation</entry>
-<entry key="SAVE_CONSOLE_TITLE_NAME">Console d'enregistrement</entry>
-<entry key="SAVE_PROJECT_FINISHED_MESSAGE">Enregistrement terminé</entry>
-<entry key="IMPLICIT_STOP_SAVE_FILE_MESSAGE">Enregistrement stoppé : Problème dans l'enregistrement des objets de l'utilisateur</entry>
-<entry key="EXPLICIT_STOP_SAVE_FILE_MESSAGE">Enregistrement annulé : Suppression des objets K-MAD</entry>
-
-
-
-<entry key="ENTITY_LIST_DIALOG_TITLE">Moniteur des objets de l'état du monde</entry>
-<entry key="FORCE_ENTITY_LIST_ACTION_MESSAGE">Mise à jour</entry>
-
-
-
-<entry key="GENERAL_TABBED_NAME">Général</entry>
-<entry key="TASK_MODEL_EDITOR_TABBED_NAME">Tâches</entry>
-<entry key="TASK_MODEL_EDITOR_TABBED_LONG_NAME">Editeur de Tâches</entry>
-<entry key="TREE_EDITOR_TABBED_NAME">Arbres</entry>
-<entry key="TREE_EDITOR_TABBED_LONG_NAME">Editeur d'Arbres</entry>
-<entry key="GENERAL_PANEL_CONFIGURATION_PANEL_NAME">Configuration</entry>
-<entry key="GENERAL_PANEL_AUTOMATIC_SAVE_LABEL">Sauvegarde automatique :</entry>
-<entry key="GENERAL_PANEL_BUG_MESSAGE_LABEL">Envoyer un rapport de bugs </entry>
-<entry key="GENERAL_PANEL_GARBAGE_COLLECTOR_LABEL">Appler le garbage collector :</entry>
-<entry key="GENERAL_PANEL_SPLASH_SREEN_LABEL">Affichage Splash Screen</entry>
-<entry key="GENERAL_PANEL_LANGUAGE_PANEL_NAME">Langue</entry>
-<entry key="GENERAL_PANEL_LANGUAGE_LABEL">Choix de la langue :</entry>
-<entry key="GENERAL_PANEL_KEYS_PANEL_NAME">Raccourcis</entry>
-<entry key="GENERAL_PANEL_ZOOM_LABEL">Pas de zoom</entry>
-<entry key="TASK_PANEL_NAME_PANEL_NAME">Nom</entry>
-<entry key="TASK_PANEL_NAME_FONT_NAME_LABEL">Police :</entry>
-<entry key="TASK_PANEL_NAME_FONT_SIZE_LABEL">Taille :</entry>
-<entry key="TASK_PANEL_NAME_FONT_STYLE_LABEL">Style :</entry>
-<entry key="TASK_PANEL_NAME_FONT_COLOR_LABEL">Couleur :</entry>
-<entry key="TASK_PANEL_NAME_BACKGROUND_COLOR_LABEL">Couleur d'arrière plan :    </entry>
-<entry key="TASK_PANEL_DECOMPOSITION_PANEL_NAME">Décomposition</entry>
-<entry key="TASK_PANEL_MODEL_PANEL_NAME">Style Prédéfini</entry>
-<entry key="TASK_PANEL_MODEL_CHOICE_LABEL">Choix :</entry>
-<entry key="TASK_PANEL_MODEL_SAVE_BUTTON_LABEL">Sauvegarde</entry>
-<entry key="TASK_PANEL_MODEL_LOAD_BUTTON_LABEL">Chargement</entry>
-<entry key="TASK_PANEL_OPTIONS_PANEL_NAME">Options</entry>
-<entry key="TASK_PANEL_OPTIONS_TRIGGER_EVENT_LABEL">Montrer la caractéristique déclenchement dans la vue d'une tâche</entry>
-<entry key="TASK_PANEL_OPTIONS_ACTOR_TASK_LABEL">Montrer la caractéristique acteur dans la vue d'une tâche</entry>
-<entry key="TASK_PANEL_PREVIEW_PANEL_NAME">Aperçu</entry>
-<entry key="TASK_TREE_PANEL_LAYOUT_PANEL_NAME">Agencement</entry>
-<entry key="TASK_TREE_PANEL_LAYOUT_ORIENTATION_LABEL">Orientation de l'arbre</entry>
-<entry key="TASK_TREE_PANEL_LAYOUT_DISTANCE_LABEL">Distance entre les noeuds</entry>
-<entry key="TASK_TREE_PANEL_LAYOUT_SELECTION_COLOR_LABEL">Couleur de sélection d'une tâche</entry>
-<entry key="TASK_TREE_PANEL_LAYOUT_LEVEL_DISTANCE_LABEL">Hauteur des liens</entry>
-<entry key="TASK_TREE_PANEL_OPTIONS_PANEL_NAME">Options</entry>
-<entry key="TASK_TREE_PANEL_OPTIONS_ORTHOGONAL_EDGE_LABEL">Orthogonalité des liens</entry>
-
-
-
-<entry key="COLOR_NO_COLOR">Aucune</entry>
-<entry key="COLOR_BLUE">Bleu</entry>
-<entry key="COLOR_GREEN">Vert</entry>
-<entry key="COLOR_RED">Rouge</entry>
-<entry key="COLOR_BLACK">Noir</entry>
-<entry key="COLOR_YELLOW">Jaune</entry>
-<entry key="COLOR_WHITE">Blanc</entry>
-
-
-
-<entry key="ARIAL_FONT">Arial</entry>
-<entry key="TIMES_FONT">Times New Roman</entry>
-<entry key="TAHOMA_FONT">Tahoma</entry>
-
-
-
-<entry key="STYLE_PLAIN">Normal</entry>
-<entry key="STYLE_BOLD">Gras</entry>
-<entry key="STYLE_ITALIC">Italique</entry>
-<entry key="STYLE_BOLD_ITALIC">Gras+Italique</entry>
-
-
-
-<entry key="FRENCH_LANGUAGE">Français</entry>
-<entry key="ENGLISH_LANGUAGE">Anglais</entry>
-<entry key="FRENCH_LANGUAGE_INFO">Français</entry>
-<entry key="ENGLISH_LANGUAGE_INFO">English</entry>
-    
-
-<entry key="YES_MESSAGE">Oui</entry>
-<entry key="NO_MESSAGE">Non</entry>
-<entry key="ALL_MESSAGE">Tout</entry>
-<entry key="VALID_MESSAGE">Valider</entry>
-<entry key="APPLY_MESSAGE">Appliquer</entry>
-<entry key="CANCEL_MESSAGE">Annuler</entry>
-<entry key="SAVE_AS_MESSAGE">Enregistrer sous ...</entry>
-<entry key="OVERWRITE_FILE_MESSAGE">Remplacer fichier existant ?</entry>
-<entry key="GO_BACK_MESSAGE">Fermer</entry>
-<entry key="CONFIRMATION_DIALOG_MESSAGE">Message de confirmation</entry>
-<entry key="BROWSE_DIRECTORY_OR_FILE_MESSAGE">Parcourir</entry>
-<entry key="REMOVE_MESSAGE">Supprimer</entry>
-
-    
-
-<entry key="FILE_MENU_MESSAGE">Fichier</entry>
-<entry key="EDITING_MENU_MESSAGE">Edition</entry>
-<entry key="VIEW_MENU_MESSAGE">Visualisation</entry>
-<entry key="PROJECT_MENU_MESSAGE">Projet</entry>
-<entry key="HELP_MENU_MESSAGE">Aide</entry>
-<entry key="TOOLS_MENU_MESSAGE">Outils	</entry>
-<entry key="NEW_PROJECT_ACTION_MESSAGE">Nouveau projet</entry>
-<entry key="OPEN_PROJECT_ACTION_MESSAGE">Ouvrir projet</entry>
-<entry key="SAVE_PROJECT_ACTION_MESSAGE">Enregistrer</entry>
-<entry key="SAVE_PROJECT_AS_ACTION_MESSAGE">Enregistrer sous ...</entry>
-<entry key="CLOSE_PROJECT_ACTION_MESSAGE">Fermer</entry>
-<entry key="PRINT_PROJECT_ACTION_MESSAGE">Imprimer</entry>
-<entry key="EXIT_ACTION_MESSAGE">Quitter</entry>
-<entry key="HIDE_GRID_ACTION_MESSAGE">Cacher grille</entry>
-<entry key="SHOW_GRID_ACTION_MESSAGE">Montrer grille</entry>
-<entry key="CHOICE_GRID_SIZE_MESSAGE">Choisir taille de la grille</entry>
-<entry key="HIDE_RULE_ACTION_MESSAGE">Cacher règle</entry>
-<entry key="SHOW_RULE_ACTION_MESSAGE">Montrer règle</entry>
-<entry key="PREFERENCE_ACTION_MESSAGE">Préférences...</entry>
-<entry key="DEBUG_INFO_ACTION_MESSAGE">Info de développement</entry>
-<entry key="ABOUT_ACTION_MESSAGE">A Propos ...</entry>
-<entry key="HELP_MODEL_ACTION_MESSAGE">Aide sur K-MAD</entry>
-<entry key="HELP_TOOL_ACTION_MESSAGE">Aide sur K-MADe</entry>
-<entry key="HISTORY_ACTION_MESSAGE">Histoire de K-MADe</entry>
-<entry key="UNDO_ACTION_MESSAGE">Annuler</entry>
-<entry key="REDO_ACTION_MESSAGE">Rétablir</entry>
-<entry key="CUT_ACTION_MESSAGE">Couper</entry>
-<entry key="COPY_ACTION_MESSAGE">Copier</entry>
-<entry key="PASTE_ACTION_MESSAGE">Coller</entry>
-<entry key="SHOW_CLIPBOARD_MESSAGE">Afficher fenêtre presse-papier</entry>
-<entry key="SEARCH_ACTION_MESSAGE">Recherche avancée ...</entry>
-<entry key="SIMULATION_ACTION_MESSAGE">Simulation</entry>
-<entry key="INTERROGATION_ACTION_MESSAGE">Statistiques</entry>
-<entry key="CHECK_COHERENCE_ACTION_MESSAGE">Vérification grammaire</entry>
-<entry key="ENTITY_LIST_ACTION_MESSAGE">Liste des entités de l'état du monde</entry>
-<entry key="VERSION_MESSAGE">Version</entry>
-<entry key="MESSAGES_MESSAGE">Messages</entry>
-<entry key="ERREURS_MESSAGE">Erreurs</entry>
-<entry key="FIND_REPLACE_ACTION_MESSAGE">Chercher/Remplacer</entry>
-<entry key="GRID_SIZE_ACTION_MESSAGE">Taille de la grille (compris entre 1 et 40)</entry>
-<entry key="INPUT_GRID_SIZE_MESSAGE">Choix de la taille de la grille</entry>
-<entry key="INPUT_GRID_SIZE_ERROR_MESSAGE">Valeur de la grille non conforme</entry>
-<entry key="NEW_UNKNOWN_TASK_ACTION_MESSAGE">Nouvelle tâche inconnue</entry>
-<entry key="NEW_ABSTRACT_TASK_ACTION_MESSAGE">Nouvelle tâche abstraite</entry>
-<entry key="NEW_INTERACTION_TASK_ACTION_MESSAGE">Nouvelle tâche interaction</entry>
-<entry key="NEW_FEEDBACK_TASK_ACTION_MESSAGE">Nouvelle tâche système</entry>
-<entry key="NEW_USER_TASK_ACTION_MESSAGE">Nouvelle tâche utilisateur</entry>
-<entry key="EDIT_TASK_ACTION_MESSAGE">Edition de la tâche</entry>
-<entry key="COMPLETE_EDIT_TASK_ACTION_MESSAGE">Edition complète de la tâche</entry>
-
-<entry key="COMPLETE_EDIT_TASK_ACTION_MESSAGE_PIE_MENU">Edition complète</entry>
-
-<entry key="UNKNOWN_TASK_MESSAGE">Inconnue</entry>
-<entry key="ABSTRACT_TASK_MESSAGE">Abstraite</entry>
-<entry key="INTERACTION_TASK_MESSAGE">Interaction</entry>
-<entry key="FEEDBACK_TASK_MESSAGE">Systeme</entry>
-<entry key="USER_TASK_MESSAGE">Utilisateur</entry>
-
-<entry key="DELETE_CELL_ACTION_MESSAGE">Supprimer élément(s) sélectionné(s)</entry>
-<entry key="DELETE_CELL_ACTION_MESSAGE_PIE_MENU">Supprimer</entry>
-<entry key="PREVIEW_WINDOW_ACTION_MESSAGE">Afficher fenêtre aperçue</entry>
-<entry key="ZOOM_IN_ACTION_MESSAGE">Agrandissement du modèle de tâches (+)</entry>
-<entry key="ZOOM_OUT_ACTION_MESSAGE">Dégrossissement du modèle de tâches (-)</entry>
-<entry key="ZOOM_DEFAULT_ACTION_MESSAGE">Taille du modèle de tâches par défaut</entry>
-<entry key="ZOOM_GLOBAL_ACTION_MESSAGE">Vue globale du modèle de tâches</entry>
-<entry key="MAGNET_OPTION_ACTION_MESSAGE">Activer/Désactiver l'aimant</entry>
-<entry key="JUSTIFY_OPTION_ACTION_MESSAGE">Respatialisation d'une tâche</entry>
-<entry key="SAME_EXECUTANT_MESSAGE">Uniformisation des sous exécutants   </entry>
-<entry key="VISIBLE_LABEL_ACTION_MESSAGE">Activer/Désactiver l'affichage des libellés</entry>
-<entry key="COLOR_LABEL_ACTION_MESSAGE">Activer/Désactiver la couleur des libellés</entry>
-
-
-
-<entry key="TREE_TASK_PRINT_TITLE_MESSAGE">Arbre de tâches</entry>
-<entry key="USER_CARDS_PRINT_TITLE_MESSAGE">Fiches d'analyse</entry>
-<entry key="OBJECTS_PRINT_TITLE_MESSAGE">Objets du monde</entry>
-<entry key="PRINT_ACTION_MESSAGE">Impression</entry>
-<entry key="LAYOUT_PRINT_ACTION_MESSAGE">Mise en page</entry>
-<entry key="PRINT_PREVIEW_ACTION_MESSAGE">Aperçu avant impression</entry>
-<entry key="PDF_EXPORT_ACTION_MESSAGE">Exporter en PDF</entry>
-<entry key="EPS_EXPORT_ACTION_MESSAGE">Exporter en EPS</entry>
-<entry key="PORTRAIT_ACTION_MESSAGE">Portrait</entry>
-<entry key="LANDSCAPE_ACTION_MESSAGE">Paysage</entry>
-<entry key="SCALE_ACTION_MESSAGE">Echelle</entry>
-<entry key="INPUT_SCALE_ACTION_MESSAGE">Choix de la valeur de l'échelle</entry>
-<entry key="PREVIEW_ZOOM_ACTION_MESSAGE">Agrandissement/Dégrossissement de l'aperçu</entry>
-<entry key="SAVE_HISTORIC_ACTION_MESSAGE">Sauver historique</entry>
-<entry key="CLEAR_HISTORIC_ACTION_MESSAGE">Effacer historique</entry>
-
-
-
-<entry key="PRINT_SCALE_ADAPT_MESSAGE">Adapter au modèle</entry>
-<entry key="PRINT_SCALE_PERSONALIZE_MESSAGE">Personnaliser...</entry>
-<entry key="RESET_ACTION_MESSAGE">Reset</entry>
-<entry key="CONCRETE_OBJECTS_LIST_MESSAGE">Liste Objets</entry>
-<entry key="EDITOR_PRE_TITLE_NAME">Editeur Precondition</entry>
-<entry key="EDITOR_POST_TITLE_NAME">Editeur Action</entry>
-<entry key="EDITOR_ITER_TITLE_NAME">Editeur Iteration</entry>
-<entry key="CAUSE_MESSAGE">  CAUSE</entry>
-<entry key="VALUE_MESSAGE">  RESULTAT</entry>
-<entry key="CHECK_ACTION_MESSAGE">Vérification de l'expression</entry>
-<entry key="EVALUATE_ACTION_MESSAGE">Evaluation de l'expression</entry>
-<entry key="STRING_TO_INTEGER">Erreur : impossible de transformer le texte en entier</entry>
-<entry key="STRING_TO_NUMBER">Erreur : impossible de transformer le texte en nombre</entry>
-<entry key="NO_EXPRESSION_MESSAGE">Aucune expression</entry>
-<entry key="NO_FIRST_EXPRESSION_MESSAGE">Expression non booléenne ne peut être utilisée toute seule</entry>
-<entry key="MISSING_USER_VALUE_MESSAGE">Valeur(s) utilisateur manquante(s)</entry>
-<entry key="PARSER_PROBLEM_MESSAGE">Problème dans le module d'analyse grammaticale</entry>
-<entry key="LEXICAL_ERROR_MESSAGE">Erreur lexicale</entry>
-<entry key="SYNTAXICAL_ERROR_MESSAGE">Erreur syntaxique</entry>
-<entry key="SEMANTICAL_ERROR_MESSAGE">Erreur sémantique</entry>
-<entry key="LINE_MESSAGE">ligne</entry>
-<entry key="COLUMN_MESSAGE">colonne</entry>
-<entry key="ENCOUNTERED_CHAR_MESSAGE">caractère rencontré</entry>
-<entry key="ENCOUNTERED_TOKEN_MESSAGE">texte rencontré</entry>
-<entry key="CHECK_ALL_PRECONDITIONS">Vérification des préconditions ...</entry>
-<entry key="PRECONDITION_OK_MESSAGE">précondition correcte</entry>
-<entry key="PRECONDITION_NO_OK_MESSAGE">précondition non correcte</entry>
-<entry key="PRECONDITION_EVAL_OK_MESSAGE">précondition évaluée</entry>
-<entry key="PRECONDITION_EVAL_NO_OK_MESSAGE">précondition non évaluée</entry>
-<entry key="PRECONDITION_OF_TASK_OK_MESSAGE">Précondition correcte pour la tâche</entry>
-<entry key="PRECONDITION_OF_TASK_NO_OK_MESSAGE">Précondition incorrecte pour la tâche</entry>
-<entry key="PRECONDITION_ERROR_MESSAGE">Erreur sur la précondition</entry>
-<entry key="NOT_YET_CHECKED_PRECONDITION_MESSAGE">Précondition non vérifiée</entry>
-<entry key="PRECONDITION_CHECKED_AND_BUILT_MESSAGE">Vérification et création des préconditions terminées</entry>
-<entry key="PRECONDITION_PROGRESSBAR_MESSAGE">Vérification et construction des préconditions</entry>
-<entry key="EXIT_WITHOUT_SAVE_MESSAGE">Quitter en modifiant l'état du modèle. L'historique des modifications sera initialisé</entry>
-<entry key="CHECK_ALL_EFFETSDEBORDS">Vérification des actions ...</entry>
-<entry key="EFFETSDEBORD_OK_MESSAGE">Action correcte</entry>
-<entry key="EFFETSDEBORD_NO_OK_MESSAGE">Action non correcte</entry>
-<entry key="EFFETSDEBORD_EVAL_OK_MESSAGE">Action évaluée et modèle K-MAD modifié</entry>
-<entry key="EFFETSDEBORD_EVAL_NO_OK_MESSAGE">Action non évaluée</entry>
-<entry key="EFFETSDEBORD_OF_TASK_OK_MESSAGE">Action correcte pour la tâche</entry>
-<entry key="EFFETSDEBORD_OF_TASK_NO_OK_MESSAGE">Action incorrecte pour la tâche</entry>
-<entry key="EFFETSDEBORD_ERROR_MESSAGE">Erreur sur l'action</entry>
-<entry key="NOT_YET_CHECKED_EFFETSDEBORD_MESSAGE">Action non vérifiée</entry>
-<entry key="EFFETSDEBORD_CHECKED_AND_BUILT_MESSAGE">Vérification et création des actions terminées</entry>
-<entry key="EFFETSDEBORD_PROGRESSBAR_MESSAGE">Vérification et construction des actions</entry>
-<entry key="EFFETSDEBORD_CONCRETE_OBJECT_TITLE_MESSAGE">Objet Concret</entry>
-<entry key="EFFETSDEBORD_HISTORY_TITLE_MESSAGE">Historique de K-MAD</entry>
-<entry key="EFFETSDEBORD_LOAD_STATE_MESSAGE">Charger</entry>
-<entry key="NO_SELECTED_HISTORIC_MESSAGE">Historique non sélectionné</entry>
-<entry key="HISTORIC_LOADED_MESSAGE">Historique chargée</entry>
-<entry key="HISTORIC_NO_LOADED_MESSAGE">Historique non chargée</entry>
-<entry key="CHECK_ALL_ITERATIONS">Vérification des itérations ...</entry>
-<entry key="ITERATION_OK_MESSAGE">itération correcte</entry>
-<entry key="ITERATION_NO_OK_MESSAGE">itération non correcte</entry>
-<entry key="ITERATION_EVAL_OK_MESSAGE">itération évaluée</entry>
-<entry key="ITERATION_EVAL_NO_OK_MESSAGE">itération non évaluée</entry>
-<entry key="NOT_YET_CHECKED_ITERATION_MESSAGE">Itération non vérifiée</entry>
-<entry key="STOP_LOOP_ITERATION_MESSAGE">Itération terminée</entry>
-<entry key="CONTINUE_LOOP_ITERATION_MESSAGE">Itération en cours</entry>
-<entry key="ITERATION_MESSAGE">ITERATION</entry>
-<entry key="ITERATION_ERROR_MESSAGE">Erreur sur l'itération</entry>
-<entry key="ITERATION_OF_TASK_OK_MESSAGE">Itération correcte pour la tâche</entry>
-<entry key="ITERATION_OF_TASK_NO_OK_MESSAGE">Itération incorrecte pour la tâche</entry>
-<entry key="ITERATION_CHECKED_AND_BUILT_MESSAGE">Vérification et création des itérations terminées</entry>
-<entry key="ITERATION_PROGRESSBAR_MESSAGE">Vérification et construction des itérations</entry>
-
-        
-
-<entry key="CLEAR_EXPRESSION_MESSAGE">Effacer</entry>
-<entry key="CHECK_VALIDATE_MESSAGE">Vérifier</entry>
-<entry key="EVALUATE_FORCE1_MESSAGE">Evaluer</entry>
-<entry key="PRECONDITION_EDITION_MESSAGE">Edition de la précondition</entry>
-<entry key="EFFETSDEBORD_EDITION_MESSAGE">Edition d'action</entry>
-<entry key="ITERATION_EDITION_MESSAGE">Edition de l'itération</entry>
-<entry key="PRECONDITION_TEXTUEL_EDITION_MESSAGE">Edition textuelle de la précondition</entry>
-<entry key="EFFETSDEBORD_TEXTUEL_EDITION_MESSAGE">Edition textuelle d'action</entry>
-<entry key="ITERATION_TEXTUEL_EDITION_MESSAGE">Edition textuelle de l'itération</entry>
-<entry key="LITTERAUX_TITLE_MESSAGE">Littéraux</entry>
-<entry key="OPERATORS_TITLE_MESSAGE">Opérateurs</entry>
-<entry key="FUNCTIONS_TITLE_MESSAGE">Fonctions</entry>
-<entry key="ITERATORS_TITLE_MESSAGE">Itérateurs</entry>
-<entry key="LOOP_VARIANT_MESSAGE">Variant Boucle</entry>
-
-
-
-<entry key="WRITE_TXT_FILE_OK">Enregistrement du fichier texte réussi : </entry>
-<entry key="WRITE_TXT_FILE_ERROR">Erreur d'enregistrement du fichier texte</entry>
-<entry key="SAVE_CANCELLED_TEXT_FILECHOOSER_NAME">Enregistrement du fichier texte annulé</entry>
-<entry key="SEARCH_NAME_NAME">Nom de la Tâche</entry>
-<entry key="WHOLE_TASK_NAME_OPTION_REPLACE_MESSAGE">Nom complet</entry>
-<entry key="SEARCH_FAC_NAME">Tâche optionnelle</entry>
-<entry key="SEARCH_INT_NAME">Tâche interruptible</entry>
-<entry key="EXTENSION_TEXT_FILTER_SEARCH_NAME">Fichier texte (*.txt)</entry>
-<entry key="SEARCH_MESSAGE_TITLE">Outil de recherche ...</entry>
-<entry key="FIND_MESSAGE">Rechercher</entry>
-<entry key="REPLACE_MESSAGE">Remplacer avec</entry>
-<entry key="DIRECTION_FIND_MESSAGE">Direction</entry>
-<entry key="FORWARD_DIRECTION_FIND_MESSAGE">En Avant</entry>
-<entry key="BACKWARD_DIRECTION_FIND_MESSAGE">En Arrière</entry>
-<entry key="SCOPE_FIND_MESSAGE">Etendu</entry>
-<entry key="ALL_FIND_MESSAGE">Toutes</entry>
-<entry key="SELECTION_FIND_MESSAGE">Sélection</entry>
-<entry key="OPTION_FIND_MESSAGE">Options</entry>
-<entry key="CASE_SENSITIVE_OPTIONS_FIND_MESSAGE">Sensible à la case</entry>
-<entry key="WHOLE_TASK_NAME_OPTIONS_FIND_MESSAGE">Nom de tâche complet</entry>
-<entry key="REGULAR_EXPRESSIONS_OPTIONS_FIND_MESSAGE">Expressions régulières</entry>
-<entry key="SEARCH_RESULT_FIND_MESSAGE">Résultat Recherche</entry>
-<entry key="FIND_ACTION_FIND_MESSAGE">Chercher</entry>
-<entry key="SAVE_OCCURENCES_ACTION_FIND_MESSAGE">Enregistrer Occurences</entry>
-<entry key="REPLACE_NEXT_ACTION_FIND_MESSAGE">Remplacer/Suivant</entry>
-<entry key="REPLACE_PREVIOUS_ACTION_FIND_MESSAGE">Remplacer/Précédent</entry>
-<entry key="REPLACE_ACTION_FIND_MESSAGE">Remplacer</entry>
-<entry key="REPLACE_ALL_ACTION_FIND_MESSAGE">Remplacer tout</entry>
-<entry key="TASK_NOT_FOUNDED_ACCORDING_FIND_CRITERIAS">Tâche non trouvée</entry>
-<entry key="COUNT_TASKS_FOUNDED_MESSAGE">Nombre de tâches</entry>
-
-
-
-<entry key="SIMULATION_TITLE_MESSAGE">Simulation</entry>
-<entry key="ERROR_ITERATION_VIEW_MESSAGE">Erreur</entry>
-<entry key="PREDICAT_ITERATION_VIEW_MESSAGE">Prédicat</entry>
-<entry key="USER_VALUE_ITERATION_VIEW_MESSAGE">Val. Utilisateur</entry>
-<entry key="SCENARIO_FILTER_NAME">Fichier de scénario</entry>
-<entry key="ACTIONS_SIMULATION_MESSAGE">Actions</entry>
-<entry key="EDIT_USER_VALUES_SIMULATION_MESSAGE">Editer Valeurs Utilisateur</entry>
-<entry key="RECORD_SCENARIO_MESSAGE">Enregistrer scénario </entry>
-<entry key="OPEN_CANCELLED_SCENARIO_FILECHOOSER_NAME">Chargement d'un scénario annulé</entry>
-<entry key="SAVE_CANCELLED_SCENARIO_FILECHOOSER_NAME">Enregistrement d'un scénario annulé</entry>
-<entry key="SUCCEEDED_SAVE_SCENARIO_MESSAGE">Enregistrement du scénario réussi</entry>
-<entry key="NO_SUCCEEDED_SAVE_SCENARIO_MESSAGE">Enregistrement du scénario échoué</entry>
-<entry key="AUTHORIZED_EXECUTER_USER_MESSAGE">Autorisée</entry>
-<entry key="NO_AUTHORIZED_EXECUTER_USER_MESSAGE">Non Autorisée</entry>
-<entry key="DISABLED_CONSTRAINT_MESSAGE">Désactivée</entry>
-<entry key="EVENT_TITLE_MESSAGE">Evénements</entry>
-<entry key="NO_CONCRETE_OBJECT">Aucun object concret courant</entry>
-<entry key="NO_FIRING_EVENT_MESSAGE">Aucun Evénement Provoqué</entry>
-<entry key="NO_FIRING_EVENT_TINY_MESSAGE">Aucun Evénement</entry>
-<entry key="FIRABLE_EVENT_STATE_MESSAGE">Déclenchable</entry>
-<entry key="NO_FIRABLE_EVENT_STATE_MESSAGE">Non Déclenchable</entry>
-<entry key="NO_SELECTED_ACTION_FOR_CONSTRAINTS_MESSAGE">Aucune action "exécuter" sélectionnée</entry>
-<entry key="NO_SELECTED_SCENARIO_ACTION_FOR_CONSTRAINTS_MESSAGE">Aucune action "exécuter" du scénario sélectionnée</entry>
-<entry key="CONSTRAINTS_TITLE_MESSAGE">Contraintes</entry>
-<entry key="SOURCE_TASK_EVENT_MESSAGE">Tâche</entry>
-<entry key="NO_USER_MESSAGE">Aucun Utilisateur</entry>
-<entry key="EXECUTING_USER_TITLE_MESSAGE">Utilisateur</entry>
-<entry key="CONSTRAINTS_NAME_COLUMN_NAME">Nom</entry>
-<entry key="CONSTRAINTS_VALEUR_COLUMN_NAME">Valeur</entry>
-<entry key="CONSTRAINTS_STATE_COLUMN_NAME">Etat</entry>
-<entry key="PRECONDITION_CONSTRAINTS_RESPECTED_STATE_MESSAGE">Respectée</entry>
-<entry key="PRECONDITION_CONSTRAINTS_NO_RESPECTED_STATE_MESSAGE">Non Respectée</entry>
-<entry key="PRECONDITION_CONSTRAINTS_ERROR_STATE_MESSAGE">Erreur</entry>
-<entry key="PRECONDITION_CONSTRAINTS_NEED_VALUES_STATE_MESSAGE">Besoin Valeur(s)</entry>
-<entry key="EFFETSDEBORD_EXECUTED_STATE_MESSAGE">Exécutée</entry>
-<entry key="EFFETSDEBORD_NO_EXECUTED_STATE_MESSAGE">Non Exécutée</entry>
-<entry key="USER_VALUES_TITLE">Editeur des Valeurs Utilisateurs</entry>
-<entry key="PRECONDITION_USER_EDITION_MESSAGE">Valeurs utilisateur de la précondition</entry>
-<entry key="EFFETSDEBORD_USER_EDITION_MESSAGE">Valeurs utilisateur d'action</entry>
-<entry key="ITERATION_USER_EDITION_MESSAGE">Valeurs utilisateur de l'itération</entry>
-<entry key="TRIGGER_VALID_TASK_MESSAGE">Déclencher</entry>
-<entry key="NO_TRIGGER_CANCEL_TASK_MESSAGE">Annuler Déclenchement</entry>
-<entry key="EXECUTE_TASK_TRAITEMENT_MESSAGE">Traitement de la tâche</entry>
-<entry key="EXECUTION_CONSTRAINT_MESSAGE">Contraintes d'exécutation</entry>
-<entry key="USER_EXECUTION_CONSTRAINT_MESSAGE">Utilisateur</entry>
-<entry key="CAN_EXECUTE_TASK_MESSAGE">peut exécuter la tâche</entry>
-<entry key="CAN_NOT_EXECUTE_TASK_MESSAGE">ne peut pas exécuter la tâche</entry>
-<entry key="EVENT_TRIGGER_CONSTRAINT_MESSAGE">Evénement</entry>
-<entry key="NO_TRIGGER_EVENT_CONSTRAINT_MESSAGE">Aucun d'événement déclencheur</entry>
-<entry key="CAN_TRIGGER_TASK_MESSAGE">déclenche la tâche</entry>
-<entry key="CAN_NOT_TRIGGER_CONSTRAINT_MESSAGE">non généré et ne peut déclencher la tâche</entry>
-<entry key="PRECONDITION_CONSTRAINT_MESSAGE">Précondition</entry>
-<entry key="ACTION_CONSTRAINT_MESSAGE">Effets de bord</entry>
-<entry key="GENERATE_EVENTS_CONSTRAINT_MESSAGE">Génération Evénements</entry>
-<entry key="NO_GENERATED_EVENTS_CONSTRAINT_MESSAGE">Pas d'événement généré</entry>
-<entry key="EFFETSDEBORD_CONSTRAINT_MESSAGE">Actions</entry>
-<entry key="USER_VALUES_MISSING_OR_WRONG_MESSAGE">Valeur(s) utilisateur manquante(s) ou erronée(s)</entry>
-<entry key="CONCRETE_OBJECT_NO_SELECTED_MESSAGE">Objet(s) concret(s) non sélectionné(s)</entry>
-<entry key="USER_VALUES_PROBLEM_MESSAGE">Problème Valeurs Utilisateur</entry>
-<entry key="FINISHED_SCENARIO_PROBLEM_MESSAGE">Scénario Terminée</entry>
-<entry key="FINISHED_SIMULATION_PROBLEM_MESSAGE">Simulation Terminée</entry>
-<entry key="FINISHED_SCENARIO_AND_SIMULATION_PROBLEM_MESSAGE">Simulation et scénario Terminés</entry>
-<entry key="SELECT_TASK_TO_REPLAY_MESSAGE">Veuillez selectionner une tache</entry>
-<entry key="ITERATION_FINISH_NO_ACTION">Itération términée, aucun effet de bord n'est exécuté</entry>
-
-
-<entry key="EXECUTE_ACTION_SIMULATION_MESSAGE">Exécuter</entry>
-<entry key="PASS_ACTION_SIMULATION_MESSAGE">Passer</entry>
-<entry key="SUSPEND_ACTION_SIMULATION_MESSAGE">Interrompre</entry>
-<entry key="RESUME_ACTION_SIMULATION_MESSAGE">Reprendre</entry>
-<entry key="NO_RESUME_ACTION_SIMULATION_MESSAGE">Abandonner</entry>
-
-
-
-<entry key="ACTIVE_STATE_TASK_SIMULATION_MESSAGE">Active</entry>
-<entry key="ACTIVE_ITERATION_STATE_TASK_SIMULATION_MESSAGE">ActiveIte</entry>
-<entry key="FINISHED_STATE_TASK_SIMULATION_MESSAGE">Terminée</entry>
-<entry key="PASSIVE_STATE_TASK_SIMULATION_MESSAGE">Passive</entry>
-<entry key="NO_ACCESSIBLE_STATE_TASK_SIMULATION_MESSAGE">Inactive</entry>
-<entry key="PASSED_STATE_TASK_SIMULATION_MESSAGE">Passée</entry>
-<entry key="SUSPENDED_STATE_TASK_SIMULATION_MESSAGE">Suspendue</entry>
-<entry key="NO_RESUMED_STATE_TASK_SIMULATION_MESSAGE">Abandonnée</entry>
-
-
-
-<entry key="RECORD_TITLE_MESSAGE">Enregistrement</entry>
-<entry key="RECORD_BUILDING_SCENARION_MESSAGE">Scénario Courant</entry>
-<entry key="RECORD_AVAILABLE_ACTIONABLE_MESSAGE">Actions Disponibles</entry>
-<entry key="FINISHED_RECORD_SIMULATION_MESSAGE">Simulation du modèle de tâches K-MAD terminée : scénario disponible ...</entry>
-<entry key="NO_SELECTED_TASK_BEFORE_RECORD_SIMULATION_MESSAGE">Veuillez selectionner une tâche</entry>
-
-
-<entry key="REPLAY_TITLE_MESSAGE">Rejeu</entry>
-<entry key="REPLAY_SLOW_TEMPO">Lent</entry>
-<entry key="REPLAY_MODERATE_TEMPO">Modéré</entry>
-<entry key="REPLAY_SPEED_TEMPO">Rapide</entry>
-<entry key="SCENARIO_REPLAY_MESSAGE">Scénario à Rejouer</entry>
-<entry key="REPLAY_OPTIONS_MESSAGE">Options de rejeu</entry>
-<entry key="REPLAY_KEEP_USER_VALUES_MESSAGE">Conserver valeurs</entry>
-<entry key="REPLAY_TEMPO_MESSAGE">Tempo</entry>
-<entry key="NO_ROOT_TASK_PROBLEM_MESSAGE">Pas de tâche racine</entry>
-<entry key="NO_FOUNDED_TASK_TO_REPLAY_PROBLEM_MESSAGE">Tâche non trouvée</entry>
-<entry key="CAN_NOT_EXECUTE_TASK_TO_REPLAY_PROBLEM_MESSAGE">Ne peut exécuter cette tâche tout de suite</entry>
-
-<entry key="CONFIG_ERROR_DOM">Erreur de configuration du parseur DOM</entry>
-<entry key="CALL_NEW_DOCUMENT_BUILDER">lors de l'appel à  fabrique.newDocumentBuilder()</entry>
-<entry key="SIMULATION_PARSING_ERROR">Erreur lors du parsing du document</entry>
-<entry key="CALL_CONSTRUCTEUR_PARSE">lors de l'appel à  construteur.parse(xml)</entry>
-<entry key="SIMULATION_IO_ERROR">Erreur d'entrée/sortie</entry>
-
-
-<entry key="PROJECT_LEADER_MESSAGE">Responsable du Projet</entry>
-<entry key="DEVELOPMENT_QUERING_TOOL_MESSAGE">Développement K-MADe et Interrogation K-MAD</entry>
-<entry key="KMAD_SPECIFY_MESSAGE">Spécification du modèle K-MAD</entry>
-<entry key="KMAD_ADAPTATOR_MESSAGE">Adaptateur du modèle K-MAD</entry>
-<entry key="JAVA_GRAPHIC_LIBRARIES_MESSAGE">Bibliothèques Utilisées</entry>
-<entry key="KMADE_TEAM_MESSAGE">Participants</entry>
-<entry key="JAVA_LIBRARIES_MESSAGE">Bibliothèques</entry>
-
-<!-- Event -->
-<entry key="EVENT_TRIGGER">Evénement déclenché</entry>
-<entry key="EVENT_ENABLE">Evénement disponible</entry>
-
-
-<entry key="COHERENCE_INTRO_ERROR">L'outil de cohérence a détecté</entry>
-<entry key="COHERENCE_ONE_ERROR">erreur</entry>
-<entry key="COHERENCE_SOME_ERROR">erreurs</entry>
-<entry key="COHERENCE_INTER">et</entry>
-<entry key="COHERENCE_ONE_WARNING">warning</entry>
-<entry key="COHERENCE_SOME_WARNING">warnings</entry>
-<entry key="COHERENCE_VERIFICATION_TITLE">Simulation refusée ...</entry>
-
-
-<entry key="NO_ALONE_MESSAGE_PROBLEM">Pas de tâche seule</entry>
-<entry key="PRECONDITION_EXPRESSION_MESSAGE_PROBLEM">Problème dans l'expression de la précondition</entry>
-<entry key="EFFETSDEBORD_EXPRESSION_MESSAGE_PROBLEM">Problème dans l'expression d'action</entry>
-<entry key="ITERATION_EXPRESSION_MESSAGE_PROBLEM">Problème dans l'expression de l'itération</entry>
-<entry key="NO_ONLY_ONE_SUBTASK_MESSAGE_PROBLEM">Pas de sous tâche unique</entry>
-<entry key="INVALID_DECOMPOSITION_MESSAGE_PROBLEM">Decomposition invalide</entry>
-<entry key="NO_DECOMPOSITION_SPECIFIED_MESSAGE_PROBLEM">Décomposition non précisée</entry>
-<entry key="TASK_HAS_NO_NAME_MESSAGE_PROBLEM">Entrez un nom pour la tache</entry>
-<entry key="ELEMENTARY_DECOMPOSITION_FOR_LEAF_TASK">Décomposition doit être élémentaire pour une tâche feuille</entry>
-<entry key="NO_EXECUTANT_SPECIFIED_MESSAGE_WARNING">Exécutant non défini</entry>
-<entry key="SUBTASKS_EXECUTANT_DIFFERENT_MESSAGE_WARNING">Exécutant différent</entry>
-<entry key="HIERARCHY_TYPE_MESSAGE">Hiérarchie</entry>
-<entry key="EXPRESSION_TYPE_MESSAGE">Expression</entry>
-<entry key="TASKS_SPACE_LOCATION_MESSAGE">Espace de tâches</entry>
-<entry key="PRECONDITION_LOCATION_MESSAGE">Précondition</entry>
-<entry key="EFFETSDEBORD_LOCATION_MESSAGE">Action</entry>
-<entry key="ITERATION_LOCATION_MESSAGE">Itération</entry>
-<entry key="COHERENCE_TITLE_MESSAGE">Vérification grammaire</entry>
-<entry key="COHERENCE_CHECK_MESSAGE">Vérifier grammaire</entry>
-<entry key="ERRORS_TITLE_MESSAGE">Erreurs et Avertissements</entry>
-<entry key="MESSAGE_ERROR_COLUMN_NAME">Message</entry>
-<entry key="TASK_NAME_COLUMN_NAME">Tâche</entry>
-<entry key="ERROR_TYPE_COLUMN_NAME">Type</entry>
-<entry key="LOCATION_COLUMN_NAME">Localisation</entry>
-
-
-
-<entry key="COUNT_TASK_INTO_TASK_MODELS_MESSAGE">Nombre de tâches dans l'espace de tâches</entry>
-<entry key="COUNT_USER_TASK_MESSAGE">Nombre d'exécutant de type utilisateur    </entry>
-<entry key="COUNT_UNKNOWN_TASK_MESSAGE">Nombre d'exécutant de type inconnu</entry>
-<entry key="COUNT_SYSTEM_TASK_MESSAGE">Nombre d'exécutant de type système</entry>
-<entry key="COUNT_ABSTRACT_TASK_MESSAGE">Nombre d'exécutant de type abstrait</entry>
-<entry key="COUNT_INTERACT_TASK_MESSAGE">Nombre d'exécutant de type interaction</entry>
-<entry key="COUNT_UNKNOWN_DEC_TASK_MESSAGE">Nombre de décomposition de type inconnu</entry>
-<entry key="COUNT_ENABLING_DEC_TASK_MESSAGE">Nombre de décomposition de type séquenciel</entry>
-<entry key="COUNT_CHOICE_DEC_TASK_MESSAGE">Nombre de décomposition de type alternatif</entry>
-<entry key="COUNT_CONCURRENT_DEC_TASK_MESSAGE">Nombre de décomposition de type parallèle</entry>
-<entry key="COUNT_ELEMENTARY_DEC_TASK_MESSAGE">Nombre de décomposition de type élémentaire</entry>
-<entry key="COUNT_NO_ORDER_DEC_TASK_MESSAGE">Nombre de décomposition de type pas d'ordre</entry>
-<entry key="STATISTIC_TITLE">Outil de Statistiques</entry>
-<entry key="TYPE_STATISTIC_MESSAGE">Type</entry>
-<entry key="RESULT_STATISTIC_MESSAGE">Resultat</entry>
-<entry key="REFRESH_STATISTIC_MESSAGE">Mise à jour</entry>
-
-
-
-
-
-<entry key="ATTRIBUT_NOT_FOUND_EXPRESSION_EXCEPTION_MESSAGE">Type de l'Attribut Non Trouvé</entry>
-<entry key="GROUP_NOT_FOUND_EXPRESSION_EXCEPTION_MESSAGE">Groupe non trouvé</entry>
-
-<entry key="NEW_NAME_TASK">Nom de la tâche</entry>
-<entry key="ROOT_TASK_NAME">Racine   </entry>
-<entry key="SINGLETON_NAME">Unique</entry>
-<entry key="STACK_NAME">Pile</entry>
-<entry key="SET_NAME">Ensemble</entry>
-<entry key="LIST_NAME">Liste</entry>
-<entry key="ARRAY_NAME">Tableau</entry>
-<entry key="BOOLEAN_NAME">Booléen</entry>
-<entry key="ENUMERATION_NAME">Enumération</entry>
-<entry key="INTEGER_NAME">Entier</entry>
-<entry key="NUMBER_NAME">Nombre</entry>
-<entry key="INTERVALLE_NAME">Intervalle</entry>
-<entry key="STRING_NAME">Texte</entry>
-<entry key="UNKNOWN_EXECUTANT_NAME">Inconnu</entry>
-<entry key="SYSTEM_EXECUTANT_NAME">Système</entry>
-<entry key="INTERACTION_EXECUTANT_NAME">Interactif</entry>
-<entry key="USER_EXECUTANT_NAME">Utilisateur</entry>
-<entry key="ABSTRACT_EXECUTANT_NAME">Abstrait</entry>
-<entry key="UNKNOWN_IMPORTANCE_NAME">Non déterminée</entry>
-<entry key="HIGH_IMPORTANCE_NAME">Très importante</entry>
-<entry key="AVERAGE_IMPORTANCE_NAME">Assez importante</entry>
-<entry key="LOW_IMPORTANCE_NAME">Peu importante</entry>
-<entry key="UNKNOWN_FREQUENCY_NAME">Non déterminée</entry>
-<entry key="HIGH_FREQUENCY_NAME">Elevée</entry>
-<entry key="AVERAGE_FREQUENCY_NAME">Moyenne</entry>
-<entry key="LOW_FREQUENCY_NAME">Faible</entry>
-<entry key="UNKNOWN_MODALITY_NAME">Nom déterminée</entry>
-<entry key="SENSORI_MODALITY_NAME">Sensori-Motrice</entry>
-<entry key="COGNITIF_MODALITY_NAME">Cognitive</entry>
-<entry key="UNKNOWN_EXPERIENCE_NAME">Nom déterminée</entry>
-<entry key="HIGH_EXPERIENCE_NAME">Expert</entry>
-<entry key="AVERAGE_EXPERIENCE_NAME">Moyenne</entry>
-<entry key="LOW_EXPERIENCE_NAME">Novice</entry>
-<entry key="OPERATOR_NAME">Décomposition</entry>
-<entry key="ALTERNATIF_LONG_NAME">Alternatif</entry>
-<entry key="PARALLELE_LONG_NAME">Parallèle</entry>
-<entry key="SEQUENTIEL_LONG_NAME">Séquentiel</entry>
-<entry key="NO_ORDER_LONG_NAME">Pas d'ordre</entry>
-<entry key="LEAF_LONG_NAME">Elémentaire</entry>
-<entry key="UNKNOWN_LONG_NAME">Inconnu</entry>
-    
-
-<entry key="REMOVE_ABSTRACT_OBJECT">Suppression de l'objet abstrait</entry>
-<entry key="REMOVE_ABSTRACT_ATTRIBUT">Suppression de l'attribut abstrait</entry>
-<entry key="REMOVE_GROUP">Suppression du groupe</entry>
-<entry key="REMOVE_USER">Suppression de l'utilisateur</entry>
-<entry key="REMOVE_EVENT">Suppression de l'événement</entry>
-<entry key="REMOVE_CONCRETE_OBJECT">Suppression de l'objet concret</entry>
-<entry key="REMOVE_CONCRETE_ATTRIBUT">Suppression de l'attribut concret</entry>
-<entry key="NO_USED_GROUP_ATTRIBUT">Groupe ou attribut abstrait jamais utilisés</entry>
-<entry key="NO_USED_ABSTRACT_OBJECT">Objet abstrait jamais utilisé</entry>
-<entry key="REMOVE_ACTOR">Suppression de l'acteur</entry>
-<entry key="REMOVE_ACTOR_SYSTEM">Suppression de l'acteur système</entry>
-<entry key="REMOVE_MATERIEL">Suppression de l'équipement</entry>
-<entry key="REMOVE_ENUMERATION">Suppression de l'énumération</entry>
-<entry key="REMOVE_ELEMENT">Suppression de l'élément</entry>
-<entry key="REMOVE_INTERVALLE">Suppression de l'intervalle</entry>
-<entry key="REMOVE_LABEL">Suppression du libellé</entry>
-<entry key="CHANGE_AGREGAT">Modification du type d'ensemble</entry>
-<entry key="REMOVE_OF_THE_TASK_MESSAGE">de la tâche</entry>
-<entry key="REMOVE_OF_THE_ABSTRACT_ATTRIBUT_MESSAGE">de l'attribut abstrait</entry>
-<entry key="REMOVE_OF_THE_ABSTRACT_OBJECT_MESSAGE">de l'objet abstrait</entry>
-<entry key="GROUP_MESSAGE">Groupe</entry>
-<entry key="CONCRETE_OBJECT_MESSAGE">OC</entry>
-<entry key="FROM_GROUP_MESSAGE">du groupe</entry>
-<entry key="ATTRIBUT_ABSTRAIT">Attribut abstrait</entry>
-<entry key="NOT_FOUNDED_ERROR">non trouvé</entry>
-<entry key="INTEGER_STRING_COMPARISON_OPERATOR_ERROR">Conversion de la chaîne de caractères en entier impossible</entry>
-<entry key="INTEGER_STRINGS_COMPARISON_OPERATOR_ERROR">Conversion des chaînes de caractères en entier impossible</entry>
-<entry key="COMPARISON_OPERATOR_ERROR">Problème de typage pour la décomposition de comparaison</entry>
-<entry key="BOOLEAN_IS_NEEDED_ERROR">Fonction nécessite une expression booléenne comme paramètre</entry>
-<entry key="NO_SAME_ABSTRACT_OBJECT">Les groupes ont des objets abstraits différents</entry>
-<entry key="TYPAGE_ERROR">Les types sont différents</entry>
-<entry key="TYPE_NOT_A_NUMBER">Les types doivent être des nombres</entry>
-<entry key="TYPE_NEED_BOOLEAN">Le type doit être booléen</entry>
-<entry key="TYPE_PLUS_ASSIGNMENT">Les types doivent être deux nombres ou deux textes</entry>
-
-
-<entry key="CLASS_LOADER_PROBLEM_MESSAGE">Probleme avec la classe Java</entry>
-<entry key="ENTITY_NO_EXIST_PROBLEM_MESSAGE">Entity n'existe pas</entry>
-
-
-
-<entry key="NO_VERSION">Aucune version n'est précisée dans le fichier chargé</entry>
-<entry key="NEW_SAVE_NEW_FORMAT">Attention toute nouvelle sauvegarde se fera au nouveau format</entry>
-<entry key="VERSION_USE">Vous utilisez la version : </entry>
-<entry key="VERSION_FILE">Vous chargez un fichier avec la version : </entry>
-<entry key="NOT_SAME_VERSION">La version que vous essayez de charger n'est pas la même que celle de l'outil</entry>
-
-
-<entry key="OBJECTS_VISUALIZATION_WINDOW_NAME">Objets KMADe</entry>
-<entry key="OPEN_ITEMS_FILE">Charger un fichier d'objets</entry>
-<entry key="CAN_SAVE_PROJECT">Vous pouvez sauver le projet ou les objets en cours</entry>
-<entry key="CAN_NOT_SAVE_PROJECT">Vous ne pouvez pas sauver le projet ou les objets en cours</entry>
-
-
-<entry key="EMPTY_CELL_NAME">VIDE</entry>
-<entry key="NEW_ABSTRACT_OBJECT_TEXT">Créer un nouvel objet abstrait</entry>
-<entry key="REMOVE_ABSTRACT_OBJECT_TEXT">Supprimer l'objet abstrait sélectionné</entry>
-<entry key="NEW_OBJECT_NAME">Nouvel objet</entry>
-<entry key="NO_SELECTED_OBJECT">Pas d'objet sélectionné</entry>
-<entry key="GENERALITY">Généralités</entry>
-<entry key="ATTRIBUTES_NAME">Attributs</entry>
-<entry key="ADD_ATTRIBUTE">Ajouter un nouvel attribut</entry>
-<entry key="REMOVE_ATTRIBUTE">Supprimer un attribut</entry>
-
-
-<entry key="EDIT_CONCRETE_OBJECT_ACTION_MESSAGE">Editer l'objet concret </entry>
-<entry key="EDIT_OBJECTS_ACTION_MESSAGE">Ouvrir la fenêtre d'édition des objets</entry>
-<entry key="OBJECT_INSERTION_ERROR">Le groupe n'est pas concordant avec l'objet abstrait duquel est instancié l'objet</entry>
-<entry key="NEW_GROUP_NAME">Nouveau groupe</entry>
-<entry key="NEW_STACK_ACTION_MESSAGE">Ajouter une nouvelle pile</entry>
-<entry key="NEW_SET_ACTION_MESSAGE">Ajouter un nouvel ensemble</entry>
-<entry key="NEW_ARRAY_ACTION_MESSAGE">Ajouter un nouveau tableau</entry>
-<entry key="NEW_LIST_ACTION_MESSAGE">Ajouter une nouvelle liste</entry>
-<entry key="NEW_SINGLETON_ACTION_MESSAGE">Ajouter un nouveau singleton</entry>
-<entry key="EDIT_GROUP_ACTION_MESSAGE">Editer le groupe</entry>
-<entry key="EDIT_GROUP_AND_CONCRETE_ACTION_MESSAGE">Editer le groupe ou l'objet concret</entry>
-<entry key="DELETE_GROUP_AND_CONCRETE_ACTION_MESSAGE">Supprimer le groupe ou l'objet concret</entry>
-
-
-<!-- Prototyping tool -->
-<!--   <entry key="PROTOTYPING_TOOL_TITLE_NAME">ProtoTask</entry> -->
-<entry key="PROTOTYPING_TOOL_TITLE_NAME">ProtoTask</entry>
-<entry key="PROTOTYPING_TOOL_RESET">Recommencer</entry>
-<entry key="PROTOTYPING_TOOL_CURRENT_TASK">Tâche en cours</entry>
-<entry key="PROTOTYPING_TOOL_NAME_TITLE">Nom</entry>
-<entry key="PROTOTYPING_TOOL_NAME_TOOLTIP">Le nom de la tâche</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_ABS">La tâche se décompose en plusieurs sous tâches</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_INCONNU">La tâche est réalisée par \"inconnu\"</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_INT">La tâche est réalisée par l'utilisateur sur le système</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_SYS">La tâche est réalisée par le système</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_USER">La tâche est réalisée par l'utilisateur, indépendamment du système</entry>
-<entry key="PROTOTYPING_TOOL_EXECUTANT_TOOLTIP">L'exécutant de la tâche</entry>
-<entry key="PROTOTYPING_TOOL_DECOMPOSITION_TITLE">Décomposition de la tâche</entry>
-<entry key="PROTOTYPING_TOOL_PRECONDITION_TITLE">Prérequis d'éxécution</entry>
-<entry key="PROTOTYPING_TOOL_PRECONDITION_TOOLTIP">Condition pour l'éxécution de la tâche</entry>
-<entry key="PROTOTYPING_TOOL_ITERATION_TITLE">Prérequis de répétition</entry>
-<entry key="PROTOTYPING_TOOL_ITERATION_TOOLTIP">Condition pour la répétition de la tâche</entry>
-<entry key="PROTOTYPING_TOOL_DESCRIPTION_TITLE">Description de la tâche</entry>
-<entry key="PROTOTYPING_TOOL_DESCRIPTION_TOOLTIP">Description textuelle de la tâche</entry>
-<entry key="PROTOTYPING_TOOL_SUBTASK_DECOMP">(...)</entry>
-<entry key="PROTOTYPING_TOOL_SUBTASK_DECOMP_TOOLTIP1">Cette sous-tâche se décompose en</entry>
-<entry key="PROTOTYPING_TOOL_SUBTASK_DECOMP_TOOLTIP2">tâche(s)</entry>
-<entry key="PROTOTYPING_TOOL_SUBTASK_TERMINAL_TOOLTIP">Cette sous-tâche ne se décompose pas</entry>
-<entry key="PROTOTYPING_TOOL_SUBTASK_DESCRIPTION_TOOLTIP">Description</entry>
-<entry key="PROTOTYPING_TOOL_SUBTASK_PRECONDITION">Prérequis</entry>
-<entry key="PROTOTYPING_TOOL_CANCEL_BUTTON">Annuler</entry>
-<entry key="PROTOTYPING_TOOL_END_BUTTON">Terminer</entry>
-<entry key="PROTOTYPING_TOOL_VALIDATE_END_BUTTON">Valider et Terminer</entry>
-<entry key="PROTOTYPING_TOOL_CONTROL_TITLE">Contrôle</entry>
-<entry key="PROTOTYPING_TOOL_ITERATION_BUTTON">Faire de nouveau</entry>
-<entry key="PROTOTYPING_TOOL_MENU_TITLE">ProtoTask</entry>
-<entry key="PROTOTYPING_TOOL_MENU_TOOLTIP">ProtoTask</entry>
-<entry key="PROTOTYPING_TOOL_PRECONDITION_TEXT_PANE">Prérequis</entry>
-<entry key="PROTOTYPING_TOOL_PRECONDITION_TITLE_PANE">Vérification du prérequis</entry>
-<entry key="PROTOTYPING_TOOL_PASSIVE_INACTIVE_ERROR">Erreur : la tâche en cours n'a pas le bon état</entry>
-<entry key="PROTOTYPING_TOOL_END_ERROR">Impossible de terminer la tâche</entry>
-<entry key="PROTOTYPING_TOOL_TRUE">Vrai</entry>
-<entry key="PROTOTYPING_TOOL_FALSE">Faux</entry>
-<entry key="PROTOTYPING_TOOL_INDETERMINATE">Indeterminé</entry>
-<entry key="PROTOTYPING_TOOL_HISTORY">Historique</entry>
-<entry key="PROTOTYPING_TOOL_HISTORY_DESCRIPTION">Description</entry>
-<entry key="PROTOTYPING_TOOL_DURATION">Duration</entry>
-
-
+	<entry key="PROTOTASK_CONDITION_MENU">Condition(s)</entry>
+	<entry key="PROTOTASK_CONDITION_MENU_ITEM1">Afficher</entry>
+	<entry key="PROTOTASK_HISTORIQUE_MENU">Historique</entry>
+	<entry key="PROTOTASK_HISTORIQUE_MENU_ITEM1">Sauvegarder</entry>
+	<entry key="PROTOTASK_HISTORIQUE_MENU_ITEM2">Afficher</entry>
+	<entry key="PROTOTASK_CONDITION_FRAME_TITLE">Condition(s)</entry>
+	<entry key="PROTOTASK_HISTORIQUE_FRAME_TITLE">Historique</entry>
+	<entry key="PROTOTASK_END_TITLE">Scenario terminé</entry>
+	<entry key="PROTOTASK_END_LABEL">Scenario terminé !</entry>
+	<entry key="PROTOTASK_CONDITION_LABEL">Condition(s):</entry>
+	<entry key="PROTOTASK_TASK_LABEL">Tâche(s):</entry>
+	<entry key="PROTOTASK_REPEAT_BUTTON">Refaire</entry>
+	<entry key="PROTOTASK_VALIDATE_BUTTON">Valider</entry>
+	<entry key="PROTOTASK_TOOL_MENU_TITLE">ProtoTask (2.0 Beta)</entry>
+	<entry key="PROTOTASK_TOOL_MENU_TOOLTIP">ProtoTask (2.0 Beta)</entry>
 
 </properties>

@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -74,7 +74,7 @@ public class ParkMachines extends Material {
     public ArrayList<Machine> getMembers() {
 	return members;
     }
-    
+
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;
     }
@@ -122,58 +122,62 @@ public class ParkMachines extends Material {
     }
 
     public Element toXML2(Document doc) throws Exception {
-    	Element racine = doc.createElement("ParcMachines");
-    	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.MACHINE_PARK_CLASS);
-    	racine.setAttribute("idkmad", oid.get());
+	Element racine = doc.createElement("ParcMachines");
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "."
+		+ ExpressConstant.MACHINE_PARK_CLASS);
+	racine.setAttribute("idkmad", oid.get());
 
-    	Element kmadParcName = doc.createElement("parcMachines-name");
-    	kmadParcName.setTextContent(this.getName());
-    	racine.appendChild(kmadParcName);
+	Element kmadParcName = doc.createElement("parcMachines-name");
+	kmadParcName.setTextContent(this.getName());
+	racine.appendChild(kmadParcName);
 
-    	if (!this.getDescription().equals("")) {
-    	    Element kmadParcDescription = doc
-    		    .createElement("parcMachines-description");
-    	    kmadParcDescription.setTextContent(this.getDescription());
-    	    racine.appendChild(kmadParcDescription);
-    	}
+	if (!this.getDescription().equals("")) {
+	    Element kmadParcDescription = doc
+		    .createElement("parcMachines-description");
+	    kmadParcDescription.setTextContent(this.getDescription());
+	    racine.appendChild(kmadParcDescription);
+	}
 
-    	if (!super.getImage().equals("")) {
-    	    Element kmadParcImagePath = doc
-    		    .createElement("parcMachines-imagepath");
-    	    kmadParcImagePath.setTextContent(super.getImage());
-    	    racine.appendChild(kmadParcImagePath);
-    	}
-    	// seul les machines stocks les parcs dans le XML
+	if (!super.getImage().equals("")) {
+	    Element kmadParcImagePath = doc
+		    .createElement("parcMachines-imagepath");
+	    kmadParcImagePath.setTextContent(super.getImage());
+	    racine.appendChild(kmadParcImagePath);
+	}
+	// seul les machines stocks les parcs dans le XML
 
-    	return racine;
+	return racine;
     }
 
     public void createObjectFromXMLElement2(Element p) throws Exception {
-    	this.oid = new Oid(p.getAttribute("idkmad"));
-    	members.clear();
+	this.oid = new Oid(p.getAttribute("idkmad"));
+	members.clear();
 
-    	NodeList kmadParcName = p.getElementsByTagName("parcMachines-name");
-    	if(kmadParcName.item(0).getParentNode() != p){
-    		kmadParcName = null;}
-    	if (kmadParcName.item(0) != null)
-    	    super.setName(kmadParcName.item(0).getTextContent());
+	NodeList kmadParcName = p.getElementsByTagName("parcMachines-name");
+	if (kmadParcName.item(0).getParentNode() != p) {
+	    kmadParcName = null;
+	}
+	if (kmadParcName.item(0) != null)
+	    super.setName(kmadParcName.item(0).getTextContent());
 
-    	NodeList kmadParcDescription = p
-    		.getElementsByTagName("parcMachines-description");
-    	if(kmadParcDescription.item(0).getParentNode() != p){
-    		kmadParcDescription = null;}
-    	if (kmadParcDescription.item(0) != null)
-    	    super.setDescription(kmadParcDescription.item(0).getTextContent());
+	NodeList kmadParcDescription = p
+		.getElementsByTagName("parcMachines-description");
+	if (kmadParcDescription.item(0).getParentNode() != p) {
+	    kmadParcDescription = null;
+	}
+	if (kmadParcDescription.item(0) != null)
+	    super.setDescription(kmadParcDescription.item(0).getTextContent());
 
-    	NodeList kmadParcImagePath = p
-    		.getElementsByTagName("parcMachines-imagepath");
-    	if(kmadParcImagePath.item(0).getParentNode() != p){
-    		kmadParcImagePath = null;}
-    	if (kmadParcImagePath.item(0) != null)
-    	    super.setImage(kmadParcImagePath.item(0).getTextContent());
+	NodeList kmadParcImagePath = p
+		.getElementsByTagName("parcMachines-imagepath");
+	if (kmadParcImagePath.item(0).getParentNode() != p) {
+	    kmadParcImagePath = null;
+	}
+	if (kmadParcImagePath.item(0) != null)
+	    super.setImage(kmadParcImagePath.item(0).getTextContent());
     }
 
     public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
-    	return false;
+	return false;
     }
 }

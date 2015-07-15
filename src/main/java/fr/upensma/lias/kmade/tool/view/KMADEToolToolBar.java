@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -136,10 +136,10 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
     public static final ImageIcon ENTITY_LIST_IMAGE_ICON = new ImageIcon(
 	    GraphicEditorAdaptator.class
 		    .getResource(KMADEConstant.ENTITIES_IMAGE));
-    
+
     public static final ImageIcon OBJECT_MANAGEMENT = new ImageIcon(
 	    GraphicEditorAdaptator.class
-	    .getResource(KMADEConstant.OBJECT_MANAGEMENT));
+		    .getResource(KMADEConstant.OBJECT_MANAGEMENT));
 
     private AbstractAction modeleAction;
 
@@ -152,7 +152,9 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
     private AbstractAction aboutAction;
 
     private AbstractAction simulationAction;
-    
+
+    private AbstractAction protoTaskAction;
+
     private AbstractAction prototypeAction;
 
     private AbstractAction statisticAction;
@@ -190,7 +192,7 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
     private JMenuBar myMenuBar;
 
     private AbstractAction myExportAction;
-    
+
     private AbstractAction mySaveAction;
 
     private AbstractAction mySaveAsAction;
@@ -294,8 +296,6 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 	toolbar.add(mySaveAction);
 	myFileMenu.add(mySaveAction);
 
-	
-	
 	// Sauver sous ...
 	mySaveAsAction = new AbstractAction(
 		KMADEConstant.SAVE_PROJECT_AS_ACTION_MESSAGE) {
@@ -311,21 +311,18 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 		KMADEConstant.SAVE_PROJECT_AS_ACTION_MESSAGE);
 	myFileMenu.add(mySaveAsAction);
 	// exportation texte
-	myExportAction = new AbstractAction("KMC EXPORT"){
-		private static final long serialVersionUID = -7482079639019314991L;
+	myExportAction = new AbstractAction("KMC EXPORT") {
+	    private static final long serialVersionUID = -7482079639019314991L;
 
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			KMADeAdaptator.exportSimpleText();			
-		}
-		
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		KMADeAdaptator.exportSimpleText();
+	    }
+
 	};
-	myExportAction.putValue(AbstractAction.SHORT_DESCRIPTION,"KMC EXPORT");
+	myExportAction.putValue(AbstractAction.SHORT_DESCRIPTION, "KMC EXPORT");
 	myFileMenu.add(myExportAction);
-	
-	
-	
-	
+
 	myFileMenu.addSeparator();
 	AbstractAction myImportAction = new AbstractAction(
 		"Importer SPF (BETA)") {
@@ -417,6 +414,7 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 	myFileMenu = new JMenu(KMADEConstant.EDITING_MENU_MESSAGE);
 	myMenuBar.add(myFileMenu);
 
+	/* AG */
 	// Undo
 	undoAction = new AbstractAction(KMADEConstant.UNDO_ACTION_MESSAGE,
 		KMADEToolToolBar.UNDO) {
@@ -424,16 +422,23 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 
 	    public void actionPerformed(ActionEvent e) {
 		if (!activeMenu()) {
-		    // TODO undoAction
+
+		    KMADeAdaptator.undoAction();
 		}
 	    }
 	};
 	undoAction.putValue(AbstractAction.SHORT_DESCRIPTION,
 		KMADEConstant.UNDO_ACTION_MESSAGE);
+	// "Retour");
+
+	undoAction.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_Z);
+	undoAction.putValue(Action.ACCELERATOR_KEY,
+		KeyStroke.getKeyStroke(KeyEvent.VK_Z, ActionEvent.CTRL_MASK));
+
 	undoAction.setEnabled(false);
 	toolbar.add(undoAction);
 	myFileMenu.add(undoAction);
-
+	/* AG */
 	// Redo
 	redoAction = new AbstractAction(KMADEConstant.REDO_ACTION_MESSAGE,
 		KMADEToolToolBar.REDO) {
@@ -441,12 +446,18 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 
 	    public void actionPerformed(ActionEvent e) {
 		if (!activeMenu()) {
-		    // TODO redoAction
+
+		    KMADeAdaptator.redoAction();
 		}
 	    }
 	};
 	redoAction.putValue(AbstractAction.SHORT_DESCRIPTION,
 		KMADEConstant.REDO_ACTION_MESSAGE);
+
+	redoAction.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_Y);
+	redoAction.putValue(Action.ACCELERATOR_KEY,
+		KeyStroke.getKeyStroke(KeyEvent.VK_Y, ActionEvent.CTRL_MASK));
+
 	redoAction.setEnabled(false);
 	toolbar.add(redoAction);
 	myFileMenu.add(redoAction);
@@ -648,26 +659,41 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 	// **
 	myFileMenu = new JMenu(KMADEConstant.TOOLS_MENU_MESSAGE);
 	myMenuBar.add(myFileMenu);
-	
-	prototypeAction = new AbstractAction(KMADEConstant.PROTOTYPING_TOOL_MENU_TITLE) {
-	    
-	
+	protoTaskAction = new AbstractAction(
+		KMADEConstant.PROTOTASK_TOOL_MENU_TITLE) {
+
 	    private static final long serialVersionUID = 353172974792966132L;
 
 	    public void actionPerformed(ActionEvent e) {
-	    	//TODO Echange version de ProtoTask
-		KMADeAdaptator.openPrototypeDialog();
-		//KMADeAdaptator.openProtoTaskMainFrame();
-		
+		// TODO Echange version de ProtoTask
+		KMADeAdaptator.openProtoTaskMainFrame();
+		// KMADeAdaptator.openProtoTaskMainFrame();
+
 	    }
 	};
-	prototypeAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.PROTOTYPING_TOOL_MENU_TOOLTIP);
+	protoTaskAction.putValue(AbstractAction.SHORT_DESCRIPTION,
+		KMADEConstant.PROTOTASK_TOOL_MENU_TOOLTIP);
+	protoTaskAction.setEnabled(true);
+	// UNDO COMMENT FOR PROTOTACK V2
+	// myFileMenu.add(protoTaskAction);
+
+	prototypeAction = new AbstractAction(
+		KMADEConstant.PROTOTYPING_TOOL_MENU_TITLE) {
+
+	    private static final long serialVersionUID = 353172974792966132L;
+
+	    public void actionPerformed(ActionEvent e) {
+		// TODO Echange version de ProtoTask
+		KMADeAdaptator.openPrototypeDialog();
+		// KMADeAdaptator.openProtoTaskMainFrame();
+
+	    }
+	};
+	prototypeAction.putValue(AbstractAction.SHORT_DESCRIPTION,
+		KMADEConstant.PROTOTYPING_TOOL_MENU_TOOLTIP);
 	prototypeAction.setEnabled(true);
 	myFileMenu.add(prototypeAction);
-	
-	
-	
-	
+
 	simulationAction = new AbstractAction(
 		KMADEConstant.SIMULATION_ACTION_MESSAGE) {
 	    private static final long serialVersionUID = -3565098144261030486L;
@@ -780,7 +806,7 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 
 	// Edition Window
 	this.myEditItemsAction = new AbstractAction(
-		KMADEConstant.EDIT_OBJECTS_ACTION_MESSAGE,OBJECT_MANAGEMENT) {
+		KMADEConstant.EDIT_OBJECTS_ACTION_MESSAGE, OBJECT_MANAGEMENT) {
 
 	    private static final long serialVersionUID = 8078845868799430529L;
 
@@ -792,7 +818,7 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 	myEditItemsAction.putValue(AbstractAction.SHORT_DESCRIPTION,
 		KMADEConstant.EDIT_OBJECTS_ACTION_MESSAGE);
 	myFileMenu.add(myEditItemsAction);
-	
+
 	toolbar.addSeparator();
 	toolbar.add(myEditItemsAction);
 	toolbar.addSeparator();
@@ -957,12 +983,13 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 
     /*
      * un test ... public void setVisibleEditorsToolBar(Boolean bool){ if(bool){
-     * // on regarde si le composant n'est pas d�j� pr�sent avant de
-     * l'ajouter EditorToolBar.setVisible(true); Component[] compo =
-     * this.getComponents(); boolean haveIt = false; for(Component cur:compo ){
+     * // on regarde si le composant n'est pas d�j� pr�sent avant de l'ajouter
+     * EditorToolBar.setVisible(true); Component[] compo = this.getComponents();
+     * boolean haveIt = false; for(Component cur:compo ){
      * if(cur.equals(EditorToolBar)){ haveIt = true; } } if(!haveIt){
      * this.add(EditorToolBar, BorderLayout.CENTER); } }else{
-     * KMADEHistoryMessageManager.printError("testremove !s"); EditorToolBar.setVisible(false);
+     * KMADEHistoryMessageManager.printError("testremove !s");
+     * EditorToolBar.setVisible(false);
      * this.getLayout().removeLayoutComponent(EditorToolBar); } }
      */
     public void setEnabledGrid() {
@@ -1366,4 +1393,18 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 
 	return false;
     }
+
+    /* AG */
+    // ===================================================================
+    public void setUndoActionViewState(boolean bool) {
+	this.undoAction.setEnabled(bool);
+    }
+
+    // ===================================================================
+    /* AG */
+    // ===================================================================
+    public void setRedoActionViewState(boolean bool) {
+	this.redoAction.setEnabled(bool);
+    }
+    // ===================================================================
 }
