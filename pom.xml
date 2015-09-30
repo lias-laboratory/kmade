@@ -129,8 +129,8 @@
 		</plugins>
 	</build>
 	<ciManagement>
-		<system>Hudson</system>
-		<url>http://s-lisi-locforge.w.ensma.fr:8080/hudson/job/KMADe/</url>
+		<system>Jenkins</system>
+		<url>http://s-localforge-lias/jenkins/job/KMADe/</url>
 	</ciManagement>
 	<developers>
 		<developer>
@@ -140,22 +140,27 @@
 			<organization>LIAS / ENSMA</organization>
 			<organizationUrl>http://www.lias-lab.fr</organizationUrl>
 		</developer>
+		<developer>
+            <id>lachaumet</id>
+            <name>LACHAUME Thomas</name>
+            <email>thomas.lachaume@ensma.fr</email>
+            <organization>LIAS / ENSMA</organization>
+            <organizationUrl>http://www.lias-lab.fr</organizationUrl>
+        </developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:http://s-lisi-locforge.w.ensma.fr/svn/KMADe/trunk</connection>
-		<developerConnection>scm:svn:http://s-lisi-locforge.w.ensma.fr/svn/KMADe/trunk</developerConnection>
-		<url>http://s-lisi-locforge.w.ensma.fr/svn/KMADe/trunk</url>
+		<url>scm:git:http://s-localforge-lias/gitblit/r/java/kmade.git</url>
 	</scm>
-	<distributionManagement>
-		<repository>
-			<id>releases</id>
-			<name>Internal Releases</name>
-			<url>http://s-lisi-locforge.w.ensma.fr:8080/nexus/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<name>Internal Snapshots</name>
-			<url>http://s-lisi-locforge.w.ensma.fr:8080/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Internal Releases</name>
+            <url>http://s-localforge-lias/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Internal Snapshots</name>
+            <url>http://s-localforge-lias/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
