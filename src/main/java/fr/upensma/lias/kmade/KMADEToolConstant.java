@@ -36,7 +36,7 @@ public class KMADEToolConstant {
 
     public static final String TOOL_NAME = "KMADe";
 
-    public static final String VERSION_VALUE = "1.3";
+    public static final String VERSION_VALUE = "1.4";
 
     public static String PACKAGE_PATH_NAME = "fr.upensma.lias.kmade.kmad.schema.";
 
