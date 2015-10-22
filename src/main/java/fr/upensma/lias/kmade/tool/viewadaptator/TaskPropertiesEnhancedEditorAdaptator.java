@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.viewadaptator;
 
 import java.util.ArrayList;
@@ -91,15 +91,15 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
 	myRefTaskEditor.displayTaskProperties(currentEditedTask.getNumber(),
 		currentEditedTask.getMotherTaskName(), currentEditedTask
 			.getName(), currentEditedTask.getGoal(),
-		currentEditedTask.getFeedback(), currentEditedTask
-			.getDuration(), currentEditedTask.getDescription(),
-		currentEditedTask.getExecutor(), currentEditedTask
-			.getModality(), currentEditedTask.getFrequency(),
-		currentEditedTask.getFrequencyValue(), currentEditedTask
-			.getImportance(), TaskPropertiesAdaptator
-			.getFiredEvents(), currentEditedTask.getFacultatif(),
-		currentEditedTask.isInterruptible(), TaskPropertiesAdaptator
-			.getAllEvents(), currentEditedTask
+		currentEditedTask
+			.getFeedback(), currentEditedTask.getDuration(),
+		currentEditedTask.getDescription(), currentEditedTask
+			.getExecutor(), currentEditedTask.getModality(),
+		currentEditedTask.getFrequency(), currentEditedTask
+			.getFrequencyValue(), currentEditedTask.getImportance(),
+		TaskPropertiesAdaptator.getFiredEvents(), currentEditedTask
+			.getFacultatif(), currentEditedTask.isInterruptible(),
+		TaskPropertiesAdaptator.getAllEvents(), currentEditedTask
 			.getRaisingEventName(),
 		TaskPropertiesEnhancedEditorAdaptator.getActorTable(),
 		TaskPropertiesEnhancedEditorAdaptator.getActorSystemTable(),
@@ -242,36 +242,34 @@ public final class TaskPropertiesEnhancedEditorAdaptator {
     public static void setNameInTaskProperties(String value) {
 	TaskPropertiesAdaptator.updateNameRealTime(value);
     }
-
     public static void setPurposeInTaskProperties(String value) {
 	TaskPropertiesAdaptator.updatePurposeRealTime(value);
     }
 
     public static void setObservationInTaskProperties(String value) {
-	TaskPropertiesAdaptator.updateObservationRealTime(value);
-    }
+    	TaskPropertiesAdaptator.updateObservationRealTime(value);
+        }
 
-    public static void setDureeInTaskProperties(String text) {
-	TaskPropertiesAdaptator.updateDurationRealTime(text);
-    }
-
-    public static void setPurpose() {
-	TaskPropertiesAdaptator.setPurpose();
-	myRefTaskEditor.setPurposeField(TaskPropertiesAdaptator.getPurpose());
-    }
-
+    
+    
+      public static void setDureeInTaskProperties(String text) {
+      TaskPropertiesAdaptator.updateDurationRealTime(text); }
+     
+   
+     public static void setPurpose() { TaskPropertiesAdaptator.setPurpose();
+     myRefTaskEditor.setPurposeField(TaskPropertiesAdaptator.getPurpose()); }
+     
     /*
      * public static void setFeedBack() { TaskPropertiesAdaptator.setFeedback();
      * myRefTaskEditor.setFeedbackField(TaskPropertiesAdaptator.getFeedback());
      * }
      */
-
-    public static void setObservation() {
-	TaskPropertiesAdaptator.setObservation();
-	myRefTaskEditor.setObservationArea(TaskPropertiesAdaptator
-		.getObservation());
-    }
-
+    
+     public static void setObservation() {
+     TaskPropertiesAdaptator.setObservation();
+     myRefTaskEditor.setObservationArea
+     (TaskPropertiesAdaptator.getObservation()); }
+    
     public static void setUnknownExecutant() {
 	TaskPropertiesAdaptator.setUnknownExecutant();
 	myRefTaskEditor.setEnabledModalityGroup();

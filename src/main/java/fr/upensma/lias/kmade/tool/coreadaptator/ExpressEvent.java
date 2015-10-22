@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -31,8 +31,8 @@ import fr.upensma.lias.kmade.kmad.schema.tache.CurrentEvents.CurrentEvent;
  */
 public class ExpressEvent {
     public static String createEvent() {
-	Oid oidEvent = InterfaceExpressJava.createEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.EVENT_CLASS);
+	Oid oidEvent = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.EVENT_CLASS);
 	return (oidEvent.get());
     }
 
@@ -41,11 +41,12 @@ public class ExpressEvent {
 	e.delete();
     }
 
-    /*
-     * not used - what is the purpose ??? public static ArrayList<String>
-     * getForeseeableEvent(String oid) { Event e = (Event)
-     * InterfaceExpressJava.prendre(new Oid(oid)); return e.affProvoquer(); }
-     */
+/*  not used - what is the purpose ???
+ 	public static ArrayList<String> getForeseeableEvent(String oid) {
+	Event e = (Event) InterfaceExpressJava.prendre(new Oid(oid));
+	return e.affProvoquer();
+    }
+*/
     public static void affRemoveEvent(String oid) {
 	Event e = (Event) InterfaceExpressJava.prendre(new Oid(oid));
 	e.affDelete();
@@ -64,8 +65,8 @@ public class ExpressEvent {
 
     public static ArrayList<Event> getEvents() {
 	ArrayList<Event> lst = new ArrayList<Event>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.EVENT_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.EVENT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Event obj = (Event) objs[i];
 	    lst.add(obj);
@@ -75,8 +76,8 @@ public class ExpressEvent {
 
     public static ArrayList<String> getEventsName() {
 	ArrayList<String> lst = new ArrayList<String>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.EVENT_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.EVENT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Event obj = (Event) objs[i];
 	    lst.add(obj.getName());
@@ -85,8 +86,8 @@ public class ExpressEvent {
     }
 
     public static Event stringToEvent(String s) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.EVENT_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.EVENT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Event obj = (Event) objs[i];
 	    if (obj.getName().equals(s)) {

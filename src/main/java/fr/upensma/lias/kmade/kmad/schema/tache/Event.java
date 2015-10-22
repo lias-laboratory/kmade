@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -29,9 +29,8 @@ import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * @author Vincent LUCQUIAUD 
- * @author Mickael BARON
- */
+ * @author Vincent LUCQUIAUD and Mickael BARON
+ **/
 public class Event implements Entity {
 
     private static final long serialVersionUID = -7501424700161825538L;
@@ -100,8 +99,7 @@ public class Event implements Entity {
 
     public org.w3c.dom.Element toXML2(Document doc) {
 	Element racine = doc.createElement("event");
-	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "."
-		+ ExpressConstant.EVENT_CLASS);
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.EVENT_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 
 	Element kmadEventName = doc.createElement("event-name");
@@ -118,6 +116,7 @@ public class Event implements Entity {
 	return racine;
     }
 
+    
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 	return false;
     }
@@ -128,9 +127,8 @@ public class Event implements Entity {
 	NodeList kmadEventName = p.getElementsByTagName("event-name");
 
 	this.name = kmadEventName.item(0).getTextContent();
-	NodeList kmadEventDescription = p
-		.getElementsByTagName("event-description");
-
+	NodeList kmadEventDescription = p.getElementsByTagName("event-description");
+	
 	if (kmadEventDescription.item(0) != null) {
 	    this.description = kmadEventDescription.item(0).getTextContent();
 	}
@@ -145,13 +143,12 @@ public class Event implements Entity {
     }
 
     /**
-     * @param s
-     *            the name of the event
+     * @param s the name of the event
      * @return true if the name is unique among task names and event names
      */
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.EVENT_CLASS);
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.EVENT_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Event obj = (Event) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {
@@ -181,13 +178,17 @@ public class Event implements Entity {
 	name = n;
     }
 
-    /*
-     * not used - what is the purpose ? public ArrayList<String> affProvoquer()
-     * { ArrayList<String> stAff = new ArrayList<String>(); for (int i = 0; i <
-     * inverseTache.size(); i++) { Task t = inverseTache.get(i);
-     * stAff.add(ExpressConstant.REMOVE_OF_THE_TASK_MESSAGE + " \"" +
-     * t.getName() + "\""); } return stAff; }
-     */
+/*  not used - what is the purpose ?
+ 	public ArrayList<String> affProvoquer() {
+	ArrayList<String> stAff = new ArrayList<String>();
+	for (int i = 0; i < inverseTache.size(); i++) {
+	    Task t = inverseTache.get(i);
+	    stAff.add(ExpressConstant.REMOVE_OF_THE_TASK_MESSAGE + " \""
+		    + t.getName() + "\"");
+	}
+	return stAff;
+    }
+*/
     public static String proposeName(String n) {
 	boolean ok = false;
 	int cpt = 0;
@@ -206,27 +207,26 @@ public class Event implements Entity {
 	return n;
     }
 
-    /*
-     * @Override public Element toXML2(Document doc) throws Exception { // TODO
-     * Auto-generated method stub return toXML(doc); }
-     */
+/*    @Override
+    public Element toXML2(Document doc) throws Exception {
+	// TODO Auto-generated method stub
+	return toXML(doc);
+    }
+*/
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	this.oid = new Oid(p.getAttribute("idkmad"));
+    	this.oid = new Oid(p.getAttribute("idkmad"));
 
-	NodeList kmadEventName = p.getElementsByTagName("event-name");
-	if (kmadEventName.item(0).getParentNode() != p) {
-	    kmadEventName = null;
-	}
-	this.name = kmadEventName.item(0).getTextContent();
-	NodeList kmadEventDescription = p
-		.getElementsByTagName("event-description");
-	if (kmadEventDescription.item(0).getParentNode() != p) {
-	    kmadEventDescription = null;
-	}
-	if (kmadEventDescription.item(0) != null) {
-	    this.description = kmadEventDescription.item(0).getTextContent();
-	}
+    	NodeList kmadEventName = p.getElementsByTagName("event-name");
+    	if(kmadEventName.item(0).getParentNode() != p){
+    		kmadEventName = null;}
+    	this.name = kmadEventName.item(0).getTextContent();
+    	NodeList kmadEventDescription = p.getElementsByTagName("event-description");
+    	if(kmadEventDescription.item(0).getParentNode() != p){
+    		kmadEventDescription = null;}
+    	if (kmadEventDescription.item(0) != null) {
+    	    this.description = kmadEventDescription.item(0).getTextContent();
+    	}
     }
 
     @Override

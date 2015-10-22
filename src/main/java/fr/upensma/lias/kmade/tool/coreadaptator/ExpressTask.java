@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 public final class ExpressTask {
 
     private static int counterClipboard = 0;
-
+    
     private static KMADEObservable expressTaskObservable = new KMADEObservable();
 
     public static void addObserver(Observer o) {
@@ -65,8 +65,8 @@ public final class ExpressTask {
     }
 
     public static ArrayList<Task> getRootTasks() {
-	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.TASK_CLASS);
+	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.TASK_CLASS);
 	ArrayList<Task> rootTasks = new ArrayList<Task>();
 	for (int i = 0; i < taches.length; i++) {
 	    if (((Task) taches[i]).isRoot()) {
@@ -96,8 +96,8 @@ public final class ExpressTask {
 
     public static ArrayList<Task> getTasksFromName(String name) {
 	ArrayList<Task> myTaskName = new ArrayList<Task>();
-	Object[] toto = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.TASK_CLASS);
+	Object[] toto = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.TASK_CLASS);
 
 	for (int i = 0; i < toto.length; i++) {
 	    if (((Task) toto[i]).equals(name)) {
@@ -127,8 +127,8 @@ public final class ExpressTask {
      * Méthode qui permet de retourner toutes les tâches du modèle Express.
      */
     public static Task[] getAllTaskFromExpress() {
-	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.TASK_CLASS);
+	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.TASK_CLASS);
 	Task[] myNewTask = new Task[taches.length];
 	for (int i = 0; i < taches.length; i++) {
 	    myNewTask[i] = (Task) taches[i];
@@ -137,8 +137,8 @@ public final class ExpressTask {
     }
 
     public static ArrayList<Task> getTasksFromExpress() {
-	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.TASK_CLASS);
+	Object[] taches = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.TASK_CLASS);
 	ArrayList<Task> toto = new ArrayList<Task>();
 	for (int i = 0; i < taches.length; i++) {
 	    toto.add((Task) taches[i]);
@@ -153,27 +153,22 @@ public final class ExpressTask {
     public static Task[] pasteElementsFromClipBoard(java.awt.Point pt) {
 	counterClipboard++;
 	Object[] myTaskList = InterfaceExpressJava
-		.getAllReferencesOfEntityFromClipBoard(
-			ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.TASK_CLASS);
+		.getAllReferencesOfEntityFromClipBoard(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.TASK_CLASS);
 
 	Task[] myNewTaskList = new Task[myTaskList.length];
 	// PG: correction de l'anomalie "NewTache dans la classe Tache
 	HashMap<Task, Task> myNewTasks = new HashMap<Task, Task>();
-
-	// KMADEHistoryMessageManager.printMessage("nb tache arbre debut" +
-	// myTaskList.length);
+	
+	// KMADEHistoryMessageManager.printMessage("nb tache arbre debut" + myTaskList.length);
 
 	for (int i = 0; i < myTaskList.length; i++) {
-	    // KMADEHistoryMessageManager.printMessage("Collage a partir du PP2 "
-	    // + myTaskList[i]);
+	    // KMADEHistoryMessageManager.printMessage("Collage a partir du PP2 " + myTaskList[i]);
 	    // On cree un point et une tache.
 	    Point refPoint = (Point) InterfaceExpressJava
-		    .createEntityReferenceBack(ExpressConstant.CORE_PACKAGE,
-			    ExpressConstant.POINT_CLASS);
+		    .createEntityReferenceBack(ExpressConstant.CORE_PACKAGE,ExpressConstant.POINT_CLASS);
 	    Task refTache = (Task) InterfaceExpressJava
-		    .createEntityReferenceBack(ExpressConstant.CORE_PACKAGE,
-			    ExpressConstant.TASK_CLASS);
+		    .createEntityReferenceBack(ExpressConstant.CORE_PACKAGE,ExpressConstant.TASK_CLASS);
 
 	    if (pt != null) {
 		refPoint.setX(pt.x);
@@ -193,14 +188,15 @@ public final class ExpressTask {
 	    refTache.setPoint(refPoint);
 
 	    // To save a reference between my old task and my new task
-	    myNewTasks.put((Task) myTaskList[i], refTache);
+	    myNewTasks.put((Task) myTaskList[i], refTache) ; 
 
 	    /**********************************************************
 	     * On effectue la relation Clipboard et modele Express. *
 	     **********************************************************/
 	    refTache.setName(((Task) myTaskList[i]).getName()); // nom de la
-								// tache
-	    refTache.setOrdering(((Task) myTaskList[i]).getOrdering()); // decomposition
+								 // tache
+	    refTache.setOrdering(((Task) myTaskList[i])
+		    .getOrdering()); // decomposition
 	    refTache.setExecutor(((Task) myTaskList[i]).getExecutor()); // executant
 
 	    // interruption
@@ -214,7 +210,8 @@ public final class ExpressTask {
 		refTache.setOptional(((Task) myTaskList[i]).getFacultatif());
 	    }
 
-	    refTache.setPreExpression(((Task) myTaskList[i]).getPreExpression()); // precondition
+	    refTache.setPreExpression(((Task) myTaskList[i])
+		    .getPreExpression()); // precondition
 	    refTache.setSideEffetExpression(((Task) myTaskList[i])
 		    .getEffetsDeBordExpression()); // effetsdebord
 	    refTache.setIterExpression(((Task) myTaskList[i])
@@ -226,20 +223,19 @@ public final class ExpressTask {
 	    myNewTaskList[i] = refTache;
 	}
 
-	// Links (mother and children) must be changed from clipboard tasks to
-	// new tasks
+	// Links (mother and children) must be changed from clipboard tasks to new tasks
 	for (int i = 0; i < myTaskList.length; i++) {
-	    ArrayList<Task> mySubTasks = ((Task) myTaskList[i]).getChildren();
-	    if (mySubTasks.size() != 0) {
-		ArrayList<Task> myNewSubTasks = new ArrayList<Task>();
-		for (int j = 0; j < mySubTasks.size(); j++) {
-		    // get my new task through the old one
-		    Task myNewTask = myNewTasks.get(mySubTasks.get(j));
-		    myNewSubTasks.add(myNewTask);
-		    myNewTask.setMother(myNewTaskList[i]);
+		ArrayList<Task> mySubTasks = ((Task) myTaskList[i]).getChildren();
+		if (mySubTasks.size() != 0) {
+			ArrayList<Task> myNewSubTasks = new ArrayList<Task>();
+			for (int j = 0; j < mySubTasks.size(); j++) {
+				// get my new task through the old one 
+				Task myNewTask=myNewTasks.get(mySubTasks.get(j));
+				myNewSubTasks.add(myNewTask);
+				myNewTask.setMother(myNewTaskList[i]);
+			}
+			myNewTaskList[i].setChildren(myNewSubTasks);
 		}
-		myNewTaskList[i].setChildren(myNewSubTasks);
-	    }
 	}
 
 	return myNewTaskList;
@@ -251,8 +247,8 @@ public final class ExpressTask {
      * @param taskOIDList
      * @param edgeOIDList
      */
-    public static Task[] copyElementsIntoClipBoard(ArrayList<Task> myTacheList,
-	    ArrayList<String[]> edgeOIDList) {
+    public static Task[] copyElementsIntoClipBoard(
+	    ArrayList<Task> myTacheList, ArrayList<String[]> edgeOIDList) {
 	// On nettoie le presse-papier.
 	counterClipboard = 0;
 	InterfaceExpressJava.clearClipBoard();
@@ -260,7 +256,7 @@ public final class ExpressTask {
 	// Pour l'instant on fait une copie sans les autres attributs.
 	// Y a au moins le point puisqu'il doit etre cree par Express
 	Task[] myNewTaskList = new Task[myTacheList.size()];
-
+		
 	for (int i = 0; i < myTacheList.size(); i++) {
 	    // On pioche.
 	    Integer x = (myTacheList.get(i)).getPoint().getX();
@@ -268,13 +264,11 @@ public final class ExpressTask {
 
 	    // On cr��
 	    Point refPoint = (Point) InterfaceExpressJava
-		    .createEntityReferenceBackIntoClipBoard(
-			    ExpressConstant.CORE_PACKAGE,
-			    ExpressConstant.POINT_CLASS);
+		    .createEntityReferenceBackIntoClipBoard(ExpressConstant.CORE_PACKAGE,
+					ExpressConstant.POINT_CLASS);
 	    Task refTache = (Task) InterfaceExpressJava
-		    .createEntityReferenceBackIntoClipBoard(
-			    ExpressConstant.CORE_PACKAGE,
-			    ExpressConstant.TASK_CLASS);
+		    .createEntityReferenceBackIntoClipBoard(ExpressConstant.CORE_PACKAGE,
+		    		ExpressConstant.TASK_CLASS);
 
 	    // On integre
 	    refPoint.setX(new Integer(x.intValue()));
@@ -309,14 +303,15 @@ public final class ExpressTask {
 	// Traitement des liens.
 	int i = 0;
 	boolean[] motherTasksUsed = new boolean[myNewTaskList.length];
-
+	
 	while (edgeOIDList.size() != 0) {
 	    String oldMotherTask = (edgeOIDList.get(i))[0];
 
 	    boolean supprimee = false;
 	    for (int j = 0; j < myNewTaskList.length; j++) {
-		if (myTacheList.get(j).getOid().equals(new Oid(oldMotherTask))
-		// && !myNewTaskList[j].isMotherUsed()) {
+			if (myTacheList.get(j).getOid()
+			.equals(new Oid(oldMotherTask))
+//			&& !myNewTaskList[j].isMotherUsed()) {
 			&& !motherTasksUsed[j]) {
 
 		    int l = 0;
@@ -329,7 +324,7 @@ public final class ExpressTask {
 				    && !trouveeFils; k++) {
 				if (k != j) { // Une tache mere ne peut etre son
 					      // fils.
-				    if (myTacheList.get(k).getOid()
+					if (myTacheList.get(k).getOid()
 					    .equals(new Oid(oldSonTask))) {
 					// Ici on a vérifié qu'il y a une
 					// nouvelle tache qui doit etre
@@ -360,7 +355,7 @@ public final class ExpressTask {
 		    }
 		    // On a effectue la recherche dans toutes les sous-taches et
 		    // ainsi la mere est comblee...
-		    motherTasksUsed[j] = true;
+		    motherTasksUsed[j]=true;
 		}
 	    }
 
@@ -383,19 +378,17 @@ public final class ExpressTask {
     /**
      * Cette methode cree une tache au sens Express.
      * 
-     * @param x
-     *            : position abcisse
-     * @param y
-     *            : position ordonnee
+     * @param x  : position abcisse
+     * @param y  : position ordonnee
      * @return Oid de la tache
      */
     public static Task addNewTask(int x, int y, Executor e) {
-	Oid oidPoint = InterfaceExpressJava.createEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.POINT_CLASS);
-	Oid oidTache = InterfaceExpressJava.createEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.TASK_CLASS);
-	Oid oidMedia = InterfaceExpressJava.createEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.MEDIA_CLASS);
+	Oid oidPoint = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.POINT_CLASS);
+	Oid oidTache = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.TASK_CLASS);
+	Oid oidMedia = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE, 
+    		ExpressConstant.MEDIA_CLASS);
 
 	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
 	Task t = (Task) InterfaceExpressJava.prendre(oidTache);
@@ -608,28 +601,26 @@ public final class ExpressTask {
     }
 
     public static void setOperatorTask(Task currentTask, Decomposition valeur) {
-	/* AG */
-	String oid = currentTask.getOid().get();
-
-	Decomposition dec = currentTask.getOrdering();
-	Vector<Object> task_decomposition = new Vector<Object>();
-	task_decomposition.add(oid);
-	task_decomposition.add(dec);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_decomposition);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Decomposition");
-
-	currentTask.setOrdering(valeur);
-	notifyObservers();
+      	/*AG*/
+    	String oid = currentTask.getOid().get();
+	
+	   Decomposition dec = currentTask.getOrdering();
+	   Vector<Object> task_decomposition = new Vector<Object>();
+	   task_decomposition.add(oid);
+	   task_decomposition.add(dec);
+	   GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_decomposition);
+	   GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Decomposition");
+	
+    	
+	   currentTask.setOrdering(valeur);
+	   notifyObservers();
     }
-
-    /* AG */
-    /* old version of setOperatorTask */
+    /*AG*/ 
+    /*old version of setOperatorTask*/
     public static void setOperatorTask2(Task currentTask, Decomposition valeur) {
-
-	currentTask.setOrdering(valeur);
-	notifyObservers();
+		
+        currentTask.setOrdering(valeur);
+    	notifyObservers();
     }
 
     public static void removeEventTask(Task currentTask, String valeur) {
@@ -646,8 +637,8 @@ public final class ExpressTask {
     }
 
     public static boolean addActorSystem(Task currentTask, String oidactSys) {
-	ActorSystem act = (ActorSystem) InterfaceExpressJava.prendre(new Oid(
-		oidactSys));
+	ActorSystem act = (ActorSystem) InterfaceExpressJava
+		.prendre(new Oid(oidactSys));
 	boolean value = currentTask.addActorSystem(act);
 	notifyObservers();
 	return value;
@@ -704,20 +695,14 @@ public final class ExpressTask {
 	selectedExpressTask.setLabel(ExpressLabel.stringToLabel(pLabel));
 	notifyObservers();
     }
-
-    public static void removeProtoTaskPreCondition(String oidCondition) {
-	// l'oid est passé pour quand la condition pourra avoir plusieurs
-	// pttcondition
-	GraphicEditorAdaptator.getSelectedGraphicTask().getTask()
-		.getPreExpression().getProtoTaskConditionExpression()
-		.removeCondition();
+    
+    public static void removeProtoTaskPreCondition(String oidCondition){
+    	//l'oid est passé pour quand la condition pourra avoir plusieurs pttcondition
+    	GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getPreExpression().getProtoTaskConditionExpression().removeCondition();
     }
-
-    public static void removeProtoTaskIterCondition(String oidCondition) {
-	// l'oid est passé pour quand la condition pourra avoir plusieurs
-	// pttcondition
-	GraphicEditorAdaptator.getSelectedGraphicTask().getTask()
-		.getIterExpression().getProtoTaskConditionExpression()
-		.removeCondition();
+    
+    public static void removeProtoTaskIterCondition(String oidCondition){
+    	//l'oid est passé pour quand la condition pourra avoir plusieurs pttcondition
+    	GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getIterExpression().getProtoTaskConditionExpression().removeCondition();
     }
 }

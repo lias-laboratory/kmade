@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -453,11 +453,11 @@ public class AbstractObjectPanel extends JPanel implements MouseListener {
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-	    if (data.get(rowIndex)[0].equals(KMADEConstant.GENERALITY)
-		    || data.get(rowIndex)[0]
-			    .equals(KMADEConstant.ATTRIBUTES_NAME)) {
+	    if(data.get(rowIndex)[0].equals(KMADEConstant.GENERALITY) || 
+		data.get(rowIndex)[0].equals(KMADEConstant.ATTRIBUTES_NAME)){
 		return false;
-	    } else
+	    }
+	    else
 		return (columnIndex == 1);
 	}
 

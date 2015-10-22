@@ -1,24 +1,25 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.tache;
 
 import java.awt.Color;
 import java.util.ArrayList;
+
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -137,8 +138,8 @@ public class Label implements Entity {
     }
 
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.LABEL_CLASS);
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.LABEL_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Label obj = (Label) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.getName())) {
@@ -151,8 +152,7 @@ public class Label implements Entity {
     @Override
     public Element toXML2(Document doc) throws Exception {
 	Element racine = doc.createElement("label");
-	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "."
-		+ ExpressConstant.LABEL_CLASS);
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.LABEL_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 
 	Element currentElement = doc.createElement("label-name");
@@ -223,12 +223,10 @@ public class Label implements Entity {
 		if (nodeListEvent.item(i).getNodeType() == Element.ELEMENT_NODE) {
 		    Node node = nodeListEvent.item(i);
 		    if (node.getNodeName().equals("label-color-red")) {
-			KMADEHistoryMessageManager.printlnMessage(node
-				.getTextContent());
+		    	KMADEHistoryMessageManager.printlnMessage(node.getTextContent());
 			try {
 			    red = Integer.parseInt(node.getTextContent());
-			    KMADEHistoryMessageManager.printlnMessage(node
-				    .getTextContent());
+			    KMADEHistoryMessageManager.printlnMessage(node.getTextContent());
 			} catch (Exception e) {
 			    red = 255;
 			}
@@ -251,19 +249,15 @@ public class Label implements Entity {
 	this.color = new Color(red, green, blue);
 
 	nodeList = p.getElementsByTagName("label-visible");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null)
 	    this.isVisible = Boolean.parseBoolean(nodeList.item(0)
 		    .getTextContent());
 
 	nodeList = p.getElementsByTagName("label-colorvisible");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null)
 	    this.isColorVisible = Boolean.parseBoolean(nodeList.item(0)
 		    .getTextContent());
@@ -294,89 +288,77 @@ public class Label implements Entity {
 	return n;
     }
 
-    @Override
-    public void createObjectFromXMLElement2(Element p) throws Exception {
-	this.oid = new Oid(p.getAttribute("idkmad"));
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		this.oid = new Oid(p.getAttribute("idkmad"));
 
-	NodeList nodeList = p.getElementsByTagName("label-name");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	if (nodeList.item(0) != null)
-	    this.name = nodeList.item(0).getTextContent();
+		NodeList nodeList = p.getElementsByTagName("label-name");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		if (nodeList.item(0) != null)
+		    this.name = nodeList.item(0).getTextContent();
 
-	nodeList = p.getElementsByTagName("label-description");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	if (nodeList.item(0) != null)
-	    this.description = nodeList.item(0).getTextContent();
+		nodeList = p.getElementsByTagName("label-description");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		if (nodeList.item(0) != null)
+		    this.description = nodeList.item(0).getTextContent();
 
-	nodeList = p.getElementsByTagName("label-color");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	int red = 255;
-	int green = 255;
-	int blue = 255;
-	if (nodeList.getLength() != 0) {
-	    NodeList nodeListEvent = nodeList.item(0).getChildNodes();
+		nodeList = p.getElementsByTagName("label-color");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		int red = 255;
+		int green = 255;
+		int blue = 255;
+		if (nodeList.getLength() != 0) {
+		    NodeList nodeListEvent = nodeList.item(0).getChildNodes();
 
-	    for (int i = 0; i < nodeListEvent.getLength(); i++) {
-		if (nodeListEvent.item(i).getNodeType() == Element.ELEMENT_NODE) {
-		    Node node = nodeListEvent.item(i);
-		    if (node.getNodeName().equals("label-color-red")) {
-			KMADEHistoryMessageManager.printlnMessage(node
-				.getTextContent());
-			try {
-			    red = Integer.parseInt(node.getTextContent());
-			    KMADEHistoryMessageManager.printlnMessage(node
-				    .getTextContent());
-			} catch (Exception e) {
-			    red = 255;
-			}
-		    } else if (node.getNodeName().equals("label-color-green")) {
-			try {
-			    green = Integer.parseInt(node.getTextContent());
-			} catch (Exception e) {
-			    green = 255;
-			}
-		    } else if (node.getNodeName().equals("label-color-blue")) {
-			try {
-			    blue = Integer.parseInt(node.getTextContent());
-			} catch (Exception e) {
-			    blue = 255;
+		    for (int i = 0; i < nodeListEvent.getLength(); i++) {
+			if (nodeListEvent.item(i).getNodeType() == Element.ELEMENT_NODE) {
+			    Node node = nodeListEvent.item(i);
+			    if (node.getNodeName().equals("label-color-red")) {
+			    	KMADEHistoryMessageManager.printlnMessage(node.getTextContent());
+				try {
+				    red = Integer.parseInt(node.getTextContent());
+				    KMADEHistoryMessageManager.printlnMessage(node.getTextContent());
+				} catch (Exception e) {
+				    red = 255;
+				}
+			    } else if (node.getNodeName().equals("label-color-green")) {
+				try {
+				    green = Integer.parseInt(node.getTextContent());
+				} catch (Exception e) {
+				    green = 255;
+				}
+			    } else if (node.getNodeName().equals("label-color-blue")) {
+				try {
+				    blue = Integer.parseInt(node.getTextContent());
+				} catch (Exception e) {
+				    blue = 255;
+				}
+			    }
 			}
 		    }
 		}
-	    }
-	}
-	this.color = new Color(red, green, blue);
+		this.color = new Color(red, green, blue);
 
-	nodeList = p.getElementsByTagName("label-visible");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	if (nodeList.item(0) != null)
-	    this.isVisible = Boolean.parseBoolean(nodeList.item(0)
-		    .getTextContent());
+		nodeList = p.getElementsByTagName("label-visible");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		if (nodeList.item(0) != null)
+		    this.isVisible = Boolean.parseBoolean(nodeList.item(0)
+			    .getTextContent());
 
-	nodeList = p.getElementsByTagName("label-colorvisible");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
+		nodeList = p.getElementsByTagName("label-colorvisible");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		if (nodeList.item(0) != null)
+		    this.isColorVisible = Boolean.parseBoolean(nodeList.item(0)
+			    .getTextContent());
 	}
-	if (nodeList.item(0) != null)
-	    this.isColorVisible = Boolean.parseBoolean(nodeList.item(0)
-		    .getTextContent());
-    }
 
-    @Override
-    public boolean oidIsAnyMissing2(Element p) throws Exception {
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
 	return false;
-    }
+	}
 }

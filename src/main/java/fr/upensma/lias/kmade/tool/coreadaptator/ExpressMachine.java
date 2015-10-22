@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -30,8 +30,8 @@ import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
  */
 public class ExpressMachine {
     public static String createMachine() {
-	Oid oidUser = InterfaceExpressJava.createEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.MACHINE_CLASS);
+	Oid oidUser = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.MACHINE_CLASS);
 	return (oidUser.get());
     }
 
@@ -46,8 +46,8 @@ public class ExpressMachine {
     }
 
     public static String[] getMachinesName() {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.MACHINE_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.MACHINE_CLASS);
 	String[] lst = new String[objs.length];
 	for (int i = 0; i < objs.length; i++) {
 	    Machine obj = (Machine) objs[i];
@@ -58,8 +58,8 @@ public class ExpressMachine {
 
     public static ArrayList<Machine> getMachines() {
 	ArrayList<Machine> lst = new ArrayList<Machine>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.MACHINE_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.MACHINE_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Machine obj = (Machine) objs[i];
 	    lst.add(obj);
@@ -68,8 +68,8 @@ public class ExpressMachine {
     }
 
     public static Machine getMachineWithName(String name) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.MACHINE_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.MACHINE_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Machine obj = (Machine) objs[i];
 	    if (obj.getName().equals(name)) {
@@ -167,8 +167,8 @@ public class ExpressMachine {
 	    Machine m = (Machine) InterfaceExpressJava.prendre(new Oid(oid));
 	    // R�cup�ration de tous les parcs
 	    Object[] tabObj = (Object[]) InterfaceExpressJava
-		    .prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			    ExpressConstant.MACHINE_PARK_CLASS);
+		    .prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, 
+		    		ExpressConstant.MACHINE_PARK_CLASS);
 	    // cast des objets r�cup�r�s en organisation
 	    ParkMachines[] tabParc = new ParkMachines[tabObj.length];
 	    for (int i = 0; i < tabParc.length; i++) {

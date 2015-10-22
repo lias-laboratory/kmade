@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.viewadaptator;
 
 import java.awt.Dimension;
@@ -27,6 +27,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 
 import org.jgraph.graph.DefaultGraphModel;
 
@@ -185,12 +186,10 @@ public final class SimulationAdaptator {
 		    replayScenarioModified = false;
 	    }
 	    if (isSuccess) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.SUCCEEDED_SAVE_SCENARIO_MESSAGE);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SUCCEEDED_SAVE_SCENARIO_MESSAGE);
 		return true;
 	    } else {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.NO_SUCCEEDED_SAVE_SCENARIO_MESSAGE);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_SUCCEEDED_SAVE_SCENARIO_MESSAGE);
 		return false;
 	    }
 	} else {
@@ -290,8 +289,7 @@ public final class SimulationAdaptator {
 		.getRecordingPanel().updateListEnabledTask(myTasks);
 	if (ExpressSimulation.getCurrentTask().getStateSimulation()
 		.isFinished()) {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.FINISHED_RECORD_SIMULATION_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.FINISHED_RECORD_SIMULATION_MESSAGE);
 	}
 
 	GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
@@ -334,8 +332,7 @@ public final class SimulationAdaptator {
 		.getMainFrame().getSimulationDialog().getGraphSimulation()
 		.getSelectionCell());
 	if (myCell == null) {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.NO_SELECTED_TASK_BEFORE_RECORD_SIMULATION_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_SELECTED_TASK_BEFORE_RECORD_SIMULATION_MESSAGE);
 	} else {
 	    ArrayList<TokenSimulation> myTasks = ExpressSimulation
 		    .startSimulation(myCell.getTask());
@@ -386,8 +383,7 @@ public final class SimulationAdaptator {
 		    .getSimulationDialog()
 		    .getGraphSimulation()
 		    .setSelectionCell(
-			    currentSelectedTokenSimulation.getTask()
-				    .getRefJTask());
+			    currentSelectedTokenSimulation.getTask().getRefJTask());
 
 	    // Est-ce un Token pour l'exécution.
 	    if (currentSelectedTokenSimulation.isExecuterAction()) {
@@ -448,7 +444,8 @@ public final class SimulationAdaptator {
 			    .getSimulationDialog().getSelectionUserListCombo();
 		    User selectUser = ExpressSimulation
 			    .getCurrentUserList(value);
-		    for (Actor current : tokenSimulation.getTask().getActors()) {
+		    for (Actor current : tokenSimulation.getTask()
+			    .getActors()) {
 			if (current.getUserRef().getName()
 				.equals(selectUser.getName())) {
 			    trouve = true;
@@ -605,8 +602,7 @@ public final class SimulationAdaptator {
 
 	if (ExpressSimulation.getCurrentTask().getStateSimulation()
 		.isFinished()) {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.FINISHED_RECORD_SIMULATION_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.FINISHED_RECORD_SIMULATION_MESSAGE);
 	}
 
 	// Enregistre l'action exécutée.
@@ -745,12 +741,12 @@ public final class SimulationAdaptator {
 		    .getPanelProprieteTache()
 		    .displayTaskProperties(tache.getNumber(),
 			    tache.getMotherTaskName(), tache.getName(),
-			    tache.getGoal(),
+			     tache.getGoal(), 
 			    /* tache.getMedia(), */
 			    tache.getLabelName(),
 			    /* tache.getFeedBack(), */
-			    tache.getDuration(), tache.getDescription(),
-			    tache.getExecutor(),
+			    tache.getDuration(), 
+			    tache.getDescription(), tache.getExecutor(),
 			    tache.getModality().getValue(),
 			    tache.getFrequency().getValue(),
 			    tache.getFrequencyValue(),
@@ -1035,34 +1031,32 @@ public final class SimulationAdaptator {
 		myfield.add(current);
 		isUserConcreteExpression = true;
 	    } else if (tt instanceof ConcreteObjectType) {
-		if (((ConcreteObjectType) tt).getConcreteObject() != null) {
-		    // Car un ConcreteObjectType est obligatoirement un
-		    // NodeExpression.
-		    myListComponent.add(new JLabel(((NodeExpression) tt)
-			    .getName()));
-		    myListComponent.add(new JLabel("["));
-		    if (((ConcreteObjectType) tt).isGroupSetType()) {
-			isUserConcreteExpression = true;
-			KMADESetTypeComboBox currentCombo = new KMADESetTypeComboBox(
-				(ConcreteObjectType) tt,
-				((ConcreteObjectType) tt).getConcreteObjects());
-			arrayList.add(currentCombo);
-			myListComponent.add(currentCombo);
-		    } else if (((ConcreteObjectType) tt).isGroupArrayType()) {
-			isUserConcreteExpression = true;
-			KMADEArrayTypeComboBox currentCombo = new KMADEArrayTypeComboBox(
-				(ConcreteObjectType) tt,
-				((ConcreteObjectType) tt).getConcreteObjects());
-			arrayList.add(currentCombo);
-			myListComponent.add(currentCombo);
-		    } else {
-			myListComponent.add(new JLabel(
-				((ConcreteObjectType) tt).getConcreteObject()
-					.getName()));
-		    }
-		    myListComponent.add(new JLabel("]"));
+	    	if(((ConcreteObjectType) tt).getConcreteObject()!=null){
+		// Car un ConcreteObjectType est obligatoirement un
+		// NodeExpression.
+		myListComponent
+			.add(new JLabel(((NodeExpression) tt).getName()));
+		myListComponent.add(new JLabel("["));
+		if (((ConcreteObjectType) tt).isGroupSetType()) {
+		    isUserConcreteExpression = true;
+		    KMADESetTypeComboBox currentCombo = new KMADESetTypeComboBox(
+			    (ConcreteObjectType) tt,
+			    ((ConcreteObjectType) tt).getConcreteObjects());
+		    arrayList.add(currentCombo);
+		    myListComponent.add(currentCombo);
+		} else if (((ConcreteObjectType) tt).isGroupArrayType()) {
+		    isUserConcreteExpression = true;
+		    KMADEArrayTypeComboBox currentCombo = new KMADEArrayTypeComboBox(
+			    (ConcreteObjectType) tt,
+			    ((ConcreteObjectType) tt).getConcreteObjects());
+		    arrayList.add(currentCombo);
+		    myListComponent.add(currentCombo);
+		} else {
+		    myListComponent.add(new JLabel(((ConcreteObjectType) tt)
+			    .getConcreteObject().getName()));
 		}
-	    } else {
+		myListComponent.add(new JLabel("]"));
+	    } }else {
 		myListComponent.add(new JLabel((String) tt));
 	    }
 	}
@@ -1139,9 +1133,8 @@ public final class SimulationAdaptator {
 	    if (scenarioModel.getRootTask() == null) {
 		// Pas de tâche Root
 		REPLAY_SCENARIO_STATE = SimulationAdaptator.NO_REPLAY_SCENARIO;
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.NO_ROOT_TASK_PROBLEM_MESSAGE
-				+ "...");
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_ROOT_TASK_PROBLEM_MESSAGE
+			+ "...");
 	    } else {
 		REPLAY_SCENARIO_STATE = SimulationAdaptator.REPLAY_SCENARIO_NO_STARTED;
 		GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
@@ -1178,16 +1171,14 @@ public final class SimulationAdaptator {
 	    TokenReplayScenarioSimulation tokenSimulation) {
 	if (tokenSimulation.isNotFounded()) {
 	    // La tâche n'a pas été trouvée.
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.NO_FOUNDED_TASK_TO_REPLAY_PROBLEM_MESSAGE
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.NO_FOUNDED_TASK_TO_REPLAY_PROBLEM_MESSAGE
 			    + " : UNDER DEVELOPMENT");
 	    return false;
 	} else {
 	    if (!tokenSimulation.isActionable(GraphicEditorAdaptator
 		    .getMainFrame().getSimulationDialog().getReplayPanel()
 		    .getAvailableTaches())) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.CAN_NOT_EXECUTE_TASK_TO_REPLAY_PROBLEM_MESSAGE
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAN_NOT_EXECUTE_TASK_TO_REPLAY_PROBLEM_MESSAGE
 				+ " : UNDER DEVELOPMENT");
 		return false;
 	    }
@@ -1220,19 +1211,16 @@ public final class SimulationAdaptator {
 		.getReplayPanel().isFinishedReplayScenario()) {
 	    if (ExpressSimulation.getCurrentTask().getStateSimulation()
 		    .isFinished()) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.FINISHED_SCENARIO_AND_SIMULATION_PROBLEM_MESSAGE);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.FINISHED_SCENARIO_AND_SIMULATION_PROBLEM_MESSAGE);
 		isFinished = true;
 	    } else {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.FINISHED_SCENARIO_PROBLEM_MESSAGE);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.FINISHED_SCENARIO_PROBLEM_MESSAGE);
 		isFinished = true;
 	    }
 	} else {
 	    if (ExpressSimulation.getCurrentTask().getStateSimulation()
 		    .isFinished()) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.FINISHED_SIMULATION_PROBLEM_MESSAGE);
+	    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.FINISHED_SIMULATION_PROBLEM_MESSAGE);
 		isFinished = true;
 	    } else {
 		GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
@@ -1283,8 +1271,7 @@ public final class SimulationAdaptator {
 
     private static void initReplayScenario(Task rootTask) {
 	if (rootTask == null) {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.SELECT_TASK_TO_REPLAY_MESSAGE);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SELECT_TASK_TO_REPLAY_MESSAGE);
 	} else {
 	    GraphicEditorAdaptator.getMainFrame().getSimulationDialog()
 		    .getReplayPanel().initCurrentReplaySimulation();

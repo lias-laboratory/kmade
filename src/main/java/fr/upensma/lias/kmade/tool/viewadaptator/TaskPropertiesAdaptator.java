@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.viewadaptator;
 
 import java.util.ArrayList;
@@ -51,16 +51,16 @@ public final class TaskPropertiesAdaptator {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
 		.setTaskNameRealTime(nameJTache);
     }
-
-    public static void updatePurposeRealTime(String p) {
-	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
+    
+    public static void updatePurposeRealTime(String p){
+    	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
 		.setPurposeRealTime(p);
     }
-
-    public static void updateObservationRealTime(String p) {
-	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
+    public static void updateObservationRealTime(String p){
+    	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
 		.setObservationRealTime(p);
     }
+    
 
     public static void updateExecutantTypeRealTime(Executor myExecutant) {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
@@ -83,25 +83,23 @@ public final class TaskPropertiesAdaptator {
 		.setDecompositionRealTime(localeDecompositionIntoEnumere);
     }
 
-    public static void updateDurationRealTime(String duree) {
-	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		.setDureeRealTime(duree);
-    }
-
+    
+      public static void updateDurationRealTime(String duree) {
+      KMADEMainFrame.getProjectPanel
+      ().getPanelProprieteTache().setDureeRealTime(duree); }
+     
     public static void updateFrequencyRealTime(String text) {
 	KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
 		.setFrequencyRealTime(text);
     }
 
-    public static void setPurpose() {
-	KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setPurpose();
-    }
-
-    public static String getPurpose() {
-	return KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		.getPurpose();
-    }
-
+    
+      public static void setPurpose() {
+      KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setPurpose(); }
+      
+      public static String getPurpose() { return
+      KMADEMainFrame.getProjectPanel().getPanelProprieteTache().getPurpose(); }
+     
     /*
      * public static void setFeedback() {
      * KMADEMainFrame.getProjectPanel().getPanelProprieteTache().setFeedback();
@@ -321,14 +319,14 @@ public final class TaskPropertiesAdaptator {
 		.getPanelProprieteTache()
 		.displayTaskProperties(tache.getNumber(),
 			tache.getMotherTaskName(), tache.getName(),
-			tache.getGoal(),
+			 tache.getGoal(), 
 			/* tache.getMedia(), */
 			tache.getLabelName(),
 			/* tache.getFeedBack(), */
-			tache.getDuration(), tache.getDescription(),
-			tache.getExecutor(), tache.getModality().getValue(),
-			tache.getFrequency().getValue(),
-			tache.getFrequencyValue(),
+			 tache.getDuration(), 
+			tache.getDescription(), tache.getExecutor(),
+			tache.getModality().getValue(),
+			tache.getFrequency().getValue(), tache.getFrequencyValue(),
 			tache.getImportance().getValue(),
 			tache.getEventsName(), tache.getFacultatif(),
 			tache.isInterruptible(), tache.getRaisingEventName(),
@@ -376,56 +374,59 @@ public final class TaskPropertiesAdaptator {
     }
 
     public static void setNameFromExpressTask(String name) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	String nom = GraphicEditorAdaptator.getSelectedExpressTask().getName();
-	Vector<Object> task_name = new Vector<Object>();
-	task_name.add(oid);
-	task_name.add(nom);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_name);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Name");
-	// ///////////////////////////////////////////////////
-	ExpressTask.setNameTask(
-		GraphicEditorAdaptator.getSelectedExpressTask(), name);
-	GraphicEditorAdaptator.updateSelectedTaskGraphModel();
+    	/*AG*/
+    	
+    	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+    	   String nom = GraphicEditorAdaptator.getSelectedExpressTask().getName();
+    	   Vector<Object> task_name = new Vector<Object>();
+    	   task_name.add(oid);
+    	   task_name.add(nom);
+    		GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_name);
+    		GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Name");
+    	   /////////////////////////////////////////////////////
+    	   ExpressTask.setNameTask(
+    	   GraphicEditorAdaptator.getSelectedExpressTask(), name);
+    	   GraphicEditorAdaptator.updateSelectedTaskGraphModel();
     }
 
-    public static void setButFromExpressTask(String but) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	String But = GraphicEditorAdaptator.getSelectedExpressTask().getGoal();
-	Vector<Object> task_but = new Vector<Object>();
-	task_but.add(oid);
-	task_but.add(But);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_but);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("But");
-	// ///////////////////////////////////////////////////
-
-	ExpressTask.setButTask(GraphicEditorAdaptator.getSelectedExpressTask(),
-		but);
-    }
-
+    
+      public static void setButFromExpressTask(String but) {
+    	  /*AG*/
+      	
+   	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+   	   String But = GraphicEditorAdaptator.getSelectedExpressTask().getGoal();
+   	   Vector<Object> task_but = new Vector<Object>();
+   	   task_but.add(oid);
+   	   task_but.add(But);
+   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_but);
+	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("But");
+   	   /////////////////////////////////////////////////////
+   	   
+   	   
+   	   
+    	  
+    ExpressTask.setButTask(GraphicEditorAdaptator.getSelectedExpressTask(),
+      but); }
+    
+      
+      
     public static void setLabelExpressTask(String pcolor) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	String label = GraphicEditorAdaptator.getSelectedExpressTask()
-		.getLabelName();
-	Vector<Object> task_label = new Vector<Object>();
-	task_label.add(oid);
-	task_label.add(label);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_label);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Label");
-	// ///////////////////////////////////////////////////
-
+  	  /*AG*/
+      	
+    	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+    	   String label = GraphicEditorAdaptator.getSelectedExpressTask().getLabelName();
+    	   Vector<Object> task_label = new Vector<Object>();
+    	   task_label.add(oid);
+    	   task_label.add(label);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_label);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Label");
+    	   /////////////////////////////////////////////////////
+    	
+    	
+    	
+    	
+    	
+    	
 	ExpressTask.setLabelTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), pcolor);
 	GraphicEditorAdaptator.updateSelectedTaskGraphModel();
@@ -438,136 +439,130 @@ public final class TaskPropertiesAdaptator {
      */
 
     public static void setDurationFromExpressTask(String res) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	String dur = GraphicEditorAdaptator.getSelectedExpressTask()
-		.getDuration();
-	Vector<Object> task_duration = new Vector<Object>();
-	task_duration.add(oid);
-	task_duration.add(dur);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_duration);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Duration");
-	// ///////////////////////////////////////////////////
-
-	ExpressTask.setDurationTask(
-		GraphicEditorAdaptator.getSelectedExpressTask(), res);
+  	  /*AG*/
+      	
+    	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+    	   String dur = GraphicEditorAdaptator.getSelectedExpressTask().getDuration();
+    	   Vector<Object> task_duration = new Vector<Object>();
+    	   task_duration.add(oid);
+    	   task_duration.add(dur);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_duration);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Duration");
+    	   /////////////////////////////////////////////////////
+    	
+    	
+    	
+    ExpressTask.setDurationTask(
+	GraphicEditorAdaptator.getSelectedExpressTask(), res);
     }
 
     public static void setObservationFromExpressTask(String res) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	String obs = GraphicEditorAdaptator.getSelectedExpressTask()
-		.getDescription();
-	Vector<Object> task_observation = new Vector<Object>();
-	task_observation.add(oid);
-	task_observation.add(obs);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_observation);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Observation");
-	// ///////////////////////////////////////////////////
-
+  	  /*AG*/
+      	
+    	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+    	   String obs = GraphicEditorAdaptator.getSelectedExpressTask().getDescription();
+    	   Vector<Object> task_observation = new Vector<Object>();
+    	   task_observation.add(oid);
+    	   task_observation.add(obs);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_observation);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Observation");
+    	   /////////////////////////////////////////////////////
+    		
+    	
+    	
+    	
 	ExpressTask.setObservationTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), res);
     }
 
     public static void setExecutingUserFromExpressTask(Executor res) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	Executor exe = GraphicEditorAdaptator.getSelectedExpressTask()
-		.getExecutor();
-	Vector<Object> task_executant = new Vector<Object>();
-	task_executant.add(oid);
-	task_executant.add(exe);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_executant);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Executant");
-	// ///////////////////////////////////////////////////
-
+  	  /*AG*/
+      	
+    	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+    	   Executor exe = GraphicEditorAdaptator.getSelectedExpressTask().getExecutor();
+    	   Vector<Object> task_executant = new Vector<Object>();
+    	   task_executant.add(oid);
+    	   task_executant.add(exe);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_executant);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Executant");
+    	   /////////////////////////////////////////////////////
+    	
 	ExpressTask.setExecutingUserTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), res);
 	GraphicEditorAdaptator.updateSelectedTaskGraphModel();
     }
 
+    
     public static void setFrequencyFromExpressTask(Frequence res) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	Frequence fr = GraphicEditorAdaptator.getSelectedExpressTask()
-		.getFrequency();
-	Vector<Object> task_frequence = new Vector<Object>();
-	task_frequence.add(oid);
-	task_frequence.add(fr);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_frequence);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Frequence");
-	// ///////////////////////////////////////////////////
-
-	ExpressTask.setFrequencyTask(
+  	  /*AG*/
+      	
+    	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+    	   Frequence fr = GraphicEditorAdaptator.getSelectedExpressTask().getFrequency();
+    	   Vector<Object> task_frequence = new Vector<Object>();
+    	   task_frequence.add(oid);
+    	   task_frequence.add(fr);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_frequence);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Frequence");
+    	   /////////////////////////////////////////////////////
+    	
+    	
+    	
+    	ExpressTask.setFrequencyTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), res);
     }
 
+    
+    
     public static void setFrequencyValueFromExpressTask(String res) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	String fr = GraphicEditorAdaptator.getSelectedExpressTask()
-		.getFrequencyValue();
-	Vector<Object> task_frequence = new Vector<Object>();
-	task_frequence.add(oid);
-	task_frequence.add(fr);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_frequence);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("FrequenceValue");
-	// ///////////////////////////////////////////////////
-
-	ExpressTask.setFrequencyValueTask(
+    	 /*AG*/
+      	
+ 	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+ 	   String fr = GraphicEditorAdaptator.getSelectedExpressTask().getFrequencyValue();
+ 	   Vector<Object> task_frequence = new Vector<Object>();
+ 	   task_frequence.add(oid);
+ 	   task_frequence.add(fr);
+ 	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_frequence);
+ 	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("FrequenceValue");
+ 	   /////////////////////////////////////////////////////
+ 		
+ 	   ExpressTask.setFrequencyValueTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), res);
     }
 
     public static void setModalityFromExpressTask(Modality sensOrCogn) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	Modality mod = GraphicEditorAdaptator.getSelectedExpressTask()
-		.getModality();
-	Vector<Object> task_modality = new Vector<Object>();
-	task_modality.add(oid);
-	task_modality.add(mod);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_modality);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Modalite");
-	// ///////////////////////////////////////////////////
-
+   	 /*AG*/
+      	
+  	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+  	   Modality mod = GraphicEditorAdaptator.getSelectedExpressTask().getModality();
+  	   Vector<Object> task_modality = new Vector<Object>();
+  	   task_modality.add(oid);
+  	   task_modality.add(mod);
+  	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_modality);
+  	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Modalite");
+  	   /////////////////////////////////////////////////////
+  		
+    	
+    	
+    	
 	ExpressTask.setModalityTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), sensOrCogn);
     }
 
+    
+    
     public static void setSignificantFromExpressTask(Importance res) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	Importance imp = GraphicEditorAdaptator.getSelectedExpressTask()
-		.getImportance();
-	Vector<Object> task_importance = new Vector<Object>();
-	task_importance.add(oid);
-	task_importance.add(imp);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_importance);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Importance");
-	// ///////////////////////////////////////////////////
-
-	ExpressTask.setSignificantTask(
+    	/*AG*/
+      	
+   	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+   	   Importance imp = GraphicEditorAdaptator.getSelectedExpressTask().getImportance();
+   	   Vector<Object> task_importance = new Vector<Object>();
+   	   task_importance.add(oid);
+   	   task_importance.add(imp);
+   	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_importance);
+   	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Importance");
+   	   /////////////////////////////////////////////////////
+    	
+    ExpressTask.setSignificantTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), res);
     }
 
@@ -581,41 +576,39 @@ public final class TaskPropertiesAdaptator {
     }
 
     public static void setOptionalFromExpressTask(boolean res) {
-
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	boolean opt = GraphicEditorAdaptator.getSelectedExpressTask()
-		.getFacultatif();
-	Vector<Object> task_modality = new Vector<Object>();
-	task_modality.add(oid);
-	task_modality.add(opt);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_modality);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Facultatif");
-	// ///////////////////////////////////////////////////
-
+    	
+    	/*AG*/
+      	
+   	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+   	   boolean opt = GraphicEditorAdaptator.getSelectedExpressTask().getFacultatif();
+   	   Vector<Object> task_modality = new Vector<Object>();
+   	   task_modality.add(oid);
+   	   task_modality.add(opt);
+   	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_modality);
+   	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Facultatif");
+   	   /////////////////////////////////////////////////////
+   		
+    	
+    	
 	ExpressTask.setOptionalTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), res);
 	GraphicEditorAdaptator.updateSelectedTaskGraphModel();
     }
 
     public static void setInterruptibleFromExpressTask(boolean res) {
-	/* AG */
-
-	String oid = GraphicEditorAdaptator.getOidSelectedTask();
-	boolean opt = GraphicEditorAdaptator.getSelectedExpressTask()
-		.getInterruptible();
-	Vector<Object> task_interruptible = new Vector<Object>();
-	task_interruptible.add(oid);
-	task_interruptible.add(opt);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager()
-		.getObjToUndo().push(task_interruptible);
-	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo
-		.push("Interruptible");
-	// ///////////////////////////////////////////////////
-
+    	/*AG*/
+      	
+    	   String oid =  GraphicEditorAdaptator.getOidSelectedTask();
+    	   boolean opt = GraphicEditorAdaptator.getSelectedExpressTask().getInterruptible();
+    	   Vector<Object> task_interruptible = new Vector<Object>();
+    	   task_interruptible.add(oid);
+    	   task_interruptible.add(opt);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().getObjToUndo().push(task_interruptible);
+    	   	GraphicEditorAdaptator.getTaskModelPanel().getUndoRedoManager().whatUndo.push("Interruptible");
+    	   /////////////////////////////////////////////////////   	
+    	
+    	
+    	
 	ExpressTask.setInterruptibleTask(
 		GraphicEditorAdaptator.getSelectedExpressTask(), res);
 	GraphicEditorAdaptator.updateSelectedTaskGraphModel();

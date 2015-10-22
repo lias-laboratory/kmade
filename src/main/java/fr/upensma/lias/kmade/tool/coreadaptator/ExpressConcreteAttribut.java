@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -34,8 +34,7 @@ public class ExpressConcreteAttribut {
     public static ArrayList<AttributConcret> getConcreteAttr() {
 	ArrayList<AttributConcret> lst = new ArrayList<AttributConcret>();
 	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
+			ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    AttributConcret obj = (AttributConcret) objs[i];
 	    lst.add(obj);
@@ -54,9 +53,8 @@ public class ExpressConcreteAttribut {
 	ArrayList<AttributAbstrait> listattributabs = objAbs
 		.getInverseAttributsAbs();
 	for (int i = 0; i < listattributabs.size(); i++) {
-	    Oid oidAttribut = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
+	    Oid oidAttribut = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	    		ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 	    AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava
 		    .prendre(oidAttribut);
 	    AttributAbstrait abstractAttribut = listattributabs.get(i);
@@ -75,9 +73,8 @@ public class ExpressConcreteAttribut {
      */
     public static void addConcreteAttribut(AttributAbstrait attributabs,
 	    ObjetConcret ObjConc) {
-	Oid oidAttribut = InterfaceExpressJava.createEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
+	Oid oidAttribut = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 	AttributConcret attribut = (AttributConcret) InterfaceExpressJava
 		.prendre(oidAttribut);
 	attribut.setObjConcDe(ObjConc);

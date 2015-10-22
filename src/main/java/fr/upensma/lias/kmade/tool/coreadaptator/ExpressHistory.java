@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -64,8 +64,7 @@ public final class ExpressHistory {
 
     public static boolean saveConcreteHistory() {
 	Object[] coTab = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.CONCRETE_OBJECT_CLASS);
+		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.CONCRETE_OBJECT_CLASS);
 
 	KMADConcreteHistory refHistory = new KMADConcreteHistory(coTab);
 	myHistoryDB.add(0, refHistory);
@@ -84,8 +83,7 @@ public final class ExpressHistory {
 
     private static void removeConcreteObject() {
 	Object[] tabCon = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.CONCRETE_OBJECT_CLASS);
+		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.CONCRETE_OBJECT_CLASS);
 
 	for (int i = 0; i < tabCon.length; i++) {
 	    ObjetConcret occurrent = (ObjetConcret) tabCon[i];
@@ -99,22 +97,19 @@ public final class ExpressHistory {
 
     private static void removeLinkBetweenConcreteWithAbstract() {
 	Object[] aoTab = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ABSTRACT_OBJECT_CLASS);
+		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.ABSTRACT_OBJECT_CLASS);
 	for (int i = 0; i < aoTab.length; i++) {
 	    ((ObjetAbstrait) aoTab[i]).removeAllConcreteObject();
 	}
 
-	Object[] gTab = InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.GROUP_CLASS);
+	Object[] gTab = InterfaceExpressJava.prendreAllOidOfEntity(	
+			ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.GROUP_CLASS);
 	for (int i = 0; i < gTab.length; i++) {
 	    ((Groupe) gTab[i]).getEnsemble().removeAllConcreteObject();
 	}
 
 	Object[] aaTab = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ABSTRACT_ATTRIBUTE_CLASS);
+			ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.ABSTRACT_ATTRIBUTE_CLASS);
 	for (int i = 0; i < aaTab.length; i++) {
 	    ((AttributAbstrait) aaTab[i]).removeAllConcreteAttribut();
 	}
@@ -160,7 +155,7 @@ public final class ExpressHistory {
 	}
 
 	if (cellModel.size() != myStateSimulationCollection.size()) {
-	    KMADEHistoryMessageManager.printlnMessage("Problème IO");
+		 KMADEHistoryMessageManager.printlnMessage("Problème IO");
 	}
 
 	for (int i = 0; i < cursorUndo; i++) {

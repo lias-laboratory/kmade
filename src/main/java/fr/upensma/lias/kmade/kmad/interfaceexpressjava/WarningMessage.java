@@ -1,24 +1,23 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.kmad.interfaceexpressjava;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.schema.Entity;
@@ -30,13 +29,13 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
  */
 public class WarningMessage implements AbstractMessage {
 
-    private static List<Integer> listInteger = new ArrayList<Integer>();
+    private static ArrayList<Integer> listInteger = new ArrayList<Integer>();
 
-    private static List<String> listName = new ArrayList<String>();
+    private static ArrayList<String> listName = new ArrayList<String>();
 
-    private static List<Oid> listOid = new ArrayList<Oid>();
+    private static ArrayList<Oid> listOid = new ArrayList<Oid>();
 
-    private static List<String> listMessages = new ArrayList<String>();
+    private static ArrayList<String> listMessages = new ArrayList<String>();
 
     public static final String[] messWarning = {
 	    ExpressConstant.REMOVE_ABSTRACT_OBJECT, // 0
@@ -56,8 +55,8 @@ public class WarningMessage implements AbstractMessage {
 	    ExpressConstant.CHANGE_AGREGAT, // 14
 	    ExpressConstant.REMOVE_ACTOR_SYSTEM, // 15
 	    ExpressConstant.REMOVE_MATERIEL, // 16
-	    ExpressConstant.REMOVE_CONDITION, // 17
-	    ExpressConstant.REMOVE_CONDITION // 18
+	    ExpressConstant.REMOVE_CONDITION, //17
+	    ExpressConstant.REMOVE_CONDITION //18
     };
 
     public void addMessage(Oid oid, int idWarning) {
@@ -89,7 +88,7 @@ public class WarningMessage implements AbstractMessage {
     public void displayMessages() {
 	String[] str = getMessages();
 	for (int i = 0; i < str.length; i++) {
-	    KMADEHistoryMessageManager.printlnMessage("ATTENTION " + str[i]);
+		 KMADEHistoryMessageManager.printlnMessage("ATTENTION " + str[i]);
 	}
 	listOid.clear();
 	listInteger.clear();

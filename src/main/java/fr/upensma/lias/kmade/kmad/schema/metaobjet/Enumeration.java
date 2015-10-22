@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,9 +27,8 @@ import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * @author Vincent LUCQUIAUD
- * @author Mickael BARON
- */
+ * @author Vincent LUCQUIAUD and Mickael BARON
+ **/
 public final class Enumeration extends TypeAbs {
 
     private static final long serialVersionUID = -5667088185950172365L;
@@ -152,8 +151,8 @@ public final class Enumeration extends TypeAbs {
 
     public static boolean isUniqueName(String s) {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ENUMERATION_CLASS);
+			ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.ENUMERATION_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Enumeration obj = (Enumeration) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {
@@ -165,8 +164,8 @@ public final class Enumeration extends TypeAbs {
 
     public static boolean isUnique() {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ENUMERATION_CLASS);
+			ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.ENUMERATION_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Enumeration obj = (Enumeration) objAbs[i];
 	    if (!isUniqueName(obj.name))

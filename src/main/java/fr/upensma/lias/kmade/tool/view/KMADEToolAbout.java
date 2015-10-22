@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.view;
 
 import java.awt.BorderLayout;
@@ -77,10 +77,10 @@ public class KMADEToolAbout extends JDialog implements LanguageFactory {
 		.getLabelCenter(KMADEToolConstant.TOOL_NAME + " "
 			+ KMADEConstant.VERSION_MESSAGE + " "
 			+ KMADEToolConstant.VERSION_VALUE));
-	panel_info.add(KMADEToolUtilities.getLabelCenter("2005 - 2015"));
+	panel_info.add(KMADEToolUtilities.getLabelCenter("2005 - 2011"));
 	panel_info
 		.add(KMADEToolUtilities
-			.getLabelCenter("INRIA Rocquencourt - Projet MErLIn - LIAS / ISAE-ENSMA"));
+			.getLabelCenter("INRIA Rocquencourt - Projet MErLIn - LISI / ENSMA"));
 	panel_info.add(KMADEToolUtilities.getLabelCenter("France"));
 	mySouthPanel.add(panel_info, BorderLayout.CENTER);
 
@@ -129,7 +129,7 @@ public class KMADEToolAbout extends JDialog implements LanguageFactory {
 	participants.append(KMADEConstant.DEVELOPMENT_QUERING_TOOL_MESSAGE
 		+ "\n");
 	participants
-		.append(" - Mickael Baron (baron@ensma.fr)\n\n");
+		.append(" - Mickael Baron (mickael.baron@ensma.fr ; baron.mickael@gmail.com)\n\n");
 	participants.append(KMADEConstant.KMAD_SPECIFY_MESSAGE + "\n");
 	participants.append(" - Vincent Lucquiaud \n\n");
 	participants.append(KMADEConstant.KMAD_ADAPTATOR_MESSAGE + "\n");

@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.Observer;
@@ -77,8 +77,7 @@ public final class ExpressPrecondition {
 	SwingWorker worker = new SwingWorker() {
 	    public Object construct() {
 		Task[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.CHECK_ALL_PRECONDITIONS);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CHECK_ALL_PRECONDITIONS);
 		for (int i = 0; i < tacheToBeCreated.length
 			&& !ExpressPrecondition.isCanceled(); i++) {
 		    String precondtion = tacheToBeCreated[i].getPreExpression()
@@ -92,8 +91,7 @@ public final class ExpressPrecondition {
 		    try {
 			NodeExpression ref = parser.expression();
 			if (ref == null) {
-			    KMADEHistoryMessageManager
-				    .printlnMessage(KMADEConstant.PARSER_PROBLEM_MESSAGE);
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PARSER_PROBLEM_MESSAGE);
 			    ExpressPrecondition.setPrecondition(
 				    tacheToBeCreated[i], null);
 			} else {
@@ -102,8 +100,7 @@ public final class ExpressPrecondition {
 				    tacheToBeCreated[i], ref);
 			}
 		    } catch (SemanticException e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -114,8 +111,7 @@ public final class ExpressPrecondition {
 			ExpressPrecondition.setPrecondition(
 				tacheToBeCreated[i], null);
 		    } catch (ParseException e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -126,8 +122,7 @@ public final class ExpressPrecondition {
 			ExpressPrecondition.setPrecondition(
 				tacheToBeCreated[i], null);
 		    } catch (TokenMgrError e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -138,8 +133,7 @@ public final class ExpressPrecondition {
 			ExpressPrecondition.setPrecondition(
 				tacheToBeCreated[i], null);
 		    } catch (Error e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -153,8 +147,7 @@ public final class ExpressPrecondition {
 		}
 
 		if (!ExpressPrecondition.isCanceled()) {
-		    KMADEHistoryMessageManager
-			    .printlnMessage(KMADEConstant.PRECONDITION_CHECKED_AND_BUILT_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_CHECKED_AND_BUILT_MESSAGE);
 		    ExpressPrecondition.done = true;
 		}
 		return null;

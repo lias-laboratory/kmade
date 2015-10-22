@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -87,22 +87,26 @@ public class ActorSystem implements Entity {
 	return materialRef.toString();
     }
 
-    /*
-     * public org.w3c.dom.Element toXML(Document doc) { Element racine =
-     * doc.createElement("actorSystem"); racine.setAttribute("classkmad",
-     * "tache.ActeurSysteme"); racine.setAttribute("idkmad", oid.get());
-     * 
-     * racine.appendChild(experience.toXML(doc));
-     * 
-     * if (!this.competence.equals("")) { Element kmadActorCompetence = doc
-     * .createElement("actorSystem-competence");
-     * kmadActorCompetence.setTextContent(this.competence);
-     * racine.appendChild(kmadActorCompetence); }
-     * 
-     * Element idUser = doc.createElement("id-userSystem");
-     * idUser.setTextContent(this.userRef.getOid().get());
-     * racine.appendChild(idUser); return racine; }
-     */
+/*    public org.w3c.dom.Element toXML(Document doc) {
+	Element racine = doc.createElement("actorSystem");
+	racine.setAttribute("classkmad", "tache.ActeurSysteme");
+	racine.setAttribute("idkmad", oid.get());
+
+	racine.appendChild(experience.toXML(doc));
+
+	if (!this.competence.equals("")) {
+	    Element kmadActorCompetence = doc
+		    .createElement("actorSystem-competence");
+	    kmadActorCompetence.setTextContent(this.competence);
+	    racine.appendChild(kmadActorCompetence);
+	}
+
+	Element idUser = doc.createElement("id-userSystem");
+	idUser.setTextContent(this.userRef.getOid().get());
+	racine.appendChild(idUser);
+	return racine;
+    }
+*/
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) throws Exception,
 	    KMADXMLParserException {
 	NodeList nodeList = p.getElementsByTagName("id-userSystem");
@@ -119,19 +123,15 @@ public class ActorSystem implements Entity {
 	this.experience = Experience.getXMLExperienceValue(p);
 
 	NodeList nodeList = p.getElementsByTagName("actorSystem-competence");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.competence = nodeList.item(0).getTextContent();
 	}
 
 	nodeList = p.getElementsByTagName("id-userSystem");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.materialRef = (Material) InterfaceExpressJava.bdd.prendre(new Oid(
 		nodeList.item(0).getTextContent()));
     }
@@ -183,8 +183,7 @@ public class ActorSystem implements Entity {
     public Element toXML2(Document doc) throws Exception {
 	// TODO Auto-generated method stub
 	Element racine = doc.createElement("actorSystem");
-	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "."
-		+ ExpressConstant.ACTOR_SYSTEM_CLASS);
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.ACTOR_SYSTEM_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 	racine.setAttribute("id-user", this.materialRef.getOid().get());
 
@@ -201,15 +200,13 @@ public class ActorSystem implements Entity {
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
 	this.oid = new Oid(p.getAttribute("idkmad"));
-	this.materialRef = (Material) InterfaceExpressJava.bdd.prendre(new Oid(
-		p.getAttribute("id-user")));
+	this.materialRef = (Material) InterfaceExpressJava.bdd.prendre(new Oid(p
+		.getAttribute("id-user")));
 	this.experience = Experience.getXMLExperienceValue(p);
 
 	NodeList nodeList = p.getElementsByTagName("actor-competence");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.competence = nodeList.item(0).getTextContent();
 	}

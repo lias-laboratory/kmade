@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -29,12 +29,11 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
 /**
  * @author Mickael BARON
  */
-public class ExpressConcreteObject {
+public class ExpressConcreteObject {    
     public static ArrayList<ObjetConcret> getConcreteObj() {
 	ArrayList<ObjetConcret> lst = new ArrayList<ObjetConcret>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.CONCRETE_OBJECT_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.CONCRETE_OBJECT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    ObjetConcret obj = (ObjetConcret) objs[i];
 	    lst.add(obj);
@@ -44,9 +43,8 @@ public class ExpressConcreteObject {
 
     public static ArrayList<String> getConcreteObjName() {
 	ArrayList<String> lst = new ArrayList<String>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.CONCRETE_OBJECT_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.CONCRETE_OBJECT_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    ObjetConcret obj = (ObjetConcret) objs[i];
 	    lst.add(obj.getName());
@@ -63,9 +61,8 @@ public class ExpressConcreteObject {
      * @return
      */
     public static String createConcreteObject(Oid oidObjAbs, Oid oidG) {
-	Oid oidObjConc = InterfaceExpressJava.createEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.CONCRETE_OBJECT_CLASS);
+	Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.CONCRETE_OBJECT_CLASS);
 
 	ObjetAbstrait abstractObject = (ObjetAbstrait) InterfaceExpressJava
 		.prendre(oidObjAbs);
@@ -143,9 +140,8 @@ public class ExpressConcreteObject {
      */
     public static ObjetConcret createConcreteObject(Oid oidObjAbs, Groupe g,
 	    String concreteObjectName) {
-	Oid oidObjConc = InterfaceExpressJava.createEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.CONCRETE_OBJECT_CLASS);
+	Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+			ExpressConstant.CONCRETE_OBJECT_CLASS);
 
 	ObjetAbstrait abstractObject = (ObjetAbstrait) InterfaceExpressJava
 		.prendre(oidObjAbs);

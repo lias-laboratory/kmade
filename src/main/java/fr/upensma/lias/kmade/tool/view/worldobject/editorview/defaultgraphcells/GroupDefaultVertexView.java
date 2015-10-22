@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -124,8 +124,8 @@ public abstract class GroupDefaultVertexView extends VertexView {
 		BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), title));
 
 	objects = new JList(listModel);
-
-	objects.setMinimumSize(new Dimension(80, 40));
+	
+	objects.setMinimumSize(new Dimension(80,40));
 
 	return panel;
     }
@@ -134,12 +134,14 @@ public abstract class GroupDefaultVertexView extends VertexView {
      * Method to set the size of the renderer
      */
     public void autoSize() {
-	int w = (int) objects.getPreferredSize().getWidth();
-	int h = (int) (objects.getPreferredSize().getHeight());
-	if (w < 80)
+	int w = (int) objects
+	    .getPreferredSize().getWidth();
+	int h = (int) (objects
+		    .getPreferredSize().getHeight());
+	if(w < 80)
 	    w = 80;
-	if (h < 40)
-	    h = 40;
+	if(h < 40)
+	    h=40;
 	if (listModel.getSize() != 1) {
 	    listPanel.setPreferredSize(new Dimension(w, h));
 	    listPanel
@@ -304,14 +306,13 @@ public abstract class GroupDefaultVertexView extends VertexView {
 
 		    if (listModel.contains(cell.getSelectedCell())) {
 			listModel.removeElement(cell.getSelectedCell());
-			((ObjetConcret) cell.getSelectedCell().getObject())
-				.setAppartientGroupe(null);
+			((ObjetConcret) cell.getSelectedCell().getObject()).setAppartientGroupe(null);
 			cell.getObject()
 				.getEnsemble()
 				.removeFromConcreteObject(
 					(ObjetConcret) cell.getSelectedCell()
 						.getObject());
-
+			
 			cell.getCellsInGroup().remove(cell.getSelectedCell());
 			Graph.getGraphLayoutCache().editCell(cell,
 				cell.getAttributes());

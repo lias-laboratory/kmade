@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -25,9 +25,8 @@ import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * @author Vincent LUCQUIAUD
- * @author Mickael BARON
- */
+ * @author Vincent LUCQUIAUD and Mickael BARON
+ **/
 public class Element implements Entity {
 
     private static final long serialVersionUID = -2086941688924181010L;
@@ -133,8 +132,8 @@ public class Element implements Entity {
 
     public static boolean isUnique() {
 	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ELEMENT_CLASS);
+			ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.ELEMENT_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    AttributAbstrait obj = (AttributAbstrait) objAbs[i];
 	    if (!isUniqueName(obj.getName(), obj.oid.get()))

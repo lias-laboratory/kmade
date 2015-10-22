@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.view;
 
 import java.awt.Dimension;
@@ -44,11 +44,11 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 public class KMADESimpleTreePanel extends JFrame {
 
     private static final long serialVersionUID = 6331603702903812405L;
-
+    
     private JTextArea textArea = new JTextArea();
-
+    
     private JPanel myContentPane;
-
+    
     private static final ImageIcon SAVE_HISTORY = new ImageIcon(
 	    GraphicEditorAdaptator.class
 		    .getResource(KMADEConstant.SAVE_HISTORY_IMAGE));
@@ -72,13 +72,13 @@ public class KMADESimpleTreePanel extends JFrame {
 	this.setContentPane(myContentPane);
 
 	Dimension dim = new Dimension(1000, 700);
-	if (Toolkit.getDefaultToolkit().getScreenSize().height < dim.height) {
-	    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-	    this.setLocation(0, 0);
-	} else {
-	    this.setSize(new Dimension(1000, 700));
-	    KMADEToolUtilities.setCenteredInScreen(this);
-	}
+	if(Toolkit.getDefaultToolkit().getScreenSize().height< dim.height){
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		this.setLocation(0, 0);
+	}else{
+		this.setSize(new Dimension(1000, 700));
+		KMADEToolUtilities.setCenteredInScreen(this);
+		}
 	this.validate();
 	this.repaint();
 	myContentPane.setLayout(new BoxLayout(myContentPane,

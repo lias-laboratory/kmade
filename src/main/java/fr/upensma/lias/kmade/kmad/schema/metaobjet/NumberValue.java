@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -24,9 +24,8 @@ import org.w3c.dom.NodeList;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * @authors Vincent LUCQUIAUD 
- * @author Mickael BARON
- */
+ * @authors Vincent LUCQUIAUD and Mickael BARON
+ **/
 public class NumberValue extends ValeurType {
 
     private static final long serialVersionUID = -403645145776016389L;
@@ -161,10 +160,8 @@ public class NumberValue extends ValeurType {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
 	NodeList nodeList = p.getElementsByTagName("typevalue-value");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setValeur(nodeList.item(0).getTextContent());
     }
 
@@ -176,8 +173,8 @@ public class NumberValue extends ValeurType {
     }
 
     /**
-     * Retourne si les valeurs des deux nombres sont les mêmes ( équivalant à un
-     * ==)
+     * Retourne si les valeurs des deux nombres sont les mêmes ( équivalant à
+     * un ==)
      * 
      * @param n
      */

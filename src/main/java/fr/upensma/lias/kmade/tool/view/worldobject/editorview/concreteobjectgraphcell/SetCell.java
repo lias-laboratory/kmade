@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,39 +27,33 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  * 
  * @author Joachim TROUVERIE
  */
-public class SetCell extends GroupDefaultGraphCell {
+public class SetCell extends GroupDefaultGraphCell{
 
     private static final long serialVersionUID = 2028720001387402470L;
-
+    
     @SuppressWarnings("unused")
     private EnsembleAg set;
 
     /**
      * First constructor for the cell (the point is not created yet)
-     * 
-     * @param set
-     *            represented by the cell
-     * @param point
-     *            x in the graph
-     * @param point
-     *            y in the graph
+     * @param set represented by the cell
+     * @param point x in the graph
+     * @param point y in the graph
      */
     public SetCell(Groupe object, int x, int y) {
-	super(object, x, y);
+	super(object, x, y);	
+	this.set = (EnsembleAg) object.getEnsemble();
+    }
+    
+    /**
+     * Second constructor for the cell (the point is already yet)
+     * @param set represented by the cell
+     * @param point in the graph
+     */
+    public SetCell(Groupe object, Point p) {
+	super(object,p);	
 	this.set = (EnsembleAg) object.getEnsemble();
     }
 
-    /**
-     * Second constructor for the cell (the point is already yet)
-     * 
-     * @param set
-     *            represented by the cell
-     * @param point
-     *            in the graph
-     */
-    public SetCell(Groupe object, Point p) {
-	super(object, p);
-	this.set = (EnsembleAg) object.getEnsemble();
-    }
 
 }

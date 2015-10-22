@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -72,9 +72,9 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
 import fr.upensma.lias.kmade.tool.viewadaptator.ObjectDialogViewAdaptator;
 
 /**
- * Class allowing the user to create and manage objects and groups in KMADe.
+ * Class allowing the user to create and manage objects and groups in KMADe. 
  * 
- * @author Joachim TROUVERIE
+ * @author Joachim TROUVERIE 
  */
 public class KMADEObjectDialogView extends JDialog {
 
@@ -83,7 +83,7 @@ public class KMADEObjectDialogView extends JDialog {
     private JTabbedPane tabs;
 
     private KMADEObjectsToolBar toolBar;
-
+    
     private JLabel saveMessage;
 
     private AbstractObjectPanel abstractObjectPanel;
@@ -132,6 +132,7 @@ public class KMADEObjectDialogView extends JDialog {
 	this.toolBar = new KMADEObjectsToolBar();
 	this.toolBar.setAbstractObjectEnabled();
 	this.getContentPane().add(toolBar, BorderLayout.PAGE_START);
+	
 
 	this.tabs = new JTabbedPane();
 	this.tabs.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -155,10 +156,10 @@ public class KMADEObjectDialogView extends JDialog {
 	});
 
 	this.getContentPane().add(tabs, BorderLayout.CENTER);
-
+	
 	this.saveMessage = new JLabel();
 	checkSaveStatus();
-	this.getContentPane().add(this.saveMessage, BorderLayout.SOUTH);
+	this.getContentPane().add(this.saveMessage,BorderLayout.SOUTH);
 
 	this.setPreferredSize(new Dimension(800, 700));
 	this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -694,7 +695,7 @@ public class KMADEObjectDialogView extends JDialog {
 	abstractObjectPanel.drawAbstractObjectCells(abstracts);
 	concreteObjectPanel.drawConcreteObjectsCells(abstracts);
     }
-
+    
     /**
      * Method to check if the user can save the project or not
      */
@@ -708,14 +709,12 @@ public class KMADEObjectDialogView extends JDialog {
 	    if (bdd.prendre(oid) instanceof ObjetConcret)
 		concretes.add((ObjetConcret) bdd.prendre(oid));
 	}
-
-	for (ObjetConcret o : concretes) {
-	    if (o.getAppartientGroupe() == null)
-		saveMessage
-			.setText("<html><font color=\"red\">"
-				+ KMADEConstant.CAN_NOT_SAVE_PROJECT
-				+ "</font></html>");
-
+	
+	for(ObjetConcret o : concretes){
+	    if(o.getAppartientGroupe() == null)
+		saveMessage.setText("<html><font color=\"red\">"+KMADEConstant.CAN_NOT_SAVE_PROJECT
+			+"</font></html>");
+	    
 	}
     }
 

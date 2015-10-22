@@ -1,6 +1,6 @@
 /*********************************************************************************
 * This file is part of KMADe Project.
-* Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
 * 
 * KMADe is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published by
@@ -17,9 +17,6 @@
 **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.tache;
 
-/**
- * @author Thomas LACHAUME
- */
 public enum StateExecution {
     INACTIVE,
     PASSIVE,

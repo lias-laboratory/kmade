@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.project;
 
 import org.w3c.dom.Document;
@@ -55,16 +55,18 @@ public class GeneralInformation implements Entity {
 	this.resources = "";
 	this.justification = "";
     }
-
+    
     /**
      * Added by Joachim TROUVERIE
-     * 
      * @return if the general information are empty
      */
-    public boolean isEmpty() {
-	return (this.entreprise.isEmpty() && this.site.isEmpty()
-		&& this.typePost.isEmpty() && this.date.isEmpty()
-		&& this.resources.isEmpty() && this.justification.isEmpty());
+    public boolean isEmpty(){
+    	return (this.entreprise.isEmpty() &&
+    	this.site.isEmpty() &&
+    	this.typePost.isEmpty() &&
+    	this.date.isEmpty() &&
+    	this.resources.isEmpty() &&
+    	this.justification.isEmpty());
     }
 
     public GeneralInformation(String pentreprise, String psite,
@@ -141,33 +143,32 @@ public class GeneralInformation implements Entity {
     public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
-	NodeList userPreValue = p
-		.getElementsByTagName("projectinformation-compagny");
+	NodeList userPreValue = p.getElementsByTagName("projectinformation-compagny");
 
 	if (userPreValue.item(0) != null) {
 	    entreprise = userPreValue.item(0).getTextContent();
 	}
-
+	
 	if (userPreValue.item(0) != null) {
 	    site = userPreValue.item(0).getTextContent();
 	}
 	userPreValue = p.getElementsByTagName("projectinformation-type");
-
+	
 	if (userPreValue.item(0) != null) {
 	    typePost = userPreValue.item(0).getTextContent();
 	}
 	userPreValue = p.getElementsByTagName("projectinformation-date");
-
+	 
 	if (userPreValue.item(0) != null) {
 	    date = userPreValue.item(0).getTextContent();
 	}
 	userPreValue = p.getElementsByTagName("projectinformation-resources");
-
+	
 	if (userPreValue.item(0) != null) {
 	    resources = userPreValue.item(0).getTextContent();
 	}
 	userPreValue = p.getElementsByTagName("projectinformation-motivation");
-
+	 
 	if (userPreValue.item(0) != null) {
 	    justification = userPreValue.item(0).getTextContent();
 	}
@@ -290,73 +291,59 @@ public class GeneralInformation implements Entity {
 	this.justification = justification;
     }
 
-    @Override
-    public Element toXML2(Document doc) throws Exception {
-	// TODO Auto-generated method stub
-	if (!this.isEmpty())
-	    return toXML(doc);
-	else
-	    return null;
-    }
-
-    @Override
-    public void createObjectFromXMLElement2(Element p) throws Exception {
-	this.oid = new Oid(p.getAttribute("idkmad"));
-
-	NodeList userPreValue = p
-		.getElementsByTagName("projectinformation-compagny");
-	if (userPreValue != null && userPreValue.item(0) != null
-		&& userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    entreprise = userPreValue.item(0).getTextContent();
-	}
-	userPreValue = p.getElementsByTagName("projectinformation-place");
-	if (userPreValue != null && userPreValue.item(0) != null
-		&& userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    site = userPreValue.item(0).getTextContent();
-	}
-	userPreValue = p.getElementsByTagName("projectinformation-type");
-	if (userPreValue != null && userPreValue.item(0) != null
-		&& userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    typePost = userPreValue.item(0).getTextContent();
-	}
-	userPreValue = p.getElementsByTagName("projectinformation-date");
-	if (userPreValue != null && userPreValue.item(0) != null
-		&& userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    date = userPreValue.item(0).getTextContent();
-	}
-	userPreValue = p.getElementsByTagName("projectinformation-resources");
-	if (userPreValue != null && userPreValue.item(0) != null
-		&& userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    resources = userPreValue.item(0).getTextContent();
-	}
-	userPreValue = p.getElementsByTagName("projectinformation-motivation");
-	if (userPreValue != null && userPreValue.item(0) != null
-		&& userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    justification = userPreValue.item(0).getTextContent();
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		if(!this.isEmpty())
+			return toXML(doc);
+		else return null;
 	}
 
-    }
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		this.oid = new Oid(p.getAttribute("idkmad"));
 
-    @Override
-    public boolean oidIsAnyMissing2(Element p) throws Exception {
-	return false;
-    }
+		NodeList userPreValue = p.getElementsByTagName("projectinformation-compagny");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    entreprise = userPreValue.item(0).getTextContent();
+		}
+		userPreValue = p.getElementsByTagName("projectinformation-place");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    site = userPreValue.item(0).getTextContent();
+		}
+		userPreValue = p.getElementsByTagName("projectinformation-type");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    typePost = userPreValue.item(0).getTextContent();
+		}
+		userPreValue = p.getElementsByTagName("projectinformation-date");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    date = userPreValue.item(0).getTextContent();
+		}
+		userPreValue = p.getElementsByTagName("projectinformation-resources");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    resources = userPreValue.item(0).getTextContent();
+		}
+		userPreValue = p.getElementsByTagName("projectinformation-motivation");
+		 if(userPreValue != null && userPreValue.item(0)!=null && userPreValue.item(0).getParentNode()!=p){
+			 userPreValue = null;}
+		if (userPreValue.item(0) != null) {
+		    justification = userPreValue.item(0).getTextContent();
+		}
+		
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+				return false;
+	}
 }

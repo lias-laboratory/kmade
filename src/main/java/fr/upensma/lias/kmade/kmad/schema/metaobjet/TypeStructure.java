@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -24,9 +24,8 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
 import fr.upensma.lias.kmade.kmad.schema.tache.Enumerated;
 
 /**
- * @author Vincent LUCQUIAUD 
- * @author Mickael BARON
- */
+ * @author Vincent LUCQUIAUD and Mickael BARON
+ **/
 public enum TypeStructure implements Enumerated {
     BOOLEAN_STRUCT("BoolValue"), ENUM_STRUCT("EnumValue"), NUMBER_STRUCT(
 	    "NumberValue"), INTERVAL_STRUCT("IntervalleValue"), STRING_STRUCT(

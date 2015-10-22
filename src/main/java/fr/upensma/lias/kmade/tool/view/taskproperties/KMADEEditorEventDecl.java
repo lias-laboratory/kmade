@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.view.taskproperties;
 
 import java.awt.BorderLayout;
@@ -25,6 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import fr.upensma.lias.kmade.kmad.schema.tache.Event;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadEventObjectTable;
@@ -112,15 +113,13 @@ public class KMADEEditorEventDecl extends JPropertiesEditorDialog {
 	/* Insertion de la liste récupérée dans la liste déroulante */
 	myComboBox.setModel(new javax.swing.DefaultComboBoxModel(listOfEvent
 		.toArray(temp)));
-	String evt = "null";
-	if (row == KMADETaskPropertiesPanel.DECLENCHEMENT_TITLE_ELEMENT) {
-	    if (GraphicEditorAdaptator.getSelectedExpressTask()
-		    .getRaisingEvent() != null)
-		evt = GraphicEditorAdaptator.getSelectedExpressTask()
-			.getRaisingEvent().getName();
+	String evt="null";
+	if(row == KMADETaskPropertiesPanel.DECLENCHEMENT_TITLE_ELEMENT){
+		if(GraphicEditorAdaptator.getSelectedExpressTask().getRaisingEvent()!=null)
+			evt = GraphicEditorAdaptator.getSelectedExpressTask().getRaisingEvent().getName();
 	}
-	if (!evt.equals("null")) {
-	    myComboBox.setSelectedItem(evt);
+	if(!evt.equals("null")){
+		myComboBox.setSelectedItem(evt);
 	}
 	PrePostIterExpressionAdaptator.disabledFrame();
 	super.showPropertiesEditor(refModel, row);

@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -188,15 +188,14 @@ public class AttributAbstrait implements Entity {
     }
 
     public boolean oidIsAnyMissing(Element p) {
-	NodeList userValue = p
-		.getElementsByTagName("id-abstractattribut-abstractobject");
+	NodeList userValue = p.getElementsByTagName("id-abstractattribut-abstractobject");
 
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		.getTextContent())) == null) {
 	    return true;
 	}
 	userValue = p.getElementsByTagName("id-abstractattribut-type");
-
+	
 	if (userValue.item(0) != null) {
 	    if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
 		    .getTextContent())) == null) {
@@ -210,42 +209,32 @@ public class AttributAbstrait implements Entity {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
 	NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 
 	nodeList = p.getElementsByTagName("abstractattribut-description");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}
 
 	nodeList = p.getElementsByTagName("abstractattribut-typestructure");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.typeStruct = TypeStructure.getValue(nodeList.item(0)
 		.getTextContent());
 
 	nodeList = p.getElementsByTagName("id-abstractattribut-abstractobject");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setUtiliseeparClass((ObjetAbstrait) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent())));
 
 	nodeList = p.getElementsByTagName("id-abstractattribut-type");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    TypeAbs ref = (TypeAbs) InterfaceExpressJava.bdd.prendre(new Oid(
 		    nodeList.item(0).getTextContent()));
@@ -327,9 +316,8 @@ public class AttributAbstrait implements Entity {
     }
 
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ABSTRACT_ATTRIBUTE_CLASS);
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity( ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.ABSTRACT_ATTRIBUTE_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    AttributAbstrait obj = (AttributAbstrait) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {
@@ -365,8 +353,8 @@ public class AttributAbstrait implements Entity {
 	    element.setTextContent(this.getDescription());
 	    racine.appendChild(element);
 	}
-
-	// To write 'typeStruct' as a child of the Abstract attribute
+	
+	//To write 'typeStruct' as a child of the Abstract attribute
 	racine.appendChild(typeStruct.toXML(doc));
 
 	return racine;
@@ -374,44 +362,37 @@ public class AttributAbstrait implements Entity {
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
-	this.oid = new Oid(p.getAttribute("idkmad"));
-	utilisePar.clear();
-	if (p.hasAttribute("id-abstractattribut-type"))
-	    this.setTypeRef((TypeAbs) InterfaceExpressJava.bdd.prendre(new Oid(
-		    p.getAttribute("id-abstractattribut-type"))));
+		// TODO Auto-generated method stub
+		this.oid = new Oid(p.getAttribute("idkmad"));
+		utilisePar.clear();
+		if (p.hasAttribute("id-abstractattribut-type"))
+		    this.setTypeRef((TypeAbs) InterfaceExpressJava.bdd.prendre(new Oid(  p.getAttribute("id-abstractattribut-type"))));
 
-	this.setUtiliseeparClass((ObjetAbstrait) InterfaceExpressJava.bdd
-		.prendre(new Oid(p
-			.getAttribute("id-abstractattribut-abstractobject"))));
+		this.setUtiliseeparClass((ObjetAbstrait) InterfaceExpressJava.bdd
+			.prendre(new Oid(p
+				.getAttribute("id-abstractattribut-abstractobject"))));
 
-	NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	this.name = nodeList.item(0).getTextContent();
+		NodeList nodeList = p.getElementsByTagName("abstractattribut-name");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		this.name = nodeList.item(0).getTextContent();
 
-	nodeList = p.getElementsByTagName("abstractattribut-description");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	if (nodeList.item(0) != null) {
-	    this.description = nodeList.item(0).getTextContent();
-	}
+		nodeList = p.getElementsByTagName("abstractattribut-description");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		if (nodeList.item(0) != null) {
+		    this.description = nodeList.item(0).getTextContent();
+		}
 
-	nodeList = p.getElementsByTagName("abstractattribut-typestructure");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	this.typeStruct = TypeStructure.getValue(nodeList.item(0)
-		.getTextContent());
+		nodeList = p.getElementsByTagName("abstractattribut-typestructure");
+		if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+			nodeList = null;}
+		this.typeStruct = TypeStructure.getValue(nodeList.item(0)
+			.getTextContent());
     }
 
     @Override
-    public boolean oidIsAnyMissing2(Element p) {
+    public boolean oidIsAnyMissing2(Element p){
 	String userValue = p.getAttribute("id-abstractattribut-abstractobject");
 	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
 	    return true;

@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.tache;
 
 import org.w3c.dom.Document;
@@ -24,9 +24,8 @@ import org.w3c.dom.NodeList;
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 
 /**
- * @author Delphine AUTARD
- * @author Mickael BARON
- */
+ * @author Delphine AUTARD and Mickael BARON
+ **/
 public enum Executor implements Enumerated {
     INCONNU("UNK", ExpressConstant.UNKNOWN_TASK_16_IMAGE), USER("USER",
 	    ExpressConstant.USER_TASK_16_IMAGE), SYS("SYS",
@@ -56,7 +55,7 @@ public enum Executor implements Enumerated {
     }
 
     public static Executor getXMLExecutorValue(org.w3c.dom.Element p) {
-
+    	
 	NodeList nodeList = p.getElementsByTagName("task-executant");
 	if (nodeList.item(0) == null) {
 	    return INCONNU;
@@ -70,14 +69,12 @@ public enum Executor implements Enumerated {
 	}
 	return INCONNU;
     }
-
+    
     public static Executor getXMLExecutorValue2(org.w3c.dom.Element p) {
-
+    	
 	NodeList nodeList = p.getElementsByTagName("task-executant");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    return INCONNU;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		return INCONNU;}
 	if (nodeList.item(0) == null) {
 	    return INCONNU;
 	}
@@ -131,12 +128,14 @@ public enum Executor implements Enumerated {
 	return myExecutorArray;
     }
 
-    public static Executor getLocaleExecutorIntoExecutor(String myStringExecutor) {
+    public static Executor getLocaleExecutorIntoExecutor(
+	    String myStringExecutor) {
 	if (myStringExecutor.equals(ExpressConstant.UNKNOWN_EXECUTANT_NAME))
 	    return Executor.INCONNU;
 	else if (myStringExecutor.equals(ExpressConstant.USER_EXECUTANT_NAME))
 	    return Executor.USER;
-	else if (myStringExecutor.equals(ExpressConstant.SYSTEM_EXECUTANT_NAME))
+	else if (myStringExecutor
+		.equals(ExpressConstant.SYSTEM_EXECUTANT_NAME))
 	    return Executor.SYS;
 	else if (myStringExecutor
 		.equals(ExpressConstant.INTERACTION_EXECUTANT_NAME))
@@ -153,7 +152,8 @@ public enum Executor implements Enumerated {
 	    return "UNK";
 	else if (myStringExecutor.equals(ExpressConstant.USER_EXECUTANT_NAME))
 	    return "USER";
-	else if (myStringExecutor.equals(ExpressConstant.SYSTEM_EXECUTANT_NAME))
+	else if (myStringExecutor
+		.equals(ExpressConstant.SYSTEM_EXECUTANT_NAME))
 	    return "SYS";
 	else if (myStringExecutor
 		.equals(ExpressConstant.INTERACTION_EXECUTANT_NAME))
@@ -170,7 +170,8 @@ public enum Executor implements Enumerated {
 	    return 0;
 	else if (myStringExecutor.equals(ExpressConstant.USER_EXECUTANT_NAME))
 	    return 1;
-	else if (myStringExecutor.equals(ExpressConstant.SYSTEM_EXECUTANT_NAME))
+	else if (myStringExecutor
+		.equals(ExpressConstant.SYSTEM_EXECUTANT_NAME))
 	    return 2;
 	else if (myStringExecutor
 		.equals(ExpressConstant.INTERACTION_EXECUTANT_NAME))

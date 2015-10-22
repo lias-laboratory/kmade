@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -32,8 +32,8 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
  */
 public class ExpressProjectManager {
     public static String createProjectManager() {
-	Oid oidObjAbs = InterfaceExpressJava.createEntity(
-		ExpressConstant.PROJECT_PACKAGE, ExpressConstant.PROJECT_CLASS);
+	Oid oidObjAbs = InterfaceExpressJava.createEntity(ExpressConstant.PROJECT_PACKAGE, 
+    	ExpressConstant.PROJECT_CLASS);
 	return (oidObjAbs.get());
     }
 
@@ -56,8 +56,8 @@ public class ExpressProjectManager {
     }
 
     public static String getProjectManager() {
-	Object[] temp = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.PROJECT_PACKAGE, ExpressConstant.PROJECT_CLASS);
+	Object[] temp = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.PROJECT_PACKAGE, 
+    	ExpressConstant.PROJECT_CLASS);
 	return ((Project) temp[0]).getOid().get();
     }
 
@@ -67,9 +67,8 @@ public class ExpressProjectManager {
     }
 
     public static String createInterviewIndex(Oid oidProject) {
-	Oid oidInterviewIndex = InterfaceExpressJava.createEntity(
-		ExpressConstant.PROJECT_PACKAGE,
-		ExpressConstant.INTERVIEW_CLASS);
+	Oid oidInterviewIndex = InterfaceExpressJava.createEntity(ExpressConstant.PROJECT_PACKAGE, 
+    	ExpressConstant.INTERVIEW_CLASS);
 	InterviewIndex objInterviewIndex = (InterviewIndex) InterfaceExpressJava
 		.prendre(oidInterviewIndex);
 	Project objProject = (Project) InterfaceExpressJava.prendre(oidProject);
@@ -83,9 +82,8 @@ public class ExpressProjectManager {
 	    String interviewed, String placeInformation, String statut,
 	    String seniority, String date, String interviewType,
 	    String searchedInformations, String interviewerName) {
-	Oid oidInterviewIndex = InterfaceExpressJava.createEntity(
-		ExpressConstant.PROJECT_PACKAGE,
-		ExpressConstant.INTERVIEW_CLASS);
+	Oid oidInterviewIndex = InterfaceExpressJava.createEntity(ExpressConstant.PROJECT_PACKAGE, 
+    	ExpressConstant.INTERVIEW_CLASS);
 	InterviewIndex objInterviewIndex = (InterviewIndex) InterfaceExpressJava
 		.prendre(oidInterviewIndex);
 	objInterviewIndex.setInterviewedName(interviewed);
@@ -108,8 +106,7 @@ public class ExpressProjectManager {
 	    String entreprise, String site, String typePost, String date,
 	    String resources, String justification) {
 	Oid oidGeneralInformation = InterfaceExpressJava.createEntity(
-		ExpressConstant.PROJECT_PACKAGE,
-		ExpressConstant.GENERAL_INFORMATION_CLASS);
+		ExpressConstant.PROJECT_PACKAGE, ExpressConstant.GENERAL_INFORMATION_CLASS);
 	GeneralInformation objGeneralInformation = (GeneralInformation) InterfaceExpressJava
 		.prendre(oidGeneralInformation);
 
@@ -129,8 +126,7 @@ public class ExpressProjectManager {
 
     public static String createGeneralInformation(Oid oidProject) {
 	Oid oidGeneralInformation = InterfaceExpressJava.createEntity(
-		ExpressConstant.PROJECT_PACKAGE,
-		ExpressConstant.GENERAL_INFORMATION_CLASS);
+			ExpressConstant.PROJECT_PACKAGE, ExpressConstant.GENERAL_INFORMATION_CLASS);
 	GeneralInformation objGeneralInformation = (GeneralInformation) InterfaceExpressJava
 		.prendre(oidGeneralInformation);
 	Project objProject = (Project) InterfaceExpressJava.prendre(oidProject);

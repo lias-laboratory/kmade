@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -28,9 +28,8 @@ import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * @author Vincent LUCQUIAUD
- * @author Mickael BARON
- */
+ * @author Vincent LUCQUIAUD and Mickael BARON
+ **/
 public final class Intervalle extends TypeAbs implements Entity {
 
     private static final long serialVersionUID = 5401805142580604125L;
@@ -152,9 +151,8 @@ public final class Intervalle extends TypeAbs implements Entity {
     }
 
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.RANGE_CLASS);
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.RANGE_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Intervalle obj = (Intervalle) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {
@@ -165,9 +163,8 @@ public final class Intervalle extends TypeAbs implements Entity {
     }
 
     public static boolean isUnique() {
-	Object[] objAbs = InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.RANGE_CLASS);
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
+			ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.RANGE_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Intervalle obj = (Intervalle) objAbs[i];
 	    if (!isUniqueName(obj.name))

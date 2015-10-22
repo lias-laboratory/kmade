@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -43,7 +43,7 @@ public class Groupe implements Entity {
     private ObjetAbstrait contientObj = null;
 
     private String description = "";
-
+    
     private Point point;
 
     public Oid oid;
@@ -238,34 +238,26 @@ public class Groupe implements Entity {
 	this.oid = new Oid(p.getAttribute("idkmad"));
 
 	NodeList nodeList = p.getElementsByTagName("group-name");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 
 	nodeList = p.getElementsByTagName("group-description");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}
 
 	nodeList = p.getElementsByTagName("id-group-agregat");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setEnsemble((Agregat) InterfaceExpressJava.bdd.prendre(new Oid(
 		nodeList.item(0).getTextContent())));
 
 	nodeList = p.getElementsByTagName("id-group-abstractobject");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.setContientObj((ObjetAbstrait) InterfaceExpressJava.bdd
 		.prendre(new Oid(nodeList.item(0).getTextContent())));
     }
@@ -290,9 +282,9 @@ public class Groupe implements Entity {
     }
 
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.GROUP_CLASS);
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
+			ExpressConstant.METAOBJECT_PACKAGE,
+    		ExpressConstant.GROUP_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Groupe obj = (Groupe) objAbs[i];
 	    if (s.equalsIgnoreCase(obj.name)) {
@@ -320,8 +312,8 @@ public class Groupe implements Entity {
 	Element element = doc.createElement("group-name");
 	element.setTextContent(this.getName());
 	racine.appendChild(element);
-
-	if (this.point != null) {
+	
+	if(this.point != null){
 	    racine.setAttribute("id-task-point", this.point.getOid().get());
 	    racine.appendChild(this.point.toXML2(doc));
 	}
@@ -345,27 +337,24 @@ public class Groupe implements Entity {
 		.prendre(new Oid(p.getAttribute("id-group-abstractobject"))));
 
 	NodeList nodeList = p.getElementsByTagName("group-name");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	this.name = nodeList.item(0).getTextContent();
 
 	nodeList = p.getElementsByTagName("group-description");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
+	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
+		nodeList = null;}
 	if (nodeList.item(0) != null) {
 	    this.description = nodeList.item(0).getTextContent();
 	}
-
+	
 	// Point
 	if (p.hasAttribute("id-task-point"))
 	    this.point = (Point) InterfaceExpressJava.bdd.prendre(new Oid(p
 		    .getAttribute("id-task-point")));
-	else
+	else 
 	    this.point = null;
+	    
 
     }
 

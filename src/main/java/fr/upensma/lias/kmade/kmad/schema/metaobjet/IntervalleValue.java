@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -23,9 +23,8 @@ import org.w3c.dom.Element;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * @authors Vincent LUCQUIAUD 
- * @author Mickael BARON
- */
+ * @authors Vincent LUCQUIAUD and Mickael BARON
+ **/
 public class IntervalleValue extends ValeurType {
 
     private static final long serialVersionUID = 5338273650635386769L;

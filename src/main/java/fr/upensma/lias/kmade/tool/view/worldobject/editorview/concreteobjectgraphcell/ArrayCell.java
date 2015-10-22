@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -36,26 +36,19 @@ public class ArrayCell extends GroupDefaultGraphCell {
 
     /**
      * First constructor for the cell (the point is not created yet)
-     * 
-     * @param array
-     *            represented by the cell
-     * @param point
-     *            x in the graph
-     * @param point
-     *            y in the graph
+     * @param array represented by the cell
+     * @param point x in the graph
+     * @param point y in the graph
      */
     public ArrayCell(Groupe object, int x, int y) {
 	super(object, x, y);
 	this.array = (TableauAg) object.getEnsemble();
     }
-
+    
     /**
      * Second constructor for the cell (the point is already yet)
-     * 
-     * @param array
-     *            represented by the cell
-     * @param point
-     *            in the graph
+     * @param array represented by the cell
+     * @param point in the graph
      */
     public ArrayCell(Groupe object, Point p) {
 	super(object, p);

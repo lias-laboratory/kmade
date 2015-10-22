@@ -1,20 +1,20 @@
 /*********************************************************************************
- * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
- * 
- * KMADe is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * KMADe is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
- **********************************************************************************/
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.Observer;
@@ -68,10 +68,10 @@ public final class ExpressIteration {
     public static boolean isFinished(Task myTache) {
 	return myTache.getIterExpression().isFinished();
 	/*
-	 * if (myTache.getIteExpression().isVariableExpressionNode()) { return
-	 * (myTache.getIteExpression().getIterationVariant() <= 0); } else {
-	 * return (Boolean)
-	 * myTache.getIteExpression().getNodeExpression().getNodeValue(); }
+	  if (myTache.getIteExpression().isVariableExpressionNode()) { return
+	  (myTache.getIteExpression().getIterationVariant() <= 0); } else {
+	  return (Boolean)
+	  myTache.getIteExpression().getNodeExpression().getNodeValue(); }
 	 */
     }
 
@@ -89,8 +89,7 @@ public final class ExpressIteration {
 	SwingWorker worker = new SwingWorker() {
 	    public Object construct() {
 		Task[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.CHECK_ALL_ITERATIONS);
+		KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CHECK_ALL_ITERATIONS);
 		for (int i = 0; i < tacheToBeCreated.length
 			&& !ExpressIteration.isCanceled(); i++) {
 		    String iteration = tacheToBeCreated[i].getIterExpression()
@@ -104,8 +103,7 @@ public final class ExpressIteration {
 		    try {
 			NodeExpression ref = parser.expression();
 			if (ref == null) {
-			    KMADEHistoryMessageManager
-				    .printlnMessage(KMADEConstant.PARSER_PROBLEM_MESSAGE);
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PARSER_PROBLEM_MESSAGE);
 			    ExpressIteration.setIteration(tacheToBeCreated[i],
 				    null);
 			} else {
@@ -114,8 +112,7 @@ public final class ExpressIteration {
 				    ref);
 			}
 		    } catch (SemanticException e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -126,8 +123,7 @@ public final class ExpressIteration {
 			ExpressIteration
 				.setIteration(tacheToBeCreated[i], null);
 		    } catch (ParseException e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -138,8 +134,7 @@ public final class ExpressIteration {
 			ExpressIteration
 				.setIteration(tacheToBeCreated[i], null);
 		    } catch (TokenMgrError e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -150,8 +145,7 @@ public final class ExpressIteration {
 			ExpressIteration
 				.setIteration(tacheToBeCreated[i], null);
 		    } catch (Error e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
+		    	KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_OF_TASK_NO_OK_MESSAGE
 					+ " : "
 					+ tacheToBeCreated[i].getName()
 					+ ". "
@@ -165,8 +159,7 @@ public final class ExpressIteration {
 		}
 
 		if (!ExpressIteration.isCanceled()) {
-		    KMADEHistoryMessageManager
-			    .printlnMessage(KMADEConstant.ITERATION_CHECKED_AND_BUILT_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_CHECKED_AND_BUILT_MESSAGE);
 		    ExpressIteration.done = true;
 		}
 		return null;
@@ -220,7 +213,8 @@ public final class ExpressIteration {
 	ExpressIteration.done = done;
     }
 
-    public static void setIterationDescription(Task task, String descriptionArea) {
+    public static void setIterationDescription(Task task,
+	    String descriptionArea) {
 	task.getIterExpression().setDescription(descriptionArea);
     }
 }

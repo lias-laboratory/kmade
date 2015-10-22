@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -29,8 +29,7 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.viewadaptator.ObjectDialogViewAdaptator;
 
 /**
- * Class for the tool bar representation of the different action that could be
- * made on objects.
+ * Class for the tool bar representation of the different action that could be made on objects.
  * 
  * @author Joachim TROUVERIE
  */
@@ -86,6 +85,7 @@ public class KMADEObjectsToolBar extends JToolBar {
     public static final ImageIcon DELETE_GROUP_IMAGE = new ImageIcon(
 	    KMADEObjectsToolBar.class
 		    .getResource(KMADEConstant.DELETE_GROUP_IMAGE));
+    
 
     public KMADEObjectsToolBar() {
 	super();
@@ -173,8 +173,7 @@ public class KMADEObjectsToolBar extends JToolBar {
 
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		ObjectDialogViewAdaptator
-			.createNewGroup(ExpressConstant.STACK_NAME);
+		ObjectDialogViewAdaptator.createNewGroup(ExpressConstant.STACK_NAME);
 	    }
 	};
 	this.newStack.putValue(AbstractAction.SHORT_DESCRIPTION,
@@ -190,8 +189,7 @@ public class KMADEObjectsToolBar extends JToolBar {
 
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		ObjectDialogViewAdaptator
-			.createNewGroup(ExpressConstant.SET_NAME);
+		ObjectDialogViewAdaptator.createNewGroup(ExpressConstant.SET_NAME);
 	    }
 	};
 	this.newSet.putValue(AbstractAction.SHORT_DESCRIPTION,
@@ -208,8 +206,7 @@ public class KMADEObjectsToolBar extends JToolBar {
 
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		ObjectDialogViewAdaptator
-			.createNewGroup(ExpressConstant.ARRAY_NAME);
+		ObjectDialogViewAdaptator.createNewGroup(ExpressConstant.ARRAY_NAME);
 	    }
 	};
 	this.newArray.putValue(AbstractAction.SHORT_DESCRIPTION,
@@ -226,8 +223,7 @@ public class KMADEObjectsToolBar extends JToolBar {
 
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		ObjectDialogViewAdaptator
-			.createNewGroup(ExpressConstant.LIST_NAME);
+		ObjectDialogViewAdaptator.createNewGroup(ExpressConstant.LIST_NAME);
 	    }
 	};
 	this.newList.putValue(AbstractAction.SHORT_DESCRIPTION,
@@ -244,8 +240,7 @@ public class KMADEObjectsToolBar extends JToolBar {
 
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-		ObjectDialogViewAdaptator
-			.createNewGroup(ExpressConstant.SINGLETON_NAME);
+		ObjectDialogViewAdaptator.createNewGroup(ExpressConstant.SINGLETON_NAME);
 	    }
 	};
 	this.newUnique.putValue(AbstractAction.SHORT_DESCRIPTION,
