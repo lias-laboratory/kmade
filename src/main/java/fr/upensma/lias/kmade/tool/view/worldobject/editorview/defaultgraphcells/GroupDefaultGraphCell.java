@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -83,17 +83,21 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 
     /**
      * First constructor of the cell (the point is not created yet)
-     * @param group represented by the cell
-     * @param point x in the cell
-     * @param point y in the cell
+     * 
+     * @param group
+     *            represented by the cell
+     * @param point
+     *            x in the cell
+     * @param point
+     *            y in the cell
      */
     public GroupDefaultGraphCell(Groupe o, int x, int y) {
 	super(o.getName());
 
 	this.group = o;
 
-	Oid oidPoint = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.POINT_CLASS);
+	Oid oidPoint = InterfaceExpressJava.createEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.POINT_CLASS);
 	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
 	p.setX(x);
 	p.setY(y);
@@ -110,8 +114,11 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 
     /**
      * Second constructor for the cell (the point is already created)
-     * @param group represented by the cell
-     * @param point in the graph
+     * 
+     * @param group
+     *            represented by the cell
+     * @param point
+     *            in the graph
      */
     public GroupDefaultGraphCell(Groupe o, Point p) {
 	super(o.getName());
@@ -142,8 +149,9 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
     }
 
     /**
-     * Method to add a new concrete object cell in the group
-     * and to add the concrete object in the group
+     * Method to add a new concrete object cell in the group and to add the
+     * concrete object in the group
+     * 
      * @param new concrete object cell
      */
     public void addCellToGroup(ConcreteObjectCell cell) {
@@ -167,6 +175,7 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 
     /**
      * Method to set a new renderer to the cell
+     * 
      * @param new renderer
      */
     public void setInvView(GroupDefaultVertexView newView) {
@@ -185,7 +194,9 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 
     /**
      * Method to set the selected cell in the group
-     * @param index of the cell
+     * 
+     * @param index
+     *            of the cell
      */
     public void setSelectedIndex(int i) {
 	this.selectedIndex = i;
@@ -210,6 +221,7 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 
     /**
      * Window to edit the group when it is created
+     * 
      * @author Joachim TROUVERIE
      */
     class GroupEditDialogCreation extends JDialog {
@@ -235,7 +247,8 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 	    this.box = new JComboBox();
 
 	    final Object[] objets = InterfaceExpressJava.prendreAllOidOfEntity(
-	    	ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.ABSTRACT_OBJECT_CLASS);
+		    ExpressConstant.METAOBJECT_PACKAGE,
+		    ExpressConstant.ABSTRACT_OBJECT_CLASS);
 	    for (int i = 0; i < objets.length; i++) {
 		this.box.addItem((ObjetAbstrait) objets[i]);
 	    }
@@ -286,7 +299,9 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
     };
 
     /**
-     * Window to edit the group and the objects contained in it after its creation
+     * Window to edit the group and the objects contained in it after its
+     * creation
+     * 
      * @author Joachim TROUVERIE
      */
     class GroupEditDialog extends JDialog {
@@ -339,12 +354,12 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 			int cp = -1;
 			for (ObjetConcret o : object.getEnsemble()
 				.getLstObjConcrets()) {
-			    cp = cp+1;
+			    cp = cp + 1;
 			    for (AttributConcret a : o.getInverseListAttribut()) {
-				cp = cp+1;
+				cp = cp + 1;
 				if (cp == i)
-				    a.setValeur(String.valueOf(editObjects.getModel()
-					    .getValueAt(i, 1)));
+				    a.setValeur(String.valueOf(editObjects
+					    .getModel().getValueAt(i, 1)));
 			    }
 			}
 		    }
@@ -371,7 +386,9 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
     };
 
     /**
-     * Table editor used in the window to edit the objects contained in the group
+     * Table editor used in the window to edit the objects contained in the
+     * group
+     * 
      * @author Joachim TROUVERIE
      */
     class EditGroupTableEditor extends AbstractCellEditor implements
@@ -429,7 +446,9 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
     };
 
     /**
-     * Table renderer used in the window to edit the objects contained in the group
+     * Table renderer used in the window to edit the objects contained in the
+     * group
+     * 
      * @author Joachim TROUVERIE
      */
     class EditGroupTableRenderer extends DefaultTableCellRenderer {
@@ -463,6 +482,7 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 
     /**
      * Table model used in the window to edit the objects contained in the group
+     * 
      * @author Joachim TROUVERIE
      */
     class EditGroupTableModel extends AbstractTableModel {
@@ -484,7 +504,7 @@ public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 		}
 	    }
 	}
-	
+
 	@Override
 	public String getColumnName(int columnIndex) {
 	    return null;

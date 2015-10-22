@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -28,12 +28,12 @@ import fr.upensma.lias.kmade.kmad.schema.KMADXMLParserException;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * An actor is an association between one task and one user (one person or one organization). 
- * Relatively to this association, an experience (enumerated type) and a competence (free string) 
- * can be defined
+ * An actor is an association between one task and one user (one person or one
+ * organization). Relatively to this association, an experience (enumerated
+ * type) and a competence (free string) can be defined
  * 
- * @author Mickael BARON 
- * @author [Comment] Patrick GIRARD
+ * @author Mickael BARON
+ * @author Patrick GIRARD
  */
 public class Actor implements Entity {
 
@@ -42,18 +42,21 @@ public class Actor implements Entity {
     public Oid oid = null;
 
     /**
-     * userRef : User -> This user may be a person or an organization (i.e. a group of persons) 
+     * userRef : User -> This user may be a person or an organization (i.e. a
+     * group of persons)
      */
     private User userRef;
 
     /**
-     * experience : Experience -> Enumerated attribute, which is supposed to reflect the required level of 
-     * experience of the user in accomplishing his/her task.  
+     * experience : Experience -> Enumerated attribute, which is supposed to
+     * reflect the required level of experience of the user in accomplishing
+     * his/her task.
      */
     private Experience experience = Experience.INCONNU;
 
     /**
-     * competence : String -> free text for detailing the required competence for the task
+     * competence : String -> free text for detailing the required competence
+     * for the task
      */
     private String competence = "";
 
@@ -69,37 +72,40 @@ public class Actor implements Entity {
     }
 
     /**
-     * Constructor with all parameters
-     * The parameters are supposed to be ok !
+     * Constructor with all parameters The parameters are supposed to be ok !
      * The inverse task is not set
      * 
-     * @param exp String value from enumerated type Experience
-     * @param comp free text for the competence
-     * @param u User the associated user
-     * @param o Oid unique Express identifier
+     * @param exp
+     *            String value from enumerated type Experience
+     * @param comp
+     *            free text for the competence
+     * @param u
+     *            User the associated user
+     * @param o
+     *            Oid unique Express identifier
      */
     public Actor(String exp, String comp, User u, Oid o) {
-    	userRef = u;
-    	experience = Experience.getValue(exp);
-    	competence = comp;
-    	this.oid = o;
+	userRef = u;
+	experience = Experience.getValue(exp);
+	competence = comp;
+	this.oid = o;
     }
 
     /**
      * Suppress the actor, deleting the inverse links in the user and the task
      */
     public void delete() {
-    	userRef.removeInverseActeur(this);
-    	reverseTask.removeActor(this);
-    	InterfaceExpressJava.remove(oid);
+	userRef.removeInverseActeur(this);
+	reverseTask.removeActor(this);
+	InterfaceExpressJava.remove(oid);
     }
 
     public String getName() {
-    	return userRef.getName();
+	return userRef.getName();
     }
 
     public void affDelete() {
-    	InterfaceExpressJava.getGestionWarning().addMessage(
+	InterfaceExpressJava.getGestionWarning().addMessage(
 		oid,
 		9,
 		ExpressConstant.REMOVE_OF_THE_TASK_MESSAGE + " \""
@@ -107,53 +113,54 @@ public class Actor implements Entity {
     }
 
     public void setOid(Oid oid) {
-    	this.oid = oid;
+	this.oid = oid;
     }
 
     /**
-     * Sets the inverse link to the task in which the actor is defined
-     * Warning: no verification is made to ensure the task is the right one
+     * Sets the inverse link to the task in which the actor is defined Warning:
+     * no verification is made to ensure the task is the right one
      * 
-     * @param a the task where the actor is defined
+     * @param a
+     *            the task where the actor is defined
      */
     public void setReverseTask(Task a) {
-    	this.reverseTask = a;
+	this.reverseTask = a;
     }
 
     public Task getInverseTache() {
-    	return reverseTask;
+	return reverseTask;
     }
 
     public void setExperience(String s) {
-    	experience = Experience.getValue(s);
+	experience = Experience.getValue(s);
     }
 
     public Experience getExperience() {
-    	return experience;
+	return experience;
     }
 
     public void setCompetence(String s) {
-    	competence = s;
+	competence = s;
     }
 
     public String getCompetence() {
-    	return competence;
+	return competence;
     }
 
     public void setUserRef(User u) {
-    	userRef = u;
+	userRef = u;
     }
 
     public User getUserRef() {
-    	return userRef;
+	return userRef;
     }
 
     public Oid getOid() {
-    	return oid;
+	return oid;
     }
 
     public String toString() {
-    	return userRef.toString();
+	return userRef.toString();
     }
 
     public boolean oidIsAnyMissing(org.w3c.dom.Element p) throws Exception,
@@ -197,7 +204,8 @@ public class Actor implements Entity {
     public Element toXML2(Document doc) throws Exception {
 	// TODO Auto-generated method stub
 	Element racine = doc.createElement("actor");
-	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.ACTOR_CLASS);
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "."
+		+ ExpressConstant.ACTOR_CLASS);
 	racine.setAttribute("idkmad", oid.get());
 	racine.setAttribute("id-user", this.userRef.getOid().get());
 
@@ -221,8 +229,10 @@ public class Actor implements Entity {
 	this.experience = Experience.getXMLExperienceValue(p);
 
 	NodeList nodeList = p.getElementsByTagName("actor-competence");
-	if(nodeList != null && nodeList.item(0)!=null && nodeList.item(0).getParentNode()!=p){
-		nodeList = null;}
+	if (nodeList != null && nodeList.item(0) != null
+		&& nodeList.item(0).getParentNode() != p) {
+	    nodeList = null;
+	}
 	if (nodeList.item(0) != null) {
 	    this.competence = nodeList.item(0).getTextContent();
 	}

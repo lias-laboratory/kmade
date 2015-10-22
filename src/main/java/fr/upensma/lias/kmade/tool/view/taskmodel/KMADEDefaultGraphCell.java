@@ -1,27 +1,26 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.view.taskmodel;
 
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
-
 
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.GraphConstants;
@@ -39,7 +38,7 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
  * @author Mickael BARON
  */
 public class KMADEDefaultGraphCell extends DefaultGraphCell {
-    
+
     private static final long serialVersionUID = 1L;
 
     private Task myTask;
@@ -51,7 +50,7 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
     private final KMADEDefaultPort sonPort;
 
     private boolean isExpanded = true;
-    
+
     private boolean isSonExpanded = true;
 
     private boolean isSimulationExpanded = true;
@@ -101,22 +100,23 @@ public class KMADEDefaultGraphCell extends DefaultGraphCell {
 	// KMADEHistoryMessageManager.printMessage("methode gettask"+getTask().getLabelName());
 
 	Map<Object, Object> map = new Hashtable<Object, Object>();
-	
+
 	Point p = this.myTask.getPoint();
-		
-	if(p==null){
-	    myTask.setPoint(new Point(0,0,new Oid(InterfaceExpressJava.bdd.getMax()+1)));
-	    //We need to put the root task out of line
-	    if(myTask.getNumber().contains(ExpressConstant.ROOT_TASK_NAME)){
+
+	if (p == null) {
+	    myTask.setPoint(new Point(0, 0, new Oid(InterfaceExpressJava.bdd
+		    .getMax() + 1)));
+	    // We need to put the root task out of line
+	    if (myTask.getNumber().contains(ExpressConstant.ROOT_TASK_NAME)) {
 		myTask.getPoint().setX(20);
 		myTask.getPoint().setY(20);
 	    }
 	}
-	
+
 	p = this.myTask.getPoint();
-	
+
 	GraphConstants.setBounds(map, new Rectangle2D.Double(p.getX(),
-	    	p.getY(), 0, 0));
+		p.getY(), 0, 0));
 	GraphConstants.setResize(map, true);
 	GraphConstants.setAutoSize(map, true);
 	GraphConstants.setOpaque(map, false);

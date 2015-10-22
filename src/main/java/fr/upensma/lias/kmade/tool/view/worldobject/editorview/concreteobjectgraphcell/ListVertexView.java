@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -73,19 +73,20 @@ public class ListVertexView extends GroupDefaultVertexView {
 
 		if (!((ConcreteObjectCell) value).getName().equals(
 			KMADEConstant.EMPTY_CELL_NAME)) {
-		    JLabel label = new JLabel(((ConcreteObjectCell) value).getName());
+		    JLabel label = new JLabel(((ConcreteObjectCell) value)
+			    .getName());
 		    label.setOpaque(true);
 		    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		    if (index == 0)
 			label.setBackground(KMADEConstant.ACTIVE_OBJECT);
-		    
+
 		    else
 			label.setBackground(KMADEConstant.INACTIVE_OBJECT);
-		    
+
 		    return label;
 		} else
 		    return drawEmpty();
-		
+
 	    }
 	});
 
@@ -100,7 +101,7 @@ public class ListVertexView extends GroupDefaultVertexView {
 
 	panel.add(listPanel, BorderLayout.CENTER);
 	panel.setOpaque(false);
-	
+
 	this.autoSize();
 
 	return panel;

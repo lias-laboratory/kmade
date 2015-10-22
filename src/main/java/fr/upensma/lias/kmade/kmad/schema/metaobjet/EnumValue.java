@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -51,12 +51,12 @@ public class EnumValue extends ValeurType implements Entity {
     }
 
     public void setEnumeration(Enumeration e) {
-    	KMADEHistoryMessageManager.printlnMessage(e.toString());
+	KMADEHistoryMessageManager.printlnMessage(e.toString());
 	this.enumere = e;
     }
 
     public void setElement(Element e) {
-    	KMADEHistoryMessageManager.printlnMessage(e.toString());
+	KMADEHistoryMessageManager.printlnMessage(e.toString());
 	this.element = e;
     }
 
@@ -153,7 +153,7 @@ public class EnumValue extends ValeurType implements Entity {
 	// TODO Auto-generated method stub
 
     }
-    
+
     public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
 	return false;
     }

@@ -1,3 +1,20 @@
+/*********************************************************************************
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.view.taskproperties.constrainteditors;
 
 import java.awt.Dimension;
@@ -19,163 +36,173 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEJTable;
 import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
 import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 
-public class KMADEReadProtoTaskTaskIterCondition extends JScrollPane implements LanguageFactory  {
+/**
+ * @author Thomas LACHAUME
+ */
+public class KMADEReadProtoTaskTaskIterCondition extends JScrollPane implements
+	LanguageFactory {
 
-	private static final long serialVersionUID = -889866129907311742L;
+    private static final long serialVersionUID = -889866129907311742L;
 
-	private KMADEJTable table;
+    private KMADEJTable table;
 
-	private myModel modele;
+    private myModel modele;
 
-	public KMADEReadProtoTaskTaskIterCondition() {
-		modele = new myModel();
-		table = new KMADEJTable(modele);
-		table.getSelectionModel().setSelectionMode(
-				ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		this.setViewportView(table);
-		this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
-		// table.setFocusable(true);
-		this.setPreferredSize(new Dimension (390,600));
-		table.addKeyListener(new KeyListener() {
+    public KMADEReadProtoTaskTaskIterCondition() {
+	modele = new myModel();
+	table = new KMADEJTable(modele);
+	table.getSelectionModel().setSelectionMode(
+		ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+	this.setViewportView(table);
+	this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
+	// table.setFocusable(true);
+	this.setPreferredSize(new Dimension(390, 600));
+	table.addKeyListener(new KeyListener() {
 
-			public void keyTyped(KeyEvent ke) {
-				// on enleve lacondition de la tâche
-				if (ke.getKeyChar() == KeyEvent.VK_DELETE
-						|| ke.getKeyChar() == KeyEvent.VK_ENTER) {
-					int r[] = ((JTable) ke.getSource()).getSelectedRows();
-					for (int i = 0; i < r.length; i++) {
-						//3 pour l'oid
-						String oidCondition = (String) modele.getValueAt(r[i], 2);
-						ExpressTask.removeProtoTaskIterCondition(oidCondition);
-					}
+	    public void keyTyped(KeyEvent ke) {
+		// on enleve lacondition de la tâche
+		if (ke.getKeyChar() == KeyEvent.VK_DELETE
+			|| ke.getKeyChar() == KeyEvent.VK_ENTER) {
+		    int r[] = ((JTable) ke.getSource()).getSelectedRows();
+		    for (int i = 0; i < r.length; i++) {
+			// 3 pour l'oid
+			String oidCondition = (String) modele.getValueAt(r[i],
+				2);
+			ExpressTask.removeProtoTaskIterCondition(oidCondition);
+		    }
 
-				}
-				GraphicEditorAdaptator.getPanelProp().getEditorPrePostIterDialog().getAllIterationPanel().getProtoTaskIterationPanel().updateDataModel();
-			}
-
-			public void keyReleased(KeyEvent e) {
-
-			}
-
-			public void keyPressed(KeyEvent e) {
-
-			}
-		});
-		table.addMouseListener(new MouseListener() {
-
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2) {
-					int r = ((JTable) e.getSource()).getSelectedRow();
-					String oidCondition = (String) modele.getValueAt(r, 2);
-					ExpressTask.removeProtoTaskIterCondition(oidCondition);
-				}
-				GraphicEditorAdaptator.getPanelProp().getEditorPrePostIterDialog().getAllIterationPanel().getProtoTaskIterationPanel().updateDataModel();
-
-			}
-
-			public void mousePressed(MouseEvent e) {
-			}
-
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			public void mouseExited(MouseEvent e) {
-			}
-
-		});
-	}
-
-	public void setData(Object[][] tab) {
-		modele.setData(tab);
-		modele.fireTableDataChanged();
-	}
-
-	static class myModel extends AbstractTableModel {
-		static final long serialVersionUID = 132585986L;
-
-		private Object[][] data = new Object[0][];
-
-		public int getColumnCount() {
-			return 2;
 		}
+		GraphicEditorAdaptator.getPanelProp()
+			.getEditorPrePostIterDialog().getAllIterationPanel()
+			.getProtoTaskIterationPanel().updateDataModel();
+	    }
 
-		public int getRowCount() {
-			return (data == null ? 0 : data.length);
-		}
+	    public void keyReleased(KeyEvent e) {
 
-		public Object getValueAt(int param, int param1) {
-			return data[param][param1];
-		}
+	    }
 
-		public String getColumnName(int i) {
-			switch (i) {
-			case 0:
-				return KMADEConstant.PROTOTASK_CONDITION_DESCRIPTION;
-			case 1:
-				return KMADEConstant.PROTOTASK_CONDITION_DEFAULT_VALUE;
-			default:
-				return "";
-			}
-		}
+	    public void keyPressed(KeyEvent e) {
 
-		public void setData(Object[][] data) {
-			this.data = data;
+	    }
+	});
+	table.addMouseListener(new MouseListener() {
+
+	    public void mouseClicked(MouseEvent e) {
+		if (e.getClickCount() == 2) {
+		    int r = ((JTable) e.getSource()).getSelectedRow();
+		    String oidCondition = (String) modele.getValueAt(r, 2);
+		    ExpressTask.removeProtoTaskIterCondition(oidCondition);
 		}
+		GraphicEditorAdaptator.getPanelProp()
+			.getEditorPrePostIterDialog().getAllIterationPanel()
+			.getProtoTaskIterationPanel().updateDataModel();
+
+	    }
+
+	    public void mousePressed(MouseEvent e) {
+	    }
+
+	    public void mouseReleased(MouseEvent e) {
+	    }
+
+	    public void mouseEntered(MouseEvent e) {
+	    }
+
+	    public void mouseExited(MouseEvent e) {
+	    }
+
+	});
+    }
+
+    public void setData(Object[][] tab) {
+	modele.setData(tab);
+	modele.fireTableDataChanged();
+    }
+
+    static class myModel extends AbstractTableModel {
+	static final long serialVersionUID = 132585986L;
+
+	private Object[][] data = new Object[0][];
+
+	public int getColumnCount() {
+	    return 2;
 	}
 
-	class MyTableListModel extends DefaultListTableModel {
-
-		private static final long serialVersionUID = 8773587010073998732L;
-
-		public MyTableListModel(String[] columnNames, String nameDefault) {
-			super(columnNames, nameDefault);
-		}
-
-		public boolean isCellEditable(int iRowIndex, int iColumnIndex) {
-			return false;
-		}
+	public int getRowCount() {
+	    return (data == null ? 0 : data.length);
 	}
 
-	public void notifLocalisationModification() {
+	public Object getValueAt(int param, int param1) {
+	    return data[param][param1];
 	}
 
-	public void clearSelection() {
-		table.getSelectionModel().clearSelection();
+	public String getColumnName(int i) {
+	    switch (i) {
+	    case 0:
+		return KMADEConstant.PROTOTASK_CONDITION_DESCRIPTION;
+	    case 1:
+		return KMADEConstant.PROTOTASK_CONDITION_DEFAULT_VALUE;
+	    default:
+		return "";
+	    }
 	}
 
-	public void setOrganizationAddNameBorder(String name) {
-		this.setBorder(new TitledBorder(null,
-				KMADEConstant.CONDITION_TABBEDPANE_TITLE_MESSAGE+ " : " + name,
-				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
+	public void setData(Object[][] data) {
+	    this.data = data;
+	}
+    }
 
+    class MyTableListModel extends DefaultListTableModel {
+
+	private static final long serialVersionUID = 8773587010073998732L;
+
+	public MyTableListModel(String[] columnNames, String nameDefault) {
+	    super(columnNames, nameDefault);
 	}
 
-	public void removeAllCondition() {
-		table.removeAll();
-		modele.setData(new Object[0][]);
+	public boolean isCellEditable(int iRowIndex, int iColumnIndex) {
+	    return false;
 	}
+    }
 
-	public void updateDataModel(Object[][] o) {
-		this.removeAllCondition();
-		// les conditions {oid, description, valeur}
-		if(o!=null){
-			Object[][] temp = new Object[o.length][3];
-			for (int i = 0; i < o.length; i++) {
+    public void notifLocalisationModification() {
+    }
 
-				// description
-				temp[i][0] = (String) o[i][0];
-				// valeur
-				temp[i][1] = (String) o[i][1];
-				// oid
-				temp[i][2] = (String) o[i][2];
+    public void clearSelection() {
+	table.getSelectionModel().clearSelection();
+    }
 
-			}
-			modele.setData(temp);
-		}
-		modele.fireTableDataChanged();
+    public void setOrganizationAddNameBorder(String name) {
+	this.setBorder(new TitledBorder(
+		null,
+		KMADEConstant.CONDITION_TABBEDPANE_TITLE_MESSAGE + " : " + name,
+		TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
 
+    }
+
+    public void removeAllCondition() {
+	table.removeAll();
+	modele.setData(new Object[0][]);
+    }
+
+    public void updateDataModel(Object[][] o) {
+	this.removeAllCondition();
+	// les conditions {oid, description, valeur}
+	if (o != null) {
+	    Object[][] temp = new Object[o.length][3];
+	    for (int i = 0; i < o.length; i++) {
+
+		// description
+		temp[i][0] = (String) o[i][0];
+		// valeur
+		temp[i][1] = (String) o[i][1];
+		// oid
+		temp[i][2] = (String) o[i][2];
+
+	    }
+	    modele.setData(temp);
 	}
+	modele.fireTableDataChanged();
+
+    }
 }

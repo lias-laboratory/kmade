@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -28,10 +28,10 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
 /**
  * @author Mickael BARON
  */
-public class ExpressIndividu{
+public class ExpressIndividu {
     public static String createIndividu() {
-	Oid oidUser = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE, 
-			ExpressConstant.PERSON_CLASS);
+	Oid oidUser = InterfaceExpressJava.createEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.PERSON_CLASS);
 	return (oidUser.get());
     }
 
@@ -46,8 +46,8 @@ public class ExpressIndividu{
     }
 
     public static String[] getIndividusName() {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, 
-			ExpressConstant.PERSON_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.PERSON_CLASS);
 	String[] lst = new String[objs.length];
 	for (int i = 0; i < objs.length; i++) {
 	    Person obj = (Person) objs[i];
@@ -58,8 +58,8 @@ public class ExpressIndividu{
 
     public static ArrayList<Person> getIndividus() {
 	ArrayList<Person> lst = new ArrayList<Person>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, 
-			ExpressConstant.PERSON_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.PERSON_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Person obj = (Person) objs[i];
 	    lst.add(obj);
@@ -68,8 +68,8 @@ public class ExpressIndividu{
     }
 
     public static Person getIndividuWithName(String name) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, 
-			ExpressConstant.PERSON_CLASS);
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.PERSON_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Person obj = (Person) objs[i];
 	    if (obj.getName().equals(name)) {
@@ -102,8 +102,7 @@ public class ExpressIndividu{
 
     public static void addIndividuInOrganisation(String oidIndividu,
 	    String oidOrganisation) {
-	Person i = (Person) InterfaceExpressJava.prendre(new Oid(
-		oidIndividu));
+	Person i = (Person) InterfaceExpressJava.prendre(new Oid(oidIndividu));
 	Organization o = (Organization) InterfaceExpressJava.prendre(new Oid(
 		oidOrganisation));
 	// on les ajoutes mutuellement
@@ -113,8 +112,7 @@ public class ExpressIndividu{
 
     public static void removeIndividuInOrganisation(String oidIndividu,
 	    String oidOrganisation) {
-	Person i = (Person) InterfaceExpressJava.prendre(new Oid(
-		oidIndividu));
+	Person i = (Person) InterfaceExpressJava.prendre(new Oid(oidIndividu));
 	Organization o = (Organization) InterfaceExpressJava.prendre(new Oid(
 		oidOrganisation));
 	// on les ajoutes mutuellement
@@ -173,7 +171,8 @@ public class ExpressIndividu{
 	Person m = (Person) InterfaceExpressJava.prendre(new Oid(oid));
 	// R�cup�ration de toutes les organisations
 	Object[] tabObj = (Object[]) InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE, ExpressConstant.ORGANIZATION_CLASS);
+		.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+			ExpressConstant.ORGANIZATION_CLASS);
 	// cast des objets r�cup�r�s en organisation
 	Organization[] tabOrg = new Organization[tabObj.length];
 	for (int i = 0; i < tabOrg.length; i++) {

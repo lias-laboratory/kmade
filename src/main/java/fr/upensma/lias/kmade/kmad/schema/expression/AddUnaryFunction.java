@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.kmad.schema.expression;
 
 import java.util.ArrayList;
@@ -41,22 +41,24 @@ public class AddUnaryFunction extends UnaryFunction {
     }
 
     public void checkNode() throws SemanticException {
-	try{
-		ObjetAbstrait groupeStored = InterfaceExpressJava.getCurrentObject()
-	
-		.getCurrentCheckGroup().getContientObj();
-	ObjetAbstrait groupeAttributed = ((GroupExpressExpression) myAloneExpression)
-		.getGroup().getContientObj();
+	try {
+	    ObjetAbstrait groupeStored = InterfaceExpressJava
+		    .getCurrentObject()
 
-	if (!groupeStored.getName().equals(groupeAttributed.getName())) {
-	    throw new SemanticException(ExpressConstant.NO_SAME_ABSTRACT_OBJECT
-		    + " : \"" + groupeStored.getName() + "\" et " + "\""
-		    + groupeAttributed.getName() + "\"");
+		    .getCurrentCheckGroup().getContientObj();
+	    ObjetAbstrait groupeAttributed = ((GroupExpressExpression) myAloneExpression)
+		    .getGroup().getContientObj();
+
+	    if (!groupeStored.getName().equals(groupeAttributed.getName())) {
+		throw new SemanticException(
+			ExpressConstant.NO_SAME_ABSTRACT_OBJECT + " : \""
+				+ groupeStored.getName() + "\" et " + "\""
+				+ groupeAttributed.getName() + "\"");
+	    }
+	} catch (Exception e) {
+	    System.err.println("KMC");
+	    e.printStackTrace();
 	}
-	}catch (Exception e) {
-		System.err.println("KMC");
-		e.printStackTrace();
-		}
     }
 
     public void evaluateNode(ObjetConcret ref) throws SemanticException {
@@ -82,8 +84,9 @@ public class AddUnaryFunction extends UnaryFunction {
 
 	if (groupeStored.getName().equals(groupeAttributed.getName())) {
 	    // Création de l'objet concret
-	    Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
-	    		ExpressConstant.CONCRETE_OBJECT_CLASS);
+	    Oid oidObjConc = InterfaceExpressJava.createEntity(
+		    ExpressConstant.METAOBJECT_PACKAGE,
+		    ExpressConstant.CONCRETE_OBJECT_CLASS);
 	    // Récupère l'objet Abstrait
 	    ObjetAbstrait abstractObject = (ObjetAbstrait) InterfaceExpressJava
 		    .prendre(groupeStored.getOid());
@@ -106,8 +109,8 @@ public class AddUnaryFunction extends UnaryFunction {
 	    boolean etat = false;
 	    for (int i = 0; i < listattributabs.size(); i++) {
 		Oid oidAttribut = InterfaceExpressJava.createEntity(
-				ExpressConstant.METAOBJECT_PACKAGE,
-	    		ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
+			ExpressConstant.METAOBJECT_PACKAGE,
+			ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
 		AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava
 			.prendre(oidAttribut);
 		AttributAbstrait abstractAttribut = listattributabs.get(i);

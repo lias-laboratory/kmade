@@ -1,116 +1,96 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.view.taskproperties.constrainteditors;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.JTextComponent;
 
-import fr.upensma.lias.kmade.kmad.schema.expression.ConcreteObjectType;
-import fr.upensma.lias.kmade.kmad.schema.expression.NodeExpression;
-import fr.upensma.lias.kmade.kmad.schema.expression.UserExpression;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
-import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessagePanel;
 import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
 import fr.upensma.lias.kmade.tool.viewadaptator.ConcreteObjectPanelAdaptator;
-import fr.upensma.lias.kmade.tool.viewadaptator.IterationAdaptator;
-import fr.upensma.lias.kmade.tool.viewadaptator.ReadConcreteObjectAdaptator;
 
 /**
  * @author Mickael BARON
  */
-public class KMADEIterationPanel extends JPanel implements LanguageFactory  {
+public class KMADEIterationPanel extends JPanel implements LanguageFactory {
 
-	
+    private static final long serialVersionUID = -6251751576712160692L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6251751576712160692L;
+    private final KMADEProtoTaskIterationPanel proto = new KMADEProtoTaskIterationPanel();
 
+    private final KMADEBaseIterationPanel base = new KMADEBaseIterationPanel();
 
-	private final KMADEProtoTaskIterationPanel proto = new KMADEProtoTaskIterationPanel();
+    public KMADEProtoTaskIterationPanel getProtoTaskIterationPanel() {
+	return proto;
+    }
 
-	private final KMADEBaseIterationPanel base = new KMADEBaseIterationPanel();
+    public KMADEBaseIterationPanel getBaseIterationPanel() {
+	return base;
+    }
 
-	public KMADEProtoTaskIterationPanel getProtoTaskIterationPanel() {
-		return proto;
-	}
-	public KMADEBaseIterationPanel getBaseIterationPanel() {
-		return base;
-	}
-	private final JTabbedPane tabpanePre;
+    private final JTabbedPane tabpanePre;
 
+    public Object textArea;
 
-	public Object textArea;
+    public KMADEIterationPanel() {
+	tabpanePre = new JTabbedPane();
+	tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_FORMAL, base);
+	tabpanePre.setPreferredSize(new Dimension(600, 700));
+	// UNDO for ProtoTask V2
+	// tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_PROTOTASK,proto);
 
-	public KMADEIterationPanel(){
-		tabpanePre = new JTabbedPane();
-		tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_FORMAL,base);
-		//tabpanePre.setPreferredSize(new Dimension(600,700));
-		tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_PROTOTASK,proto);
+	tabpanePre.addChangeListener(new ChangeListener() {
+	    public void stateChanged(ChangeEvent e) {
+		if (tabpanePre.getSelectedIndex() == 0) {
+		    ConcreteObjectPanelAdaptator.updateConcreteObjectView();
+		} else if (tabpanePre.getSelectedIndex() == 1) {
 
-		tabpanePre.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				if (tabpanePre.getSelectedIndex() == 0) {
-					ConcreteObjectPanelAdaptator.updateConcreteObjectView();
-				} else if (tabpanePre.getSelectedIndex() == 1) {
-						
-						proto.updateDataModel();
-					}
-				}
-			});
-		this.add(tabpanePre, BorderLayout.CENTER);
-		//this.setPreferredSize(new Dimension(700,700));
+		    proto.updateDataModel();
 		}
-		@Override
-		public void notifLocalisationModification() {
-			// TODO Auto-generated method stub
-		}
-		public void setOutputMessage() {
-			base.setOutputMessage();
+	    }
+	});
+	this.add(tabpanePre, BorderLayout.CENTER);
+	this.setPreferredSize(new Dimension(700, 700));
+    }
 
-		}
-		public void setDescriptionArea(String description) {
-			base.setDescriptionArea(description);
+    @Override
+    public void notifLocalisationModification() {
+	// TODO Auto-generated method stub
+    }
 
-		}
-		public JTextComponent getTextArea() {
-			return base.textArea;
-		}
+    public void setOutputMessage() {
+	base.setOutputMessage();
 
+    }
+
+    public void setDescriptionArea(String description) {
+	base.setDescriptionArea(description);
+
+    }
+
+    public JTextComponent getTextArea() {
+	return base.textArea;
+    }
 
 }

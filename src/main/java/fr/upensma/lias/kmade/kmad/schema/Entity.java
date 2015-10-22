@@ -1,6 +1,6 @@
 /*********************************************************************************
 * This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
 * 
 * KMADe is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published by
@@ -20,9 +20,8 @@ package fr.upensma.lias.kmade.kmad.schema;
 import java.io.Serializable;
 
 /**
- * @author Vincent LUCQUIAUD and Mickael BARON
- * CommentPG: Je ne comprends pas cette classe. Pourquoi en avoir fait une interface, 
- * et pas une classe mere, contenant l'Oid ?
+ * @author Vincent LUCQUIAUD
+ * @author Mickael BARON
  */
 public interface Entity extends Serializable, KMADXml {
     

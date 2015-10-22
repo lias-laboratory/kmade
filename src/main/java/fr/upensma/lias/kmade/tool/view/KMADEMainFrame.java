@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.view;
 
 import java.awt.AlphaComposite;
@@ -125,9 +125,9 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
     private KMADESimulationDialog simulationDialog = new KMADESimulationDialog();
 
     private KMADEPrototypeDialog prototypeDialog = new KMADEPrototypeDialog();
-    
+
     private KMADEProtoTaskMainPanel protoTaskPanel = new KMADEProtoTaskMainPanel();
-    
+
     private KMADESimpleTreePanel simpleTreePanel = new KMADESimpleTreePanel();
 
     private KMADEStatisticDialog statisticDialog = new KMADEStatisticDialog(
@@ -138,13 +138,12 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 
     private KMADEEntityDialog entityDialog = new KMADEEntityDialog(this);
 
-  
     private KMADEFindReplaceDialog findReplaceDialog = new KMADEFindReplaceDialog(
 	    this);
-    
-    
+
     // ADDED by Joachim TROUVERIE
-    private KMADEObjectDialogView objectDialogView = new KMADEObjectDialogView(this);
+    private KMADEObjectDialogView objectDialogView = new KMADEObjectDialogView(
+	    this);
 
     private final KMADEStatusBar myStatusBar = new KMADEStatusBar();
 
@@ -179,10 +178,10 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 	return findReplaceDialog;
     }
 
-    public KMADESimpleTreePanel getSimpleTreePanel(){
-    	return simpleTreePanel;
+    public KMADESimpleTreePanel getSimpleTreePanel() {
+	return simpleTreePanel;
     }
-    
+
     public void showEmptyPanel() {
 
 	myProjectCard.show(panelHaut, "PanelEmpty");
@@ -451,8 +450,9 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 	this.activeMessageStream();
 
 	this.pack();
-	Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-	tailleEcran.height -=40;
+	Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit()
+		.getScreenSize();
+	tailleEcran.height -= 40;
 	this.setSize(new Dimension(tailleEcran));
 
 	// this.setSize(440, 400);
@@ -486,7 +486,7 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 	});
 
 	this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
-	this.setLocation(0,0);
+	this.setLocation(0, 0);
 
     }
 
@@ -523,7 +523,6 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
     public KMADEPrintingDialog getPrintingFrame() {
 	return printingDialog;
     }
-    
 
     /**
      * @return Returns the aPPLICATION_TOOL_BAR.
@@ -608,12 +607,11 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
     public KMADEPrototypeDialog getPrototypeDialog() {
 	return prototypeDialog;
     }
-    
+
     public KMADEProtoTaskMainPanel getProtoTaskPanel() {
-    	return protoTaskPanel;
-        }
-    
-    
+	return protoTaskPanel;
+    }
+
     public KMADEStatisticDialog getStatisticDialog() {
 	return statisticDialog;
     }
@@ -625,7 +623,7 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
     public KMADEEntityDialog getEntityDialog() {
 	return entityDialog;
     }
-    
+
     public KMADEObjectDialogView getObjectDialogView() {
 	return objectDialogView;
     }

@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -37,46 +37,53 @@ public class StackCell extends GroupDefaultGraphCell {
 
     /**
      * First constructor for the cell (the point is not created yet)
-     * @param stack represented by the cell
-     * @param point x in the graph
-     * @param point y in the graph
+     * 
+     * @param stack
+     *            represented by the cell
+     * @param point
+     *            x in the graph
+     * @param point
+     *            y in the graph
      */
     public StackCell(Groupe o, int x, int y) {
 	super(o, x, y);
 	this.stack = (PileAg) o.getEnsemble();
     }
-    
 
     /**
      * Second constructor for the cell (the point is already yet)
-     * @param stack represented by the cell
-     * @param point in the graph
+     * 
+     * @param stack
+     *            represented by the cell
+     * @param point
+     *            in the graph
      */
     public StackCell(Groupe g, Point point) {
-	super(g,point);
+	super(g, point);
 	this.stack = (PileAg) g.getEnsemble();
     }
-
 
     /**
      * Method to add a cell in the stack in the first position
      */
     @Override
     public void addCellToGroup(ConcreteObjectCell cell) {
-	this.childCells.add(0,cell);
+	this.childCells.add(0, cell);
 	((ObjetConcret) cell.getObject()).setAppartientGroupe(this.group);
     }
-    
+
     /**
      * Method to set the selected cell in the group
-     * @param index of the cell
+     * 
+     * @param index
+     *            of the cell
      */
     @Override
     public void setSelectedIndex(int i) {
-	if(i != -1){
+	if (i != -1) {
 	    this.selectedIndex = 0;
-	}
-	else this.selectedIndex = i;
+	} else
+	    this.selectedIndex = i;
     }
 
 }

@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -32,7 +32,6 @@ import org.jgraph.JGraph;
 
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.GroupDefaultVertexView;
-
 
 /**
  * Renderer for the array cells.
@@ -80,11 +79,12 @@ public class ArrayVertexView extends GroupDefaultVertexView {
 			    .createLineBorder(Color.BLACK));
 		    numero.setOpaque(false);
 
-		    JLabel label = new JLabel(((ConcreteObjectCell) value).getName(),JLabel.CENTER);
+		    JLabel label = new JLabel(((ConcreteObjectCell) value)
+			    .getName(), JLabel.CENTER);
 		    label.setOpaque(true);
 		    label.setBackground(KMADEConstant.ACTIVE_OBJECT);
 		    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		    
+
 		    panel.add(numero, BorderLayout.WEST);
 		    panel.add(label, BorderLayout.CENTER);
 
@@ -96,7 +96,7 @@ public class ArrayVertexView extends GroupDefaultVertexView {
 	});
 
 	this.autoSize();
-	
+
 	return panel;
     }
 }

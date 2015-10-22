@@ -1,6 +1,6 @@
 /*********************************************************************************
 * This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
 * 
 * KMADe is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published by
@@ -25,11 +25,10 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.text.JTextComponent;
 
-import fr.upensma.lias.kmade.kmad.schema.tache.SideEffectExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.IterExpression;
 import fr.upensma.lias.kmade.kmad.schema.tache.PreExpression;
+import fr.upensma.lias.kmade.kmad.schema.tache.SideEffectExpression;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.taskproperties.constrainteditors.KMADEBaseIterationPanel;
 import fr.upensma.lias.kmade.tool.view.taskproperties.constrainteditors.KMADEBasePreconditionPanel;
@@ -68,19 +67,19 @@ public class KMADEEditorPrePostIterDialog extends JPropertiesEditorDialog {
 	cardPanel.add(refPreconditionPanel, "PRECONDITION");
 	cardPanel.add(refEffetsDeBordPanel, "EFFETSDEBORD");
 	cardPanel.add(refIterconditionPanel, "ITERATION");
+
 	JSplitPane mySplitPane = KMADEEnhancedSplitPane
 		.createStrippedSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 			cardPanel, refReadObject);
-	cardPanel.setMinimumSize(new Dimension(250, 400));
+	//cardPanel.setMinimumSize(new Dimension(250, 400));
 	mySplitPane.setOneTouchExpandable(true);
 	mySplitPane.setDividerLocation(800);
 	mySplitPane.setResizeWeight(0.55);
 	ScrollPane scrollPane = new ScrollPane();
-	Dimension dim = new Dimension(1300, 900);
+	Dimension dim = new Dimension(1230, 800);
 
 	scrollPane.setPreferredSize(dim);
 	scrollPane.add(mySplitPane);
-	this.setLayout(new BorderLayout());
 	this.getContentPane().add(BorderLayout.CENTER, scrollPane);
 	this.pack();
 	if(Toolkit.getDefaultToolkit().getScreenSize().height< dim.height){

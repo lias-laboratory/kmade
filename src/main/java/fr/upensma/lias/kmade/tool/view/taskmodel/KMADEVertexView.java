@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.view.taskmodel;
 
 import java.awt.Color;
@@ -49,11 +49,7 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 import fr.upensma.lias.kmade.tool.KMADEConstant;
 import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADETaskModelPanel.MyBasicGraphUI;
-import fr.upensma.lias.kmade.tool.view.taskproperties.KMADEEditorTextDialog;
-import fr.upensma.lias.kmade.tool.view.toolutilities.JPropertiesTable;
-import fr.upensma.lias.kmade.tool.view.toolutilities.PropertiesObject;
 import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
-import fr.upensma.lias.kmade.tool.viewadaptator.TaskPropertiesAdaptator;
 
 /**
  * @author Mickael BARON
@@ -482,12 +478,16 @@ public class KMADEVertexView extends VertexView {
 		String s_pre = KMADEConstant.VERTEX_PRECONDITION;
 
 		if (!myGraphCell.getTask().getPreExpression().getFormalText()
-				.equals("true") || (myGraphCell.getTask().getPreExpression().getDescription()!= null && !myGraphCell.getTask().getPreExpression().getDescription().equals("") )) {
-			    f.setColor(Color.BLACK);
-			} else {
-			    f.setColor(Color.LIGHT_GRAY);
-			}
-		
+			.equals("true")
+			|| (myGraphCell.getTask().getPreExpression()
+				.getDescription() != null && !myGraphCell
+				.getTask().getPreExpression().getDescription()
+				.equals(""))) {
+		    f.setColor(Color.BLACK);
+		} else {
+		    f.setColor(Color.LIGHT_GRAY);
+		}
+
 		f.setFont(KMADEConstant.TASK_NUM_FONT);
 		FontMetrics fm_pre = f.getFontMetrics();
 		Rectangle2D rpre = fm_pre.getStringBounds(s_pre, f);
@@ -590,15 +590,19 @@ public class KMADEVertexView extends VertexView {
 		String s_rep = KMADEConstant.VERTEX_ITERATION;
 
 		Rectangle2D rrep = fm_pre.getStringBounds(s_rep, f);
-		myGraphCell.getTask().getIterExpression().setInitIterationVariant();
-		if((!myGraphCell.getTask().getIterExpression().getFormalText().equals("[1]"))||
-				(myGraphCell.getTask().getIterExpression().getDescription()!=null && !myGraphCell.getTask().getIterExpression().getDescription().equals(""))
-				){
-			f.setColor(Color.BLACK);
-		}else{
-			f.setColor(Color.LIGHT_GRAY);
+		myGraphCell.getTask().getIterExpression()
+			.setInitIterationVariant();
+		if ((!myGraphCell.getTask().getIterExpression().getFormalText()
+			.equals("[1]"))
+			|| (myGraphCell.getTask().getIterExpression()
+				.getDescription() != null && !myGraphCell
+				.getTask().getIterExpression().getDescription()
+				.equals(""))) {
+		    f.setColor(Color.BLACK);
+		} else {
+		    f.setColor(Color.LIGHT_GRAY);
 		}
-		
+
 		f.drawString(
 			s_rep,
 			widthd - (int) rrep.getWidth(),
@@ -618,11 +622,15 @@ public class KMADEVertexView extends VertexView {
 		// L'icône POST
 		String s_post = KMADEConstant.VERTEX_EFFETSDEBORD;
 
-		if (myGraphCell.getTask().getEffetsDeBordExpression().getFormalText()
-			.equals("void") && (myGraphCell.getTask().getEffetsDeBordExpression().getDescription()==null || myGraphCell.getTask().getEffetsDeBordExpression().getDescription().equals("") )) {
+		if (myGraphCell.getTask().getEffetsDeBordExpression()
+			.getFormalText().equals("void")
+			&& (myGraphCell.getTask().getEffetsDeBordExpression()
+				.getDescription() == null || myGraphCell
+				.getTask().getEffetsDeBordExpression()
+				.getDescription().equals(""))) {
 		    f.setColor(Color.LIGHT_GRAY);
-		}else{
-			 f.setColor(Color.BLACK);
+		} else {
+		    f.setColor(Color.BLACK);
 		}
 
 		Rectangle2D rpost = fm_pre.getStringBounds(s_post, f);
@@ -1054,10 +1062,9 @@ public class KMADEVertexView extends VertexView {
 	    // et on fait l'action en cons�quence
 
 	    if (rectOpt != null && rectOpt.contains(event.getPoint())) {
-		((KMADEDefaultGraphCell) cell.getCell()).getTask()
-			.setOptional(
-				!((KMADEDefaultGraphCell) cell.getCell())
-					.getTask().getFacultatif());
+		((KMADEDefaultGraphCell) cell.getCell()).getTask().setOptional(
+			!((KMADEDefaultGraphCell) cell.getCell()).getTask()
+				.getFacultatif());
 
 	    } else if (rectInter != null
 		    && rectInter.contains(event.getPoint())) {
@@ -1097,11 +1104,10 @@ public class KMADEVertexView extends VertexView {
 		    && rectEvenementIn.contains(event.getPoint())) {
 		KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel()
 			.getProprieteTache().setEventDecl();
-	    } else if(rectDesc != null
-			    && rectDesc.contains(event.getPoint())) {
-	    	KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel()
-	    		.getProprieteTache().setObservation();
-	  		  
+	    } else if (rectDesc != null && rectDesc.contains(event.getPoint())) {
+		KMADEMainFrame.getProjectPanel().getTaskDescriptionPanel()
+			.getProprieteTache().setObservation();
+
 	    }
 	    graph.repaint();
 	}

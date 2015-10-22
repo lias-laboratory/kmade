@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -44,15 +44,18 @@ public class AbstractObjectCell extends ObjectDefaultGraphCell {
 
     /**
      * First constructor for the cell (the point is not created yet)
+     * 
      * @param abstract object represented by the cell
-     * @param point x in the graph
-     * @param point y in the graph
+     * @param point
+     *            x in the graph
+     * @param point
+     *            y in the graph
      */
     public AbstractObjectCell(ObjetAbstrait o, int x, int y) {
 	super(o, x, y);
 	this.item = (ObjetAbstrait) o;
-	Oid oidPoint = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.POINT_CLASS);
+	Oid oidPoint = InterfaceExpressJava.createEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.POINT_CLASS);
 	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
 	p.setX(x);
 	p.setY(y);
@@ -68,8 +71,11 @@ public class AbstractObjectCell extends ObjectDefaultGraphCell {
 
     /**
      * Second constructor for the cell (the point is already created)
-     * @param object represented by the cell
-     * @param point in the graph
+     * 
+     * @param object
+     *            represented by the cell
+     * @param point
+     *            in the graph
      */
     public AbstractObjectCell(ObjetAbstrait o, Point p) {
 	super(o, p.getX(), p.getY());
@@ -84,7 +90,7 @@ public class AbstractObjectCell extends ObjectDefaultGraphCell {
     }
 
     /**
-     * @return a String representing the object's attributes 
+     * @return a String representing the object's attributes
      */
     public String[] getObjectAttributes() {
 	if (!item.getInverseAttributsAbs().isEmpty()) {
@@ -104,6 +110,7 @@ public class AbstractObjectCell extends ObjectDefaultGraphCell {
 	} else
 	    return null;
     }
+
     /**
      * @return the object's description
      */

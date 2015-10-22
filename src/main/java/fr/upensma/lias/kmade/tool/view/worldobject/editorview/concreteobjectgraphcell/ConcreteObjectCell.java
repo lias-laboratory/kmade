@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -74,15 +74,19 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
     /**
      * First constructor for the cell (the point is not created yet)
-     * @param concrete object represented by the cell
-     * @param point x in the graph
-     * @param point y in the graph
+     * 
+     * @param concrete
+     *            object represented by the cell
+     * @param point
+     *            x in the graph
+     * @param point
+     *            y in the graph
      */
     public ConcreteObjectCell(ObjetConcret o, int x, int y) {
 	super(o, x, y);
 	this.item = o;
-	Oid oidPoint = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.POINT_CLASS);
+	Oid oidPoint = InterfaceExpressJava.createEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.POINT_CLASS);
 	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
 	p.setX(x);
 	p.setY(y);
@@ -97,8 +101,11 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
     /**
      * Second constructor for the cell (the point is already created)
-     * @param concrete object represented by the cell
-     * @param point in the graph
+     * 
+     * @param concrete
+     *            object represented by the cell
+     * @param point
+     *            in the graph
      */
     public ConcreteObjectCell(ObjetConcret o, Point p) {
 	super(o, p.getX(), p.getY());
@@ -118,6 +125,7 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
     public String getDescription() {
 	return item.getDescription();
     }
+
     /**
      * @return the concrete object represented by the cell
      */
@@ -144,6 +152,7 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
     /**
      * Method to set the renderer for the cell
+     * 
      * @param new renderer for the cell
      */
     public void setInvView(ConcreteObjectVertexView invView) {
@@ -151,7 +160,8 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
     }
 
     /**
-     * @param the graph where the cell is located
+     * @param the
+     *            graph where the cell is located
      * @return the cell's renderer
      */
     public ConcreteObjectVertexView getInvView(JGraph graph) {
@@ -163,7 +173,9 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
     /**
      * Method to set the concrete object's name
-     * @param the new name
+     * 
+     * @param the
+     *            new name
      */
     public void setName(String newName) {
 	this.item.setName(newName);
@@ -171,6 +183,7 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
     /**
      * Method to set the concrete object's description
+     * 
      * @param description
      */
     public void setDescription(String description) {
@@ -179,7 +192,9 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
     /**
      * Method to set a concrete object's attribute value
-     * @param attribute's name
+     * 
+     * @param attribute
+     *            's name
      * @param value
      */
     public void setConcreteAttributeValue(String name, String value) {
@@ -193,15 +208,19 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
     /**
      * Display a window to edit the concrete object
-     * @param graph where the cell is located
+     * 
+     * @param graph
+     *            where the cell is located
      */
     public void edit(JGraph graph) {
 	this.edit = new ConcreteObjectEdit(this, GraphicEditorAdaptator
-		.getMainFrame().getObjectDialogView(),graph);
+		.getMainFrame().getObjectDialogView(), graph);
     }
 
     /**
-     * Class displaying a window to edit the concrete object represented by the cell
+     * Class displaying a window to edit the concrete object represented by the
+     * cell
+     * 
      * @author Joachim TROUVERIE
      */
     public class ConcreteObjectEdit extends JDialog {
@@ -216,7 +235,8 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
 	private JButton ok;
 
-	public ConcreteObjectEdit(final ConcreteObjectCell cell, JDialog owner, final JGraph myGraph) {
+	public ConcreteObjectEdit(final ConcreteObjectCell cell, JDialog owner,
+		final JGraph myGraph) {
 
 	    super(owner, KMADEConstant.EDIT_CONCRETE_OBJECT_ACTION_MESSAGE);
 	    this.setLayout(new BorderLayout());
@@ -269,7 +289,8 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 				.toString();
 			cell.setConcreteAttributeValue(name, value);
 		    }
-		    myGraph.getGraphLayoutCache().insert(ConcreteObjectCell.this);
+		    myGraph.getGraphLayoutCache().insert(
+			    ConcreteObjectCell.this);
 		    ConcreteObjectEdit.this.dispose();
 		}
 	    });
@@ -285,6 +306,7 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
 	/**
 	 * Table editor used to edit the concrete object
+	 * 
 	 * @author Joachim TROUVERIE
 	 */
 	class EditionTableEditor extends AbstractCellEditor implements
@@ -343,6 +365,7 @@ public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
 	/**
 	 * Table model used to edit the concrete object
+	 * 
 	 * @author Joachim TROUVERIE
 	 */
 	class EditionTableModel extends AbstractTableModel {

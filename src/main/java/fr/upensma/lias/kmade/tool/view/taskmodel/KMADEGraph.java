@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.view.taskmodel;
 
 import java.awt.Container;
@@ -28,7 +28,6 @@ import java.awt.geom.Point2D;
 import javax.swing.JViewport;
 import javax.swing.ToolTipManager;
 import javax.swing.event.MouseInputAdapter;
-
 
 import org.jgraph.graph.CellView;
 import org.jgraph.graph.GraphModel;
@@ -175,53 +174,55 @@ public class KMADEGraph extends org.jgraph.JGraph {
 	addMouseMotionListener(mia);
 	addMouseListener(mia);
 	addMouseWheelListener(new MouseWheelListener() {
-	    public void mouseWheelMoved(MouseWheelEvent e) {	
-	    if(e.isControlDown()){
-		double zoom = getScale();
+	    public void mouseWheelMoved(MouseWheelEvent e) {
+		if (e.isControlDown()) {
+		    double zoom = getScale();
 
-		/*
-		 * ici on veut zoomer lorsque l'on bouge la molette vers le haut
-		 * et d�zoomer lorsqu'on la bouge vers le bas
-		 */
-		double wheelRotation = -((double) e.getWheelRotation()) / 4;
-
-		// KMADEHistoryMessageManager.printError("wheelRotation = " + wheelRotation);
-
-		if (zoom > 1) {
-		    zoom += wheelRotation;
-		} else if (zoom == 1) {
 		    /*
-		     * if (wheelRotation == 1) { zoom+=0.5; } else { zoom-=0.33;
-		     * }
+		     * ici on veut zoomer lorsque l'on bouge la molette vers le
+		     * haut et d�zoomer lorsqu'on la bouge vers le bas
 		     */
-		    zoom = (wheelRotation == 0.25 ? zoom + wheelRotation : 0.75);
-		} else if (zoom < 1) {
-		    if (zoom >= 0.5) {
+		    double wheelRotation = -((double) e.getWheelRotation()) / 4;
+
+		    // KMADEHistoryMessageManager.printError("wheelRotation = "
+		    // + wheelRotation);
+
+		    if (zoom > 1) {
 			zoom += wheelRotation;
-		    } else if (wheelRotation == 0.25) {
-			zoom *= 2;
-		    } else {
-			zoom /= 2;
+		    } else if (zoom == 1) {
+			/*
+			 * if (wheelRotation == 1) { zoom+=0.5; } else {
+			 * zoom-=0.33; }
+			 */
+			zoom = (wheelRotation == 0.25 ? zoom + wheelRotation
+				: 0.75);
+		    } else if (zoom < 1) {
+			if (zoom >= 0.5) {
+			    zoom += wheelRotation;
+			} else if (wheelRotation == 0.25) {
+			    zoom *= 2;
+			} else {
+			    zoom /= 2;
+			}
+
 		    }
 
-		}
+		    // on zoom en centrant sur la position du curseur
+		    setScale(zoom, getMousePosition());
 
-		// on zoom en centrant sur la position du curseur
-		setScale(zoom, getMousePosition());
+		    CellView[] views = getGraphLayoutCache().getCellViews();
 
-		CellView[] views = getGraphLayoutCache().getCellViews();
-
-		for (int i = 0; i < views.length; i++) {
-		    if (views[i] instanceof KMADEVertexView) {
-			((MyVertexRenderer) ((KMADEVertexView) views[i])
-				.getRenderer()).paintTask(getGraphics());
+		    for (int i = 0; i < views.length; i++) {
+			if (views[i] instanceof KMADEVertexView) {
+			    ((MyVertexRenderer) ((KMADEVertexView) views[i])
+				    .getRenderer()).paintTask(getGraphics());
+			}
 		    }
-		}
 
-	    }else{
-	    	
+		} else {
+
+		}
 	    }
-	}
 	});
     }
 
@@ -341,71 +342,77 @@ public class KMADEGraph extends org.jgraph.JGraph {
 	addMouseListener(mia);
 	addMouseWheelListener(new MouseWheelListener() {
 	    public void mouseWheelMoved(MouseWheelEvent e) {
-	    	if(e.isControlDown()){
-		double zoom = getScale();
-		double tmp;
+		if (e.isControlDown()) {
+		    double zoom = getScale();
+		    double tmp;
 
-		/*
-		 * ici on veut zoomer lorsque l'on bouge la molette vers le haut
-		 * et d�zoomer lorsqu'on la bouge vers le bas
-		 */
-		// double wheelRotation = -((double) e.getWheelRotation()) / 4;
+		    /*
+		     * ici on veut zoomer lorsque l'on bouge la molette vers le
+		     * haut et d�zoomer lorsqu'on la bouge vers le bas
+		     */
+		    // double wheelRotation = -((double) e.getWheelRotation()) /
+		    // 4;
 
-		if (e.getWheelRotation() < 0) {
-		    tmp = zoom * (KMADEConstant.WHEEL_ZOOM + 1);
-		} else {
-		    tmp = zoom / (KMADEConstant.WHEEL_ZOOM + 1);
-		}
+		    if (e.getWheelRotation() < 0) {
+			tmp = zoom * (KMADEConstant.WHEEL_ZOOM + 1);
+		    } else {
+			tmp = zoom / (KMADEConstant.WHEEL_ZOOM + 1);
+		    }
 
-		if (tmp > 0.001 && tmp < 7) {
-		    zoom = tmp;
-		}
+		    if (tmp > 0.001 && tmp < 7) {
+			zoom = tmp;
+		    }
 
-		// if (zoom > 1) {
-		// zoom += wheelRotation;
-		// } else if (zoom == 1) {
-		// /*
-		// * if (wheelRotation == 1) { zoom+=0.5; } else { zoom-=0.33; }
-		// */
-		// zoom = (wheelRotation == 0.25 ? zoom + wheelRotation : 0.75);
-		// } else if (zoom < 1) {
-		// if (zoom >= 0.5) {
-		// zoom += wheelRotation;
-		// } else if (wheelRotation == 0.25) {
-		// zoom *= 2;
-		// } else {
-		// zoom /= 2;
-		// }
-		//
-		// }
+		    // if (zoom > 1) {
+		    // zoom += wheelRotation;
+		    // } else if (zoom == 1) {
+		    // /*
+		    // * if (wheelRotation == 1) { zoom+=0.5; } else {
+		    // zoom-=0.33; }
+		    // */
+		    // zoom = (wheelRotation == 0.25 ? zoom + wheelRotation :
+		    // 0.75);
+		    // } else if (zoom < 1) {
+		    // if (zoom >= 0.5) {
+		    // zoom += wheelRotation;
+		    // } else if (wheelRotation == 0.25) {
+		    // zoom *= 2;
+		    // } else {
+		    // zoom /= 2;
+		    // }
+		    //
+		    // }
 
-		CellView[] views = getGraphLayoutCache().getCellViews();
+		    CellView[] views = getGraphLayoutCache().getCellViews();
 
-		if (getSelectionCell() != null) {
+		    if (getSelectionCell() != null) {
 
-		    if (getSelectionCell() instanceof KMADEDefaultGraphCell) {
-			for (int i = 0; i < views.length; i++) {
-			    if (views[i] instanceof KMADEVertexView) {
-				if (((KMADEVertexView) views[i]).getCell() == getSelectionCell()) {
-				    Point p = new Point(
-					    (int) ((KMADEVertexView) views[i])
-						    .getBounds().getCenterX(),
-					    (int) ((KMADEVertexView) views[i])
-						    .getBounds().getCenterY());
-				    setScale(zoom, p);
-				    return;
+			if (getSelectionCell() instanceof KMADEDefaultGraphCell) {
+			    for (int i = 0; i < views.length; i++) {
+				if (views[i] instanceof KMADEVertexView) {
+				    if (((KMADEVertexView) views[i]).getCell() == getSelectionCell()) {
+					Point p = new Point(
+						(int) ((KMADEVertexView) views[i])
+							.getBounds()
+							.getCenterX(),
+						(int) ((KMADEVertexView) views[i])
+							.getBounds()
+							.getCenterY());
+					setScale(zoom, p);
+					return;
+				    }
 				}
 			    }
 			}
+
 		    }
 
+		    // on zoom en centrant sur la position du curseur
+		    setScale(zoom, getMousePosition());
+
 		}
-
-		// on zoom en centrant sur la position du curseur
-		setScale(zoom, getMousePosition());
-
 	    }
-	}});
+	});
     }
 
     public String getToolTipText(MouseEvent event) {
@@ -517,8 +524,8 @@ public class KMADEGraph extends org.jgraph.JGraph {
 	    /* Rep(iteration) ok ! */
 	    if (select.getRectRep() != null
 		    && select.getRectRep().contains(event.getPoint())) {
-		if (((KMADEDefaultGraphCell) cell).getTask().getIterExpression()
-			.getDescription().equals("")) {
+		if (((KMADEDefaultGraphCell) cell).getTask()
+			.getIterExpression().getDescription().equals("")) {
 		    return (KMADEConstant.VERTEX_ITERATION + ": " + ((KMADEDefaultGraphCell) cell)
 			    .getTask().getIterExpression().toSPF().toString());
 		}

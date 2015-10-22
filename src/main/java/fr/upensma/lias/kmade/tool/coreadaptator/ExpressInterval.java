@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -27,9 +27,10 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.Intervalle;
 /**
  * @author Mickael BARON
  */
-public class ExpressInterval { 
+public class ExpressInterval {
     public static String createInterval() {
-	Oid oidIntervalle = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	Oid oidIntervalle = InterfaceExpressJava
+		.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
 			ExpressConstant.RANGE_CLASS);
 	return (oidIntervalle.get());
     }
@@ -66,7 +67,8 @@ public class ExpressInterval {
     }
 
     public static String[][] getArrayIntervals() {
-	Object[] intervalles = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	Object[] intervalles = InterfaceExpressJava
+		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
 			ExpressConstant.RANGE_CLASS);
 	if (intervalles.length == 0)
 	    return null;
@@ -81,7 +83,8 @@ public class ExpressInterval {
 
     public static ArrayList<Intervalle> getIntervals() {
 	ArrayList<Intervalle> lst = new ArrayList<Intervalle>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	Object[] objs = InterfaceExpressJava
+		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
 			ExpressConstant.RANGE_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Intervalle obj = (Intervalle) objs[i];
@@ -91,7 +94,8 @@ public class ExpressInterval {
     }
 
     public static Intervalle getInterval(String name) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE, 
+	Object[] objs = InterfaceExpressJava
+		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
 			ExpressConstant.RANGE_CLASS);
 	for (int i = 0; i < objs.length; i++) {
 	    Intervalle obj = (Intervalle) objs[i];

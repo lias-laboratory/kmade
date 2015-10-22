@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -76,9 +76,10 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 import fr.upensma.lias.kmade.tool.viewadaptator.ObjectDialogViewAdaptator;
 
 /**
- * Class allowing the user to create concrete objects by a system of drag and drop and to manage the objects in the groups.
+ * Class allowing the user to create concrete objects by a system of drag and
+ * drop and to manage the objects in the groups.
  * 
- * @author Joachim TROUVERIE 
+ * @author Joachim TROUVERIE
  */
 public class ConcreteObjectPanel extends JPanel implements MouseMotionListener,
 	MouseListener {
@@ -178,8 +179,8 @@ public class ConcreteObjectPanel extends JPanel implements MouseMotionListener,
 			ObjetAbstrait ref = ((ObjetAbstrait) ((AbstractObjectCell) cell)
 				.getObject());
 			Oid oidObjCon = InterfaceExpressJava.createEntity(
-					ExpressConstant.METAOBJECT_PACKAGE, 
-					ExpressConstant.CONCRETE_OBJECT_CLASS);
+				ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.CONCRETE_OBJECT_CLASS);
 			ObjetConcret o = (ObjetConcret) InterfaceExpressJava.bdd
 				.prendre(oidObjCon);
 			o.setName(ref.getName() + " concret");

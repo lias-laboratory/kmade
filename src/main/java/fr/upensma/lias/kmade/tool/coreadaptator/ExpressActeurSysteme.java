@@ -1,20 +1,20 @@
 /*********************************************************************************
-* This file is part of KMADe Project.
-* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
-* 
-* KMADe is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* KMADe is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public License
-* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
-**********************************************************************************/
+ * This file is part of KMADe Project.
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
+ * 
+ * KMADe is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * KMADe is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************************/
 package fr.upensma.lias.kmade.tool.coreadaptator;
 
 import java.util.ArrayList;
@@ -43,8 +43,9 @@ public class ExpressActeurSysteme {
     }
 
     public static Oid createActorSystem(Oid oidUserSystem) {
-	Oid oidActorSystem = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.ACTOR_SYSTEM_CLASS);
+	Oid oidActorSystem = InterfaceExpressJava.createEntity(
+		ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.ACTOR_SYSTEM_CLASS);
 	ActorSystem a = (ActorSystem) InterfaceExpressJava
 		.prendre(oidActorSystem);
 	Material u = (Material) InterfaceExpressJava.prendre(oidUserSystem);
@@ -55,8 +56,7 @@ public class ExpressActeurSysteme {
 
     public static String[] getActorSystemFromOid(Oid actorSystem) {
 	String[] myTable = new String[4];
-	ActorSystem a = (ActorSystem) InterfaceExpressJava
-		.prendre(actorSystem);
+	ActorSystem a = (ActorSystem) InterfaceExpressJava.prendre(actorSystem);
 	myTable[0] = a.getName();
 	myTable[1] = a.getExperience().getValue();
 	myTable[2] = a.getCompetence();
@@ -64,10 +64,10 @@ public class ExpressActeurSysteme {
 	return myTable;
     }
 
-    public static ArrayList<ActorSystem> extractActorSystemFromTask(
-	    Task current) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.ACTOR_SYSTEM_CLASS);
+    public static ArrayList<ActorSystem> extractActorSystemFromTask(Task current) {
+	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE,
+		ExpressConstant.ACTOR_SYSTEM_CLASS);
 
 	ArrayList<ActorSystem> empilActeur = new ArrayList<ActorSystem>();
 	for (int i = 0; i < objs.length; i++) {
@@ -84,14 +84,14 @@ public class ExpressActeurSysteme {
     }
 
     public static void setActorSystemCompetence(String oid, String comp) {
-	ActorSystem m = (ActorSystem) InterfaceExpressJava.prendre(new Oid(
-		oid));
+	ActorSystem m = (ActorSystem) InterfaceExpressJava
+		.prendre(new Oid(oid));
 	m.setCompetence(comp);
     }
 
     public static void setActorSystemExperience(String oid, String exp) {
-	ActorSystem m = (ActorSystem) InterfaceExpressJava.prendre(new Oid(
-		oid));
+	ActorSystem m = (ActorSystem) InterfaceExpressJava
+		.prendre(new Oid(oid));
 	m.setExperience(exp);
     }
 }

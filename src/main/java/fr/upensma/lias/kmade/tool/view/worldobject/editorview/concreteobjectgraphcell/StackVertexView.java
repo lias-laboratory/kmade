@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -56,10 +56,10 @@ public class StackVertexView extends GroupDefaultVertexView {
 	panel = (JPanel) super.getRendererComponent(graph, selected, focus,
 		preview);
 	panel.setLayout(new BorderLayout());
-	
+
 	listModel.clear();
-	ConcreteObjectCell emptyCell = new ConcreteObjectCell(new ObjetConcret(),
-		0, 0);
+	ConcreteObjectCell emptyCell = new ConcreteObjectCell(
+		new ObjetConcret(), 0, 0);
 	emptyCell.setName(KMADEConstant.EMPTY_CELL_NAME);
 	listModel.addElement(emptyCell);
 	if (!this.cell.getCellsInGroup().isEmpty()) {
@@ -67,7 +67,6 @@ public class StackVertexView extends GroupDefaultVertexView {
 		listModel.addElement(Ocell);
 	    }
 	}
-	
 
 	objects = new JList(listModel);
 
@@ -79,20 +78,20 @@ public class StackVertexView extends GroupDefaultVertexView {
 
 		if (!((ConcreteObjectCell) value).getName().equals(
 			KMADEConstant.EMPTY_CELL_NAME)) {
-		    JLabel label = new JLabel(((ConcreteObjectCell) value).getName());
+		    JLabel label = new JLabel(((ConcreteObjectCell) value)
+			    .getName());
 		    label.setOpaque(true);
 		    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		    if (index == 1)
 			label.setBackground(KMADEConstant.ACTIVE_OBJECT);
-		    
+
 		    else
 			label.setBackground(KMADEConstant.INACTIVE_OBJECT);
-		    
+
 		    return label;
 		} else
 		    return drawEmpty();
-		
-		
+
 	    }
 	});
 
@@ -111,7 +110,6 @@ public class StackVertexView extends GroupDefaultVertexView {
 
 	panel.add(empty, BorderLayout.NORTH);
 	panel.add(listPanel, BorderLayout.CENTER);
-
 
 	this.autoSize();
 

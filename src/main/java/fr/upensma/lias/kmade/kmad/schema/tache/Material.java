@@ -1,6 +1,6 @@
 /*********************************************************************************
  * This file is part of KMADe Project.
- * Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+ * Copyright (C) 2006/2015  INRIA - MErLIn Project and LIAS/ISAE-ENSMA
  * 
  * KMADe is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -29,8 +29,9 @@ import fr.upensma.lias.kmade.kmad.schema.Entity;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * @author Delphine AUTARD and Mickael BARON
- **/
+ * @author Delphine AUTARD 
+ * @author Mickael BARON
+ */
 public class Material implements Entity {
 
     private static final long serialVersionUID = 4380917017782960768L;
@@ -125,11 +126,12 @@ public class Material implements Entity {
     }
 
     public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-			ExpressConstant.MATERIAL_CLASS);
-	Object[] objAbs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
-		ExpressConstant.MACHINE_CLASS);
-	Object[] objAbs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.MATERIAL_CLASS);
+	Object[] objAbs1 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE, ExpressConstant.MACHINE_CLASS);
+	Object[] objAbs2 = InterfaceExpressJava.prendreAllOidOfEntity(
+		ExpressConstant.CORE_PACKAGE,
 		ExpressConstant.MACHINE_PARK_CLASS);
 	for (int i = 0; i < objAbs.length; i++) {
 	    Material obj = (Material) objAbs[i];
@@ -189,45 +191,48 @@ public class Material implements Entity {
 
     @Override
     public Element toXML2(Document doc) throws Exception {
-    	Element racine = doc.createElement("materiel");
-    	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.MATERIAL_CLASS);
-    	racine.setAttribute("idkmad", oid.get());
+	Element racine = doc.createElement("materiel");
+	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "."
+		+ ExpressConstant.MATERIAL_CLASS);
+	racine.setAttribute("idkmad", oid.get());
 
-    	Element kmadUserName = doc.createElement("materiel-name");
-    	kmadUserName.setTextContent(this.getName());
-    	racine.appendChild(kmadUserName);
+	Element kmadUserName = doc.createElement("materiel-name");
+	kmadUserName.setTextContent(this.getName());
+	racine.appendChild(kmadUserName);
 
-    	if (!this.getDescription().equals("")) {
-    	    Element kmadUserDescription = doc
-    		    .createElement("materiel-description");
-    	    kmadUserDescription.setTextContent(this.getDescription());
-    	    racine.appendChild(kmadUserDescription);
-    	}
+	if (!this.getDescription().equals("")) {
+	    Element kmadUserDescription = doc
+		    .createElement("materiel-description");
+	    kmadUserDescription.setTextContent(this.getDescription());
+	    racine.appendChild(kmadUserDescription);
+	}
 
-    	return racine;
+	return racine;
     }
 
     @Override
     public void createObjectFromXMLElement2(Element p) throws Exception {
-    	this.oid = new Oid(p.getAttribute("idkmad"));
+	this.oid = new Oid(p.getAttribute("idkmad"));
 
-    	NodeList kmadUserName = p.getElementsByTagName("materiel-name");
-    	if(kmadUserName.item(0).getParentNode() != p){
-    		kmadUserName = null;}
-    	if (kmadUserName.item(0) != null)
-    	    this.name = kmadUserName.item(0).getTextContent();
+	NodeList kmadUserName = p.getElementsByTagName("materiel-name");
+	if (kmadUserName.item(0).getParentNode() != p) {
+	    kmadUserName = null;
+	}
+	if (kmadUserName.item(0) != null)
+	    this.name = kmadUserName.item(0).getTextContent();
 
-    	NodeList kmadUserDescription = p
-    		.getElementsByTagName("materiel-description");
-    	if(kmadUserDescription.item(0).getParentNode() != p){
-    		kmadUserDescription = null;}
-    	if (kmadUserDescription.item(0) != null)
-    	    this.description = kmadUserDescription.item(0).getTextContent();
+	NodeList kmadUserDescription = p
+		.getElementsByTagName("materiel-description");
+	if (kmadUserDescription.item(0).getParentNode() != p) {
+	    kmadUserDescription = null;
+	}
+	if (kmadUserDescription.item(0) != null)
+	    this.description = kmadUserDescription.item(0).getTextContent();
 
     }
 
     @Override
     public boolean oidIsAnyMissing2(Element p) throws Exception {
-    	return false;
+	return false;
     }
 }
