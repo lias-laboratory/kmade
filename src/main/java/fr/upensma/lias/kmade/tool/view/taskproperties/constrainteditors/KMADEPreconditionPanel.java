@@ -56,8 +56,7 @@ public class KMADEPreconditionPanel extends JPanel implements LanguageFactory {
     public KMADEPreconditionPanel() {
 	tabpanePre = new JTabbedPane();
 	tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_FORMAL, base);
-	// UNDO for ProtoTask V2
-	// tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_PROTOTASK,proto);
+	tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_PROTOTASK,proto);
 
 	tabpanePre.addChangeListener(new ChangeListener() {
 	    public void stateChanged(ChangeEvent e) {

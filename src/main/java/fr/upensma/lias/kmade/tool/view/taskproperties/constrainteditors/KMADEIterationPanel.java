@@ -57,8 +57,7 @@ public class KMADEIterationPanel extends JPanel implements LanguageFactory {
 	tabpanePre = new JTabbedPane();
 	tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_FORMAL, base);
 	tabpanePre.setPreferredSize(new Dimension(600, 700));
-	// UNDO for ProtoTask V2
-	// tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_PROTOTASK,proto);
+	tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_PROTOTASK,proto);
 
 	tabpanePre.addChangeListener(new ChangeListener() {
 	    public void stateChanged(ChangeEvent e) {

@@ -674,8 +674,7 @@ public class KMADEToolToolBar extends JPanel implements LanguageFactory {
 	protoTaskAction.putValue(AbstractAction.SHORT_DESCRIPTION,
 		KMADEConstant.PROTOTASK_TOOL_MENU_TOOLTIP);
 	protoTaskAction.setEnabled(true);
-	// UNDO COMMENT FOR PROTOTACK V2
-	// myFileMenu.add(protoTaskAction);
+    myFileMenu.add(protoTaskAction);
 
 	prototypeAction = new AbstractAction(
 		KMADEConstant.PROTOTYPING_TOOL_MENU_TITLE) {

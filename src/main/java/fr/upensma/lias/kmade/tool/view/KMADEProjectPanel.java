@@ -128,8 +128,7 @@ public class KMADEProjectPanel extends JPanel implements LanguageFactory {
     public KMADEProjectPanel() {
 	super();
 	boolean v2 = false;
-	// UNDO FOR Prototask V2
-	// v2=true;
+	v2=true;
 	if (v2) {
 	    tabpaneProjet = new JTabbedPane();
 	    /* 0 espace de tache */tabpaneProjet.addTab(

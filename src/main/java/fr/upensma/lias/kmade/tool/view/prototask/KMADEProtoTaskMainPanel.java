@@ -89,7 +89,7 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 	 */
     private static final long serialVersionUID = -2184765933287357646L;
     int gap = 0;
-    private ArrayList<Task> displayTask = new ArrayList<Task>();
+    int maxGap = 7;
     private LinkedHashMap<String, JInternalFrame> myframes = new LinkedHashMap<String, JInternalFrame>();
     private JDesktopPane desktop;
     private KMADEProtoTaskHistoricPanel historique;
@@ -442,17 +442,17 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 
 	for (Task t : attentefinKO) {
 	    displayWaitEndKO(t, gap);
-	    if (gap > 10)
+	    if (gap > maxGap || myframes.size()<=3)
 		gap = 0;
 	}
 	for (Task t : attentefin) {
 	    displayWaitEnd(t, gap);
-	    if (gap > 10)
+	    if (gap > maxGap || myframes.size()<=3)
 		gap = 0;
 	}
 	for (Task t : active) {
 	    displayActive(t, gap);
-	    if (gap > 10)
+	    if (gap > maxGap || myframes.size()<=3)
 		gap = 0;
 	}
 	Collection c = myframes.values();
@@ -517,6 +517,7 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 	    myframes.put(t.getOid().get(), internalframe);
 	    desktop.add(internalframe);
 	    internalframe.setLocation(offset * 20, offset * 20);
+	    if(myframes.size()>=3)
 	    gap++;
 
 	}
@@ -591,7 +592,7 @@ public class KMADEProtoTaskMainPanel extends JFrame {
 	frame.add(condiPanel);
 
 	if (conditionLine.size() == 0) {
-	    condiPanel.add(new JLabel("Aucune"), BorderLayout.CENTER);
+	    condiPanel.add(new JLabel("<HTML><FONT SIZE=" + "3" + ">"+"Aucune"+ "</FONT></HTML>"), BorderLayout.CENTER);
 	} else {
 	    for (conditionLine conditionLine2 : conditionLine) {
 		condiPanel.add(conditionLine2);
