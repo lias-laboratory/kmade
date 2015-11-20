@@ -20,6 +20,7 @@ package fr.upensma.lias.kmade.tool.view.taskproperties;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
 
@@ -62,7 +63,7 @@ public class KMADEEditorPrePostIterDialog extends JPropertiesEditorDialog {
 
     public KMADEEditorPrePostIterDialog() {
 	super();
-	this.setModal(false);
+	this.setModal(true);
 	cardPanel = new JPanel(new CardLayout());
 	cardPanel.add(refPreconditionPanel, "PRECONDITION");
 	cardPanel.add(refEffetsDeBordPanel, "EFFETSDEBORD");
@@ -82,9 +83,16 @@ public class KMADEEditorPrePostIterDialog extends JPropertiesEditorDialog {
 	scrollPane.add(mySplitPane);
 	this.getContentPane().add(BorderLayout.CENTER, scrollPane);
 	this.pack();
-	if(Toolkit.getDefaultToolkit().getScreenSize().height< dim.height){
-		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-		this.setLocation(0, 0);
+	Toolkit tk = Toolkit.getDefaultToolkit();
+    Dimension d = tk.getScreenSize();
+    Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
+    int width = (int) (d.getWidth() - insets.left - insets.right);
+    int height = (int) (d.getHeight() - insets.top - insets.bottom);
+    Dimension screenDim = new Dimension(width, height);
+   
+	if (screenDim.height < dim.height) {
+	    this.setSize(screenDim);
+	    this.setLocation(insets.left,insets.top);
 	}else{
 		this.setPreferredSize(dim);
 		KMADEToolUtilities.setCenteredInScreen(this);

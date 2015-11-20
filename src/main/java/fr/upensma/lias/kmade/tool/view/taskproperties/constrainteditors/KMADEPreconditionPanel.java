@@ -41,13 +41,7 @@ public class KMADEPreconditionPanel extends JPanel implements LanguageFactory {
 
     private final KMADEBasePreconditionPanel base = new KMADEBasePreconditionPanel();
 
-    public KMADEProtoTaskPreconditionPanel getProtoTaskPreconditionPanel() {
-	return proto;
-    }
 
-    public KMADEBasePreconditionPanel getBasePreconditionPanel() {
-	return base;
-    }
 
     private final JTabbedPane tabpanePre;
 
@@ -90,5 +84,11 @@ public class KMADEPreconditionPanel extends JPanel implements LanguageFactory {
     public JTextComponent getTextArea() {
 	return base.textArea;
     }
+    public KMADEProtoTaskPreconditionPanel getProtoTaskPreconditionPanel() {
+	return proto;
+    }
 
+    public KMADEBasePreconditionPanel getBasePreconditionPanel() {
+	return base;
+    }
 }

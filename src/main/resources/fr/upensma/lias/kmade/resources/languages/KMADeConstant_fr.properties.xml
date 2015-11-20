@@ -1184,9 +1184,13 @@
 	<entry key="PROTOTASK_END_LABEL">Scenario terminé !</entry>
 	<entry key="PROTOTASK_CONDITION_LABEL">Condition(s):</entry>
 	<entry key="PROTOTASK_TASK_LABEL">Tâche(s):</entry>
-	<entry key="PROTOTASK_REPEAT_BUTTON">Refaire</entry>
-	<entry key="PROTOTASK_VALIDATE_BUTTON">Valider</entry>
+	<entry key="PROTOTASK_REPEAT_BUTTON">Refaire : </entry>
+	<entry key="PROTOTASK_VALIDATE_BUTTON">Terminer : </entry>
 	<entry key="PROTOTASK_TOOL_MENU_TITLE">ProtoTask (2.0 Beta)</entry>
 	<entry key="PROTOTASK_TOOL_MENU_TOOLTIP">ProtoTask (2.0 Beta)</entry>
-
+    <entry key="PROTOTASK_NOOPP_TT">La tâche est obligatoire</entry>
+    <entry key="PROTOTASK_OPT_TT">La tâche peut être passée</entry>
+	<entry key="PROTOTASK_NO_CONDITION_TT">Pas de condition pour lancer la tâche</entry>
+    
+    
 </properties>

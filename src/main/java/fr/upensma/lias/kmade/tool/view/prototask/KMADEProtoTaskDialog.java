@@ -21,6 +21,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -84,8 +85,13 @@ public class KMADEProtoTaskDialog extends JFrame {
 		closePrototaskDialog();
 	    }
 	});
-	Dimension screen_dimension = Toolkit.getDefaultToolkit()
-		.getScreenSize();
+	Toolkit tk = Toolkit.getDefaultToolkit();
+    Dimension d = tk.getScreenSize();
+    Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
+    int width = (int) (d.getWidth() - insets.left - insets.right);
+    int height = (int) (d.getHeight() - insets.top - insets.bottom);
+    Dimension screen_dimension = new Dimension(width, height);
+   
 	// TODO dont understant why it is /4 and /2
 	this.setLocation(
 		(int) ((screen_dimension.getWidth() - this.getWidth()) / 4),
@@ -145,9 +151,10 @@ public class KMADEProtoTaskDialog extends JFrame {
 	// historicPanel = new KMADEHistoricPanel();
 
 	Dimension dim = new Dimension(1000, 700);
-	if (Toolkit.getDefaultToolkit().getScreenSize().height < dim.height) {
-	    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-	    this.setLocation(0, 0);
+    Dimension screenDim = new Dimension(width, height);
+	if (screenDim.height < dim.height) {
+	    this.setSize(screenDim);
+	    this.setLocation(insets.left,insets.top);
 	} else {
 	    this.setSize(new Dimension(1000, 700));
 	}

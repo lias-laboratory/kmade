@@ -34,6 +34,7 @@ import java.awt.Insets;
 import java.awt.Paint;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Area;
@@ -450,10 +451,15 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 	this.activeMessageStream();
 
 	this.pack();
-	Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit()
-		.getScreenSize();
-	tailleEcran.height -= 40;
-	this.setSize(new Dimension(tailleEcran));
+	Toolkit tk = Toolkit.getDefaultToolkit();
+    Dimension d = tk.getScreenSize();
+    Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
+    int width = (int) (d.getWidth() - insets.left - insets.right);
+    int height = (int) (d.getHeight() - insets.top - insets.bottom);
+    Dimension screenDim  = new Dimension(width, height);
+   
+	
+	this.setSize(new Dimension(screenDim));
 
 	// this.setSize(440, 400);
 
@@ -486,8 +492,10 @@ public class KMADEMainFrame extends JFrame implements LanguageFactory {
 	});
 
 	this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
-	this.setLocation(0, 0);
+	this.setLocationByPlatform(true);
 
+	this.setLocation( insets.left,insets.top);
+	
     }
 
     public static boolean isTaskEditorVisible() {

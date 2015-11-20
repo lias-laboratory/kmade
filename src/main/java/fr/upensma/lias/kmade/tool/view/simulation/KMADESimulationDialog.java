@@ -23,6 +23,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -434,9 +435,16 @@ public class KMADESimulationDialog extends JFrame {
 			KMADEConstant.ROW_HEIGHT));
 	Dimension dim = new Dimension(1800, 1000);
 
-	if (Toolkit.getDefaultToolkit().getScreenSize().height < dim.height) {
-	    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-	    this.setLocation(0, 0);
+	Toolkit tk = Toolkit.getDefaultToolkit();
+    Dimension d = tk.getScreenSize();
+    Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
+    int width = (int) (d.getWidth() - insets.left - insets.right);
+    int height = (int) (d.getHeight() - insets.top - insets.bottom);
+    Dimension screenDim = new Dimension(width, height);
+   
+	if (screenDim.height < dim.height) {
+	    this.setSize(screenDim);
+	    this.setLocation(insets.left,insets.top);
 	} else {
 	    this.setPreferredSize(dim);
 	    KMADEToolUtilities.setCenteredInScreen(this);

@@ -62,6 +62,7 @@ public class KMADeMain {
     }
 
     public static void main(String[] args) throws Exception {
+
 	// Gestion du language.
 
 	String lang = KMADEConstant.FRENCH_LANGUAGE_INFO;
@@ -112,7 +113,6 @@ public class KMADeMain {
 	    KMADEHistoryMessageManager.printlnError("Can't set look & feel:"
 		    + e);
 	}
-
 	JDialog.setDefaultLookAndFeelDecorated(true);
 	JFrame.setDefaultLookAndFeelDecorated(true);
 

@@ -21,6 +21,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -221,9 +222,16 @@ public class KMADEInputUserExpressionAndConcreteObjectDialog extends JDialog {
 	this.getContentPane().add(BorderLayout.SOUTH, panelSouth);
 	this.pack();
 	Dimension dim = new Dimension(500, 500);
-	if (Toolkit.getDefaultToolkit().getScreenSize().height < dim.height) {
-	    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-	    this.setLocation(0, 0);
+	Toolkit tk = Toolkit.getDefaultToolkit();
+    Dimension d = tk.getScreenSize();
+    Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
+    int width = (int) (d.getWidth() - insets.left - insets.right);
+    int height = (int) (d.getHeight() - insets.top - insets.bottom);
+    Dimension screenDim = new Dimension(width, height);
+   
+	if (screenDim.height < dim.height) {
+	    this.setSize(screenDim);
+	    this.setLocation(insets.left,insets.top);
 	} else {
 	    this.setSize(new Dimension(500, 500));
 	    KMADEToolUtilities.setCenteredInScreen(this);

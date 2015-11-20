@@ -46,7 +46,7 @@ public class KMADEProtoTaskIterationPanel extends JPanel implements
 		.createStrippedSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 			taskCondition, worldCondition);
 	this.add(mySplitPane, BorderLayout.CENTER);
-	this.setPreferredSize(new Dimension(800, 800));
+	//this.setPreferredSize(new Dimension(800, 800));
 
     }
 

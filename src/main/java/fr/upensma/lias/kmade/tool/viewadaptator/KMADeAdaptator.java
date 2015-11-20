@@ -685,4 +685,9 @@ public final class KMADeAdaptator {
 			.getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
     }
 
+    
+    public static void undoProtoTask(){
+    	
+    }
+    
 }

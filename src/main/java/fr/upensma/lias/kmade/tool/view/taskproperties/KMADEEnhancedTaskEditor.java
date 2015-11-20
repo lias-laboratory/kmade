@@ -27,6 +27,7 @@ import java.awt.FontMetrics;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.Paint;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -522,9 +523,16 @@ public class KMADEEnhancedTaskEditor extends JFrame implements ActionListener,
 
 	objetsListPanel.setEditable(false);
 	Dimension dim = new Dimension(900, 900);
-	if (Toolkit.getDefaultToolkit().getScreenSize().height < dim.height) {
-	    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-	    this.setLocation(0, 0);
+	Toolkit tk = Toolkit.getDefaultToolkit();
+    Dimension d = tk.getScreenSize();
+    Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
+    int width = (int) (d.getWidth() - insets.left - insets.right);
+    int height = (int) (d.getHeight() - insets.top - insets.bottom);
+    Dimension screenDim = new Dimension(width, height);
+   
+	if (screenDim.height < dim.height) {
+	    this.setSize(screenDim);
+	    this.setLocation(insets.left,insets.top);
 	} else {
 	    this.setSize(new Dimension(900, 900));
 	    KMADEToolUtilities.setCenteredInScreen(this);

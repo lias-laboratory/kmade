@@ -236,6 +236,30 @@ public class KMADEProtoTaskHistoricPanel extends JPanel implements
 	});
     }
 
+    public void undo(){
+    	int number = seq-1;
+    	System.out.println("number : "+number);
+    	if(nodes.size()>1){
+    		//on regarde la derniere action, on supprime le node si la tâche n'était pas terminée
+    	  for (DefaultMutableTreeNode treeNode : nodes) {
+  	    	HistoricTask hT = (HistoricTask) treeNode.getUserObject();
+  	    	if(hT.getStart()==number) {
+  	    		nodes.remove(treeNode);
+  	    		treeNode.removeFromParent();
+  	    		 ((DefaultTreeModel) tree.getModel()).reload(treeNode);
+  	    		 break;
+  	    	}
+  	    	else if(hT.getEnd()==number){
+  	    		hT.setEndNumber(-1);
+ 	    		 ((DefaultTreeModel) tree.getModel()).reload(treeNode);
+
+  	    	}
+  		}
+    		seq--;
+    		}
+    	
+    }
+    
     public void addNode(Task t, ArrayList<ProtoTaskCondition> conditions) {
 	if (nodes.isEmpty()) {
 	    if (conditions != null) {
@@ -265,6 +289,7 @@ public class KMADEProtoTaskHistoricPanel extends JPanel implements
 	    }
 
 	    HistoricTask histoTask;
+	    //si il y a eu un changement dans les conditions
 	    if (changed) {
 		histoTask = new HistoricTask(t, seq, lastcondit);
 	    } else {
@@ -278,7 +303,8 @@ public class KMADEProtoTaskHistoricPanel extends JPanel implements
 	    }
 	    // recherche du node de la mère
 	    for (DefaultMutableTreeNode treeNode : nodes) {
-		if (treeNode.toString().equals(mother.getName())) {
+	    	HistoricTask hT = (HistoricTask) treeNode.getUserObject();
+	    	if(hT.getTask().getOid().equals(mother.getOid())) {
 		    treeNode.add(node);
 		    ((DefaultTreeModel) tree.getModel()).reload(treeNode);
 		}
@@ -337,8 +363,7 @@ public class KMADEProtoTaskHistoricPanel extends JPanel implements
 	    int oid = ((HistoricTask) nodes.get(i - 1).getUserObject())
 		    .getTask().getOid().getValue();
 	    if (oid == t.getOid().getValue()) {
-		((HistoricTask) nodes.get(i - 1).getUserObject())
-			.setValidated(true);
+		
 		((HistoricTask) nodes.get(i - 1).getUserObject())
 			.setEndNumber(seq);
 		if (changed) {
@@ -517,9 +542,8 @@ public class KMADEProtoTaskHistoricPanel extends JPanel implements
     public class HistoricTask {
 	String name;
 	Task t;
-	int start;
-	int end;
-	Boolean validated = false;
+	int start= -1 ;
+	int end = -1;
 	HashMap<ProtoTaskCondition, StateCondition> startconditions = null;
 	HashMap<ProtoTaskCondition, StateCondition> endconditions = null;
 
@@ -546,7 +570,13 @@ public class KMADEProtoTaskHistoricPanel extends JPanel implements
 		name = "";
 	    this.t = t;
 	}
+	public int getStart(){
+		return start;
+	}
 
+	public int getEnd(){
+		return end;
+	}
 	public void setEndCondition(ArrayList<ProtoTaskCondition> conditions) {
 	    this.endconditions = new HashMap<ProtoTaskCondition, StateCondition>();
 	    for (ProtoTaskCondition protoTaskCondition : conditions) {
@@ -589,12 +619,10 @@ public class KMADEProtoTaskHistoricPanel extends JPanel implements
 	}
 
 	public Boolean isValidated() {
-	    return validated;
+	    return end>0;
 	}
 
-	public void setValidated(Boolean bool) {
-	    validated = bool;
-	}
+
 
 	public HashMap<ProtoTaskCondition, StateCondition> getStartConditions() {
 	    return startconditions;

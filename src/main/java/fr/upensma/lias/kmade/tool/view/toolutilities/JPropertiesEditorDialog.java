@@ -48,7 +48,8 @@ public class JPropertiesEditorDialog extends JDialog implements LanguageFactory 
     protected JPanel panelSouth;
 
     public JPropertiesEditorDialog() {
-	this.setModal(true);
+    	this.setModalityType(ModalityType.APPLICATION_MODAL);
+	//this.setModal(true);
 	myOkButton = new JButton(KMADEConstant.GO_BACK_MESSAGE);
 	panelSouth = new JPanel();
 	panelSouth.add(myOkButton);

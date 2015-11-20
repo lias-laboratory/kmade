@@ -113,6 +113,17 @@ public class Excution {
 	case SEQ:
 	    t.setStateExecution(StateExecution.ATTENTETASK);
 	    enfants = t.getChildren();
+	    int i= 0;
+	    for (Task child : enfants){
+	    	if(child.getStateExecution()==StateExecution.ACTIVE || child.getStateExecution()==StateExecution.ATTENTEFIN || child.getStateExecution()==StateExecution.ATTENTEFINKO){
+	    		i=enfants.indexOf(child);
+	    	}
+	    }
+	    for(int j=0;j<i;j++){
+	    	if(!(enfants.get(j).getStateExecution()==StateExecution.FINISHED || enfants.get(j).getStateExecution()==StateExecution.PASSEE))
+	    		enfants.get(j).setStateExecution(StateExecution.PASSEE);
+
+	    }
 	    for (Task fille : enfants) {
 		switch (fille.getStateExecution()) {
 		case ACTIVABLE:

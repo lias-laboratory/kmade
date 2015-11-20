@@ -1173,8 +1173,12 @@
 	<entry key="PROTOTASK_END_LABEL">Scenario finished !</entry>
 	<entry key="PROTOTASK_CONDITION_LABEL">Prerequisite(s):</entry>
 	<entry key="PROTOTASK_TASK_LABEL">Task(s):</entry>
-	<entry key="PROTOTASK_REPEAT_BUTTON">Repeat</entry>
-	<entry key="PROTOTASK_VALIDATE_BUTTON">Validate</entry>
+	<entry key="PROTOTASK_REPEAT_BUTTON">Repeat: </entry>
+	<entry key="PROTOTASK_VALIDATE_BUTTON">End:</entry>
 	<entry key="PROTOTASK_TOOL_MENU_TITLE">ProtoTask 2.0</entry>
 	<entry key="PROTOTASK_TOOL_MENU_TOOLTIP">ProtoTask 2.0</entry>
-</properties>
+ 	<entry key="PROTOTASK_NOOPP_TT">This task is mandatory</entry>
+    <entry key="PROTOTASK_OPT_TT">This task can be skipped</entry>
+    <entry key="PROTOTASK_NO_CONDITION_TT">No condition to start the task</entry>
+    
+    </properties>
