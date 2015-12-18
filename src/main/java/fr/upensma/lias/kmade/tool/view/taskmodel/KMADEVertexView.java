@@ -477,7 +477,8 @@ public class KMADEVertexView extends VertexView {
 		// L'ic�ne PRE
 		String s_pre = KMADEConstant.VERTEX_PRECONDITION;
 
-		if (!myGraphCell.getTask().getPreExpression().getFormalText()
+		if (!myGraphCell.getTask().getPreExpression().getProtoTaskConditionExpression().getValue().getDescription().equals("")				
+				|| !myGraphCell.getTask().getPreExpression().getFormalText()
 			.equals("true")
 			|| (myGraphCell.getTask().getPreExpression()
 				.getDescription() != null && !myGraphCell
@@ -592,7 +593,9 @@ public class KMADEVertexView extends VertexView {
 		Rectangle2D rrep = fm_pre.getStringBounds(s_rep, f);
 		myGraphCell.getTask().getIterExpression()
 			.setInitIterationVariant();
-		if ((!myGraphCell.getTask().getIterExpression().getFormalText()
+		if (!myGraphCell.getTask().getIterExpression().getProtoTaskConditionExpression().getValue().getDescription().equals("")	||
+				
+				(!myGraphCell.getTask().getIterExpression().getFormalText()
 			.equals("[1]"))
 			|| (myGraphCell.getTask().getIterExpression()
 				.getDescription() != null && !myGraphCell
