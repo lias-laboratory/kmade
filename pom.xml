@@ -130,7 +130,7 @@
 	</build>
 	<ciManagement>
 		<system>Jenkins</system>
-		<url>http://s-localforge-lias/jenkins/job/KMADe/</url>
+		<url>https://ci-lias.ensma.fr/job/KMADe/</url>
 	</ciManagement>
 	<developers>
 		<developer>
@@ -149,18 +149,18 @@
         </developer>
 	</developers>
 	<scm>
-		<url>scm:git:http://s-localforge-lias/gitblit/r/java/kmade.git</url>
+		<url>scm:git:https://git.lias-lab.fr/r/java/kmade.git</url>
 	</scm>
     <distributionManagement>
         <repository>
             <id>releases</id>
             <name>Internal Releases</name>
-            <url>http://s-forge-lias.ensma.fr/content/repositories/releases</url>
+	    <url>http://s-nexus-lias.ensma.fr/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
             <name>Internal Snapshots</name>
-            <url>http://s-forge-lias.ensma.fr/content/repositories/snapshots</url>
+	    <url>http://s-nexus-lias.ensma.fr/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
