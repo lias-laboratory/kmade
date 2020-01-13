@@ -22,49 +22,47 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public abstract class BinaryExpression extends NodeExpression {
 
-    private static final long serialVersionUID = 2346679206867201911L;
+	private static final long serialVersionUID = 2346679206867201911L;
 
-    protected NodeExpression leftNode;
+	protected NodeExpression leftNode;
 
-    protected NodeExpression rightNode;
+	protected NodeExpression rightNode;
 
-    public BinaryExpression(Object value, NodeExpression left) {
-	super(value);
-	this.setStateToUnknown();
-	this.leftNode = left;
-	this.rightNode = null;
-    }
-
-    public BinaryExpression(Object value, NodeExpression left,
-	    NodeExpression right) {
-	super(value);
-	this.setStateToUnknown();
-	this.leftNode = left;
-	this.rightNode = right;
-    }
-
-    public NodeExpression getLeftNode() {
-	return leftNode;
-    }
-
-    public NodeExpression getRightNode() {
-	return rightNode;
-    }
-
-    public void setLeftNode(NodeExpression leftNode) {
-	this.leftNode = leftNode;
-    }
-
-    public void setRightNode(NodeExpression rightNode) {
-	this.rightNode = rightNode;
-    }
-
-    public String toString() {
-	if (leftNode != null && rightNode != null) {
-	    return super.toString() + "\n" + leftNode.toString() + "\n"
-		    + rightNode.toString();
-	} else {
-	    return super.toString();
+	public BinaryExpression(Object value, NodeExpression left) {
+		super(value);
+		this.setStateToUnknown();
+		this.leftNode = left;
+		this.rightNode = null;
 	}
-    }
+
+	public BinaryExpression(Object value, NodeExpression left, NodeExpression right) {
+		super(value);
+		this.setStateToUnknown();
+		this.leftNode = left;
+		this.rightNode = right;
+	}
+
+	public NodeExpression getLeftNode() {
+		return leftNode;
+	}
+
+	public NodeExpression getRightNode() {
+		return rightNode;
+	}
+
+	public void setLeftNode(NodeExpression leftNode) {
+		this.leftNode = leftNode;
+	}
+
+	public void setRightNode(NodeExpression rightNode) {
+		this.rightNode = rightNode;
+	}
+
+	public String toString() {
+		if (leftNode != null && rightNode != null) {
+			return super.toString() + "\n" + leftNode.toString() + "\n" + rightNode.toString();
+		} else {
+			return super.toString();
+		}
+	}
 }

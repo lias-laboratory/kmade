@@ -40,61 +40,56 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  */
 public class SingletonVertexView extends GroupDefaultVertexView {
 
-    private static final long serialVersionUID = -1426683620396678810L;
+	private static final long serialVersionUID = -1426683620396678810L;
 
-    public SingletonVertexView(SingletonCell cell, JGraph graph) {
-	super(cell, graph);
+	public SingletonVertexView(SingletonCell cell, JGraph graph) {
+		super(cell, graph);
 
-    }
-
-    /**
-     * Call of the renderer
-     */
-    public Component getRendererComponent(JGraph graph, boolean selected,
-	    boolean focus, boolean preview) {
-
-	panel = (JPanel) super.getRendererComponent(graph, selected, focus,
-		preview);
-	panel.setLayout(new BorderLayout());
-
-	if (listModel.size() > 1) {
-	    listModel.clear();
-	    for (ConcreteObjectCell Ocell : this.cell.getCellsInGroup()) {
-		listModel.addElement(Ocell);
-	    }
 	}
 
-	listPanel = new JScrollPane(objects);
-	listPanel.setOpaque(false);
+	/**
+	 * Call of the renderer
+	 */
+	public Component getRendererComponent(JGraph graph, boolean selected, boolean focus, boolean preview) {
 
-	panel.add(listPanel, BorderLayout.CENTER);
+		panel = (JPanel) super.getRendererComponent(graph, selected, focus, preview);
+		panel.setLayout(new BorderLayout());
 
-	objects.setCellRenderer(new ListCellRenderer() {
+		if (listModel.size() > 1) {
+			listModel.clear();
+			for (ConcreteObjectCell Ocell : this.cell.getCellsInGroup()) {
+				listModel.addElement(Ocell);
+			}
+		}
 
-	    public Component getListCellRendererComponent(JList list,
-		    Object value, int index, boolean isSelected,
-		    boolean cellHasFocus) {
+		listPanel = new JScrollPane(objects);
+		listPanel.setOpaque(false);
 
-		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(listPanel, BorderLayout.CENTER);
 
-		if (!((ConcreteObjectCell) value).getName().equals(
-			KMADEConstant.EMPTY_CELL_NAME)) {
-		    JLabel label = new JLabel(((ConcreteObjectCell) value)
-			    .getName());
-		    label.setOpaque(true);
-		    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		    label.setBackground(KMADEConstant.ACTIVE_OBJECT);
-		    panel.add(label);
-		} else
-		    panel = drawEmpty();
+		objects.setCellRenderer(new ListCellRenderer() {
 
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
+
+				JPanel panel = new JPanel(new BorderLayout());
+
+				if (!((ConcreteObjectCell) value).getName().equals(KMADEConstant.EMPTY_CELL_NAME)) {
+					JLabel label = new JLabel(((ConcreteObjectCell) value).getName());
+					label.setOpaque(true);
+					label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					label.setBackground(KMADEConstant.ACTIVE_OBJECT);
+					panel.add(label);
+				} else
+					panel = drawEmpty();
+
+				return panel;
+
+			}
+		});
+
+		this.autoSize();
 		return panel;
-
-	    }
-	});
-
-	this.autoSize();
-	return panel;
-    }
+	}
 
 }

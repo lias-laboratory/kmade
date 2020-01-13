@@ -26,27 +26,27 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class NumberVariant extends VariableExpression {
 
-    private static final long serialVersionUID = 1207077613054213868L;
+	private static final long serialVersionUID = 1207077613054213868L;
 
-    public NumberVariant() {
-	this(new NumberValue("1"));
-    }
+	public NumberVariant() {
+		this(new NumberValue("1"));
+	}
 
-    public NumberVariant(int value) {
-	super(new NumberValue(value));
-	this.setStateToValue();
-	this.name = ExpressConstant.INTEGER_VARIANT_EXPRESSION;
-    }
+	public NumberVariant(int value) {
+		super(new NumberValue(value));
+		this.setStateToValue();
+		this.name = ExpressConstant.INTEGER_VARIANT_EXPRESSION;
+	}
 
-    public NumberVariant(NumberValue value) {
-	super(value);
-	this.setStateToValue();
-	this.name = ExpressConstant.INTEGER_VARIANT_EXPRESSION;
-    }
+	public NumberVariant(NumberValue value) {
+		super(value);
+		this.setStateToValue();
+		this.name = ExpressConstant.INTEGER_VARIANT_EXPRESSION;
+	}
 
-    public void checkNode() throws SemanticException {
-    }
+	public void checkNode() throws SemanticException {
+	}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+	}
 }

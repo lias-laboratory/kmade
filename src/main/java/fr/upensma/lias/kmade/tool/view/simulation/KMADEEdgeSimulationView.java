@@ -43,111 +43,99 @@ import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEPortView;
  */
 public class KMADEEdgeSimulationView extends KMADEEdgeView {
 
-    private static final long serialVersionUID = -201474302992985695L;
+	private static final long serialVersionUID = -201474302992985695L;
 
-    public KMADEEdgeSimulationView(Object cell, JGraph myGraph) {
-	super(cell, myGraph);
-    }
-
-    public CellViewRenderer getRenderer() {
-	return new MyEdgeSimulationRenderer(this);
-    }
-
-    class MyEdgeSimulationRenderer extends EdgeRenderer {
-
-	private static final long serialVersionUID = 1824218275417406698L;
-
-	public MyEdgeSimulationRenderer(EdgeView d) {
-	    this.view = d;
+	public KMADEEdgeSimulationView(Object cell, JGraph myGraph) {
+		super(cell, myGraph);
 	}
 
-	protected void paintEdge(Graphics g) {
-	    g.setColor(Color.RED);
-	    KMADEPortView mySource = (KMADEPortView) view.getSource();
-	    KMADEPortView myTarget = (KMADEPortView) view.getTarget();
-	    VertexView parentView = (VertexView) mySource.getParentView();
-	    KMADEDefaultGraphCell myParentCell = (KMADEDefaultGraphCell) parentView
-		    .getCell();
-
-	    JGraph graph = null;
-	    if (this.graph != null) {
-		graph = (JGraph) this.graph.get();
-	    }
-
-	    if (graph.getParent() != KMADEMainFrame.getProjectPanel()
-		    .getTaskModelPanel()) {
-		return;
-	    }
-
-	    JViewport myViewPort = (JViewport) graph.getParent().getParent();
-	    double ratio = graph.getScale();
-	    int vpX = (int) (myViewPort.getViewRect().getX() / ratio);
-	    int vpY = (int) (myViewPort.getViewRect().getY() / ratio);
-	    int vpW = (int) (myViewPort.getViewRect().getWidth() / ratio);
-	    int vpH = (int) (myViewPort.getViewRect().getHeight() / ratio);
-
-	    boolean testSource = mySource.intersects(graph, new Rectangle(vpX,
-		    vpY, vpW, vpH)); //
-	    boolean testTarget = myTarget.intersects(graph, new Rectangle(vpX,
-		    vpY, vpW, vpH));
-
-	    if (!testSource && testTarget) {
-		double sourceX = mySource.getLocation().getX();
-		double sourceY = mySource.getLocation().getY();
-
-		double targetX = myTarget.getLocation().getX();
-		double targetY = myTarget.getLocation().getY();
-
-		double deltaX = Math.abs(sourceX - targetX);
-		double deltaY = Math.abs(sourceY - targetY);
-		double heighPort = 10;
-
-		FontRenderContext frc = ((Graphics2D) g).getFontRenderContext();
-		Rectangle2D bounds = ((Graphics2D) g).getFont()
-			.getStringBounds(myParentCell.getDecomposition(), frc);
-		double widthString = bounds.getWidth();
-		double heighString = bounds.getHeight();
-
-		if (deltaX < widthString || deltaY < heighString) {
-		    return;
-		}
-		// R�cup�re la hauteur de la t�che.
-		VertexView myVertexView = (VertexView) myTarget.getParentView();
-		double heighVertex = myVertexView.getBounds().getHeight();
-		if (sourceX < targetX && sourceY < targetY) {
-		    // Cas 1
-		    g.drawString(myParentCell.getDecomposition(),
-			    (int) (targetX - widthString),
-			    (int) (targetY - heighPort));
-		} else if (sourceX > targetX && sourceY < targetY) {
-		    // Cas 2
-		    g.drawString(myParentCell.getDecomposition(),
-			    (int) (targetX + 2), (int) (targetY - heighPort));
-		} else if (sourceX > targetX
-			&& (sourceY + CONST_HEIGH) > (targetY + heighString + heighVertex)) {
-		    // Cas 3
-		    g.drawString(myParentCell.getDecomposition(),
-			    (int) (targetX + 2),
-			    (int) (targetY + heighVertex + heighPort));
-		} else if (sourceX < targetX
-			&& (sourceY + CONST_HEIGH) > (targetY + heighString + heighVertex)) {
-		    // Cas 4
-		    g.drawString(myParentCell.getDecomposition(),
-			    (int) (targetX - widthString), (int) (targetY
-				    + heighVertex + heighPort));
-		}
-	    }
+	public CellViewRenderer getRenderer() {
+		return new MyEdgeSimulationRenderer(this);
 	}
 
-	public void paint(Graphics g) {
-	    if (KMADEEdgeSimulationView.this.getCell() instanceof KMADEDefaultEdge) {
-		if (!((KMADEDefaultEdge) KMADEEdgeSimulationView.this.getCell())
-			.isSimulationExpanded()) {
-		    return;
+	class MyEdgeSimulationRenderer extends EdgeRenderer {
+
+		private static final long serialVersionUID = 1824218275417406698L;
+
+		public MyEdgeSimulationRenderer(EdgeView d) {
+			this.view = d;
 		}
-	    }
-	    super.paint(g);
-	    this.paintEdge(g);
+
+		protected void paintEdge(Graphics g) {
+			g.setColor(Color.RED);
+			KMADEPortView mySource = (KMADEPortView) view.getSource();
+			KMADEPortView myTarget = (KMADEPortView) view.getTarget();
+			VertexView parentView = (VertexView) mySource.getParentView();
+			KMADEDefaultGraphCell myParentCell = (KMADEDefaultGraphCell) parentView.getCell();
+
+			JGraph graph = null;
+			if (this.graph != null) {
+				graph = (JGraph) this.graph.get();
+			}
+
+			if (graph.getParent() != KMADEMainFrame.getProjectPanel().getTaskModelPanel()) {
+				return;
+			}
+
+			JViewport myViewPort = (JViewport) graph.getParent().getParent();
+			double ratio = graph.getScale();
+			int vpX = (int) (myViewPort.getViewRect().getX() / ratio);
+			int vpY = (int) (myViewPort.getViewRect().getY() / ratio);
+			int vpW = (int) (myViewPort.getViewRect().getWidth() / ratio);
+			int vpH = (int) (myViewPort.getViewRect().getHeight() / ratio);
+
+			boolean testSource = mySource.intersects(graph, new Rectangle(vpX, vpY, vpW, vpH)); //
+			boolean testTarget = myTarget.intersects(graph, new Rectangle(vpX, vpY, vpW, vpH));
+
+			if (!testSource && testTarget) {
+				double sourceX = mySource.getLocation().getX();
+				double sourceY = mySource.getLocation().getY();
+
+				double targetX = myTarget.getLocation().getX();
+				double targetY = myTarget.getLocation().getY();
+
+				double deltaX = Math.abs(sourceX - targetX);
+				double deltaY = Math.abs(sourceY - targetY);
+				double heighPort = 10;
+
+				FontRenderContext frc = ((Graphics2D) g).getFontRenderContext();
+				Rectangle2D bounds = ((Graphics2D) g).getFont().getStringBounds(myParentCell.getDecomposition(), frc);
+				double widthString = bounds.getWidth();
+				double heighString = bounds.getHeight();
+
+				if (deltaX < widthString || deltaY < heighString) {
+					return;
+				}
+				// R�cup�re la hauteur de la t�che.
+				VertexView myVertexView = (VertexView) myTarget.getParentView();
+				double heighVertex = myVertexView.getBounds().getHeight();
+				if (sourceX < targetX && sourceY < targetY) {
+					// Cas 1
+					g.drawString(myParentCell.getDecomposition(), (int) (targetX - widthString),
+							(int) (targetY - heighPort));
+				} else if (sourceX > targetX && sourceY < targetY) {
+					// Cas 2
+					g.drawString(myParentCell.getDecomposition(), (int) (targetX + 2), (int) (targetY - heighPort));
+				} else if (sourceX > targetX && (sourceY + CONST_HEIGH) > (targetY + heighString + heighVertex)) {
+					// Cas 3
+					g.drawString(myParentCell.getDecomposition(), (int) (targetX + 2),
+							(int) (targetY + heighVertex + heighPort));
+				} else if (sourceX < targetX && (sourceY + CONST_HEIGH) > (targetY + heighString + heighVertex)) {
+					// Cas 4
+					g.drawString(myParentCell.getDecomposition(), (int) (targetX - widthString),
+							(int) (targetY + heighVertex + heighPort));
+				}
+			}
+		}
+
+		public void paint(Graphics g) {
+			if (KMADEEdgeSimulationView.this.getCell() instanceof KMADEDefaultEdge) {
+				if (!((KMADEDefaultEdge) KMADEEdgeSimulationView.this.getCell()).isSimulationExpanded()) {
+					return;
+				}
+			}
+			super.paint(g);
+			this.paintEdge(g);
+		}
 	}
-    }
 }

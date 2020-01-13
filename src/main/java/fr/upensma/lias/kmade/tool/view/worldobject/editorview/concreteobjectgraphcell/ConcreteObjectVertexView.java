@@ -35,71 +35,69 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
  */
 public class ConcreteObjectVertexView extends VertexView {
 
-    private static final long serialVersionUID = -2853170773819790684L;
+	private static final long serialVersionUID = -2853170773819790684L;
 
-    private static Color borderColor = Color.BLACK;
+	private static Color borderColor = Color.BLACK;
 
-    @SuppressWarnings("unused")
-    private JGraph myGraph;
+	@SuppressWarnings("unused")
+	private JGraph myGraph;
 
-    private String title;
+	private String title;
 
-    private String[] attributes;
+	private String[] attributes;
 
-    private ConcreteObjectCell object;
+	private ConcreteObjectCell object;
 
-    public ConcreteObjectVertexView(ConcreteObjectCell cell, JGraph graph) {
-	super(cell);
-	this.object = cell;
-	this.myGraph = graph;
-	this.title = object.getName();
-	this.attributes = object.getObjectAttributes();
-    }
-
-    /**
-     * Call of the renderer
-     */
-    public Component getRendererComponent(JGraph graph, boolean selected,
-	    boolean focus, boolean preview) {
-
-	Color background;
-
-	JPanel panel = new JPanel();
-
-	if (selected) {
-	    background = KMADEConstant.ACTIVE_OBJECT;
-	} else
-	    background = KMADEConstant.INACTIVE_OBJECT;
-
-	if (object.getName().endsWith("concret"))
-	    this.title = "<html><font color=\"red\">" + object.getName()
-		    + "</font></html>";
-	else
-	    this.title = object.getName();
-
-	this.attributes = object.getObjectAttributes();
-
-	panel.setLayout(new BorderLayout());
-	JLabel titlePanel = new JLabel(this.title, JLabel.CENTER);
-	titlePanel.setBorder(BorderFactory.createLineBorder(borderColor));
-	titlePanel.setBackground(background);
-	titlePanel.setOpaque(true);
-	JLabel attributesPanel = new JLabel();
-	String a = new String("<html>");
-	if (attributes != null) {
-	    for (int i = 0; i < this.attributes.length; i++) {
-		a += " - " + attributes[i] + "<br/>";
-	    }
+	public ConcreteObjectVertexView(ConcreteObjectCell cell, JGraph graph) {
+		super(cell);
+		this.object = cell;
+		this.myGraph = graph;
+		this.title = object.getName();
+		this.attributes = object.getObjectAttributes();
 	}
-	a += "</html>";
-	attributesPanel.setText(a);
-	attributesPanel.setBorder(BorderFactory.createLineBorder(borderColor));
-	attributesPanel.setOpaque(true);
-	attributesPanel.setBackground(background);
-	panel.add(titlePanel, BorderLayout.NORTH);
-	panel.add(attributesPanel, BorderLayout.CENTER);
 
-	return panel;
-    }
+	/**
+	 * Call of the renderer
+	 */
+	public Component getRendererComponent(JGraph graph, boolean selected, boolean focus, boolean preview) {
+
+		Color background;
+
+		JPanel panel = new JPanel();
+
+		if (selected) {
+			background = KMADEConstant.ACTIVE_OBJECT;
+		} else
+			background = KMADEConstant.INACTIVE_OBJECT;
+
+		if (object.getName().endsWith("concret"))
+			this.title = "<html><font color=\"red\">" + object.getName() + "</font></html>";
+		else
+			this.title = object.getName();
+
+		this.attributes = object.getObjectAttributes();
+
+		panel.setLayout(new BorderLayout());
+		JLabel titlePanel = new JLabel(this.title, JLabel.CENTER);
+		titlePanel.setBorder(BorderFactory.createLineBorder(borderColor));
+		titlePanel.setBackground(background);
+		titlePanel.setOpaque(true);
+		JLabel attributesPanel = new JLabel();
+		String a = new String("<html>");
+		if (attributes != null) {
+			for (int i = 0; i < this.attributes.length; i++) {
+				a += " - " + attributes[i] + "<br/>";
+			}
+		}
+		a += "</html>";
+		attributesPanel.setText(a);
+		attributesPanel.setBorder(BorderFactory.createLineBorder(borderColor));
+		attributesPanel.setOpaque(true);
+		attributesPanel.setBackground(background);
+		panel.add(titlePanel, BorderLayout.NORTH);
+		panel.add(attributesPanel, BorderLayout.CENTER);
+
+		return panel;
+	}
 
 }

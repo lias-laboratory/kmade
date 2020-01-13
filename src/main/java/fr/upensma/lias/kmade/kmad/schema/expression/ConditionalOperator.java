@@ -24,24 +24,23 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
  */
 public class ConditionalOperator extends Operator {
 
-    private static final long serialVersionUID = 2290563616278127681L;
+	private static final long serialVersionUID = 2290563616278127681L;
 
-    public ConditionalOperator(NodeExpression left) {
-	super(false, left);
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-
-	if (getLeftNode().isBoolean() && getRightNode().isBoolean()) {
-	    this.setNodeValue(false);
-	    this.setStateToUnknown();
-	    return;
+	public ConditionalOperator(NodeExpression left) {
+		super(false, left);
 	}
 
-	// Y a une erreur de type : pas deux booléens
-	this.setStateToError();
-	throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR
-		+ " : " + this.name);
-    }
+	public void checkNode() throws SemanticException {
+		super.checkNode();
+
+		if (getLeftNode().isBoolean() && getRightNode().isBoolean()) {
+			this.setNodeValue(false);
+			this.setStateToUnknown();
+			return;
+		}
+
+		// Y a une erreur de type : pas deux booléens
+		this.setStateToError();
+		throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
+	}
 }

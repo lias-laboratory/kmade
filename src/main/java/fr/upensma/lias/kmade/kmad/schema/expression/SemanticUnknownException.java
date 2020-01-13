@@ -22,6 +22,6 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public class SemanticUnknownException extends SemanticException {
 
-    private static final long serialVersionUID = 2863587298615906957L;
+	private static final long serialVersionUID = 2863587298615906957L;
 
 }

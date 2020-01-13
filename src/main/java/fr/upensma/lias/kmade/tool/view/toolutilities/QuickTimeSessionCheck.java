@@ -25,38 +25,38 @@ import quicktime.QTSession;
  */
 public class QuickTimeSessionCheck {
 
-    private Thread shutdownHook;
+	private Thread shutdownHook;
 
-    private static QuickTimeSessionCheck instance;
+	private static QuickTimeSessionCheck instance;
 
-    private QuickTimeSessionCheck() throws QTException {
-	QTSession.open();
-	// Create Shutdown Handler
-	shutdownHook = new Thread() {
-	    public void run() {
-		// QTSession.close();
-		QTSession.exitMovies();
-	    }
-	};
-	Runtime.getRuntime().addShutdownHook(shutdownHook);
-    }
-
-    private static QuickTimeSessionCheck getInstance() throws QTException {
-	if (instance == null)
-	    instance = new QuickTimeSessionCheck();
-	return instance;
-    }
-
-    public static void check() throws QTException {
-	getInstance();
-    }
-
-    public static void main(String[] args) {
-	try {
-	    QuickTimeSessionCheck.check();
-	    System.exit(0);
-	} catch (QTException qte) {
-	    qte.printStackTrace();
+	private QuickTimeSessionCheck() throws QTException {
+		QTSession.open();
+		// Create Shutdown Handler
+		shutdownHook = new Thread() {
+			public void run() {
+				// QTSession.close();
+				QTSession.exitMovies();
+			}
+		};
+		Runtime.getRuntime().addShutdownHook(shutdownHook);
 	}
-    }
+
+	private static QuickTimeSessionCheck getInstance() throws QTException {
+		if (instance == null)
+			instance = new QuickTimeSessionCheck();
+		return instance;
+	}
+
+	public static void check() throws QTException {
+		getInstance();
+	}
+
+	public static void main(String[] args) {
+		try {
+			QuickTimeSessionCheck.check();
+			System.exit(0);
+		} catch (QTException qte) {
+			qte.printStackTrace();
+		}
+	}
 }

@@ -27,63 +27,59 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class Assignment extends AssignmentOperator {
 
-    private static final long serialVersionUID = 4204749580312652874L;
+	private static final long serialVersionUID = 4204749580312652874L;
 
-    public Assignment(AttributExpressExpression left) {
-	super(false, left);
-	this.name = ExpressConstant.ASSIGNMENT_EXPRESSION;
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-
-	if (getLeftNode().isString() && getRightNode().isString()) {
-	    this.setNodeValue("");
-	    this.setStateToUnknown();
-	    return;
+	public Assignment(AttributExpressExpression left) {
+		super(false, left);
+		this.name = ExpressConstant.ASSIGNMENT_EXPRESSION;
 	}
 
-	if (getLeftNode().isBoolean() && getRightNode().isBoolean()) {
-	    this.setNodeValue(false);
-	    this.setStateToUnknown();
-	    return;
-	}
-	if (getLeftNode().isNumber() && getRightNode().isNumber()) {
-	    this.setNodeValue(new NumberValue());
-	    this.setStateToUnknown();
-	    return;
-	}
+	public void checkNode() throws SemanticException {
+		super.checkNode();
 
-	this.setStateToError();
-	throw new SemanticException(ExpressConstant.TYPAGE_ERROR);
-    }
+		if (getLeftNode().isString() && getRightNode().isString()) {
+			this.setNodeValue("");
+			this.setStateToUnknown();
+			return;
+		}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
+		if (getLeftNode().isBoolean() && getRightNode().isBoolean()) {
+			this.setNodeValue(false);
+			this.setStateToUnknown();
+			return;
+		}
+		if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+			this.setNodeValue(new NumberValue());
+			this.setStateToUnknown();
+			return;
+		}
 
-	if (this.isErrorState()) {
-	    throw new SemanticErrorException();
-	}
-
-	if (this.isUnknownState()) {
-	    throw new SemanticUnknownException();
-	}
-	// dans certains cas un java null pointer exception peut être lever ce
-	// qui correspond à une semanticunknownException
-	try {
-	    AttributConcret refConcret = ref
-		    .getAttribut(((AttributExpressExpression) this.leftNode)
-			    .getAbstractAttribut());
-	    boolean error = refConcret.setValeur(this.rightNode.getNodeValue()
-		    .toString());
-	    if (error) {
 		this.setStateToError();
-		throw new SemanticException(
-			ExpressConstant.COMPARISON_OPERATOR_ERROR + " : "
-				+ this.name);
-	    }
-	} catch (Exception e) {
-	    throw new SemanticUnknownException();
+		throw new SemanticException(ExpressConstant.TYPAGE_ERROR);
 	}
-    }
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+
+		if (this.isErrorState()) {
+			throw new SemanticErrorException();
+		}
+
+		if (this.isUnknownState()) {
+			throw new SemanticUnknownException();
+		}
+		// dans certains cas un java null pointer exception peut être lever ce
+		// qui correspond à une semanticunknownException
+		try {
+			AttributConcret refConcret = ref
+					.getAttribut(((AttributExpressExpression) this.leftNode).getAbstractAttribut());
+			boolean error = refConcret.setValeur(this.rightNode.getNodeValue().toString());
+			if (error) {
+				this.setStateToError();
+				throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
+			}
+		} catch (Exception e) {
+			throw new SemanticUnknownException();
+		}
+	}
 }

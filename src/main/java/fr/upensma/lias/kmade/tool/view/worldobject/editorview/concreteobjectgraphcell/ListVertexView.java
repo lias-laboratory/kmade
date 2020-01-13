@@ -42,69 +42,63 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  */
 public class ListVertexView extends GroupDefaultVertexView {
 
-    private static final long serialVersionUID = -1524303378034073570L;
+	private static final long serialVersionUID = -1524303378034073570L;
 
-    public ListVertexView(ListCell cell, JGraph graph) {
-	super(cell, graph);
-    }
+	public ListVertexView(ListCell cell, JGraph graph) {
+		super(cell, graph);
+	}
 
-    /**
-     * Call of the renderer
-     */
-    public Component getRendererComponent(JGraph graph, boolean selected,
-	    boolean focus, boolean preview) {
+	/**
+	 * Call of the renderer
+	 */
+	public Component getRendererComponent(JGraph graph, boolean selected, boolean focus, boolean preview) {
 
-	panel = (JPanel) super.getRendererComponent(graph, selected, focus,
-		preview);
+		panel = (JPanel) super.getRendererComponent(graph, selected, focus, preview);
 
-	panel.setLayout(new BorderLayout());
+		panel.setLayout(new BorderLayout());
 
-	// Cells are represented horizontally
-	objects.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-	objects.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-	objects.setVisibleRowCount(1);
+		// Cells are represented horizontally
+		objects.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		objects.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		objects.setVisibleRowCount(1);
 
-	objects.setCellRenderer(new ListCellRenderer() {
+		objects.setCellRenderer(new ListCellRenderer() {
 
-	    // The first cell is represented as it is possible to select it
-	    public Component getListCellRendererComponent(JList list,
-		    Object value, int index, boolean isSelected,
-		    boolean cellHasFocus) {
+			// The first cell is represented as it is possible to select it
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
 
-		if (!((ConcreteObjectCell) value).getName().equals(
-			KMADEConstant.EMPTY_CELL_NAME)) {
-		    JLabel label = new JLabel(((ConcreteObjectCell) value)
-			    .getName());
-		    label.setOpaque(true);
-		    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		    if (index == 0)
-			label.setBackground(KMADEConstant.ACTIVE_OBJECT);
+				if (!((ConcreteObjectCell) value).getName().equals(KMADEConstant.EMPTY_CELL_NAME)) {
+					JLabel label = new JLabel(((ConcreteObjectCell) value).getName());
+					label.setOpaque(true);
+					label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					if (index == 0)
+						label.setBackground(KMADEConstant.ACTIVE_OBJECT);
 
-		    else
-			label.setBackground(KMADEConstant.INACTIVE_OBJECT);
+					else
+						label.setBackground(KMADEConstant.INACTIVE_OBJECT);
 
-		    return label;
-		} else
-		    return drawEmpty();
+					return label;
+				} else
+					return drawEmpty();
 
-	    }
-	});
+			}
+		});
 
-	listPanel = new JScrollPane(objects);
-	listPanel.invalidate();
-	listPanel.validate();
-	listPanel.setOpaque(false);
+		listPanel = new JScrollPane(objects);
+		listPanel.invalidate();
+		listPanel.validate();
+		listPanel.setOpaque(false);
 
-	listPanel.setPreferredSize(new Dimension((int) objects
-		.getPreferredSize().getWidth() + 10, (int) (objects
-		.getPreferredSize().getHeight() + 5)));
+		listPanel.setPreferredSize(new Dimension((int) objects.getPreferredSize().getWidth() + 10,
+				(int) (objects.getPreferredSize().getHeight() + 5)));
 
-	panel.add(listPanel, BorderLayout.CENTER);
-	panel.setOpaque(false);
+		panel.add(listPanel, BorderLayout.CENTER);
+		panel.setOpaque(false);
 
-	this.autoSize();
+		this.autoSize();
 
-	return panel;
-    }
+		return panel;
+	}
 
 }

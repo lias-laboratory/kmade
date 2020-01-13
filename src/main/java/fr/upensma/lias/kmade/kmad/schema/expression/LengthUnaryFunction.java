@@ -25,16 +25,15 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class LengthUnaryFunction extends UnaryFunction {
 
-    private static final long serialVersionUID = 1169926917387745278L;
+	private static final long serialVersionUID = 1169926917387745278L;
 
-    public LengthUnaryFunction(GroupExpressExpression pee) {
-	super(new Integer(0), pee);
-	this.name = ExpressConstant.LENGTH_FUNCTION_EXPRESSION;
-    }
+	public LengthUnaryFunction(GroupExpressExpression pee) {
+		super(new Integer(0), pee);
+		this.name = ExpressConstant.LENGTH_FUNCTION_EXPRESSION;
+	}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
-	this.setNodeValue(((GroupExpressExpression) this.getAloneExpression())
-		.getGroup().getEnsemble().size());
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+		this.setNodeValue(((GroupExpressExpression) this.getAloneExpression()).getGroup().getEnsemble().size());
+	}
 }

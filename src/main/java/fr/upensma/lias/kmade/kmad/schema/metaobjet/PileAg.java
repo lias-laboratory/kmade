@@ -19,71 +19,68 @@ package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import java.util.ArrayList;
 
-
 import org.w3c.dom.Document;
 
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * @author Delphine AUTARD 
+ * @author Delphine AUTARD
  * @author Mickael BARON
  */
 public class PileAg extends Agregat {
 
-    private static final long serialVersionUID = 8638149917321920353L;
+	private static final long serialVersionUID = 8638149917321920353L;
 
-    public PileAg() {
-	this.agregatStruct = AgregatStructure.STACK_AGREGAT;
-    }
-
-    public PileAg(Oid oid) {
-	this.oid = oid;
-	this.agregatStruct = AgregatStructure.STACK_AGREGAT;
-    }
-
-    public PileAg(ArrayList<ObjetConcret> lst, Oid oid) {
-	this.lstObjConcrets = lst;
-	for (int i = 0; i < lst.size(); i++) {
-	    ObjetConcret oc = lst.get(i);
-	    oc.setAppartientGroupe(this.inverseGroupe);
+	public PileAg() {
+		this.agregatStruct = AgregatStructure.STACK_AGREGAT;
 	}
-	this.oid = oid;
-	this.agregatStruct = AgregatStructure.STACK_AGREGAT;
-    }
 
-    public boolean put(ObjetConcret co) {
-	this.lstObjConcrets.add(0, co);
-	return true;
-    }
+	public PileAg(Oid oid) {
+		this.oid = oid;
+		this.agregatStruct = AgregatStructure.STACK_AGREGAT;
+	}
 
-    public ObjetConcret get() {
-	return this.lstObjConcrets.get(0);
-    }
+	public PileAg(ArrayList<ObjetConcret> lst, Oid oid) {
+		this.lstObjConcrets = lst;
+		for (int i = 0; i < lst.size(); i++) {
+			ObjetConcret oc = lst.get(i);
+			oc.setAppartientGroupe(this.inverseGroupe);
+		}
+		this.oid = oid;
+		this.agregatStruct = AgregatStructure.STACK_AGREGAT;
+	}
 
-    public String toSPF() {
-	String SPF = this.oid.get() + "=PileAg();";
-	return SPF;
-    }
+	public boolean put(ObjetConcret co) {
+		this.lstObjConcrets.add(0, co);
+		return true;
+	}
 
-    public org.w3c.dom.Element toXML(Document doc) {
-	org.w3c.dom.Element racine = super.toXML(doc);
-	racine.setAttribute("classkmad", "metaobjet.PileAg");
-	return racine;
-    }
-    
-    public org.w3c.dom.Element toXML2(Document doc) {
-	org.w3c.dom.Element racine = super.toXML2(doc);
-	racine.setAttribute("classkmad", "metaobjet.PileAg");
-	return racine;
-    }
+	public ObjetConcret get() {
+		return this.lstObjConcrets.get(0);
+	}
 
-    public void setOid(Oid oid) {
-	this.oid = oid;
-    }
+	public String toSPF() {
+		String SPF = this.oid.get() + "=PileAg();";
+		return SPF;
+	}
 
-    public String getName() {
-	return AgregatStructure
-		.getEnumereIntoLocaleAgregatStructure(AgregatStructure.STACK_AGREGAT
-			.getValue());
-    }
+	public org.w3c.dom.Element toXML(Document doc) {
+		org.w3c.dom.Element racine = super.toXML(doc);
+		racine.setAttribute("classkmad", "metaobjet.PileAg");
+		return racine;
+	}
+
+	public org.w3c.dom.Element toXML2(Document doc) {
+		org.w3c.dom.Element racine = super.toXML2(doc);
+		racine.setAttribute("classkmad", "metaobjet.PileAg");
+		return racine;
+	}
+
+	public void setOid(Oid oid) {
+		this.oid = oid;
+	}
+
+	public String getName() {
+		return AgregatStructure.getEnumereIntoLocaleAgregatStructure(AgregatStructure.STACK_AGREGAT.getValue());
+	}
 }

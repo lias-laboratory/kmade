@@ -22,9 +22,9 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public abstract class UnaryExpression extends NodeExpression {
 
-    private static final long serialVersionUID = -6181059446068166110L;
+	private static final long serialVersionUID = -6181059446068166110L;
 
-    public UnaryExpression(Object pNodeValue) {
-	super(pNodeValue);
-    }
+	public UnaryExpression(Object pNodeValue) {
+		super(pNodeValue);
+	}
 }

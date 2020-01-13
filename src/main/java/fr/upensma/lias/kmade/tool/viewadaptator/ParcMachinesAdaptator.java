@@ -29,88 +29,73 @@ import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadP
  */
 public final class ParcMachinesAdaptator {
 
-    private static final KMADEReadParcMachinesObjectTable parcMachinesPanel = new KMADEReadParcMachinesObjectTable();
+	private static final KMADEReadParcMachinesObjectTable parcMachinesPanel = new KMADEReadParcMachinesObjectTable();
 
-    public static String addParcMachines() {
-	return ExpressParcMachines.createParcMachines();
-    }
-
-    public static String[] getParcMachinessName() {
-	return ExpressParcMachines.getParcMachinesName();
-    }
-
-    public static void removeParcMachines(String oid) {
-	ExpressParcMachines.deleteParcMachines(oid);
-    }
-
-    public static void affRemoveParcMachines(String oid) {
-	ExpressParcMachines.affRemoveParcMachines(oid);
-    }
-
-    public static void removeAllParcMachines() {
-	KMADEMainFrame.getProjectPanel().getParcMachinesPanel()
-		.getParcMachinesObjectTable().removeAllParcs();
-    }
-
-    public static String setParcMachinesName(String oid, String name) {
-	return ExpressParcMachines.setParcMachinesName(oid, name);
-
-    }
-
-    public static void setParcMachinesDescription(String oid, String desc) {
-	ExpressParcMachines.setParcMachinesDescription(oid, desc);
-
-    }
-
-    public static void setParcMachinesImage(String oid, String name) {
-	ExpressParcMachines.setParcMachinesImage(oid, name);
-    }
-
-    public static void refreshReadParcMachinesTable() {
-	Object[][] temp = new Object[KMADEMainFrame.getProjectPanel()
-		.getParcMachinesPanel().getParcMachinesObjectTable().getModel()
-		.getRowCount() - 1][6];
-	for (int i = 0; i < KMADEMainFrame.getProjectPanel()
-		.getParcMachinesPanel().getParcMachinesObjectTable().getModel()
-		.getRowCount() - 1; i++) {
-	    temp[i][0] = KMADEMainFrame.getProjectPanel()
-		    .getParcMachinesPanel().getParcMachinesObjectTable()
-		    .getModel().getValueAt(i, 0);
-	    temp[i][1] = KMADEMainFrame.getProjectPanel()
-		    .getParcMachinesPanel().getParcMachinesObjectTable()
-		    .getModel().getValueAt(i, 1);
-	    temp[i][2] = KMADEMainFrame.getProjectPanel()
-		    .getParcMachinesPanel().getParcMachinesObjectTable()
-		    .getModel().getValueAt(i, 2);
-	    temp[i][3] = KMADEMainFrame.getProjectPanel()
-		    .getParcMachinesPanel().getParcMachinesObjectTable()
-		    .getModel().getValueAt(i, 3);
-	    temp[i][4] = KMADEMainFrame.getProjectPanel()
-		    .getParcMachinesPanel().getParcMachinesObjectTable()
-		    .getModel().getValueAt(i, 4);
-	    temp[i][5] = KMADEMainFrame.getProjectPanel()
-		    .getParcMachinesPanel().getParcMachinesObjectTable()
-		    .getModel().getValueAt(i, 5);
+	public static String addParcMachines() {
+		return ExpressParcMachines.createParcMachines();
 	}
-	parcMachinesPanel.setData(temp);
-    }
 
-    public static void updateParcMachinesView() {
-	ArrayList<ParkMachines> myList = ExpressParcMachines.getParcsMachines();
-	for (int i = 0; i < myList.size(); i++) {
-	    KMADEMainFrame
-		    .getProjectPanel()
-		    .getParcMachinesPanel()
-		    .getParcMachinesObjectTable()
-		    .addParcMachines(myList.get(i).getName(),
-			    myList.get(i).getDescription(),
-			    myList.get(i).getImage(),
-			    myList.get(i).getMembers(),
-			    myList.get(i).getOid().get());
+	public static String[] getParcMachinessName() {
+		return ExpressParcMachines.getParcMachinesName();
 	}
-    }
 
-    public static KMADEReadParcMachinesObjectTable getParcMachinesPanel() {
-	return parcMachinesPanel;
-    }
+	public static void removeParcMachines(String oid) {
+		ExpressParcMachines.deleteParcMachines(oid);
+	}
+
+	public static void affRemoveParcMachines(String oid) {
+		ExpressParcMachines.affRemoveParcMachines(oid);
+	}
+
+	public static void removeAllParcMachines() {
+		KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().removeAllParcs();
+	}
+
+	public static String setParcMachinesName(String oid, String name) {
+		return ExpressParcMachines.setParcMachinesName(oid, name);
+
+	}
+
+	public static void setParcMachinesDescription(String oid, String desc) {
+		ExpressParcMachines.setParcMachinesDescription(oid, desc);
+
+	}
+
+	public static void setParcMachinesImage(String oid, String name) {
+		ExpressParcMachines.setParcMachinesImage(oid, name);
+	}
+
+	public static void refreshReadParcMachinesTable() {
+		Object[][] temp = new Object[KMADEMainFrame.getProjectPanel().getParcMachinesPanel()
+				.getParcMachinesObjectTable().getModel().getRowCount() - 1][6];
+		for (int i = 0; i < KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable()
+				.getModel().getRowCount() - 1; i++) {
+			temp[i][0] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel()
+					.getValueAt(i, 0);
+			temp[i][1] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel()
+					.getValueAt(i, 1);
+			temp[i][2] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel()
+					.getValueAt(i, 2);
+			temp[i][3] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel()
+					.getValueAt(i, 3);
+			temp[i][4] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel()
+					.getValueAt(i, 4);
+			temp[i][5] = KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().getModel()
+					.getValueAt(i, 5);
+		}
+		parcMachinesPanel.setData(temp);
+	}
+
+	public static void updateParcMachinesView() {
+		ArrayList<ParkMachines> myList = ExpressParcMachines.getParcsMachines();
+		for (int i = 0; i < myList.size(); i++) {
+			KMADEMainFrame.getProjectPanel().getParcMachinesPanel().getParcMachinesObjectTable().addParcMachines(
+					myList.get(i).getName(), myList.get(i).getDescription(), myList.get(i).getImage(),
+					myList.get(i).getMembers(), myList.get(i).getOid().get());
+		}
+	}
+
+	public static KMADEReadParcMachinesObjectTable getParcMachinesPanel() {
+		return parcMachinesPanel;
+	}
 }

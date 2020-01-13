@@ -26,58 +26,52 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressGroup;
  * @author Mickael BARON
  */
 public final class ConcreteObjectPanelAdaptator {
-    private static String oidAbstractObject = Oid.OID_NULL;
+	private static String oidAbstractObject = Oid.OID_NULL;
 
-    private static ObjetAbstrait refAbstractObject;
+	private static ObjetAbstrait refAbstractObject;
 
-    public static void removeAllConcreteObject() {
-	GraphicEditorAdaptator.getPanelCreationObjConc()
-		.removeAllConcreteObject();
-    }
-
-    public static String getActiveAbstractObject() {
-	return oidAbstractObject;
-    }
-
-    public static ObjetAbstrait getCurrentAbstractObject() {
-	return refAbstractObject;
-    }
-
-    public static void setActiveAbstractObject(String oid) {
-	oidAbstractObject = oid;
-
-	if (oid.equals(Oid.OID_NULL)) {
-	    // Rend invisible la table des objets et attributs concrets.
-	    GraphicEditorAdaptator.getPanelCreationObjConc()
-		    .hideConcreteObjectsAttributes();
-	    GraphicEditorAdaptator.getPanelCreationObjConc().getTableObjAbs()
-		    .setAbstractObjectNameBorder("");
-	} else {
-	    // AdaptateurConcreteObject.
-	    refAbstractObject = ExpressAbstractObject
-		    .getObjetAbstrait(oidAbstractObject);
-	    ConcreteObjectAdaptator.updateConcreteObjectView(refAbstractObject);
-	    GraphicEditorAdaptator.getPanelCreationObjConc()
-		    .showConcreteObjects();
-	    GraphicEditorAdaptator.getPanelCreationObjConc().getTableObjAbs()
-		    .setAbstractObjectNameBorder(refAbstractObject.getName());
+	public static void removeAllConcreteObject() {
+		GraphicEditorAdaptator.getPanelCreationObjConc().removeAllConcreteObject();
 	}
-    }
 
-    public static String getOidGroupe(String name) {
-	return ExpressGroup.stringToOid(name);
-    }
+	public static String getActiveAbstractObject() {
+		return oidAbstractObject;
+	}
 
-    public static String[] getAttrsList(String oidObjAbs) {
-	return ExpressAbstractObject.getAttrsNames(oidObjAbs);
-    }
+	public static ObjetAbstrait getCurrentAbstractObject() {
+		return refAbstractObject;
+	}
 
-    public static void updateConcreteObjectView() {
-	// On prend tous les objets abstrait et on les place dans la table des
-	// objets abstraits.
-	Object[][] refAbstractObject = ExpressAbstractObject.getAbsObjIntoTab();
-	GraphicEditorAdaptator.getPanelCreationObjConc().getTableObjAbs()
-		.setData(refAbstractObject);
-	ConcreteObjectPanelAdaptator.setActiveAbstractObject(Oid.OID_NULL);
-    }
+	public static void setActiveAbstractObject(String oid) {
+		oidAbstractObject = oid;
+
+		if (oid.equals(Oid.OID_NULL)) {
+			// Rend invisible la table des objets et attributs concrets.
+			GraphicEditorAdaptator.getPanelCreationObjConc().hideConcreteObjectsAttributes();
+			GraphicEditorAdaptator.getPanelCreationObjConc().getTableObjAbs().setAbstractObjectNameBorder("");
+		} else {
+			// AdaptateurConcreteObject.
+			refAbstractObject = ExpressAbstractObject.getObjetAbstrait(oidAbstractObject);
+			ConcreteObjectAdaptator.updateConcreteObjectView(refAbstractObject);
+			GraphicEditorAdaptator.getPanelCreationObjConc().showConcreteObjects();
+			GraphicEditorAdaptator.getPanelCreationObjConc().getTableObjAbs()
+					.setAbstractObjectNameBorder(refAbstractObject.getName());
+		}
+	}
+
+	public static String getOidGroupe(String name) {
+		return ExpressGroup.stringToOid(name);
+	}
+
+	public static String[] getAttrsList(String oidObjAbs) {
+		return ExpressAbstractObject.getAttrsNames(oidObjAbs);
+	}
+
+	public static void updateConcreteObjectView() {
+		// On prend tous les objets abstrait et on les place dans la table des
+		// objets abstraits.
+		Object[][] refAbstractObject = ExpressAbstractObject.getAbsObjIntoTab();
+		GraphicEditorAdaptator.getPanelCreationObjConc().getTableObjAbs().setData(refAbstractObject);
+		ConcreteObjectPanelAdaptator.setActiveAbstractObject(Oid.OID_NULL);
+	}
 }

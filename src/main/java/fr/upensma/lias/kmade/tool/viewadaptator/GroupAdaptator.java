@@ -31,69 +31,62 @@ import fr.upensma.lias.kmade.tool.view.worldobject.abstractobject.KMADEReadWrite
  */
 public final class GroupAdaptator {
 
-    public static void removeAllGroup() {
-	KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor()
-		.getGroupTable().removeAllGroup();
-    }
-
-    public static String addGroup(String oidObjAbs) {
-	if (!oidObjAbs.equals(Oid.OID_NULL)) {
-	    Oid oid = new Oid(oidObjAbs);
-	    String toto = ExpressGroup.createGroup(oid);
-	    ReadConcreteObjectAdaptator.updateReadConcreteObject();
-	    return toto;
-	} else {
-	    return "-1";
+	public static void removeAllGroup() {
+		KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor().getGroupTable().removeAllGroup();
 	}
-    }
 
-    public static String setGroupName(String oid, String name) {
-	return ExpressGroup.setGroupName(oid, name);
-    }
-
-    public static void setGroupDescription(String oid, String description) {
-	ExpressGroup.setGroupDescription(oid, description);
-    }
-
-    public static boolean setGroupSet(String oid, String ensemble) {
-	boolean isConcreteObject = ExpressGroup.affRemoveAgregat(oid, ensemble);
-
-	if (isConcreteObject) {
-	    String[] lstWarning = InterfaceExpressJava.getGestionWarning()
-		    .takeMessages();
-	    String s = "";
-	    for (int j = 0; j < lstWarning.length; j++) {
-		if (j == 0)
-		    s = s + lstWarning[j];
-		else
-		    s = s + "\n" + lstWarning[j];
-	    }
-
-	    int value = JOptionPane.showConfirmDialog(
-		    GraphicEditorAdaptator.getMainFrame(),
-		    s,
-		    "Suppression Objets Concrets",
-		    JOptionPane.YES_NO_OPTION,
-		    JOptionPane.QUESTION_MESSAGE,
-		    new ImageIcon(GraphicEditorAdaptator.class
-			    .getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
-	    if (value == JOptionPane.YES_OPTION) {
-	    } else {
-		return false;
-	    }
-	} else {
-	    // On vide les messages.
-	    InterfaceExpressJava.getGestionWarning().takeMessages();
+	public static String addGroup(String oidObjAbs) {
+		if (!oidObjAbs.equals(Oid.OID_NULL)) {
+			Oid oid = new Oid(oidObjAbs);
+			String toto = ExpressGroup.createGroup(oid);
+			ReadConcreteObjectAdaptator.updateReadConcreteObject();
+			return toto;
+		} else {
+			return "-1";
+		}
 	}
-	ExpressGroup.removeOldAgregatAndCreateNewAgregat(oid, ensemble);
-	return true;
-    }
 
-    public static void removeGroup(String oid) {
-	ExpressGroup.removeGroup(oid);
-    }
+	public static String setGroupName(String oid, String name) {
+		return ExpressGroup.setGroupName(oid, name);
+	}
 
-    public static void affRemoveGroupe(String oid) {
-	ExpressGroup.affRemoveGroup(oid);
-    }
+	public static void setGroupDescription(String oid, String description) {
+		ExpressGroup.setGroupDescription(oid, description);
+	}
+
+	public static boolean setGroupSet(String oid, String ensemble) {
+		boolean isConcreteObject = ExpressGroup.affRemoveAgregat(oid, ensemble);
+
+		if (isConcreteObject) {
+			String[] lstWarning = InterfaceExpressJava.getGestionWarning().takeMessages();
+			String s = "";
+			for (int j = 0; j < lstWarning.length; j++) {
+				if (j == 0)
+					s = s + lstWarning[j];
+				else
+					s = s + "\n" + lstWarning[j];
+			}
+
+			int value = JOptionPane.showConfirmDialog(GraphicEditorAdaptator.getMainFrame(), s,
+					"Suppression Objets Concrets", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+					new ImageIcon(GraphicEditorAdaptator.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
+			if (value == JOptionPane.YES_OPTION) {
+			} else {
+				return false;
+			}
+		} else {
+			// On vide les messages.
+			InterfaceExpressJava.getGestionWarning().takeMessages();
+		}
+		ExpressGroup.removeOldAgregatAndCreateNewAgregat(oid, ensemble);
+		return true;
+	}
+
+	public static void removeGroup(String oid) {
+		ExpressGroup.removeGroup(oid);
+	}
+
+	public static void affRemoveGroupe(String oid) {
+		ExpressGroup.affRemoveGroup(oid);
+	}
 }

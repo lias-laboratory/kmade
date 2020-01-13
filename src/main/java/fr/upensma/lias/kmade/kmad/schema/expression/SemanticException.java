@@ -22,13 +22,13 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public class SemanticException extends Exception {
 
-    private static final long serialVersionUID = 6845460701556592830L;
+	private static final long serialVersionUID = 6845460701556592830L;
 
-    public SemanticException(String message) {
-	super(message);
-    }
+	public SemanticException(String message) {
+		super(message);
+	}
 
-    public SemanticException() {
-	super();
-    }
+	public SemanticException() {
+		super();
+	}
 }

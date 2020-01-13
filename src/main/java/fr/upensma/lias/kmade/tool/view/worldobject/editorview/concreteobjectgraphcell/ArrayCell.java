@@ -29,36 +29,31 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  */
 public class ArrayCell extends GroupDefaultGraphCell {
 
-    private static final long serialVersionUID = -5284774279616678598L;
+	private static final long serialVersionUID = -5284774279616678598L;
 
-    @SuppressWarnings("unused")
-    private TableauAg array;
+	@SuppressWarnings("unused")
+	private TableauAg array;
 
-    /**
-     * First constructor for the cell (the point is not created yet)
-     * 
-     * @param array
-     *            represented by the cell
-     * @param point
-     *            x in the graph
-     * @param point
-     *            y in the graph
-     */
-    public ArrayCell(Groupe object, int x, int y) {
-	super(object, x, y);
-	this.array = (TableauAg) object.getEnsemble();
-    }
+	/**
+	 * First constructor for the cell (the point is not created yet)
+	 * 
+	 * @param array represented by the cell
+	 * @param point x in the graph
+	 * @param point y in the graph
+	 */
+	public ArrayCell(Groupe object, int x, int y) {
+		super(object, x, y);
+		this.array = (TableauAg) object.getEnsemble();
+	}
 
-    /**
-     * Second constructor for the cell (the point is already yet)
-     * 
-     * @param array
-     *            represented by the cell
-     * @param point
-     *            in the graph
-     */
-    public ArrayCell(Groupe object, Point p) {
-	super(object, p);
-	this.array = (TableauAg) object.getEnsemble();
-    }
+	/**
+	 * Second constructor for the cell (the point is already yet)
+	 * 
+	 * @param array represented by the cell
+	 * @param point in the graph
+	 */
+	public ArrayCell(Groupe object, Point p) {
+		super(object, p);
+		this.array = (TableauAg) object.getEnsemble();
+	}
 }

@@ -22,13 +22,13 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public abstract class VariableExpression extends UnaryExpression {
 
-    private static final long serialVersionUID = -6357285131428145338L;
+	private static final long serialVersionUID = -6357285131428145338L;
 
-    public VariableExpression(Object pNodeValue) {
-	super(pNodeValue);
-    }
+	public VariableExpression(Object pNodeValue) {
+		super(pNodeValue);
+	}
 
-    public String getName() {
-	return "[" + this.getNodeValue().toString() + "]";
-    }
+	public String getName() {
+		return "[" + this.getNodeValue().toString() + "]";
+	}
 }

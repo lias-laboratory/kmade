@@ -32,8 +32,7 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
 public class Excution {
 
 	public static void doTask(Task t) throws ProtoTaskException {
-		if (t.getStateExecution() == StateExecution.ACTIVABLE
-				|| t.getStateExecution() == StateExecution.ACTIVE) {
+		if (t.getStateExecution() == StateExecution.ACTIVABLE || t.getStateExecution() == StateExecution.ACTIVE) {
 			t.setStateExecution(StateExecution.ACTIVE);
 			takeCareOfMyChildren(t);
 			if (t.getMother() != null)
@@ -52,8 +51,7 @@ public class Excution {
 	/**
 	 * @param t
 	 */
-	private static void oneOfMyChildrenBecommeActive(Task t)
-			throws ProtoTaskException {
+	private static void oneOfMyChildrenBecommeActive(Task t) throws ProtoTaskException {
 
 		// je regarde mon ordonnancement et je met à jours mes filles si besoin
 		// et je me met en attente si besoin
@@ -113,14 +111,17 @@ public class Excution {
 		case SEQ:
 			t.setStateExecution(StateExecution.ATTENTETASK);
 			enfants = t.getChildren();
-			int i= 0;
-			for (Task child : enfants){
-				if(child.getStateExecution()==StateExecution.ACTIVE || child.getStateExecution()==StateExecution.ATTENTEFIN || child.getStateExecution()==StateExecution.ATTENTEFINKO){
-					i=enfants.indexOf(child);
+			int i = 0;
+			for (Task child : enfants) {
+				if (child.getStateExecution() == StateExecution.ACTIVE
+						|| child.getStateExecution() == StateExecution.ATTENTEFIN
+						|| child.getStateExecution() == StateExecution.ATTENTEFINKO) {
+					i = enfants.indexOf(child);
 				}
 			}
-			for(int j=0;j<i;j++){
-				if(!(enfants.get(j).getStateExecution()==StateExecution.FINISHED || enfants.get(j).getStateExecution()==StateExecution.PASSEE))
+			for (int j = 0; j < i; j++) {
+				if (!(enfants.get(j).getStateExecution() == StateExecution.FINISHED
+						|| enfants.get(j).getStateExecution() == StateExecution.PASSEE))
 					enfants.get(j).setStateExecution(StateExecution.PASSEE);
 
 			}
@@ -167,7 +168,7 @@ public class Excution {
 				case WAITEND:
 				default:
 					break;
-					// throw new ProtoTaskException();
+				// throw new ProtoTaskException();
 				}
 
 			}
@@ -198,7 +199,7 @@ public class Excution {
 				case PASSIVE:
 				case WAITEND:
 				default:
-					
+
 				}
 
 			}
@@ -264,7 +265,7 @@ public class Excution {
 				case WAITEND:
 				default:
 					break;
-					// throw new ProtoTaskException();
+				// throw new ProtoTaskException();
 				}
 
 			}
@@ -279,10 +280,9 @@ public class Excution {
 		// if the task has a condition
 
 		if (t.getPreExpression().getProtoTaskConditionExpression() != null
-				&& !t.getPreExpression().getProtoTaskConditionExpression()
-				.getValue().getDescription().equals("")) {
-			if (t.getPreExpression().getProtoTaskConditionExpression()
-					.getValue().getCurrentValue() == StateCondition.TRUE) {
+				&& !t.getPreExpression().getProtoTaskConditionExpression().getValue().getDescription().equals("")) {
+			if (t.getPreExpression().getProtoTaskConditionExpression().getValue()
+					.getCurrentValue() == StateCondition.TRUE) {
 				t.setStateExecution(StateExecution.ACTIVABLE);
 			} else {
 				t.setStateExecution(StateExecution.INACTIVABLE);
@@ -297,10 +297,9 @@ public class Excution {
 		// faire la gestion de l'iteration
 
 		if (t.getIterExpression().getProtoTaskConditionExpression() != null
-				&& !t.getIterExpression().getProtoTaskConditionExpression()
-				.getValue().getDescription().equals("")) {
-			if (t.getIterExpression().getProtoTaskConditionExpression()
-					.getValue().getCurrentValue() == StateCondition.TRUE) {
+				&& !t.getIterExpression().getProtoTaskConditionExpression().getValue().getDescription().equals("")) {
+			if (t.getIterExpression().getProtoTaskConditionExpression().getValue()
+					.getCurrentValue() == StateCondition.TRUE) {
 				t.setStateExecution(StateExecution.ATTENTEFINKO);
 			} else {
 				t.setStateExecution(StateExecution.ATTENTEFIN);
@@ -311,8 +310,7 @@ public class Excution {
 
 	}
 
-	public static void changeCondition(ProtoTaskCondition exp,
-			StateCondition state) {
+	public static void changeCondition(ProtoTaskCondition exp, StateCondition state) {
 		exp.setCurrentValue(state);
 		testrafraichissementconditionmodele();
 	}
@@ -344,8 +342,7 @@ public class Excution {
 
 	}
 
-	private static ArrayList<Task> getTaskInStateRec(StateExecution state,
-			ArrayList<Task> prev, Task t) {
+	private static ArrayList<Task> getTaskInStateRec(StateExecution state, ArrayList<Task> prev, Task t) {
 		if (t.getStateExecution() == state) {
 			prev.add(t);
 		}
@@ -381,8 +378,7 @@ public class Excution {
 		}
 	}
 
-	private static void oneOfMyChildrenBecomeFinish(Task t)
-			throws ProtoTaskException {
+	private static void oneOfMyChildrenBecomeFinish(Task t) throws ProtoTaskException {
 		Decomposition decompo = t.getOrdering();
 		ArrayList<Task> enfants;
 		switch (decompo) {
@@ -400,7 +396,7 @@ public class Excution {
 				case ACTIVABLE:
 				case INACTIVABLE:
 				case ATTENTETASK:
-					
+
 					if (!fille.getFacultatif()) {
 						counter++;
 					}

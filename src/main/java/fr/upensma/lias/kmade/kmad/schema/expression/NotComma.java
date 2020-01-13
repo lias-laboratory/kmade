@@ -24,10 +24,10 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
  */
 public class NotComma extends BinaryOther {
 
-    private static final long serialVersionUID = -4778296321504331434L;
+	private static final long serialVersionUID = -4778296321504331434L;
 
-    public NotComma(NodeExpression left) {
-	super(left);
-	this.name = ExpressConstant.NOT_COMMA_EXPRESSION;
-    }
+	public NotComma(NodeExpression left) {
+		super(left);
+		this.name = ExpressConstant.NOT_COMMA_EXPRESSION;
+	}
 }

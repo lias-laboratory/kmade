@@ -29,21 +29,21 @@ import javax.swing.JComponent;
  */
 public class KMADECorner extends JComponent implements Accessible {
 
-    private static final long serialVersionUID = -5467864357385427128L;
+	private static final long serialVersionUID = -5467864357385427128L;
 
-    public void paintComponent(Graphics g) {
-	g.setColor(new Color(165, 163, 151));
-	g.fillRect(0, 0, getWidth(), getHeight());
-    }
-
-    public AccessibleContext getAccessibleContext() {
-	if (accessibleContext == null) {
-	    accessibleContext = new AccessibleCorner();
+	public void paintComponent(Graphics g) {
+		g.setColor(new Color(165, 163, 151));
+		g.fillRect(0, 0, getWidth(), getHeight());
 	}
-	return accessibleContext;
-    }
 
-    protected class AccessibleCorner extends AccessibleJComponent {
-	private static final long serialVersionUID = 7606517429466071101L;
-    }
+	public AccessibleContext getAccessibleContext() {
+		if (accessibleContext == null) {
+			accessibleContext = new AccessibleCorner();
+		}
+		return accessibleContext;
+	}
+
+	protected class AccessibleCorner extends AccessibleJComponent {
+		private static final long serialVersionUID = 7606517429466071101L;
+	}
 }

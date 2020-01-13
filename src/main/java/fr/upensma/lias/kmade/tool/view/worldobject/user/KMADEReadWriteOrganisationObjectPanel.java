@@ -31,133 +31,126 @@ import fr.upensma.lias.kmade.tool.viewadaptator.OrganisationPanelAdaptator;
 /**
  * @author Mickael BARON
  */
-public class KMADEReadWriteOrganisationObjectPanel extends JPanel implements
-	LanguageFactory {
+public class KMADEReadWriteOrganisationObjectPanel extends JPanel implements LanguageFactory {
 
-    private static final long serialVersionUID = 16531L;
+	private static final long serialVersionUID = 16531L;
 
-    private final KMADEReadWriteOrganisationObjectTable organisation = new KMADEReadWriteOrganisationObjectTable();
+	private final KMADEReadWriteOrganisationObjectTable organisation = new KMADEReadWriteOrganisationObjectTable();
 
-    private final KMADEReadIndividuInOrganisation indiAdd = new KMADEReadIndividuInOrganisation();
+	private final KMADEReadIndividuInOrganisation indiAdd = new KMADEReadIndividuInOrganisation();
 
-    private final KMADEReadIndividuNotInOrganisation indiNotAdd = new KMADEReadIndividuNotInOrganisation();
+	private final KMADEReadIndividuNotInOrganisation indiNotAdd = new KMADEReadIndividuNotInOrganisation();
 
-    private String oidActiveOrganisation = Oid.OID_NULL;
+	private String oidActiveOrganisation = Oid.OID_NULL;
 
-    private String nameActiveOrganisation = null;
+	private String nameActiveOrganisation = null;
 
-    public KMADEReadWriteOrganisationObjectPanel() {
-	// cr�ation de la table comprenant les 3 Jtable que l'on souhaite
-	JPanel panelHaut = new JPanel(new GridLayout(1, 1, 2, 2));
-	panelHaut.add(organisation);
-	JPanel panelBas = new JPanel(new GridLayout(1, 2, 2, 2));
-	panelBas.add(indiAdd);
-	panelBas.add(indiNotAdd);
-	this.setLayout(new GridLayout(2, 1, 2, 2));
-	this.add(panelHaut);
-	this.add(panelBas);
-	// il n'y a pas d'individu selectionn�
-	this.setActiveOrganisationObject("", Oid.OID_NULL);
-	this.setBorder(new TitledBorder(null,
-		KMADEConstant.ORGANIZATION_TITLE_NAME, TitledBorder.CENTER,
-		TitledBorder.DEFAULT_POSITION));
-    }
-
-    /**
-     * Met � jour les tables des organisations
-     */
-    public void refreshActiveOrganisation() {
-	setActiveOrganisationObject(nameActiveOrganisation,
-		oidActiveOrganisation);
-
-    }
-
-    /**
-     * Affiche les tables des individus de l'organisation selectionn�e.
-     * 
-     * @param name
-     * @param oid
-     */
-    public void setActiveOrganisationObject(String name, String oid) {
-	indiAdd.clearSelection();
-	indiNotAdd.clearSelection();
-	oidActiveOrganisation = oid;
-	nameActiveOrganisation = name;
-	if (oid.equals(Oid.OID_NULL)) {
-	    // cas o� il n'y a rien de selectionn�
-	    indiAdd.setVisible(false);
-	    indiNotAdd.setVisible(false);
-	    organisation.setOrganisationNameBorder("");
-	} else {
-	    // un individu est selectionn�
-	    // affichage du titre avec le nom de l'individu
-	    organisation.setOrganisationNameBorder(name);
-
-	    // La partie indiAdd
-	    // Supression de la table indiAdd des informations contenu dedans (
-	    // pas dans la bdd Express)
-	    indiAdd.removeAllIndividu();
-	    // Modification du nom de la table
-	    indiAdd.setIndividuAddNameBorder(name);
-
-	    // mise � jour des valeurs de la table
-	    Object[][] tabindiAdd = OrganisationPanelAdaptator
-		    .getIndividuAddIntoTab(oid);
-	    if (tabindiAdd.length != 0) {
-		indiAdd.updateDataModel(tabindiAdd);
-	    }
-	    // affichage de la table
-	    indiAdd.setVisible(true);
-
-	    // La partie indiNotAdd
-	    // comme pour indiAdd
-	    indiNotAdd.removeAllIndividu();
-	    indiNotAdd.setIndividuNotInOrganisationNameBorder(name);
-
-	    Object[][] tabindiNotAdd = OrganisationPanelAdaptator
-		    .getIndividuNotAddIntoTab(oid);
-	    if (tabindiNotAdd.length != 0) {
-		indiNotAdd.updateDataModel(tabindiNotAdd);
-	    }
-	    indiNotAdd.setVisible(true);
+	public KMADEReadWriteOrganisationObjectPanel() {
+		// cr�ation de la table comprenant les 3 Jtable que l'on souhaite
+		JPanel panelHaut = new JPanel(new GridLayout(1, 1, 2, 2));
+		panelHaut.add(organisation);
+		JPanel panelBas = new JPanel(new GridLayout(1, 2, 2, 2));
+		panelBas.add(indiAdd);
+		panelBas.add(indiNotAdd);
+		this.setLayout(new GridLayout(2, 1, 2, 2));
+		this.add(panelHaut);
+		this.add(panelBas);
+		// il n'y a pas d'individu selectionn�
+		this.setActiveOrganisationObject("", Oid.OID_NULL);
+		this.setBorder(new TitledBorder(null, KMADEConstant.ORGANIZATION_TITLE_NAME, TitledBorder.CENTER,
+				TitledBorder.DEFAULT_POSITION));
 	}
-    }
 
-    public void addIndividuInOrganization(String oidIndividu) {
-	try {
-
-	    ExpressIndividu.addIndividuInOrganisation(oidIndividu,
-		    oidActiveOrganisation);
-	} catch (Exception e) {
+	/**
+	 * Met � jour les tables des organisations
+	 */
+	public void refreshActiveOrganisation() {
+		setActiveOrganisationObject(nameActiveOrganisation, oidActiveOrganisation);
 
 	}
-    }
 
-    public void removeIndividuOfOrganization(String oidIndividu) {
-	try {
+	/**
+	 * Affiche les tables des individus de l'organisation selectionn�e.
+	 * 
+	 * @param name
+	 * @param oid
+	 */
+	public void setActiveOrganisationObject(String name, String oid) {
+		indiAdd.clearSelection();
+		indiNotAdd.clearSelection();
+		oidActiveOrganisation = oid;
+		nameActiveOrganisation = name;
+		if (oid.equals(Oid.OID_NULL)) {
+			// cas o� il n'y a rien de selectionn�
+			indiAdd.setVisible(false);
+			indiNotAdd.setVisible(false);
+			organisation.setOrganisationNameBorder("");
+		} else {
+			// un individu est selectionn�
+			// affichage du titre avec le nom de l'individu
+			organisation.setOrganisationNameBorder(name);
 
-	    ExpressIndividu.removeIndividuInOrganisation(oidIndividu,
-		    oidActiveOrganisation);
-	} catch (Exception e) {
+			// La partie indiAdd
+			// Supression de la table indiAdd des informations contenu dedans (
+			// pas dans la bdd Express)
+			indiAdd.removeAllIndividu();
+			// Modification du nom de la table
+			indiAdd.setIndividuAddNameBorder(name);
 
+			// mise � jour des valeurs de la table
+			Object[][] tabindiAdd = OrganisationPanelAdaptator.getIndividuAddIntoTab(oid);
+			if (tabindiAdd.length != 0) {
+				indiAdd.updateDataModel(tabindiAdd);
+			}
+			// affichage de la table
+			indiAdd.setVisible(true);
+
+			// La partie indiNotAdd
+			// comme pour indiAdd
+			indiNotAdd.removeAllIndividu();
+			indiNotAdd.setIndividuNotInOrganisationNameBorder(name);
+
+			Object[][] tabindiNotAdd = OrganisationPanelAdaptator.getIndividuNotAddIntoTab(oid);
+			if (tabindiNotAdd.length != 0) {
+				indiNotAdd.updateDataModel(tabindiNotAdd);
+			}
+			indiNotAdd.setVisible(true);
+		}
 	}
-    }
 
-    public KMADEReadIndividuInOrganisation getIndividuAddTable() {
-	return indiAdd;
-    }
+	public void addIndividuInOrganization(String oidIndividu) {
+		try {
 
-    public KMADEReadIndividuNotInOrganisation getIndividuNotAddTable() {
-	return indiNotAdd;
-    }
+			ExpressIndividu.addIndividuInOrganisation(oidIndividu, oidActiveOrganisation);
+		} catch (Exception e) {
 
-    public KMADEReadWriteOrganisationObjectTable getOrganizationObjectTable() {
-	return organisation;
-    }
+		}
+	}
 
-    public void notifLocalisationModification() {
-	organisation.notifLocalisationModification();
-	indiAdd.notifLocalisationModification();
-	indiNotAdd.notifLocalisationModification();
-    }
+	public void removeIndividuOfOrganization(String oidIndividu) {
+		try {
+
+			ExpressIndividu.removeIndividuInOrganisation(oidIndividu, oidActiveOrganisation);
+		} catch (Exception e) {
+
+		}
+	}
+
+	public KMADEReadIndividuInOrganisation getIndividuAddTable() {
+		return indiAdd;
+	}
+
+	public KMADEReadIndividuNotInOrganisation getIndividuNotAddTable() {
+		return indiNotAdd;
+	}
+
+	public KMADEReadWriteOrganisationObjectTable getOrganizationObjectTable() {
+		return organisation;
+	}
+
+	public void notifLocalisationModification() {
+		organisation.notifLocalisationModification();
+		indiAdd.notifLocalisationModification();
+		indiNotAdd.notifLocalisationModification();
+	}
 }

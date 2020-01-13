@@ -25,36 +25,32 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
  */
 public class PROTOHistoric {
 
-    public static void addTask(Task t) {
-	GraphicEditorAdaptator.getMainFrame().getPrototypeDialog()
-		.getHistoricPanel().addNode(t);
-    }
+	public static void addTask(Task t) {
+		GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().getHistoricPanel().addNode(t);
+	}
 
-    public static void addPrecondition(Task t, boolean respected) {
+	public static void addPrecondition(Task t, boolean respected) {
 
-    }
+	}
 
-    public static void addFinished(Task t) {
-    }
+	public static void addFinished(Task t) {
+	}
 
-    public static void descendre() {
+	public static void descendre() {
 
-    }
+	}
 
-    public static void remonter() {
-	GraphicEditorAdaptator.getMainFrame().getPrototypeDialog()
-		.getHistoricPanel().remonter();
-    }
+	public static void remonter() {
+		GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().getHistoricPanel().remonter();
+	}
 
-    public static void clearHisto() {
-	GraphicEditorAdaptator.getMainFrame().getPrototypeDialog()
-		.getHistoricPanel().clearHisto();
+	public static void clearHisto() {
+		GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().getHistoricPanel().clearHisto();
 
-    }
+	}
 
-    public static void deleteCurrentTask() {
-	GraphicEditorAdaptator.getMainFrame().getPrototypeDialog()
-		.getHistoricPanel().deleteCurrentTask();
-    }
+	public static void deleteCurrentTask() {
+		GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().getHistoricPanel().deleteCurrentTask();
+	}
 
 }

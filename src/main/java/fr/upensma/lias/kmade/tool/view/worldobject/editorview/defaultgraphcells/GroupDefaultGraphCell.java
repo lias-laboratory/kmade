@@ -67,497 +67,461 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
  */
 public abstract class GroupDefaultGraphCell extends DefaultGraphCell {
 
-    private static final long serialVersionUID = 1388699310236979117L;
+	private static final long serialVersionUID = 1388699310236979117L;
 
-    protected Groupe group;
+	protected Groupe group;
 
-    protected List<ConcreteObjectCell> childCells = new ArrayList<ConcreteObjectCell>();
+	protected List<ConcreteObjectCell> childCells = new ArrayList<ConcreteObjectCell>();
 
-    protected int selectedIndex = -1;
+	protected int selectedIndex = -1;
 
-    protected GroupEditDialog edit;
+	protected GroupEditDialog edit;
 
-    protected GroupEditDialogCreation editCreation;
+	protected GroupEditDialogCreation editCreation;
 
-    protected GroupDefaultVertexView invView;
+	protected GroupDefaultVertexView invView;
 
-    /**
-     * First constructor of the cell (the point is not created yet)
-     * 
-     * @param group
-     *            represented by the cell
-     * @param point
-     *            x in the cell
-     * @param point
-     *            y in the cell
-     */
-    public GroupDefaultGraphCell(Groupe o, int x, int y) {
-	super(o.getName());
+	/**
+	 * First constructor of the cell (the point is not created yet)
+	 * 
+	 * @param group represented by the cell
+	 * @param point x in the cell
+	 * @param point y in the cell
+	 */
+	public GroupDefaultGraphCell(Groupe o, int x, int y) {
+		super(o.getName());
 
-	this.group = o;
+		this.group = o;
 
-	Oid oidPoint = InterfaceExpressJava.createEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.POINT_CLASS);
-	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
-	p.setX(x);
-	p.setY(y);
-	o.setPoint(p);
+		Oid oidPoint = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE, ExpressConstant.POINT_CLASS);
+		Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
+		p.setX(x);
+		p.setY(y);
+		o.setPoint(p);
 
-	Map<?, ?> myHashTable = this.getAttributes();
-	GraphConstants.setBounds(myHashTable, new Rectangle2D.Double(x, y, 50,
-		50));
-	GraphConstants.setEditable(myHashTable, false);
-	GraphConstants.setAutoSize(myHashTable, true);
-	GraphConstants.setOpaque(myHashTable, false);
-	this.setAttributes(new AttributeMap(myHashTable));
-    }
-
-    /**
-     * Second constructor for the cell (the point is already created)
-     * 
-     * @param group
-     *            represented by the cell
-     * @param point
-     *            in the graph
-     */
-    public GroupDefaultGraphCell(Groupe o, Point p) {
-	super(o.getName());
-
-	this.group = o;
-
-	Map<?, ?> myHashTable = this.getAttributes();
-	GraphConstants.setBounds(myHashTable, new Rectangle2D.Double(p.getX(),
-		p.getY(), 100, 100));
-	GraphConstants.setEditable(myHashTable, false);
-	GraphConstants.setAutoSize(myHashTable, true);
-	GraphConstants.setOpaque(myHashTable, false);
-	this.setAttributes(new AttributeMap(myHashTable));
-    }
-
-    /**
-     * @return the group represented by the cell
-     */
-    public Groupe getObject() {
-	return group;
-    }
-
-    /**
-     * @return the group's name
-     */
-    public String getName() {
-	return group.getName();
-    }
-
-    /**
-     * Method to add a new concrete object cell in the group and to add the
-     * concrete object in the group
-     * 
-     * @param new concrete object cell
-     */
-    public void addCellToGroup(ConcreteObjectCell cell) {
-	this.childCells.add(cell);
-	((ObjetConcret) cell.getObject()).setAppartientGroupe(this.group);
-    }
-
-    /**
-     * @return the concrete object cell contained in the group
-     */
-    public List<ConcreteObjectCell> getCellsInGroup() {
-	return this.childCells;
-    }
-
-    /**
-     * @return the renderer of this cell
-     */
-    public GroupDefaultVertexView getInvView() {
-	return this.invView;
-    }
-
-    /**
-     * Method to set a new renderer to the cell
-     * 
-     * @param new renderer
-     */
-    public void setInvView(GroupDefaultVertexView newView) {
-	this.invView = newView;
-    }
-
-    /**
-     * @return the concrete object cell selected in the group
-     */
-    public ConcreteObjectCell getSelectedCell() {
-	if (selectedIndex == -1)
-	    return null;
-	else
-	    return this.childCells.get(this.selectedIndex);
-    }
-
-    /**
-     * Method to set the selected cell in the group
-     * 
-     * @param index
-     *            of the cell
-     */
-    public void setSelectedIndex(int i) {
-	this.selectedIndex = i;
-    }
-
-    /**
-     * Method to display a window to edit the group when it is created
-     */
-    public void editCreation() {
-	editCreation = new GroupEditDialogCreation(this, GraphicEditorAdaptator
-		.getMainFrame().getObjectDialogView());
-    }
-
-    /**
-     * Method to display a window to edit the group after its creation
-     */
-    public void edit() {
-	edit = new GroupEditDialog(this, GraphicEditorAdaptator.getMainFrame()
-		.getObjectDialogView());
-
-    }
-
-    /**
-     * Window to edit the group when it is created
-     * 
-     * @author Joachim TROUVERIE
-     */
-    class GroupEditDialogCreation extends JDialog {
-
-	private static final long serialVersionUID = 5464831586210482158L;
-
-	private Groupe object;
-
-	private JComboBox box;
-
-	private JTextArea description;
-
-	private JTextField name;
-
-	private JButton ok;
-
-	public GroupEditDialogCreation(GroupDefaultGraphCell cell, JDialog owner) {
-	    super(owner, KMADEConstant.EDIT_GROUP_ACTION_MESSAGE);
-
-	    // Initialization
-	    this.object = cell.getObject();
-
-	    this.box = new JComboBox();
-
-	    final Object[] objets = InterfaceExpressJava.prendreAllOidOfEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.ABSTRACT_OBJECT_CLASS);
-	    for (int i = 0; i < objets.length; i++) {
-		this.box.addItem((ObjetAbstrait) objets[i]);
-	    }
-	    this.description = new JTextArea(cell.getObject().getDescription());
-	    this.name = new JTextField(cell.getObject().getName());
-
-	    // Form Panel
-	    JPanel formPanel = new JPanel(new GridLayout(4, 2));
-	    formPanel.add(new JLabel(KMADEConstant.ABSTRACT_GROUP_NAME_TABLE));
-	    formPanel.add(name);
-	    formPanel.add(new JLabel(
-		    KMADEConstant.ABSTRACT_GROUP_DESCRIPTION_TABLE));
-	    formPanel.add(description);
-	    formPanel.add(new JLabel(KMADEConstant.ABSTRACT_GROUP_TITLE_TABLE));
-	    formPanel.add(box);
-
-	    // Button Panel
-	    JPanel buttonPanel = new JPanel(new BorderLayout());
-	    ok = new JButton("Ok");
-	    ok.setBorder(BorderFactory.createEtchedBorder());
-	    ok.setOpaque(false);
-	    ok.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-		    object.setName(name.getText());
-		    object.setDescription(description.getText());
-		    object.setContientObj((ObjetAbstrait) objets[box
-			    .getSelectedIndex()]);
-		    invView.getGraph()
-			    .getGraphLayoutCache()
-			    .editCell(GroupDefaultGraphCell.this,
-				    GroupDefaultGraphCell.this.getAttributes());
-		    GroupEditDialogCreation.this.dispose();
-		}
-	    });
-
-	    buttonPanel.add(ok, BorderLayout.EAST);
-
-	    // Packing
-	    this.setLayout(new BorderLayout());
-	    this.add(formPanel, BorderLayout.CENTER);
-	    this.add(buttonPanel, BorderLayout.SOUTH);
-
-	    this.pack();
-	    this.setVisible(true);
-	    KMADEToolUtilities.setCenteredInScreen(this);
+		Map<?, ?> myHashTable = this.getAttributes();
+		GraphConstants.setBounds(myHashTable, new Rectangle2D.Double(x, y, 50, 50));
+		GraphConstants.setEditable(myHashTable, false);
+		GraphConstants.setAutoSize(myHashTable, true);
+		GraphConstants.setOpaque(myHashTable, false);
+		this.setAttributes(new AttributeMap(myHashTable));
 	}
-    };
 
-    /**
-     * Window to edit the group and the objects contained in it after its
-     * creation
-     * 
-     * @author Joachim TROUVERIE
-     */
-    class GroupEditDialog extends JDialog {
+	/**
+	 * Second constructor for the cell (the point is already created)
+	 * 
+	 * @param group represented by the cell
+	 * @param point in the graph
+	 */
+	public GroupDefaultGraphCell(Groupe o, Point p) {
+		super(o.getName());
 
-	private static final long serialVersionUID = 4897843890244687654L;
+		this.group = o;
 
-	private Groupe object;
+		Map<?, ?> myHashTable = this.getAttributes();
+		GraphConstants.setBounds(myHashTable, new Rectangle2D.Double(p.getX(), p.getY(), 100, 100));
+		GraphConstants.setEditable(myHashTable, false);
+		GraphConstants.setAutoSize(myHashTable, true);
+		GraphConstants.setOpaque(myHashTable, false);
+		this.setAttributes(new AttributeMap(myHashTable));
+	}
 
-	private JTextArea description;
+	/**
+	 * @return the group represented by the cell
+	 */
+	public Groupe getObject() {
+		return group;
+	}
 
-	private JTextField name;
+	/**
+	 * @return the group's name
+	 */
+	public String getName() {
+		return group.getName();
+	}
 
-	private JTable editObjects;
+	/**
+	 * Method to add a new concrete object cell in the group and to add the concrete
+	 * object in the group
+	 * 
+	 * @param new concrete object cell
+	 */
+	public void addCellToGroup(ConcreteObjectCell cell) {
+		this.childCells.add(cell);
+		((ObjetConcret) cell.getObject()).setAppartientGroupe(this.group);
+	}
 
-	private JButton ok;
+	/**
+	 * @return the concrete object cell contained in the group
+	 */
+	public List<ConcreteObjectCell> getCellsInGroup() {
+		return this.childCells;
+	}
 
-	public GroupEditDialog(GroupDefaultGraphCell cell, JDialog owner) {
-	    super(owner, KMADEConstant.EDIT_GROUP_ACTION_MESSAGE);
+	/**
+	 * @return the renderer of this cell
+	 */
+	public GroupDefaultVertexView getInvView() {
+		return this.invView;
+	}
 
-	    // Initialization
-	    this.object = cell.getObject();
-	    this.description = new JTextArea(cell.getObject().getDescription());
-	    this.name = new JTextField(cell.getObject().getName());
+	/**
+	 * Method to set a new renderer to the cell
+	 * 
+	 * @param new renderer
+	 */
+	public void setInvView(GroupDefaultVertexView newView) {
+		this.invView = newView;
+	}
 
-	    // Form Panel
-	    JPanel formPanel = new JPanel(new GridLayout(4, 2));
-	    formPanel.add(new JLabel(KMADEConstant.ABSTRACT_GROUP_NAME_TABLE));
-	    formPanel.add(name);
-	    formPanel.add(new JLabel(
-		    KMADEConstant.ABSTRACT_GROUP_DESCRIPTION_TABLE));
-	    formPanel.add(description);
+	/**
+	 * @return the concrete object cell selected in the group
+	 */
+	public ConcreteObjectCell getSelectedCell() {
+		if (selectedIndex == -1)
+			return null;
+		else
+			return this.childCells.get(this.selectedIndex);
+	}
 
-	    this.editObjects = new JTable(new EditGroupTableModel(object));
-	    this.editObjects.setDefaultEditor(Object.class,
-		    new EditGroupTableEditor());
-	    this.editObjects.setDefaultRenderer(Object.class,
-		    new EditGroupTableRenderer());
+	/**
+	 * Method to set the selected cell in the group
+	 * 
+	 * @param index of the cell
+	 */
+	public void setSelectedIndex(int i) {
+		this.selectedIndex = i;
+	}
 
-	    // Button Panel
-	    JPanel buttonPanel = new JPanel(new BorderLayout());
-	    ok = new JButton("Ok");
-	    ok.setBorder(BorderFactory.createEtchedBorder());
-	    ok.setOpaque(false);
-	    ok.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-		    object.setName(name.getText());
-		    object.setDescription(description.getText());
-		    for (int i = 0; i < editObjects.getModel().getRowCount(); i++) {
-			int cp = -1;
-			for (ObjetConcret o : object.getEnsemble()
-				.getLstObjConcrets()) {
-			    cp = cp + 1;
-			    for (AttributConcret a : o.getInverseListAttribut()) {
-				cp = cp + 1;
-				if (cp == i)
-				    a.setValeur(String.valueOf(editObjects
-					    .getModel().getValueAt(i, 1)));
-			    }
+	/**
+	 * Method to display a window to edit the group when it is created
+	 */
+	public void editCreation() {
+		editCreation = new GroupEditDialogCreation(this, GraphicEditorAdaptator.getMainFrame().getObjectDialogView());
+	}
+
+	/**
+	 * Method to display a window to edit the group after its creation
+	 */
+	public void edit() {
+		edit = new GroupEditDialog(this, GraphicEditorAdaptator.getMainFrame().getObjectDialogView());
+
+	}
+
+	/**
+	 * Window to edit the group when it is created
+	 * 
+	 * @author Joachim TROUVERIE
+	 */
+	class GroupEditDialogCreation extends JDialog {
+
+		private static final long serialVersionUID = 5464831586210482158L;
+
+		private Groupe object;
+
+		private JComboBox box;
+
+		private JTextArea description;
+
+		private JTextField name;
+
+		private JButton ok;
+
+		public GroupEditDialogCreation(GroupDefaultGraphCell cell, JDialog owner) {
+			super(owner, KMADEConstant.EDIT_GROUP_ACTION_MESSAGE);
+
+			// Initialization
+			this.object = cell.getObject();
+
+			this.box = new JComboBox();
+
+			final Object[] objets = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.ABSTRACT_OBJECT_CLASS);
+			for (int i = 0; i < objets.length; i++) {
+				this.box.addItem((ObjetAbstrait) objets[i]);
 			}
-		    }
-		    invView.getGraph()
-			    .getGraphLayoutCache()
-			    .editCell(GroupDefaultGraphCell.this,
-				    GroupDefaultGraphCell.this.getAttributes());
-		    GroupEditDialog.this.dispose();
+			this.description = new JTextArea(cell.getObject().getDescription());
+			this.name = new JTextField(cell.getObject().getName());
+
+			// Form Panel
+			JPanel formPanel = new JPanel(new GridLayout(4, 2));
+			formPanel.add(new JLabel(KMADEConstant.ABSTRACT_GROUP_NAME_TABLE));
+			formPanel.add(name);
+			formPanel.add(new JLabel(KMADEConstant.ABSTRACT_GROUP_DESCRIPTION_TABLE));
+			formPanel.add(description);
+			formPanel.add(new JLabel(KMADEConstant.ABSTRACT_GROUP_TITLE_TABLE));
+			formPanel.add(box);
+
+			// Button Panel
+			JPanel buttonPanel = new JPanel(new BorderLayout());
+			ok = new JButton("Ok");
+			ok.setBorder(BorderFactory.createEtchedBorder());
+			ok.setOpaque(false);
+			ok.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					object.setName(name.getText());
+					object.setDescription(description.getText());
+					object.setContientObj((ObjetAbstrait) objets[box.getSelectedIndex()]);
+					invView.getGraph().getGraphLayoutCache().editCell(GroupDefaultGraphCell.this,
+							GroupDefaultGraphCell.this.getAttributes());
+					GroupEditDialogCreation.this.dispose();
+				}
+			});
+
+			buttonPanel.add(ok, BorderLayout.EAST);
+
+			// Packing
+			this.setLayout(new BorderLayout());
+			this.add(formPanel, BorderLayout.CENTER);
+			this.add(buttonPanel, BorderLayout.SOUTH);
+
+			this.pack();
+			this.setVisible(true);
+			KMADEToolUtilities.setCenteredInScreen(this);
 		}
-	    });
+	};
 
-	    buttonPanel.add(ok, BorderLayout.EAST);
+	/**
+	 * Window to edit the group and the objects contained in it after its creation
+	 * 
+	 * @author Joachim TROUVERIE
+	 */
+	class GroupEditDialog extends JDialog {
 
-	    // Packing
-	    this.setLayout(new BorderLayout());
-	    this.add(formPanel, BorderLayout.NORTH);
-	    this.add(new JScrollPane(editObjects), BorderLayout.CENTER);
-	    this.add(buttonPanel, BorderLayout.SOUTH);
+		private static final long serialVersionUID = 4897843890244687654L;
 
-	    this.pack();
-	    this.setVisible(true);
-	    KMADEToolUtilities.setCenteredInScreen(this);
-	}
-    };
+		private Groupe object;
 
-    /**
-     * Table editor used in the window to edit the objects contained in the
-     * group
-     * 
-     * @author Joachim TROUVERIE
-     */
-    class EditGroupTableEditor extends AbstractCellEditor implements
-	    TableCellEditor {
+		private JTextArea description;
 
-	private static final long serialVersionUID = -6782028045515902195L;
+		private JTextField name;
 
-	private JComboBox box = null;
+		private JTable editObjects;
 
-	private JTextField field = null;
+		private JButton ok;
 
-	private String[] values = { "true", "false" };
+		public GroupEditDialog(GroupDefaultGraphCell cell, JDialog owner) {
+			super(owner, KMADEConstant.EDIT_GROUP_ACTION_MESSAGE);
 
-	public Component getTableCellEditorComponent(JTable table,
-		Object value, boolean isSelected, int row, int column) {
+			// Initialization
+			this.object = cell.getObject();
+			this.description = new JTextArea(cell.getObject().getDescription());
+			this.name = new JTextField(cell.getObject().getName());
 
-	    field = null;
-	    box = null;
+			// Form Panel
+			JPanel formPanel = new JPanel(new GridLayout(4, 2));
+			formPanel.add(new JLabel(KMADEConstant.ABSTRACT_GROUP_NAME_TABLE));
+			formPanel.add(name);
+			formPanel.add(new JLabel(KMADEConstant.ABSTRACT_GROUP_DESCRIPTION_TABLE));
+			formPanel.add(description);
 
-	    if (table.getModel().getValueAt(row, 1) instanceof Boolean) {
-		box = new JComboBox(values);
-		this.box.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-			EditGroupTableEditor.this.stopCellEditing();
-		    }
-		});
-		return box;
-	    }
+			this.editObjects = new JTable(new EditGroupTableModel(object));
+			this.editObjects.setDefaultEditor(Object.class, new EditGroupTableEditor());
+			this.editObjects.setDefaultRenderer(Object.class, new EditGroupTableRenderer());
 
-	    else {
-		field = new JTextField();
-		this.field.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-			EditGroupTableEditor.this.stopCellEditing();
-		    }
-		});
-		return field;
-	    }
-	}
+			// Button Panel
+			JPanel buttonPanel = new JPanel(new BorderLayout());
+			ok = new JButton("Ok");
+			ok.setBorder(BorderFactory.createEtchedBorder());
+			ok.setOpaque(false);
+			ok.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					object.setName(name.getText());
+					object.setDescription(description.getText());
+					for (int i = 0; i < editObjects.getModel().getRowCount(); i++) {
+						int cp = -1;
+						for (ObjetConcret o : object.getEnsemble().getLstObjConcrets()) {
+							cp = cp + 1;
+							for (AttributConcret a : o.getInverseListAttribut()) {
+								cp = cp + 1;
+								if (cp == i)
+									a.setValeur(String.valueOf(editObjects.getModel().getValueAt(i, 1)));
+							}
+						}
+					}
+					invView.getGraph().getGraphLayoutCache().editCell(GroupDefaultGraphCell.this,
+							GroupDefaultGraphCell.this.getAttributes());
+					GroupEditDialog.this.dispose();
+				}
+			});
 
-	public Object getCellEditorValue() {
-	    if (field == null)
-		return Boolean.valueOf((String) box.getSelectedItem())
-			.booleanValue();
-	    else {
-		try {
-		    return Double.parseDouble(field.getText());
-		} catch (NumberFormatException nfe) {
-		    return field.getText();
+			buttonPanel.add(ok, BorderLayout.EAST);
+
+			// Packing
+			this.setLayout(new BorderLayout());
+			this.add(formPanel, BorderLayout.NORTH);
+			this.add(new JScrollPane(editObjects), BorderLayout.CENTER);
+			this.add(buttonPanel, BorderLayout.SOUTH);
+
+			this.pack();
+			this.setVisible(true);
+			KMADEToolUtilities.setCenteredInScreen(this);
 		}
-	    }
+	};
 
-	}
+	/**
+	 * Table editor used in the window to edit the objects contained in the group
+	 * 
+	 * @author Joachim TROUVERIE
+	 */
+	class EditGroupTableEditor extends AbstractCellEditor implements TableCellEditor {
 
-    };
+		private static final long serialVersionUID = -6782028045515902195L;
 
-    /**
-     * Table renderer used in the window to edit the objects contained in the
-     * group
-     * 
-     * @author Joachim TROUVERIE
-     */
-    class EditGroupTableRenderer extends DefaultTableCellRenderer {
+		private JComboBox box = null;
 
-	private static final long serialVersionUID = -5875808651735753800L;
+		private JTextField field = null;
 
-	@Override
-	public Component getTableCellRendererComponent(JTable table,
-		Object value, boolean isSelected, boolean hasFocus, int row,
-		int column) {
+		private String[] values = { "true", "false" };
 
-	    Component cell = super.getTableCellRendererComponent(table, value,
-		    isSelected, hasFocus, row, column);
+		public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
+				int column) {
 
-	    if (table.getValueAt(row, 0).equals(
-		    KMADEConstant.CONCRETE_OBJECT_TITLE_TABLE)) {
-		cell.setBackground(Color.LIGHT_GRAY);
-	    }
+			field = null;
+			box = null;
 
-	    else if (isSelected) {
-		cell.setBackground(KMADEConstant.ACTIVE_SELECTION);
-		cell.setForeground(Color.BLACK);
-	    }
+			if (table.getModel().getValueAt(row, 1) instanceof Boolean) {
+				box = new JComboBox(values);
+				this.box.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						EditGroupTableEditor.this.stopCellEditing();
+					}
+				});
+				return box;
+			}
 
-	    else
-		cell.setBackground(Color.WHITE);
-
-	    return cell;
-	}
-    };
-
-    /**
-     * Table model used in the window to edit the objects contained in the group
-     * 
-     * @author Joachim TROUVERIE
-     */
-    class EditGroupTableModel extends AbstractTableModel {
-
-	private static final long serialVersionUID = 1364115072730236546L;
-
-	private List<Object[]> data = new ArrayList<Object[]>();
-
-	@SuppressWarnings("unused")
-	private Groupe g;
-
-	public EditGroupTableModel(Groupe g) {
-	    this.g = g;
-	    for (ObjetConcret o : g.getEnsemble().getLstObjConcrets()) {
-		this.addNewRow(KMADEConstant.CONCRETE_OBJECT_TITLE_TABLE,
-			o.getName());
-		for (AttributConcret a : o.getInverseListAttribut()) {
-		    this.addNewRow(a.getDeriveName(), a.getValue().getValeur());
+			else {
+				field = new JTextField();
+				this.field.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						EditGroupTableEditor.this.stopCellEditing();
+					}
+				});
+				return field;
+			}
 		}
-	    }
-	}
 
-	@Override
-	public String getColumnName(int columnIndex) {
-	    return null;
-	}
+		public Object getCellEditorValue() {
+			if (field == null)
+				return Boolean.valueOf((String) box.getSelectedItem()).booleanValue();
+			else {
+				try {
+					return Double.parseDouble(field.getText());
+				} catch (NumberFormatException nfe) {
+					return field.getText();
+				}
+			}
 
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-	    if (this.getValueAt(rowIndex, 0).equals(
-		    KMADEConstant.CONCRETE_OBJECT_TITLE_TABLE)
-		    || columnIndex != 1)
-		return false;
-	    else
-		return true;
-	}
+		}
 
-	@Override
-	public int getRowCount() {
-	    return data.size();
-	}
+	};
 
-	@Override
-	public int getColumnCount() {
-	    return 2;
-	}
+	/**
+	 * Table renderer used in the window to edit the objects contained in the group
+	 * 
+	 * @author Joachim TROUVERIE
+	 */
+	class EditGroupTableRenderer extends DefaultTableCellRenderer {
 
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-	    return data.get(rowIndex)[columnIndex];
-	}
+		private static final long serialVersionUID = -5875808651735753800L;
 
-	@Override
-	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-	    Class<?> classe = aValue.getClass();
-	    if (classe.equals(Double.class)
-		    && this.getValueAt(rowIndex, columnIndex).getClass()
-			    .equals(Integer.class)) {
-		aValue = ((Double) aValue).intValue();
-		classe = aValue.getClass();
-	    }
-	    if (this.getValueAt(rowIndex, columnIndex).getClass()
-		    .equals(classe))
-		data.get(rowIndex)[columnIndex] = aValue;
-	    else
-		return;
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 
-	    this.fireTableDataChanged();
-	}
+			Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-	public void addNewRow(String name, Object value) {
-	    Object[] o = { name, value };
-	    data.add(o);
-	    this.fireTableDataChanged();
-	}
+			if (table.getValueAt(row, 0).equals(KMADEConstant.CONCRETE_OBJECT_TITLE_TABLE)) {
+				cell.setBackground(Color.LIGHT_GRAY);
+			}
 
-    };
+			else if (isSelected) {
+				cell.setBackground(KMADEConstant.ACTIVE_SELECTION);
+				cell.setForeground(Color.BLACK);
+			}
+
+			else
+				cell.setBackground(Color.WHITE);
+
+			return cell;
+		}
+	};
+
+	/**
+	 * Table model used in the window to edit the objects contained in the group
+	 * 
+	 * @author Joachim TROUVERIE
+	 */
+	class EditGroupTableModel extends AbstractTableModel {
+
+		private static final long serialVersionUID = 1364115072730236546L;
+
+		private List<Object[]> data = new ArrayList<Object[]>();
+
+		@SuppressWarnings("unused")
+		private Groupe g;
+
+		public EditGroupTableModel(Groupe g) {
+			this.g = g;
+			for (ObjetConcret o : g.getEnsemble().getLstObjConcrets()) {
+				this.addNewRow(KMADEConstant.CONCRETE_OBJECT_TITLE_TABLE, o.getName());
+				for (AttributConcret a : o.getInverseListAttribut()) {
+					this.addNewRow(a.getDeriveName(), a.getValue().getValeur());
+				}
+			}
+		}
+
+		@Override
+		public String getColumnName(int columnIndex) {
+			return null;
+		}
+
+		@Override
+		public boolean isCellEditable(int rowIndex, int columnIndex) {
+			if (this.getValueAt(rowIndex, 0).equals(KMADEConstant.CONCRETE_OBJECT_TITLE_TABLE) || columnIndex != 1)
+				return false;
+			else
+				return true;
+		}
+
+		@Override
+		public int getRowCount() {
+			return data.size();
+		}
+
+		@Override
+		public int getColumnCount() {
+			return 2;
+		}
+
+		@Override
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			return data.get(rowIndex)[columnIndex];
+		}
+
+		@Override
+		public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+			Class<?> classe = aValue.getClass();
+			if (classe.equals(Double.class)
+					&& this.getValueAt(rowIndex, columnIndex).getClass().equals(Integer.class)) {
+				aValue = ((Double) aValue).intValue();
+				classe = aValue.getClass();
+			}
+			if (this.getValueAt(rowIndex, columnIndex).getClass().equals(classe))
+				data.get(rowIndex)[columnIndex] = aValue;
+			else
+				return;
+
+			this.fireTableDataChanged();
+		}
+
+		public void addNewRow(String name, Object value) {
+			Object[] o = { name, value };
+			data.add(o);
+			this.fireTableDataChanged();
+		}
+
+	};
 }

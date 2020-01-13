@@ -29,77 +29,72 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.TableauAg;
  */
 public class GetFunction extends BinaryFunction implements ConcreteObjectType {
 
-    private static final long serialVersionUID = 6431796702725796954L;
+	private static final long serialVersionUID = 6431796702725796954L;
 
-    private ObjetConcret refUserObjetConcret;
+	private ObjetConcret refUserObjetConcret;
 
-    /**
-     * @param value
-     * @param left
-     * @param right
-     */
-    public GetFunction(GroupExpressExpression left,
-	    AttributExpressExpression right) {
-	super(false, left, right);
-	this.setNodeType(right.getNodeType());
-	this.name = ExpressConstant.GET_FUNCTION_EXPRESSION;
-    }
-
-    public boolean isGroupSetType() {
-	return (((GroupExpressExpression) this.leftNode).getGroup()
-		.getEnsemble() instanceof EnsembleAg);
-    }
-
-    public boolean isGroupArrayType() {
-	return (((GroupExpressExpression) this.leftNode).getGroup()
-		.getEnsemble() instanceof TableauAg);
-    }
-
-    public ArrayList<ObjetConcret> getConcreteObjects() {
-	return (((GroupExpressExpression) this.leftNode).getGroup()
-		.getEnsemble().getLstObjConcrets());
-    }
-
-    public ObjetConcret getConcreteObject() {
-	return ((GroupExpressExpression) this.leftNode).getGroup()
-		.getEnsemble().get();
-    }
-
-    public void setUserConcreteObject(ObjetConcret p) {
-	this.refUserObjetConcret = p;
-    }
-
-    public ObjetConcret getUserConcreteObject() {
-	return this.refUserObjetConcret;
-    }
-
-    public boolean isEmptyUserConcreteObject() {
-	return this.refUserObjetConcret == null;
-    }
-
-    public ArrayList<Object> getLinearExpression() {
-	ArrayList<Object> myLinearList = new ArrayList<Object>();
-	myLinearList.add(this);
-	myLinearList.add("(");
-	for (Object current : leftNode.getLinearExpression()) {
-	    myLinearList.add(current);
+	/**
+	 * @param value
+	 * @param left
+	 * @param right
+	 */
+	public GetFunction(GroupExpressExpression left, AttributExpressExpression right) {
+		super(false, left, right);
+		this.setNodeType(right.getNodeType());
+		this.name = ExpressConstant.GET_FUNCTION_EXPRESSION;
 	}
-	myLinearList.add(",");
-	for (Object current : rightNode.getLinearExpression()) {
-	    myLinearList.add(current);
-	}
-	myLinearList.add(")");
-	return myLinearList;
-    }
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	if (!this.isGroupSetType() && !this.isGroupArrayType()) {
-	    refUserObjetConcret = this.getConcreteObject();
+	public boolean isGroupSetType() {
+		return (((GroupExpressExpression) this.leftNode).getGroup().getEnsemble() instanceof EnsembleAg);
 	}
-	this.rightNode.evaluateNode(refUserObjetConcret);
-	this.setObjectValueState(this.rightNode.getObjectValueState());
-	if (this.isValueState()) {
-	    this.setNodeValue(this.rightNode.getNodeValue());
+
+	public boolean isGroupArrayType() {
+		return (((GroupExpressExpression) this.leftNode).getGroup().getEnsemble() instanceof TableauAg);
 	}
-    }
+
+	public ArrayList<ObjetConcret> getConcreteObjects() {
+		return (((GroupExpressExpression) this.leftNode).getGroup().getEnsemble().getLstObjConcrets());
+	}
+
+	public ObjetConcret getConcreteObject() {
+		return ((GroupExpressExpression) this.leftNode).getGroup().getEnsemble().get();
+	}
+
+	public void setUserConcreteObject(ObjetConcret p) {
+		this.refUserObjetConcret = p;
+	}
+
+	public ObjetConcret getUserConcreteObject() {
+		return this.refUserObjetConcret;
+	}
+
+	public boolean isEmptyUserConcreteObject() {
+		return this.refUserObjetConcret == null;
+	}
+
+	public ArrayList<Object> getLinearExpression() {
+		ArrayList<Object> myLinearList = new ArrayList<Object>();
+		myLinearList.add(this);
+		myLinearList.add("(");
+		for (Object current : leftNode.getLinearExpression()) {
+			myLinearList.add(current);
+		}
+		myLinearList.add(",");
+		for (Object current : rightNode.getLinearExpression()) {
+			myLinearList.add(current);
+		}
+		myLinearList.add(")");
+		return myLinearList;
+	}
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		if (!this.isGroupSetType() && !this.isGroupArrayType()) {
+			refUserObjetConcret = this.getConcreteObject();
+		}
+		this.rightNode.evaluateNode(refUserObjetConcret);
+		this.setObjectValueState(this.rightNode.getObjectValueState());
+		if (this.isValueState()) {
+			this.setNodeValue(this.rightNode.getNodeValue());
+		}
+	}
 }

@@ -24,19 +24,19 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class ConstantExpression extends UnaryExpression {
 
-    private static final long serialVersionUID = 7297200073616659160L;
+	private static final long serialVersionUID = 7297200073616659160L;
 
-    public ConstantExpression(Object pNodeValue) {
-	super(pNodeValue);
-    }
+	public ConstantExpression(Object pNodeValue) {
+		super(pNodeValue);
+	}
 
-    public void checkNode() throws SemanticException {
-    }
+	public void checkNode() throws SemanticException {
+	}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+	}
 
-    public String getName() {
-	return this.getNodeValue().toString();
-    }
+	public String getName() {
+		return this.getNodeValue().toString();
+	}
 }

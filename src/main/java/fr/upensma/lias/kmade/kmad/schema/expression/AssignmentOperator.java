@@ -24,24 +24,24 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class AssignmentOperator extends Operator {
 
-    private static final long serialVersionUID = 1775472343465419728L;
+	private static final long serialVersionUID = 1775472343465419728L;
 
-    public AssignmentOperator(Object value, AttributExpressExpression left) {
-	super(value, left);
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	this.rightNode.evaluateNode(ref);
-
-	if (getRightNode().isUnknownState()) {
-	    this.setStateToUnknown();
-	    throw new SemanticUnknownException();
+	public AssignmentOperator(Object value, AttributExpressExpression left) {
+		super(value, left);
 	}
 
-	if (getRightNode().isErrorState()) {
-	    this.setStateToError();
-	    throw new SemanticErrorException();
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		this.rightNode.evaluateNode(ref);
+
+		if (getRightNode().isUnknownState()) {
+			this.setStateToUnknown();
+			throw new SemanticUnknownException();
+		}
+
+		if (getRightNode().isErrorState()) {
+			this.setStateToError();
+			throw new SemanticErrorException();
+		}
+		this.setStateToValue();
 	}
-	this.setStateToValue();
-    }
 }

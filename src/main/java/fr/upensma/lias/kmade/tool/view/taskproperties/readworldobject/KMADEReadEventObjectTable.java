@@ -33,87 +33,83 @@ import fr.upensma.lias.kmade.tool.viewadaptator.EventAdaptator;
  * @author Mickael BARON
  */
 public class KMADEReadEventObjectTable extends JScrollPane {
-    private static final long serialVersionUID = 465521L;
+	private static final long serialVersionUID = 465521L;
 
-    private MyReadEventTableModel modele;
+	private MyReadEventTableModel modele;
 
-    private JTable table;
+	private JTable table;
 
-    public KMADEReadEventObjectTable() {
-	modele = new MyReadEventTableModel();
-	table = new KMADEJTable(modele);
-	this.setViewportView(table);
-	table.addMouseListener(new mouseHelpListener());
-	table.getSelectionModel().setSelectionMode(
-		ListSelectionModel.SINGLE_SELECTION);
-	this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
-    }
-
-    /**
-     * Constructeur avec deux param�tres qui permet de ne pas mettre le
-     * mouseListener qui ajout des �v�nerments g�n�r�s
-     * 
-     * @param obj
-     * @param editable
-     */
-    public KMADEReadEventObjectTable(KMADEReadEventObjectTable obj,
-	    boolean editable) {
-	modele = obj.modele;
-	table = new KMADEJTable(obj.modele);
-	this.setViewportView(table);
-	if (editable) {
-	    table.addMouseListener(new mouseHelpListener());
-	}
-	table.getSelectionModel().setSelectionMode(
-		ListSelectionModel.SINGLE_SELECTION);
-	this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
-    }
-
-    public void setData(Object[][] tab) {
-	modele.setData(tab);
-	modele.fireTableDataChanged();
-    }
-
-    static class MyReadEventTableModel extends AbstractTableModel {
-	private static final long serialVersionUID = 6638234406364874255L;
-
-	private Object[][] data = new Object[0][];
-
-	public int getColumnCount() {
-	    return 2;
+	public KMADEReadEventObjectTable() {
+		modele = new MyReadEventTableModel();
+		table = new KMADEJTable(modele);
+		this.setViewportView(table);
+		table.addMouseListener(new mouseHelpListener());
+		table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
 	}
 
-	public int getRowCount() {
-	    return data.length;
+	/**
+	 * Constructeur avec deux param�tres qui permet de ne pas mettre le
+	 * mouseListener qui ajout des �v�nerments g�n�r�s
+	 * 
+	 * @param obj
+	 * @param editable
+	 */
+	public KMADEReadEventObjectTable(KMADEReadEventObjectTable obj, boolean editable) {
+		modele = obj.modele;
+		table = new KMADEJTable(obj.modele);
+		this.setViewportView(table);
+		if (editable) {
+			table.addMouseListener(new mouseHelpListener());
+		}
+		table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
 	}
 
-	public Object getValueAt(int param, int param1) {
-	    return data[param][param1];
+	public void setData(Object[][] tab) {
+		modele.setData(tab);
+		modele.fireTableDataChanged();
 	}
 
-	public String getColumnName(int i) {
-	    switch (i) {
-	    case 0:
-		return KMADEConstant.EVENT_NAME_TABLE;
-	    case 1:
-		return KMADEConstant.EVENT_DESCRIPTION_TABLE;
-	    default:
-		return "";
-	    }
+	static class MyReadEventTableModel extends AbstractTableModel {
+		private static final long serialVersionUID = 6638234406364874255L;
+
+		private Object[][] data = new Object[0][];
+
+		public int getColumnCount() {
+			return 2;
+		}
+
+		public int getRowCount() {
+			return data.length;
+		}
+
+		public Object getValueAt(int param, int param1) {
+			return data[param][param1];
+		}
+
+		public String getColumnName(int i) {
+			switch (i) {
+			case 0:
+				return KMADEConstant.EVENT_NAME_TABLE;
+			case 1:
+				return KMADEConstant.EVENT_DESCRIPTION_TABLE;
+			default:
+				return "";
+			}
+		}
+
+		public void setData(Object[][] data) {
+			this.data = data;
+		}
 	}
 
-	public void setData(Object[][] data) {
-	    this.data = data;
+	class mouseHelpListener extends MouseAdapter {
+		public void mouseClicked(MouseEvent mouseEvent) {
+			if (mouseEvent.getClickCount() == 2) {
+				String select = (String) table.getModel().getValueAt(table.getSelectedRow(), 0);
+				EventAdaptator.addNewEventInSelectedTask(select);
+			}
+		}
 	}
-    }
-
-    class mouseHelpListener extends MouseAdapter {
-	public void mouseClicked(MouseEvent mouseEvent) {
-	    if (mouseEvent.getClickCount() == 2) {
-		String select = (String) table.getModel().getValueAt(
-			table.getSelectedRow(), 0);
-		EventAdaptator.addNewEventInSelectedTask(select);
-	    }
-	}
-    }
 }

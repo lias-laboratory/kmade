@@ -30,119 +30,106 @@ import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadE
  */
 public final class EventAdaptator {
 
-    private static final KMADEReadEventObjectTable eventPanel = new KMADEReadEventObjectTable();
+	private static final KMADEReadEventObjectTable eventPanel = new KMADEReadEventObjectTable();
 
-    public static int origine = 0;
+	public static int origine = 0;
 
-    public static void disabledFrame() {
-	GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
-	TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
-    }
-
-    public static void editedFromEnhancedFrame() {
-	origine = 1;
-    }
-
-    public static void enabledFrame() {
-	GraphicEditorAdaptator.enabledMainFrameAfterEdition();
-	TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
-	if (origine == 0) {
-	    GraphicEditorAdaptator.requestFocus();
-	} else {
-	    TaskPropertiesEnhancedEditorAdaptator.requestFocus();
+	public static void disabledFrame() {
+		GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
+		TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
 	}
-	origine = 0;
-    }
 
-    public static void removeAllEvent() {
-	GraphicEditorAdaptator.getEventObjectPanel().removeAllEvent();
-    }
-
-    public static KMADEReadEventObjectTable getEventReadPanel() {
-	return eventPanel;
-    }
-
-    public static String addEvent() {
-	return ExpressEvent.createEvent();
-    }
-
-    public static String setEventName(String oid, String name) {
-	return ExpressEvent.setEventName(oid, name);
-    }
-
-    public static void setEventDescription(String oid, String description) {
-	ExpressEvent.setEventDescription(oid, description);
-    }
-
-    public static void removeEvent(String oid) {
-	ExpressEvent.removeEvent(oid);
-    }
-
-    public static void affRemoveEvent(String oid) {
-	ExpressEvent.affRemoveEvent(oid);
-    }
-
-    public static ArrayList<String> getEventsName() {
-	ArrayList<String> myEventsName = ExpressEvent.getEventsName();
-	return myEventsName;
-    }
-
-    public static void refreshReadEventTable() {
-	ArrayList<Event> myEvent = ExpressEvent.getEvents();
-	Object[][] myTab = new Object[myEvent.size()][2];
-	for (int i = 0; i < myEvent.size(); i++) {
-	    myTab[i][0] = myEvent.get(i).getName();
-	    myTab[i][1] = myEvent.get(i).getDescription();
+	public static void editedFromEnhancedFrame() {
+		origine = 1;
 	}
-	eventPanel.setData(myTab);
-    }
 
-    public static void updateEventView() {
-	ArrayList<Event> myList = ExpressEvent.getEvents();
-	for (int i = 0; i < myList.size(); i++) {
-	    GraphicEditorAdaptator.getEventObjectPanel().addEvent(
-		    myList.get(i).getName(), myList.get(i).getDescription(),
-		    myList.get(i).getOid().get());
+	public static void enabledFrame() {
+		GraphicEditorAdaptator.enabledMainFrameAfterEdition();
+		TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
+		if (origine == 0) {
+			GraphicEditorAdaptator.requestFocus();
+		} else {
+			TaskPropertiesEnhancedEditorAdaptator.requestFocus();
+		}
+		origine = 0;
 	}
-    }
 
-    // Association Tâches et Caractéristique
-    public static boolean setEventInSelectedTask(String oldEvent,
-	    String newEvent) {
-	return ExpressTask.setEventTask(
-		GraphicEditorAdaptator.getSelectedExpressTask(), oldEvent,
-		newEvent);
-    }
-
-    public static void addNewEventInSelectedTask(String name) {
-	if (ExpressTask.addNewEventTask(
-		GraphicEditorAdaptator.getSelectedExpressTask(), name)) {
-	    KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		    .addNewEvent(name);
+	public static void removeAllEvent() {
+		GraphicEditorAdaptator.getEventObjectPanel().removeAllEvent();
 	}
-    }
 
-    public static void removeEventIntoSelectedTask(String res) {
-	ExpressTask.removeEventTask(
-		GraphicEditorAdaptator.getSelectedExpressTask(), res);
-    }
+	public static KMADEReadEventObjectTable getEventReadPanel() {
+		return eventPanel;
+	}
 
-    public static ArrayList<String> getEventsNameInSelectedTask() {
-	return GraphicEditorAdaptator.getSelectedGraphicTask().getTask()
-		.getEventsName();
-    }
+	public static String addEvent() {
+		return ExpressEvent.createEvent();
+	}
 
-    public static void affRemoveEventInSelectedTask(String maValue) {
-	ExpressTask.affRemoveEvent(
-		GraphicEditorAdaptator.getSelectedExpressTask(), maValue);
-    }
+	public static String setEventName(String oid, String name) {
+		return ExpressEvent.setEventName(oid, name);
+	}
 
-    public static void setFiredEventsInSelectedTask() {
-	KMADEMainFrame
-		.getProjectPanel()
-		.getPanelProprieteTache()
-		.setFiredEventsInModel(
-			GraphicEditorAdaptator.getSelectedGraphicTask()
-				.getTask().getEventsName());
-    }
+	public static void setEventDescription(String oid, String description) {
+		ExpressEvent.setEventDescription(oid, description);
+	}
+
+	public static void removeEvent(String oid) {
+		ExpressEvent.removeEvent(oid);
+	}
+
+	public static void affRemoveEvent(String oid) {
+		ExpressEvent.affRemoveEvent(oid);
+	}
+
+	public static ArrayList<String> getEventsName() {
+		ArrayList<String> myEventsName = ExpressEvent.getEventsName();
+		return myEventsName;
+	}
+
+	public static void refreshReadEventTable() {
+		ArrayList<Event> myEvent = ExpressEvent.getEvents();
+		Object[][] myTab = new Object[myEvent.size()][2];
+		for (int i = 0; i < myEvent.size(); i++) {
+			myTab[i][0] = myEvent.get(i).getName();
+			myTab[i][1] = myEvent.get(i).getDescription();
+		}
+		eventPanel.setData(myTab);
+	}
+
+	public static void updateEventView() {
+		ArrayList<Event> myList = ExpressEvent.getEvents();
+		for (int i = 0; i < myList.size(); i++) {
+			GraphicEditorAdaptator.getEventObjectPanel().addEvent(myList.get(i).getName(),
+					myList.get(i).getDescription(), myList.get(i).getOid().get());
+		}
+	}
+
+	// Association Tâches et Caractéristique
+	public static boolean setEventInSelectedTask(String oldEvent, String newEvent) {
+		return ExpressTask.setEventTask(GraphicEditorAdaptator.getSelectedExpressTask(), oldEvent, newEvent);
+	}
+
+	public static void addNewEventInSelectedTask(String name) {
+		if (ExpressTask.addNewEventTask(GraphicEditorAdaptator.getSelectedExpressTask(), name)) {
+			KMADEMainFrame.getProjectPanel().getPanelProprieteTache().addNewEvent(name);
+		}
+	}
+
+	public static void removeEventIntoSelectedTask(String res) {
+		ExpressTask.removeEventTask(GraphicEditorAdaptator.getSelectedExpressTask(), res);
+	}
+
+	public static ArrayList<String> getEventsNameInSelectedTask() {
+		return GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getEventsName();
+	}
+
+	public static void affRemoveEventInSelectedTask(String maValue) {
+		ExpressTask.affRemoveEvent(GraphicEditorAdaptator.getSelectedExpressTask(), maValue);
+	}
+
+	public static void setFiredEventsInSelectedTask() {
+		KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
+				.setFiredEventsInModel(GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getEventsName());
+	}
 }

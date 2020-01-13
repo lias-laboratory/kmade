@@ -26,41 +26,39 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class MinusComputing extends ComputingOperator {
 
-    private static final long serialVersionUID = 5691133096293444148L;
+	private static final long serialVersionUID = 5691133096293444148L;
 
-    public MinusComputing(NodeExpression left, NodeExpression right) {
-	super(left, right);
-	this.name = ExpressConstant.MINUS_COMPUTING_EXPRESSION;
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-
-	if (this.getLeftNode().isNumber() && this.getRightNode().isNumber()) {
-	    this.setNodeType(new NumberValue(0));
-	    return;
+	public MinusComputing(NodeExpression left, NodeExpression right) {
+		super(left, right);
+		this.name = ExpressConstant.MINUS_COMPUTING_EXPRESSION;
 	}
 
-	this.setStateToError();
-	throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR
-		+ " : " + this.name);
-    }
+	public void checkNode() throws SemanticException {
+		super.checkNode();
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
+		if (this.getLeftNode().isNumber() && this.getRightNode().isNumber()) {
+			this.setNodeType(new NumberValue(0));
+			return;
+		}
 
-	if (this.isErrorState()) {
-	    throw new SemanticErrorException();
+		this.setStateToError();
+		throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
 	}
 
-	if (this.isUnknownState()) {
-	    throw new SemanticUnknownException();
-	}
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
 
-	if (getLeftNode().isNumber() && getRightNode().isNumber()) {
-	    this.setNodeValue(((NumberValue) getLeftNode().getNodeValue())
-		    .minusComputing((((NumberValue) getRightNode()
-			    .getNodeValue()))));
+		if (this.isErrorState()) {
+			throw new SemanticErrorException();
+		}
+
+		if (this.isUnknownState()) {
+			throw new SemanticUnknownException();
+		}
+
+		if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+			this.setNodeValue(((NumberValue) getLeftNode().getNodeValue())
+					.minusComputing((((NumberValue) getRightNode().getNodeValue()))));
+		}
 	}
-    }
 }

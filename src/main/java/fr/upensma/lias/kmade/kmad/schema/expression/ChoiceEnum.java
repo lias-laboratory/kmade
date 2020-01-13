@@ -21,5 +21,5 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  * @author Thomas LACHAUME
  */
 public enum ChoiceEnum {
-    vrai, faux, indeterminee;
+	vrai, faux, indeterminee;
 }

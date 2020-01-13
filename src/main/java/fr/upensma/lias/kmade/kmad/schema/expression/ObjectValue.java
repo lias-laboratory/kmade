@@ -26,90 +26,89 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.NumberValue;
  */
 public class ObjectValue implements Serializable {
 
-    private static final long serialVersionUID = 2135584525822886070L;
+	private static final long serialVersionUID = 2135584525822886070L;
 
-    private Object objectValue;
+	private Object objectValue;
 
-    private int stateObjectValue;
+	private int stateObjectValue;
 
-    public ObjectValue() {
-	objectValue = null;
-	this.stateObjectValue = ExpressionConstant.UNKNOWN;
-    }
-
-    public ObjectValue(Object myValue) {
-	this.objectValue = myValue;
-	this.stateObjectValue = ExpressionConstant.UNKNOWN;
-    }
-
-    /**
-     * @return Returns the objectValue.
-     */
-    public Object getObjectValue() {
-	return objectValue;
-    }
-
-    public void setObjectValueState(int p) {
-	this.stateObjectValue = p;
-    }
-
-    public int getObjectValueState() {
-	return this.stateObjectValue;
-    }
-
-    /**
-     * @param objectValue
-     *            The objectValue to set.
-     */
-    public void setObjectValue(Object objectValue) {
-	this.objectValue = objectValue;
-    }
-
-    public boolean isStringType() {
-	return (objectValue instanceof String);
-    }
-
-    // Retourne si le type est NumberValue, si le type est Integer il le
-    // transforme en NumberValue
-    public boolean isNumberType() {
-	if (objectValue instanceof Integer) {
-	    objectValue = new NumberValue((Integer) objectValue);
+	public ObjectValue() {
+		objectValue = null;
+		this.stateObjectValue = ExpressionConstant.UNKNOWN;
 	}
-	if (objectValue instanceof Double) {
-	    objectValue = new NumberValue((Double) objectValue);
+
+	public ObjectValue(Object myValue) {
+		this.objectValue = myValue;
+		this.stateObjectValue = ExpressionConstant.UNKNOWN;
 	}
-	return ((objectValue instanceof NumberValue));
-    }
 
-    public boolean isBooleanType() {
-	return (objectValue instanceof Boolean);
-    }
+	/**
+	 * @return Returns the objectValue.
+	 */
+	public Object getObjectValue() {
+		return objectValue;
+	}
 
-    public boolean isUnknownState() {
-	return stateObjectValue == ExpressionConstant.UNKNOWN;
-    }
+	public void setObjectValueState(int p) {
+		this.stateObjectValue = p;
+	}
 
-    public boolean isErrorState() {
-	return stateObjectValue == ExpressionConstant.ERROR;
-    }
+	public int getObjectValueState() {
+		return this.stateObjectValue;
+	}
 
-    public boolean isValueState() {
-	return stateObjectValue == ExpressionConstant.VALUE;
-    }
+	/**
+	 * @param objectValue The objectValue to set.
+	 */
+	public void setObjectValue(Object objectValue) {
+		this.objectValue = objectValue;
+	}
 
-    public void setStateToValue() {
-	stateObjectValue = ExpressionConstant.VALUE;
-    }
+	public boolean isStringType() {
+		return (objectValue instanceof String);
+	}
 
-    public void setStateToUnknown() {
-	stateObjectValue = ExpressionConstant.UNKNOWN;
-    }
+	// Retourne si le type est NumberValue, si le type est Integer il le
+	// transforme en NumberValue
+	public boolean isNumberType() {
+		if (objectValue instanceof Integer) {
+			objectValue = new NumberValue((Integer) objectValue);
+		}
+		if (objectValue instanceof Double) {
+			objectValue = new NumberValue((Double) objectValue);
+		}
+		return ((objectValue instanceof NumberValue));
+	}
 
-    public void setStateToError() {
-	stateObjectValue = ExpressionConstant.ERROR;
-    }
+	public boolean isBooleanType() {
+		return (objectValue instanceof Boolean);
+	}
 
-    public String toString() {
-	return objectValue.toString();
-    }
+	public boolean isUnknownState() {
+		return stateObjectValue == ExpressionConstant.UNKNOWN;
+	}
+
+	public boolean isErrorState() {
+		return stateObjectValue == ExpressionConstant.ERROR;
+	}
+
+	public boolean isValueState() {
+		return stateObjectValue == ExpressionConstant.VALUE;
+	}
+
+	public void setStateToValue() {
+		stateObjectValue = ExpressionConstant.VALUE;
+	}
+
+	public void setStateToUnknown() {
+		stateObjectValue = ExpressionConstant.UNKNOWN;
+	}
+
+	public void setStateToError() {
+		stateObjectValue = ExpressionConstant.ERROR;
+	}
+
+	public String toString() {
+		return objectValue.toString();
+	}
 }

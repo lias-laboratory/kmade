@@ -30,48 +30,45 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
  */
 public class EntityListAdaptator {
 
-    private static SwingWorker worker;
+	private static SwingWorker worker;
 
-    public static void openEntityListDialog() {
-	EntityListAdaptator.startEntityList();
-	GraphicEditorAdaptator.getMainFrame().getEntityDialog()
-		.setVisible(true);
-    }
-
-    public static void stopEntityList() {
-	if (worker != null) {
-	    worker.interrupt();
+	public static void openEntityListDialog() {
+		EntityListAdaptator.startEntityList();
+		GraphicEditorAdaptator.getMainFrame().getEntityDialog().setVisible(true);
 	}
-    }
 
-    public static void startEntityList() {
-	if (worker != null) {
-	    worker.interrupt();
-	    worker = null;
+	public static void stopEntityList() {
+		if (worker != null) {
+			worker.interrupt();
+		}
 	}
-	worker = new SwingWorker() {
-	    public Object construct() {
-		displayEntityList();
-		return null;
-	    }
-	};
-	worker.start();
-    }
 
-    private static synchronized void displayEntityList() {
-	Set<Oid> set = InterfaceExpressJava.bdd.keySet();
-	GraphicEditorAdaptator.getMainFrame().getEntityDialog().clearTextArea();
-
-	for (Iterator<Oid> i = set.iterator(); i.hasNext();) {
-	    Oid oid = i.next();
-	    Object o = InterfaceExpressJava.bdd.prendre(oid);
-	    GraphicEditorAdaptator.getMainFrame().getEntityDialog()
-		    .writeInTextArea(((Entity) o).toSPF());
+	public static void startEntityList() {
+		if (worker != null) {
+			worker.interrupt();
+			worker = null;
+		}
+		worker = new SwingWorker() {
+			public Object construct() {
+				displayEntityList();
+				return null;
+			}
+		};
+		worker.start();
 	}
-    }
 
-    public static void closeEntityListDialog() {
-	GraphicEditorAdaptator.getMainFrame().getEntityDialog()
-		.setVisible(false);
-    }
+	private static synchronized void displayEntityList() {
+		Set<Oid> set = InterfaceExpressJava.bdd.keySet();
+		GraphicEditorAdaptator.getMainFrame().getEntityDialog().clearTextArea();
+
+		for (Iterator<Oid> i = set.iterator(); i.hasNext();) {
+			Oid oid = i.next();
+			Object o = InterfaceExpressJava.bdd.prendre(oid);
+			GraphicEditorAdaptator.getMainFrame().getEntityDialog().writeInTextArea(((Entity) o).toSPF());
+		}
+	}
+
+	public static void closeEntityListDialog() {
+		GraphicEditorAdaptator.getMainFrame().getEntityDialog().setVisible(false);
+	}
 }

@@ -28,48 +28,43 @@ import fr.upensma.lias.kmade.tool.view.worldobject.abstractobject.KMADEReadWrite
  */
 public final class EnumAdaptator {
 
-    public static void removeEnum(String oid) {
-	ExpressEnum.removeEnum(oid);
-    }
-
-    public static void removeAllEnum() {
-	KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-		.getEnumPanel().removeAllEnum();
-    }
-
-    public static void affRemoveEnumeration(String oid) {
-	ExpressEnum.affRemoveEnum(oid);
-    }
-
-    /**
-     * Cette méthode permet de communiquer avec Express pour créer un objet
-     * abstrait et retourne l'OID du nouvel objet.
-     */
-    public static String addEnum() {
-	String temp = ExpressEnum.createEnum();
-	ReadConcreteObjectAdaptator.updateReadConcreteObject();
-	return temp;
-    }
-
-    public static String setEnumName(String oid, String name) {
-	String n = ExpressEnum.setEnumName(oid, name);
-	ReadConcreteObjectAdaptator.updateReadConcreteObject();
-	return n;
-    }
-
-    public static void setEnumDescription(String oid, String Description) {
-	ExpressEnum.setEnumDescription(oid, Description);
-    }
-
-    public static void updateEnumView() {
-	ArrayList<Enumeration> myList = ExpressEnum.getEnums();
-	for (int i = 0; i < myList.size(); i++) {
-	    KMADEReadWriteAbstractTypeObjectPanel
-		    .getEnumIntervalEditor()
-		    .getEnumPanel()
-		    .addEnum(myList.get(i).getName(),
-			    myList.get(i).getDescription(),
-			    myList.get(i).getOid().get());
+	public static void removeEnum(String oid) {
+		ExpressEnum.removeEnum(oid);
 	}
-    }
+
+	public static void removeAllEnum() {
+		KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().getEnumPanel().removeAllEnum();
+	}
+
+	public static void affRemoveEnumeration(String oid) {
+		ExpressEnum.affRemoveEnum(oid);
+	}
+
+	/**
+	 * Cette méthode permet de communiquer avec Express pour créer un objet abstrait
+	 * et retourne l'OID du nouvel objet.
+	 */
+	public static String addEnum() {
+		String temp = ExpressEnum.createEnum();
+		ReadConcreteObjectAdaptator.updateReadConcreteObject();
+		return temp;
+	}
+
+	public static String setEnumName(String oid, String name) {
+		String n = ExpressEnum.setEnumName(oid, name);
+		ReadConcreteObjectAdaptator.updateReadConcreteObject();
+		return n;
+	}
+
+	public static void setEnumDescription(String oid, String Description) {
+		ExpressEnum.setEnumDescription(oid, Description);
+	}
+
+	public static void updateEnumView() {
+		ArrayList<Enumeration> myList = ExpressEnum.getEnums();
+		for (int i = 0; i < myList.size(); i++) {
+			KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().getEnumPanel()
+					.addEnum(myList.get(i).getName(), myList.get(i).getDescription(), myList.get(i).getOid().get());
+		}
+	}
 }

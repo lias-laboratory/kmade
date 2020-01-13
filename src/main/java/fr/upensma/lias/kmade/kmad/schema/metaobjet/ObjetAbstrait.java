@@ -30,7 +30,7 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.tache.Point;
 
 /**
- * @author Delphine AUTARD 
+ * @author Delphine AUTARD
  * @author Mickael BARON
  */
 public class ObjetAbstrait implements Entity {
@@ -121,7 +121,7 @@ public class ObjetAbstrait implements Entity {
 	}
 
 	public void addInverseObjConc(ObjetConcret ObjConc) {
-		if(!inverseObjConcDe.contains(ObjConc))
+		if (!inverseObjConcDe.contains(ObjConc))
 			inverseObjConcDe.add(ObjConc);
 	}
 
@@ -166,15 +166,14 @@ public class ObjetAbstrait implements Entity {
 		this.name = nodeList.item(0).getTextContent();
 
 		nodeList = p.getElementsByTagName("abstractobject-description");
-		
+
 		if (nodeList.item(0) != null) {
 			this.description = nodeList.item(0).getTextContent();
 		}
 	}
 
 	public String toSPF() {
-		return (this.oid.get() + "=" + "ObjetAbstrait" + "(" + "'" + name + "'"
-				+ "," + "'" + description + "'" + ")");
+		return (this.oid.get() + "=" + "ObjetAbstrait" + "(" + "'" + name + "'" + "," + "'" + description + "'" + ")");
 	}
 
 	public void setOid(Oid oid) {
@@ -214,8 +213,8 @@ public class ObjetAbstrait implements Entity {
 	}
 
 	public static boolean isUniqueName(String s) {
-		Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-				ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.ABSTRACT_OBJECT_CLASS);
+		Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.ABSTRACT_OBJECT_CLASS);
 		for (int i = 0; i < objAbs.length; i++) {
 			ObjetAbstrait obj = (ObjetAbstrait) objAbs[i];
 			if (s.equalsIgnoreCase(obj.name)) {
@@ -258,8 +257,8 @@ public class ObjetAbstrait implements Entity {
 	@Override
 	public Element toXML2(Document doc) throws Exception {
 //		inverseObjConcDe.clear();
-	//	inverseAttributsAbs.clear();
-	//	inverseGroupe.clear();
+		// inverseAttributsAbs.clear();
+		// inverseGroupe.clear();
 		Element racine = doc.createElement("abstractobject");
 		try {
 			racine.setAttribute("classkmad", "metaobjet.ObjetAbstrait");
@@ -275,7 +274,7 @@ public class ObjetAbstrait implements Entity {
 				racine.appendChild(element);
 			}
 
-			//Add the object's attributes as childs
+			// Add the object's attributes as childs
 			if (!this.inverseGroupe.isEmpty()) {
 				for (int i = 0; i < this.inverseGroupe.size(); i++) {
 					racine.appendChild(this.inverseGroupe.get(i).toXML2(doc));
@@ -294,7 +293,7 @@ public class ObjetAbstrait implements Entity {
 				}
 			}
 
-			if(this.point != null){
+			if (this.point != null) {
 				racine.setAttribute("id-task-point", this.point.getOid().get());
 				racine.appendChild(this.point.toXML2(doc));
 			}
@@ -310,20 +309,18 @@ public class ObjetAbstrait implements Entity {
 	@Override
 	public void createObjectFromXMLElement2(Element p) throws Exception {
 //	inverseObjConcDe.clear();
-	//	inverseAttributsAbs.clear();
-	//	inverseGroupe.clear();
+		// inverseAttributsAbs.clear();
+		// inverseGroupe.clear();
 		try {
 			createObjectFromXMLElement(p);
 			// Point
-			if (p.hasAttribute("id-task-point")){
-				this.point = (Point) InterfaceExpressJava.bdd.prendre(new Oid(p
-						.getAttribute("id-task-point")));
-			}
-			else 
+			if (p.hasAttribute("id-task-point")) {
+				this.point = (Point) InterfaceExpressJava.bdd.prendre(new Oid(p.getAttribute("id-task-point")));
+			} else
 				this.point = null;
 			NodeList nodeList = p.getElementsByTagName("groupe");
-			if(nodeList !=null){
-			//	Groupe.createObjectFromXMLElement2((Element) nodeList);
+			if (nodeList != null) {
+				// Groupe.createObjectFromXMLElement2((Element) nodeList);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -334,7 +331,7 @@ public class ObjetAbstrait implements Entity {
 
 	@Override
 	public boolean oidIsAnyMissing2(Element p) throws Exception {
-		if(p.hasAttribute("id-task-point")){
+		if (p.hasAttribute("id-task-point")) {
 			String nodeList = p.getAttribute("id-task-point");
 			if (InterfaceExpressJava.bdd.prendre(new Oid(nodeList)) == null) {
 				return true;

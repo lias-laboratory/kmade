@@ -24,11 +24,11 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
  */
 public class NumberConstant extends ConstantExpression {
 
-    private static final long serialVersionUID = 322901053601096866L;
+	private static final long serialVersionUID = 322901053601096866L;
 
-    public NumberConstant(Object myValue) {
-	super(myValue);
-	this.setStateToValue();
-	this.name = ExpressConstant.INTEGER_CONSTANT_EXPRESSION;
-    }
+	public NumberConstant(Object myValue) {
+		super(myValue);
+		this.setStateToValue();
+		this.name = ExpressConstant.INTEGER_CONSTANT_EXPRESSION;
+	}
 }

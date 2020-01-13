@@ -24,112 +24,111 @@ import org.w3c.dom.NodeList;
 import fr.upensma.lias.kmade.kmad.ExpressConstant;
 
 /**
- * @author Delphine AUTARD 
+ * @author Delphine AUTARD
  * @author Mickael BARON
  */
 public enum Frequence implements Enumerated {
-    INCONNU("UNK"), ELEVE("HIGH"), MOYENNE("AVERAGE"), FAIBLE("LOW");
+	INCONNU("UNK"), ELEVE("HIGH"), MOYENNE("AVERAGE"), FAIBLE("LOW");
 
-    private final String value;
+	private final String value;
 
-    private Frequence(String s) {
-	value = s;
-    }
-
-    public String getValue() {
-	return value;
-    }
-
-    public String toString() {
-	return Frequence.getEnumereIntoLocaleFrequence(value);
-    }
-
-    public static Frequence getValue(String s) {
-	for (Frequence i : Frequence.values()) {
-	    if (s.equalsIgnoreCase(i.value)) {
-		return i;
-	    }
+	private Frequence(String s) {
+		value = s;
 	}
-	return null;
-    }
 
-    public static Frequence getXMLFrequenceValue(org.w3c.dom.Element p) {
-	NodeList nodeList = p.getElementsByTagName("task-frequency");
-	if (nodeList.item(0) == null) {
-	    return INCONNU;
+	public String getValue() {
+		return value;
 	}
-	String value = (String) nodeList.item(0).getTextContent();
 
-	for (Frequence i : Frequence.values()) {
-	    if (value.equalsIgnoreCase(i.value)) {
-		return i;
-	    }
+	public String toString() {
+		return Frequence.getEnumereIntoLocaleFrequence(value);
 	}
-	return INCONNU;
-    }
 
-    public static String[] getNameLocaleFrequence() {
-	String[] myFrequenceArray = new String[4];
-	myFrequenceArray[0] = ExpressConstant.UNKNOWN_FREQUENCY_NAME;
-	myFrequenceArray[1] = ExpressConstant.HIGH_FREQUENCY_NAME;
-	myFrequenceArray[2] = ExpressConstant.AVERAGE_FREQUENCY_NAME;
-	myFrequenceArray[3] = ExpressConstant.LOW_FREQUENCY_NAME;
-	return myFrequenceArray;
-    }
-
-    public static String getEnumereIntoLocaleFrequence(String freq) {
-	if (freq.equals("UNK"))
-	    return ExpressConstant.UNKNOWN_FREQUENCY_NAME;
-	else if (freq.equals("HIGH"))
-	    return ExpressConstant.HIGH_FREQUENCY_NAME;
-	else if (freq.equals("AVERAGE"))
-	    return ExpressConstant.AVERAGE_FREQUENCY_NAME;
-	else if (freq.equals("LOW"))
-	    return ExpressConstant.LOW_FREQUENCY_NAME;
-	else
-	    return ExpressConstant.UNKNOWN_FREQUENCY_NAME;
-    }
-
-    public static String getLocaleFrequenceIntoEnumerate(String frequence) {
-	if (frequence.equals(ExpressConstant.UNKNOWN_FREQUENCY_NAME)) {
-	    return "UNK";
-	} else if (frequence.equals(ExpressConstant.HIGH_FREQUENCY_NAME)) {
-	    return "HIGH";
-	} else if (frequence.equals(ExpressConstant.AVERAGE_FREQUENCY_NAME)) {
-	    return "AVERAGE";
-	} else if (frequence.equals(ExpressConstant.LOW_FREQUENCY_NAME)) {
-	    return "LOW";
+	public static Frequence getValue(String s) {
+		for (Frequence i : Frequence.values()) {
+			if (s.equalsIgnoreCase(i.value)) {
+				return i;
+			}
+		}
+		return null;
 	}
-	return "UNK";
-    }
 
-    @Override
-    public org.w3c.dom.Element toXML2(Document doc) {
-	Element kmadTaskFrequency = doc.createElement("task-frequency");
-	kmadTaskFrequency.setTextContent(this.value);
-	return kmadTaskFrequency;
-    }
+	public static Frequence getXMLFrequenceValue(org.w3c.dom.Element p) {
+		NodeList nodeList = p.getElementsByTagName("task-frequency");
+		if (nodeList.item(0) == null) {
+			return INCONNU;
+		}
+		String value = (String) nodeList.item(0).getTextContent();
 
-    public String toSPF() {
-	return "." + value + ".";
-    }
-
-    public static Frequence getXMLFrequenceValue2(Element p) {
-	NodeList nodeList = p.getElementsByTagName("task-frequency");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    return INCONNU;
+		for (Frequence i : Frequence.values()) {
+			if (value.equalsIgnoreCase(i.value)) {
+				return i;
+			}
+		}
+		return INCONNU;
 	}
-	if (nodeList.item(0) == null) {
-	    return INCONNU;
-	}
-	String value = (String) nodeList.item(0).getTextContent();
 
-	for (Frequence i : Frequence.values()) {
-	    if (value.equalsIgnoreCase(i.value)) {
-		return i;
-	    }
+	public static String[] getNameLocaleFrequence() {
+		String[] myFrequenceArray = new String[4];
+		myFrequenceArray[0] = ExpressConstant.UNKNOWN_FREQUENCY_NAME;
+		myFrequenceArray[1] = ExpressConstant.HIGH_FREQUENCY_NAME;
+		myFrequenceArray[2] = ExpressConstant.AVERAGE_FREQUENCY_NAME;
+		myFrequenceArray[3] = ExpressConstant.LOW_FREQUENCY_NAME;
+		return myFrequenceArray;
 	}
-	return INCONNU;
-    }
+
+	public static String getEnumereIntoLocaleFrequence(String freq) {
+		if (freq.equals("UNK"))
+			return ExpressConstant.UNKNOWN_FREQUENCY_NAME;
+		else if (freq.equals("HIGH"))
+			return ExpressConstant.HIGH_FREQUENCY_NAME;
+		else if (freq.equals("AVERAGE"))
+			return ExpressConstant.AVERAGE_FREQUENCY_NAME;
+		else if (freq.equals("LOW"))
+			return ExpressConstant.LOW_FREQUENCY_NAME;
+		else
+			return ExpressConstant.UNKNOWN_FREQUENCY_NAME;
+	}
+
+	public static String getLocaleFrequenceIntoEnumerate(String frequence) {
+		if (frequence.equals(ExpressConstant.UNKNOWN_FREQUENCY_NAME)) {
+			return "UNK";
+		} else if (frequence.equals(ExpressConstant.HIGH_FREQUENCY_NAME)) {
+			return "HIGH";
+		} else if (frequence.equals(ExpressConstant.AVERAGE_FREQUENCY_NAME)) {
+			return "AVERAGE";
+		} else if (frequence.equals(ExpressConstant.LOW_FREQUENCY_NAME)) {
+			return "LOW";
+		}
+		return "UNK";
+	}
+
+	@Override
+	public org.w3c.dom.Element toXML2(Document doc) {
+		Element kmadTaskFrequency = doc.createElement("task-frequency");
+		kmadTaskFrequency.setTextContent(this.value);
+		return kmadTaskFrequency;
+	}
+
+	public String toSPF() {
+		return "." + value + ".";
+	}
+
+	public static Frequence getXMLFrequenceValue2(Element p) {
+		NodeList nodeList = p.getElementsByTagName("task-frequency");
+		if (nodeList != null && nodeList.item(0) != null && nodeList.item(0).getParentNode() != p) {
+			return INCONNU;
+		}
+		if (nodeList.item(0) == null) {
+			return INCONNU;
+		}
+		String value = (String) nodeList.item(0).getTextContent();
+
+		for (Frequence i : Frequence.values()) {
+			if (value.equalsIgnoreCase(i.value)) {
+				return i;
+			}
+		}
+		return INCONNU;
+	}
 }

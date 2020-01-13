@@ -33,82 +33,78 @@ import fr.upensma.lias.kmade.kmad.schema.Entity;
  */
 public abstract class ObjectDefaultGraphCell extends DefaultGraphCell {
 
-    private static final long serialVersionUID = 1388699310236979117L;
+	private static final long serialVersionUID = 1388699310236979117L;
 
-    protected Entity object;
+	protected Entity object;
 
-    /**
-     * Constructor for the cell
-     * 
-     * @param object
-     *            represented by the cell
-     * @param point
-     *            x in the graph
-     * @param point
-     *            y in the graph
-     */
-    public ObjectDefaultGraphCell(Entity o, int x, int y) {
-	super(o.getName());
+	/**
+	 * Constructor for the cell
+	 * 
+	 * @param object represented by the cell
+	 * @param point  x in the graph
+	 * @param point  y in the graph
+	 */
+	public ObjectDefaultGraphCell(Entity o, int x, int y) {
+		super(o.getName());
 
-	this.object = o;
+		this.object = o;
 
-	Map<?, ?> myHashTable = this.getAttributes();
+		Map<?, ?> myHashTable = this.getAttributes();
 
-	GraphConstants.setBounds(myHashTable, new Rectangle2D.Double(x, y, 80,
-		40));
-	GraphConstants.setEditable(myHashTable, false);
-	GraphConstants.setAutoSize(myHashTable, false);
-	GraphConstants.setOpaque(myHashTable, false);
+		GraphConstants.setBounds(myHashTable, new Rectangle2D.Double(x, y, 80, 40));
+		GraphConstants.setEditable(myHashTable, false);
+		GraphConstants.setAutoSize(myHashTable, false);
+		GraphConstants.setOpaque(myHashTable, false);
 
-	this.setAttributes(new AttributeMap(myHashTable));
-    }
+		this.setAttributes(new AttributeMap(myHashTable));
+	}
 
-    /**
-     * @return the cell's width
-     */
-    public double getWidth() {
-	Map<?, ?> myHashTable = this.getAttributes();
-	return GraphConstants.getBounds(myHashTable).getWidth();
-    }
+	/**
+	 * @return the cell's width
+	 */
+	public double getWidth() {
+		Map<?, ?> myHashTable = this.getAttributes();
+		return GraphConstants.getBounds(myHashTable).getWidth();
+	}
 
-    /**
-     * @return the cell height
-     */
-    public double getHeight() {
-	Map<?, ?> myHashTable = this.getAttributes();
-	return GraphConstants.getBounds(myHashTable).getHeight();
-    }
+	/**
+	 * @return the cell height
+	 */
+	public double getHeight() {
+		Map<?, ?> myHashTable = this.getAttributes();
+		return GraphConstants.getBounds(myHashTable).getHeight();
+	}
 
-    /**
-     * @return the object represented by the cell
-     */
-    public Object getObject() {
-	return object;
-    }
+	/**
+	 * @return the object represented by the cell
+	 */
+	public Object getObject() {
+		return object;
+	}
 
-    /**
-     * @return the object's name
-     */
-    public String getName() {
-	return object.getName();
-    }
+	/**
+	 * @return the object's name
+	 */
+	public String getName() {
+		return object.getName();
+	}
 
-    public abstract String getDescription();
+	public abstract String getDescription();
 
-    /**
-     * @return the point x in the graph where the cell is located
-     */
-    public int getX() {
-	Map<?, ?> myHashTable = this.getAttributes();
-	return (int) GraphConstants.getBounds(myHashTable).getX();
-    }
+	/**
+	 * @return the point x in the graph where the cell is located
+	 */
+	public int getX() {
+		Map<?, ?> myHashTable = this.getAttributes();
+		return (int) GraphConstants.getBounds(myHashTable).getX();
+	}
 
-    /**
-     * @return the point y in the graph where the cell is located
-     */
-    public int getY() {
-	Map<?, ?> myHashTable = this.getAttributes();
-	return (int) GraphConstants.getBounds(myHashTable).getY();
-    }
+	/**
+	 * @return the point y in the graph where the cell is located
+	 */
+	public int getY() {
+		Map<?, ?> myHashTable = this.getAttributes();
+		return (int) GraphConstants.getBounds(myHashTable).getY();
+	}
 
 }

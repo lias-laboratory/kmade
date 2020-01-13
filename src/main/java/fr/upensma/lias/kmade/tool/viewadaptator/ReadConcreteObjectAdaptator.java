@@ -25,21 +25,20 @@ import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadC
  */
 public final class ReadConcreteObjectAdaptator {
 
-    private static final KMADEReadConcreteObjectDialog myReadConcreteObject = new KMADEReadConcreteObjectDialog();
+	private static final KMADEReadConcreteObjectDialog myReadConcreteObject = new KMADEReadConcreteObjectDialog();
 
-    public static void showReadConcreteObject() {
-	ReadConcreteObjectAdaptator.updateReadConcreteObject();
-	if (!myReadConcreteObject.isVisible()) {
-	    myReadConcreteObject.setVisible(true);
+	public static void showReadConcreteObject() {
+		ReadConcreteObjectAdaptator.updateReadConcreteObject();
+		if (!myReadConcreteObject.isVisible()) {
+			myReadConcreteObject.setVisible(true);
+		}
 	}
-    }
 
-    public static void closeReadConcreteObjectDialog() {
-	myReadConcreteObject.setVisible(false);
-    }
+	public static void closeReadConcreteObjectDialog() {
+		myReadConcreteObject.setVisible(false);
+	}
 
-    public static void updateReadConcreteObject() {
-	myReadConcreteObject.getAbstractObjectTable().updateView(
-		ExpressAbstractObject.getAbstractObjects());
-    }
+	public static void updateReadConcreteObject() {
+		myReadConcreteObject.getAbstractObjectTable().updateView(ExpressAbstractObject.getAbstractObjects());
+	}
 }

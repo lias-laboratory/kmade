@@ -31,51 +31,49 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
  * @author Mickael BARON
  */
 public class KMADEArrayTypeComboBox extends KMADEGroupTypeComboBox {
-    private static final long serialVersionUID = -5106570507739645552L;
+	private static final long serialVersionUID = -5106570507739645552L;
 
-    private ArrayList<ObjetConcret> refObjetConcret;
+	private ArrayList<ObjetConcret> refObjetConcret;
 
-    private ConcreteObjectType ref;
+	private ConcreteObjectType ref;
 
-    public KMADEArrayTypeComboBox(ConcreteObjectType ref,
-	    ArrayList<ObjetConcret> concreteObjects) {
-	refObjetConcret = concreteObjects;
-	this.ref = ref;
-	Object[] refTab = new Object[refObjetConcret.size() + 1];
-	refTab[0] = KMADEConstant.NO_CONCRETE_OBJECT_GROUPE_NAME;
-	for (int i = 0; i < concreteObjects.size(); i++) {
-	    // on met la liste de 1 à n (numérotation de l'affichage)
-	    refTab[i + 1] = i + 1;
-	}
-	this.setModel(new DefaultComboBoxModel(refTab));
-
-	if (ref.getUserConcreteObject() != null) {
-	    this.setSelectedItem(ref.getUserConcreteObject());
-	} else {
-	    this.setSelectedIndex(0);
-	    ref.setUserConcreteObject(null);
-	}
-
-	this.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		if (KMADEArrayTypeComboBox.this.getSelectedIndex() == 0) {
-		    KMADEArrayTypeComboBox.this.ref.setUserConcreteObject(null);
-		} else {
-		    // l'objet numéro i est à la ième position - 1
-		    ObjetConcret tmp = refObjetConcret.get(-1
-			    + (Integer) KMADEArrayTypeComboBox.this
-				    .getSelectedItem());
-		    KMADEArrayTypeComboBox.this.ref.setUserConcreteObject(tmp);
+	public KMADEArrayTypeComboBox(ConcreteObjectType ref, ArrayList<ObjetConcret> concreteObjects) {
+		refObjetConcret = concreteObjects;
+		this.ref = ref;
+		Object[] refTab = new Object[refObjetConcret.size() + 1];
+		refTab[0] = KMADEConstant.NO_CONCRETE_OBJECT_GROUPE_NAME;
+		for (int i = 0; i < concreteObjects.size(); i++) {
+			// on met la liste de 1 à n (numérotation de l'affichage)
+			refTab[i + 1] = i + 1;
 		}
-	    }
-	});
-    }
+		this.setModel(new DefaultComboBoxModel(refTab));
 
-    public ConcreteObjectType getConcreteObjectType() {
-	return ref;
-    }
+		if (ref.getUserConcreteObject() != null) {
+			this.setSelectedItem(ref.getUserConcreteObject());
+		} else {
+			this.setSelectedIndex(0);
+			ref.setUserConcreteObject(null);
+		}
 
-    public boolean isConcreteObjectEmpty() {
-	return ref.isEmptyUserConcreteObject();
-    }
+		this.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (KMADEArrayTypeComboBox.this.getSelectedIndex() == 0) {
+					KMADEArrayTypeComboBox.this.ref.setUserConcreteObject(null);
+				} else {
+					// l'objet numéro i est à la ième position - 1
+					ObjetConcret tmp = refObjetConcret
+							.get(-1 + (Integer) KMADEArrayTypeComboBox.this.getSelectedItem());
+					KMADEArrayTypeComboBox.this.ref.setUserConcreteObject(tmp);
+				}
+			}
+		});
+	}
+
+	public ConcreteObjectType getConcreteObjectType() {
+		return ref;
+	}
+
+	public boolean isConcreteObjectEmpty() {
+		return ref.isEmptyUserConcreteObject();
+	}
 }

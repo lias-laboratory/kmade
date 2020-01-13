@@ -34,35 +34,35 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
  * @author Mickael BARON
  */
 public class KMADEPreviewWindow extends JDialog {
-    private static final long serialVersionUID = 1162975786596750565L;
+	private static final long serialVersionUID = 1162975786596750565L;
 
-    private final KMADEPreviewPanel myPreviewPanel = new KMADEPreviewPanel();
+	private final KMADEPreviewPanel myPreviewPanel = new KMADEPreviewPanel();
 
-    public KMADEPreviewWindow(Frame owner) {
-	super(owner, KMADEConstant.PREVIEW_WINDOW_TITLE_NAME, false);
-	this.getContentPane().setForeground(Color.lightGray);
-	this.add(BorderLayout.CENTER, myPreviewPanel);
-	this.pack();
-	this.setSize(new Dimension(150, 150));
-	this.setResizable(true);
-	KMADEToolUtilities.setCenteredInScreen(this);
-	this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
-	this.repaint();
-    }
+	public KMADEPreviewWindow(Frame owner) {
+		super(owner, KMADEConstant.PREVIEW_WINDOW_TITLE_NAME, false);
+		this.getContentPane().setForeground(Color.lightGray);
+		this.add(BorderLayout.CENTER, myPreviewPanel);
+		this.pack();
+		this.setSize(new Dimension(150, 150));
+		this.setResizable(true);
+		KMADEToolUtilities.setCenteredInScreen(this);
+		this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
+		this.repaint();
+	}
 
-    public void setOverviewGraph(KMADEGraph graphModel) {
-	myPreviewPanel.setOverviewGraph(graphModel);
-    }
+	public void setOverviewGraph(KMADEGraph graphModel) {
+		myPreviewPanel.setOverviewGraph(graphModel);
+	}
 
-    public JGraph getOverviewGraph() {
-	return myPreviewPanel.getOverviewGraph();
-    }
+	public JGraph getOverviewGraph() {
+		return myPreviewPanel.getOverviewGraph();
+	}
 
-    public void updatePreviewPanel() {
-	myPreviewPanel.repaint();
-    }
+	public void updatePreviewPanel() {
+		myPreviewPanel.repaint();
+	}
 
-    public void notifLocalisationModification() {
-	this.setTitle(KMADEConstant.PREVIEW_WINDOW_TITLE_NAME);
-    }
+	public void notifLocalisationModification() {
+		this.setTitle(KMADEConstant.PREVIEW_WINDOW_TITLE_NAME);
+	}
 }

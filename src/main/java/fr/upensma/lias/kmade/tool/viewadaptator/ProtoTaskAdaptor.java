@@ -21,10 +21,7 @@ package fr.upensma.lias.kmade.tool.viewadaptator;
  * @author Thomas LACHAUME
  */
 public class ProtoTaskAdaptor {
-    public static void openProtoTaskMainFrame() {
-	// TODO utilisatition d'une fonction de la simulation
-	// GraphicEditorAdaptator.disabledMainFrameBeforeSimulation();
-	GraphicEditorAdaptator.getMainFrame().getProtoTaskPanel()
-		.openProtoTaskMainFrame();
-    }
+	public static void openProtoTaskMainFrame() {
+		GraphicEditorAdaptator.getMainFrame().getProtoTaskPanel().openProtoTaskMainFrame();
+	}
 }

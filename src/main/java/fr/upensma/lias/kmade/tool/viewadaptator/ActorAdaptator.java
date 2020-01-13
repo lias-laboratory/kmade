@@ -31,101 +31,92 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressUser;
  * @author Mickael BARON
  */
 public class ActorAdaptator {
-    public static int origine = 0;
+	public static int origine = 0;
 
-    public static void disabledFrame() {
-	GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
-	TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
-    }
-
-    public static void editedFromEnhancedFrame() {
-	origine = 1;
-    }
-
-    public static void enabledFrame() {
-	GraphicEditorAdaptator.enabledMainFrameAfterEdition();
-	TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
-	if (origine == 0) {
-	    GraphicEditorAdaptator.requestFocus();
-	} else {
-	    TaskPropertiesEnhancedEditorAdaptator.requestFocus();
+	public static void disabledFrame() {
+		GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
+		TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
 	}
-	origine = 0;
-    }
 
-    public static String setOldActorSelectedTask(String oidActor, String newUser) {
-
-	Actor m = (Actor) InterfaceExpressJava.prendre(new Oid(oidActor));
-	User myUser = ExpressUser.getUserWithName(newUser);
-	if (!isUserInActors(myUser.getOid())) {
-	    m.delete();
-	    Oid oidNewActor = ExpressActeur.createActor(myUser.getOid());
-	    if (ExpressTask.addActor(
-		    GraphicEditorAdaptator.getSelectedExpressTask(),
-		    oidNewActor.get())) {
-		return oidNewActor.get();
-	    }
+	public static void editedFromEnhancedFrame() {
+		origine = 1;
 	}
-	return null;
-    }
 
-    public static void removeActeur(String oidAct) {
-	ExpressTask.removeActor(oidAct);
-    }
-
-    public static void affRemoveActeur(String oidAct) {
-	ExpressTask.affRemoveActeur(oidAct);
-    }
-
-    private static boolean isUserInActors(Oid oidUser) {
-	ArrayList<Actor> ma_liste = ExpressActeur
-		.extractActorFromTask(GraphicEditorAdaptator
-			.getSelectedExpressTask());
-	for (int i = 0; i < ma_liste.size(); i++) {
-	    Oid oidActeurUser = ma_liste.get(i).getUserRef().getOid();
-	    if (oidActeurUser.equals(oidUser)) {
-		return true;
-	    }
+	public static void enabledFrame() {
+		GraphicEditorAdaptator.enabledMainFrameAfterEdition();
+		TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
+		if (origine == 0) {
+			GraphicEditorAdaptator.requestFocus();
+		} else {
+			TaskPropertiesEnhancedEditorAdaptator.requestFocus();
+		}
+		origine = 0;
 	}
-	return false;
-    }
 
-    public static String[] addNewActor(String user) {
-	User myUser = ExpressUser.getUserWithName(user);
-	if (!isUserInActors(myUser.getOid())) {
-	    Oid oidNewActor = ExpressActeur.createActor(myUser.getOid());
-	    if (ExpressTask.addActor(
-		    GraphicEditorAdaptator.getSelectedExpressTask(),
-		    oidNewActor.get())) {
-		return ExpressActeur.getActorFromOid(oidNewActor);
-	    }
+	public static String setOldActorSelectedTask(String oidActor, String newUser) {
+
+		Actor m = (Actor) InterfaceExpressJava.prendre(new Oid(oidActor));
+		User myUser = ExpressUser.getUserWithName(newUser);
+		if (!isUserInActors(myUser.getOid())) {
+			m.delete();
+			Oid oidNewActor = ExpressActeur.createActor(myUser.getOid());
+			if (ExpressTask.addActor(GraphicEditorAdaptator.getSelectedExpressTask(), oidNewActor.get())) {
+				return oidNewActor.get();
+			}
+		}
+		return null;
 	}
-	return null;
-    }
 
-    public static void addNewActor(Oid user) {
-	if (!ActorAdaptator.isUserInActors(user)) {
-	    // L'utilisateur n'est pas utilisé dans cette tâche
-	    Oid oidNewActor = ExpressActeur.createActor(user);
-	    if (ExpressTask.addActor(
-		    GraphicEditorAdaptator.getSelectedExpressTask(),
-		    oidNewActor.get())) {
-		String[] temp = ExpressActeur.getActorFromOid(oidNewActor);
-		GraphicEditorAdaptator.getPanelProp().addNewActor(temp[0],
-			temp[1], temp[2], temp[3]);
-	    } else {
-
-	    }
-	} else {
-
+	public static void removeActeur(String oidAct) {
+		ExpressTask.removeActor(oidAct);
 	}
-    }
 
-    public static void setActorExperience(String oid, String name) {
-	ExpressActeur.setActorExperience(oid, name);
-    }
+	public static void affRemoveActeur(String oidAct) {
+		ExpressTask.affRemoveActeur(oidAct);
+	}
 
-    public static void setActorCompetence(String oid, String name) {
-	ExpressActeur.setActorCompetence(oid, name);
-    }
+	private static boolean isUserInActors(Oid oidUser) {
+		ArrayList<Actor> ma_liste = ExpressActeur.extractActorFromTask(GraphicEditorAdaptator.getSelectedExpressTask());
+		for (int i = 0; i < ma_liste.size(); i++) {
+			Oid oidActeurUser = ma_liste.get(i).getUserRef().getOid();
+			if (oidActeurUser.equals(oidUser)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static String[] addNewActor(String user) {
+		User myUser = ExpressUser.getUserWithName(user);
+		if (!isUserInActors(myUser.getOid())) {
+			Oid oidNewActor = ExpressActeur.createActor(myUser.getOid());
+			if (ExpressTask.addActor(GraphicEditorAdaptator.getSelectedExpressTask(), oidNewActor.get())) {
+				return ExpressActeur.getActorFromOid(oidNewActor);
+			}
+		}
+		return null;
+	}
+
+	public static void addNewActor(Oid user) {
+		if (!ActorAdaptator.isUserInActors(user)) {
+			// L'utilisateur n'est pas utilisé dans cette tâche
+			Oid oidNewActor = ExpressActeur.createActor(user);
+			if (ExpressTask.addActor(GraphicEditorAdaptator.getSelectedExpressTask(), oidNewActor.get())) {
+				String[] temp = ExpressActeur.getActorFromOid(oidNewActor);
+				GraphicEditorAdaptator.getPanelProp().addNewActor(temp[0], temp[1], temp[2], temp[3]);
+			} else {
+
+			}
+		} else {
+
+		}
+	}
+
+	public static void setActorExperience(String oid, String name) {
+		ExpressActeur.setActorExperience(oid, name);
+	}
+
+	public static void setActorCompetence(String oid, String name) {
+		ExpressActeur.setActorCompetence(oid, name);
+	}
 }

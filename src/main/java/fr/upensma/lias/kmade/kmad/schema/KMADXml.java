@@ -25,19 +25,19 @@ import org.w3c.dom.Element;
  */
 public interface KMADXml {
 
-    // obsolete Element toXML(Document doc) throws Exception;
+	// obsolete Element toXML(Document doc) throws Exception;
 
-    // New version of the dtd
-    Element toXML2(Document doc) throws Exception;
+	// New version of the dtd
+	Element toXML2(Document doc) throws Exception;
 
-    boolean oidIsAnyMissing(Element p) throws Exception;
+	boolean oidIsAnyMissing(Element p) throws Exception;
 
-    // New version of the dtd
-    boolean oidIsAnyMissing2(Element p) throws Exception;
+	// New version of the dtd
+	boolean oidIsAnyMissing2(Element p) throws Exception;
 
-    // For compatibility with the old version of the dtd
-    void createObjectFromXMLElement(Element p) throws Exception;
+	// For compatibility with the old version of the dtd
+	void createObjectFromXMLElement(Element p) throws Exception;
 
-    // New version of the dtd
-    void createObjectFromXMLElement2(Element p) throws Exception;
+	// New version of the dtd
+	void createObjectFromXMLElement2(Element p) throws Exception;
 }

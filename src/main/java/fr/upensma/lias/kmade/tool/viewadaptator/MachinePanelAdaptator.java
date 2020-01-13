@@ -26,24 +26,23 @@ import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
  */
 public final class MachinePanelAdaptator {
 
-    private static String oidClaseActive = Oid.OID_NULL;
+	private static String oidClaseActive = Oid.OID_NULL;
 
-    public static void setActiveMachine(String name, String oid) {
-	oidClaseActive = oid;
-	KMADEMainFrame.getProjectPanel().getMachinePanel()
-		.setActiveMachineObject(name, oid);
-    }
+	public static void setActiveMachine(String name, String oid) {
+		oidClaseActive = oid;
+		KMADEMainFrame.getProjectPanel().getMachinePanel().setActiveMachineObject(name, oid);
+	}
 
-    public static String getActiveMachine() {
-	return oidClaseActive;
-    }
+	public static String getActiveMachine() {
+		return oidClaseActive;
+	}
 
-    public static Object[][] getParcsIntoTab(String oid) {
+	public static Object[][] getParcsIntoTab(String oid) {
 
-	return ExpressMachine.getParcsIntoTab(oid);
-    }
+		return ExpressMachine.getParcsIntoTab(oid);
+	}
 
-    public static Object[][] getOtherParcsIntoTab(String oid) {
-	return ExpressMachine.getOtherParcsIntoTab(oid);
-    }
+	public static Object[][] getOtherParcsIntoTab(String oid) {
+		return ExpressMachine.getOtherParcsIntoTab(oid);
+	}
 }

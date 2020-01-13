@@ -22,5 +22,5 @@ package fr.upensma.lias.kmade.tool.view.toolutilities;
  */
 public interface LanguageFactory {
 
-    void notifLocalisationModification();
+	void notifLocalisationModification();
 }

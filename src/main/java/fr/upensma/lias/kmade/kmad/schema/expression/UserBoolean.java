@@ -22,14 +22,14 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public class UserBoolean extends UserExpression {
 
-    private static final long serialVersionUID = 2019400828635652844L;
+	private static final long serialVersionUID = 2019400828635652844L;
 
-    public UserBoolean() {
-	super(false);
-	this.name = "?bool";
-    }
+	public UserBoolean() {
+		super(false);
+		this.name = "?bool";
+	}
 
-    public String toString() {
-	return super.toString();
-    }
+	public String toString() {
+		return super.toString();
+	}
 }

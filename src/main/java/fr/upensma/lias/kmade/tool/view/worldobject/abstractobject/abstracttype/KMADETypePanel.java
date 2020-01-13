@@ -30,63 +30,61 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
  */
 public class KMADETypePanel extends JPanel implements LanguageFactory {
 
-    private static final long serialVersionUID = 98756L;
+	private static final long serialVersionUID = 98756L;
 
-    private final JPanel panel;
+	private final JPanel panel;
 
-    private final KMADETypeEnumTable enumeration = new KMADETypeEnumTable();
+	private final KMADETypeEnumTable enumeration = new KMADETypeEnumTable();
 
-    private final KMADETypeEnumElementTable element = new KMADETypeEnumElementTable();
+	private final KMADETypeEnumElementTable element = new KMADETypeEnumElementTable();
 
-    private final KMADETypeIntervalTable intervalle = new KMADETypeIntervalTable();
+	private final KMADETypeIntervalTable intervalle = new KMADETypeIntervalTable();
 
-    public KMADETypePanel() {
-	// Le JPanel pour la partie Enumeration.
-	panel = new JPanel(new GridLayout(1, 0));
-	panel.add(enumeration);
-	panel.add(element);
+	public KMADETypePanel() {
+		// Le JPanel pour la partie Enumeration.
+		panel = new JPanel(new GridLayout(1, 0));
+		panel.add(enumeration);
+		panel.add(element);
 
-	this.setLayout(new GridLayout(0, 1));
-	this.add(intervalle);
-	this.add(panel);
-    }
-
-    public KMADETypeIntervalTable getIntervalPanel() {
-	return this.intervalle;
-    }
-
-    public KMADETypeEnumElementTable getEnumElementPanel() {
-	return this.element;
-    }
-
-    public KMADETypeEnumTable getEnumPanel() {
-	return this.enumeration;
-    }
-
-    public void setBorderTypePanel(String afficher) {
-	panel.setBorder(new TitledBorder(null,
-		KMADEConstant.ENUMERATION_TITLE_TABLE + afficher,
-		TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION));
-    }
-
-    public void showEnumOrIntervalPanel(boolean b) {
-	intervalle.setVisible(!b);
-	panel.setVisible(b);
-	enumeration.setVisible(b);
-	element.setVisible(false);
-
-	if (!b) {
-	    panel.setBorder(new TitledBorder(null,
-		    KMADEConstant.ENUMERATION_TITLE_TABLE, TitledBorder.CENTER,
-		    TitledBorder.DEFAULT_POSITION));
-	} else {
-	    enumeration.setFirstRowIndexTable();
+		this.setLayout(new GridLayout(0, 1));
+		this.add(intervalle);
+		this.add(panel);
 	}
-    }
 
-    public void notifLocalisationModification() {
-	enumeration.notifLocalisationModification();
-	element.notifLocalisationModification();
-	intervalle.notifLocalisationModification();
-    }
+	public KMADETypeIntervalTable getIntervalPanel() {
+		return this.intervalle;
+	}
+
+	public KMADETypeEnumElementTable getEnumElementPanel() {
+		return this.element;
+	}
+
+	public KMADETypeEnumTable getEnumPanel() {
+		return this.enumeration;
+	}
+
+	public void setBorderTypePanel(String afficher) {
+		panel.setBorder(new TitledBorder(null, KMADEConstant.ENUMERATION_TITLE_TABLE + afficher, TitledBorder.CENTER,
+				TitledBorder.DEFAULT_POSITION));
+	}
+
+	public void showEnumOrIntervalPanel(boolean b) {
+		intervalle.setVisible(!b);
+		panel.setVisible(b);
+		enumeration.setVisible(b);
+		element.setVisible(false);
+
+		if (!b) {
+			panel.setBorder(new TitledBorder(null, KMADEConstant.ENUMERATION_TITLE_TABLE, TitledBorder.CENTER,
+					TitledBorder.DEFAULT_POSITION));
+		} else {
+			enumeration.setFirstRowIndexTable();
+		}
+	}
+
+	public void notifLocalisationModification() {
+		enumeration.notifLocalisationModification();
+		element.notifLocalisationModification();
+		intervalle.notifLocalisationModification();
+	}
 }

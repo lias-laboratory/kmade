@@ -22,9 +22,9 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public class ComparisonOperator extends Operator {
 
-    private static final long serialVersionUID = 3449550494176434355L;
+	private static final long serialVersionUID = 3449550494176434355L;
 
-    public ComparisonOperator(Object value, NodeExpression left) {
-	super(value, left);
-    }
+	public ComparisonOperator(Object value, NodeExpression left) {
+		super(value, left);
+	}
 }

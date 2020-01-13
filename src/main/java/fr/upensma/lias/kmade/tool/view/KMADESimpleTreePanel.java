@@ -44,105 +44,100 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
  */
 public class KMADESimpleTreePanel extends JFrame {
 
-    private static final long serialVersionUID = 6331603702903812405L;
+	private static final long serialVersionUID = 6331603702903812405L;
 
-    private JTextArea textArea = new JTextArea();
+	private JTextArea textArea = new JTextArea();
 
-    private JPanel myContentPane;
+	private JPanel myContentPane;
 
-    private static final ImageIcon SAVE_HISTORY = new ImageIcon(
-	    GraphicEditorAdaptator.class
-		    .getResource(KMADEConstant.SAVE_HISTORY_IMAGE));
+	private static final ImageIcon SAVE_HISTORY = new ImageIcon(
+			GraphicEditorAdaptator.class.getResource(KMADEConstant.SAVE_HISTORY_IMAGE));
 
-    public KMADESimpleTreePanel() {
-	super("KMC TITLE");
-	this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-	this.addWindowListener(new WindowAdapter() {
-	    public void windowClosing(WindowEvent e) {
-		closeSimpleTreePanel();
-	    }
-	});
-	Dimension screen_dimension = Toolkit.getDefaultToolkit()
-		.getScreenSize();
-	// TODO dont understant why it is /4 and /2
-	this.setLocation(
-		(int) ((screen_dimension.getWidth() - this.getWidth()) / 4),
-		(int) ((screen_dimension.getHeight() - this.getHeight()) / 4));
-	// JPanel for constraint
-	this.myContentPane = new JPanel();
-	this.setContentPane(myContentPane);
+	public KMADESimpleTreePanel() {
+		super("KMC TITLE");
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				closeSimpleTreePanel();
+			}
+		});
+		Dimension screen_dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		// TODO dont understant why it is /4 and /2
+		this.setLocation((int) ((screen_dimension.getWidth() - this.getWidth()) / 4),
+				(int) ((screen_dimension.getHeight() - this.getHeight()) / 4));
+		// JPanel for constraint
+		this.myContentPane = new JPanel();
+		this.setContentPane(myContentPane);
 
-	Dimension dim = new Dimension(1000, 700);
-	Toolkit tk = Toolkit.getDefaultToolkit();
-    Dimension d = tk.getScreenSize();
-    Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
-    int width = (int) (d.getWidth() - insets.left - insets.right);
-    int height = (int) (d.getHeight() - insets.top - insets.bottom);
-    Dimension screenDim = new Dimension(width, height);
-   
-	if (screenDim.height < dim.height) {
-	    this.setSize(screenDim);
-	    this.setLocation(insets.left,insets.top);
-	} else {
-	    this.setSize(new Dimension(1000, 700));
-	    KMADEToolUtilities.setCenteredInScreen(this);
-	}
-	this.validate();
-	this.repaint();
-	myContentPane.setLayout(new BoxLayout(myContentPane,
-		BoxLayout.LINE_AXIS));
+		Dimension dim = new Dimension(1000, 700);
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension d = tk.getScreenSize();
+		Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
+		int width = (int) (d.getWidth() - insets.left - insets.right);
+		int height = (int) (d.getHeight() - insets.top - insets.bottom);
+		Dimension screenDim = new Dimension(width, height);
 
-	textArea.append("KMC pas d'arbre");
-	JButton selectButton = new JButton("KMC Séléctionner");
-	selectButton.addActionListener(new ActionListener() {
-
-	    @Override
-	    public void actionPerformed(ActionEvent arg0) {
-		getTextArea().selectAll();
-		getTextArea().requestFocus();
-
-	    }
-	});
-	JButton copyButton = new JButton("KMC Copier");
-	copyButton.addActionListener(new ActionListener() {
-
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		getTextArea().selectAll();
-		getTextArea().requestFocus();
-		getTextArea().copy();
-
-	    }
-	});
-
-	JButton saveButton = new JButton("KMC Enregistrer");
-	saveButton.addActionListener(new ActionListener() {
-
-	    @Override
-	    public void actionPerformed(ActionEvent e) {
-		String myCurrentFile = KMADEFileChooser
-			.saveKMADModelSimpleFile();
-		if (myCurrentFile != null) {
-		    ExpressKMADTXT.saveKMADSimpleModel(myCurrentFile);
+		if (screenDim.height < dim.height) {
+			this.setSize(screenDim);
+			this.setLocation(insets.left, insets.top);
+		} else {
+			this.setSize(new Dimension(1000, 700));
+			KMADEToolUtilities.setCenteredInScreen(this);
 		}
-	    }
-	});
+		this.validate();
+		this.repaint();
+		myContentPane.setLayout(new BoxLayout(myContentPane, BoxLayout.LINE_AXIS));
 
-	JPanel buttonPanel = new JPanel();
-	buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
-	buttonPanel.add(selectButton);
-	buttonPanel.add(copyButton);
-	buttonPanel.add(saveButton);
-	myContentPane.add(buttonPanel);
-	JScrollPane scrollpane = new JScrollPane(textArea);
-	myContentPane.add(scrollpane);
-    }
+		textArea.append("KMC pas d'arbre");
+		JButton selectButton = new JButton("KMC Séléctionner");
+		selectButton.addActionListener(new ActionListener() {
 
-    public void closeSimpleTreePanel() {
-	this.setVisible(false);
-    }
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				getTextArea().selectAll();
+				getTextArea().requestFocus();
 
-    public JTextArea getTextArea() {
-	return textArea;
-    }
+			}
+		});
+		JButton copyButton = new JButton("KMC Copier");
+		copyButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				getTextArea().selectAll();
+				getTextArea().requestFocus();
+				getTextArea().copy();
+
+			}
+		});
+
+		JButton saveButton = new JButton("KMC Enregistrer");
+		saveButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String myCurrentFile = KMADEFileChooser.saveKMADModelSimpleFile();
+				if (myCurrentFile != null) {
+					ExpressKMADTXT.saveKMADSimpleModel(myCurrentFile);
+				}
+			}
+		});
+
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
+		buttonPanel.add(selectButton);
+		buttonPanel.add(copyButton);
+		buttonPanel.add(saveButton);
+		myContentPane.add(buttonPanel);
+		JScrollPane scrollpane = new JScrollPane(textArea);
+		myContentPane.add(scrollpane);
+	}
+
+	public void closeSimpleTreePanel() {
+		this.setVisible(false);
+	}
+
+	public JTextArea getTextArea() {
+		return textArea;
+	}
 }

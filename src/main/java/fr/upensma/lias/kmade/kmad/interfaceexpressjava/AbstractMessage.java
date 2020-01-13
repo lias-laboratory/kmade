@@ -24,15 +24,15 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public interface AbstractMessage {
 
-    void addMessage(Oid oid, int idErreur);
+	void addMessage(Oid oid, int idErreur);
 
-    void addMessage(Oid oid, int idErreur, String otherMessage);
+	void addMessage(Oid oid, int idErreur, String otherMessage);
 
-    String[] getMessages();
+	String[] getMessages();
 
-    boolean isMessages();
+	boolean isMessages();
 
-    void displayMessages();
+	void displayMessages();
 
-    String[] takeMessages();
+	String[] takeMessages();
 }

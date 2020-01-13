@@ -32,105 +32,92 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressTask;
  */
 public class ActorSystemAdaptator {
 
-    public static int origine = 0;
+	public static int origine = 0;
 
-    public static void disabledFrame() {
-	GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
-	TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
-    }
-
-    public static void editedFromEnhancedFrame() {
-	origine = 1;
-    }
-
-    public static void enabledFrame() {
-	GraphicEditorAdaptator.enabledMainFrameAfterEdition();
-	TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
-	if (origine == 0) {
-	    GraphicEditorAdaptator.requestFocus();
-	} else {
-	    TaskPropertiesEnhancedEditorAdaptator.requestFocus();
+	public static void disabledFrame() {
+		GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
+		TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
 	}
-	origine = 0;
-    }
 
-    public static String setOldActorSystemSelectedTask(String oidActor,
-	    String newUser) {
-	ActorSystem m = (ActorSystem) InterfaceExpressJava.prendre(new Oid(
-		oidActor));
-	Material myUser = ExpressMateriel.getMaterielWithName(newUser);
-	if (!isMaterielInActorSystem(myUser.getOid())) {
-	    m.delete();
-	    Oid oidNewActor = ExpressActeurSysteme.createActorSystem(myUser
-		    .getOid());
-	    if (ExpressTask.addActorSystem(
-		    GraphicEditorAdaptator.getSelectedExpressTask(),
-		    oidNewActor.get())) {
-		return oidNewActor.get();
-	    }
+	public static void editedFromEnhancedFrame() {
+		origine = 1;
 	}
-	return null;
-    }
 
-    public static void removeActeurSystem(String oidAct) {
-	ExpressTask.removeActorSystem(oidAct);
-    }
-
-    public static void affRemoveActeurSystem(String oidAct) {
-	ExpressTask.affRemoveActeurSystem(oidAct);
-    }
-
-    private static boolean isMaterielInActorSystem(Oid oidMateriel) {
-	ArrayList<ActorSystem> ma_liste = ExpressActeurSysteme
-		.extractActorSystemFromTask(GraphicEditorAdaptator
-			.getSelectedExpressTask());
-	for (int i = 0; i < ma_liste.size(); i++) {
-	    Oid oidActeurUser = ma_liste.get(i).getMaterialRef().getOid();
-	    if (oidActeurUser.equals(oidMateriel)) {
-		return true;
-	    }
+	public static void enabledFrame() {
+		GraphicEditorAdaptator.enabledMainFrameAfterEdition();
+		TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
+		if (origine == 0) {
+			GraphicEditorAdaptator.requestFocus();
+		} else {
+			TaskPropertiesEnhancedEditorAdaptator.requestFocus();
+		}
+		origine = 0;
 	}
-	return false;
-    }
 
-    public static String[] addNewActorSystem(String materiel) {
-	Material myMateriel = ExpressMateriel.getMaterielWithName(materiel);
-	if (!isMaterielInActorSystem(myMateriel.getOid())) {
-	    Oid oidNewActor = ExpressActeurSysteme.createActorSystem(myMateriel
-		    .getOid());
-	    if (ExpressTask.addActorSystem(
-		    GraphicEditorAdaptator.getSelectedExpressTask(),
-		    oidNewActor.get())) {
-		return ExpressActeurSysteme.getActorSystemFromOid(oidNewActor);
-	    }
+	public static String setOldActorSystemSelectedTask(String oidActor, String newUser) {
+		ActorSystem m = (ActorSystem) InterfaceExpressJava.prendre(new Oid(oidActor));
+		Material myUser = ExpressMateriel.getMaterielWithName(newUser);
+		if (!isMaterielInActorSystem(myUser.getOid())) {
+			m.delete();
+			Oid oidNewActor = ExpressActeurSysteme.createActorSystem(myUser.getOid());
+			if (ExpressTask.addActorSystem(GraphicEditorAdaptator.getSelectedExpressTask(), oidNewActor.get())) {
+				return oidNewActor.get();
+			}
+		}
+		return null;
 	}
-	return null;
-    }
 
-    public static void addNewActorSystem(Oid user) {
-	if (!ActorSystemAdaptator.isMaterielInActorSystem(user)) {
-	    // L'utilisateur n'est pas utilisé dans cette tâche
-	    Oid oidNewActor = ExpressActeurSysteme.createActorSystem(user);
-	    if (ExpressTask.addActorSystem(
-		    GraphicEditorAdaptator.getSelectedExpressTask(),
-		    oidNewActor.get())) {
-		String[] temp = ExpressActeurSysteme
-			.getActorSystemFromOid(oidNewActor);
-		GraphicEditorAdaptator.getPanelProp().addNewActorSystem(
-			temp[0], temp[1], temp[2], temp[3]);
-	    } else {
-
-	    }
-	} else {
-
+	public static void removeActeurSystem(String oidAct) {
+		ExpressTask.removeActorSystem(oidAct);
 	}
-    }
 
-    public static void setActorSystemExperience(String oid, String xp) {
-	ExpressActeurSysteme.setActorSystemExperience(oid, xp);
-    }
+	public static void affRemoveActeurSystem(String oidAct) {
+		ExpressTask.affRemoveActeurSystem(oidAct);
+	}
 
-    public static void setActorSystemCompetence(String oid, String name) {
-	ExpressActeurSysteme.setActorSystemCompetence(oid, name);
-    }
+	private static boolean isMaterielInActorSystem(Oid oidMateriel) {
+		ArrayList<ActorSystem> ma_liste = ExpressActeurSysteme
+				.extractActorSystemFromTask(GraphicEditorAdaptator.getSelectedExpressTask());
+		for (int i = 0; i < ma_liste.size(); i++) {
+			Oid oidActeurUser = ma_liste.get(i).getMaterialRef().getOid();
+			if (oidActeurUser.equals(oidMateriel)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static String[] addNewActorSystem(String materiel) {
+		Material myMateriel = ExpressMateriel.getMaterielWithName(materiel);
+		if (!isMaterielInActorSystem(myMateriel.getOid())) {
+			Oid oidNewActor = ExpressActeurSysteme.createActorSystem(myMateriel.getOid());
+			if (ExpressTask.addActorSystem(GraphicEditorAdaptator.getSelectedExpressTask(), oidNewActor.get())) {
+				return ExpressActeurSysteme.getActorSystemFromOid(oidNewActor);
+			}
+		}
+		return null;
+	}
+
+	public static void addNewActorSystem(Oid user) {
+		if (!ActorSystemAdaptator.isMaterielInActorSystem(user)) {
+			// L'utilisateur n'est pas utilisé dans cette tâche
+			Oid oidNewActor = ExpressActeurSysteme.createActorSystem(user);
+			if (ExpressTask.addActorSystem(GraphicEditorAdaptator.getSelectedExpressTask(), oidNewActor.get())) {
+				String[] temp = ExpressActeurSysteme.getActorSystemFromOid(oidNewActor);
+				GraphicEditorAdaptator.getPanelProp().addNewActorSystem(temp[0], temp[1], temp[2], temp[3]);
+			} else {
+
+			}
+		} else {
+
+		}
+	}
+
+	public static void setActorSystemExperience(String oid, String xp) {
+		ExpressActeurSysteme.setActorSystemExperience(oid, xp);
+	}
+
+	public static void setActorSystemCompetence(String oid, String name) {
+		ExpressActeurSysteme.setActorSystemCompetence(oid, name);
+	}
 }

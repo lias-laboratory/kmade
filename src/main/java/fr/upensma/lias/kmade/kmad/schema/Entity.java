@@ -24,13 +24,13 @@ import java.io.Serializable;
  * @author Mickael BARON
  */
 public interface Entity extends Serializable, KMADXml {
-    
-    String toSPF();
 
-    void setOid(Oid oid);
+	String toSPF();
 
-    Oid getOid();
+	void setOid(Oid oid);
 
-    String getName();
+	Oid getOid();
+
+	String getName();
 
 }

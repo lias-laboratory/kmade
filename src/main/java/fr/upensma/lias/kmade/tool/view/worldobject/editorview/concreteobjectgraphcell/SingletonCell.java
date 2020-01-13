@@ -29,36 +29,32 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  */
 public class SingletonCell extends GroupDefaultGraphCell {
 
-    private static final long serialVersionUID = -4114475534467064550L;
+	private static final long serialVersionUID = -4114475534467064550L;
 
-    @SuppressWarnings("unused")
-    private UniqAg single;
+	@SuppressWarnings("unused")
+	private UniqAg single;
 
-    /**
-     * First constructor of the cell (the point is not created yet)
-     * 
-     * @param singleton
-     *            represented by the cell
-     * @param point
-     *            x in the graph
-     * @param point
-     *            y in the graph
-     */
-    public SingletonCell(Groupe object, int x, int y) {
-	super(object, x, y);
-	this.single = (UniqAg) object.getEnsemble();
-    }
+	/**
+	 * First constructor of the cell (the point is not created yet)
+	 * 
+	 * @param singleton represented by the cell
+	 * @param point     x in the graph
+	 * @param point     y in the graph
+	 */
+	public SingletonCell(Groupe object, int x, int y) {
+		super(object, x, y);
+		this.single = (UniqAg) object.getEnsemble();
+	}
 
-    /**
-     * Second constructor for the cell (the point is already created)
-     * 
-     * @param singleton
-     *            represented by the cell
-     * @param point
-     */
-    public SingletonCell(Groupe g, Point point) {
-	super(g, point);
-	this.single = (UniqAg) g.getEnsemble();
-    }
+	/**
+	 * Second constructor for the cell (the point is already created)
+	 * 
+	 * @param singleton represented by the cell
+	 * @param point
+	 */
+	public SingletonCell(Groupe g, Point point) {
+		super(g, point);
+		this.single = (UniqAg) g.getEnsemble();
+	}
 
 }

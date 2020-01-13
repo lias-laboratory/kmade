@@ -26,59 +26,55 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class PlusComputing extends ComputingOperator {
 
-    private static final long serialVersionUID = -394810851362269302L;
+	private static final long serialVersionUID = -394810851362269302L;
 
-    public PlusComputing(NodeExpression left, NodeExpression right) {
-	super(left, right);
-	this.name = "+";
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-
-	if (this.getLeftNode().isString() && this.getRightNode().isString()) {
-	    this.setNodeType("");
-	    return;
+	public PlusComputing(NodeExpression left, NodeExpression right) {
+		super(left, right);
+		this.name = "+";
 	}
 
-	if (this.getLeftNode().isNumber() && this.getRightNode().isNumber()) {
-	    this.setNodeType(new NumberValue());
-	    return;
+	public void checkNode() throws SemanticException {
+		super.checkNode();
+
+		if (this.getLeftNode().isString() && this.getRightNode().isString()) {
+			this.setNodeType("");
+			return;
+		}
+
+		if (this.getLeftNode().isNumber() && this.getRightNode().isNumber()) {
+			this.setNodeType(new NumberValue());
+			return;
+		}
+
+		this.setStateToError();
+		throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
 	}
 
-	this.setStateToError();
-	throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR
-		+ " : " + this.name);
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
+		if (this.isErrorState()) {
+			throw new SemanticErrorException();
+		}
 
-	if (this.isErrorState()) {
-	    throw new SemanticErrorException();
-	}
+		if (this.isUnknownState()) {
+			throw new SemanticUnknownException();
+		}
+		// les cas autres que String + String ou Nombre+ Nombre ne doivent pas
+		// arriver normalement
+		if (getLeftNode().isNumber() && getRightNode().isString()) {
+			this.setNodeValue(new String(((NumberValue) getLeftNode().getNodeValue()).toString()
+					+ ((String) getRightNode().getNodeValue())));
+		}
 
-	if (this.isUnknownState()) {
-	    throw new SemanticUnknownException();
-	}
-	// les cas autres que String + String ou Nombre+ Nombre ne doivent pas
-	// arriver normalement
-	if (getLeftNode().isNumber() && getRightNode().isString()) {
-	    this.setNodeValue(new String(((NumberValue) getLeftNode()
-		    .getNodeValue()).toString()
-		    + ((String) getRightNode().getNodeValue())));
-	}
+		if (getLeftNode().isString() && getRightNode().isNumber()) {
+			this.setNodeValue(new String(((String) getLeftNode().getNodeValue())
+					+ ((NumberValue) getRightNode().getNodeValue()).toString()));
+		}
 
-	if (getLeftNode().isString() && getRightNode().isNumber()) {
-	    this.setNodeValue(new String(
-		    ((String) getLeftNode().getNodeValue())
-			    + ((NumberValue) getRightNode().getNodeValue())
-				    .toString()));
+		if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+			this.setNodeValue(((NumberValue) getLeftNode().getNodeValue())
+					.plusComputing(((NumberValue) getRightNode().getNodeValue())));
+		}
 	}
-
-	if (getLeftNode().isNumber() && getRightNode().isNumber()) {
-	    this.setNodeValue(((NumberValue) getLeftNode().getNodeValue())
-		    .plusComputing(((NumberValue) getRightNode().getNodeValue())));
-	}
-    }
 }

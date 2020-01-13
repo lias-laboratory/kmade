@@ -23,20 +23,20 @@ import fr.upensma.lias.kmade.kmad.schema.tache.StateSimulation;
  * @author Mickael BARON
  */
 public class StackState {
-    private StateSimulation refStateSimulation;
+	private StateSimulation refStateSimulation;
 
-    private int variant;
+	private int variant;
 
-    public StackState(StateSimulation pss, int variant) {
-	this.refStateSimulation = pss;
-	this.variant = variant;
-    }
+	public StackState(StateSimulation pss, int variant) {
+		this.refStateSimulation = pss;
+		this.variant = variant;
+	}
 
-    public StateSimulation getStateSimulation() {
-	return this.refStateSimulation;
-    }
+	public StateSimulation getStateSimulation() {
+		return this.refStateSimulation;
+	}
 
-    public int getVariant() {
-	return variant;
-    }
+	public int getVariant() {
+		return variant;
+	}
 }

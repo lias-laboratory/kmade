@@ -24,36 +24,34 @@ import fr.upensma.lias.kmade.tool.view.worldobject.abstractobject.KMADEReadWrite
  */
 public final class AbstractTypeObjectPanelAdaptator {
 
-    private static int stateEnumereOrInterval = 0; // 0 : aucun; 1 : enuemere; 2
-						   // : intervalle.
+	private static int stateEnumereOrInterval = 0; // 0 : aucun; 1 : enuemere; 2
+	// : intervalle.
 
-    public static void showEnumPanel() {
-	KMADEReadWriteAbstractTypeObjectPanel.showEnumOrIntervalPanel();
-	KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-		.showEnumOrIntervalPanel(true);
-	stateEnumereOrInterval = 1;
-    }
-
-    public static void showIntervalPanel() {
-	KMADEReadWriteAbstractTypeObjectPanel.showEnumOrIntervalPanel();
-	KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-		.showEnumOrIntervalPanel(false);
-	stateEnumereOrInterval = 2;
-    }
-
-    public static void setActiveEnumereOrInterval(int p) {
-	if (p == 0) {
-	    if (stateEnumereOrInterval == 1) {
-		AbstractAttributeAdaptator.updateEnumList();
-	    } else if (stateEnumereOrInterval == 2) {
-		AbstractAttributeAdaptator.updateIntervalList();
-	    }
-	    KMADEReadWriteAbstractTypeObjectPanel.showAbstractObjectPanel();
+	public static void showEnumPanel() {
+		KMADEReadWriteAbstractTypeObjectPanel.showEnumOrIntervalPanel();
+		KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().showEnumOrIntervalPanel(true);
+		stateEnumereOrInterval = 1;
 	}
-	AbstractTypeObjectPanelAdaptator.stateEnumereOrInterval = p;
-    }
 
-    public static int getActiveEnumereOrInterval() {
-	return AbstractTypeObjectPanelAdaptator.stateEnumereOrInterval;
-    }
+	public static void showIntervalPanel() {
+		KMADEReadWriteAbstractTypeObjectPanel.showEnumOrIntervalPanel();
+		KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().showEnumOrIntervalPanel(false);
+		stateEnumereOrInterval = 2;
+	}
+
+	public static void setActiveEnumereOrInterval(int p) {
+		if (p == 0) {
+			if (stateEnumereOrInterval == 1) {
+				AbstractAttributeAdaptator.updateEnumList();
+			} else if (stateEnumereOrInterval == 2) {
+				AbstractAttributeAdaptator.updateIntervalList();
+			}
+			KMADEReadWriteAbstractTypeObjectPanel.showAbstractObjectPanel();
+		}
+		AbstractTypeObjectPanelAdaptator.stateEnumereOrInterval = p;
+	}
+
+	public static int getActiveEnumereOrInterval() {
+		return AbstractTypeObjectPanelAdaptator.stateEnumereOrInterval;
+	}
 }

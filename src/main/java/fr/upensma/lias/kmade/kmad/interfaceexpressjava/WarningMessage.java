@@ -30,79 +30,77 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
  */
 public class WarningMessage implements AbstractMessage {
 
-    private static List<Integer> listInteger = new ArrayList<Integer>();
+	private static List<Integer> listInteger = new ArrayList<Integer>();
 
-    private static List<String> listName = new ArrayList<String>();
+	private static List<String> listName = new ArrayList<String>();
 
-    private static List<Oid> listOid = new ArrayList<Oid>();
+	private static List<Oid> listOid = new ArrayList<Oid>();
 
-    private static List<String> listMessages = new ArrayList<String>();
+	private static List<String> listMessages = new ArrayList<String>();
 
-    public static final String[] messWarning = {
-	    ExpressConstant.REMOVE_ABSTRACT_OBJECT, // 0
-	    ExpressConstant.REMOVE_ABSTRACT_ATTRIBUT, // 1
-	    ExpressConstant.REMOVE_GROUP, // 2
-	    ExpressConstant.REMOVE_USER, // 3
-	    ExpressConstant.REMOVE_EVENT, // 4
-	    ExpressConstant.REMOVE_CONCRETE_OBJECT, // 5
-	    ExpressConstant.REMOVE_CONCRETE_ATTRIBUT, // 6
-	    ExpressConstant.NO_USED_GROUP_ATTRIBUT, // 7
-	    ExpressConstant.NO_USED_ABSTRACT_OBJECT, // 8
-	    ExpressConstant.REMOVE_ACTOR, // 9
-	    ExpressConstant.REMOVE_ENUMERATION, // 10
-	    ExpressConstant.REMOVE_ELEMENT, // 11
-	    ExpressConstant.REMOVE_INTERVALLE, // 12
-	    ExpressConstant.REMOVE_LABEL, // 13
-	    ExpressConstant.CHANGE_AGREGAT, // 14
-	    ExpressConstant.REMOVE_ACTOR_SYSTEM, // 15
-	    ExpressConstant.REMOVE_MATERIEL, // 16
-	    ExpressConstant.REMOVE_CONDITION, // 17
-	    ExpressConstant.REMOVE_CONDITION // 18
-    };
+	public static final String[] messWarning = { ExpressConstant.REMOVE_ABSTRACT_OBJECT, // 0
+			ExpressConstant.REMOVE_ABSTRACT_ATTRIBUT, // 1
+			ExpressConstant.REMOVE_GROUP, // 2
+			ExpressConstant.REMOVE_USER, // 3
+			ExpressConstant.REMOVE_EVENT, // 4
+			ExpressConstant.REMOVE_CONCRETE_OBJECT, // 5
+			ExpressConstant.REMOVE_CONCRETE_ATTRIBUT, // 6
+			ExpressConstant.NO_USED_GROUP_ATTRIBUT, // 7
+			ExpressConstant.NO_USED_ABSTRACT_OBJECT, // 8
+			ExpressConstant.REMOVE_ACTOR, // 9
+			ExpressConstant.REMOVE_ENUMERATION, // 10
+			ExpressConstant.REMOVE_ELEMENT, // 11
+			ExpressConstant.REMOVE_INTERVALLE, // 12
+			ExpressConstant.REMOVE_LABEL, // 13
+			ExpressConstant.CHANGE_AGREGAT, // 14
+			ExpressConstant.REMOVE_ACTOR_SYSTEM, // 15
+			ExpressConstant.REMOVE_MATERIEL, // 16
+			ExpressConstant.REMOVE_CONDITION, // 17
+			ExpressConstant.REMOVE_CONDITION // 18
+	};
 
-    public void addMessage(Oid oid, int idWarning) {
-	this.addMessage(oid, idWarning, "");
-    }
-
-    public void addMessage(Oid oid, int idWarning, String other) {
-	Entity e = (Entity) InterfaceExpressJava.prendre(oid);
-	WarningMessage.listOid.add(oid);
-	WarningMessage.listName.add(e.getName());
-	WarningMessage.listInteger.add(idWarning);
-	WarningMessage.listMessages.add(other);
-    }
-
-    public String[] getMessages() {
-	String[] mess = new String[WarningMessage.listOid.size()];
-	for (int i = 0; i < WarningMessage.listOid.size(); i++) {
-	    mess[i] = messWarning[WarningMessage.listInteger.get(i)] + " \""
-		    + WarningMessage.listName.get(i) + "\" "
-		    + WarningMessage.listMessages.get(i);
+	public void addMessage(Oid oid, int idWarning) {
+		this.addMessage(oid, idWarning, "");
 	}
-	return mess;
-    }
 
-    public boolean isMessages() {
-	return (WarningMessage.listOid.size() == 0);
-    }
-
-    public void displayMessages() {
-	String[] str = getMessages();
-	for (int i = 0; i < str.length; i++) {
-	    KMADEHistoryMessageManager.printlnMessage("ATTENTION " + str[i]);
+	public void addMessage(Oid oid, int idWarning, String other) {
+		Entity e = (Entity) InterfaceExpressJava.prendre(oid);
+		WarningMessage.listOid.add(oid);
+		WarningMessage.listName.add(e.getName());
+		WarningMessage.listInteger.add(idWarning);
+		WarningMessage.listMessages.add(other);
 	}
-	listOid.clear();
-	listInteger.clear();
-	listMessages.clear();
-	listName.clear();
-    }
 
-    public String[] takeMessages() {
-	String[] str = getMessages();
-	listOid.clear();
-	listInteger.clear();
-	listMessages.clear();
-	listName.clear();
-	return str;
-    }
+	public String[] getMessages() {
+		String[] mess = new String[WarningMessage.listOid.size()];
+		for (int i = 0; i < WarningMessage.listOid.size(); i++) {
+			mess[i] = messWarning[WarningMessage.listInteger.get(i)] + " \"" + WarningMessage.listName.get(i) + "\" "
+					+ WarningMessage.listMessages.get(i);
+		}
+		return mess;
+	}
+
+	public boolean isMessages() {
+		return (WarningMessage.listOid.size() == 0);
+	}
+
+	public void displayMessages() {
+		String[] str = getMessages();
+		for (int i = 0; i < str.length; i++) {
+			KMADEHistoryMessageManager.printlnMessage("ATTENTION " + str[i]);
+		}
+		listOid.clear();
+		listInteger.clear();
+		listMessages.clear();
+		listName.clear();
+	}
+
+	public String[] takeMessages() {
+		String[] str = getMessages();
+		listOid.clear();
+		listInteger.clear();
+		listMessages.clear();
+		listName.clear();
+		return str;
+	}
 }

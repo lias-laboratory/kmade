@@ -35,77 +35,75 @@ import fr.upensma.lias.kmade.tool.viewadaptator.AbstractTypeObjectPanelAdaptator
 /**
  * @author Mickael BARON
  */
-public final class KMADEReadWriteAbstractTypeObjectPanel extends JPanel
-	implements LanguageFactory {
-    private static final long serialVersionUID = 5647468L;
+public final class KMADEReadWriteAbstractTypeObjectPanel extends JPanel implements LanguageFactory {
+	private static final long serialVersionUID = 5647468L;
 
-    private static final KMADETypePanel enumIntervalEditor = new KMADETypePanel();
+	private static final KMADETypePanel enumIntervalEditor = new KMADETypePanel();
 
-    private static final KMADEReadWriteAbstractObjectPanel abstractObjectEditor = new KMADEReadWriteAbstractObjectPanel();
+	private static final KMADEReadWriteAbstractObjectPanel abstractObjectEditor = new KMADEReadWriteAbstractObjectPanel();
 
-    private static JPanel cards;
+	private static JPanel cards;
 
-    private TitledBorder myTitledBorder;
+	private TitledBorder myTitledBorder;
 
-    private JButton bVers;
+	private JButton bVers;
 
-    public static KMADETypePanel getEnumIntervalEditor() {
-	return enumIntervalEditor;
-    }
+	public static KMADETypePanel getEnumIntervalEditor() {
+		return enumIntervalEditor;
+	}
 
-    public static JPanel getCardLayout() {
-	return cards;
-    }
+	public static JPanel getCardLayout() {
+		return cards;
+	}
 
-    public static KMADEReadWriteAbstractObjectPanel getAbstractObjectEditor() {
-	return abstractObjectEditor;
-    }
+	public static KMADEReadWriteAbstractObjectPanel getAbstractObjectEditor() {
+		return abstractObjectEditor;
+	}
 
-    public KMADEReadWriteAbstractTypeObjectPanel() {
-	myTitledBorder = new TitledBorder(null,
-		KMADEConstant.ABSTRACT_OBJECT_TITLE_NAME, TitledBorder.CENTER,
-		TitledBorder.TOP);
-	this.setBorder(myTitledBorder);
-	this.setLayout(new BorderLayout());
+	public KMADEReadWriteAbstractTypeObjectPanel() {
+		myTitledBorder = new TitledBorder(null, KMADEConstant.ABSTRACT_OBJECT_TITLE_NAME, TitledBorder.CENTER,
+				TitledBorder.TOP);
+		this.setBorder(myTitledBorder);
+		this.setLayout(new BorderLayout());
 
-	JPanel p = new JPanel();
-	bVers = new JButton(KMADEConstant.BACK_TO_EDITOR);
-	p.add(bVers);
+		JPanel p = new JPanel();
+		bVers = new JButton(KMADEConstant.BACK_TO_EDITOR);
+		p.add(bVers);
 
-	cards = new JPanel(new CardLayout());
+		cards = new JPanel(new CardLayout());
 
-	JPanel pane = new JPanel(new BorderLayout());
-	pane.add(abstractObjectEditor, BorderLayout.CENTER);
+		JPanel pane = new JPanel(new BorderLayout());
+		pane.add(abstractObjectEditor, BorderLayout.CENTER);
 
-	JPanel type = new JPanel(new BorderLayout());
-	type.add(enumIntervalEditor, BorderLayout.CENTER);
-	type.add(p, BorderLayout.NORTH);
+		JPanel type = new JPanel(new BorderLayout());
+		type.add(enumIntervalEditor, BorderLayout.CENTER);
+		type.add(p, BorderLayout.NORTH);
 
-	cards.add(pane, "ABSTRACTOBJECT");
-	cards.add(type, "TYPE");
-	this.add(cards, BorderLayout.CENTER);
+		cards.add(pane, "ABSTRACTOBJECT");
+		cards.add(type, "TYPE");
+		this.add(cards, BorderLayout.CENTER);
 
-	bVers.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		AbstractTypeObjectPanelAdaptator.setActiveEnumereOrInterval(0);
-	    }
-	});
-    }
+		bVers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AbstractTypeObjectPanelAdaptator.setActiveEnumereOrInterval(0);
+			}
+		});
+	}
 
-    public static void showAbstractObjectPanel() {
-	CardLayout ca = (CardLayout) cards.getLayout();
-	ca.show(cards, "ABSTRACTOBJECT");
-    }
+	public static void showAbstractObjectPanel() {
+		CardLayout ca = (CardLayout) cards.getLayout();
+		ca.show(cards, "ABSTRACTOBJECT");
+	}
 
-    public static void showEnumOrIntervalPanel() {
-	CardLayout ca = (CardLayout) cards.getLayout();
-	ca.show(cards, "TYPE");
-    }
+	public static void showEnumOrIntervalPanel() {
+		CardLayout ca = (CardLayout) cards.getLayout();
+		ca.show(cards, "TYPE");
+	}
 
-    public void notifLocalisationModification() {
-	myTitledBorder.setTitle(KMADEConstant.ABSTRACT_OBJECT_TITLE_NAME);
-	bVers.setText(KMADEConstant.BACK_TO_EDITOR);
-	enumIntervalEditor.notifLocalisationModification();
-	abstractObjectEditor.notifLocalisationModification();
-    }
+	public void notifLocalisationModification() {
+		myTitledBorder.setTitle(KMADEConstant.ABSTRACT_OBJECT_TITLE_NAME);
+		bVers.setText(KMADEConstant.BACK_TO_EDITOR);
+		enumIntervalEditor.notifLocalisationModification();
+		abstractObjectEditor.notifLocalisationModification();
+	}
 }

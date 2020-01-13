@@ -26,34 +26,34 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Task;
  */
 public class TaskProto {
 
-    private Task myTask;
+	private Task myTask;
 
-    private StateExecution stateExecution;
+	private StateExecution stateExecution;
 
-    private ChoiceEnum IterationValue = ChoiceEnum.indeterminee;
+	private ChoiceEnum IterationValue = ChoiceEnum.indeterminee;
 
-    public Task getTask() {
-	return myTask;
-    }
+	public Task getTask() {
+		return myTask;
+	}
 
-    public void setTask(Task myTask) {
-	this.myTask = myTask;
-    }
+	public void setTask(Task myTask) {
+		this.myTask = myTask;
+	}
 
-    public StateExecution getStateExecution() {
-	return stateExecution;
-    }
+	public StateExecution getStateExecution() {
+		return stateExecution;
+	}
 
-    public void setStateExecution(StateExecution stateExecution) {
-	this.stateExecution = stateExecution;
-    }
+	public void setStateExecution(StateExecution stateExecution) {
+		this.stateExecution = stateExecution;
+	}
 
-    public ChoiceEnum getIterationValue() {
-	return IterationValue;
-    }
+	public ChoiceEnum getIterationValue() {
+		return IterationValue;
+	}
 
-    public void setIterationValue(ChoiceEnum iterationValue) {
-	IterationValue = iterationValue;
-    }
+	public void setIterationValue(ChoiceEnum iterationValue) {
+		IterationValue = iterationValue;
+	}
 
 }

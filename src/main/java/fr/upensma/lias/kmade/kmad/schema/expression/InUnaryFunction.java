@@ -24,10 +24,10 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
  */
 public class InUnaryFunction extends UnaryFunction {
 
-    private static final long serialVersionUID = 9060835882985819497L;
+	private static final long serialVersionUID = 9060835882985819497L;
 
-    public InUnaryFunction(NodeExpression pnode) {
-	super(false, pnode);
-	this.name = ExpressConstant.IN_UNARY_FUNCTION_EXPRESSION;
-    }
+	public InUnaryFunction(NodeExpression pnode) {
+		super(false, pnode);
+		this.name = ExpressConstant.IN_UNARY_FUNCTION_EXPRESSION;
+	}
 }

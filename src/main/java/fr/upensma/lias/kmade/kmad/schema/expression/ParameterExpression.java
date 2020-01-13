@@ -26,36 +26,36 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class ParameterExpression extends UnaryExpression {
 
-    private static final long serialVersionUID = 4305149294752713361L;
+	private static final long serialVersionUID = 4305149294752713361L;
 
-    protected NodeExpression myAloneExpression;
+	protected NodeExpression myAloneExpression;
 
-    public ParameterExpression(Object value, NodeExpression pAloneExpression) {
-	super(value);
-	this.myAloneExpression = pAloneExpression;
-    }
-
-    public void checkNode() throws SemanticException {
-	this.myAloneExpression.checkNode();
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	myAloneExpression.evaluateNode(ref);
-	this.setObjectValueState(myAloneExpression.getObjectValueState());
-    }
-
-    public NodeExpression getAloneExpression() {
-	return myAloneExpression;
-    }
-
-    public ArrayList<Object> getLinearExpression() {
-	ArrayList<Object> myList = new ArrayList<Object>();
-	myList.add(this.getName());
-	myList.add("(");
-	for (Object current : myAloneExpression.getLinearExpression()) {
-	    myList.add(current);
+	public ParameterExpression(Object value, NodeExpression pAloneExpression) {
+		super(value);
+		this.myAloneExpression = pAloneExpression;
 	}
-	myList.add(")");
-	return myList;
-    }
+
+	public void checkNode() throws SemanticException {
+		this.myAloneExpression.checkNode();
+	}
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		myAloneExpression.evaluateNode(ref);
+		this.setObjectValueState(myAloneExpression.getObjectValueState());
+	}
+
+	public NodeExpression getAloneExpression() {
+		return myAloneExpression;
+	}
+
+	public ArrayList<Object> getLinearExpression() {
+		ArrayList<Object> myList = new ArrayList<Object>();
+		myList.add(this.getName());
+		myList.add("(");
+		for (Object current : myAloneExpression.getLinearExpression()) {
+			myList.add(current);
+		}
+		myList.add(")");
+		return myList;
+	}
 }

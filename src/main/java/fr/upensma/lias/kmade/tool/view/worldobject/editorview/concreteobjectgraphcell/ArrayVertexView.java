@@ -40,63 +40,57 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  */
 public class ArrayVertexView extends GroupDefaultVertexView {
 
-    private static final long serialVersionUID = -8213898490016362073L;
+	private static final long serialVersionUID = -8213898490016362073L;
 
-    public ArrayVertexView(ArrayCell cell, JGraph graph) {
-	super(cell, graph);
-    }
+	public ArrayVertexView(ArrayCell cell, JGraph graph) {
+		super(cell, graph);
+	}
 
-    /**
-     * Call of the renderer
-     */
-    public Component getRendererComponent(JGraph graph, boolean selected,
-	    boolean focus, boolean preview) {
+	/**
+	 * Call of the renderer
+	 */
+	public Component getRendererComponent(JGraph graph, boolean selected, boolean focus, boolean preview) {
 
-	panel = (JPanel) super.getRendererComponent(graph, selected, focus,
-		preview);
-	panel.setLayout(new BorderLayout());
+		panel = (JPanel) super.getRendererComponent(graph, selected, focus, preview);
+		panel.setLayout(new BorderLayout());
 
-	listPanel = new JScrollPane(objects);
-	listPanel.setOpaque(false);
+		listPanel = new JScrollPane(objects);
+		listPanel.setOpaque(false);
 
-	panel.add(listPanel, BorderLayout.CENTER);
+		panel.add(listPanel, BorderLayout.CENTER);
 
-	// To have numbers alongside the cells
-	objects.setCellRenderer(new ListCellRenderer() {
+		// To have numbers alongside the cells
+		objects.setCellRenderer(new ListCellRenderer() {
 
-	    public Component getListCellRendererComponent(JList list,
-		    Object value, int index, boolean isSelected,
-		    boolean cellHasFocus) {
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
 
-		JPanel panel = new JPanel(new BorderLayout());
+				JPanel panel = new JPanel(new BorderLayout());
 
-		if (!((ConcreteObjectCell) value).getName().equals(
-			KMADEConstant.EMPTY_CELL_NAME)) {
+				if (!((ConcreteObjectCell) value).getName().equals(KMADEConstant.EMPTY_CELL_NAME)) {
 
-		    String s = String.valueOf(index);
-		    JLabel numero = new JLabel(s, JLabel.CENTER);
-		    numero.setBorder(BorderFactory
-			    .createLineBorder(Color.BLACK));
-		    numero.setOpaque(false);
+					String s = String.valueOf(index);
+					JLabel numero = new JLabel(s, JLabel.CENTER);
+					numero.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					numero.setOpaque(false);
 
-		    JLabel label = new JLabel(((ConcreteObjectCell) value)
-			    .getName(), JLabel.CENTER);
-		    label.setOpaque(true);
-		    label.setBackground(KMADEConstant.ACTIVE_OBJECT);
-		    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					JLabel label = new JLabel(((ConcreteObjectCell) value).getName(), JLabel.CENTER);
+					label.setOpaque(true);
+					label.setBackground(KMADEConstant.ACTIVE_OBJECT);
+					label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		    panel.add(numero, BorderLayout.WEST);
-		    panel.add(label, BorderLayout.CENTER);
+					panel.add(numero, BorderLayout.WEST);
+					panel.add(label, BorderLayout.CENTER);
 
-		} else
-		    panel = drawEmpty();
+				} else
+					panel = drawEmpty();
+
+				return panel;
+			}
+		});
+
+		this.autoSize();
 
 		return panel;
-	    }
-	});
-
-	this.autoSize();
-
-	return panel;
-    }
+	}
 }

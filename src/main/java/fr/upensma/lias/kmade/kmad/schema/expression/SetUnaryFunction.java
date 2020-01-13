@@ -25,34 +25,31 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class SetUnaryFunction extends UnaryFunction {
 
-    private static final long serialVersionUID = -3391467421932692168L;
+	private static final long serialVersionUID = -3391467421932692168L;
 
-    public SetUnaryFunction(NodeExpression pnode) {
-	super(false, pnode);
-	this.name = "set";
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	ObjetConcret myRef = ref;
-	if (InterfaceExpressJava.getCurrentObject()
-		.isExistCurrentEvaluateConcreteObject()) {
-	    myRef = InterfaceExpressJava.getCurrentObject()
-		    .getCurrentEvaluateConcreteObject();
-	} else {
-	    myRef = null;
+	public SetUnaryFunction(NodeExpression pnode) {
+		super(false, pnode);
+		this.name = "set";
 	}
 
-	if (myRef == null) {
-	    this.setStateToError();
-	    throw new SemanticErrorException();
-	}
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		ObjetConcret myRef = ref;
+		if (InterfaceExpressJava.getCurrentObject().isExistCurrentEvaluateConcreteObject()) {
+			myRef = InterfaceExpressJava.getCurrentObject().getCurrentEvaluateConcreteObject();
+		} else {
+			myRef = null;
+		}
 
-	super.evaluateNode(myRef);
+		if (myRef == null) {
+			this.setStateToError();
+			throw new SemanticErrorException();
+		}
 
-	if (this.isValueState()) {
-	    InterfaceExpressJava.appendHistoryMessage(this.name);
-	    InterfaceExpressJava.getCurrentObject()
-		    .setCurrentEvaluateConcreteObject(myRef);
+		super.evaluateNode(myRef);
+
+		if (this.isValueState()) {
+			InterfaceExpressJava.appendHistoryMessage(this.name);
+			InterfaceExpressJava.getCurrentObject().setCurrentEvaluateConcreteObject(myRef);
+		}
 	}
-    }
 }

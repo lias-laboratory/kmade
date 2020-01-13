@@ -24,19 +24,19 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class WhileUnaryFunction extends UnaryFunction {
 
-    private static final long serialVersionUID = -2557504737851443643L;
+	private static final long serialVersionUID = -2557504737851443643L;
 
-    public WhileUnaryFunction(NodeExpression pee) {
-	super(false, pee);
-	this.name = "while";
-    }
+	public WhileUnaryFunction(NodeExpression pee) {
+		super(false, pee);
+		this.name = "while";
+	}
 
-    public void checkNode() throws SemanticException {
-	myAloneExpression.checkNode();
-    }
+	public void checkNode() throws SemanticException {
+		myAloneExpression.checkNode();
+	}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
-	this.setNodeValue(this.myAloneExpression.getNodeValue());
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+		this.setNodeValue(this.myAloneExpression.getNodeValue());
+	}
 }

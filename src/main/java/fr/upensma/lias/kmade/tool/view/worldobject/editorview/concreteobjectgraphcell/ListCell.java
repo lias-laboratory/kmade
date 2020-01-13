@@ -29,50 +29,44 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  */
 public class ListCell extends GroupDefaultGraphCell {
 
-    private static final long serialVersionUID = -5284774279616678598L;
+	private static final long serialVersionUID = -5284774279616678598L;
 
-    @SuppressWarnings("unused")
-    private ListeAg list;
+	@SuppressWarnings("unused")
+	private ListeAg list;
 
-    /**
-     * First constructor for the cell (the point is not created yet)
-     * 
-     * @param list
-     *            represented by the cell
-     * @param point
-     *            x in the graph
-     * @param point
-     *            y in the graph
-     */
-    public ListCell(Groupe object, int x, int y) {
-	super(object, x, y);
-	this.list = (ListeAg) object.getEnsemble();
-    }
+	/**
+	 * First constructor for the cell (the point is not created yet)
+	 * 
+	 * @param list  represented by the cell
+	 * @param point x in the graph
+	 * @param point y in the graph
+	 */
+	public ListCell(Groupe object, int x, int y) {
+		super(object, x, y);
+		this.list = (ListeAg) object.getEnsemble();
+	}
 
-    /**
-     * Second constructor for the cell (the point is already yet)
-     * 
-     * @param list
-     *            represented by the cell
-     * @param point
-     *            in the graph
-     */
-    public ListCell(Groupe object, Point p) {
-	super(object, p);
-	this.list = (ListeAg) object.getEnsemble();
-    }
+	/**
+	 * Second constructor for the cell (the point is already yet)
+	 * 
+	 * @param list  represented by the cell
+	 * @param point in the graph
+	 */
+	public ListCell(Groupe object, Point p) {
+		super(object, p);
+		this.list = (ListeAg) object.getEnsemble();
+	}
 
-    /**
-     * Method to set the selected cell in the group
-     * 
-     * @param index
-     *            of the cell
-     */
-    @Override
-    public void setSelectedIndex(int i) {
-	if (i != -1) {
-	    this.selectedIndex = 0;
-	} else
-	    this.selectedIndex = i;
-    }
+	/**
+	 * Method to set the selected cell in the group
+	 * 
+	 * @param index of the cell
+	 */
+	@Override
+	public void setSelectedIndex(int i) {
+		if (i != -1) {
+			this.selectedIndex = 0;
+		} else
+			this.selectedIndex = i;
+	}
 }

@@ -26,42 +26,42 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public class ClipBoardDB extends TreeMap<Oid, Object> {
 
-    private static final long serialVersionUID = -4065187555842667783L;
+	private static final long serialVersionUID = -4065187555842667783L;
 
-    private static Oid oid = new Oid(1);
+	private static Oid oid = new Oid(1);
 
-    public Oid put(Object value) {
-	Oid leoid = new Oid(oid);
-	put(leoid, value);
+	public Oid put(Object value) {
+		Oid leoid = new Oid(oid);
+		put(leoid, value);
 
-	oid.plus();
-	return leoid;
-    }
+		oid.plus();
+		return leoid;
+	}
 
-    public void mettre(Oid key, Object value) {
-	put(new Oid(key), value);
-    }
+	public void mettre(Oid key, Object value) {
+		put(new Oid(key), value);
+	}
 
-    public Object prendre(Oid key) {
-	return get(key);
-    }
+	public Object prendre(Oid key) {
+		return get(key);
+	}
 
-    /**
-     * Supprime l'intégralité de la BDD.
-     */
-    public void clear() {
-	// L'oid principale est mise à 1.
-	ClipBoardDB.oid = new Oid(1);
-	// Utilisation de la méthode de la super-classe pour supprimer
-	// l'intégralité.
-	super.clear();
-    }
+	/**
+	 * Supprime l'intégralité de la BDD.
+	 */
+	public void clear() {
+		// L'oid principale est mise à 1.
+		ClipBoardDB.oid = new Oid(1);
+		// Utilisation de la méthode de la super-classe pour supprimer
+		// l'intégralité.
+		super.clear();
+	}
 
-    public void supprimer(Oid key) {
-	this.remove(key);
-    }
+	public void supprimer(Oid key) {
+		this.remove(key);
+	}
 
-    public Oid getLastOid() {
-	return oid;
-    }
+	public Oid getLastOid() {
+		return oid;
+	}
 }

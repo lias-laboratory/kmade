@@ -41,105 +41,102 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.JTreeTable.TreeTableModel;
  */
 public class JListTreeTable extends JPanel {
 
-    private static final long serialVersionUID = -4280074759089012114L;
+	private static final long serialVersionUID = -4280074759089012114L;
 
-    private JTreeTable myTable;
+	private JTreeTable myTable;
 
-    private JList myList;
+	private JList myList;
 
-    private JPanel panelHeader;
+	private JPanel panelHeader;
 
-    private TableListModelAdapter refTableListModelAdapter;
+	private TableListModelAdapter refTableListModelAdapter;
 
-    public JListTreeTable(TreeTableModel treeTableModel) {
-	myTable = new JTreeTable(treeTableModel);
-	refTableListModelAdapter = new TableListModelAdapter(
-		myTable.getTableTreeModel());
-	myList = new JList(refTableListModelAdapter);
-	myList.setCellRenderer(new ListTableRenderer());
-	myList.setSelectionModel(myTable.getSelectionModel());
+	public JListTreeTable(TreeTableModel treeTableModel) {
+		myTable = new JTreeTable(treeTableModel);
+		refTableListModelAdapter = new TableListModelAdapter(myTable.getTableTreeModel());
+		myList = new JList(refTableListModelAdapter);
+		myList.setCellRenderer(new ListTableRenderer());
+		myList.setSelectionModel(myTable.getSelectionModel());
 
-	this.setLayout(new BorderLayout());
-	this.add(BorderLayout.CENTER, myTable);
-	this.add(BorderLayout.WEST, myList);
+		this.setLayout(new BorderLayout());
+		this.add(BorderLayout.CENTER, myTable);
+		this.add(BorderLayout.WEST, myList);
 
-	panelHeader = new JPanel(new BorderLayout());
-	JPanel panelVide = new JPanel();
-	panelVide.setPreferredSize(new Dimension(10, (int) myTable
-		.getTableHeader().getPreferredSize().getHeight()));
-	panelHeader.add(BorderLayout.WEST, panelVide);
-	panelHeader.add(BorderLayout.CENTER, myTable.getTableHeader());
-    }
-
-    public JPanel getPanelHeader() {
-	return panelHeader;
-    }
-
-    public void fireListRowsInserted() {
-	refTableListModelAdapter.fireListRowsInserted();
-    }
-
-    public void addAllKeyListener(KeyListener l) {
-	myTable.addKeyListener(l);
-	this.myList.addKeyListener(l);
-    }
-
-    public JTree getTree() {
-	return myTable.getTree();
-    }
-
-    public JTreeTable getTreeTable() {
-	return this.myTable;
-    }
-
-    class TableListModelAdapter extends AbstractListModel {
-
-	private static final long serialVersionUID = -7208312048831796834L;
-
-	private AbstractTableModel modele;
-
-	public TableListModelAdapter(AbstractTableModel ref) {
-	    this.modele = ref;
-	    ref.addTableModelListener(new TableModelListener() {
-		public void tableChanged(TableModelEvent e) {
-		    TableListModelAdapter.this.fireContentsChanged();
-		}
-
-	    });
+		panelHeader = new JPanel(new BorderLayout());
+		JPanel panelVide = new JPanel();
+		panelVide.setPreferredSize(new Dimension(10, (int) myTable.getTableHeader().getPreferredSize().getHeight()));
+		panelHeader.add(BorderLayout.WEST, panelVide);
+		panelHeader.add(BorderLayout.CENTER, myTable.getTableHeader());
 	}
 
-	public Object getElementAt(int index) {
-	    return "";
-	}
-
-	public int getSize() {
-	    return modele.getRowCount();
-	}
-
-	public void fireContentsChanged() {
-	    this.fireContentsChanged(this, 0, this.getSize() - 1);
+	public JPanel getPanelHeader() {
+		return panelHeader;
 	}
 
 	public void fireListRowsInserted() {
-	    this.fireContentsChanged(this, 0, this.getSize() - 1);
+		refTableListModelAdapter.fireListRowsInserted();
 	}
-    }
 
-    class ListTableRenderer implements ListCellRenderer {
-	public Component getListCellRendererComponent(JList list, Object value,
-		int index, boolean isSelected, boolean cellHasFocus) {
-	    JPanel myComponent = new JPanel();
-	    int rowHeight = myTable.getRowHeight(index);
-	    myComponent.setPreferredSize(new Dimension(10, rowHeight));
-	    myComponent.setOpaque(true);
-	    myComponent
-		    .setBorder(UIManager.getBorder("TableHeader.cellBorder"));
-
-	    if (isSelected)
-		myComponent.setBackground(Color.gray);
-	    else
-		myComponent.setBackground(new Color(238, 238, 238));
-	    return myComponent;
+	public void addAllKeyListener(KeyListener l) {
+		myTable.addKeyListener(l);
+		this.myList.addKeyListener(l);
 	}
-    }
+
+	public JTree getTree() {
+		return myTable.getTree();
+	}
+
+	public JTreeTable getTreeTable() {
+		return this.myTable;
+	}
+
+	class TableListModelAdapter extends AbstractListModel {
+
+		private static final long serialVersionUID = -7208312048831796834L;
+
+		private AbstractTableModel modele;
+
+		public TableListModelAdapter(AbstractTableModel ref) {
+			this.modele = ref;
+			ref.addTableModelListener(new TableModelListener() {
+				public void tableChanged(TableModelEvent e) {
+					TableListModelAdapter.this.fireContentsChanged();
+				}
+
+			});
+		}
+
+		public Object getElementAt(int index) {
+			return "";
+		}
+
+		public int getSize() {
+			return modele.getRowCount();
+		}
+
+		public void fireContentsChanged() {
+			this.fireContentsChanged(this, 0, this.getSize() - 1);
+		}
+
+		public void fireListRowsInserted() {
+			this.fireContentsChanged(this, 0, this.getSize() - 1);
+		}
+	}
+
+	class ListTableRenderer implements ListCellRenderer {
+		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+				boolean cellHasFocus) {
+			JPanel myComponent = new JPanel();
+			int rowHeight = myTable.getRowHeight(index);
+			myComponent.setPreferredSize(new Dimension(10, rowHeight));
+			myComponent.setOpaque(true);
+			myComponent.setBorder(UIManager.getBorder("TableHeader.cellBorder"));
+
+			if (isSelected)
+				myComponent.setBackground(Color.gray);
+			else
+				myComponent.setBackground(new Color(238, 238, 238));
+			return myComponent;
+		}
+	}
 }

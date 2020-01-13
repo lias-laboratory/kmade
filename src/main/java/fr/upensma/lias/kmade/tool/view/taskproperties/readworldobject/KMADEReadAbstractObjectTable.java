@@ -34,82 +34,79 @@ import fr.upensma.lias.kmade.tool.viewadaptator.ReadAbstractObjectAdaptator;
  */
 public class KMADEReadAbstractObjectTable extends JScrollPane {
 
-    private static final long serialVersionUID = -8952846858100692775L;
+	private static final long serialVersionUID = -8952846858100692775L;
 
-    private MyReadAbstractObjectTableModel modele;
+	private MyReadAbstractObjectTableModel modele;
 
-    private JTable table;
+	private JTable table;
 
-    public KMADEReadAbstractObjectTable() {
-	modele = new MyReadAbstractObjectTableModel();
-	table = new KMADEJTable(modele);
-	this.setViewportView(table);
-	table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
+	public KMADEReadAbstractObjectTable() {
+		modele = new MyReadAbstractObjectTableModel();
+		table = new KMADEJTable(modele);
+		this.setViewportView(table);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
 
-	ListSelectionModel rowSM = table.getSelectionModel();
-	rowSM.addListSelectionListener(new ListSelectionListener() {
-	    public void valueChanged(ListSelectionEvent e) {
-		ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-		if (lsm.isSelectionEmpty()) {
-		    ReadAbstractObjectAdaptator.noAbstractSelection();
-		} else {
-		    ReadAbstractObjectAdaptator.setAbstractObjectSelection(lsm
-			    .getMinSelectionIndex());
+		ListSelectionModel rowSM = table.getSelectionModel();
+		rowSM.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+				if (lsm.isSelectionEmpty()) {
+					ReadAbstractObjectAdaptator.noAbstractSelection();
+				} else {
+					ReadAbstractObjectAdaptator.setAbstractObjectSelection(lsm.getMinSelectionIndex());
+				}
+			}
+		});
+	}
+
+	public void setAbstractObjectNameBorder(String name) {
+		String afficher = "";
+		if (name.equals(""))
+			afficher = "";
+		else
+			afficher = " : " + name;
+		this.setBorder(new TitledBorder(null, KMADEConstant.ABSTRACT_OBJECT_TITLE_TABLE + afficher, TitledBorder.CENTER,
+				TitledBorder.DEFAULT_POSITION, KMADEConstant.fontACTIF));
+	}
+
+	public void setData(Object[][] refData) {
+		this.modele.data = refData;
+		this.modele.fireTableDataChanged();
+		table.getSelectionModel().clearSelection();
+	}
+
+	static class MyReadAbstractObjectTableModel extends AbstractTableModel {
+
+		private static final long serialVersionUID = 6307559459569197314L;
+
+		private Object[][] data = new Object[0][];
+
+		public int getColumnCount() {
+			return 2;
 		}
-	    }
-	});
-    }
 
-    public void setAbstractObjectNameBorder(String name) {
-	String afficher = "";
-	if (name.equals(""))
-	    afficher = "";
-	else
-	    afficher = " : " + name;
-	this.setBorder(new TitledBorder(null,
-		KMADEConstant.ABSTRACT_OBJECT_TITLE_TABLE + afficher,
-		TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
-		KMADEConstant.fontACTIF));
-    }
+		public int getRowCount() {
+			return data.length;
+		}
 
-    public void setData(Object[][] refData) {
-	this.modele.data = refData;
-	this.modele.fireTableDataChanged();
-	table.getSelectionModel().clearSelection();
-    }
+		public Object getValueAt(int row, int col) {
+			return data[row][col];
+		}
 
-    static class MyReadAbstractObjectTableModel extends AbstractTableModel {
+		public String getColumnName(int i) {
+			switch (i) {
+			case 0:
+				return KMADEConstant.ABSTRACT_OBJECT_NAME_TABLE;
+			case 1:
+				return KMADEConstant.ABSTRACT_OBJECT_OBSERVATION_TABLE;
+			default:
+				return "";
+			}
+		}
 
-	private static final long serialVersionUID = 6307559459569197314L;
-
-	private Object[][] data = new Object[0][];
-
-	public int getColumnCount() {
-	    return 2;
+		public boolean isCellEditable(int row, int col) {
+			return false;
+		}
 	}
-
-	public int getRowCount() {
-	    return data.length;
-	}
-
-	public Object getValueAt(int row, int col) {
-	    return data[row][col];
-	}
-
-	public String getColumnName(int i) {
-	    switch (i) {
-	    case 0:
-		return KMADEConstant.ABSTRACT_OBJECT_NAME_TABLE;
-	    case 1:
-		return KMADEConstant.ABSTRACT_OBJECT_OBSERVATION_TABLE;
-	    default:
-		return "";
-	    }
-	}
-
-	public boolean isCellEditable(int row, int col) {
-	    return false;
-	}
-    }
 }

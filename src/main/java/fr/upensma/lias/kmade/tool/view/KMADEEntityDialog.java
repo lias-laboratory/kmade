@@ -45,77 +45,77 @@ import fr.upensma.lias.kmade.tool.viewadaptator.EntityListAdaptator;
  */
 public class KMADEEntityDialog extends JDialog implements LanguageFactory {
 
-    private static final long serialVersionUID = -2258571876517155414L;
+	private static final long serialVersionUID = -2258571876517155414L;
 
-    private JTextArea myTextArea;
+	private JTextArea myTextArea;
 
-    private JButton verifier;
+	private JButton verifier;
 
-    private JButton fermer;
+	private JButton fermer;
 
-    public KMADEEntityDialog(Frame owner) {
-	super(owner, KMADEConstant.ENTITY_LIST_DIALOG_TITLE);
-	myTextArea = new JTextArea();
-	JScrollPane myScrollPane = new JScrollPane(myTextArea);
+	public KMADEEntityDialog(Frame owner) {
+		super(owner, KMADEConstant.ENTITY_LIST_DIALOG_TITLE);
+		myTextArea = new JTextArea();
+		JScrollPane myScrollPane = new JScrollPane(myTextArea);
 
-	JPanel myPanelControlButtons = new JPanel();
-	verifier = new JButton(KMADEConstant.FORCE_ENTITY_LIST_ACTION_MESSAGE);
-	verifier.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		EntityListAdaptator.startEntityList();
-	    }
-	});
-	fermer = new JButton(KMADEConstant.GO_BACK_MESSAGE);
-	fermer.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		EntityListAdaptator.closeEntityListDialog();
-	    }
-	});
+		JPanel myPanelControlButtons = new JPanel();
+		verifier = new JButton(KMADEConstant.FORCE_ENTITY_LIST_ACTION_MESSAGE);
+		verifier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EntityListAdaptator.startEntityList();
+			}
+		});
+		fermer = new JButton(KMADEConstant.GO_BACK_MESSAGE);
+		fermer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EntityListAdaptator.closeEntityListDialog();
+			}
+		});
 
-	myPanelControlButtons.add(verifier);
-	myPanelControlButtons.add(fermer);
+		myPanelControlButtons.add(verifier);
+		myPanelControlButtons.add(fermer);
 
-	this.getContentPane().add(BorderLayout.CENTER, myScrollPane);
-	this.getContentPane().add(BorderLayout.SOUTH, myPanelControlButtons);
+		this.getContentPane().add(BorderLayout.CENTER, myScrollPane);
+		this.getContentPane().add(BorderLayout.SOUTH, myPanelControlButtons);
 
-	this.pack();
-	Dimension dim = new Dimension(700, 300);
-	Toolkit tk = Toolkit.getDefaultToolkit();
-    Dimension d = tk.getScreenSize();
-    Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
-    int width = (int) (d.getWidth() - insets.left - insets.right);
-    int height = (int) (d.getHeight() - insets.top - insets.bottom);
-    Dimension screenDim = new Dimension(width, height);
-   
-	if (screenDim.height < dim.height) {
-	    this.setSize(screenDim);
-	    this.setLocation(insets.left,insets.top);
-	} else {
-	    this.setSize(new Dimension(700, 300));
-	    KMADEToolUtilities.setCenteredInScreen(this);
+		this.pack();
+		Dimension dim = new Dimension(700, 300);
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension d = tk.getScreenSize();
+		Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
+		int width = (int) (d.getWidth() - insets.left - insets.right);
+		int height = (int) (d.getHeight() - insets.top - insets.bottom);
+		Dimension screenDim = new Dimension(width, height);
+
+		if (screenDim.height < dim.height) {
+			this.setSize(screenDim);
+			this.setLocation(insets.left, insets.top);
+		} else {
+			this.setSize(new Dimension(700, 300));
+			KMADEToolUtilities.setCenteredInScreen(this);
+		}
+		this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				EntityListAdaptator.closeEntityListDialog();
+			}
+		});
 	}
-	this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
-	this.setVisible(false);
-	this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-	this.addWindowListener(new WindowAdapter() {
-	    public void windowClosing(WindowEvent e) {
-		EntityListAdaptator.closeEntityListDialog();
-	    }
-	});
-    }
 
-    public void writeInTextArea(String value) {
-	this.myTextArea.append(value);
-	this.myTextArea.append("\n");
-    }
+	public void writeInTextArea(String value) {
+		this.myTextArea.append(value);
+		this.myTextArea.append("\n");
+	}
 
-    public void clearTextArea() {
-	this.myTextArea.setText("");
-    }
+	public void clearTextArea() {
+		this.myTextArea.setText("");
+	}
 
-    public void notifLocalisationModification() {
-	this.setTitle(KMADEConstant.ENTITY_LIST_DIALOG_TITLE);
-	verifier.setText(KMADEConstant.FORCE_ENTITY_LIST_ACTION_MESSAGE);
-	fermer.setText(KMADEConstant.GO_BACK_MESSAGE);
-    }
+	public void notifLocalisationModification() {
+		this.setTitle(KMADEConstant.ENTITY_LIST_DIALOG_TITLE);
+		verifier.setText(KMADEConstant.FORCE_ENTITY_LIST_ACTION_MESSAGE);
+		fermer.setText(KMADEConstant.GO_BACK_MESSAGE);
+	}
 }

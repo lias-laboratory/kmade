@@ -25,37 +25,32 @@ import fr.upensma.lias.kmade.tool.view.worldobject.abstractobject.KMADEReadWrite
  */
 public final class TypePanelAdaptator {
 
-    private static String oidEnumeration = Oid.OID_NULL;
+	private static String oidEnumeration = Oid.OID_NULL;
 
-    public static void setActiveEnumeration(String name, String oid) {
-	oidEnumeration = oid;
+	public static void setActiveEnumeration(String name, String oid) {
+		oidEnumeration = oid;
 
-	String afficher = "";
+		String afficher = "";
 
-	if (oid.equals(Oid.OID_NULL)) {
-	    KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-		    .getEnumElementPanel().setVisible(false);
-	    afficher = "";
-	} else {
-	    afficher = " : " + name;
-	    KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-		    .getEnumElementPanel().setVisible(true);
-	    KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-		    .getEnumElementPanel().removeAllEnumElement();
-	    KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-		    .getEnumElementPanel().setEnabled(true);
-	    Object[][] tabElem = EnumElementAdaptator.getElementIntoTab(oid);
-	    if (tabElem.length != 0) {
-		KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-			.getEnumElementPanel().updateDataModel(tabElem);
-	    }
+		if (oid.equals(Oid.OID_NULL)) {
+			KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().getEnumElementPanel().setVisible(false);
+			afficher = "";
+		} else {
+			afficher = " : " + name;
+			KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().getEnumElementPanel().setVisible(true);
+			KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().getEnumElementPanel().removeAllEnumElement();
+			KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().getEnumElementPanel().setEnabled(true);
+			Object[][] tabElem = EnumElementAdaptator.getElementIntoTab(oid);
+			if (tabElem.length != 0) {
+				KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().getEnumElementPanel()
+						.updateDataModel(tabElem);
+			}
+		}
+
+		KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().setBorderTypePanel(afficher);
 	}
 
-	KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-		.setBorderTypePanel(afficher);
-    }
-
-    public static String getEnumerationActive() {
-	return oidEnumeration;
-    }
+	public static String getEnumerationActive() {
+		return oidEnumeration;
+	}
 }

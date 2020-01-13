@@ -24,17 +24,17 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class ParenthesisExpression extends ParameterExpression {
 
-    private static final long serialVersionUID = -8442663452961910445L;
+	private static final long serialVersionUID = -8442663452961910445L;
 
-    public ParenthesisExpression(NodeExpression pAloneExpression) {
-	super(pAloneExpression.getNodeValue(), pAloneExpression);
-	this.setStateToValue();
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
-	if (this.isValueState()) {
-	    this.setNodeValue(myAloneExpression.getNodeValue());
+	public ParenthesisExpression(NodeExpression pAloneExpression) {
+		super(pAloneExpression.getNodeValue(), pAloneExpression);
+		this.setStateToValue();
 	}
-    }
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+		if (this.isValueState()) {
+			this.setNodeValue(myAloneExpression.getNodeValue());
+		}
+	}
 }

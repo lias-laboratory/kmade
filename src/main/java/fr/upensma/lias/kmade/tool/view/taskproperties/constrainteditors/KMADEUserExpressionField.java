@@ -37,84 +37,77 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
  */
 public class KMADEUserExpressionField extends JTextField {
 
-    private static final long serialVersionUID = -7138413572029624691L;
+	private static final long serialVersionUID = -7138413572029624691L;
 
-    private UserExpression myUserExpression;
+	private UserExpression myUserExpression;
 
-    public KMADEUserExpressionField(UserExpression ref) {
-	super();
-	myUserExpression = ref;
-	KMADEUserExpressionField.this.setPreferredSize(new Dimension(20,
-		KMADEUserExpressionField.this.getPreferredSize().height));
-	this.addKeyListener(new KeyAdapter() {
-	    public void keyReleased(KeyEvent e) {
-
-		if (KMADEUserExpressionField.this.getText().length() < 2) {
-		    KMADEUserExpressionField.this
-			    .setPreferredSize(new Dimension(20,
-				    KMADEUserExpressionField.this
-					    .getPreferredSize().height));
-		} else {
-		    KMADEUserExpressionField.this.setPreferredSize(null);
-		}
-
-		KMADEUserExpressionField.this.getParent().validate();
-		KMADEUserExpressionField.this.getParent().repaint();
-
+	public KMADEUserExpressionField(UserExpression ref) {
+		super();
+		myUserExpression = ref;
 		KMADEUserExpressionField.this
-			.setValueIntoUserExpression(KMADEUserExpressionField.this
-				.getText());
-	    }
-	});
+				.setPreferredSize(new Dimension(20, KMADEUserExpressionField.this.getPreferredSize().height));
+		this.addKeyListener(new KeyAdapter() {
+			public void keyReleased(KeyEvent e) {
 
-	if (ref.getObjectValueState() == ExpressionConstant.VALUE) {
-	    this.setText(ref.getNodeValue().toString());
+				if (KMADEUserExpressionField.this.getText().length() < 2) {
+					KMADEUserExpressionField.this.setPreferredSize(
+							new Dimension(20, KMADEUserExpressionField.this.getPreferredSize().height));
+				} else {
+					KMADEUserExpressionField.this.setPreferredSize(null);
+				}
+
+				KMADEUserExpressionField.this.getParent().validate();
+				KMADEUserExpressionField.this.getParent().repaint();
+
+				KMADEUserExpressionField.this.setValueIntoUserExpression(KMADEUserExpressionField.this.getText());
+			}
+		});
+
+		if (ref.getObjectValueState() == ExpressionConstant.VALUE) {
+			this.setText(ref.getNodeValue().toString());
+		}
+		this.setAutoscrolls(true);
 	}
-	this.setAutoscrolls(true);
-    }
 
-    public UserExpression getUserExpression() {
-	return myUserExpression;
-    }
-
-    public void setInitValueIntoUserExpression(String myText) {
-	this.setText(myText);
-	this.setValueIntoUserExpression(myText);
-	if (this.getText().length() < 2) {
-	    KMADEUserExpressionField.this.setPreferredSize(new Dimension(20,
-		    KMADEUserExpressionField.this.getPreferredSize().height));
-	} else {
-	    KMADEUserExpressionField.this.setPreferredSize(null);
+	public UserExpression getUserExpression() {
+		return myUserExpression;
 	}
-    }
 
-    private void setValueIntoUserExpression(String myText) {
-	if (myUserExpression instanceof UserBoolean) {
-	    myUserExpression.setNodeValue(Boolean.valueOf(myText));
-	} else if (myUserExpression instanceof UserString) {
-	    myUserExpression.setNodeValue(myText);
-	} else if (myUserExpression instanceof UserNumber) {
-	    try {
-		myUserExpression.setNodeValue(new NumberValue(myText));
-	    } catch (NumberFormatException nfe) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.STRING_TO_INTEGER + " : "
-				+ myText);
-		myUserExpression.setStateToError();
-	    }
+	public void setInitValueIntoUserExpression(String myText) {
+		this.setText(myText);
+		this.setValueIntoUserExpression(myText);
+		if (this.getText().length() < 2) {
+			KMADEUserExpressionField.this
+					.setPreferredSize(new Dimension(20, KMADEUserExpressionField.this.getPreferredSize().height));
+		} else {
+			KMADEUserExpressionField.this.setPreferredSize(null);
+		}
 	}
-    }
 
-    public void setToUnknownUserExpression() {
-	myUserExpression.setStateToUnknown();
-    }
-
-    public boolean isUnknownOrErrorUserExpressionState() {
-	if (myUserExpression != null) {
-	    return (myUserExpression.isErrorState() || myUserExpression
-		    .isUnknownState());
-	} else {
-	    return true;
+	private void setValueIntoUserExpression(String myText) {
+		if (myUserExpression instanceof UserBoolean) {
+			myUserExpression.setNodeValue(Boolean.valueOf(myText));
+		} else if (myUserExpression instanceof UserString) {
+			myUserExpression.setNodeValue(myText);
+		} else if (myUserExpression instanceof UserNumber) {
+			try {
+				myUserExpression.setNodeValue(new NumberValue(myText));
+			} catch (NumberFormatException nfe) {
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.STRING_TO_INTEGER + " : " + myText);
+				myUserExpression.setStateToError();
+			}
+		}
 	}
-    }
+
+	public void setToUnknownUserExpression() {
+		myUserExpression.setStateToUnknown();
+	}
+
+	public boolean isUnknownOrErrorUserExpressionState() {
+		if (myUserExpression != null) {
+			return (myUserExpression.isErrorState() || myUserExpression.isUnknownState());
+		} else {
+			return true;
+		}
+	}
 }

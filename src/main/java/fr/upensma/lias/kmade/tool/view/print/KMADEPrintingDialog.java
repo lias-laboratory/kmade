@@ -51,237 +51,218 @@ import fr.upensma.lias.kmade.tool.viewadaptator.PrintAdaptator;
  * @author Mickael BARON
  */
 public class KMADEPrintingDialog extends JDialog implements LanguageFactory {
-    private static final long serialVersionUID = 4335454175244701286L;
+	private static final long serialVersionUID = 4335454175244701286L;
 
-    private static final ImageIcon LANDSCAPE_IMAGE = new ImageIcon(
-	    GraphicEditorAdaptator.class
-		    .getResource(KMADEConstant.LANDSCAPE_IMAGE));
+	private static final ImageIcon LANDSCAPE_IMAGE = new ImageIcon(
+			GraphicEditorAdaptator.class.getResource(KMADEConstant.LANDSCAPE_IMAGE));
 
-    private static final ImageIcon PORTRAIT_IMAGE = new ImageIcon(
-	    GraphicEditorAdaptator.class
-		    .getResource(KMADEConstant.PORTRAIT_IMAGE));
+	private static final ImageIcon PORTRAIT_IMAGE = new ImageIcon(
+			GraphicEditorAdaptator.class.getResource(KMADEConstant.PORTRAIT_IMAGE));
 
-    private String[] myTable = { "10%", "20%", "30%", "40%", "50%", "60%",
-	    "70%", "80%", "90%", "100%", "110%", "120%", "130%",
-	    KMADEConstant.PRINT_SCALE_ADAPT_MESSAGE,
-	    KMADEConstant.PRINT_SCALE_PERSONALIZE_MESSAGE };
+	private String[] myTable = { "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%", "110%", "120%",
+			"130%", KMADEConstant.PRINT_SCALE_ADAPT_MESSAGE, KMADEConstant.PRINT_SCALE_PERSONALIZE_MESSAGE };
 
-    private AbstractAction printAction;
+	private AbstractAction printAction;
 
-    private AbstractAction pageLayoutAction;
+	private AbstractAction pageLayoutAction;
 
-    private AbstractAction pdfAction;
+	private AbstractAction pdfAction;
 
-    private AbstractAction epsAction;
+	private AbstractAction epsAction;
 
-    private AbstractAction portraitAction;
+	private AbstractAction portraitAction;
 
-    private AbstractAction landscapeAction;
+	private AbstractAction landscapeAction;
 
-    private AbstractAction zoomInAction;
+	private AbstractAction zoomInAction;
 
-    private AbstractAction zoomOutAction;
+	private AbstractAction zoomOutAction;
 
-    private AbstractAction zoomDefaultAction;
+	private AbstractAction zoomDefaultAction;
 
-    private JLabel myLabel;
+	private JLabel myLabel;
 
-    private JComboBox myComboBox;
+	private JComboBox myComboBox;
 
-    private JTabbedPane category;
+	private JTabbedPane category;
 
-    private KMADEPrintingTaskModelPanel refTaskModel;
+	private KMADEPrintingTaskModelPanel refTaskModel;
 
-    private KMADEPrintingUserCardsPanel refUserCards;
+	private KMADEPrintingUserCardsPanel refUserCards;
 
-    private PageFormat pf;
+	private PageFormat pf;
 
-    private static PrinterJob printJob = PrinterJob.getPrinterJob();
+	private static PrinterJob printJob = PrinterJob.getPrinterJob();
 
-    public KMADEPrintingTaskModelPanel getTaskModel() {
-	return refTaskModel;
-    }
-
-    public KMADEPrintingUserCardsPanel getUserCards() {
-	return refUserCards;
-    }
-
-    public PageFormat getPageFormat() {
-	return pf;
-    }
-
-    public static PrinterJob getPrinterJob() {
-	return printJob;
-    }
-
-    public void setPageLayout() {
-	pf = printJob.pageDialog(pf);
-    }
-
-    public void setToPortrait() {
-	pf.setOrientation(PageFormat.PORTRAIT);
-    }
-
-    public void setToLandscape() {
-	pf.setOrientation(PageFormat.LANDSCAPE);
-    }
-
-    public KMADEPrintingDialog(Frame owner) {
-	super(owner, KMADEConstant.PRINT_PREVIEW_WINDOW_TITLE_NAME, true);
-
-	pf = printJob.defaultPage();
-
-	JToolBar myToolBar = new JToolBar();
-	myToolBar.setFloatable(false);
-
-	// Impression sur imprimante physique
-	printAction = new AbstractAction("", KMADEToolToolBar.PRINT) {
-	    private static final long serialVersionUID = 838662422873173261L;
-
-	    public void actionPerformed(ActionEvent e) {
-		PrintAdaptator.printAction();
-	    }
-	};
-	printAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.PRINT_ACTION_MESSAGE);
-	myToolBar.add(printAction);
-
-	// Mise en page
-	pageLayoutAction = new AbstractAction("", KMADEToolToolBar.PRINT_LAYOUT) {
-	    private static final long serialVersionUID = 838662422873173261L;
-
-	    public void actionPerformed(ActionEvent e) {
-		PrintAdaptator.pageLayoutAction();
-	    }
-	};
-	pageLayoutAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.LAYOUT_PRINT_ACTION_MESSAGE);
-	myToolBar.add(pageLayoutAction);
-	myToolBar.addSeparator();
-
-	// Impression en PDF (interne)
-	pdfAction = new AbstractAction("", KMADEToolToolBar.PRINT) {
-	    private static final long serialVersionUID = 838662422873173261L;
-
-	    public void actionPerformed(ActionEvent e) {
-	    }
-	};
-	pdfAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.PDF_EXPORT_ACTION_MESSAGE);
-	pdfAction.setEnabled(false);
-	myToolBar.add(pdfAction);
-
-	// Impression en EPS (interne)
-	epsAction = new AbstractAction("", KMADEToolToolBar.PRINT) {
-	    private static final long serialVersionUID = 838662422873173261L;
-
-	    public void actionPerformed(ActionEvent e) {
-	    }
-	};
-	epsAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.EPS_EXPORT_ACTION_MESSAGE);
-	epsAction.setEnabled(false);
-	myToolBar.add(epsAction);
-	myToolBar.addSeparator();
-
-	// Changement en portrait
-	portraitAction = new AbstractAction("", PORTRAIT_IMAGE) {
-	    private static final long serialVersionUID = 838662422873173261L;
-
-	    public void actionPerformed(ActionEvent e) {
-		PrintAdaptator.setToPortrait();
-	    }
-	};
-	portraitAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.PORTRAIT_ACTION_MESSAGE);
-	myToolBar.add(portraitAction);
-
-	// Changement en paysage
-	landscapeAction = new AbstractAction("", LANDSCAPE_IMAGE) {
-	    private static final long serialVersionUID = 838662422873173261L;
-
-	    public void actionPerformed(ActionEvent e) {
-		PrintAdaptator.setToLandscape();
-	    }
-	};
-	landscapeAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.LANDSCAPE_ACTION_MESSAGE);
-	myToolBar.add(landscapeAction);
-	myToolBar.addSeparator();
-
-	// Zoom de l'aperçu.
-	myLabel = new JLabel(KMADEConstant.SCALE_ACTION_MESSAGE);
-	myToolBar.add(myLabel);
-	myComboBox = new JComboBox();
-	myComboBox.setToolTipText(KMADEConstant.PREVIEW_ZOOM_ACTION_MESSAGE);
-	for (int i = 0; i < myTable.length; i++) {
-	    myComboBox.addItem(myTable[i]);
+	public KMADEPrintingTaskModelPanel getTaskModel() {
+		return refTaskModel;
 	}
-	myComboBox.setSelectedIndex(9);
 
-	myToolBar.add(myComboBox);
-	myComboBox.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		refTaskModel.setScaleView((myComboBox.getSelectedIndex() + 1) / 10.0);
-	    }
-	});
-	myToolBar.addSeparator();
+	public KMADEPrintingUserCardsPanel getUserCards() {
+		return refUserCards;
+	}
 
-	JPanel myPanelToolBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	myPanelToolBar.add(myToolBar);
-	this.getContentPane().add(BorderLayout.NORTH, myPanelToolBar);
+	public PageFormat getPageFormat() {
+		return pf;
+	}
 
-	category = new JTabbedPane();
-	refUserCards = new KMADEPrintingUserCardsPanel(this);
-	refTaskModel = new KMADEPrintingTaskModelPanel(this);
-	category.add(KMADEConstant.TREE_TASK_PRINT_TITLE_MESSAGE, refTaskModel);
-	category.add(KMADEConstant.USER_CARDS_PRINT_TITLE_MESSAGE, refUserCards);
-	category.add(KMADEConstant.OBJECTS_PRINT_TITLE_MESSAGE, new JPanel());
-	category.addChangeListener(new ChangeListener() {
-	    public void stateChanged(ChangeEvent e) {
-		PrintAdaptator.setSheet(category.getSelectedIndex());
-	    }
-	});
+	public static PrinterJob getPrinterJob() {
+		return printJob;
+	}
 
-	this.getContentPane().add(BorderLayout.CENTER, category);
+	public void setPageLayout() {
+		pf = printJob.pageDialog(pf);
+	}
 
-	this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-	this.addWindowListener(new WindowAdapter() {
-	    public void windowClosing(WindowEvent e) {
-		GraphicEditorAdaptator.closePrintDialog();
-	    }
-	});
+	public void setToPortrait() {
+		pf.setOrientation(PageFormat.PORTRAIT);
+	}
 
-	this.setPreferredSize(new Dimension(800, 700));
-	this.pack();
-	KMADEToolUtilities.setCenteredInScreen(this);
-	this.setVisible(false);
-    }
+	public void setToLandscape() {
+		pf.setOrientation(PageFormat.LANDSCAPE);
+	}
 
-    public void showTaskModel() {
-	category.setSelectedIndex(0);
-    }
+	public KMADEPrintingDialog(Frame owner) {
+		super(owner, KMADEConstant.PRINT_PREVIEW_WINDOW_TITLE_NAME, true);
 
-    public void notifLocalisationModification() {
-	this.setTitle(KMADEConstant.PRINT_PREVIEW_WINDOW_TITLE_NAME);
-	printAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.PRINT_ACTION_MESSAGE);
-	pageLayoutAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.LAYOUT_PRINT_ACTION_MESSAGE);
-	pdfAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.PDF_EXPORT_ACTION_MESSAGE);
-	epsAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.EPS_EXPORT_ACTION_MESSAGE);
-	portraitAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.PORTRAIT_ACTION_MESSAGE);
-	landscapeAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.LANDSCAPE_ACTION_MESSAGE);
-	zoomInAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.ZOOM_IN_ACTION_MESSAGE);
-	zoomOutAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.ZOOM_OUT_ACTION_MESSAGE);
-	zoomDefaultAction.putValue(AbstractAction.SHORT_DESCRIPTION,
-		KMADEConstant.ZOOM_DEFAULT_ACTION_MESSAGE);
-	myLabel.setText(KMADEConstant.SCALE_ACTION_MESSAGE);
-    }
+		pf = printJob.defaultPage();
+
+		JToolBar myToolBar = new JToolBar();
+		myToolBar.setFloatable(false);
+
+		// Impression sur imprimante physique
+		printAction = new AbstractAction("", KMADEToolToolBar.PRINT) {
+			private static final long serialVersionUID = 838662422873173261L;
+
+			public void actionPerformed(ActionEvent e) {
+				PrintAdaptator.printAction();
+			}
+		};
+		printAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.PRINT_ACTION_MESSAGE);
+		myToolBar.add(printAction);
+
+		// Mise en page
+		pageLayoutAction = new AbstractAction("", KMADEToolToolBar.PRINT_LAYOUT) {
+			private static final long serialVersionUID = 838662422873173261L;
+
+			public void actionPerformed(ActionEvent e) {
+				PrintAdaptator.pageLayoutAction();
+			}
+		};
+		pageLayoutAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.LAYOUT_PRINT_ACTION_MESSAGE);
+		myToolBar.add(pageLayoutAction);
+		myToolBar.addSeparator();
+
+		// Impression en PDF (interne)
+		pdfAction = new AbstractAction("", KMADEToolToolBar.PRINT) {
+			private static final long serialVersionUID = 838662422873173261L;
+
+			public void actionPerformed(ActionEvent e) {
+			}
+		};
+		pdfAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.PDF_EXPORT_ACTION_MESSAGE);
+		pdfAction.setEnabled(false);
+		myToolBar.add(pdfAction);
+
+		// Impression en EPS (interne)
+		epsAction = new AbstractAction("", KMADEToolToolBar.PRINT) {
+			private static final long serialVersionUID = 838662422873173261L;
+
+			public void actionPerformed(ActionEvent e) {
+			}
+		};
+		epsAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.EPS_EXPORT_ACTION_MESSAGE);
+		epsAction.setEnabled(false);
+		myToolBar.add(epsAction);
+		myToolBar.addSeparator();
+
+		// Changement en portrait
+		portraitAction = new AbstractAction("", PORTRAIT_IMAGE) {
+			private static final long serialVersionUID = 838662422873173261L;
+
+			public void actionPerformed(ActionEvent e) {
+				PrintAdaptator.setToPortrait();
+			}
+		};
+		portraitAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.PORTRAIT_ACTION_MESSAGE);
+		myToolBar.add(portraitAction);
+
+		// Changement en paysage
+		landscapeAction = new AbstractAction("", LANDSCAPE_IMAGE) {
+			private static final long serialVersionUID = 838662422873173261L;
+
+			public void actionPerformed(ActionEvent e) {
+				PrintAdaptator.setToLandscape();
+			}
+		};
+		landscapeAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.LANDSCAPE_ACTION_MESSAGE);
+		myToolBar.add(landscapeAction);
+		myToolBar.addSeparator();
+
+		// Zoom de l'aperçu.
+		myLabel = new JLabel(KMADEConstant.SCALE_ACTION_MESSAGE);
+		myToolBar.add(myLabel);
+		myComboBox = new JComboBox();
+		myComboBox.setToolTipText(KMADEConstant.PREVIEW_ZOOM_ACTION_MESSAGE);
+		for (int i = 0; i < myTable.length; i++) {
+			myComboBox.addItem(myTable[i]);
+		}
+		myComboBox.setSelectedIndex(9);
+
+		myToolBar.add(myComboBox);
+		myComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				refTaskModel.setScaleView((myComboBox.getSelectedIndex() + 1) / 10.0);
+			}
+		});
+		myToolBar.addSeparator();
+
+		JPanel myPanelToolBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		myPanelToolBar.add(myToolBar);
+		this.getContentPane().add(BorderLayout.NORTH, myPanelToolBar);
+
+		category = new JTabbedPane();
+		refUserCards = new KMADEPrintingUserCardsPanel(this);
+		refTaskModel = new KMADEPrintingTaskModelPanel(this);
+		category.add(KMADEConstant.TREE_TASK_PRINT_TITLE_MESSAGE, refTaskModel);
+		category.add(KMADEConstant.USER_CARDS_PRINT_TITLE_MESSAGE, refUserCards);
+		category.add(KMADEConstant.OBJECTS_PRINT_TITLE_MESSAGE, new JPanel());
+		category.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				PrintAdaptator.setSheet(category.getSelectedIndex());
+			}
+		});
+
+		this.getContentPane().add(BorderLayout.CENTER, category);
+
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				GraphicEditorAdaptator.closePrintDialog();
+			}
+		});
+
+		this.setPreferredSize(new Dimension(800, 700));
+		this.pack();
+		KMADEToolUtilities.setCenteredInScreen(this);
+		this.setVisible(false);
+	}
+
+	public void showTaskModel() {
+		category.setSelectedIndex(0);
+	}
+
+	public void notifLocalisationModification() {
+		this.setTitle(KMADEConstant.PRINT_PREVIEW_WINDOW_TITLE_NAME);
+		printAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.PRINT_ACTION_MESSAGE);
+		pageLayoutAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.LAYOUT_PRINT_ACTION_MESSAGE);
+		pdfAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.PDF_EXPORT_ACTION_MESSAGE);
+		epsAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.EPS_EXPORT_ACTION_MESSAGE);
+		portraitAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.PORTRAIT_ACTION_MESSAGE);
+		landscapeAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.LANDSCAPE_ACTION_MESSAGE);
+		zoomInAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.ZOOM_IN_ACTION_MESSAGE);
+		zoomOutAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.ZOOM_OUT_ACTION_MESSAGE);
+		zoomDefaultAction.putValue(AbstractAction.SHORT_DESCRIPTION, KMADEConstant.ZOOM_DEFAULT_ACTION_MESSAGE);
+		myLabel.setText(KMADEConstant.SCALE_ACTION_MESSAGE);
+	}
 }

@@ -26,44 +26,44 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class BinaryOther extends BinaryExpression {
 
-    private static final long serialVersionUID = 5800549777406230793L;
+	private static final long serialVersionUID = 5800549777406230793L;
 
-    public BinaryOther(NodeExpression left) {
-	super(new Object(), left);
-    }
-
-    public ArrayList<Object> getLinearExpression() {
-	ArrayList<Object> myLinearList = new ArrayList<Object>();
-	myLinearList.add("(");
-	for (Object current : leftNode.getLinearExpression()) {
-	    myLinearList.add(current);
-	}
-	myLinearList.add(this.getName());
-	for (Object current : rightNode.getLinearExpression()) {
-	    myLinearList.add(current);
-	}
-	myLinearList.add(")");
-	return myLinearList;
-    }
-
-    public void checkNode() throws SemanticException {
-	this.leftNode.checkNode();
-	this.rightNode.checkNode();
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	this.leftNode.evaluateNode(ref);
-	this.rightNode.evaluateNode(ref);
-
-	if (getLeftNode().isUnknownState() || getRightNode().isUnknownState()) {
-	    this.setStateToUnknown();
-	    throw new SemanticUnknownException();
+	public BinaryOther(NodeExpression left) {
+		super(new Object(), left);
 	}
 
-	if (getLeftNode().isErrorState() || getRightNode().isErrorState()) {
-	    this.setStateToError();
-	    throw new SemanticErrorException();
+	public ArrayList<Object> getLinearExpression() {
+		ArrayList<Object> myLinearList = new ArrayList<Object>();
+		myLinearList.add("(");
+		for (Object current : leftNode.getLinearExpression()) {
+			myLinearList.add(current);
+		}
+		myLinearList.add(this.getName());
+		for (Object current : rightNode.getLinearExpression()) {
+			myLinearList.add(current);
+		}
+		myLinearList.add(")");
+		return myLinearList;
 	}
-	this.setStateToValue();
-    }
+
+	public void checkNode() throws SemanticException {
+		this.leftNode.checkNode();
+		this.rightNode.checkNode();
+	}
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		this.leftNode.evaluateNode(ref);
+		this.rightNode.evaluateNode(ref);
+
+		if (getLeftNode().isUnknownState() || getRightNode().isUnknownState()) {
+			this.setStateToUnknown();
+			throw new SemanticUnknownException();
+		}
+
+		if (getLeftNode().isErrorState() || getRightNode().isErrorState()) {
+			this.setStateToError();
+			throw new SemanticErrorException();
+		}
+		this.setStateToValue();
+	}
 }

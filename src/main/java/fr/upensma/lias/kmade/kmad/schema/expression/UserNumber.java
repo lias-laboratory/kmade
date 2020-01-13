@@ -22,14 +22,14 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public class UserNumber extends UserExpression {
 
-    private static final long serialVersionUID = -3231262251190611391L;
+	private static final long serialVersionUID = -3231262251190611391L;
 
-    public UserNumber() {
-	super(0);
-	this.name = "?nb";
-    }
+	public UserNumber() {
+		super(0);
+		this.name = "?nb";
+	}
 
-    public String toString() {
-	return super.toString();
-    }
+	public String toString() {
+		return super.toString();
+	}
 }

@@ -29,74 +29,68 @@ import fr.upensma.lias.kmade.tool.view.worldobject.abstractobject.KMADEReadWrite
  */
 public final class AbstractAttributeAdaptator {
 
-    public static void removeAllAtributes() {
-	KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor()
-		.getAbstractObjectAttributTable().removeAllAttributes();
-    }
-
-    public static void updateEnumList() {
-	String[][] listEnumeration = ExpressEnum.getArrayEnum();
-	if (listEnumeration == null) {
-	    listEnumeration = new String[0][2];
+	public static void removeAllAtributes() {
+		KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor().getAbstractObjectAttributTable()
+				.removeAllAttributes();
 	}
-	updateAttributes();
-	KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor()
-		.getAbstractObjectAttributTable()
-		.buildEnumerationList(listEnumeration);
-    }
 
-    public static void updateIntervalList() {
-	String[][] listIntervalle = ExpressInterval.getArrayIntervals();
-	if (listIntervalle == null) {
-	    listIntervalle = new String[0][2];
+	public static void updateEnumList() {
+		String[][] listEnumeration = ExpressEnum.getArrayEnum();
+		if (listEnumeration == null) {
+			listEnumeration = new String[0][2];
+		}
+		updateAttributes();
+		KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor().getAbstractObjectAttributTable()
+				.buildEnumerationList(listEnumeration);
 	}
-	updateAttributes();
-	KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor()
-		.getAbstractObjectAttributTable()
-		.buildIntervalList(listIntervalle);
-    }
 
-    public static String addAbstractAttributes(String oidObjAbs) {
-	if (!oidObjAbs.equals(Oid.OID_NULL)) {
-	    Oid oid = new Oid(oidObjAbs);
-	    return (ExpressAbstractAttribut.createAbstractAttribut(oid));
-	} else {
-	    return "-1";
+	public static void updateIntervalList() {
+		String[][] listIntervalle = ExpressInterval.getArrayIntervals();
+		if (listIntervalle == null) {
+			listIntervalle = new String[0][2];
+		}
+		updateAttributes();
+		KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor().getAbstractObjectAttributTable()
+				.buildIntervalList(listIntervalle);
 	}
-    }
 
-    public static String setAbstractAttributeName(String oid, String name) {
-	return ExpressAbstractAttribut.setAbstractAttributName(oid, name);
-    }
+	public static String addAbstractAttributes(String oidObjAbs) {
+		if (!oidObjAbs.equals(Oid.OID_NULL)) {
+			Oid oid = new Oid(oidObjAbs);
+			return (ExpressAbstractAttribut.createAbstractAttribut(oid));
+		} else {
+			return "-1";
+		}
+	}
 
-    public static void setAbstractAttributDescription(String oid,
-	    String description) {
-	ExpressAbstractAttribut
-		.setAbstractAttributDescription(oid, description);
-    }
+	public static String setAbstractAttributeName(String oid, String name) {
+		return ExpressAbstractAttribut.setAbstractAttributName(oid, name);
+	}
 
-    public static void setAbstractAttributType(String oid, String type) {
-	ExpressAbstractAttribut.setAbstractAttributType(oid, type);
-    }
+	public static void setAbstractAttributDescription(String oid, String description) {
+		ExpressAbstractAttribut.setAbstractAttributDescription(oid, description);
+	}
 
-    public static void setAbstractAttributNameType(String oid,
-	    String oidnameType) {
-	ExpressAbstractAttribut.setAbstractAttributNameType(oid, oidnameType);
-    }
+	public static void setAbstractAttributType(String oid, String type) {
+		ExpressAbstractAttribut.setAbstractAttributType(oid, type);
+	}
 
-    public static void removeAbstractAttribute(String oid) {
-	ExpressAbstractAttribut.removeAbstractAttribut(oid);
-    }
+	public static void setAbstractAttributNameType(String oid, String oidnameType) {
+		ExpressAbstractAttribut.setAbstractAttributNameType(oid, oidnameType);
+	}
 
-    public static void affRemoveAttrAbs(String oid) {
-	ExpressAbstractAttribut.affRemoveAbstractAttribut(oid);
-    }
+	public static void removeAbstractAttribute(String oid) {
+		ExpressAbstractAttribut.removeAbstractAttribut(oid);
+	}
 
-    public static void updateAttributes() {
-	Object[][] tabAttr = ExpressAbstractObject
-		.getAttributes(AbstractObjectPanelAdaptator
-			.getActiveAbstractObject());
-	KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor()
-		.getAbstractObjectAttributTable().updateDataModel(tabAttr);
-    }
+	public static void affRemoveAttrAbs(String oid) {
+		ExpressAbstractAttribut.affRemoveAbstractAttribut(oid);
+	}
+
+	public static void updateAttributes() {
+		Object[][] tabAttr = ExpressAbstractObject
+				.getAttributes(AbstractObjectPanelAdaptator.getActiveAbstractObject());
+		KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor().getAbstractObjectAttributTable()
+				.updateDataModel(tabAttr);
+	}
 }

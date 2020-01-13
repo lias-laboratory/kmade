@@ -30,60 +30,54 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  */
 public class StackCell extends GroupDefaultGraphCell {
 
-    private static final long serialVersionUID = -5888066168242352877L;
+	private static final long serialVersionUID = -5888066168242352877L;
 
-    @SuppressWarnings("unused")
-    private PileAg stack;
+	@SuppressWarnings("unused")
+	private PileAg stack;
 
-    /**
-     * First constructor for the cell (the point is not created yet)
-     * 
-     * @param stack
-     *            represented by the cell
-     * @param point
-     *            x in the graph
-     * @param point
-     *            y in the graph
-     */
-    public StackCell(Groupe o, int x, int y) {
-	super(o, x, y);
-	this.stack = (PileAg) o.getEnsemble();
-    }
+	/**
+	 * First constructor for the cell (the point is not created yet)
+	 * 
+	 * @param stack represented by the cell
+	 * @param point x in the graph
+	 * @param point y in the graph
+	 */
+	public StackCell(Groupe o, int x, int y) {
+		super(o, x, y);
+		this.stack = (PileAg) o.getEnsemble();
+	}
 
-    /**
-     * Second constructor for the cell (the point is already yet)
-     * 
-     * @param stack
-     *            represented by the cell
-     * @param point
-     *            in the graph
-     */
-    public StackCell(Groupe g, Point point) {
-	super(g, point);
-	this.stack = (PileAg) g.getEnsemble();
-    }
+	/**
+	 * Second constructor for the cell (the point is already yet)
+	 * 
+	 * @param stack represented by the cell
+	 * @param point in the graph
+	 */
+	public StackCell(Groupe g, Point point) {
+		super(g, point);
+		this.stack = (PileAg) g.getEnsemble();
+	}
 
-    /**
-     * Method to add a cell in the stack in the first position
-     */
-    @Override
-    public void addCellToGroup(ConcreteObjectCell cell) {
-	this.childCells.add(0, cell);
-	((ObjetConcret) cell.getObject()).setAppartientGroupe(this.group);
-    }
+	/**
+	 * Method to add a cell in the stack in the first position
+	 */
+	@Override
+	public void addCellToGroup(ConcreteObjectCell cell) {
+		this.childCells.add(0, cell);
+		((ObjetConcret) cell.getObject()).setAppartientGroupe(this.group);
+	}
 
-    /**
-     * Method to set the selected cell in the group
-     * 
-     * @param index
-     *            of the cell
-     */
-    @Override
-    public void setSelectedIndex(int i) {
-	if (i != -1) {
-	    this.selectedIndex = 0;
-	} else
-	    this.selectedIndex = i;
-    }
+	/**
+	 * Method to set the selected cell in the group
+	 * 
+	 * @param index of the cell
+	 */
+	@Override
+	public void setSelectedIndex(int i) {
+		if (i != -1) {
+			this.selectedIndex = 0;
+		} else
+			this.selectedIndex = i;
+	}
 
 }

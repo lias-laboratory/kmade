@@ -35,80 +35,71 @@ import javax.swing.JLabel;
  * @author Mickael BARON
  */
 public class KMADEToolUtilities {
-    public static void setCenteredInScreen(Window p_window) {
-	Dimension screen_dimension = Toolkit.getDefaultToolkit()
-		.getScreenSize();
-	p_window.setLocation(
-		(int) ((screen_dimension.getWidth() - p_window.getWidth()) / 2),
-		(int) ((screen_dimension.getHeight() - p_window.getHeight()) / 2));
-    }
-
-    public static JLabel getLabelCenter(String p_texte) {
-	JLabel nouveau = new JLabel(p_texte);
-	nouveau.setAlignmentX(Component.CENTER_ALIGNMENT);
-	return nouveau;
-    }
-
-    public static Image getImageThumbnail(String image, int requestedThumbSize) {
-	try {
-	    BufferedImage imageBuffered = ImageIO.read(new File(image));
-	    if (imageBuffered.getType() == 0) {
-		return imageBuffered.getScaledInstance(-1, requestedThumbSize,
-			Image.SCALE_FAST);
-	    }
-	    return KMADEToolUtilities.createThumbnail(imageBuffered,
-		    requestedThumbSize);
-	} catch (Exception e) {
-	    return null;
+	public static void setCenteredInScreen(Window p_window) {
+		Dimension screen_dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		p_window.setLocation((int) ((screen_dimension.getWidth() - p_window.getWidth()) / 2),
+				(int) ((screen_dimension.getHeight() - p_window.getHeight()) / 2));
 	}
-    }
 
-    public static Image getImageThumbnail(URL image, int requestedThumbSize) {
-	try {
-	    BufferedImage imageBuffered = ImageIO.read(image);
-	    if (imageBuffered.getType() == 0) {
-		return imageBuffered.getScaledInstance(-1, requestedThumbSize,
-			Image.SCALE_FAST);
-	    }
-	    return KMADEToolUtilities.createThumbnail(imageBuffered,
-		    requestedThumbSize);
-	} catch (Exception e) {
-	    e.printStackTrace();
-	    return null;
+	public static JLabel getLabelCenter(String p_texte) {
+		JLabel nouveau = new JLabel(p_texte);
+		nouveau.setAlignmentX(Component.CENTER_ALIGNMENT);
+		return nouveau;
 	}
-    }
 
-    public static BufferedImage createThumbnail(BufferedImage image,
-	    int requestedThumbSize) {
-	float ratio = (float) image.getWidth() / (float) image.getHeight();
-	int height = image.getHeight();
-	boolean divide = requestedThumbSize < height;
-	BufferedImage thumb = image;
-
-	do {
-	    if (divide) {
-		height /= 2;
-		if (height < requestedThumbSize) {
-		    height = requestedThumbSize;
+	public static Image getImageThumbnail(String image, int requestedThumbSize) {
+		try {
+			BufferedImage imageBuffered = ImageIO.read(new File(image));
+			if (imageBuffered.getType() == 0) {
+				return imageBuffered.getScaledInstance(-1, requestedThumbSize, Image.SCALE_FAST);
+			}
+			return KMADEToolUtilities.createThumbnail(imageBuffered, requestedThumbSize);
+		} catch (Exception e) {
+			return null;
 		}
-	    } else {
-		height *= 2;
-		if (height > requestedThumbSize) {
-		    height = requestedThumbSize;
+	}
+
+	public static Image getImageThumbnail(URL image, int requestedThumbSize) {
+		try {
+			BufferedImage imageBuffered = ImageIO.read(image);
+			if (imageBuffered.getType() == 0) {
+				return imageBuffered.getScaledInstance(-1, requestedThumbSize, Image.SCALE_FAST);
+			}
+			return KMADEToolUtilities.createThumbnail(imageBuffered, requestedThumbSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-	    }
+	}
 
-	    BufferedImage temp = new BufferedImage((int) (height * ratio),
-		    height, image.getType());
-	    Graphics2D g2 = temp.createGraphics();
-	    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-		    RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-	    g2.drawImage(thumb, 0, 0, temp.getWidth(), temp.getHeight(), null);
-	    g2.dispose();
+	public static BufferedImage createThumbnail(BufferedImage image, int requestedThumbSize) {
+		float ratio = (float) image.getWidth() / (float) image.getHeight();
+		int height = image.getHeight();
+		boolean divide = requestedThumbSize < height;
+		BufferedImage thumb = image;
 
-	    thumb = temp;
-	} while (height != requestedThumbSize);
+		do {
+			if (divide) {
+				height /= 2;
+				if (height < requestedThumbSize) {
+					height = requestedThumbSize;
+				}
+			} else {
+				height *= 2;
+				if (height > requestedThumbSize) {
+					height = requestedThumbSize;
+				}
+			}
 
-	return thumb;
-    }
+			BufferedImage temp = new BufferedImage((int) (height * ratio), height, image.getType());
+			Graphics2D g2 = temp.createGraphics();
+			g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+			g2.drawImage(thumb, 0, 0, temp.getWidth(), temp.getHeight(), null);
+			g2.dispose();
+
+			thumb = temp;
+		} while (height != requestedThumbSize);
+
+		return thumb;
+	}
 }

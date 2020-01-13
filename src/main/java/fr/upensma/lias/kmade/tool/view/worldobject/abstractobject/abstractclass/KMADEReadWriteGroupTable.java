@@ -249,6 +249,6 @@ public class KMADEReadWriteGroupTable extends JScrollPane implements
 	myTableListModel
 		.setNameDefault(KMADEConstant.ABSTRACT_GROUP_NEW_OBJECT_TABLE);
 	String[] enumList = AgregatStructure.getLocaleAgregatStructures();
-	myListTable.setCellEditor(2, "List", enumList);
-    }
+		myListTable.setCellEditor(2, "List", enumList);
+	}
 }

@@ -36,49 +36,49 @@ import javax.swing.UIManager;
  */
 public class VerticalTextIcon implements Icon, SwingConstants {
 
-    private Font font = UIManager.getFont("Label.font");
+	private Font font = UIManager.getFont("Label.font");
 
-    private FontMetrics fm;
+	private FontMetrics fm;
 
-    private String text;
+	private String text;
 
-    private int width;
+	private int width;
 
-    private boolean clockWize;
+	private boolean clockWize;
 
-    public VerticalTextIcon(String text, boolean clockWize, JPanel cible) {
-	this.text = " " + text + " ";
-	fm = cible.getFontMetrics(font);
-	width = SwingUtilities.computeStringWidth(fm, this.text);
-	this.clockWize = clockWize;
-    }
-
-    public void paintIcon(Component c, Graphics g, int x, int y) {
-	Graphics2D g2 = (Graphics2D) g;
-	Font oldFont = g.getFont();
-	Color oldColor = g.getColor();
-	AffineTransform oldTransform = g2.getTransform();
-	g.setFont(font);
-	g.setColor(Color.black);
-	if (clockWize) {
-	    g2.translate(x + getIconWidth(), y);
-	    g2.rotate(Math.PI / 2);
-	} else {
-	    g2.translate(x - 6, y + getIconHeight());
-	    g2.rotate(-Math.PI / 2);
+	public VerticalTextIcon(String text, boolean clockWize, JPanel cible) {
+		this.text = " " + text + " ";
+		fm = cible.getFontMetrics(font);
+		width = SwingUtilities.computeStringWidth(fm, this.text);
+		this.clockWize = clockWize;
 	}
-	g.drawString(text, 0, fm.getLeading() + fm.getAscent());
-	g.setFont(oldFont);
-	g.setColor(oldColor);
-	g2.setTransform(oldTransform);
 
-    }
+	public void paintIcon(Component c, Graphics g, int x, int y) {
+		Graphics2D g2 = (Graphics2D) g;
+		Font oldFont = g.getFont();
+		Color oldColor = g.getColor();
+		AffineTransform oldTransform = g2.getTransform();
+		g.setFont(font);
+		g.setColor(Color.black);
+		if (clockWize) {
+			g2.translate(x + getIconWidth(), y);
+			g2.rotate(Math.PI / 2);
+		} else {
+			g2.translate(x - 6, y + getIconHeight());
+			g2.rotate(-Math.PI / 2);
+		}
+		g.drawString(text, 0, fm.getLeading() + fm.getAscent());
+		g.setFont(oldFont);
+		g.setColor(oldColor);
+		g2.setTransform(oldTransform);
 
-    public int getIconWidth() {
-	return 0;
-    }
+	}
 
-    public int getIconHeight() {
-	return width + 2;
-    }
+	public int getIconWidth() {
+		return 0;
+	}
+
+	public int getIconHeight() {
+		return width + 2;
+	}
 }

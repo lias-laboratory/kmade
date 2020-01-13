@@ -29,66 +29,64 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public class ListeAg extends Agregat implements Entity {
 
-    private static final long serialVersionUID = -1653901133419278678L;
+	private static final long serialVersionUID = -1653901133419278678L;
 
-    public ListeAg() {
-	this.lstObjConcrets = new ArrayList<ObjetConcret>();
-	this.agregatStruct = AgregatStructure.LIST_AGREGAT;
-    }
-
-    public ListeAg(Oid oid) {
-	this.lstObjConcrets = new ArrayList<ObjetConcret>();
-	this.agregatStruct = AgregatStructure.LIST_AGREGAT;
-	this.oid = oid;
-    }
-
-    public ListeAg(ArrayList<ObjetConcret> lst, Oid oid) {
-	this.lstObjConcrets = lst;
-	this.oid = oid;
-	this.agregatStruct = AgregatStructure.LIST_AGREGAT;
-    }
-
-    public ObjetConcret get() {
-	try {
-	    return this.lstObjConcrets.get(0);
-	} catch (java.lang.IndexOutOfBoundsException e) {
-	    return null;
+	public ListeAg() {
+		this.lstObjConcrets = new ArrayList<ObjetConcret>();
+		this.agregatStruct = AgregatStructure.LIST_AGREGAT;
 	}
-    }
 
-    public boolean put(ObjetConcret i) {
-	this.lstObjConcrets.add(i);
-	return true;
-    }
+	public ListeAg(Oid oid) {
+		this.lstObjConcrets = new ArrayList<ObjetConcret>();
+		this.agregatStruct = AgregatStructure.LIST_AGREGAT;
+		this.oid = oid;
+	}
 
-    public String toSPF() {
-	String SPF = this.oid.get() + "=ListeAg()";
-	return SPF;
-    }
+	public ListeAg(ArrayList<ObjetConcret> lst, Oid oid) {
+		this.lstObjConcrets = lst;
+		this.oid = oid;
+		this.agregatStruct = AgregatStructure.LIST_AGREGAT;
+	}
 
-    public void setOid(Oid oid) {
-	this.oid = oid;
-    }
+	public ObjetConcret get() {
+		try {
+			return this.lstObjConcrets.get(0);
+		} catch (java.lang.IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
 
-    public Oid getOid() {
-	return oid;
-    }
+	public boolean put(ObjetConcret i) {
+		this.lstObjConcrets.add(i);
+		return true;
+	}
 
-    public String getName() {
-	return AgregatStructure
-		.getEnumereIntoLocaleAgregatStructure(AgregatStructure.LIST_AGREGAT
-			.getValue());
-    }
+	public String toSPF() {
+		String SPF = this.oid.get() + "=ListeAg()";
+		return SPF;
+	}
 
-    public org.w3c.dom.Element toXML(Document doc) {
-	org.w3c.dom.Element racine = super.toXML(doc);
-	racine.setAttribute("classkmad", "metaobjet.ListeAg");
-	return racine;
-    }
+	public void setOid(Oid oid) {
+		this.oid = oid;
+	}
 
-    public org.w3c.dom.Element toXML2(Document doc) {
-	org.w3c.dom.Element racine = super.toXML2(doc);
-	racine.setAttribute("classkmad", "metaobjet.ListeAg");
-	return racine;
-    }
+	public Oid getOid() {
+		return oid;
+	}
+
+	public String getName() {
+		return AgregatStructure.getEnumereIntoLocaleAgregatStructure(AgregatStructure.LIST_AGREGAT.getValue());
+	}
+
+	public org.w3c.dom.Element toXML(Document doc) {
+		org.w3c.dom.Element racine = super.toXML(doc);
+		racine.setAttribute("classkmad", "metaobjet.ListeAg");
+		return racine;
+	}
+
+	public org.w3c.dom.Element toXML2(Document doc) {
+		org.w3c.dom.Element racine = super.toXML2(doc);
+		racine.setAttribute("classkmad", "metaobjet.ListeAg");
+		return racine;
+	}
 }

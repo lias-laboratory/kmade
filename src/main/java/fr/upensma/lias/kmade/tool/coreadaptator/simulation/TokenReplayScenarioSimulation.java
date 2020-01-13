@@ -24,88 +24,87 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Task;
 /**
  * @author Mickael BARON
  */
-public class TokenReplayScenarioSimulation extends
-	TokenRecordScenarioSimulation {
+public class TokenReplayScenarioSimulation extends TokenRecordScenarioSimulation {
 
-    public static final int DONE_STATE = 0;
+	public static final int DONE_STATE = 0;
 
-    public static final int NOT_DONE_STATE = 1;
+	public static final int NOT_DONE_STATE = 1;
 
-    public static final int ERROR_STATE = 2;
+	public static final int ERROR_STATE = 2;
 
-    protected int state = 1;
+	protected int state = 1;
 
-    protected ArrayList<Task> myPossibleTasks = new ArrayList<Task>();
+	protected ArrayList<Task> myPossibleTasks = new ArrayList<Task>();
 
-    protected boolean notFounded;
+	protected boolean notFounded;
 
-    public TokenReplayScenarioSimulation(Task p, int paction) {
-	// La tâche trouvée est une tâche du modèle. Rien ne dit que c'est la
-	// bonne.
-	super(p, paction);
-	notFounded = (p == null);
-    }
-
-    public TokenReplayScenarioSimulation(Task p) {
-	this(p, -1);
-	myPossibleTasks = new ArrayList<Task>();
-    }
-
-    public TokenReplayScenarioSimulation() {
-	this(null, -1);
-	myPossibleTasks = new ArrayList<Task>();
-    }
-
-    public TokenReplayScenarioSimulation(ArrayList<Task> possibleTasks) {
-	this(null, -1);
-	myPossibleTasks = possibleTasks;
-    }
-
-    public boolean isNotFounded() {
-	return notFounded;
-    }
-
-    public void setAction(int p) {
-	this.action = p;
-    }
-
-    public boolean isDoneState() {
-	return this.state == TokenReplayScenarioSimulation.DONE_STATE;
-    }
-
-    public boolean isNotDoneState() {
-	return this.state == TokenReplayScenarioSimulation.NOT_DONE_STATE;
-    }
-
-    public boolean isErrorState() {
-	return this.state == TokenReplayScenarioSimulation.ERROR_STATE;
-    }
-
-    public void setToDoneState() {
-	this.state = DONE_STATE;
-    }
-
-    public void setToNotDoneState() {
-	this.state = NOT_DONE_STATE;
-    }
-
-    public void setToErrorState() {
-	this.state = ERROR_STATE;
-    }
-
-    /**
-     * Cette méthode permet de vérifier parmi la liste donnée s'il existe une
-     * tâche identique (Lia liste correspond à la liste des tâches actionables).
-     * 
-     * @param p
-     * @return
-     */
-    public boolean isActionable(ArrayList<Task> p) {
-	for (Task current : p) {
-	    if (current.getOid().get().equals(myTask.getOid().get())) {
-		return true;
-	    }
+	public TokenReplayScenarioSimulation(Task p, int paction) {
+		// La tâche trouvée est une tâche du modèle. Rien ne dit que c'est la
+		// bonne.
+		super(p, paction);
+		notFounded = (p == null);
 	}
-	return false;
-    }
+
+	public TokenReplayScenarioSimulation(Task p) {
+		this(p, -1);
+		myPossibleTasks = new ArrayList<Task>();
+	}
+
+	public TokenReplayScenarioSimulation() {
+		this(null, -1);
+		myPossibleTasks = new ArrayList<Task>();
+	}
+
+	public TokenReplayScenarioSimulation(ArrayList<Task> possibleTasks) {
+		this(null, -1);
+		myPossibleTasks = possibleTasks;
+	}
+
+	public boolean isNotFounded() {
+		return notFounded;
+	}
+
+	public void setAction(int p) {
+		this.action = p;
+	}
+
+	public boolean isDoneState() {
+		return this.state == TokenReplayScenarioSimulation.DONE_STATE;
+	}
+
+	public boolean isNotDoneState() {
+		return this.state == TokenReplayScenarioSimulation.NOT_DONE_STATE;
+	}
+
+	public boolean isErrorState() {
+		return this.state == TokenReplayScenarioSimulation.ERROR_STATE;
+	}
+
+	public void setToDoneState() {
+		this.state = DONE_STATE;
+	}
+
+	public void setToNotDoneState() {
+		this.state = NOT_DONE_STATE;
+	}
+
+	public void setToErrorState() {
+		this.state = ERROR_STATE;
+	}
+
+	/**
+	 * Cette méthode permet de vérifier parmi la liste donnée s'il existe une tâche
+	 * identique (Lia liste correspond à la liste des tâches actionables).
+	 * 
+	 * @param p
+	 * @return
+	 */
+	public boolean isActionable(ArrayList<Task> p) {
+		for (Task current : p) {
+			if (current.getOid().get().equals(myTask.getOid().get())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

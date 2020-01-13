@@ -28,81 +28,77 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.Intervalle;
  * @author Mickael BARON
  */
 public class ExpressInterval {
-    public static String createInterval() {
-	Oid oidIntervalle = InterfaceExpressJava
-		.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.RANGE_CLASS);
-	return (oidIntervalle.get());
-    }
-
-    public static void removeInterval(String oid) {
-	Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
-	m.delete();
-    }
-
-    public static void affRemoveInterval(String oid) {
-	Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
-	m.affDelete();
-    }
-
-    public static String setIntervalName(String oid, String name) {
-	Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setName(name);
-	return m.getName();
-    }
-
-    public static void setIntervalDescription(String oid, String description) {
-	Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setDescription(description);
-    }
-
-    public static void setIntervalMin(String oid, Integer min) {
-	Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setMin(min);
-    }
-
-    public static void setIntervalMax(String oid, Integer max) {
-	Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setMax(max);
-    }
-
-    public static String[][] getArrayIntervals() {
-	Object[] intervalles = InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.RANGE_CLASS);
-	if (intervalles.length == 0)
-	    return null;
-	String[][] s = new String[intervalles.length][2];
-	for (int i = 0; i < intervalles.length; i++) {
-	    Intervalle intervalle = (Intervalle) intervalles[i];
-	    s[i][0] = intervalle.getName();
-	    s[i][1] = intervalle.getOid().get();
+	public static String createInterval() {
+		Oid oidIntervalle = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.RANGE_CLASS);
+		return (oidIntervalle.get());
 	}
-	return s;
-    }
 
-    public static ArrayList<Intervalle> getIntervals() {
-	ArrayList<Intervalle> lst = new ArrayList<Intervalle>();
-	Object[] objs = InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.RANGE_CLASS);
-	for (int i = 0; i < objs.length; i++) {
-	    Intervalle obj = (Intervalle) objs[i];
-	    lst.add(obj);
+	public static void removeInterval(String oid) {
+		Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
+		m.delete();
 	}
-	return lst;
-    }
 
-    public static Intervalle getInterval(String name) {
-	Object[] objs = InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.RANGE_CLASS);
-	for (int i = 0; i < objs.length; i++) {
-	    Intervalle obj = (Intervalle) objs[i];
-	    if (obj.getName().equals(name)) {
-		return obj;
-	    }
+	public static void affRemoveInterval(String oid) {
+		Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
+		m.affDelete();
 	}
-	return null;
-    }
+
+	public static String setIntervalName(String oid, String name) {
+		Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setName(name);
+		return m.getName();
+	}
+
+	public static void setIntervalDescription(String oid, String description) {
+		Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setDescription(description);
+	}
+
+	public static void setIntervalMin(String oid, Integer min) {
+		Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setMin(min);
+	}
+
+	public static void setIntervalMax(String oid, Integer max) {
+		Intervalle m = (Intervalle) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setMax(max);
+	}
+
+	public static String[][] getArrayIntervals() {
+		Object[] intervalles = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.RANGE_CLASS);
+		if (intervalles.length == 0)
+			return null;
+		String[][] s = new String[intervalles.length][2];
+		for (int i = 0; i < intervalles.length; i++) {
+			Intervalle intervalle = (Intervalle) intervalles[i];
+			s[i][0] = intervalle.getName();
+			s[i][1] = intervalle.getOid().get();
+		}
+		return s;
+	}
+
+	public static ArrayList<Intervalle> getIntervals() {
+		ArrayList<Intervalle> lst = new ArrayList<Intervalle>();
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.RANGE_CLASS);
+		for (int i = 0; i < objs.length; i++) {
+			Intervalle obj = (Intervalle) objs[i];
+			lst.add(obj);
+		}
+		return lst;
+	}
+
+	public static Intervalle getInterval(String name) {
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.RANGE_CLASS);
+		for (int i = 0; i < objs.length; i++) {
+			Intervalle obj = (Intervalle) objs[i];
+			if (obj.getName().equals(name)) {
+				return obj;
+			}
+		}
+		return null;
+	}
 }

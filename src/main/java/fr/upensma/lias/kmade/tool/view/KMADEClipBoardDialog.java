@@ -54,134 +54,129 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
  */
 public class KMADEClipBoardDialog extends JDialog implements LanguageFactory {
 
-    private static final long serialVersionUID = -4814746185677765580L;
+	private static final long serialVersionUID = -4814746185677765580L;
 
-    private ComponentListener componentListener;
+	private ComponentListener componentListener;
 
-    private JGraph myGraph = new JGraph();
+	private JGraph myGraph = new JGraph();
 
-    private JScrollPane myScrollPane;
+	private JScrollPane myScrollPane;
 
-    private DefaultGraphModel refModel;
+	private DefaultGraphModel refModel;
 
-    public KMADEClipBoardDialog(JFrame owner) {
-	super(owner, KMADEConstant.CLIPBOARD_TITLE_NAME);
-	componentListener = new ComponentAdapter() {
-	    public void componentResized(ComponentEvent componentevent) {
+	public KMADEClipBoardDialog(JFrame owner) {
+		super(owner, KMADEConstant.CLIPBOARD_TITLE_NAME);
+		componentListener = new ComponentAdapter() {
+			public void componentResized(ComponentEvent componentevent) {
 
-		updateScale();
-	    }
-	};
-	refModel = new DefaultGraphModel();
-	myGraph.setModel(refModel);
-	myGraph.setOpaque(true);
-	myGraph.setScale(1);
-	myGraph.setEnabled(false);
-	myGraph.setFocusable(false);
-	myGraph.setGridEnabled(false);
+				updateScale();
+			}
+		};
+		refModel = new DefaultGraphModel();
+		myGraph.setModel(refModel);
+		myGraph.setOpaque(true);
+		myGraph.setScale(1);
+		myGraph.setEnabled(false);
+		myGraph.setFocusable(false);
+		myGraph.setGridEnabled(false);
 
-	myGraph.getGraphLayoutCache().setFactory(new DefaultCellViewFactory() {
+		myGraph.getGraphLayoutCache().setFactory(new DefaultCellViewFactory() {
 
-	    private static final long serialVersionUID = -733364299084085305L;
+			private static final long serialVersionUID = -733364299084085305L;
 
-	    public CellView createView(GraphModel arg0, Object arg1) {
-		if (arg1 instanceof KMADEDefaultGraphCell) {
-		    return new KMADEVertexView(arg1, myGraph);
-		} else if (arg1 instanceof DefaultPort) {
-		    return new KMADEPortView(arg1);
-		} else if (arg1 instanceof DefaultEdge)
-		    return new KMADEEdgeView(arg1, myGraph);
-		{
-		    return super.createView(arg0, arg1);
+			public CellView createView(GraphModel arg0, Object arg1) {
+				if (arg1 instanceof KMADEDefaultGraphCell) {
+					return new KMADEVertexView(arg1, myGraph);
+				} else if (arg1 instanceof DefaultPort) {
+					return new KMADEPortView(arg1);
+				} else if (arg1 instanceof DefaultEdge)
+					return new KMADEEdgeView(arg1, myGraph);
+				{
+					return super.createView(arg0, arg1);
+				}
+			}
+		});
+
+		myScrollPane = new JScrollPane(myGraph);
+		this.getContentPane().add(BorderLayout.CENTER, myScrollPane);
+		this.addComponentListener(componentListener);
+		this.setPreferredSize(new Dimension(200, 200));
+		this.pack();
+		KMADEToolUtilities.setCenteredInScreen(this);
+		this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
+		this.setGlassPane(new InDevelopmentGlassPanel("", Color.RED));
+		this.setVisible(false);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				GraphicEditorAdaptator.getMainFrame().getApplicationToolBar()
+						.setSelectedOverviewClipboardToggleButton(false);
+			}
+		});
+	}
+
+	public void emptyRootFromModel() {
+		Object[] toto = DefaultGraphModel.getAll(refModel);
+		for (int i = 0; i < toto.length; i++) {
+			refModel.remove(toto);
 		}
-	    }
-	});
-
-	myScrollPane = new JScrollPane(myGraph);
-	this.getContentPane().add(BorderLayout.CENTER, myScrollPane);
-	this.addComponentListener(componentListener);
-	this.setPreferredSize(new Dimension(200, 200));
-	this.pack();
-	KMADEToolUtilities.setCenteredInScreen(this);
-	this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
-	this.setGlassPane(new InDevelopmentGlassPanel("", Color.RED));
-	this.setVisible(false);
-	this.addWindowListener(new WindowAdapter() {
-	    public void windowClosing(WindowEvent e) {
-		GraphicEditorAdaptator.getMainFrame().getApplicationToolBar()
-			.setSelectedOverviewClipboardToggleButton(false);
-	    }
-	});
-    }
-
-    public void emptyRootFromModel() {
-	Object[] toto = DefaultGraphModel.getAll(refModel);
-	for (int i = 0; i < toto.length; i++) {
-	    refModel.remove(toto);
 	}
-    }
 
-    protected void updateScale() {
-	SwingUtilities.invokeLater(new Runnable() {
-	    public void run() {
-		JGraph jgraph = myGraph;
-		if (jgraph != null) {
-		    Dimension dimension = KMADEClipBoardDialog.this
-			    .getPreferredSize();
-		    Dimension dimension1 = KMADEClipBoardDialog.this
-			    .getBounds().getSize();
-		    dimension.width = Math.max(dimension.width,
-			    dimension1.width);
-		    dimension1.height = Math.max(dimension.height,
-			    dimension1.height);
-		    double d = 1;
-		    dimension.setSize((double) (dimension.width * 1) / d,
-			    (double) (dimension.height * 1) / d);
-		    Dimension dimension2 = myScrollPane.getViewport().getSize();
-		    double d1 = dimension2.getWidth() / dimension.getWidth();
-		    double d2 = dimension2.getHeight() / dimension.getHeight();
-		    d = Math.min(Math.min(d1, d2), 0.3d);
-		    myGraph.setScale(d);
-		    repaint();
+	protected void updateScale() {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				JGraph jgraph = myGraph;
+				if (jgraph != null) {
+					Dimension dimension = KMADEClipBoardDialog.this.getPreferredSize();
+					Dimension dimension1 = KMADEClipBoardDialog.this.getBounds().getSize();
+					dimension.width = Math.max(dimension.width, dimension1.width);
+					dimension1.height = Math.max(dimension.height, dimension1.height);
+					double d = 1;
+					dimension.setSize((double) (dimension.width * 1) / d, (double) (dimension.height * 1) / d);
+					Dimension dimension2 = myScrollPane.getViewport().getSize();
+					double d1 = dimension2.getWidth() / dimension.getWidth();
+					double d2 = dimension2.getHeight() / dimension.getHeight();
+					d = Math.min(Math.min(d1, d2), 0.3d);
+					myGraph.setScale(d);
+					repaint();
+				}
+			}
+
+		});
+	}
+
+	public JGraph getMyGraph() {
+		return myGraph;
+	}
+
+	/**
+	 * Recherche une t�che dans l'arbre de t�che portant l'oid OID.
+	 * 
+	 * @param oid
+	 * @return
+	 */
+	public KMADEDefaultGraphCell getTask(String oid) {
+		Object[] allCell = DefaultGraphModel.getAll(myGraph.getModel());
+
+		for (int i = 0; i <= allCell.length; i++) {
+			if (allCell[i] instanceof KMADEDefaultGraphCell) {
+				KMADEDefaultGraphCell myCurrentCell = (KMADEDefaultGraphCell) allCell[i];
+				if (oid.equalsIgnoreCase(myCurrentCell.getOid()))
+					return myCurrentCell;
+			} else {
+				// Ce n'est pas une cellule.
+			}
 		}
-	    }
-
-	});
-    }
-
-    public JGraph getMyGraph() {
-	return myGraph;
-    }
-
-    /**
-     * Recherche une t�che dans l'arbre de t�che portant l'oid OID.
-     * 
-     * @param oid
-     * @return
-     */
-    public KMADEDefaultGraphCell getTask(String oid) {
-	Object[] allCell = DefaultGraphModel.getAll(myGraph.getModel());
-
-	for (int i = 0; i <= allCell.length; i++) {
-	    if (allCell[i] instanceof KMADEDefaultGraphCell) {
-		KMADEDefaultGraphCell myCurrentCell = (KMADEDefaultGraphCell) allCell[i];
-		if (oid.equalsIgnoreCase(myCurrentCell.getOid()))
-		    return myCurrentCell;
-	    } else {
-		// Ce n'est pas une cellule.
-	    }
+		return null;
 	}
-	return null;
-    }
 
-    public void removeAllEntities() {
-	Object[] toto = DefaultGraphModel.getAll(myGraph.getModel());
-	for (int i = 0; i < toto.length; i++) {
-	    myGraph.getModel().remove(toto);
+	public void removeAllEntities() {
+		Object[] toto = DefaultGraphModel.getAll(myGraph.getModel());
+		for (int i = 0; i < toto.length; i++) {
+			myGraph.getModel().remove(toto);
+		}
 	}
-    }
 
-    public void notifLocalisationModification() {
-	this.setTitle(KMADEConstant.CLIPBOARD_TITLE_NAME);
-    }
+	public void notifLocalisationModification() {
+		this.setTitle(KMADEConstant.CLIPBOARD_TITLE_NAME);
+	}
 }

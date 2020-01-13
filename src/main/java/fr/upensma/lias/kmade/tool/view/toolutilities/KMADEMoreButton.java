@@ -41,62 +41,60 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
  */
 public class KMADEMoreButton extends JToggleButton implements ActionListener {
 
-    private static final long serialVersionUID = 6534942062944585074L;
+	private static final long serialVersionUID = 6534942062944585074L;
 
-    public static final ImageIcon MORE = new ImageIcon(
-	    GraphicEditorAdaptator.class.getResource(KMADEConstant.MORE_IMAGE));
+	public static final ImageIcon MORE = new ImageIcon(
+			GraphicEditorAdaptator.class.getResource(KMADEConstant.MORE_IMAGE));
 
-    private JToolBar toolbar;
+	private JToolBar toolbar;
 
-    public KMADEMoreButton(final JToolBar toolbar) {
-	super(MORE);
-	this.toolbar = toolbar;
-	addActionListener(this);
-	setFocusPainted(false);
+	public KMADEMoreButton(final JToolBar toolbar) {
+		super(MORE);
+		this.toolbar = toolbar;
+		addActionListener(this);
+		setFocusPainted(false);
 
-	toolbar.addComponentListener(new ComponentAdapter() {
-	    public void componentResized(ComponentEvent e) {
-		setVisible(!isVisible(
-			toolbar.getComponent(toolbar.getComponentCount() - 1),
-			null));
-	    }
-	});
-    }
-
-    private boolean isVisible(Component comp, Rectangle rect) {
-	if (rect == null)
-	    rect = toolbar.getVisibleRect();
-	return comp.getLocation().x + comp.getWidth() <= rect.getWidth();
-    }
-
-    public void actionPerformed(ActionEvent e) {
-	Component[] comp = toolbar.getComponents();
-	Rectangle visibleRect = toolbar.getVisibleRect();
-	for (int i = 0; i < comp.length; i++) {
-	    if (!isVisible(comp[i], visibleRect)) {
-		JPopupMenu popup = new JPopupMenu();
-		for (; i < comp.length; i++) {
-		    if (comp[i] instanceof AbstractButton) {
-			AbstractButton button = (AbstractButton) comp[i];
-			if (button.getAction() != null)
-			    popup.add(button.getAction());
-		    } else if (comp[i] instanceof JSeparator)
-			popup.addSeparator();
-		}
-
-		popup.addPopupMenuListener(new PopupMenuListener() {
-		    public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-			setSelected(false);
-		    }
-
-		    public void popupMenuCanceled(PopupMenuEvent e) {
-		    }
-
-		    public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-		    }
+		toolbar.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				setVisible(!isVisible(toolbar.getComponent(toolbar.getComponentCount() - 1), null));
+			}
 		});
-		popup.show(this, 0, getHeight());
-	    }
 	}
-    }
+
+	private boolean isVisible(Component comp, Rectangle rect) {
+		if (rect == null)
+			rect = toolbar.getVisibleRect();
+		return comp.getLocation().x + comp.getWidth() <= rect.getWidth();
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		Component[] comp = toolbar.getComponents();
+		Rectangle visibleRect = toolbar.getVisibleRect();
+		for (int i = 0; i < comp.length; i++) {
+			if (!isVisible(comp[i], visibleRect)) {
+				JPopupMenu popup = new JPopupMenu();
+				for (; i < comp.length; i++) {
+					if (comp[i] instanceof AbstractButton) {
+						AbstractButton button = (AbstractButton) comp[i];
+						if (button.getAction() != null)
+							popup.add(button.getAction());
+					} else if (comp[i] instanceof JSeparator)
+						popup.addSeparator();
+				}
+
+				popup.addPopupMenuListener(new PopupMenuListener() {
+					public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+						setSelected(false);
+					}
+
+					public void popupMenuCanceled(PopupMenuEvent e) {
+					}
+
+					public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+					}
+				});
+				popup.show(this, 0, getHeight());
+			}
+		}
+	}
 }

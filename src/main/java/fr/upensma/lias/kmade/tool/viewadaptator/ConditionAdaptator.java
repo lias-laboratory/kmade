@@ -28,101 +28,94 @@ import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
  */
 public final class ConditionAdaptator {
 
-    public static int origine = 0;
+	public static int origine = 0;
 
-    public static void disabledFrame() {
-	GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
-	TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
-    }
-
-    public static void editedFromEnhancedFrame() {
-	origine = 1;
-    }
-
-    public static void enabledFrame() {
-	GraphicEditorAdaptator.enabledMainFrameAfterEdition();
-	TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
-	if (origine == 0) {
-	    GraphicEditorAdaptator.requestFocus();
-	} else {
-	    TaskPropertiesEnhancedEditorAdaptator.requestFocus();
+	public static void disabledFrame() {
+		GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
+		TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
 	}
-	origine = 0;
-    }
 
-    public static boolean affRemoveCondition(String oid) {
-	return ExpressCondition.affRemoveCondition(oid);
-    }
-
-    public static void removeCondition(String oidAct) {
-	ExpressCondition.removeCondition(oidAct);
-    }
-
-    public static void updateConditionView() {
-	ArrayList<ProtoTaskCondition> myList = ExpressCondition.getConditions();
-	for (ProtoTaskCondition current : myList) {
-	    KMADEMainFrame
-		    .getProjectPanel()
-		    .getConditionPanel()
-		    .addCondition(current.getDescription(),
-			    current.getDefaultValueText(),
-			    current.getOid().get());
+	public static void editedFromEnhancedFrame() {
+		origine = 1;
 	}
-    }
 
-    public static String[] getConditionsDescriptionArray() {
-	return ExpressCondition.getConditionsDescriptionArray();
-    }
-
-    public static ArrayList<String> getConditionsDescriptionList() {
-	return ExpressCondition.getConditionsDescriptionList();
-    }
-
-    public static String addCondition() {
-	return ExpressCondition.createCondition();
-    }
-
-    public static void setConditionDefaultValue(String oid, String defaultValue) {
-	ExpressCondition.setConditionDefaultValue(oid, defaultValue);
-    }
-
-    public static void removeAllConditions() {
-	KMADEMainFrame.getProjectPanel().getConditionPanel()
-		.removeAllConditions();
-    }
-
-    /**
-     * @param newConditionObject
-     * @param value
-     * @return
-     */
-    public static String setConditionDescription(String oid, String value) {
-	return (ExpressCondition.setConditionDescription(oid, value));
-    }
-
-    public static Object[][] getProtoTaskConditionsIntoTab() {
-	ArrayList<ProtoTaskCondition> myList = ExpressCondition.getConditions();
-	Object[][] res = new Object[myList.size()][3];
-	for (int i = 0; i < myList.size(); i++) {
-	    res[i][0] = myList.get(i).getDescription();
-	    res[i][1] = myList.get(i).getDefaultValueText();
-	    res[i][2] = myList.get(i).getOid().get();
+	public static void enabledFrame() {
+		GraphicEditorAdaptator.enabledMainFrameAfterEdition();
+		TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
+		if (origine == 0) {
+			GraphicEditorAdaptator.requestFocus();
+		} else {
+			TaskPropertiesEnhancedEditorAdaptator.requestFocus();
+		}
+		origine = 0;
 	}
-	return res;
-    }
 
-    public static void setPreCondition(String oidConditions) {
-	ExpressCondition.setPreCondition(GraphicEditorAdaptator
-		.getSelectedGraphicTask().getTask().getOid().get(),
-		oidConditions);
+	public static boolean affRemoveCondition(String oid) {
+		return ExpressCondition.affRemoveCondition(oid);
+	}
 
-    }
+	public static void removeCondition(String oidAct) {
+		ExpressCondition.removeCondition(oidAct);
+	}
 
-    public static void setIterCondition(String oidConditions) {
-	ExpressCondition.setIterCondition(GraphicEditorAdaptator
-		.getSelectedGraphicTask().getTask().getOid().get(),
-		oidConditions);
+	public static void updateConditionView() {
+		ArrayList<ProtoTaskCondition> myList = ExpressCondition.getConditions();
+		for (ProtoTaskCondition current : myList) {
+			KMADEMainFrame.getProjectPanel().getConditionPanel().addCondition(current.getDescription(),
+					current.getDefaultValueText(), current.getOid().get());
+		}
+	}
 
-    }
+	public static String[] getConditionsDescriptionArray() {
+		return ExpressCondition.getConditionsDescriptionArray();
+	}
+
+	public static ArrayList<String> getConditionsDescriptionList() {
+		return ExpressCondition.getConditionsDescriptionList();
+	}
+
+	public static String addCondition() {
+		return ExpressCondition.createCondition();
+	}
+
+	public static void setConditionDefaultValue(String oid, String defaultValue) {
+		ExpressCondition.setConditionDefaultValue(oid, defaultValue);
+	}
+
+	public static void removeAllConditions() {
+		KMADEMainFrame.getProjectPanel().getConditionPanel().removeAllConditions();
+	}
+
+	/**
+	 * @param newConditionObject
+	 * @param value
+	 * @return
+	 */
+	public static String setConditionDescription(String oid, String value) {
+		return (ExpressCondition.setConditionDescription(oid, value));
+	}
+
+	public static Object[][] getProtoTaskConditionsIntoTab() {
+		ArrayList<ProtoTaskCondition> myList = ExpressCondition.getConditions();
+		Object[][] res = new Object[myList.size()][3];
+		for (int i = 0; i < myList.size(); i++) {
+			res[i][0] = myList.get(i).getDescription();
+			res[i][1] = myList.get(i).getDefaultValueText();
+			res[i][2] = myList.get(i).getOid().get();
+		}
+		return res;
+	}
+
+	public static void setPreCondition(String oidConditions) {
+		ExpressCondition.setPreCondition(GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getOid().get(),
+				oidConditions);
+
+	}
+
+	public static void setIterCondition(String oidConditions) {
+		ExpressCondition.setIterCondition(GraphicEditorAdaptator.getSelectedGraphicTask().getTask().getOid().get(),
+				oidConditions);
+
+	}
 
 }

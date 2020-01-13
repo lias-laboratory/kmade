@@ -29,85 +29,77 @@ import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadI
  */
 public final class IndividuAdaptator {
 
-    private static final KMADEReadIndividuObjectTable individuPanel = new KMADEReadIndividuObjectTable();
+	private static final KMADEReadIndividuObjectTable individuPanel = new KMADEReadIndividuObjectTable();
 
-    public static String addIndividu() {
-	return ExpressIndividu.createIndividu();
-    }
-
-    public static String[] getIndividusName() {
-	return ExpressIndividu.getIndividusName();
-    }
-
-    public static void removeIndividu(String oid) {
-	ExpressIndividu.deleteIndividu(oid);
-    }
-
-    public static void affRemoveIndividu(String oid) {
-	ExpressIndividu.affRemoveIndividu(oid);
-    }
-
-    public static void removeAllIndividu() {
-	KMADEMainFrame.getProjectPanel().tableIndividu()
-		.getIndividuObjectTable().removeAllIndividu();
-    }
-
-    public static String setIndividuName(String oid, String name) {
-	return ExpressIndividu.setIndividuName(oid, name);
-
-    }
-
-    public static void setIndividuStatut(String oid, String name) {
-	ExpressIndividu.setIndividuStatut(oid, name);
-
-    }
-
-    public static void setIndividuRole(String oid, String name) {
-	ExpressIndividu.setIndividuRole(oid, name);
-    }
-
-    public static void setIndividuImage(String oid, String name) {
-	ExpressIndividu.setIndividuImage(oid, name);
-    }
-
-    public static void refreshReadIndividuTable() {
-	Object[][] temp = new Object[KMADEMainFrame.getProjectPanel()
-		.tableIndividu().getIndividuObjectTable().getModel()
-		.getRowCount() - 1][6];
-	for (int i = 0; i < KMADEMainFrame.getProjectPanel().tableIndividu()
-		.getIndividuObjectTable().getModel().getRowCount() - 1; i++) {
-	    temp[i][0] = KMADEMainFrame.getProjectPanel().tableIndividu()
-		    .getIndividuObjectTable().getModel().getValueAt(i, 0);
-	    temp[i][1] = KMADEMainFrame.getProjectPanel().tableIndividu()
-		    .getIndividuObjectTable().getModel().getValueAt(i, 1);
-	    temp[i][2] = KMADEMainFrame.getProjectPanel().tableIndividu()
-		    .getIndividuObjectTable().getModel().getValueAt(i, 2);
-	    temp[i][3] = KMADEMainFrame.getProjectPanel().tableIndividu()
-		    .getIndividuObjectTable().getModel().getValueAt(i, 3);
-	    temp[i][4] = KMADEMainFrame.getProjectPanel().tableIndividu()
-		    .getIndividuObjectTable().getModel().getValueAt(i, 4);
-	    temp[i][5] = KMADEMainFrame.getProjectPanel().tableIndividu()
-		    .getIndividuObjectTable().getModel().getValueAt(i, 5);
+	public static String addIndividu() {
+		return ExpressIndividu.createIndividu();
 	}
-	individuPanel.setData(temp);
-    }
 
-    public static void updateIndividuView() {
-	ArrayList<Person> myList = ExpressIndividu.getIndividus();
-	for (int i = 0; i < myList.size(); i++) {
-	    KMADEMainFrame
-		    .getProjectPanel()
-		    .tableIndividu()
-		    .getIndividuObjectTable()
-		    .addIndividu(myList.get(i).getName(),
-			    myList.get(i).getStatus(), myList.get(i).getRole(),
-			    myList.get(i).getImage(),
-			    myList.get(i).getOrganisations(),
-			    myList.get(i).getOid().get());
+	public static String[] getIndividusName() {
+		return ExpressIndividu.getIndividusName();
 	}
-    }
 
-    public static KMADEReadIndividuObjectTable getIndividuPanel() {
-	return individuPanel;
-    }
+	public static void removeIndividu(String oid) {
+		ExpressIndividu.deleteIndividu(oid);
+	}
+
+	public static void affRemoveIndividu(String oid) {
+		ExpressIndividu.affRemoveIndividu(oid);
+	}
+
+	public static void removeAllIndividu() {
+		KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().removeAllIndividu();
+	}
+
+	public static String setIndividuName(String oid, String name) {
+		return ExpressIndividu.setIndividuName(oid, name);
+
+	}
+
+	public static void setIndividuStatut(String oid, String name) {
+		ExpressIndividu.setIndividuStatut(oid, name);
+
+	}
+
+	public static void setIndividuRole(String oid, String name) {
+		ExpressIndividu.setIndividuRole(oid, name);
+	}
+
+	public static void setIndividuImage(String oid, String name) {
+		ExpressIndividu.setIndividuImage(oid, name);
+	}
+
+	public static void refreshReadIndividuTable() {
+		Object[][] temp = new Object[KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable()
+				.getModel().getRowCount() - 1][6];
+		for (int i = 0; i < KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel()
+				.getRowCount() - 1; i++) {
+			temp[i][0] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel()
+					.getValueAt(i, 0);
+			temp[i][1] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel()
+					.getValueAt(i, 1);
+			temp[i][2] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel()
+					.getValueAt(i, 2);
+			temp[i][3] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel()
+					.getValueAt(i, 3);
+			temp[i][4] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel()
+					.getValueAt(i, 4);
+			temp[i][5] = KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().getModel()
+					.getValueAt(i, 5);
+		}
+		individuPanel.setData(temp);
+	}
+
+	public static void updateIndividuView() {
+		ArrayList<Person> myList = ExpressIndividu.getIndividus();
+		for (int i = 0; i < myList.size(); i++) {
+			KMADEMainFrame.getProjectPanel().tableIndividu().getIndividuObjectTable().addIndividu(
+					myList.get(i).getName(), myList.get(i).getStatus(), myList.get(i).getRole(),
+					myList.get(i).getImage(), myList.get(i).getOrganisations(), myList.get(i).getOid().get());
+		}
+	}
+
+	public static KMADEReadIndividuObjectTable getIndividuPanel() {
+		return individuPanel;
+	}
 }

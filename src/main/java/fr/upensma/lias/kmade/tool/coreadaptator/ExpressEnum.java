@@ -28,75 +28,67 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.Enumeration;
  * @author Mickael BARON
  */
 public class ExpressEnum {
-    public static String createEnum() {
-	Oid oidEnumeration = InterfaceExpressJava.createEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ENUMERATION_CLASS);
-	return (oidEnumeration.get());
-    }
-
-    public static void removeEnum(String oid) {
-	Enumeration m = (Enumeration) InterfaceExpressJava
-		.prendre(new Oid(oid));
-	m.delete();
-    }
-
-    public static void affRemoveEnum(String oid) {
-	Enumeration m = (Enumeration) InterfaceExpressJava
-		.prendre(new Oid(oid));
-	m.affDelete();
-    }
-
-    public static ArrayList<Enumeration> getEnums() {
-	ArrayList<Enumeration> lst = new ArrayList<Enumeration>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ENUMERATION_CLASS);
-	for (int i = 0; i < objs.length; i++) {
-	    Enumeration obj = (Enumeration) objs[i];
-	    lst.add(obj);
+	public static String createEnum() {
+		Oid oidEnumeration = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.ENUMERATION_CLASS);
+		return (oidEnumeration.get());
 	}
-	return lst;
-    }
 
-    public static String setEnumName(String oid, String name) {
-	Enumeration m = (Enumeration) InterfaceExpressJava
-		.prendre(new Oid(oid));
-	m.setName(name);
-	return m.getName();
-    }
-
-    public static void setEnumDescription(String oid, String description) {
-	Enumeration m = (Enumeration) InterfaceExpressJava
-		.prendre(new Oid(oid));
-	m.setDescription(description);
-    }
-
-    public static String[][] getArrayEnum() {
-	Object[] enumerations = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ENUMERATION_CLASS);
-	if (enumerations.length == 0)
-	    return null;
-	String[][] s = new String[enumerations.length][2];
-	for (int i = 0; i < enumerations.length; i++) {
-	    Enumeration enumeration = (Enumeration) enumerations[i];
-	    s[i][0] = enumeration.getName();
-	    s[i][1] = enumeration.getOid().get();
+	public static void removeEnum(String oid) {
+		Enumeration m = (Enumeration) InterfaceExpressJava.prendre(new Oid(oid));
+		m.delete();
 	}
-	return s;
-    }
 
-    public static Enumeration getEnum(String name) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ENUMERATION_CLASS);
-	for (int i = 0; i < objs.length; i++) {
-	    Enumeration obj = (Enumeration) objs[i];
-	    if (obj.getName().equalsIgnoreCase(name)) {
-		return obj;
-	    }
+	public static void affRemoveEnum(String oid) {
+		Enumeration m = (Enumeration) InterfaceExpressJava.prendre(new Oid(oid));
+		m.affDelete();
 	}
-	return null;
-    }
+
+	public static ArrayList<Enumeration> getEnums() {
+		ArrayList<Enumeration> lst = new ArrayList<Enumeration>();
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.ENUMERATION_CLASS);
+		for (int i = 0; i < objs.length; i++) {
+			Enumeration obj = (Enumeration) objs[i];
+			lst.add(obj);
+		}
+		return lst;
+	}
+
+	public static String setEnumName(String oid, String name) {
+		Enumeration m = (Enumeration) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setName(name);
+		return m.getName();
+	}
+
+	public static void setEnumDescription(String oid, String description) {
+		Enumeration m = (Enumeration) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setDescription(description);
+	}
+
+	public static String[][] getArrayEnum() {
+		Object[] enumerations = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.ENUMERATION_CLASS);
+		if (enumerations.length == 0)
+			return null;
+		String[][] s = new String[enumerations.length][2];
+		for (int i = 0; i < enumerations.length; i++) {
+			Enumeration enumeration = (Enumeration) enumerations[i];
+			s[i][0] = enumeration.getName();
+			s[i][1] = enumeration.getOid().get();
+		}
+		return s;
+	}
+
+	public static Enumeration getEnum(String name) {
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.ENUMERATION_CLASS);
+		for (int i = 0; i < objs.length; i++) {
+			Enumeration obj = (Enumeration) objs[i];
+			if (obj.getName().equalsIgnoreCase(name)) {
+				return obj;
+			}
+		}
+		return null;
+	}
 }

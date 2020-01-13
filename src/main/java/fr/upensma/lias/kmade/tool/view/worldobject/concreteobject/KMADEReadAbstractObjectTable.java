@@ -36,101 +36,96 @@ import fr.upensma.lias.kmade.tool.viewadaptator.ConcreteObjectPanelAdaptator;
 /**
  * @author Mickael BARON
  */
-public class KMADEReadAbstractObjectTable extends JScrollPane implements
-	LanguageFactory {
+public class KMADEReadAbstractObjectTable extends JScrollPane implements LanguageFactory {
 
-    private static final long serialVersionUID = 465431L;
+	private static final long serialVersionUID = 465431L;
 
-    private final MyReadAbstractObjectTableModel myModel;
+	private final MyReadAbstractObjectTableModel myModel;
 
-    private final JTable table;
+	private final JTable table;
 
-    private int selectedRowCourant = -1;
+	private int selectedRowCourant = -1;
 
-    public KMADEReadAbstractObjectTable() {
-	myModel = new MyReadAbstractObjectTableModel();
-	table = new KMADEJTable(myModel);
-	table.setPreferredScrollableViewportSize(new Dimension(300, 90));
-	this.setViewportView(table);
-	this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
+	public KMADEReadAbstractObjectTable() {
+		myModel = new MyReadAbstractObjectTableModel();
+		table = new KMADEJTable(myModel);
+		table.setPreferredScrollableViewportSize(new Dimension(300, 90));
+		this.setViewportView(table);
+		this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
 
-	table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	ListSelectionModel rowSM = table.getSelectionModel();
-	rowSM.addListSelectionListener(new ListSelectionListener() {
-	    public void valueChanged(ListSelectionEvent e) {
-		ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-		if (lsm.isSelectionEmpty()) {
-		    ConcreteObjectPanelAdaptator
-			    .setActiveAbstractObject(Oid.OID_NULL);
-		    selectedRowCourant = -1;
-		} else {
-		    int selectedRow = lsm.getMinSelectionIndex();
-		    if (selectedRow != selectedRowCourant) {
-			ConcreteObjectPanelAdaptator
-				.setActiveAbstractObject((String) myModel
-					.getValueAt(selectedRow, 2));
-			selectedRowCourant = selectedRow;
-		    }
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		ListSelectionModel rowSM = table.getSelectionModel();
+		rowSM.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+				if (lsm.isSelectionEmpty()) {
+					ConcreteObjectPanelAdaptator.setActiveAbstractObject(Oid.OID_NULL);
+					selectedRowCourant = -1;
+				} else {
+					int selectedRow = lsm.getMinSelectionIndex();
+					if (selectedRow != selectedRowCourant) {
+						ConcreteObjectPanelAdaptator
+								.setActiveAbstractObject((String) myModel.getValueAt(selectedRow, 2));
+						selectedRowCourant = selectedRow;
+					}
+				}
+			}
+		});
+	}
+
+	public void setAbstractObjectNameBorder(String name) {
+		String afficher = "";
+		if (name.equals(""))
+			afficher = "";
+		else
+			afficher = " : " + name;
+		this.setBorder(new TitledBorder(null, KMADEConstant.CONCRETE_ABSTRACT_OBJECT_TITLE_TABLE + afficher,
+				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, KMADEConstant.fontACTIF));
+	}
+
+	public void removeAllAbstractObject() {
+		myModel.setData(new Object[0][]);
+	}
+
+	public void setData(Object[][] refAbstractObject) {
+		myModel.setData(refAbstractObject);
+	}
+
+	class MyReadAbstractObjectTableModel extends AbstractTableModel {
+		private static final long serialVersionUID = 7209012552138445616L;
+
+		private Object[][] data = new Object[0][];
+
+		public int getColumnCount() {
+			return 2;
 		}
-	    }
-	});
-    }
 
-    public void setAbstractObjectNameBorder(String name) {
-	String afficher = "";
-	if (name.equals(""))
-	    afficher = "";
-	else
-	    afficher = " : " + name;
-	this.setBorder(new TitledBorder(null,
-		KMADEConstant.CONCRETE_ABSTRACT_OBJECT_TITLE_TABLE + afficher,
-		TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
-		KMADEConstant.fontACTIF));
-    }
+		public int getRowCount() {
+			return data.length;
+		}
 
-    public void removeAllAbstractObject() {
-	myModel.setData(new Object[0][]);
-    }
+		public Object getValueAt(int row, int col) {
+			return data[row][col];
+		}
 
-    public void setData(Object[][] refAbstractObject) {
-	myModel.setData(refAbstractObject);
-    }
+		public String getColumnName(int i) {
+			switch (i) {
+			case 0:
+				return KMADEConstant.ABSTRACT_OBJECT_NAME_TABLE;
+			case 1:
+				return KMADEConstant.ABSTRACT_OBJECT_OBSERVATION_TABLE;
+			default:
+				return "";
+			}
+		}
 
-    class MyReadAbstractObjectTableModel extends AbstractTableModel {
-	private static final long serialVersionUID = 7209012552138445616L;
-
-	private Object[][] data = new Object[0][];
-
-	public int getColumnCount() {
-	    return 2;
+		public void setData(Object[][] data) {
+			this.data = data;
+			this.fireTableDataChanged();
+		}
 	}
 
-	public int getRowCount() {
-	    return data.length;
+	public void notifLocalisationModification() {
+		// Rien.
 	}
-
-	public Object getValueAt(int row, int col) {
-	    return data[row][col];
-	}
-
-	public String getColumnName(int i) {
-	    switch (i) {
-	    case 0:
-		return KMADEConstant.ABSTRACT_OBJECT_NAME_TABLE;
-	    case 1:
-		return KMADEConstant.ABSTRACT_OBJECT_OBSERVATION_TABLE;
-	    default:
-		return "";
-	    }
-	}
-
-	public void setData(Object[][] data) {
-	    this.data = data;
-	    this.fireTableDataChanged();
-	}
-    }
-
-    public void notifLocalisationModification() {
-	// Rien.
-    }
 }

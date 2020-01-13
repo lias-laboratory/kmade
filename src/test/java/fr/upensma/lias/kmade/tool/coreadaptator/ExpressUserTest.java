@@ -28,6 +28,9 @@ import fr.upensma.lias.kmade.kmad.interfaceexpressjava.InterfaceExpressJava;
 import fr.upensma.lias.kmade.kmad.schema.tache.Organization;
 import fr.upensma.lias.kmade.kmad.schema.tache.User;
 
+/**
+ * @author Mickael BARON
+ */
 public class ExpressUserTest {
     // Les organisations
     String oidorga1;

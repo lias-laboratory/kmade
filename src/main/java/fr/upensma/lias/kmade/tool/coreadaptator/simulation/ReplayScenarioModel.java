@@ -26,34 +26,31 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Task;
  */
 public class ReplayScenarioModel {
 
-    private Task rootTask;
+	private Task rootTask;
 
-    private ArrayList<TokenReplayScenarioSimulation> replayScenarioList = new ArrayList<TokenReplayScenarioSimulation>();
+	private ArrayList<TokenReplayScenarioSimulation> replayScenarioList = new ArrayList<TokenReplayScenarioSimulation>();
 
-    public ReplayScenarioModel() {
-    }
+	public ReplayScenarioModel() {
+	}
 
-    public ReplayScenarioModel(
-	    ArrayList<TokenReplayScenarioSimulation> replayScenarioList,
-	    Task rootTask) {
-	this.replayScenarioList = replayScenarioList;
-	this.rootTask = rootTask;
-    }
+	public ReplayScenarioModel(ArrayList<TokenReplayScenarioSimulation> replayScenarioList, Task rootTask) {
+		this.replayScenarioList = replayScenarioList;
+		this.rootTask = rootTask;
+	}
 
-    public ArrayList<TokenReplayScenarioSimulation> getTokenReplayScenarioSimulation() {
-	return replayScenarioList;
-    }
+	public ArrayList<TokenReplayScenarioSimulation> getTokenReplayScenarioSimulation() {
+		return replayScenarioList;
+	}
 
-    public void setTokenReplayScenarioSimulation(
-	    ArrayList<TokenReplayScenarioSimulation> p) {
-	replayScenarioList = p;
-    }
+	public void setTokenReplayScenarioSimulation(ArrayList<TokenReplayScenarioSimulation> p) {
+		replayScenarioList = p;
+	}
 
-    public Task getRootTask() {
-	return rootTask;
-    }
+	public Task getRootTask() {
+		return rootTask;
+	}
 
-    public void setRootTask(Task rootTask) {
-	this.rootTask = rootTask;
-    }
+	public void setRootTask(Task rootTask) {
+		this.rootTask = rootTask;
+	}
 }

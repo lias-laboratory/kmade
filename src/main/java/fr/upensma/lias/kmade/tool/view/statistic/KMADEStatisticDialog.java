@@ -46,110 +46,110 @@ import fr.upensma.lias.kmade.tool.viewadaptator.StatisticAdaptator;
  */
 public class KMADEStatisticDialog extends JDialog {
 
-    private static final long serialVersionUID = -3147707051505669774L;
+	private static final long serialVersionUID = -3147707051505669774L;
 
-    private JTable myStatisticTable;
+	private JTable myStatisticTable;
 
-    private MyDefaultTableModel myDefaultTableModel;
+	private MyDefaultTableModel myDefaultTableModel;
 
-    private TableSorter sorter;
+	private TableSorter sorter;
 
-    public KMADEStatisticDialog(Frame owner) {
-	super(owner, KMADEConstant.STATISTIC_TITLE);
-	myDefaultTableModel = new MyDefaultTableModel();
-	sorter = new TableSorter(myDefaultTableModel);
-	myStatisticTable = new JTable(sorter);
-	myStatisticTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	myStatisticTable.setSelectionBackground(KMADEConstant.ACTIVE_SELECTION);
-	sorter.setTableHeader(myStatisticTable.getTableHeader());
+	public KMADEStatisticDialog(Frame owner) {
+		super(owner, KMADEConstant.STATISTIC_TITLE);
+		myDefaultTableModel = new MyDefaultTableModel();
+		sorter = new TableSorter(myDefaultTableModel);
+		myStatisticTable = new JTable(sorter);
+		myStatisticTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		myStatisticTable.setSelectionBackground(KMADEConstant.ACTIVE_SELECTION);
+		sorter.setTableHeader(myStatisticTable.getTableHeader());
 
-	JScrollPane myScrollPane = new JScrollPane(myStatisticTable);
-	this.getContentPane().add(BorderLayout.CENTER, myScrollPane);
+		JScrollPane myScrollPane = new JScrollPane(myStatisticTable);
+		this.getContentPane().add(BorderLayout.CENTER, myScrollPane);
 
-	JPanel myPanelControlButtons = new JPanel();
-	JButton verifier = new JButton(KMADEConstant.REFRESH_STATISTIC_MESSAGE);
-	verifier.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		StatisticAdaptator.statisticTaskModel();
-	    }
-	});
-	JButton fermer = new JButton(KMADEConstant.GO_BACK_MESSAGE);
-	fermer.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		StatisticAdaptator.closeStatisticDialog();
-	    }
-	});
-	myPanelControlButtons.add(verifier);
-	myPanelControlButtons.add(fermer);
-	this.getContentPane().add(BorderLayout.SOUTH, myPanelControlButtons);
-	this.pack();
-	Dimension dim = new Dimension(700, 300);
-	Toolkit tk = Toolkit.getDefaultToolkit();
-    Dimension d = tk.getScreenSize();
-    Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
-    int width = (int) (d.getWidth() - insets.left - insets.right);
-    int height = (int) (d.getHeight() - insets.top - insets.bottom);
-    Dimension screenDim = new Dimension(width, height);
-   
-	if (screenDim.height < dim.height) {
-	    this.setSize(screenDim);
-	    this.setLocation(insets.left,insets.top);
-	} else {
-	    this.setSize(new Dimension(700, 300));
-	    KMADEToolUtilities.setCenteredInScreen(this);
-	}
-	this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
-    }
+		JPanel myPanelControlButtons = new JPanel();
+		JButton verifier = new JButton(KMADEConstant.REFRESH_STATISTIC_MESSAGE);
+		verifier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StatisticAdaptator.statisticTaskModel();
+			}
+		});
+		JButton fermer = new JButton(KMADEConstant.GO_BACK_MESSAGE);
+		fermer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StatisticAdaptator.closeStatisticDialog();
+			}
+		});
+		myPanelControlButtons.add(verifier);
+		myPanelControlButtons.add(fermer);
+		this.getContentPane().add(BorderLayout.SOUTH, myPanelControlButtons);
+		this.pack();
+		Dimension dim = new Dimension(700, 300);
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension d = tk.getScreenSize();
+		Insets insets = tk.getScreenInsets(getGraphicsConfiguration());
+		int width = (int) (d.getWidth() - insets.left - insets.right);
+		int height = (int) (d.getHeight() - insets.top - insets.bottom);
+		Dimension screenDim = new Dimension(width, height);
 
-    public void setStatisticInfos(ArrayList<Object[]> pList) {
-	this.myDefaultTableModel.setTab(pList);
-	myDefaultTableModel.fireTableDataChanged();
-    }
-
-    static class MyDefaultTableModel extends AbstractTableModel {
-
-	private static final long serialVersionUID = 9072531295424161211L;
-
-	private ArrayList<Object[]> myList = new ArrayList<Object[]>();
-
-	public void setTab(ArrayList<Object[]> pTab) {
-	    this.myList = pTab;
+		if (screenDim.height < dim.height) {
+			this.setSize(screenDim);
+			this.setLocation(insets.left, insets.top);
+		} else {
+			this.setSize(new Dimension(700, 300));
+			KMADEToolUtilities.setCenteredInScreen(this);
+		}
+		this.setGlassPane(new InDevelopmentGlassPanel("", Color.GRAY));
 	}
 
-	public int getColumnCount() {
-	    return 2;
+	public void setStatisticInfos(ArrayList<Object[]> pList) {
+		this.myDefaultTableModel.setTab(pList);
+		myDefaultTableModel.fireTableDataChanged();
 	}
 
-	public Class<?> getColumnClass(int columnIndex) {
-	    switch (columnIndex) {
-	    case 0:
-		return String.class;
-	    case 1:
-		return Integer.class;
-	    }
-	    return Object.class;
-	}
+	static class MyDefaultTableModel extends AbstractTableModel {
 
-	public String getColumnName(int column) {
-	    switch (column) {
-	    case 0:
-		return KMADEConstant.TYPE_STATISTIC_MESSAGE;
-	    case 1:
-		return KMADEConstant.RESULT_STATISTIC_MESSAGE;
-	    }
-	    return "";
-	}
+		private static final long serialVersionUID = 9072531295424161211L;
 
-	public int getRowCount() {
-	    return (myList == null ? 0 : myList.size());
-	}
+		private ArrayList<Object[]> myList = new ArrayList<Object[]>();
 
-	public Object getValueAt(int row, int column) {
-	    return myList.get(row)[column];
-	}
+		public void setTab(ArrayList<Object[]> pTab) {
+			this.myList = pTab;
+		}
 
-	public boolean isCellEditable(int row, int column) {
-	    return super.isCellEditable(row, column);
+		public int getColumnCount() {
+			return 2;
+		}
+
+		public Class<?> getColumnClass(int columnIndex) {
+			switch (columnIndex) {
+			case 0:
+				return String.class;
+			case 1:
+				return Integer.class;
+			}
+			return Object.class;
+		}
+
+		public String getColumnName(int column) {
+			switch (column) {
+			case 0:
+				return KMADEConstant.TYPE_STATISTIC_MESSAGE;
+			case 1:
+				return KMADEConstant.RESULT_STATISTIC_MESSAGE;
+			}
+			return "";
+		}
+
+		public int getRowCount() {
+			return (myList == null ? 0 : myList.size());
+		}
+
+		public Object getValueAt(int row, int column) {
+			return myList.get(row)[column];
+		}
+
+		public boolean isCellEditable(int row, int column) {
+			return super.isCellEditable(row, column);
+		}
 	}
-    }
 }

@@ -22,66 +22,65 @@ import java.io.Serializable;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 
 /**
- * @author Vincent LUCQUIAUD 
+ * @author Vincent LUCQUIAUD
  * @author Mickael BARON
  */
 public class Oid implements Comparable<Object>, Serializable {
-    private static final long serialVersionUID = -5084335304591633333L;
+	private static final long serialVersionUID = -5084335304591633333L;
 
-    public static final String OID_NULL = "null";
+	public static final String OID_NULL = "null";
 
-    private int numoid = 1;
+	private int numoid = 1;
 
-    public Oid() {
-    }
-
-    public Oid(int i) {
-	numoid = i;
-    }
-
-    public Oid(String st) {
-	// Previous and current version of the dtd
-	if (st.charAt(0) != '#' && st.charAt(0) != 'K') {
-	    KMADEHistoryMessageManager
-		    .printlnError("Erreur dans chaine pour oid st=" + st);
+	public Oid() {
 	}
-	Integer in = Integer.valueOf(Integer.parseInt(st.substring(1)));
-	numoid = in.intValue();
-    }
 
-    public Oid(Oid oid) {
-	this(oid.get());
-    }
+	public Oid(int i) {
+		numoid = i;
+	}
 
-    public String get() {
-	return ("K" + String.valueOf(numoid));
-    }
+	public Oid(String st) {
+		// Previous and current version of the dtd
+		if (st.charAt(0) != '#' && st.charAt(0) != 'K') {
+			KMADEHistoryMessageManager.printlnError("Erreur dans chaine pour oid st=" + st);
+		}
+		Integer in = Integer.valueOf(Integer.parseInt(st.substring(1)));
+		numoid = in.intValue();
+	}
 
-    public String toString() {
-	return String.valueOf(numoid);
-    }
+	public Oid(Oid oid) {
+		this(oid.get());
+	}
 
-    public Oid plus() {
-	numoid++;
-	return this;
-    }
+	public String get() {
+		return ("K" + String.valueOf(numoid));
+	}
 
-    public boolean equals(Object obj) {
-	if (!(obj instanceof Oid))
-	    return false;
-	return (this.numoid == ((Oid) obj).numoid);
-    }
+	public String toString() {
+		return String.valueOf(numoid);
+	}
 
-    public int compareTo(Object o) {
-	Oid n = (Oid) o;
-	if (this.numoid < n.numoid)
-	    return -1;
-	if (this.numoid > n.numoid)
-	    return 1;
-	return 0;
-    }
+	public Oid plus() {
+		numoid++;
+		return this;
+	}
 
-    public int getValue() {
-	return this.numoid;
-    }
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Oid))
+			return false;
+		return (this.numoid == ((Oid) obj).numoid);
+	}
+
+	public int compareTo(Object o) {
+		Oid n = (Oid) o;
+		if (this.numoid < n.numoid)
+			return -1;
+		if (this.numoid > n.numoid)
+			return 1;
+		return 0;
+	}
+
+	public int getValue() {
+		return this.numoid;
+	}
 }

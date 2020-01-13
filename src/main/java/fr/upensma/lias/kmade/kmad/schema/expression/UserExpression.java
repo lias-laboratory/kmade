@@ -26,21 +26,21 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class UserExpression extends UnaryExpression {
 
-    private static final long serialVersionUID = -4339777500598729073L;
+	private static final long serialVersionUID = -4339777500598729073L;
 
-    public UserExpression(Object pNodeValue) {
-	super(pNodeValue);
-    }
+	public UserExpression(Object pNodeValue) {
+		super(pNodeValue);
+	}
 
-    public void checkNode() throws SemanticException {
-    }
+	public void checkNode() throws SemanticException {
+	}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+	}
 
-    public ArrayList<Object> getLinearExpression() {
-	ArrayList<Object> myList = new ArrayList<Object>();
-	myList.add(this);
-	return myList;
-    }
+	public ArrayList<Object> getLinearExpression() {
+		ArrayList<Object> myList = new ArrayList<Object>();
+		myList.add(this);
+		return myList;
+	}
 }

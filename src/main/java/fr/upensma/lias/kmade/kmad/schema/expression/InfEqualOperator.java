@@ -26,61 +26,53 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class InfEqualOperator extends RelationalOperator {
 
-    private static final long serialVersionUID = -2876331569489373224L;
+	private static final long serialVersionUID = -2876331569489373224L;
 
-    public InfEqualOperator(NodeExpression left) {
-	super(left);
-	this.name = ExpressConstant.INF_EQUAL_OPERATOR_EXPRESSION;
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
-
-	if (this.isErrorState()) {
-	    throw new SemanticErrorException();
+	public InfEqualOperator(NodeExpression left) {
+		super(left);
+		this.name = ExpressConstant.INF_EQUAL_OPERATOR_EXPRESSION;
 	}
 
-	if (this.isUnknownState()) {
-	    throw new SemanticUnknownException();
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+
+		if (this.isErrorState()) {
+			throw new SemanticErrorException();
+		}
+
+		if (this.isUnknownState()) {
+			throw new SemanticUnknownException();
+		}
+
+		// Certains tests ne doivent pas se présenter, le checkNode n'autorisant
+		// que le même type à gauche et à droite
+		if (getLeftNode().isNumber() && getRightNode().isString()) {
+			this.setNodeValue(new Boolean(((NumberValue) getLeftNode().getNodeValue())
+					.infEqualOperator((new NumberValue((String) getRightNode().getNodeValue())))));
+			return;
+		}
+
+		if (getLeftNode().isString() && getRightNode().isNumber()) {
+			this.setNodeValue(new Boolean(((new NumberValue((String) getLeftNode().getNodeValue()))
+					.infEqualOperator(((NumberValue) getRightNode().getNodeValue())))));
+			return;
+		}
+
+		// uniquement ordre lexicographique
+		if (getLeftNode().isString() && getRightNode().isString()) {
+			this.setNodeValue(new Boolean(((String) getLeftNode().getNodeValue()).toLowerCase()
+					.compareTo(((String) getRightNode().getNodeValue()).toLowerCase()) <= 0));
+			return;
+		}
+
+		if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+			this.setNodeValue(new Boolean(((NumberValue) getLeftNode().getNodeValue())
+					.infEqualOperator((NumberValue) getRightNode().getNodeValue())));
+			return;
+		}
 	}
 
-	// Certains tests ne doivent pas se présenter, le checkNode n'autorisant
-	// que le même type à gauche et à droite
-	if (getLeftNode().isNumber() && getRightNode().isString()) {
-	    this.setNodeValue(new Boolean(((NumberValue) getLeftNode()
-		    .getNodeValue()).infEqualOperator((new NumberValue(
-		    (String) getRightNode().getNodeValue())))));
-	    return;
+	public String toString() {
+		return super.toString();
 	}
-
-	if (getLeftNode().isString() && getRightNode().isNumber()) {
-	    this.setNodeValue(new Boolean(((new NumberValue(
-		    (String) getLeftNode().getNodeValue()))
-		    .infEqualOperator(((NumberValue) getRightNode()
-			    .getNodeValue())))));
-	    return;
-	}
-
-	// uniquement ordre lexicographique
-	if (getLeftNode().isString() && getRightNode().isString()) {
-	    this.setNodeValue(new Boolean(
-		    ((String) getLeftNode().getNodeValue()).toLowerCase()
-			    .compareTo(
-				    ((String) getRightNode().getNodeValue())
-					    .toLowerCase()) <= 0));
-	    return;
-	}
-
-	if (getLeftNode().isNumber() && getRightNode().isNumber()) {
-	    this.setNodeValue(new Boolean(((NumberValue) getLeftNode()
-		    .getNodeValue())
-		    .infEqualOperator((NumberValue) getRightNode()
-			    .getNodeValue())));
-	    return;
-	}
-    }
-
-    public String toString() {
-	return super.toString();
-    }
 }

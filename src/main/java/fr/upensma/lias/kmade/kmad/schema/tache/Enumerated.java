@@ -26,15 +26,15 @@ import org.w3c.dom.Element;
  */
 public interface Enumerated {
 
-    String toSPF();
+	String toSPF();
 
-    /**
-     * Element toXML(Document doc)
-     * 
-     * @param doc
-     * @return
-     */
-    Element toXML2(Document doc);
+	/**
+	 * Element toXML(Document doc)
+	 * 
+	 * @param doc
+	 * @return
+	 */
+	Element toXML2(Document doc);
 
-    String getValue();
+	String getValue();
 }

@@ -27,36 +27,35 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class IsExistFunction extends BinaryFunction {
 
-    private static final long serialVersionUID = -4093221522071521465L;
+	private static final long serialVersionUID = -4093221522071521465L;
 
-    public IsExistFunction(GroupExpressExpression left, NodeExpression right) {
-	super(false, left, right);
-	this.name = ExpressConstant.IS_EXIST_FUNCTION_EXPRESSION;
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-
-	if (this.rightNode.isBoolean()) {
-	    this.setStateToUnknown();
-	    return;
+	public IsExistFunction(GroupExpressExpression left, NodeExpression right) {
+		super(false, left, right);
+		this.name = ExpressConstant.IS_EXIST_FUNCTION_EXPRESSION;
 	}
-	this.setStateToError();
-	throw new SemanticException(ExpressConstant.BOOLEAN_IS_NEEDED_ERROR
-		+ " : " + this.getName());
-    }
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	ArrayList<ObjetConcret> refObjetConcretList = (((GroupExpressExpression) this.leftNode)
-		.getGroup().getEnsemble().getLstObjConcrets());
+	public void checkNode() throws SemanticException {
+		super.checkNode();
 
-	for (ObjetConcret current : refObjetConcretList) {
-	    super.evaluateNode(current);
-
-	    if (this.isValueState()) {
-		this.setNodeValue(this.rightNode.getNodeValue());
-		break;
-	    }
+		if (this.rightNode.isBoolean()) {
+			this.setStateToUnknown();
+			return;
+		}
+		this.setStateToError();
+		throw new SemanticException(ExpressConstant.BOOLEAN_IS_NEEDED_ERROR + " : " + this.getName());
 	}
-    }
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		ArrayList<ObjetConcret> refObjetConcretList = (((GroupExpressExpression) this.leftNode).getGroup().getEnsemble()
+				.getLstObjConcrets());
+
+		for (ObjetConcret current : refObjetConcretList) {
+			super.evaluateNode(current);
+
+			if (this.isValueState()) {
+				this.setNodeValue(this.rightNode.getNodeValue());
+				break;
+			}
+		}
+	}
 }

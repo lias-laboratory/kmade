@@ -21,5 +21,5 @@ package fr.upensma.lias.kmade.kmad.schema.tache;
  * @author Thomas LACHAUME
  */
 public enum StateCondition {
-    TRUE, FALSE, INDETERMINATE;
+	TRUE, FALSE, INDETERMINATE;
 }

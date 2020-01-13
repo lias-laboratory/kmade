@@ -31,48 +31,46 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
  * @author Mickael BARON
  */
 public class KMADESetTypeComboBox extends KMADEGroupTypeComboBox {
-    private static final long serialVersionUID = -5106570507739645552L;
+	private static final long serialVersionUID = -5106570507739645552L;
 
-    private ArrayList<ObjetConcret> refObjetConcret;
+	private ArrayList<ObjetConcret> refObjetConcret;
 
-    private ConcreteObjectType ref;
+	private ConcreteObjectType ref;
 
-    public KMADESetTypeComboBox(ConcreteObjectType ref,
-	    ArrayList<ObjetConcret> concreteObjects) {
-	refObjetConcret = concreteObjects;
-	this.ref = ref;
-	Object[] refTab = new Object[refObjetConcret.size() + 1];
-	refTab[0] = KMADEConstant.NO_CONCRETE_OBJECT_GROUPE_NAME;
-	for (int i = 0; i < concreteObjects.size(); i++) {
-	    refTab[i + 1] = concreteObjects.get(i);
-	}
-	this.setModel(new DefaultComboBoxModel(refTab));
-
-	if (ref.getUserConcreteObject() != null) {
-	    this.setSelectedItem(ref.getUserConcreteObject());
-	} else {
-	    this.setSelectedIndex(0);
-	    ref.setUserConcreteObject(null);
-	}
-
-	this.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		if (KMADESetTypeComboBox.this.getSelectedIndex() == 0) {
-		    KMADESetTypeComboBox.this.ref.setUserConcreteObject(null);
-		} else {
-		    KMADESetTypeComboBox.this.ref
-			    .setUserConcreteObject((ObjetConcret) KMADESetTypeComboBox.this
-				    .getSelectedItem());
+	public KMADESetTypeComboBox(ConcreteObjectType ref, ArrayList<ObjetConcret> concreteObjects) {
+		refObjetConcret = concreteObjects;
+		this.ref = ref;
+		Object[] refTab = new Object[refObjetConcret.size() + 1];
+		refTab[0] = KMADEConstant.NO_CONCRETE_OBJECT_GROUPE_NAME;
+		for (int i = 0; i < concreteObjects.size(); i++) {
+			refTab[i + 1] = concreteObjects.get(i);
 		}
-	    }
-	});
-    }
+		this.setModel(new DefaultComboBoxModel(refTab));
 
-    public ConcreteObjectType getConcreteObjectType() {
-	return ref;
-    }
+		if (ref.getUserConcreteObject() != null) {
+			this.setSelectedItem(ref.getUserConcreteObject());
+		} else {
+			this.setSelectedIndex(0);
+			ref.setUserConcreteObject(null);
+		}
 
-    public boolean isConcreteObjectEmpty() {
-	return ref.isEmptyUserConcreteObject();
-    }
+		this.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (KMADESetTypeComboBox.this.getSelectedIndex() == 0) {
+					KMADESetTypeComboBox.this.ref.setUserConcreteObject(null);
+				} else {
+					KMADESetTypeComboBox.this.ref
+							.setUserConcreteObject((ObjetConcret) KMADESetTypeComboBox.this.getSelectedItem());
+				}
+			}
+		});
+	}
+
+	public ConcreteObjectType getConcreteObjectType() {
+		return ref;
+	}
+
+	public boolean isConcreteObjectEmpty() {
+		return ref.isEmptyUserConcreteObject();
+	}
 }

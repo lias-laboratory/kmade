@@ -22,16 +22,16 @@ package fr.upensma.lias.kmade.tool.view.toolutilities;
  */
 public interface MessageIO {
 
-    void printlnMessage(String message);
+	void printlnMessage(String message);
 
-    void printlnError(String message);
+	void printlnError(String message);
 
-    void setOutputMessage();
+	void setOutputMessage();
 
-    void setErrputMessage();
+	void setErrputMessage();
 
-    void printlnError(Throwable e);
+	void printlnError(Throwable e);
 
-    void printMessage(String message);
+	void printMessage(String message);
 
 }

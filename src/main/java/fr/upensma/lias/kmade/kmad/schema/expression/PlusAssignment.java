@@ -28,94 +28,81 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.StrValue;
  */
 public class PlusAssignment extends AssignmentOperator {
 
-    private static final long serialVersionUID = 7980770992751137196L;
+	private static final long serialVersionUID = 7980770992751137196L;
 
-    public PlusAssignment(AttributExpressExpression left) {
-	super(false, left);
-	this.name = ExpressConstant.PLUS_ASSIGNMENT_EXPRESSION;
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-
-	if (getLeftNode().isString() && getRightNode().isString()) {
-	    this.setNodeValue("");
-	    this.setStateToUnknown();
-	    return;
+	public PlusAssignment(AttributExpressExpression left) {
+		super(false, left);
+		this.name = ExpressConstant.PLUS_ASSIGNMENT_EXPRESSION;
 	}
 
-	if (getLeftNode().isNumber() && getRightNode().isNumber()) {
-	    this.setNodeValue(new NumberValue());
-	    this.setStateToUnknown();
-	    return;
-	}
+	public void checkNode() throws SemanticException {
+		super.checkNode();
 
-	this.setStateToError();
-	throw new SemanticException(ExpressConstant.TYPE_PLUS_ASSIGNMENT);
-    }
+		if (getLeftNode().isString() && getRightNode().isString()) {
+			this.setNodeValue("");
+			this.setStateToUnknown();
+			return;
+		}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
+		if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+			this.setNodeValue(new NumberValue());
+			this.setStateToUnknown();
+			return;
+		}
 
-	if (this.isErrorState()) {
-	    throw new SemanticErrorException();
-	}
-
-	if (this.isUnknownState()) {
-	    throw new SemanticUnknownException();
-	}
-
-	// dans certains cas un java null pointer exception peut �tre lever ce
-	// qui correspond � une semanticunknownException
-	try {
-	    AttributConcret refConcret = ref
-		    .getAttribut(((AttributExpressExpression) this.leftNode)
-			    .getAbstractAttribut());
-	    boolean error = false;
-
-	    if (getLeftNode().isString() && getRightNode().isBoolean()) {
-		error = refConcret
-			.setValeur(new String(
-				((StrValue) refConcret.getValue())
-					+ ((Boolean) getRightNode()
-						.getNodeValue()).toString()));
-	    }
-
-	    if (getLeftNode().isString() && getRightNode().isString()) {
-		error = refConcret
-			.setValeur(new String(
-				((StrValue) refConcret.getValue())
-					+ ((String) getRightNode()
-						.getNodeValue())));
-	    }
-
-	    if (getLeftNode().isString() && getRightNode().isNumber()) {
-		error = refConcret.setValeur(new String((((StrValue) refConcret
-			.getValue()) + ((NumberValue) getRightNode()
-			.getNodeValue()).toString())));
-	    }
-
-	    if (getLeftNode().isNumber() && getRightNode().isString()) {
-		error = refConcret.setValeur(((NumberValue) refConcret
-			.getValue()).plusComputing(
-			new NumberValue(
-				((String) getRightNode().getNodeValue())))
-			.toString());
-	    }
-
-	    if (getLeftNode().isNumber() && getRightNode().isNumber()) {
-		error = refConcret.setValeur(((NumberValue) refConcret
-			.getValue()).plusComputing(
-			((NumberValue) getRightNode().getNodeValue()))
-			.toString());
-	    }
-
-	    if (error) {
 		this.setStateToError();
-		throw new SemanticErrorException();
-	    }
-	} catch (Exception e) {
-	    throw new SemanticUnknownException();
+		throw new SemanticException(ExpressConstant.TYPE_PLUS_ASSIGNMENT);
 	}
-    }
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+
+		if (this.isErrorState()) {
+			throw new SemanticErrorException();
+		}
+
+		if (this.isUnknownState()) {
+			throw new SemanticUnknownException();
+		}
+
+		// dans certains cas un java null pointer exception peut �tre lever ce
+		// qui correspond � une semanticunknownException
+		try {
+			AttributConcret refConcret = ref
+					.getAttribut(((AttributExpressExpression) this.leftNode).getAbstractAttribut());
+			boolean error = false;
+
+			if (getLeftNode().isString() && getRightNode().isBoolean()) {
+				error = refConcret.setValeur(new String(
+						((StrValue) refConcret.getValue()) + ((Boolean) getRightNode().getNodeValue()).toString()));
+			}
+
+			if (getLeftNode().isString() && getRightNode().isString()) {
+				error = refConcret.setValeur(
+						new String(((StrValue) refConcret.getValue()) + ((String) getRightNode().getNodeValue())));
+			}
+
+			if (getLeftNode().isString() && getRightNode().isNumber()) {
+				error = refConcret.setValeur(new String((((StrValue) refConcret.getValue())
+						+ ((NumberValue) getRightNode().getNodeValue()).toString())));
+			}
+
+			if (getLeftNode().isNumber() && getRightNode().isString()) {
+				error = refConcret.setValeur(((NumberValue) refConcret.getValue())
+						.plusComputing(new NumberValue(((String) getRightNode().getNodeValue()))).toString());
+			}
+
+			if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+				error = refConcret.setValeur(((NumberValue) refConcret.getValue())
+						.plusComputing(((NumberValue) getRightNode().getNodeValue())).toString());
+			}
+
+			if (error) {
+				this.setStateToError();
+				throw new SemanticErrorException();
+			}
+		} catch (Exception e) {
+			throw new SemanticUnknownException();
+		}
+	}
 }

@@ -35,83 +35,79 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
  */
 public class AbstractObjectVertexView extends VertexView {
 
-    private static final long serialVersionUID = -2853170773819790684L;
+	private static final long serialVersionUID = -2853170773819790684L;
 
-    private Color borderColor = Color.BLACK;
+	private Color borderColor = Color.BLACK;
 
-    @SuppressWarnings("unused")
-    private JGraph myGraph;
+	@SuppressWarnings("unused")
+	private JGraph myGraph;
 
-    private String title;
+	private String title;
 
-    private String[] attributes;
+	private String[] attributes;
 
-    private AbstractObjectCell object;
+	private AbstractObjectCell object;
 
-    private JPanel panel = new JPanel();
+	private JPanel panel = new JPanel();
 
-    public AbstractObjectVertexView(Object cell, JGraph graph) {
-	super(cell);
-	this.object = (AbstractObjectCell) cell;
-	this.myGraph = graph;
-	this.title = ((AbstractObjectCell) cell).getName();
-	this.attributes = ((AbstractObjectCell) cell).getObjectAttributes();
-    }
-
-    /**
-     * Call of the renderer
-     */
-    public Component getRendererComponent(JGraph graph, boolean selected,
-	    boolean focus, boolean preview) {
-
-	Color background;
-
-	if (selected)
-	    background = KMADEConstant.ACTIVE_OBJECT;
-	else
-	    background = KMADEConstant.INACTIVE_OBJECT;
-
-	if (((AbstractObjectCell) cell).getName().equals(
-		KMADEConstant.NEW_OBJECT_NAME))
-	    this.title = "<html><font color=\"red\">"
-		    + ((AbstractObjectCell) cell).getName() + "</font></html>";
-	else
-	    this.title = ((AbstractObjectCell) cell).getName();
-
-	this.attributes = ((AbstractObjectCell) cell).getObjectAttributes();
-
-	panel = new JPanel();
-	panel.setLayout(new BorderLayout());
-	// Title
-	JLabel titlePanel = new JLabel(this.title, JLabel.CENTER);
-	titlePanel.setBorder(BorderFactory.createLineBorder(borderColor));
-	titlePanel.setOpaque(true);
-	titlePanel.setBackground(background);
-	// Attributes
-	JPanel attributesPanel = new JPanel(new BorderLayout());
-	JLabel attributesLabel = new JLabel();
-	String a = new String("<html>");
-	if (attributes != null) {
-	    for (int i = 0; i < this.attributes.length; i++) {
-		a += " - " + attributes[i] + "<br/>";
-	    }
+	public AbstractObjectVertexView(Object cell, JGraph graph) {
+		super(cell);
+		this.object = (AbstractObjectCell) cell;
+		this.myGraph = graph;
+		this.title = ((AbstractObjectCell) cell).getName();
+		this.attributes = ((AbstractObjectCell) cell).getObjectAttributes();
 	}
-	a += "</html>";
-	attributesLabel.setText(a);
-	attributesLabel.setOpaque(true);
-	attributesLabel.setBackground(background);
-	attributesPanel.add(attributesLabel, BorderLayout.CENTER);
-	attributesPanel.setBackground(background);
-	attributesPanel.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1,
-		borderColor));
-	panel.add(titlePanel, BorderLayout.NORTH);
-	panel.add(attributesPanel, BorderLayout.CENTER);
 
-	return panel;
-    }
+	/**
+	 * Call of the renderer
+	 */
+	public Component getRendererComponent(JGraph graph, boolean selected, boolean focus, boolean preview) {
 
-    public Object getObject() {
-	return object;
-    }
+		Color background;
+
+		if (selected)
+			background = KMADEConstant.ACTIVE_OBJECT;
+		else
+			background = KMADEConstant.INACTIVE_OBJECT;
+
+		if (((AbstractObjectCell) cell).getName().equals(KMADEConstant.NEW_OBJECT_NAME))
+			this.title = "<html><font color=\"red\">" + ((AbstractObjectCell) cell).getName() + "</font></html>";
+		else
+			this.title = ((AbstractObjectCell) cell).getName();
+
+		this.attributes = ((AbstractObjectCell) cell).getObjectAttributes();
+
+		panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		// Title
+		JLabel titlePanel = new JLabel(this.title, JLabel.CENTER);
+		titlePanel.setBorder(BorderFactory.createLineBorder(borderColor));
+		titlePanel.setOpaque(true);
+		titlePanel.setBackground(background);
+		// Attributes
+		JPanel attributesPanel = new JPanel(new BorderLayout());
+		JLabel attributesLabel = new JLabel();
+		String a = new String("<html>");
+		if (attributes != null) {
+			for (int i = 0; i < this.attributes.length; i++) {
+				a += " - " + attributes[i] + "<br/>";
+			}
+		}
+		a += "</html>";
+		attributesLabel.setText(a);
+		attributesLabel.setOpaque(true);
+		attributesLabel.setBackground(background);
+		attributesPanel.add(attributesLabel, BorderLayout.CENTER);
+		attributesPanel.setBackground(background);
+		attributesPanel.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, borderColor));
+		panel.add(titlePanel, BorderLayout.NORTH);
+		panel.add(attributesPanel, BorderLayout.CENTER);
+
+		return panel;
+	}
+
+	public Object getObject() {
+		return object;
+	}
 
 }

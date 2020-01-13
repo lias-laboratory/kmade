@@ -25,58 +25,50 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class SupEqualOperator extends RelationalOperator {
 
-    private static final long serialVersionUID = 5547865175021787122L;
+	private static final long serialVersionUID = 5547865175021787122L;
 
-    public SupEqualOperator(NodeExpression left) {
-	super(left);
-	this.name = ">=";
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
-	if (this.isErrorState()) {
-	    throw new SemanticErrorException();
+	public SupEqualOperator(NodeExpression left) {
+		super(left);
+		this.name = ">=";
 	}
 
-	if (this.isUnknownState()) {
-	    throw new SemanticUnknownException();
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+		if (this.isErrorState()) {
+			throw new SemanticErrorException();
+		}
+
+		if (this.isUnknownState()) {
+			throw new SemanticUnknownException();
+		}
+
+		if (getLeftNode().isNumber() && getRightNode().isString()) {
+			this.setNodeValue(new Boolean(((NumberValue) getLeftNode().getNodeValue())
+					.supEqualOperator((new NumberValue((String) getRightNode().getNodeValue())))));
+			return;
+		}
+
+		if (getLeftNode().isString() && getRightNode().isNumber()) {
+			this.setNodeValue(new Boolean(((new NumberValue((String) getLeftNode().getNodeValue()))
+					.supEqualOperator(((NumberValue) getRightNode().getNodeValue())))));
+			return;
+		}
+
+		// uniquement ordre lexicographique
+		if (getLeftNode().isString() && getRightNode().isString()) {
+			this.setNodeValue(new Boolean(((String) getLeftNode().getNodeValue()).toLowerCase()
+					.compareTo(((String) getRightNode().getNodeValue()).toLowerCase()) >= 0));
+			return;
+		}
+
+		if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+			this.setNodeValue(new Boolean(((NumberValue) getLeftNode().getNodeValue())
+					.supEqualOperator((NumberValue) getRightNode().getNodeValue())));
+			return;
+		}
 	}
 
-	if (getLeftNode().isNumber() && getRightNode().isString()) {
-	    this.setNodeValue(new Boolean(((NumberValue) getLeftNode()
-		    .getNodeValue()).supEqualOperator((new NumberValue(
-		    (String) getRightNode().getNodeValue())))));
-	    return;
+	public String toString() {
+		return super.toString();
 	}
-
-	if (getLeftNode().isString() && getRightNode().isNumber()) {
-	    this.setNodeValue(new Boolean(((new NumberValue(
-		    (String) getLeftNode().getNodeValue()))
-		    .supEqualOperator(((NumberValue) getRightNode()
-			    .getNodeValue())))));
-	    return;
-	}
-
-	// uniquement ordre lexicographique
-	if (getLeftNode().isString() && getRightNode().isString()) {
-	    this.setNodeValue(new Boolean(
-		    ((String) getLeftNode().getNodeValue()).toLowerCase()
-			    .compareTo(
-				    ((String) getRightNode().getNodeValue())
-					    .toLowerCase()) >= 0));
-	    return;
-	}
-
-	if (getLeftNode().isNumber() && getRightNode().isNumber()) {
-	    this.setNodeValue(new Boolean(((NumberValue) getLeftNode()
-		    .getNodeValue())
-		    .supEqualOperator((NumberValue) getRightNode()
-			    .getNodeValue())));
-	    return;
-	}
-    }
-
-    public String toString() {
-	return super.toString();
-    }
 }

@@ -27,24 +27,23 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressGroup;
  */
 public class GroupExpressExpression extends ExpressExpression {
 
-    private static final long serialVersionUID = -3796792735826302638L;
+	private static final long serialVersionUID = -3796792735826302638L;
 
-    private Groupe myGroup;
+	private Groupe myGroup;
 
-    public GroupExpressExpression(String ie) throws ExpressException {
-	super(ie);
-	myGroup = ExpressGroup.getRefAbstractGroupFromName(ie);
-	if (myGroup == null) {
-	    throw new ExpressException(ExpressConstant.GROUP_MESSAGE + " \""
-		    + this.identExpress + "\" "
-		    + ExpressConstant.NOT_FOUNDED_ERROR + ".");
+	public GroupExpressExpression(String ie) throws ExpressException {
+		super(ie);
+		myGroup = ExpressGroup.getRefAbstractGroupFromName(ie);
+		if (myGroup == null) {
+			throw new ExpressException(ExpressConstant.GROUP_MESSAGE + " \"" + this.identExpress + "\" "
+					+ ExpressConstant.NOT_FOUNDED_ERROR + ".");
+		}
 	}
-    }
 
-    public Groupe getGroup() {
-	return myGroup;
-    }
+	public Groupe getGroup() {
+		return myGroup;
+	}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+	}
 }

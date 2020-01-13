@@ -29,57 +29,53 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
 /**
  * @author Mickael BARON
  */
-public class KMADEReadAbstractObjectPanel extends JPanel implements
-	LanguageFactory {
-    private static final long serialVersionUID = -8765013733902053802L;
+public class KMADEReadAbstractObjectPanel extends JPanel implements LanguageFactory {
+	private static final long serialVersionUID = -8765013733902053802L;
 
-    private final KMADEReadAbstractObjectTable objAbstrait = new KMADEReadAbstractObjectTable();
+	private final KMADEReadAbstractObjectTable objAbstrait = new KMADEReadAbstractObjectTable();
 
-    private final KMADEReadAbstractObjectGroupTable groupe = new KMADEReadAbstractObjectGroupTable();
+	private final KMADEReadAbstractObjectGroupTable groupe = new KMADEReadAbstractObjectGroupTable();
 
-    private final KMADEReadAbstractObjectAttributTable attrAbstrait = new KMADEReadAbstractObjectAttributTable();
+	private final KMADEReadAbstractObjectAttributTable attrAbstrait = new KMADEReadAbstractObjectAttributTable();
 
-    private TitledBorder myTitledBorder;
+	private TitledBorder myTitledBorder;
 
-    public KMADEReadAbstractObjectPanel() {
-	myTitledBorder = new TitledBorder(null,
-		KMADEConstant.ABSTRACT_OBJECT_LIST_MESSAGE_TITLE,
-		TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
-		KMADEConstant.fontACTIF);
-	this.setBorder(myTitledBorder);
-	JPanel panelHaut = new JPanel(new GridLayout(1, 2, 2, 2));
-	panelHaut.add(objAbstrait);
-	panelHaut.add(groupe);
-	this.setLayout(new GridLayout(2, 1, 2, 2));
-	this.add(panelHaut);
-	this.add(attrAbstrait);
-	this.setPreferredSize(new Dimension(400, 700));
-    }
+	public KMADEReadAbstractObjectPanel() {
+		myTitledBorder = new TitledBorder(null, KMADEConstant.ABSTRACT_OBJECT_LIST_MESSAGE_TITLE, TitledBorder.CENTER,
+				TitledBorder.DEFAULT_POSITION, KMADEConstant.fontACTIF);
+		this.setBorder(myTitledBorder);
+		JPanel panelHaut = new JPanel(new GridLayout(1, 2, 2, 2));
+		panelHaut.add(objAbstrait);
+		panelHaut.add(groupe);
+		this.setLayout(new GridLayout(2, 1, 2, 2));
+		this.add(panelHaut);
+		this.add(attrAbstrait);
+		this.setPreferredSize(new Dimension(400, 700));
+	}
 
-    public void hideGroupAndAttributPanel() {
-	groupe.setVisible(false);
-	attrAbstrait.setVisible(false);
-    }
+	public void hideGroupAndAttributPanel() {
+		groupe.setVisible(false);
+		attrAbstrait.setVisible(false);
+	}
 
-    public void showGroupAndAttributPanel() {
-	groupe.setVisible(true);
-	attrAbstrait.setVisible(true);
-    }
+	public void showGroupAndAttributPanel() {
+		groupe.setVisible(true);
+		attrAbstrait.setVisible(true);
+	}
 
-    public KMADEReadAbstractObjectTable getAbstractObjectTable() {
-	return this.objAbstrait;
-    }
+	public KMADEReadAbstractObjectTable getAbstractObjectTable() {
+		return this.objAbstrait;
+	}
 
-    public KMADEReadAbstractObjectAttributTable getAbstractAttributTable() {
-	return this.attrAbstrait;
-    }
+	public KMADEReadAbstractObjectAttributTable getAbstractAttributTable() {
+		return this.attrAbstrait;
+	}
 
-    public KMADEReadAbstractObjectGroupTable getGroupTable() {
-	return this.groupe;
-    }
+	public KMADEReadAbstractObjectGroupTable getGroupTable() {
+		return this.groupe;
+	}
 
-    public void notifLocalisationModification() {
-	myTitledBorder
-		.setTitle(KMADEConstant.ABSTRACT_OBJECT_LIST_MESSAGE_TITLE);
-    }
+	public void notifLocalisationModification() {
+		myTitledBorder.setTitle(KMADEConstant.ABSTRACT_OBJECT_LIST_MESSAGE_TITLE);
+	}
 }

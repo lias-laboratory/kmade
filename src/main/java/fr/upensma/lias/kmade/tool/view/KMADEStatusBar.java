@@ -34,24 +34,22 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
  */
 public class KMADEStatusBar extends JPanel implements LanguageFactory {
 
-    private static final long serialVersionUID = 1840698728748992207L;
+	private static final long serialVersionUID = 1840698728748992207L;
 
-    protected JLabel leftSideStatus;
+	protected JLabel leftSideStatus;
 
-    public KMADEStatusBar() {
-	super();
-	this.setLayout(new BorderLayout());
-	this.leftSideStatus = new JLabel(KMADEConstant.VERSION_MESSAGE + " "
-		+ KMADEToolConstant.VERSION_VALUE);
-	this.leftSideStatus.setBorder(BorderFactory.createLoweredBevelBorder());
-	this.add(leftSideStatus, BorderLayout.CENTER);
-	JComponent heapView = new KMADEHeapView();
-	heapView.setBorder(BorderFactory.createLoweredBevelBorder());
-	this.add(heapView, BorderLayout.EAST);
-    }
+	public KMADEStatusBar() {
+		super();
+		this.setLayout(new BorderLayout());
+		this.leftSideStatus = new JLabel(KMADEConstant.VERSION_MESSAGE + " " + KMADEToolConstant.VERSION_VALUE);
+		this.leftSideStatus.setBorder(BorderFactory.createLoweredBevelBorder());
+		this.add(leftSideStatus, BorderLayout.CENTER);
+		JComponent heapView = new KMADEHeapView();
+		heapView.setBorder(BorderFactory.createLoweredBevelBorder());
+		this.add(heapView, BorderLayout.EAST);
+	}
 
-    public void notifLocalisationModification() {
-	this.leftSideStatus.setText(KMADEConstant.VERSION_MESSAGE + " "
-		+ KMADEToolConstant.VERSION_VALUE);
-    }
+	public void notifLocalisationModification() {
+		this.leftSideStatus.setText(KMADEConstant.VERSION_MESSAGE + " " + KMADEToolConstant.VERSION_VALUE);
+	}
 }

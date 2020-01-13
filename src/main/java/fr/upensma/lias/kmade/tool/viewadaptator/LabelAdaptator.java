@@ -29,90 +29,86 @@ import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
  */
 public final class LabelAdaptator {
 
-    public static int origine = 0;
+	public static int origine = 0;
 
-    public static void disabledFrame() {
-	GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
-	TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
-    }
-
-    public static void editedFromEnhancedFrame() {
-	origine = 1;
-    }
-
-    public static void enabledFrame() {
-	GraphicEditorAdaptator.enabledMainFrameAfterEdition();
-	TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
-	if (origine == 0) {
-	    GraphicEditorAdaptator.requestFocus();
-	} else {
-	    TaskPropertiesEnhancedEditorAdaptator.requestFocus();
+	public static void disabledFrame() {
+		GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
+		TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
 	}
-	origine = 0;
-    }
 
-    public static void affRemoveLabel(String oid) {
-	ExpressLabel.affRemoveLabel(oid);
-    }
-
-    public static void removeLabel(String oidAct) {
-	ExpressLabel.removeLabel(oidAct);
-    }
-
-    public static void updateLabelView() {
-	ArrayList<Label> myList = ExpressLabel.getLabels();
-	for (Label current : myList) {
-	    KMADEMainFrame
-		    .getProjectPanel()
-		    .getLabelPanel()
-		    .addLabel(current.getName(), current.getDescription(),
-			    current.getColor(), current.isColorVisible(),
-			    current.isVisible(), current.getOid().get());
+	public static void editedFromEnhancedFrame() {
+		origine = 1;
 	}
-    }
 
-    public static String[] getLabelsNameArray() {
-	return ExpressLabel.getLabelsNameArray();
-    }
+	public static void enabledFrame() {
+		GraphicEditorAdaptator.enabledMainFrameAfterEdition();
+		TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
+		if (origine == 0) {
+			GraphicEditorAdaptator.requestFocus();
+		} else {
+			TaskPropertiesEnhancedEditorAdaptator.requestFocus();
+		}
+		origine = 0;
+	}
 
-    public static ArrayList<String> getLabelsNameList() {
-	return ExpressLabel.getLabelsNameList();
-    }
+	public static void affRemoveLabel(String oid) {
+		ExpressLabel.affRemoveLabel(oid);
+	}
 
-    public static String addLabel() {
-	return ExpressLabel.createLabel();
-    }
+	public static void removeLabel(String oidAct) {
+		ExpressLabel.removeLabel(oidAct);
+	}
 
-    public static void setLabelDescription(String oid, String description) {
-	ExpressLabel.setLabelDescription(oid, description);
-    }
+	public static void updateLabelView() {
+		ArrayList<Label> myList = ExpressLabel.getLabels();
+		for (Label current : myList) {
+			KMADEMainFrame.getProjectPanel().getLabelPanel().addLabel(current.getName(), current.getDescription(),
+					current.getColor(), current.isColorVisible(), current.isVisible(), current.getOid().get());
+		}
+	}
 
-    public static void setLabelColor(String oid, Color color) {
-	ExpressLabel.setLabelColor(oid, color);
-    }
+	public static String[] getLabelsNameArray() {
+		return ExpressLabel.getLabelsNameArray();
+	}
 
-    public static void setLabelVisible(String oid, boolean p) {
-	ExpressLabel.setLabelVisible(oid, p);
-    }
+	public static ArrayList<String> getLabelsNameList() {
+		return ExpressLabel.getLabelsNameList();
+	}
 
-    public static void removeAllLabels() {
-	KMADEMainFrame.getProjectPanel().getLabelPanel().removeAllLabels();
-    }
+	public static String addLabel() {
+		return ExpressLabel.createLabel();
+	}
 
-    /**
-     * @param newLabelObject
-     * @param value
-     * @return
-     */
-    public static String setLabelName(String newLabelObject, String value) {
-	return (ExpressLabel.setLabelName(newLabelObject, value));
-    }
+	public static void setLabelDescription(String oid, String description) {
+		ExpressLabel.setLabelDescription(oid, description);
+	}
 
-    /**
-     * @param oidRow
-     * @param boolean1
-     */
-    public static void setLabelColorVisible(String oidRow, boolean boolean1) {
-	ExpressLabel.setLabelColorVisible(oidRow, boolean1);
-    }
+	public static void setLabelColor(String oid, Color color) {
+		ExpressLabel.setLabelColor(oid, color);
+	}
+
+	public static void setLabelVisible(String oid, boolean p) {
+		ExpressLabel.setLabelVisible(oid, p);
+	}
+
+	public static void removeAllLabels() {
+		KMADEMainFrame.getProjectPanel().getLabelPanel().removeAllLabels();
+	}
+
+	/**
+	 * @param newLabelObject
+	 * @param value
+	 * @return
+	 */
+	public static String setLabelName(String newLabelObject, String value) {
+		return (ExpressLabel.setLabelName(newLabelObject, value));
+	}
+
+	/**
+	 * @param oidRow
+	 * @param boolean1
+	 */
+	public static void setLabelColorVisible(String oidRow, boolean boolean1) {
+		ExpressLabel.setLabelColorVisible(oidRow, boolean1);
+	}
 }

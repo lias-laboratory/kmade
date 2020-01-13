@@ -25,16 +25,16 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class GetUnaryFunction extends UnaryFunction {
 
-    private static final long serialVersionUID = -188988681154398132L;
+	private static final long serialVersionUID = -188988681154398132L;
 
-    public GetUnaryFunction(AttributExpressExpression right) {
-	super(false, right);
-	this.setNodeType(right.getNodeType());
-	this.name = ExpressConstant.GET_FUNCTION_EXPRESSION;
-    }
+	public GetUnaryFunction(AttributExpressExpression right) {
+		super(false, right);
+		this.setNodeType(right.getNodeType());
+		this.name = ExpressConstant.GET_FUNCTION_EXPRESSION;
+	}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
-	this.setNodeValue(myAloneExpression.getNodeValue());
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+		this.setNodeValue(myAloneExpression.getNodeValue());
+	}
 }

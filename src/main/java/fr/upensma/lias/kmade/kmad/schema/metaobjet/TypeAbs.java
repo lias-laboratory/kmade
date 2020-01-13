@@ -27,47 +27,47 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public abstract class TypeAbs implements Entity {
 
-    private static final long serialVersionUID = -1691961187731708342L;
+	private static final long serialVersionUID = -1691961187731708342L;
 
-    public Oid oid = null;
+	public Oid oid = null;
 
-    protected String name = null;
+	protected String name = null;
 
-    protected String description = null;
+	protected String description = null;
 
-    public ArrayList<AttributAbstrait> inverseAttributAbs = new ArrayList<AttributAbstrait>();
+	public ArrayList<AttributAbstrait> inverseAttributAbs = new ArrayList<AttributAbstrait>();
 
-    public abstract ArrayList<String> getValues();
+	public abstract ArrayList<String> getValues();
 
-    public void addInverseAttributAbs(AttributAbstrait attributabs) {
-	inverseAttributAbs.add(attributabs);
-    }
+	public void addInverseAttributAbs(AttributAbstrait attributabs) {
+		inverseAttributAbs.add(attributabs);
+	}
 
-    public void removeInverseAttributAbs(AttributAbstrait attributabs) {
-	inverseAttributAbs.remove(attributabs);
-    }
+	public void removeInverseAttributAbs(AttributAbstrait attributabs) {
+		inverseAttributAbs.remove(attributabs);
+	}
 
-    public ArrayList<AttributAbstrait> getInverseAttributAbs() {
-	return this.inverseAttributAbs;
-    }
+	public ArrayList<AttributAbstrait> getInverseAttributAbs() {
+		return this.inverseAttributAbs;
+	}
 
-    public void setOid(Oid oid) {
-	this.oid = oid;
-    }
+	public void setOid(Oid oid) {
+		this.oid = oid;
+	}
 
-    public Oid getOid() {
-	return this.oid;
-    }
+	public Oid getOid() {
+		return this.oid;
+	}
 
-    public String getName() {
-	return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setDescription(String n) {
-	description = n;
-    }
+	public void setDescription(String n) {
+		description = n;
+	}
 
-    public String getDescription() {
-	return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 }

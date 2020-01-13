@@ -28,66 +28,64 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.LanguageFactory;
 /**
  * @author Mickael BARON
  */
-public class KMADEReadWriteConcreteObjectPanel extends JPanel implements
-	LanguageFactory {
+public class KMADEReadWriteConcreteObjectPanel extends JPanel implements LanguageFactory {
 
-    private static final long serialVersionUID = 565653L;
+	private static final long serialVersionUID = 565653L;
 
-    private KMADEReadAbstractObjectTable refAbstractObjectTable = new KMADEReadAbstractObjectTable();
+	private KMADEReadAbstractObjectTable refAbstractObjectTable = new KMADEReadAbstractObjectTable();
 
-    private KMADEReadWriteConcreteObjectTreeTable refConcreteObjectTreeTable = new KMADEReadWriteConcreteObjectTreeTable();
+	private KMADEReadWriteConcreteObjectTreeTable refConcreteObjectTreeTable = new KMADEReadWriteConcreteObjectTreeTable();
 
-    private KMADEReadWriteConcreteAttributTable refConcreteAttributTable = new KMADEReadWriteConcreteAttributTable();
+	private KMADEReadWriteConcreteAttributTable refConcreteAttributTable = new KMADEReadWriteConcreteAttributTable();
 
-    public KMADEReadWriteConcreteObjectPanel() {
-	this.setBorder(new TitledBorder(null,
-		KMADEConstant.CONCRETE_OBJECT_TITLE_NAME, TitledBorder.CENTER,
-		TitledBorder.TOP));
-	JPanel panelHaut = new JPanel(new GridLayout(1, 2, 2, 2));
-	panelHaut.add(refAbstractObjectTable);
-	panelHaut.add(refConcreteObjectTreeTable);
-	this.setLayout(new GridLayout(2, 1, 2, 2));
-	this.add(panelHaut);
-	this.add(refConcreteAttributTable);
-    }
+	public KMADEReadWriteConcreteObjectPanel() {
+		this.setBorder(new TitledBorder(null, KMADEConstant.CONCRETE_OBJECT_TITLE_NAME, TitledBorder.CENTER,
+				TitledBorder.TOP));
+		JPanel panelHaut = new JPanel(new GridLayout(1, 2, 2, 2));
+		panelHaut.add(refAbstractObjectTable);
+		panelHaut.add(refConcreteObjectTreeTable);
+		this.setLayout(new GridLayout(2, 1, 2, 2));
+		this.add(panelHaut);
+		this.add(refConcreteAttributTable);
+	}
 
-    public void removeAllConcreteObject() {
-	refAbstractObjectTable.removeAllAbstractObject();
-	refConcreteAttributTable.removeAllConcreteAttribut();
-    }
+	public void removeAllConcreteObject() {
+		refAbstractObjectTable.removeAllAbstractObject();
+		refConcreteAttributTable.removeAllConcreteAttribut();
+	}
 
-    public KMADEReadAbstractObjectTable getTableObjAbs() {
-	return this.refAbstractObjectTable;
-    }
+	public KMADEReadAbstractObjectTable getTableObjAbs() {
+		return this.refAbstractObjectTable;
+	}
 
-    public KMADEReadWriteConcreteObjectTreeTable getTreeTableObjConc() {
-	return this.refConcreteObjectTreeTable;
-    }
+	public KMADEReadWriteConcreteObjectTreeTable getTreeTableObjConc() {
+		return this.refConcreteObjectTreeTable;
+	}
 
-    public KMADEReadWriteConcreteAttributTable getTableAttr() {
-	return this.refConcreteAttributTable;
-    }
+	public KMADEReadWriteConcreteAttributTable getTableAttr() {
+		return this.refConcreteAttributTable;
+	}
 
-    public void hideConcreteObjectsAttributes() {
-	refConcreteObjectTreeTable.setVisible(false);
-	refConcreteAttributTable.setVisible(false);
-    }
+	public void hideConcreteObjectsAttributes() {
+		refConcreteObjectTreeTable.setVisible(false);
+		refConcreteAttributTable.setVisible(false);
+	}
 
-    public void showConcreteObjects() {
-	refConcreteObjectTreeTable.setVisible(true);
-    }
+	public void showConcreteObjects() {
+		refConcreteObjectTreeTable.setVisible(true);
+	}
 
-    public void showConcreteAttributes() {
-	refConcreteAttributTable.setVisible(true);
-    }
+	public void showConcreteAttributes() {
+		refConcreteAttributTable.setVisible(true);
+	}
 
-    public void hideConcreteAttributes() {
-	refConcreteAttributTable.setVisible(false);
-    }
+	public void hideConcreteAttributes() {
+		refConcreteAttributTable.setVisible(false);
+	}
 
-    public void notifLocalisationModification() {
-	refAbstractObjectTable.notifLocalisationModification();
-	refConcreteObjectTreeTable.notifLocalisationModification();
-	refConcreteAttributTable.notifLocalisationModification();
-    }
+	public void notifLocalisationModification() {
+		refAbstractObjectTable.notifLocalisationModification();
+		refConcreteObjectTreeTable.notifLocalisationModification();
+		refConcreteAttributTable.notifLocalisationModification();
+	}
 }

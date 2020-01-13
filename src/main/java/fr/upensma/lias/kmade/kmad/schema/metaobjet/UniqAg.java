@@ -19,85 +19,82 @@ package fr.upensma.lias.kmade.kmad.schema.metaobjet;
 
 import java.util.ArrayList;
 
-
 import org.w3c.dom.Document;
 
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 
 /**
- * @author Delphine AUTARD 
- * @author Mickael BARON 
+ * @author Delphine AUTARD
+ * @author Mickael BARON
  **/
 public class UniqAg extends Agregat {
 
-    private static final long serialVersionUID = 4998023325756830369L;
+	private static final long serialVersionUID = 4998023325756830369L;
 
-    public UniqAg() {
-	this.lstObjConcrets = new ArrayList<ObjetConcret>(1);
-	this.agregatStruct = AgregatStructure.SINGLETON_AGREGAT;
-    }
-
-    public UniqAg(Oid oid) {
-	this.lstObjConcrets = new ArrayList<ObjetConcret>(1);
-	this.oid = oid;
-	this.agregatStruct = AgregatStructure.SINGLETON_AGREGAT;
-    }
-
-    public UniqAg(ArrayList<ObjetConcret> lst, Oid oid) {
-	this.lstObjConcrets = lst;
-	this.oid = oid;
-	this.agregatStruct = AgregatStructure.SINGLETON_AGREGAT;
-    }
-
-    public boolean put(ObjetConcret i) {
-	if (this.lstObjConcrets.size() == 0) {
-	    this.lstObjConcrets.add(i);
-	    return true;
-	} else {
-	    return false;
+	public UniqAg() {
+		this.lstObjConcrets = new ArrayList<ObjetConcret>(1);
+		this.agregatStruct = AgregatStructure.SINGLETON_AGREGAT;
 	}
-    }
 
-    public ObjetConcret get() {
-	return this.lstObjConcrets.get(0);
-    }
-
-    public String toSPF() {
-	String SPF = this.oid.get() + "=UniqAg();";
-	return SPF;
-    }
-
-    public org.w3c.dom.Element toXML(Document doc) {
-	org.w3c.dom.Element racine = super.toXML(doc);
-	racine.setAttribute("classkmad", "metaobjet.UniqAg");
-	return racine;
-    }
-    
-    public org.w3c.dom.Element toXML2(Document doc) {
-	org.w3c.dom.Element racine = super.toXML2(doc);
-	racine.setAttribute("classkmad", "metaobjet.UniqAg");
-	return racine;
-    }
-
-    public void setOid(Oid oid) {
-	this.oid = oid;
-    }
-
-    public String getName() {
-	return AgregatStructure
-		.getEnumereIntoLocaleAgregatStructure(AgregatStructure.SINGLETON_AGREGAT
-			.getValue());
-    }
-
-    public void moveConcreteObject(ArrayList<ObjetConcret> p) {
-	lstObjConcrets = new ArrayList<ObjetConcret>();
-	if (p.size() >= 1)
-	    lstObjConcrets.add(p.get(0));
-
-	int taille = p.size();
-	for (int i = 1; i < taille; i++) {
-	    ObjetConcret obj = p.get(i);
-	    obj.delete();
+	public UniqAg(Oid oid) {
+		this.lstObjConcrets = new ArrayList<ObjetConcret>(1);
+		this.oid = oid;
+		this.agregatStruct = AgregatStructure.SINGLETON_AGREGAT;
 	}
-    }
+
+	public UniqAg(ArrayList<ObjetConcret> lst, Oid oid) {
+		this.lstObjConcrets = lst;
+		this.oid = oid;
+		this.agregatStruct = AgregatStructure.SINGLETON_AGREGAT;
+	}
+
+	public boolean put(ObjetConcret i) {
+		if (this.lstObjConcrets.size() == 0) {
+			this.lstObjConcrets.add(i);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public ObjetConcret get() {
+		return this.lstObjConcrets.get(0);
+	}
+
+	public String toSPF() {
+		String SPF = this.oid.get() + "=UniqAg();";
+		return SPF;
+	}
+
+	public org.w3c.dom.Element toXML(Document doc) {
+		org.w3c.dom.Element racine = super.toXML(doc);
+		racine.setAttribute("classkmad", "metaobjet.UniqAg");
+		return racine;
+	}
+
+	public org.w3c.dom.Element toXML2(Document doc) {
+		org.w3c.dom.Element racine = super.toXML2(doc);
+		racine.setAttribute("classkmad", "metaobjet.UniqAg");
+		return racine;
+	}
+
+	public void setOid(Oid oid) {
+		this.oid = oid;
+	}
+
+	public String getName() {
+		return AgregatStructure.getEnumereIntoLocaleAgregatStructure(AgregatStructure.SINGLETON_AGREGAT.getValue());
+	}
+
+	public void moveConcreteObject(ArrayList<ObjetConcret> p) {
+		lstObjConcrets = new ArrayList<ObjetConcret>();
+		if (p.size() >= 1)
+			lstObjConcrets.add(p.get(0));
+
+		int taille = p.size();
+		for (int i = 1; i < taille; i++) {
+			ObjetConcret obj = p.get(i);
+			obj.delete();
+		}
+	}
 }

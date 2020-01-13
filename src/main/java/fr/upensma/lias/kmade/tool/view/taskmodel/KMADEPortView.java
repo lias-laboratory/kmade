@@ -31,46 +31,46 @@ import org.jgraph.graph.PortView;
  * @author Mickael BARON
  */
 public class KMADEPortView extends PortView {
-    private static final long serialVersionUID = 1274573416666928209L;
+	private static final long serialVersionUID = 1274573416666928209L;
 
-    public KMADEPortView(Object cell) {
-	super(cell);
-    }
-
-    public Point2D getLocation(EdgeView edge, Point2D nearest) {
-	// Vertex c'est la cell en fait.
-	CellView vertex = getParentView();
-	Point2D pos = null;
-	if (vertex != null) {
-	    Rectangle2D r = vertex.getBounds();
-
-	    double highOrLow = 0;
-	    if (cell instanceof KMADEDefaultPort) {
-		if (((KMADEDefaultPort) cell).isMotherPort())
-		    highOrLow = r.getMaxY();
-		else
-		    highOrLow = r.getMinY();
-	    }
-
-	    if (r != null)
-		return new Point2D.Double(r.getCenterX(), highOrLow);
+	public KMADEPortView(Object cell) {
+		super(cell);
 	}
-	return pos;
-    }
 
-    public CellViewRenderer getRenderer() {
-	return new MyPortRenderer();
-    }
+	public Point2D getLocation(EdgeView edge, Point2D nearest) {
+		// Vertex c'est la cell en fait.
+		CellView vertex = getParentView();
+		Point2D pos = null;
+		if (vertex != null) {
+			Rectangle2D r = vertex.getBounds();
 
-    class MyPortRenderer extends PortRenderer {
-	private static final long serialVersionUID = -928791334600161081L;
+			double highOrLow = 0;
+			if (cell instanceof KMADEDefaultPort) {
+				if (((KMADEDefaultPort) cell).isMotherPort())
+					highOrLow = r.getMaxY();
+				else
+					highOrLow = r.getMinY();
+			}
 
-	public void paint(Graphics g) {
-	    if (!((KMADEDefaultPort) KMADEPortView.this.getCell()).isExpanded()) {
-		return;
-	    } else {
-		super.paint(g);
-	    }
+			if (r != null)
+				return new Point2D.Double(r.getCenterX(), highOrLow);
+		}
+		return pos;
 	}
-    }
+
+	public CellViewRenderer getRenderer() {
+		return new MyPortRenderer();
+	}
+
+	class MyPortRenderer extends PortRenderer {
+		private static final long serialVersionUID = -928791334600161081L;
+
+		public void paint(Graphics g) {
+			if (!((KMADEDefaultPort) KMADEPortView.this.getCell()).isExpanded()) {
+				return;
+			} else {
+				super.paint(g);
+			}
+		}
+	}
 }

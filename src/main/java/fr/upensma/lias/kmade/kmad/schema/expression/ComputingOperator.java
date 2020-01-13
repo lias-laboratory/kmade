@@ -22,9 +22,9 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public class ComputingOperator extends Operator {
 
-    private static final long serialVersionUID = 421175294371391622L;
+	private static final long serialVersionUID = 421175294371391622L;
 
-    public ComputingOperator(NodeExpression left, NodeExpression right) {
-	super(true, left, right);
-    }
+	public ComputingOperator(NodeExpression left, NodeExpression right) {
+		super(true, left, right);
+	}
 }

@@ -25,26 +25,25 @@ import fr.upensma.lias.kmade.tool.view.taskmodel.KMADEVertexView;
  */
 public final class TaskPropertiesEditorAdaptator {
 
-    public static void setNameInTaskProperties(String value) {
-	TaskPropertiesAdaptator.updateNameRealTime(value);
-    }
+	public static void setNameInTaskProperties(String value) {
+		TaskPropertiesAdaptator.updateNameRealTime(value);
+	}
 
-    public static void setExecutantInTaskProperties(String value) {
-	Executor myExec = Executor.getLocaleExecutorIntoExecutor(value);
-	KMADEVertexView.editor.setEnableFaculEditor(!myExec
-		.equals(Executor.SYS));
-	TaskPropertiesAdaptator.updateExecutantTypeRealTime(myExec);
-    }
+	public static void setExecutantInTaskProperties(String value) {
+		Executor myExec = Executor.getLocaleExecutorIntoExecutor(value);
+		KMADEVertexView.editor.setEnableFaculEditor(!myExec.equals(Executor.SYS));
+		TaskPropertiesAdaptator.updateExecutantTypeRealTime(myExec);
+	}
 
-    public static void setOptionalInTaskProperties(boolean b) {
-	TaskPropertiesAdaptator.updateOptionalCharacRealTime(b);
-    }
+	public static void setOptionalInTaskProperties(boolean b) {
+		TaskPropertiesAdaptator.updateOptionalCharacRealTime(b);
+	}
 
-    public static void setInterruptibleInTaskProperties(boolean b) {
-	TaskPropertiesAdaptator.updateInterruptibleCharacRealTime(b);
-    }
+	public static void setInterruptibleInTaskProperties(boolean b) {
+		TaskPropertiesAdaptator.updateInterruptibleCharacRealTime(b);
+	}
 
-    public static void setDecompositionInTaskProperties(String string) {
-	TaskPropertiesAdaptator.updateDecompositionRealTime(string);
-    }
+	public static void setDecompositionInTaskProperties(String string) {
+		TaskPropertiesAdaptator.updateDecompositionRealTime(string);
+	}
 }

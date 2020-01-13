@@ -28,47 +28,47 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public class Condition implements Entity {
 
-    private static final long serialVersionUID = 5216681248489889199L;
+	private static final long serialVersionUID = 5216681248489889199L;
 
-    @Override
-    public Element toXML2(Document doc) throws Exception {
-	return null;
-    }
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		return null;
+	}
 
-    @Override
-    public boolean oidIsAnyMissing(Element p) throws Exception {
-	return false;
-    }
+	@Override
+	public boolean oidIsAnyMissing(Element p) throws Exception {
+		return false;
+	}
 
-    @Override
-    public boolean oidIsAnyMissing2(Element p) throws Exception {
-	return false;
-    }
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+		return false;
+	}
 
-    @Override
-    public void createObjectFromXMLElement(Element p) throws Exception {
-    }
+	@Override
+	public void createObjectFromXMLElement(Element p) throws Exception {
+	}
 
-    @Override
-    public void createObjectFromXMLElement2(Element p) throws Exception {
-    }
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+	}
 
-    @Override
-    public String toSPF() {
-	return null;
-    }
+	@Override
+	public String toSPF() {
+		return null;
+	}
 
-    @Override
-    public void setOid(Oid oid) {
-    }
+	@Override
+	public void setOid(Oid oid) {
+	}
 
-    @Override
-    public Oid getOid() {
-	return null;
-    }
+	@Override
+	public Oid getOid() {
+		return null;
+	}
 
-    @Override
-    public String getName() {
-	return null;
-    }
+	@Override
+	public String getName() {
+		return null;
+	}
 }

@@ -31,73 +31,68 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  */
 public final class KMADEEnhancedSplitPane extends JSplitPane {
 
-    private static final long serialVersionUID = -2273721332646585L;
+	private static final long serialVersionUID = -2273721332646585L;
 
-    public static final String PROPERTYNAME_DIVIDER_BORDER_VISIBLE = "dividerBorderVisible";
+	public static final String PROPERTYNAME_DIVIDER_BORDER_VISIBLE = "dividerBorderVisible";
 
-    private boolean dividerBorderVisible;
+	private boolean dividerBorderVisible;
 
-    public KMADEEnhancedSplitPane() {
-	this(JSplitPane.HORIZONTAL_SPLIT, false, new JButton(
-		UIManager.getString("SplitPane.leftButtonText")), new JButton(
-		UIManager.getString("SplitPane.rightButtonText")));
-    }
-
-    public KMADEEnhancedSplitPane(int newOrientation) {
-	this(newOrientation, false);
-    }
-
-    public KMADEEnhancedSplitPane(int newOrientation,
-	    boolean newContinuousLayout) {
-	this(newOrientation, newContinuousLayout, null, null);
-    }
-
-    public KMADEEnhancedSplitPane(int orientation, Component leftComponent,
-	    Component rightComponent) {
-	this(orientation, false, leftComponent, rightComponent);
-    }
-
-    public KMADEEnhancedSplitPane(int orientation, boolean continuousLayout,
-	    Component leftComponent, Component rightComponent) {
-	super(orientation, continuousLayout, leftComponent, rightComponent);
-	dividerBorderVisible = false;
-    }
-
-    public static KMADEEnhancedSplitPane createStrippedSplitPane(
-	    int orientation, Component leftComponent, Component rightComponent) {
-	KMADEEnhancedSplitPane split = new KMADEEnhancedSplitPane(orientation,
-		leftComponent, rightComponent);
-	split.setBorder(BorderFactory.createEmptyBorder());
-
-	split.setOneTouchExpandable(false);
-	split.setDividerLocation(1d);
-	return split;
-    }
-
-    public boolean isDividerBorderVisible() {
-	return dividerBorderVisible;
-    }
-
-    public void setDividerBorderVisible(boolean newVisibility) {
-	boolean oldVisibility = isDividerBorderVisible();
-	if (oldVisibility == newVisibility)
-	    return;
-	dividerBorderVisible = newVisibility;
-	firePropertyChange(PROPERTYNAME_DIVIDER_BORDER_VISIBLE, oldVisibility,
-		newVisibility);
-    }
-
-    public void updateUI() {
-	super.updateUI();
-	if (!isDividerBorderVisible())
-	    setEmptyDividerBorder();
-    }
-
-    private void setEmptyDividerBorder() {
-	SplitPaneUI splitPaneUI = getUI();
-	if (splitPaneUI instanceof BasicSplitPaneUI) {
-	    BasicSplitPaneUI basicUI = (BasicSplitPaneUI) splitPaneUI;
-	    basicUI.getDivider().setBorder(BorderFactory.createEmptyBorder());
+	public KMADEEnhancedSplitPane() {
+		this(JSplitPane.HORIZONTAL_SPLIT, false, new JButton(UIManager.getString("SplitPane.leftButtonText")),
+				new JButton(UIManager.getString("SplitPane.rightButtonText")));
 	}
-    }
+
+	public KMADEEnhancedSplitPane(int newOrientation) {
+		this(newOrientation, false);
+	}
+
+	public KMADEEnhancedSplitPane(int newOrientation, boolean newContinuousLayout) {
+		this(newOrientation, newContinuousLayout, null, null);
+	}
+
+	public KMADEEnhancedSplitPane(int orientation, Component leftComponent, Component rightComponent) {
+		this(orientation, false, leftComponent, rightComponent);
+	}
+
+	public KMADEEnhancedSplitPane(int orientation, boolean continuousLayout, Component leftComponent,
+			Component rightComponent) {
+		super(orientation, continuousLayout, leftComponent, rightComponent);
+		dividerBorderVisible = false;
+	}
+
+	public static KMADEEnhancedSplitPane createStrippedSplitPane(int orientation, Component leftComponent,
+			Component rightComponent) {
+		KMADEEnhancedSplitPane split = new KMADEEnhancedSplitPane(orientation, leftComponent, rightComponent);
+		split.setBorder(BorderFactory.createEmptyBorder());
+
+		split.setOneTouchExpandable(false);
+		split.setDividerLocation(1d);
+		return split;
+	}
+
+	public boolean isDividerBorderVisible() {
+		return dividerBorderVisible;
+	}
+
+	public void setDividerBorderVisible(boolean newVisibility) {
+		boolean oldVisibility = isDividerBorderVisible();
+		if (oldVisibility == newVisibility)
+			return;
+		dividerBorderVisible = newVisibility;
+		firePropertyChange(PROPERTYNAME_DIVIDER_BORDER_VISIBLE, oldVisibility, newVisibility);
+	}
+
+	public void updateUI() {
+		super.updateUI();
+		if (!isDividerBorderVisible())
+			setEmptyDividerBorder();
+	}
+
+	private void setEmptyDividerBorder() {
+		SplitPaneUI splitPaneUI = getUI();
+		if (splitPaneUI instanceof BasicSplitPaneUI) {
+			BasicSplitPaneUI basicUI = (BasicSplitPaneUI) splitPaneUI;
+			basicUI.getDivider().setBorder(BorderFactory.createEmptyBorder());
+		}
+	}
 }

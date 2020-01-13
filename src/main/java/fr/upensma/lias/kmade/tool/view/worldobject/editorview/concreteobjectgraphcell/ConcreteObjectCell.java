@@ -63,386 +63,358 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
  */
 public class ConcreteObjectCell extends ObjectDefaultGraphCell {
 
-    private static final long serialVersionUID = 6774003475034967508L;
+	private static final long serialVersionUID = 6774003475034967508L;
 
-    private ObjetConcret item;
+	private ObjetConcret item;
 
-    private ConcreteObjectVertexView invView;
+	private ConcreteObjectVertexView invView;
 
-    @SuppressWarnings("unused")
-    private ConcreteObjectEdit edit = null;
+	@SuppressWarnings("unused")
+	private ConcreteObjectEdit edit = null;
 
-    /**
-     * First constructor for the cell (the point is not created yet)
-     * 
-     * @param concrete
-     *            object represented by the cell
-     * @param point
-     *            x in the graph
-     * @param point
-     *            y in the graph
-     */
-    public ConcreteObjectCell(ObjetConcret o, int x, int y) {
-	super(o, x, y);
-	this.item = o;
-	Oid oidPoint = InterfaceExpressJava.createEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.POINT_CLASS);
-	Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
-	p.setX(x);
-	p.setY(y);
-	o.setPoint(p);
+	/**
+	 * First constructor for the cell (the point is not created yet)
+	 * 
+	 * @param concrete object represented by the cell
+	 * @param point    x in the graph
+	 * @param point    y in the graph
+	 */
+	public ConcreteObjectCell(ObjetConcret o, int x, int y) {
+		super(o, x, y);
+		this.item = o;
+		Oid oidPoint = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE, ExpressConstant.POINT_CLASS);
+		Point p = (Point) InterfaceExpressJava.prendre(oidPoint);
+		p.setX(x);
+		p.setY(y);
+		o.setPoint(p);
 
-	Map<?, ?> myHashTable = this.getAttributes();
-	GraphConstants.setBounds(myHashTable, new Rectangle2D.Double(x, y, 80,
-		40));
+		Map<?, ?> myHashTable = this.getAttributes();
+		GraphConstants.setBounds(myHashTable, new Rectangle2D.Double(x, y, 80, 40));
 
-	this.setAttributes(new AttributeMap(myHashTable));
-    }
-
-    /**
-     * Second constructor for the cell (the point is already created)
-     * 
-     * @param concrete
-     *            object represented by the cell
-     * @param point
-     *            in the graph
-     */
-    public ConcreteObjectCell(ObjetConcret o, Point p) {
-	super(o, p.getX(), p.getY());
-	this.item = o;
-
-	Map<?, ?> myHashTable = this.getAttributes();
-	GraphConstants.setBounds(myHashTable, new Rectangle2D.Double(p.getX(),
-		p.getY(), 100, 40));
-
-	this.setAttributes(new AttributeMap(myHashTable));
-    }
-
-    /**
-     * @return the concrete object description
-     */
-    @Override
-    public String getDescription() {
-	return item.getDescription();
-    }
-
-    /**
-     * @return the concrete object represented by the cell
-     */
-    public ObjetConcret getObject() {
-	return item;
-    }
-
-    /**
-     * @return the concrete object's attributes to print it
-     */
-    public String[] getObjectAttributes() {
-	if (!item.getInverseListAttribut().isEmpty()) {
-	    String[] s = new String[item.getInverseListAttribut().size()];
-	    for (int i = 0; i < item.getInverseListAttribut().size(); i++) {
-		s[i] = item.getInverseListAttribut().get(i).getName()
-			+ " : "
-			+ item.getInverseListAttribut().get(i).getValue()
-				.getValeur();
-	    }
-	    return s;
-	} else
-	    return null;
-    }
-
-    /**
-     * Method to set the renderer for the cell
-     * 
-     * @param new renderer for the cell
-     */
-    public void setInvView(ConcreteObjectVertexView invView) {
-	this.invView = invView;
-    }
-
-    /**
-     * @param the
-     *            graph where the cell is located
-     * @return the cell's renderer
-     */
-    public ConcreteObjectVertexView getInvView(JGraph graph) {
-	if (this.invView != null)
-	    return invView;
-	else
-	    return new ConcreteObjectVertexView(this, graph);
-    }
-
-    /**
-     * Method to set the concrete object's name
-     * 
-     * @param the
-     *            new name
-     */
-    public void setName(String newName) {
-	this.item.setName(newName);
-    }
-
-    /**
-     * Method to set the concrete object's description
-     * 
-     * @param description
-     */
-    public void setDescription(String description) {
-	this.item.setDescription(description);
-    }
-
-    /**
-     * Method to set a concrete object's attribute value
-     * 
-     * @param attribute
-     *            's name
-     * @param value
-     */
-    public void setConcreteAttributeValue(String name, String value) {
-	if (!item.getInverseListAttribut().isEmpty()) {
-	    for (AttributConcret a : item.getInverseListAttribut()) {
-		if (a.getName().equals(name))
-		    a.setValeur(value);
-	    }
-	}
-    }
-
-    /**
-     * Display a window to edit the concrete object
-     * 
-     * @param graph
-     *            where the cell is located
-     */
-    public void edit(JGraph graph) {
-	this.edit = new ConcreteObjectEdit(this, GraphicEditorAdaptator
-		.getMainFrame().getObjectDialogView(), graph);
-    }
-
-    /**
-     * Class displaying a window to edit the concrete object represented by the
-     * cell
-     * 
-     * @author Joachim TROUVERIE
-     */
-    public class ConcreteObjectEdit extends JDialog {
-
-	private static final long serialVersionUID = 5095480082791368262L;
-
-	private JTextField name;
-
-	private JTextArea description;
-
-	private JTable attributes;
-
-	private JButton ok;
-
-	public ConcreteObjectEdit(final ConcreteObjectCell cell, JDialog owner,
-		final JGraph myGraph) {
-
-	    super(owner, KMADEConstant.EDIT_CONCRETE_OBJECT_ACTION_MESSAGE);
-	    this.setLayout(new BorderLayout());
-
-	    // Name and description
-	    JPanel textPanel = new JPanel(new GridLayout(2, 2));
-	    name = new JTextField(cell.getName());
-	    description = new JTextArea(cell.getDescription());
-	    textPanel.add(new JLabel(KMADEConstant.CONCRETE_OBJECT_NAME_TABLE));
-	    textPanel.add(name);
-	    textPanel.add(new JLabel(
-		    KMADEConstant.CONCRETE_OBJECT_OBSERVATION_TABLE));
-	    textPanel.add(description);
-
-	    // Attributes
-	    attributes = new JTable(new EditionTableModel(cell));
-	    attributes.setDefaultEditor(Object.class,
-		    (TableCellEditor) new EditionTableEditor());
-	    JScrollPane table = new JScrollPane(attributes);
-
-	    // Button
-	    JPanel buttonPanel = new JPanel(new BorderLayout());
-	    ok = new JButton("Ok");
-	    buttonPanel.add(ok, BorderLayout.EAST);
-
-	    ok.addActionListener(new ActionListener() {
-
-		public void actionPerformed(ActionEvent e) {
-		    // Name
-		    if (name.getText() != null)
-			cell.setName(name.getText());
-		    else {
-			JOptionPane.showInputDialog(ConcreteObjectEdit.this,
-				"You need to enter a valid name", "Error",
-				JOptionPane.ERROR_MESSAGE);
-			return;
-		    }
-
-		    // Description
-		    if (description.getText() != null)
-			cell.setDescription(description.getText());
-		    else
-			cell.setDescription("");
-
-		    // Attributes
-		    for (int i = 0; i < attributes.getModel().getRowCount(); i++) {
-			String name = ((String) attributes.getModel()
-				.getValueAt(i, 0)).split(" : ")[0];
-			String value = attributes.getModel().getValueAt(i, 1)
-				.toString();
-			cell.setConcreteAttributeValue(name, value);
-		    }
-		    myGraph.getGraphLayoutCache().insert(
-			    ConcreteObjectCell.this);
-		    ConcreteObjectEdit.this.dispose();
-		}
-	    });
-
-	    this.add(textPanel, BorderLayout.NORTH);
-	    this.add(table, BorderLayout.CENTER);
-	    this.add(buttonPanel, BorderLayout.SOUTH);
-
-	    this.pack();
-	    this.setVisible(true);
-	    KMADEToolUtilities.setCenteredInScreen(this);
+		this.setAttributes(new AttributeMap(myHashTable));
 	}
 
 	/**
-	 * Table editor used to edit the concrete object
+	 * Second constructor for the cell (the point is already created)
 	 * 
-	 * @author Joachim TROUVERIE
+	 * @param concrete object represented by the cell
+	 * @param point    in the graph
 	 */
-	class EditionTableEditor extends AbstractCellEditor implements
-		TableCellEditor {
+	public ConcreteObjectCell(ObjetConcret o, Point p) {
+		super(o, p.getX(), p.getY());
+		this.item = o;
 
-	    private static final long serialVersionUID = -6782028045515902195L;
+		Map<?, ?> myHashTable = this.getAttributes();
+		GraphConstants.setBounds(myHashTable, new Rectangle2D.Double(p.getX(), p.getY(), 100, 40));
 
-	    private JComboBox box = null;
-
-	    private JTextField field = null;
-
-	    private String[] values = { "true", "false" };
-
-	    public Component getTableCellEditorComponent(JTable table,
-		    Object value, boolean isSelected, int row, int column) {
-
-		field = null;
-		box = null;
-
-		if (table.getModel().getValueAt(row, 1) instanceof Boolean) {
-		    box = new JComboBox(values);
-		    this.box.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			    EditionTableEditor.this.stopCellEditing();
-			}
-		    });
-		    return box;
-		}
-
-		else {
-		    field = new JTextField();
-		    this.field.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			    EditionTableEditor.this.stopCellEditing();
-			}
-		    });
-		    return field;
-		}
-	    }
-
-	    public Object getCellEditorValue() {
-		if (field == null)
-		    return Boolean.valueOf((String) box.getSelectedItem())
-			    .booleanValue();
-		else {
-		    try {
-			return Double.parseDouble(field.getText());
-		    } catch (NumberFormatException nfe) {
-			return field.getText();
-		    }
-		}
-
-	    }
-
-	};
+		this.setAttributes(new AttributeMap(myHashTable));
+	}
 
 	/**
-	 * Table model used to edit the concrete object
+	 * @return the concrete object description
+	 */
+	@Override
+	public String getDescription() {
+		return item.getDescription();
+	}
+
+	/**
+	 * @return the concrete object represented by the cell
+	 */
+	public ObjetConcret getObject() {
+		return item;
+	}
+
+	/**
+	 * @return the concrete object's attributes to print it
+	 */
+	public String[] getObjectAttributes() {
+		if (!item.getInverseListAttribut().isEmpty()) {
+			String[] s = new String[item.getInverseListAttribut().size()];
+			for (int i = 0; i < item.getInverseListAttribut().size(); i++) {
+				s[i] = item.getInverseListAttribut().get(i).getName() + " : "
+						+ item.getInverseListAttribut().get(i).getValue().getValeur();
+			}
+			return s;
+		} else
+			return null;
+	}
+
+	/**
+	 * Method to set the renderer for the cell
+	 * 
+	 * @param new renderer for the cell
+	 */
+	public void setInvView(ConcreteObjectVertexView invView) {
+		this.invView = invView;
+	}
+
+	/**
+	 * @param the graph where the cell is located
+	 * @return the cell's renderer
+	 */
+	public ConcreteObjectVertexView getInvView(JGraph graph) {
+		if (this.invView != null)
+			return invView;
+		else
+			return new ConcreteObjectVertexView(this, graph);
+	}
+
+	/**
+	 * Method to set the concrete object's name
+	 * 
+	 * @param the new name
+	 */
+	public void setName(String newName) {
+		this.item.setName(newName);
+	}
+
+	/**
+	 * Method to set the concrete object's description
+	 * 
+	 * @param description
+	 */
+	public void setDescription(String description) {
+		this.item.setDescription(description);
+	}
+
+	/**
+	 * Method to set a concrete object's attribute value
+	 * 
+	 * @param attribute 's name
+	 * @param value
+	 */
+	public void setConcreteAttributeValue(String name, String value) {
+		if (!item.getInverseListAttribut().isEmpty()) {
+			for (AttributConcret a : item.getInverseListAttribut()) {
+				if (a.getName().equals(name))
+					a.setValeur(value);
+			}
+		}
+	}
+
+	/**
+	 * Display a window to edit the concrete object
+	 * 
+	 * @param graph where the cell is located
+	 */
+	public void edit(JGraph graph) {
+		this.edit = new ConcreteObjectEdit(this, GraphicEditorAdaptator.getMainFrame().getObjectDialogView(), graph);
+	}
+
+	/**
+	 * Class displaying a window to edit the concrete object represented by the cell
 	 * 
 	 * @author Joachim TROUVERIE
 	 */
-	class EditionTableModel extends AbstractTableModel {
+	public class ConcreteObjectEdit extends JDialog {
 
-	    private static final long serialVersionUID = -7353628699628918289L;
+		private static final long serialVersionUID = 5095480082791368262L;
 
-	    private List<Object[]> data = new ArrayList<Object[]>();
+		private JTextField name;
 
-	    private String[] columnName = {
-		    KMADEConstant.CONCRETE_ATTRIBUT_NAME_TABLE,
-		    KMADEConstant.CONCRETE_ATTRIBUT_VALUE_TABLE };
+		private JTextArea description;
 
-	    public EditionTableModel(ConcreteObjectCell cell) {
-		if (cell.getObjectAttributes() != null) {
-		    for (String s : cell.getObjectAttributes()) {
-			Object value;
-			if (s.split(" : ").length == 2) {
-			    value = s.split(" : ")[1];
-			    if (value.equals("0"))
-				value = 0;
-			    else if (value.equals("true"))
-				value = true;
+		private JTable attributes;
+
+		private JButton ok;
+
+		public ConcreteObjectEdit(final ConcreteObjectCell cell, JDialog owner, final JGraph myGraph) {
+
+			super(owner, KMADEConstant.EDIT_CONCRETE_OBJECT_ACTION_MESSAGE);
+			this.setLayout(new BorderLayout());
+
+			// Name and description
+			JPanel textPanel = new JPanel(new GridLayout(2, 2));
+			name = new JTextField(cell.getName());
+			description = new JTextArea(cell.getDescription());
+			textPanel.add(new JLabel(KMADEConstant.CONCRETE_OBJECT_NAME_TABLE));
+			textPanel.add(name);
+			textPanel.add(new JLabel(KMADEConstant.CONCRETE_OBJECT_OBSERVATION_TABLE));
+			textPanel.add(description);
+
+			// Attributes
+			attributes = new JTable(new EditionTableModel(cell));
+			attributes.setDefaultEditor(Object.class, (TableCellEditor) new EditionTableEditor());
+			JScrollPane table = new JScrollPane(attributes);
+
+			// Button
+			JPanel buttonPanel = new JPanel(new BorderLayout());
+			ok = new JButton("Ok");
+			buttonPanel.add(ok, BorderLayout.EAST);
+
+			ok.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					// Name
+					if (name.getText() != null)
+						cell.setName(name.getText());
+					else {
+						JOptionPane.showInputDialog(ConcreteObjectEdit.this, "You need to enter a valid name", "Error",
+								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+					// Description
+					if (description.getText() != null)
+						cell.setDescription(description.getText());
+					else
+						cell.setDescription("");
+
+					// Attributes
+					for (int i = 0; i < attributes.getModel().getRowCount(); i++) {
+						String name = ((String) attributes.getModel().getValueAt(i, 0)).split(" : ")[0];
+						String value = attributes.getModel().getValueAt(i, 1).toString();
+						cell.setConcreteAttributeValue(name, value);
+					}
+					myGraph.getGraphLayoutCache().insert(ConcreteObjectCell.this);
+					ConcreteObjectEdit.this.dispose();
+				}
+			});
+
+			this.add(textPanel, BorderLayout.NORTH);
+			this.add(table, BorderLayout.CENTER);
+			this.add(buttonPanel, BorderLayout.SOUTH);
+
+			this.pack();
+			this.setVisible(true);
+			KMADEToolUtilities.setCenteredInScreen(this);
+		}
+
+		/**
+		 * Table editor used to edit the concrete object
+		 * 
+		 * @author Joachim TROUVERIE
+		 */
+		class EditionTableEditor extends AbstractCellEditor implements TableCellEditor {
+
+			private static final long serialVersionUID = -6782028045515902195L;
+
+			private JComboBox box = null;
+
+			private JTextField field = null;
+
+			private String[] values = { "true", "false" };
+
+			public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row,
+					int column) {
+
+				field = null;
+				box = null;
+
+				if (table.getModel().getValueAt(row, 1) instanceof Boolean) {
+					box = new JComboBox(values);
+					this.box.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							EditionTableEditor.this.stopCellEditing();
+						}
+					});
+					return box;
+				}
+
+				else {
+					field = new JTextField();
+					this.field.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							EditionTableEditor.this.stopCellEditing();
+						}
+					});
+					return field;
+				}
 			}
 
-			else
-			    value = " ";
+			public Object getCellEditorValue() {
+				if (field == null)
+					return Boolean.valueOf((String) box.getSelectedItem()).booleanValue();
+				else {
+					try {
+						return Double.parseDouble(field.getText());
+					} catch (NumberFormatException nfe) {
+						return field.getText();
+					}
+				}
 
-			String name = s.split(" : ")[0];
-			Object[] tab = { name, value };
-			data.add(tab);
-		    }
-		}
-	    }
+			}
 
-	    public int getRowCount() {
-		return data.size();
-	    }
+		};
 
-	    public int getColumnCount() {
-		return 2;
-	    }
+		/**
+		 * Table model used to edit the concrete object
+		 * 
+		 * @author Joachim TROUVERIE
+		 */
+		class EditionTableModel extends AbstractTableModel {
 
-	    @Override
-	    public String getColumnName(int columnIndex) {
-		return columnName[columnIndex];
-	    }
+			private static final long serialVersionUID = -7353628699628918289L;
 
-	    @Override
-	    public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == 1;
-	    }
+			private List<Object[]> data = new ArrayList<Object[]>();
 
-	    public Object getValueAt(int rowIndex, int columnIndex) {
-		return data.get(rowIndex)[columnIndex];
-	    }
+			private String[] columnName = { KMADEConstant.CONCRETE_ATTRIBUT_NAME_TABLE,
+					KMADEConstant.CONCRETE_ATTRIBUT_VALUE_TABLE };
 
-	    @Override
-	    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		if (columnIndex == 1) {
-		    Class<?> classe = aValue.getClass();
-		    if (classe.equals(Double.class)
-			    && this.getValueAt(rowIndex, columnIndex)
-				    .getClass().equals(Integer.class)) {
-			aValue = ((Double) aValue).intValue();
-			classe = aValue.getClass();
-		    }
-		    if (this.getValueAt(rowIndex, columnIndex).getClass()
-			    .equals(classe))
-			data.get(rowIndex)[columnIndex] = aValue;
-		    else
-			return;
+			public EditionTableModel(ConcreteObjectCell cell) {
+				if (cell.getObjectAttributes() != null) {
+					for (String s : cell.getObjectAttributes()) {
+						Object value;
+						if (s.split(" : ").length == 2) {
+							value = s.split(" : ")[1];
+							if (value.equals("0"))
+								value = 0;
+							else if (value.equals("true"))
+								value = true;
+						}
 
-		    this.fireTableDataChanged();
-		}
-	    }
+						else
+							value = " ";
+
+						String name = s.split(" : ")[0];
+						Object[] tab = { name, value };
+						data.add(tab);
+					}
+				}
+			}
+
+			public int getRowCount() {
+				return data.size();
+			}
+
+			public int getColumnCount() {
+				return 2;
+			}
+
+			@Override
+			public String getColumnName(int columnIndex) {
+				return columnName[columnIndex];
+			}
+
+			@Override
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return columnIndex == 1;
+			}
+
+			public Object getValueAt(int rowIndex, int columnIndex) {
+				return data.get(rowIndex)[columnIndex];
+			}
+
+			@Override
+			public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+				if (columnIndex == 1) {
+					Class<?> classe = aValue.getClass();
+					if (classe.equals(Double.class)
+							&& this.getValueAt(rowIndex, columnIndex).getClass().equals(Integer.class)) {
+						aValue = ((Double) aValue).intValue();
+						classe = aValue.getClass();
+					}
+					if (this.getValueAt(rowIndex, columnIndex).getClass().equals(classe))
+						data.get(rowIndex)[columnIndex] = aValue;
+					else
+						return;
+
+					this.fireTableDataChanged();
+				}
+			}
+		};
+
 	};
-
-    };
 
 }

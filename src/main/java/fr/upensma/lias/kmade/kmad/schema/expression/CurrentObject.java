@@ -26,44 +26,42 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class CurrentObject {
 
-    private Groupe currentCheckGroup;
+	private Groupe currentCheckGroup;
 
-    private ObjetConcret currentEvaluateConcreteObject;
+	private ObjetConcret currentEvaluateConcreteObject;
 
-    public void setCurrentCheckGroup(Groupe currentCheckGroup) {
-	this.currentCheckGroup = currentCheckGroup;
-    }
+	public void setCurrentCheckGroup(Groupe currentCheckGroup) {
+		this.currentCheckGroup = currentCheckGroup;
+	}
 
-    public Groupe getCurrentCheckGroup() {
-	return this.currentCheckGroup;
-    }
+	public Groupe getCurrentCheckGroup() {
+		return this.currentCheckGroup;
+	}
 
-    public boolean isExistCurrentCheckGroup() {
-	return (this.currentCheckGroup != null);
-    }
+	public boolean isExistCurrentCheckGroup() {
+		return (this.currentCheckGroup != null);
+	}
 
-    public void setCurrentEvaluateConcreteObject(
-	    ObjetConcret currentEvaluateConcreteObject) {
-	this.currentEvaluateConcreteObject = currentEvaluateConcreteObject;
-	currentCheckGroup = currentEvaluateConcreteObject.getAppartientGroupe();
-    }
+	public void setCurrentEvaluateConcreteObject(ObjetConcret currentEvaluateConcreteObject) {
+		this.currentEvaluateConcreteObject = currentEvaluateConcreteObject;
+		currentCheckGroup = currentEvaluateConcreteObject.getAppartientGroupe();
+	}
 
-    public ObjetConcret getCurrentEvaluateConcreteObject() {
-	return currentEvaluateConcreteObject;
-    }
+	public ObjetConcret getCurrentEvaluateConcreteObject() {
+		return currentEvaluateConcreteObject;
+	}
 
-    public void clearCurrentEvaluateConcreteObject() {
-	currentEvaluateConcreteObject = null;
-	currentCheckGroup = null;
-    }
+	public void clearCurrentEvaluateConcreteObject() {
+		currentEvaluateConcreteObject = null;
+		currentCheckGroup = null;
+	}
 
-    public boolean isExistCurrentEvaluateConcreteObject() {
-	return (this.currentEvaluateConcreteObject != null);
-    }
+	public boolean isExistCurrentEvaluateConcreteObject() {
+		return (this.currentEvaluateConcreteObject != null);
+	}
 
-    public String toString() {
-	return "G" + " : " + this.currentCheckGroup.getName() + " , "
-		+ ExpressConstant.CONCRETE_OBJECT_MESSAGE + " : "
-		+ this.currentEvaluateConcreteObject.getName();
-    }
+	public String toString() {
+		return "G" + " : " + this.currentCheckGroup.getName() + " , " + ExpressConstant.CONCRETE_OBJECT_MESSAGE + " : "
+				+ this.currentEvaluateConcreteObject.getName();
+	}
 }

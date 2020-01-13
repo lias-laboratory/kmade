@@ -25,30 +25,29 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class NotUnaryFunction extends UnaryFunction {
 
-    private static final long serialVersionUID = 6844275161051663640L;
+	private static final long serialVersionUID = 6844275161051663640L;
 
-    public NotUnaryFunction(NodeExpression pnode) {
-	super(false, pnode);
-	this.name = ExpressConstant.NOT_UNARY_EXPRESSION;
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-
-	if (this.getAloneExpression().isBoolean()) {
-	    this.setStateToUnknown();
-	    return;
+	public NotUnaryFunction(NodeExpression pnode) {
+		super(false, pnode);
+		this.name = ExpressConstant.NOT_UNARY_EXPRESSION;
 	}
-	// Y a une erreur de type.
-	this.setStateToError();
-	throw new SemanticException(ExpressConstant.TYPE_NEED_BOOLEAN);
-    }
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
-	if (this.isValueState()) {
-	    this.setNodeValue(new Boolean(!(Boolean) this.getAloneExpression()
-		    .getNodeValue()));
+	public void checkNode() throws SemanticException {
+		super.checkNode();
+
+		if (this.getAloneExpression().isBoolean()) {
+			this.setStateToUnknown();
+			return;
+		}
+		// Y a une erreur de type.
+		this.setStateToError();
+		throw new SemanticException(ExpressConstant.TYPE_NEED_BOOLEAN);
 	}
-    }
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+		if (this.isValueState()) {
+			this.setNodeValue(new Boolean(!(Boolean) this.getAloneExpression().getNodeValue()));
+		}
+	}
 }

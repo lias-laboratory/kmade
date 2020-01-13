@@ -26,38 +26,37 @@ import fr.upensma.lias.kmade.tool.view.worldobject.abstractobject.KMADEReadWrite
  */
 public final class EnumElementAdaptator {
 
-    public static void removeAllEnumElement() {
-	KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-		.getEnumElementPanel().removeAllEnumElement();
-    }
-
-    public static void removeElement(String oid) {
-	ExpressEnumElement.deleteElement(oid);
-	ReadConcreteObjectAdaptator.updateReadConcreteObject();
-    }
-
-    public static void affRemoveElement(String oid) {
-	ExpressEnumElement.affDeleteElement(oid);
-    }
-
-    public static String addElement(String oidEnum) {
-	if (!oidEnum.equals(Oid.OID_NULL)) {
-	    Oid oid = new Oid(oidEnum);
-	    String element = ExpressEnumElement.creerElement(oid);
-	    ReadConcreteObjectAdaptator.updateReadConcreteObject();
-	    return element;
-	} else {
-	    return "-1";
+	public static void removeAllEnumElement() {
+		KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().getEnumElementPanel().removeAllEnumElement();
 	}
-    }
 
-    public static Object[][] getElementIntoTab(String oidEnum) {
-	return ExpressEnumElement.getElementIntoTab(oidEnum);
-    }
+	public static void removeElement(String oid) {
+		ExpressEnumElement.deleteElement(oid);
+		ReadConcreteObjectAdaptator.updateReadConcreteObject();
+	}
 
-    public static String setElementName(String oid, String name) {
-	String element = ExpressEnumElement.setElementName(oid, name);
-	ReadConcreteObjectAdaptator.updateReadConcreteObject();
-	return element;
-    }
+	public static void affRemoveElement(String oid) {
+		ExpressEnumElement.affDeleteElement(oid);
+	}
+
+	public static String addElement(String oidEnum) {
+		if (!oidEnum.equals(Oid.OID_NULL)) {
+			Oid oid = new Oid(oidEnum);
+			String element = ExpressEnumElement.creerElement(oid);
+			ReadConcreteObjectAdaptator.updateReadConcreteObject();
+			return element;
+		} else {
+			return "-1";
+		}
+	}
+
+	public static Object[][] getElementIntoTab(String oidEnum) {
+		return ExpressEnumElement.getElementIntoTab(oidEnum);
+	}
+
+	public static String setElementName(String oid, String name) {
+		String element = ExpressEnumElement.setElementName(oid, name);
+		ReadConcreteObjectAdaptator.updateReadConcreteObject();
+		return element;
+	}
 }

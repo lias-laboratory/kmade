@@ -25,56 +25,50 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class AndOperator extends ConditionalOperator {
 
-    private static final long serialVersionUID = 3972146291618352854L;
+	private static final long serialVersionUID = 3972146291618352854L;
 
-    public AndOperator(NodeExpression left) {
-	super(left);
-	this.name = ExpressConstant.AND_OPERATOR_EXPRESSION;
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
-
-	if (this.isErrorState()) {
-	    throw new SemanticErrorException();
+	public AndOperator(NodeExpression left) {
+		super(left);
+		this.name = ExpressConstant.AND_OPERATOR_EXPRESSION;
 	}
 
-	if (this.isUnknownState()) {
-	    throw new SemanticUnknownException();
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+
+		if (this.isErrorState()) {
+			throw new SemanticErrorException();
+		}
+
+		if (this.isUnknownState()) {
+			throw new SemanticUnknownException();
+		}
+
+		if (getLeftNode().isBoolean() && getRightNode().isBoolean()) {
+			this.setNodeValue(new Boolean(((Boolean) getLeftNode().getNodeValue()).booleanValue()
+					&& ((Boolean) getRightNode().getNodeValue()).booleanValue()));
+			return;
+		}
+		// ne dois jamais arriver si checkNode() effectuée
+		if (getLeftNode().isBoolean() && getRightNode().isString()) {
+			this.setNodeValue(new Boolean(((Boolean) getLeftNode().getNodeValue()).booleanValue()
+					&& (new Boolean((String) getRightNode().getNodeValue())).booleanValue()));
+			return;
+		}
+		// ne dois jamais arriver si checkNode() effectuée
+		if (getLeftNode().isString() && getRightNode().isBoolean()) {
+			this.setNodeValue(new Boolean(((new Boolean((String) getLeftNode().getNodeValue())).booleanValue())
+					&& ((Boolean) getRightNode().getNodeValue()).booleanValue()));
+			return;
+		}
+		// ne dois jamais arriver si checkNode() effectuée
+		if (getLeftNode().isString() && getRightNode().isString()) {
+			this.setNodeValue(new Boolean(((new Boolean((String) getLeftNode().getNodeValue())).booleanValue())
+					&& (new Boolean((String) getRightNode().getNodeValue())).booleanValue()));
+			return;
+		}
 	}
 
-	if (getLeftNode().isBoolean() && getRightNode().isBoolean()) {
-	    this.setNodeValue(new Boolean(((Boolean) getLeftNode()
-		    .getNodeValue()).booleanValue()
-		    && ((Boolean) getRightNode().getNodeValue()).booleanValue()));
-	    return;
+	public String toString() {
+		return super.toString();
 	}
-	// ne dois jamais arriver si checkNode() effectuée
-	if (getLeftNode().isBoolean() && getRightNode().isString()) {
-	    this.setNodeValue(new Boolean(((Boolean) getLeftNode()
-		    .getNodeValue()).booleanValue()
-		    && (new Boolean((String) getRightNode().getNodeValue()))
-			    .booleanValue()));
-	    return;
-	}
-	// ne dois jamais arriver si checkNode() effectuée
-	if (getLeftNode().isString() && getRightNode().isBoolean()) {
-	    this.setNodeValue(new Boolean(((new Boolean((String) getLeftNode()
-		    .getNodeValue())).booleanValue())
-		    && ((Boolean) getRightNode().getNodeValue()).booleanValue()));
-	    return;
-	}
-	// ne dois jamais arriver si checkNode() effectuée
-	if (getLeftNode().isString() && getRightNode().isString()) {
-	    this.setNodeValue(new Boolean(((new Boolean((String) getLeftNode()
-		    .getNodeValue())).booleanValue())
-		    && (new Boolean((String) getRightNode().getNodeValue()))
-			    .booleanValue()));
-	    return;
-	}
-    }
-
-    public String toString() {
-	return super.toString();
-    }
 }

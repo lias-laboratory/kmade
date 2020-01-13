@@ -27,62 +27,56 @@ import fr.upensma.lias.kmade.tool.view.worldobject.abstractobject.KMADEReadWrite
  * @author Mickael BARON
  */
 public final class AbstractObjectAdaptator {
-    /**
-     * Supprime tous les objets abstrait
-     */
-    public static void removeAllAbstractObject() {
-	KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor()
-		.getAbstractObjectTable().removeAllAbstractObject();
-    }
-
-    /**
-     * Cette méthode permet de communiquer avec Express pour créer un objet
-     * abstrait et retourne l'OID du nouvel objet.
-     */
-    public static String addAbstractObject() {
-	return ExpressAbstractObject.createAbstractObject();
-    }
-
-    /**
-     * Modifie le nom de l'objet abstrait
-     */
-    public static String setAbstractObjectName(String oid, String name) {
-	String value = ExpressAbstractObject.setAbstractObjectName(oid, name);
-	ReadConcreteObjectAdaptator.updateReadConcreteObject();
-	return value;
-    }
-
-    /**
-     * Modifie la description de l'objet abstrait
-     */
-    public static void setAbstractObjectDescription(String oid,
-	    String Description) {
-	ExpressAbstractObject.setAbstractObjectDescription(oid, Description);
-    }
-
-    /**
-     * Supprime un objet abstrait
-     */
-    public static void removeAbstractObject(String oid) {
-	ExpressAbstractObject.removeObj(oid);
-	ReadConcreteObjectAdaptator.updateReadConcreteObject();
-    }
-
-    public static void affRemoveObjAbs(String oid) {
-	ExpressAbstractObject.affRemoveObj(oid);
-    }
-
-    public static void updateAbstractObjectView() {
-	ArrayList<ObjetAbstrait> myList = ExpressAbstractObject
-		.getAbstractObjects();
-
-	for (int i = 0; i < myList.size(); i++) {
-	    KMADEReadWriteAbstractTypeObjectPanel
-		    .getAbstractObjectEditor()
-		    .getAbstractObjectTable()
-		    .addAbstractObject(myList.get(i).getName(),
-			    myList.get(i).getDescription(),
-			    myList.get(i).getOid().get());
+	/**
+	 * Supprime tous les objets abstrait
+	 */
+	public static void removeAllAbstractObject() {
+		KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor().getAbstractObjectTable()
+				.removeAllAbstractObject();
 	}
-    }
+
+	/**
+	 * Cette méthode permet de communiquer avec Express pour créer un objet abstrait
+	 * et retourne l'OID du nouvel objet.
+	 */
+	public static String addAbstractObject() {
+		return ExpressAbstractObject.createAbstractObject();
+	}
+
+	/**
+	 * Modifie le nom de l'objet abstrait
+	 */
+	public static String setAbstractObjectName(String oid, String name) {
+		String value = ExpressAbstractObject.setAbstractObjectName(oid, name);
+		ReadConcreteObjectAdaptator.updateReadConcreteObject();
+		return value;
+	}
+
+	/**
+	 * Modifie la description de l'objet abstrait
+	 */
+	public static void setAbstractObjectDescription(String oid, String Description) {
+		ExpressAbstractObject.setAbstractObjectDescription(oid, Description);
+	}
+
+	/**
+	 * Supprime un objet abstrait
+	 */
+	public static void removeAbstractObject(String oid) {
+		ExpressAbstractObject.removeObj(oid);
+		ReadConcreteObjectAdaptator.updateReadConcreteObject();
+	}
+
+	public static void affRemoveObjAbs(String oid) {
+		ExpressAbstractObject.affRemoveObj(oid);
+	}
+
+	public static void updateAbstractObjectView() {
+		ArrayList<ObjetAbstrait> myList = ExpressAbstractObject.getAbstractObjects();
+
+		for (int i = 0; i < myList.size(); i++) {
+			KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor().getAbstractObjectTable().addAbstractObject(
+					myList.get(i).getName(), myList.get(i).getDescription(), myList.get(i).getOid().get());
+		}
+	}
 }

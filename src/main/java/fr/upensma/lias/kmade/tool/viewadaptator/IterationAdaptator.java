@@ -41,196 +41,151 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
  */
 public final class IterationAdaptator {
 
-    public static void setNewToken(String v) {
-	KMADEEditorPrePostIterDialog.getIterationPanel().appendToken(v);
-    }
-
-    public static void setNewVariantToken(String v) {
-	KMADEEditorPrePostIterDialog.getIterationPanel().replaceToken(v);
-    }
-
-    public static void modifiedExpression() {
-	KMADEEditorPrePostIterDialog.getIterationPanel()
-		.disableEvaluateControl(
-			KMADEConstant.NOT_YET_CHECKED_ITERATION_MESSAGE);
-    }
-
-    public static void clearIteration() {
-	ExpressTask.clearIterExpression(GraphicEditorAdaptator
-		.getSelectedGraphicTask().getTask());
-	IterationAdaptator.initIteration();
-    }
-
-    public static void initIteration() {
-	// Active ou pas l'�valuation
-	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
-		.getTask();
-	if (myCurrentTask.getIterExpression().getNodeExpression() != null) {
-	    // Construire l'expression.
-	    ArrayList<Object> myList = myCurrentTask.getIterExpression()
-		    .getNodeExpression().getLinearExpression();
-	    KMADEEditorPrePostIterDialog.getIterationPanel()
-		    .enabledEvaluateControl(myList);
-	    KMADEEditorPrePostIterDialog.getIterationPanel().giveResult(
-		    KMADEConstant.ITERATION_MESSAGE + " ? =");
-	} else {
-	    KMADEEditorPrePostIterDialog.getIterationPanel()
-		    .disableEvaluateControl(
-			    KMADEConstant.ITERATION_ERROR_MESSAGE);
+	public static void setNewToken(String v) {
+		KMADEEditorPrePostIterDialog.getIterationPanel().appendToken(v);
 	}
-    }
 
-    public static void checkIteration(String s) {
-	KMADEHistoryMessageManager
-		.printMessage(KMADEConstant.CHECK_ACTION_MESSAGE + " : ");
-	IterationAdaptator.checkIterationBuilder(s);
-	IterationAdaptator.initIteration();
-    }
-
-    private static void checkIterationBuilder(String s) {
-	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
-		.getTask();
-	myCurrentTask.getIterExpression().setFormalText(s);
-
-	// Transformation de la cha�ne de caract�res en flux de caract�res.
-	java.io.StringReader sr = new java.io.StringReader(s);
-	java.io.Reader r = new java.io.BufferedReader(sr);
-
-	Iteration parser = new MyIteration(r);
-	try {
-	    NodeExpression ref = parser.expression();
-	    if (ref == null) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
-				+ KMADEConstant.PARSER_PROBLEM_MESSAGE);
-		ExpressIteration.setIteration(myCurrentTask, null);
-	    } else {
-		ref.checkNode();
-		ExpressIteration.setIteration(myCurrentTask, ref);
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.ITERATION_OK_MESSAGE);
-	    }
-	} catch (SemanticException e) {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
-			    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " : "
-			    + e.getMessage());
-	    ExpressIteration.setIteration(myCurrentTask, null);
-	    return;
-	} catch (ParseException e) {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
-			    + KMADEConstant.SYNTAXICAL_ERROR_MESSAGE + " : "
-			    + e.getMessage());
-	    ExpressIteration.setIteration(myCurrentTask, null);
-	    return;
-	} catch (TokenMgrError e) {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
-			    + KMADEConstant.LEXICAL_ERROR_MESSAGE + " : "
-			    + e.getMessage());
-	    ExpressIteration.setIteration(myCurrentTask, null);
-	    return;
-	} catch (Error e) {
-	    // Erreur normalement qui doit venir de AttributExpressExpression ou
-	    // GroupExpressExpression
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
-			    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " : "
-			    + e.getMessage());
-	    ExpressIteration.setIteration(myCurrentTask, null);
-	    return;
+	public static void setNewVariantToken(String v) {
+		KMADEEditorPrePostIterDialog.getIterationPanel().replaceToken(v);
 	}
-    }
 
-    public static void addLoopVariant(String l) {
-	try {
-	    new NumberValue(l);
-	} catch (NumberFormatException e) {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.STRING_TO_INTEGER);
-	    return;
-	}
-	IterationAdaptator.setNewVariantToken("[" + l + "]");
-    }
-
-    public static void addNewLiteral(String l, String t) {
-	if (l.equals(TypeStructure.BOOLEAN_STRUCT.getValue())) {
-	    t = Boolean.valueOf(Boolean.parseBoolean(t)).toString();
-	} else if (l.equals(TypeStructure.NUMBER_STRUCT.getValue())) {
-	    try {
-		new NumberValue(t);
-	    } catch (NumberFormatException e) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.STRING_TO_INTEGER);
-		return;
-	    }
-	} else if (l.equals(TypeStructure.STRING_STRUCT.getValue())) {
-	    t = "'" + t + "'";
-	}
-	IterationAdaptator.setNewToken(t);
-    }
-
-    public static void evaluateIteration(String text) {
-	KMADEHistoryMessageManager
-		.printMessage(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
-	Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask()
-		.getTask();
-	try {
-	    myCurrentTask.getIterExpression().getNodeExpression()
-		    .evaluateNode(null);
-	    KMADEEditorPrePostIterDialog
-		    .getIterationPanel()
-		    .giveResult(
-			    (myCurrentTask.getIterExpression().isFinished() ? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE
-				    : KMADEConstant.STOP_LOOP_ITERATION_MESSAGE)
-				    + " =");
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.ITERATION_EVAL_OK_MESSAGE);
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.VALUE_MESSAGE
-			    + " = "
-			    + myCurrentTask.getIterExpression()
-				    .getNodeExpression().getNodeValue()
-			    + " , "
-			    + (myCurrentTask.getIterExpression()
-				    .isLoopProgress() ? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE
-				    : KMADEConstant.STOP_LOOP_ITERATION_MESSAGE));
-	} catch (SemanticErrorException e) {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.ITERATION_EVAL_NO_OK_MESSAGE);
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
-			    + KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " , "
-			    + e.getMessage());
-	    KMADEEditorPrePostIterDialog.getIterationPanel().giveResult(
-		    KMADEConstant.ITERATION_MESSAGE + " ? =");
-	} catch (SemanticUnknownException e) {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.ITERATION_EVAL_NO_OK_MESSAGE);
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
-			    + KMADEConstant.MISSING_USER_VALUE_MESSAGE + " , "
-			    + e.getMessage());
-	    KMADEEditorPrePostIterDialog.getIterationPanel().giveResult(
-		    KMADEConstant.ITERATION_MESSAGE + " ? =");
-	} catch (SemanticException e) {
-	}
-    }
-
-    public static void setIteration() {
-	ExpressIteration.setIterationDescription(GraphicEditorAdaptator
-		.getSelectedGraphicTask().getTask(),
+	public static void modifiedExpression() {
 		KMADEEditorPrePostIterDialog.getIterationPanel()
-			.getDescriptionArea());
-	TaskPropertiesAdaptator.setIterationInModel();
-    }
+				.disableEvaluateControl(KMADEConstant.NOT_YET_CHECKED_ITERATION_MESSAGE);
+	}
+
+	public static void clearIteration() {
+		ExpressTask.clearIterExpression(GraphicEditorAdaptator.getSelectedGraphicTask().getTask());
+		IterationAdaptator.initIteration();
+	}
+
+	public static void initIteration() {
+		// Active ou pas l'�valuation
+		Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask().getTask();
+		if (myCurrentTask.getIterExpression().getNodeExpression() != null) {
+			// Construire l'expression.
+			ArrayList<Object> myList = myCurrentTask.getIterExpression().getNodeExpression().getLinearExpression();
+			KMADEEditorPrePostIterDialog.getIterationPanel().enabledEvaluateControl(myList);
+			KMADEEditorPrePostIterDialog.getIterationPanel().giveResult(KMADEConstant.ITERATION_MESSAGE + " ? =");
+		} else {
+			KMADEEditorPrePostIterDialog.getIterationPanel()
+					.disableEvaluateControl(KMADEConstant.ITERATION_ERROR_MESSAGE);
+		}
+	}
+
+	public static void checkIteration(String s) {
+		KMADEHistoryMessageManager.printMessage(KMADEConstant.CHECK_ACTION_MESSAGE + " : ");
+		IterationAdaptator.checkIterationBuilder(s);
+		IterationAdaptator.initIteration();
+	}
+
+	private static void checkIterationBuilder(String s) {
+		Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask().getTask();
+		myCurrentTask.getIterExpression().setFormalText(s);
+
+		// Transformation de la cha�ne de caract�res en flux de caract�res.
+		java.io.StringReader sr = new java.io.StringReader(s);
+		java.io.Reader r = new java.io.BufferedReader(sr);
+
+		Iteration parser = new MyIteration(r);
+		try {
+			NodeExpression ref = parser.expression();
+			if (ref == null) {
+				KMADEHistoryMessageManager
+						.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : " + KMADEConstant.PARSER_PROBLEM_MESSAGE);
+				ExpressIteration.setIteration(myCurrentTask, null);
+			} else {
+				ref.checkNode();
+				ExpressIteration.setIteration(myCurrentTask, ref);
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_OK_MESSAGE);
+			}
+		} catch (SemanticException e) {
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
+					+ KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " : " + e.getMessage());
+			ExpressIteration.setIteration(myCurrentTask, null);
+			return;
+		} catch (ParseException e) {
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
+					+ KMADEConstant.SYNTAXICAL_ERROR_MESSAGE + " : " + e.getMessage());
+			ExpressIteration.setIteration(myCurrentTask, null);
+			return;
+		} catch (TokenMgrError e) {
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(
+					KMADEConstant.CAUSE_MESSAGE + " : " + KMADEConstant.LEXICAL_ERROR_MESSAGE + " : " + e.getMessage());
+			ExpressIteration.setIteration(myCurrentTask, null);
+			return;
+		} catch (Error e) {
+			// Erreur normalement qui doit venir de AttributExpressExpression ou
+			// GroupExpressExpression
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_NO_OK_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
+					+ KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " : " + e.getMessage());
+			ExpressIteration.setIteration(myCurrentTask, null);
+			return;
+		}
+	}
+
+	public static void addLoopVariant(String l) {
+		try {
+			new NumberValue(l);
+		} catch (NumberFormatException e) {
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.STRING_TO_INTEGER);
+			return;
+		}
+		IterationAdaptator.setNewVariantToken("[" + l + "]");
+	}
+
+	public static void addNewLiteral(String l, String t) {
+		if (l.equals(TypeStructure.BOOLEAN_STRUCT.getValue())) {
+			t = Boolean.valueOf(Boolean.parseBoolean(t)).toString();
+		} else if (l.equals(TypeStructure.NUMBER_STRUCT.getValue())) {
+			try {
+				new NumberValue(t);
+			} catch (NumberFormatException e) {
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.STRING_TO_INTEGER);
+				return;
+			}
+		} else if (l.equals(TypeStructure.STRING_STRUCT.getValue())) {
+			t = "'" + t + "'";
+		}
+		IterationAdaptator.setNewToken(t);
+	}
+
+	public static void evaluateIteration(String text) {
+		KMADEHistoryMessageManager.printMessage(KMADEConstant.EVALUATE_ACTION_MESSAGE + " : ");
+		Task myCurrentTask = GraphicEditorAdaptator.getSelectedGraphicTask().getTask();
+		try {
+			myCurrentTask.getIterExpression().getNodeExpression().evaluateNode(null);
+			KMADEEditorPrePostIterDialog.getIterationPanel()
+					.giveResult((myCurrentTask.getIterExpression().isFinished()
+							? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE
+							: KMADEConstant.STOP_LOOP_ITERATION_MESSAGE) + " =");
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_EVAL_OK_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.VALUE_MESSAGE + " = "
+					+ myCurrentTask.getIterExpression().getNodeExpression().getNodeValue() + " , "
+					+ (myCurrentTask.getIterExpression().isLoopProgress()
+							? KMADEConstant.CONTINUE_LOOP_ITERATION_MESSAGE
+							: KMADEConstant.STOP_LOOP_ITERATION_MESSAGE));
+		} catch (SemanticErrorException e) {
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_EVAL_NO_OK_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
+					+ KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " , " + e.getMessage());
+			KMADEEditorPrePostIterDialog.getIterationPanel().giveResult(KMADEConstant.ITERATION_MESSAGE + " ? =");
+		} catch (SemanticUnknownException e) {
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.ITERATION_EVAL_NO_OK_MESSAGE);
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CAUSE_MESSAGE + " : "
+					+ KMADEConstant.MISSING_USER_VALUE_MESSAGE + " , " + e.getMessage());
+			KMADEEditorPrePostIterDialog.getIterationPanel().giveResult(KMADEConstant.ITERATION_MESSAGE + " ? =");
+		} catch (SemanticException e) {
+		}
+	}
+
+	public static void setIteration() {
+		ExpressIteration.setIterationDescription(GraphicEditorAdaptator.getSelectedGraphicTask().getTask(),
+				KMADEEditorPrePostIterDialog.getIterationPanel().getDescriptionArea());
+		TaskPropertiesAdaptator.setIterationInModel();
+	}
 }

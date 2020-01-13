@@ -25,19 +25,19 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class NotWhileUnaryFunction extends UnaryFunction {
 
-    private static final long serialVersionUID = -2557504737851443643L;
+	private static final long serialVersionUID = -2557504737851443643L;
 
-    public NotWhileUnaryFunction(NodeExpression pee) {
-	super(false, pee);
-	this.name = ExpressConstant.NOT_WHILE_UNARY_EXPRESSION;
-    }
+	public NotWhileUnaryFunction(NodeExpression pee) {
+		super(false, pee);
+		this.name = ExpressConstant.NOT_WHILE_UNARY_EXPRESSION;
+	}
 
-    public void checkNode() throws SemanticException {
-	myAloneExpression.checkNode();
-    }
+	public void checkNode() throws SemanticException {
+		myAloneExpression.checkNode();
+	}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
-	this.setNodeValue(!(Boolean) this.myAloneExpression.getNodeValue());
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+		this.setNodeValue(!(Boolean) this.myAloneExpression.getNodeValue());
+	}
 }

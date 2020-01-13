@@ -38,189 +38,166 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.UniqAg;
  * @author Mickael BARON
  */
 public class ExpressGroup {
-    public static String createGroup(Oid oidObjAbs) {
-	Oid oidG = InterfaceExpressJava
-		.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.GROUP_CLASS);
-	ObjetAbstrait ObjAbs = (ObjetAbstrait) InterfaceExpressJava
-		.prendre(oidObjAbs);
-	Groupe g = (Groupe) InterfaceExpressJava.prendre(oidG);
+	public static String createGroup(Oid oidObjAbs) {
+		Oid oidG = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.GROUP_CLASS);
+		ObjetAbstrait ObjAbs = (ObjetAbstrait) InterfaceExpressJava.prendre(oidObjAbs);
+		Groupe g = (Groupe) InterfaceExpressJava.prendre(oidG);
 
-	Oid oidLst = InterfaceExpressJava.createEntity(
-		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.LIST_CLASS);
-	ListeAg lst = (ListeAg) InterfaceExpressJava.prendre(oidLst);
-	g.setEnsemble(lst);
-	g.setContientObj(ObjAbs);
-	return (oidG.get());
-    }
-
-    public static String createGroup() {
-	Oid oidG = InterfaceExpressJava
-		.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.GROUP_CLASS);
-	Groupe g = (Groupe) InterfaceExpressJava.prendre(oidG);
-
-	Oid oidLst = InterfaceExpressJava.createEntity(
-		ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.LIST_CLASS);
-	ListeAg lst = (ListeAg) InterfaceExpressJava.prendre(oidLst);
-	g.setEnsemble(lst);
-	return (oidG.get());
-    }
-
-    public static void removeGroup(String oid) {
-	Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
-	g.removeGroup();
-    }
-
-    public static void affRemoveGroup(String oid) {
-	Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
-	g.affDelete();
-    }
-
-    public static Groupe stringToGroup(String name) {
-	Object[] objs = InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.GROUP_CLASS);
-	for (int i = 0; i < objs.length; i++) {
-	    Groupe obj = (Groupe) objs[i];
-	    if (obj.getName().equals(name)) {
-		return obj;
-	    }
-	}
-	return null;
-    }
-
-    public static String stringToOid(String name) {
-	Object[] objs = InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.GROUP_CLASS);
-	for (int i = 0; i < objs.length; i++) {
-	    Groupe obj = (Groupe) objs[i];
-	    if (obj.getName().equals(name)) {
-		return obj.oid.get();
-	    }
-	}
-	return null;
-    }
-
-    public static String setGroupName(String oid, String name) {
-	Groupe m = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setName(name);
-	return m.getName();
-
-    }
-
-    public static void setGroupDescription(String oid, String desc) {
-	Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
-	if (g == null) {
-	    return;
-	}
-	g.setDescription(desc);
-    }
-
-    public static boolean affRemoveAgregat(String oid, String ensemble) {
-	Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
-	if (ensemble.equals(AgregatStructure.SINGLETON_AGREGAT.getValue())) {
-	    if (!(g.getEnsemble() instanceof UniqAg)) {
-		return ExpressGroup.removeConcreteObjectsToSingletonAgregat(g
-			.getEnsemble());
-	    }
-	}
-	return false;
-    }
-
-    public static boolean removeConcreteObjectsToSingletonAgregat(
-	    Agregat myAgregat) {
-	boolean concreteObject = false;
-	InterfaceExpressJava.getGestionWarning().addMessage(
-		myAgregat.oid,
-		14,
-		ExpressConstant.FROM_GROUP_MESSAGE + " \""
-			+ myAgregat.getInverseGroupe().getName() + "\"");
-
-	for (int i = 1; i < myAgregat.getLstObjConcrets().size(); i++) {
-	    ObjetConcret obj = myAgregat.getLstObjConcrets().get(i);
-	    obj.affDelete();
-	    concreteObject = true;
+		Oid oidLst = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.LIST_CLASS);
+		ListeAg lst = (ListeAg) InterfaceExpressJava.prendre(oidLst);
+		g.setEnsemble(lst);
+		g.setContientObj(ObjAbs);
+		return (oidG.get());
 	}
 
-	return concreteObject;
-    }
+	public static String createGroup() {
+		Oid oidG = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.GROUP_CLASS);
+		Groupe g = (Groupe) InterfaceExpressJava.prendre(oidG);
 
-    public static void removeOldAgregatAndCreateNewAgregat(String oid,
-	    String ensemble) {
-	Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
-
-	// Création du nouvel agrégat
-	Agregat myAgregat = ExpressGroup.createNewGroupType(ensemble);
-	// On déplace les objets concrets de l'ancien agregat dans le nouveau
-	myAgregat.moveConcreteObject(g.getEnsemble().getLstObjConcrets());
-	// Suppression de l'ancien agregat
-	g.getEnsemble().delete();
-	// Affectation du nouveau agregat au groupe.
-	g.setEnsemble(myAgregat);
-    }
-
-    private static Agregat createNewGroupType(String ensemble) {
-	Agregat myAgregat = null;
-	if (ensemble.equals(AgregatStructure.LIST_AGREGAT.getValue())) {
-	    Oid oidLst = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.LIST_CLASS);
-	    myAgregat = (ListeAg) InterfaceExpressJava.prendre(oidLst);
-	} else if (ensemble.equals(AgregatStructure.STACK_AGREGAT.getValue())) {
-	    Oid oidLst = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.STACK_CLASS);
-	    myAgregat = (PileAg) InterfaceExpressJava.prendre(oidLst);
-	} else if (ensemble.equals(AgregatStructure.SINGLETON_AGREGAT
-		.getValue())) {
-	    Oid oidLst = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.SINGLETON_CLASS);
-	    myAgregat = (UniqAg) InterfaceExpressJava.prendre(oidLst);
-	} else if (ensemble.equals(AgregatStructure.SET_AGREGAT.getValue())) {
-	    Oid oidLst = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.SET_CLASS);
-	    myAgregat = (EnsembleAg) InterfaceExpressJava.prendre(oidLst);
-	} else if (ensemble.equals(AgregatStructure.ARRAY_AGREGAT.getValue())) {
-	    Oid oidLst = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.ARRAY_CLASS);
-	    myAgregat = (TableauAg) InterfaceExpressJava.prendre(oidLst);
+		Oid oidLst = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE, ExpressConstant.LIST_CLASS);
+		ListeAg lst = (ListeAg) InterfaceExpressJava.prendre(oidLst);
+		g.setEnsemble(lst);
+		return (oidG.get());
 	}
-	return myAgregat;
-    }
 
-    public static ArrayList<Groupe> getGroups(ObjetAbstrait ref) {
-	return ref.getInverseGroupe();
-    }
-
-    public static Object[][] getArrayGroups(String oidObj) {
-	ObjetAbstrait m = (ObjetAbstrait) InterfaceExpressJava.prendre(new Oid(
-		oidObj));
-	ArrayList<Groupe> groupes = m.getInverseGroupe();
-	Object[][] tabObj = new Object[groupes.size()][4];
-	for (int i = 0; i < groupes.size(); i++) {
-	    Groupe g = groupes.get(i);
-	    tabObj[i][0] = g.getName();
-	    tabObj[i][1] = g.getDescription();
-	    tabObj[i][2] = g.getEnsemble().getAgregatStructure().getValue();
-	    tabObj[i][3] = g.getOid().get();
+	public static void removeGroup(String oid) {
+		Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
+		g.removeGroup();
 	}
-	return tabObj;
-    }
 
-    public static Groupe getRefAbstractGroupFromName(String name) {
-	Object[] objs = InterfaceExpressJava
-		.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.GROUP_CLASS);
-	for (int i = 0; i < objs.length; i++) {
-	    if (((Entity) objs[i]).getName().toLowerCase().equals(name)) {
-		return (Groupe) objs[i];
-	    }
+	public static void affRemoveGroup(String oid) {
+		Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
+		g.affDelete();
 	}
-	return null;
-    }
+
+	public static Groupe stringToGroup(String name) {
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.GROUP_CLASS);
+		for (int i = 0; i < objs.length; i++) {
+			Groupe obj = (Groupe) objs[i];
+			if (obj.getName().equals(name)) {
+				return obj;
+			}
+		}
+		return null;
+	}
+
+	public static String stringToOid(String name) {
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.GROUP_CLASS);
+		for (int i = 0; i < objs.length; i++) {
+			Groupe obj = (Groupe) objs[i];
+			if (obj.getName().equals(name)) {
+				return obj.oid.get();
+			}
+		}
+		return null;
+	}
+
+	public static String setGroupName(String oid, String name) {
+		Groupe m = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setName(name);
+		return m.getName();
+
+	}
+
+	public static void setGroupDescription(String oid, String desc) {
+		Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
+		if (g == null) {
+			return;
+		}
+		g.setDescription(desc);
+	}
+
+	public static boolean affRemoveAgregat(String oid, String ensemble) {
+		Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
+		if (ensemble.equals(AgregatStructure.SINGLETON_AGREGAT.getValue())) {
+			if (!(g.getEnsemble() instanceof UniqAg)) {
+				return ExpressGroup.removeConcreteObjectsToSingletonAgregat(g.getEnsemble());
+			}
+		}
+		return false;
+	}
+
+	public static boolean removeConcreteObjectsToSingletonAgregat(Agregat myAgregat) {
+		boolean concreteObject = false;
+		InterfaceExpressJava.getGestionWarning().addMessage(myAgregat.oid, 14,
+				ExpressConstant.FROM_GROUP_MESSAGE + " \"" + myAgregat.getInverseGroupe().getName() + "\"");
+
+		for (int i = 1; i < myAgregat.getLstObjConcrets().size(); i++) {
+			ObjetConcret obj = myAgregat.getLstObjConcrets().get(i);
+			obj.affDelete();
+			concreteObject = true;
+		}
+
+		return concreteObject;
+	}
+
+	public static void removeOldAgregatAndCreateNewAgregat(String oid, String ensemble) {
+		Groupe g = (Groupe) InterfaceExpressJava.prendre(new Oid(oid));
+
+		// Création du nouvel agrégat
+		Agregat myAgregat = ExpressGroup.createNewGroupType(ensemble);
+		// On déplace les objets concrets de l'ancien agregat dans le nouveau
+		myAgregat.moveConcreteObject(g.getEnsemble().getLstObjConcrets());
+		// Suppression de l'ancien agregat
+		g.getEnsemble().delete();
+		// Affectation du nouveau agregat au groupe.
+		g.setEnsemble(myAgregat);
+	}
+
+	private static Agregat createNewGroupType(String ensemble) {
+		Agregat myAgregat = null;
+		if (ensemble.equals(AgregatStructure.LIST_AGREGAT.getValue())) {
+			Oid oidLst = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.LIST_CLASS);
+			myAgregat = (ListeAg) InterfaceExpressJava.prendre(oidLst);
+		} else if (ensemble.equals(AgregatStructure.STACK_AGREGAT.getValue())) {
+			Oid oidLst = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.STACK_CLASS);
+			myAgregat = (PileAg) InterfaceExpressJava.prendre(oidLst);
+		} else if (ensemble.equals(AgregatStructure.SINGLETON_AGREGAT.getValue())) {
+			Oid oidLst = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.SINGLETON_CLASS);
+			myAgregat = (UniqAg) InterfaceExpressJava.prendre(oidLst);
+		} else if (ensemble.equals(AgregatStructure.SET_AGREGAT.getValue())) {
+			Oid oidLst = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.SET_CLASS);
+			myAgregat = (EnsembleAg) InterfaceExpressJava.prendre(oidLst);
+		} else if (ensemble.equals(AgregatStructure.ARRAY_AGREGAT.getValue())) {
+			Oid oidLst = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.ARRAY_CLASS);
+			myAgregat = (TableauAg) InterfaceExpressJava.prendre(oidLst);
+		}
+		return myAgregat;
+	}
+
+	public static ArrayList<Groupe> getGroups(ObjetAbstrait ref) {
+		return ref.getInverseGroupe();
+	}
+
+	public static Object[][] getArrayGroups(String oidObj) {
+		ObjetAbstrait m = (ObjetAbstrait) InterfaceExpressJava.prendre(new Oid(oidObj));
+		ArrayList<Groupe> groupes = m.getInverseGroupe();
+		Object[][] tabObj = new Object[groupes.size()][4];
+		for (int i = 0; i < groupes.size(); i++) {
+			Groupe g = groupes.get(i);
+			tabObj[i][0] = g.getName();
+			tabObj[i][1] = g.getDescription();
+			tabObj[i][2] = g.getEnsemble().getAgregatStructure().getValue();
+			tabObj[i][3] = g.getOid().get();
+		}
+		return tabObj;
+	}
+
+	public static Groupe getRefAbstractGroupFromName(String name) {
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.GROUP_CLASS);
+		for (int i = 0; i < objs.length; i++) {
+			if (((Entity) objs[i]).getName().toLowerCase().equals(name)) {
+				return (Groupe) objs[i];
+			}
+		}
+		return null;
+	}
 }

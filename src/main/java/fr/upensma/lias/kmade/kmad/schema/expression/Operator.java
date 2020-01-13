@@ -26,48 +26,48 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class Operator extends BinaryExpression {
 
-    private static final long serialVersionUID = -4682562510331967790L;
+	private static final long serialVersionUID = -4682562510331967790L;
 
-    public Operator(Object value, NodeExpression left) {
-	super(value, left);
-    }
-
-    public Operator(Object value, NodeExpression left, NodeExpression right) {
-	super(value, left, right);
-    }
-
-    public ArrayList<Object> getLinearExpression() {
-	ArrayList<Object> myLinearList = new ArrayList<Object>();
-	myLinearList.add("(");
-	for (Object current : leftNode.getLinearExpression()) {
-	    myLinearList.add(current);
-	}
-	myLinearList.add(this.getName());
-	for (Object current : rightNode.getLinearExpression()) {
-	    myLinearList.add(current);
-	}
-	myLinearList.add(")");
-	return myLinearList;
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	this.leftNode.evaluateNode(ref);
-	this.rightNode.evaluateNode(ref);
-
-	if (getLeftNode().isUnknownState() || getRightNode().isUnknownState()) {
-	    this.setStateToUnknown();
-	    throw new SemanticUnknownException();
+	public Operator(Object value, NodeExpression left) {
+		super(value, left);
 	}
 
-	if (getLeftNode().isErrorState() || getRightNode().isErrorState()) {
-	    this.setStateToError();
-	    throw new SemanticErrorException();
+	public Operator(Object value, NodeExpression left, NodeExpression right) {
+		super(value, left, right);
 	}
-	this.setStateToValue();
-    }
 
-    public void checkNode() throws SemanticException {
-	this.leftNode.checkNode();
-	this.rightNode.checkNode();
-    }
+	public ArrayList<Object> getLinearExpression() {
+		ArrayList<Object> myLinearList = new ArrayList<Object>();
+		myLinearList.add("(");
+		for (Object current : leftNode.getLinearExpression()) {
+			myLinearList.add(current);
+		}
+		myLinearList.add(this.getName());
+		for (Object current : rightNode.getLinearExpression()) {
+			myLinearList.add(current);
+		}
+		myLinearList.add(")");
+		return myLinearList;
+	}
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		this.leftNode.evaluateNode(ref);
+		this.rightNode.evaluateNode(ref);
+
+		if (getLeftNode().isUnknownState() || getRightNode().isUnknownState()) {
+			this.setStateToUnknown();
+			throw new SemanticUnknownException();
+		}
+
+		if (getLeftNode().isErrorState() || getRightNode().isErrorState()) {
+			this.setStateToError();
+			throw new SemanticErrorException();
+		}
+		this.setStateToValue();
+	}
+
+	public void checkNode() throws SemanticException {
+		this.leftNode.checkNode();
+		this.rightNode.checkNode();
+	}
 }

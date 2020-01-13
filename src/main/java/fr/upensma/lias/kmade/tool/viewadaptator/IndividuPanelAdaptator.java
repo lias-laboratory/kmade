@@ -26,24 +26,23 @@ import fr.upensma.lias.kmade.tool.view.KMADEMainFrame;
  */
 public final class IndividuPanelAdaptator {
 
-    private static String oidClaseActive = Oid.OID_NULL;
+	private static String oidClaseActive = Oid.OID_NULL;
 
-    public static void setActiveIndividu(String name, String oid) {
-	oidClaseActive = oid;
-	KMADEMainFrame.getProjectPanel().tableIndividu()
-		.setActiveIndividuObject(name, oid);
-    }
+	public static void setActiveIndividu(String name, String oid) {
+		oidClaseActive = oid;
+		KMADEMainFrame.getProjectPanel().tableIndividu().setActiveIndividuObject(name, oid);
+	}
 
-    public static String getActiveIndividu() {
-	return oidClaseActive;
-    }
+	public static String getActiveIndividu() {
+		return oidClaseActive;
+	}
 
-    public static Object[][] getOrganizationIntoTab(String oid) {
+	public static Object[][] getOrganizationIntoTab(String oid) {
 
-	return ExpressIndividu.getOrganisationIntoTab(oid);
-    }
+		return ExpressIndividu.getOrganisationIntoTab(oid);
+	}
 
-    public static Object[][] getOtherOrganizationIntoTab(String oid) {
-	return ExpressIndividu.getOtherOrganisationIntoTab(oid);
-    }
+	public static Object[][] getOtherOrganizationIntoTab(String oid) {
+		return ExpressIndividu.getOtherOrganisationIntoTab(oid);
+	}
 }

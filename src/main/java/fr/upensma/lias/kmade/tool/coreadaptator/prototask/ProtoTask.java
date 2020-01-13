@@ -24,25 +24,25 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Task;
  */
 public interface ProtoTask {
 
-    /**
-     * do the Task t, the task have to be available
-     * 
-     * @param t
-     */
-    void doTask(Task t) throws ProtoTaskException;
+	/**
+	 * do the Task t, the task have to be available
+	 * 
+	 * @param t
+	 */
+	void doTask(Task t) throws ProtoTaskException;
 
-    /**
-     * cancel the task t
-     * 
-     * @param t
-     */
-    void cancelTask(Task t) throws ProtoTaskException;
+	/**
+	 * cancel the task t
+	 * 
+	 * @param t
+	 */
+	void cancelTask(Task t) throws ProtoTaskException;
 
-    void suspendTask(Task t) throws ProtoTaskException;
+	void suspendTask(Task t) throws ProtoTaskException;
 
-    void changeCondition() throws ProtoTaskException;
+	void changeCondition() throws ProtoTaskException;
 
-    void interruptTask() throws ProtoTaskException;
+	void interruptTask() throws ProtoTaskException;
 
-    void endTask(Task t) throws ProtoTaskException;
+	void endTask(Task t) throws ProtoTaskException;
 }

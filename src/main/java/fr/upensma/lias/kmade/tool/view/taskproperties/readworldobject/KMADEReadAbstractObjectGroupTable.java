@@ -35,75 +35,72 @@ import fr.upensma.lias.kmade.tool.viewadaptator.ReadAbstractObjectAdaptator;
  */
 public class KMADEReadAbstractObjectGroupTable extends JScrollPane {
 
-    private static final long serialVersionUID = 8813178970912444995L;
+	private static final long serialVersionUID = 8813178970912444995L;
 
-    private MyReadGroupTableModel myModel;
+	private MyReadGroupTableModel myModel;
 
-    private JTable table;
+	private JTable table;
 
-    public KMADEReadAbstractObjectGroupTable() {
-	myModel = new MyReadGroupTableModel();
-	table = new KMADEJTable(myModel);
-	this.setViewportView(table);
-	table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
-	table.addMouseListener(new MouseAdapter() {
-	    public void mouseClicked(MouseEvent e) {
-		if (e.getClickCount() == 2) {
-		    if (!table.getSelectionModel().isSelectionEmpty()) {
-			ReadAbstractObjectAdaptator.addNewGroup(table
-				.getSelectionModel().getMinSelectionIndex());
-		    }
+	public KMADEReadAbstractObjectGroupTable() {
+		myModel = new MyReadGroupTableModel();
+		table = new KMADEJTable(myModel);
+		this.setViewportView(table);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.getViewport().setBackground(KMADEConstant.ACTIVE_PANE);
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					if (!table.getSelectionModel().isSelectionEmpty()) {
+						ReadAbstractObjectAdaptator.addNewGroup(table.getSelectionModel().getMinSelectionIndex());
+					}
+				}
+			}
+		});
+	}
+
+	public void setData(Object[][] refData) {
+		this.myModel.data = refData;
+		this.myModel.fireTableDataChanged();
+		table.getSelectionModel().clearSelection();
+	}
+
+	public void setGroupNameBorder(String name) {
+		this.setBorder(new TitledBorder(null, KMADEConstant.ABSTRACT_GROUP_TITLE_TABLE + " " + name,
+				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, KMADEConstant.fontPASSIF));
+	}
+
+	static class MyReadGroupTableModel extends AbstractTableModel {
+		private static final long serialVersionUID = 1079675105218756282L;
+
+		private Object[][] data = new Object[0][];
+
+		public int getColumnCount() {
+			return 3;
 		}
-	    }
-	});
-    }
 
-    public void setData(Object[][] refData) {
-	this.myModel.data = refData;
-	this.myModel.fireTableDataChanged();
-	table.getSelectionModel().clearSelection();
-    }
+		public int getRowCount() {
+			return data.length;
+		}
 
-    public void setGroupNameBorder(String name) {
-	this.setBorder(new TitledBorder(null,
-		KMADEConstant.ABSTRACT_GROUP_TITLE_TABLE + " " + name,
-		TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION,
-		KMADEConstant.fontPASSIF));
-    }
+		public String getColumnName(int col) {
+			switch (col) {
+			case 0:
+				return KMADEConstant.ABSTRACT_GROUP_NAME_TABLE;
+			case 1:
+				return KMADEConstant.ABSTRACT_GROUP_DESCRIPTION_TABLE;
+			case 2:
+				return KMADEConstant.ABSTRACT_GROUP_SET_TYPE_TABLE;
+			default:
+				return "";
+			}
+		}
 
-    static class MyReadGroupTableModel extends AbstractTableModel {
-	private static final long serialVersionUID = 1079675105218756282L;
+		public Object getValueAt(int row, int col) {
+			return data[row][col];
+		}
 
-	private Object[][] data = new Object[0][];
-
-	public int getColumnCount() {
-	    return 3;
+		public boolean isCellEditable(int row, int col) {
+			return false;
+		}
 	}
-
-	public int getRowCount() {
-	    return data.length;
-	}
-
-	public String getColumnName(int col) {
-	    switch (col) {
-	    case 0:
-		return KMADEConstant.ABSTRACT_GROUP_NAME_TABLE;
-	    case 1:
-		return KMADEConstant.ABSTRACT_GROUP_DESCRIPTION_TABLE;
-	    case 2:
-		return KMADEConstant.ABSTRACT_GROUP_SET_TYPE_TABLE;
-	    default:
-		return "";
-	    }
-	}
-
-	public Object getValueAt(int row, int col) {
-	    return data[row][col];
-	}
-
-	public boolean isCellEditable(int row, int col) {
-	    return false;
-	}
-    }
 }

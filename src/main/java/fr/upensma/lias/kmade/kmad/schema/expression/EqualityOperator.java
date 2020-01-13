@@ -24,31 +24,30 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
  */
 public class EqualityOperator extends ComparisonOperator {
 
-    private static final long serialVersionUID = 3907268708910997841L;
+	private static final long serialVersionUID = 3907268708910997841L;
 
-    public EqualityOperator(NodeExpression left) {
-	super(false, left);
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-
-	if (this.getLeftNode().isString() && this.getRightNode().isString()) {
-	    this.setNodeType(true);
-	    return;
+	public EqualityOperator(NodeExpression left) {
+		super(false, left);
 	}
 
-	if (this.getLeftNode().isNumber() && this.getRightNode().isNumber()) {
-	    this.setNodeType(true);
-	    return;
-	}
+	public void checkNode() throws SemanticException {
+		super.checkNode();
 
-	if (this.getLeftNode().isBoolean() && this.getRightNode().isBoolean()) {
-	    this.setNodeType(true);
-	    return;
+		if (this.getLeftNode().isString() && this.getRightNode().isString()) {
+			this.setNodeType(true);
+			return;
+		}
+
+		if (this.getLeftNode().isNumber() && this.getRightNode().isNumber()) {
+			this.setNodeType(true);
+			return;
+		}
+
+		if (this.getLeftNode().isBoolean() && this.getRightNode().isBoolean()) {
+			this.setNodeType(true);
+			return;
+		}
+		this.setStateToError();
+		throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
 	}
-	this.setStateToError();
-	throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR
-		+ " : " + this.name);
-    }
 }

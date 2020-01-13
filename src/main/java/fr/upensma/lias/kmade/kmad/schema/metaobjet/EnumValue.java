@@ -28,133 +28,129 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
  */
 public class EnumValue extends ValeurType implements Entity {
 
-    private static final long serialVersionUID = -5037423451302969688L;
+	private static final long serialVersionUID = -5037423451302969688L;
 
-    public Enumeration enumere = null;
+	public Enumeration enumere = null;
 
-    public Element element = null;
+	public Element element = null;
 
-    public EnumValue() {
-	enumere = null;
-	element = null;
-    }
-
-    public EnumValue(Enumeration enumere, Element elem) {
-	this.enumere = enumere;
-	this.element = elem;
-    }
-
-    public EnumValue(Enumeration enumere, Element elem, Oid oid) {
-	this.enumere = enumere;
-	this.element = elem;
-	this.oid = oid;
-    }
-
-    public void setEnumeration(Enumeration e) {
-	KMADEHistoryMessageManager.printlnMessage(e.toString());
-	this.enumere = e;
-    }
-
-    public void setElement(Element e) {
-	KMADEHistoryMessageManager.printlnMessage(e.toString());
-	this.element = e;
-    }
-
-    public String toSPF() {
-	if (this.element == null) {
-	    if (enumere == null) {
-		return (oid.get() + "=" + "EnumValue" + "(" + "Not defined" + ",$);");
-	    } else {
-		return (oid.get() + "=" + "EnumValue" + "("
-			+ this.enumere.getOid().get() + ",$);");
-	    }
+	public EnumValue() {
+		enumere = null;
+		element = null;
 	}
-	if (enumere == null) {
-	    return (oid.get() + "=" + "EnumValue" + "(" + "Not defined" + ","
-		    + this.element.getOid().get() + ");");
-	} else {
-	    return (oid.get() + "=" + "EnumValue" + "("
-		    + this.enumere.getOid().get() + ","
-		    + this.element.getOid().get() + ");");
+
+	public EnumValue(Enumeration enumere, Element elem) {
+		this.enumere = enumere;
+		this.element = elem;
 	}
-    }
 
-    public String toString() {
-	if (this.element != null) {
-	    return this.element.getName();
-	} else {
-	    return "?";
+	public EnumValue(Enumeration enumere, Element elem, Oid oid) {
+		this.enumere = enumere;
+		this.element = elem;
+		this.oid = oid;
 	}
-    }
 
-    public TypeStructure getType() {
-	return TypeStructure.ENUM_STRUCT;
-    }
-
-    public Object getValeur() {
-	if (this.element != null) {
-	    return this.element.getName();
-	} else {
-	    return null;
+	public void setEnumeration(Enumeration e) {
+		KMADEHistoryMessageManager.printlnMessage(e.toString());
+		this.enumere = e;
 	}
-    }
 
-    public void setValeur(String s) {
-	for (int i = 0; i < enumere.getInverseElementDe().size(); i++) {
-	    Element elem = enumere.getInverseElementDe().get(i);
-	    if (elem.getName().equals(s)) {
-		element = elem;
-	    }
+	public void setElement(Element e) {
+		KMADEHistoryMessageManager.printlnMessage(e.toString());
+		this.element = e;
 	}
-    }
 
-    public void modify(String s) {
-	this.element = new Element(s, this.enumere);
-    }
+	public String toSPF() {
+		if (this.element == null) {
+			if (enumere == null) {
+				return (oid.get() + "=" + "EnumValue" + "(" + "Not defined" + ",$);");
+			} else {
+				return (oid.get() + "=" + "EnumValue" + "(" + this.enumere.getOid().get() + ",$);");
+			}
+		}
+		if (enumere == null) {
+			return (oid.get() + "=" + "EnumValue" + "(" + "Not defined" + "," + this.element.getOid().get() + ");");
+		} else {
+			return (oid.get() + "=" + "EnumValue" + "(" + this.enumere.getOid().get() + ","
+					+ this.element.getOid().get() + ");");
+		}
+	}
 
-    public int getTaille() {
-	return this.element.getTaille();
-    }
+	public String toString() {
+		if (this.element != null) {
+			return this.element.getName();
+		} else {
+			return "?";
+		}
+	}
 
-    public String getName() {
-	String retValue;
+	public TypeStructure getType() {
+		return TypeStructure.ENUM_STRUCT;
+	}
 
-	retValue = super.getName();
-	return retValue;
-    }
+	public Object getValeur() {
+		if (this.element != null) {
+			return this.element.getName();
+		} else {
+			return null;
+		}
+	}
 
-    public org.w3c.dom.Element toXML(Document doc) {
-	return null;
-    }
+	public void setValeur(String s) {
+		for (int i = 0; i < enumere.getInverseElementDe().size(); i++) {
+			Element elem = enumere.getInverseElementDe().get(i);
+			if (elem.getName().equals(s)) {
+				element = elem;
+			}
+		}
+	}
 
-    public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
-	return false;
-    }
+	public void modify(String s) {
+		this.element = new Element(s, this.enumere);
+	}
 
-    public void createObjectFromXMLElement(org.w3c.dom.Element p) {
+	public int getTaille() {
+		return this.element.getTaille();
+	}
 
-    }
+	public String getName() {
+		String retValue;
 
-    public Object clone() {
-	ValeurType clone = new StrValue();
-	clone.oid = this.oid;
-	return clone;
-    }
+		retValue = super.getName();
+		return retValue;
+	}
 
-    @Override
-    public org.w3c.dom.Element toXML2(Document doc) throws Exception {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	public org.w3c.dom.Element toXML(Document doc) {
+		return null;
+	}
 
-    @Override
-    public void createObjectFromXMLElement2(org.w3c.dom.Element p)
-	    throws Exception {
-	// TODO Auto-generated method stub
+	public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
+		return false;
+	}
 
-    }
+	public void createObjectFromXMLElement(org.w3c.dom.Element p) {
 
-    public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
-	return false;
-    }
+	}
+
+	public Object clone() {
+		ValeurType clone = new StrValue();
+		clone.oid = this.oid;
+		return clone;
+	}
+
+	@Override
+	public org.w3c.dom.Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(org.w3c.dom.Element p) throws Exception {
+		// TODO Auto-generated method stub
+
+	}
+
+	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
+		return false;
+	}
 }

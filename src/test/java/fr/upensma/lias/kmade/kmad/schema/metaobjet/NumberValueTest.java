@@ -26,6 +26,9 @@ import org.junit.Test;
 import fr.upensma.lias.kmade.kmad.schema.Oid;
 import fr.upensma.lias.kmade.kmad.schema.metaobjet.NumberValue;
 
+/**
+ * @author Mickael BARON
+ */
 public class NumberValueTest {
     NumberValue n1;
     NumberValue n2;

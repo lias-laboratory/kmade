@@ -30,381 +30,350 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public class AttributConcret implements Entity, Cloneable {
 
-    private static final long serialVersionUID = 2989569559332885070L;
+	private static final long serialVersionUID = 2989569559332885070L;
 
-    public Oid oid = null;
+	public Oid oid = null;
 
-    private ObjetConcret objConcDe = null;
+	private ObjetConcret objConcDe = null;
 
-    private AttributAbstrait attributAbsDe = null;
+	private AttributAbstrait attributAbsDe = null;
 
-    private ValeurType valeur = null;
+	private ValeurType valeur = null;
 
-    private String name;
+	private String name;
 
-    public AttributConcret() {
-	this.name = "";
-    }
-
-    public AttributConcret(ObjetConcret i, AttributAbstrait attr,
-	    ValeurType valeur) {
-	this.valeur = valeur;
-	this.setObjConcDe(i);
-	this.setAttributDe(attr);
-	this.name = attr.getName();
-    }
-
-    public AttributConcret(ObjetConcret i, AttributAbstrait attr,
-	    ValeurType valeur, Oid oid) {
-	this.valeur = valeur;
-	this.setObjConcDe(i);
-	this.setAttributDe(attr);
-	this.oid = oid;
-	this.name = attr.getName();
-    }
-
-    public void setObjConcDe(ObjetConcret objConcDe) {
-	this.objConcDe = objConcDe;
-	objConcDe.addInverseListAttribut(this);
-    }
-
-    public void setInitValeur() {
-	TypeStructure typeStructure = this.attributAbsDe.getTypeStructure();
-
-	if (valeur != null) {
-	    valeur.delete();
+	public AttributConcret() {
+		this.name = "";
 	}
 
-	if (typeStructure.equals(TypeStructure.STRING_STRUCT)) {
-	    Oid oid = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.STRING_VALUE_CLASS);
-	    StrValue val = (StrValue) InterfaceExpressJava.prendre(oid);
-	    val.setValeur("");
-	    this.valeur = val;
-
-	} else if (typeStructure.equals(TypeStructure.NUMBER_STRUCT)) {
-	    Oid oid = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.NUMBER_VALUE_CLASS);
-	    NumberValue val = (NumberValue) InterfaceExpressJava.prendre(oid);
-	    val.setValeur("0");
-	    this.valeur = val;
-	} else if (typeStructure.equals(TypeStructure.BOOLEAN_STRUCT)) {
-	    Oid oid = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.BOOLEAN_VALUE_CLASS);
-	    BoolValue val = (BoolValue) InterfaceExpressJava.prendre(oid);
-	    val.setValeur("true");
-	    this.valeur = val;
-	}
-    }
-
-    public boolean setValeur(String v) {
-	TypeStructure typeStructure = this.attributAbsDe.getTypeStructure();
-
-	if (typeStructure.equals(TypeStructure.STRING_STRUCT)) {
-	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity(
-			ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.STRING_VALUE_CLASS);
-		StrValue val = (StrValue) InterfaceExpressJava.prendre(oid);
-		val.setValeur(v);
-		this.valeur = val;
-	    } else {
-		((StrValue) valeur).setValeur(v);
-	    }
-
-	} else if (typeStructure.equals(TypeStructure.NUMBER_STRUCT)) {
-	    // Retourne true si la chaîne ne peut pas être un int ou un double
-	    try {
-		new NumberValue(v);
-	    } catch (NumberFormatException e) {
-		return true;
-	    }
-	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity(
-			ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.NUMBER_VALUE_CLASS);
-		NumberValue val = (NumberValue) InterfaceExpressJava
-			.prendre(oid);
-		val.setValeur(v);
-		this.valeur = val;
-	    } else {
-		((NumberValue) valeur).setValeur(v);
-	    }
-	} else if (typeStructure.equals(TypeStructure.ENUM_STRUCT)) {
-	    Enumeration enu = (Enumeration) this.attributAbsDe.getTypeRef();
-	    Element el = enu.getElement(v);
-	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity(
-			ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.ENUM_VALUE_CLASS);
-		EnumValue val = (EnumValue) InterfaceExpressJava.prendre(oid);
-		val.setEnumeration(enu);
-		val.setElement(el);
-		this.valeur = val;
-	    } else {
-		((EnumValue) valeur).setEnumeration(enu);
-		((EnumValue) valeur).setElement(el);
-	    }
-	} else if (typeStructure.equals(TypeStructure.INTERVAL_STRUCT)) {
-	    Intervalle inter = (Intervalle) this.attributAbsDe.getTypeRef();
-	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity(
-			ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.RANGE_VALUE_CLASS);
-		IntervalleValue val = (IntervalleValue) InterfaceExpressJava
-			.prendre(oid);
-		val.setIntervalle(inter);
-		val.setValeur(v);
-		this.valeur = val;
-	    } else {
-		((IntervalleValue) valeur).setIntervalle(inter);
-		((IntervalleValue) valeur).setValeur(v);
-	    }
-	} else if (typeStructure.equals(TypeStructure.BOOLEAN_STRUCT)) {
-	    if (this.valeur == null) {
-		Oid oid = InterfaceExpressJava.createEntity(
-			ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.BOOLEAN_VALUE_CLASS);
-		BoolValue val = (BoolValue) InterfaceExpressJava.prendre(oid);
-		val.setValeur(v);
-		this.valeur = val;
-	    } else {
-		((BoolValue) valeur).setValeur(v);
-	    }
-	}
-	return false;
-    }
-
-    public void delete() {
-	objConcDe.removeInverseListAttribut(this);
-	attributAbsDe.removeUtiliseParAttr(this);
-	if (valeur != null) {
-	    valeur.delete();
-	}
-	InterfaceExpressJava.remove(this.oid);
-    }
-
-    public void affDelete() {
-	InterfaceExpressJava.getGestionWarning().addMessage(oid, 6);
-    }
-
-    public void setAttributDe(AttributAbstrait a) {
-	this.attributAbsDe = a;
-	a.setUtiliseParAttr(this);
-    }
-
-    public AttributAbstrait getAttributAbsDe() {
-	return this.attributAbsDe;
-    }
-
-    public String getDeriveName() {
-	return attributAbsDe.getName();
-    }
-
-    public org.w3c.dom.Element toXML(Document doc) {
-	org.w3c.dom.Element racine = doc.createElement("concreteattribut");
-	racine.setAttribute("classkmad", "metaobjet.AttributConcret");
-	racine.setAttribute("idkmad", oid.get());
-
-	org.w3c.dom.Element element = doc
-		.createElement("id-concreteattribut-concreteobject");
-	element.setTextContent(this.objConcDe.getOid().get());
-	racine.appendChild(element);
-
-	element = doc.createElement("id-concreteattribut-abstractattribut");
-	element.setTextContent(this.attributAbsDe.getOid().get());
-	racine.appendChild(element);
-
-	element = doc.createElement("id-concreteattribut-value");
-	element.setTextContent(this.valeur.getOid().get());
-	racine.appendChild(element);
-
-	return racine;
-    }
-
-    public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
-	NodeList userValue = p
-		.getElementsByTagName("id-concreteattribut-concreteobject");
-	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
-		.getTextContent())) == null) {
-	    return true;
+	public AttributConcret(ObjetConcret i, AttributAbstrait attr, ValeurType valeur) {
+		this.valeur = valeur;
+		this.setObjConcDe(i);
+		this.setAttributDe(attr);
+		this.name = attr.getName();
 	}
 
-	userValue = p
-		.getElementsByTagName("id-concreteattribut-abstractattribut");
-	if (userValue.item(0).getParentNode() != p) {
-	    userValue = null;
-	}
-	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
-		.getTextContent())) == null) {
-	    return true;
+	public AttributConcret(ObjetConcret i, AttributAbstrait attr, ValeurType valeur, Oid oid) {
+		this.valeur = valeur;
+		this.setObjConcDe(i);
+		this.setAttributDe(attr);
+		this.oid = oid;
+		this.name = attr.getName();
 	}
 
-	userValue = p.getElementsByTagName("id-concreteattribut-value");
-	if (userValue.item(0).getParentNode() != p) {
-	    userValue = null;
-	}
-	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
-		.getTextContent())) == null) {
-	    return true;
-	}
-	return false;
-    }
-
-    public void createObjectFromXMLElement(org.w3c.dom.Element p) {
-	this.oid = new Oid(p.getAttribute("idkmad"));
-
-	NodeList nodeList = p
-		.getElementsByTagName("id-concreteattribut-concreteobject");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	this.setObjConcDe((ObjetConcret) InterfaceExpressJava.bdd
-		.prendre(new Oid(nodeList.item(0).getTextContent())));
-
-	nodeList = p
-		.getElementsByTagName("id-concreteattribut-abstractattribut");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	this.setAttributDe((AttributAbstrait) InterfaceExpressJava.bdd
-		.prendre(new Oid(nodeList.item(0).getTextContent())));
-	this.name = this.attributAbsDe.getName();
-
-	nodeList = p.getElementsByTagName("id-concreteattribut-value");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	if (nodeList.item(0) != null) {
-	    this.valeur = (ValeurType) InterfaceExpressJava.bdd
-		    .prendre(new Oid(nodeList.item(0).getTextContent()));
-	}
-    }
-
-    public String toSPF() {
-	String SPF = oid.get() + "=" + "AttributConcret" + "(";
-	if (objConcDe != null)
-	    SPF = SPF + objConcDe.getOid().get();
-	else
-	    SPF = SPF + "$";
-	SPF = SPF + ",";
-	if (attributAbsDe != null)
-	    SPF = SPF + attributAbsDe.oid.get();
-	else
-	    SPF = SPF + "$";
-	SPF = SPF + ",";
-	if (valeur != null)
-	    SPF = SPF + valeur.oid.get();
-	else
-	    SPF = SPF + "$";
-	SPF = SPF + ");";
-	return SPF;
-    }
-
-    public void setOid(Oid oid) {
-	this.oid = oid;
-    }
-
-    public Oid getOid() {
-	return this.oid;
-    }
-
-    public void setName(String n) {
-	name = n;
-    }
-
-    public String getName() {
-	return name;
-    }
-
-    public ObjetConcret getObjetConcDe() {
-	return this.objConcDe;
-    }
-
-    public boolean isAttributeNull() {
-	return (this.valeur == null);
-    }
-
-    public ValeurType getValue() {
-	return this.valeur;
-    }
-
-    public String toString() {
-	return this.name;
-    }
-
-    public Object clone() {
-	AttributConcret clone = new AttributConcret();
-	clone.oid = this.oid;
-	clone.attributAbsDe = this.attributAbsDe;
-	clone.valeur = (ValeurType) (this.valeur).clone();
-	clone.name = this.name;
-	return clone;
-    }
-
-    @Override
-    public org.w3c.dom.Element toXML2(Document doc) throws Exception {
-	// TODO Auto-generated method stub
-	org.w3c.dom.Element racine = doc.createElement("concreteattribut");
-	racine.setAttribute("classkmad", "metaobjet.AttributConcret");
-	racine.setAttribute("idkmad", oid.get());
-
-	racine.setAttribute("id-concreteattribut-concreteobject",
-		this.objConcDe.getOid().get());
-
-	racine.setAttribute("id-concreteattribut-abstractattribut",
-		this.attributAbsDe.getOid().get());
-
-	racine.setAttribute("id-concreteattribut-value", this.valeur.getOid()
-		.get());
-
-	// To write the attribute's value as a child
-	racine.appendChild(this.valeur.toXML2(doc));
-
-	return racine;
-    }
-
-    @Override
-    public void createObjectFromXMLElement2(org.w3c.dom.Element p)
-	    throws Exception {
-	// TODO Auto-generated method stub
-	this.oid = new Oid(p.getAttribute("idkmad"));
-
-	this.setObjConcDe((ObjetConcret) InterfaceExpressJava.bdd
-		.prendre(new Oid(p
-			.getAttribute("id-concreteattribut-concreteobject"))));
-
-	this.setAttributDe((AttributAbstrait) InterfaceExpressJava.bdd
-		.prendre(new Oid(p
-			.getAttribute("id-concreteattribut-abstractattribut"))));
-	this.name = this.attributAbsDe.getName();
-
-	this.valeur = (ValeurType) InterfaceExpressJava.bdd.prendre(new Oid(p
-		.getAttribute("id-concreteattribut-value")));
-    }
-
-    @Override
-    public boolean oidIsAnyMissing2(org.w3c.dom.Element p) throws Exception {
-	String userValue = p.getAttribute("id-concreteattribut-concreteobject");
-	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-	    return true;
+	public void setObjConcDe(ObjetConcret objConcDe) {
+		this.objConcDe = objConcDe;
+		objConcDe.addInverseListAttribut(this);
 	}
 
-	userValue = p.getAttribute("id-concreteattribut-abstractattribut");
-	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-	    return true;
+	public void setInitValeur() {
+		TypeStructure typeStructure = this.attributAbsDe.getTypeStructure();
+
+		if (valeur != null) {
+			valeur.delete();
+		}
+
+		if (typeStructure.equals(TypeStructure.STRING_STRUCT)) {
+			Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.STRING_VALUE_CLASS);
+			StrValue val = (StrValue) InterfaceExpressJava.prendre(oid);
+			val.setValeur("");
+			this.valeur = val;
+
+		} else if (typeStructure.equals(TypeStructure.NUMBER_STRUCT)) {
+			Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.NUMBER_VALUE_CLASS);
+			NumberValue val = (NumberValue) InterfaceExpressJava.prendre(oid);
+			val.setValeur("0");
+			this.valeur = val;
+		} else if (typeStructure.equals(TypeStructure.BOOLEAN_STRUCT)) {
+			Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.BOOLEAN_VALUE_CLASS);
+			BoolValue val = (BoolValue) InterfaceExpressJava.prendre(oid);
+			val.setValeur("true");
+			this.valeur = val;
+		}
 	}
 
-	userValue = p.getAttribute("id-concreteattribut-value");
-	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
-	    return true;
+	public boolean setValeur(String v) {
+		TypeStructure typeStructure = this.attributAbsDe.getTypeStructure();
+
+		if (typeStructure.equals(TypeStructure.STRING_STRUCT)) {
+			if (this.valeur == null) {
+				Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+						ExpressConstant.STRING_VALUE_CLASS);
+				StrValue val = (StrValue) InterfaceExpressJava.prendre(oid);
+				val.setValeur(v);
+				this.valeur = val;
+			} else {
+				((StrValue) valeur).setValeur(v);
+			}
+
+		} else if (typeStructure.equals(TypeStructure.NUMBER_STRUCT)) {
+			// Retourne true si la chaîne ne peut pas être un int ou un double
+			try {
+				new NumberValue(v);
+			} catch (NumberFormatException e) {
+				return true;
+			}
+			if (this.valeur == null) {
+				Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+						ExpressConstant.NUMBER_VALUE_CLASS);
+				NumberValue val = (NumberValue) InterfaceExpressJava.prendre(oid);
+				val.setValeur(v);
+				this.valeur = val;
+			} else {
+				((NumberValue) valeur).setValeur(v);
+			}
+		} else if (typeStructure.equals(TypeStructure.ENUM_STRUCT)) {
+			Enumeration enu = (Enumeration) this.attributAbsDe.getTypeRef();
+			Element el = enu.getElement(v);
+			if (this.valeur == null) {
+				Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+						ExpressConstant.ENUM_VALUE_CLASS);
+				EnumValue val = (EnumValue) InterfaceExpressJava.prendre(oid);
+				val.setEnumeration(enu);
+				val.setElement(el);
+				this.valeur = val;
+			} else {
+				((EnumValue) valeur).setEnumeration(enu);
+				((EnumValue) valeur).setElement(el);
+			}
+		} else if (typeStructure.equals(TypeStructure.INTERVAL_STRUCT)) {
+			Intervalle inter = (Intervalle) this.attributAbsDe.getTypeRef();
+			if (this.valeur == null) {
+				Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+						ExpressConstant.RANGE_VALUE_CLASS);
+				IntervalleValue val = (IntervalleValue) InterfaceExpressJava.prendre(oid);
+				val.setIntervalle(inter);
+				val.setValeur(v);
+				this.valeur = val;
+			} else {
+				((IntervalleValue) valeur).setIntervalle(inter);
+				((IntervalleValue) valeur).setValeur(v);
+			}
+		} else if (typeStructure.equals(TypeStructure.BOOLEAN_STRUCT)) {
+			if (this.valeur == null) {
+				Oid oid = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+						ExpressConstant.BOOLEAN_VALUE_CLASS);
+				BoolValue val = (BoolValue) InterfaceExpressJava.prendre(oid);
+				val.setValeur(v);
+				this.valeur = val;
+			} else {
+				((BoolValue) valeur).setValeur(v);
+			}
+		}
+		return false;
 	}
-	return false;
-    }
+
+	public void delete() {
+		objConcDe.removeInverseListAttribut(this);
+		attributAbsDe.removeUtiliseParAttr(this);
+		if (valeur != null) {
+			valeur.delete();
+		}
+		InterfaceExpressJava.remove(this.oid);
+	}
+
+	public void affDelete() {
+		InterfaceExpressJava.getGestionWarning().addMessage(oid, 6);
+	}
+
+	public void setAttributDe(AttributAbstrait a) {
+		this.attributAbsDe = a;
+		a.setUtiliseParAttr(this);
+	}
+
+	public AttributAbstrait getAttributAbsDe() {
+		return this.attributAbsDe;
+	}
+
+	public String getDeriveName() {
+		return attributAbsDe.getName();
+	}
+
+	public org.w3c.dom.Element toXML(Document doc) {
+		org.w3c.dom.Element racine = doc.createElement("concreteattribut");
+		racine.setAttribute("classkmad", "metaobjet.AttributConcret");
+		racine.setAttribute("idkmad", oid.get());
+
+		org.w3c.dom.Element element = doc.createElement("id-concreteattribut-concreteobject");
+		element.setTextContent(this.objConcDe.getOid().get());
+		racine.appendChild(element);
+
+		element = doc.createElement("id-concreteattribut-abstractattribut");
+		element.setTextContent(this.attributAbsDe.getOid().get());
+		racine.appendChild(element);
+
+		element = doc.createElement("id-concreteattribut-value");
+		element.setTextContent(this.valeur.getOid().get());
+		racine.appendChild(element);
+
+		return racine;
+	}
+
+	public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
+		NodeList userValue = p.getElementsByTagName("id-concreteattribut-concreteobject");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0).getTextContent())) == null) {
+			return true;
+		}
+
+		userValue = p.getElementsByTagName("id-concreteattribut-abstractattribut");
+		if (userValue.item(0).getParentNode() != p) {
+			userValue = null;
+		}
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0).getTextContent())) == null) {
+			return true;
+		}
+
+		userValue = p.getElementsByTagName("id-concreteattribut-value");
+		if (userValue.item(0).getParentNode() != p) {
+			userValue = null;
+		}
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0).getTextContent())) == null) {
+			return true;
+		}
+		return false;
+	}
+
+	public void createObjectFromXMLElement(org.w3c.dom.Element p) {
+		this.oid = new Oid(p.getAttribute("idkmad"));
+
+		NodeList nodeList = p.getElementsByTagName("id-concreteattribut-concreteobject");
+		if (nodeList != null && nodeList.item(0) != null && nodeList.item(0).getParentNode() != p) {
+			nodeList = null;
+		}
+		this.setObjConcDe((ObjetConcret) InterfaceExpressJava.bdd.prendre(new Oid(nodeList.item(0).getTextContent())));
+
+		nodeList = p.getElementsByTagName("id-concreteattribut-abstractattribut");
+		if (nodeList != null && nodeList.item(0) != null && nodeList.item(0).getParentNode() != p) {
+			nodeList = null;
+		}
+		this.setAttributDe(
+				(AttributAbstrait) InterfaceExpressJava.bdd.prendre(new Oid(nodeList.item(0).getTextContent())));
+		this.name = this.attributAbsDe.getName();
+
+		nodeList = p.getElementsByTagName("id-concreteattribut-value");
+		if (nodeList != null && nodeList.item(0) != null && nodeList.item(0).getParentNode() != p) {
+			nodeList = null;
+		}
+		if (nodeList.item(0) != null) {
+			this.valeur = (ValeurType) InterfaceExpressJava.bdd.prendre(new Oid(nodeList.item(0).getTextContent()));
+		}
+	}
+
+	public String toSPF() {
+		String SPF = oid.get() + "=" + "AttributConcret" + "(";
+		if (objConcDe != null)
+			SPF = SPF + objConcDe.getOid().get();
+		else
+			SPF = SPF + "$";
+		SPF = SPF + ",";
+		if (attributAbsDe != null)
+			SPF = SPF + attributAbsDe.oid.get();
+		else
+			SPF = SPF + "$";
+		SPF = SPF + ",";
+		if (valeur != null)
+			SPF = SPF + valeur.oid.get();
+		else
+			SPF = SPF + "$";
+		SPF = SPF + ");";
+		return SPF;
+	}
+
+	public void setOid(Oid oid) {
+		this.oid = oid;
+	}
+
+	public Oid getOid() {
+		return this.oid;
+	}
+
+	public void setName(String n) {
+		name = n;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public ObjetConcret getObjetConcDe() {
+		return this.objConcDe;
+	}
+
+	public boolean isAttributeNull() {
+		return (this.valeur == null);
+	}
+
+	public ValeurType getValue() {
+		return this.valeur;
+	}
+
+	public String toString() {
+		return this.name;
+	}
+
+	public Object clone() {
+		AttributConcret clone = new AttributConcret();
+		clone.oid = this.oid;
+		clone.attributAbsDe = this.attributAbsDe;
+		clone.valeur = (ValeurType) (this.valeur).clone();
+		clone.name = this.name;
+		return clone;
+	}
+
+	@Override
+	public org.w3c.dom.Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		org.w3c.dom.Element racine = doc.createElement("concreteattribut");
+		racine.setAttribute("classkmad", "metaobjet.AttributConcret");
+		racine.setAttribute("idkmad", oid.get());
+
+		racine.setAttribute("id-concreteattribut-concreteobject", this.objConcDe.getOid().get());
+
+		racine.setAttribute("id-concreteattribut-abstractattribut", this.attributAbsDe.getOid().get());
+
+		racine.setAttribute("id-concreteattribut-value", this.valeur.getOid().get());
+
+		// To write the attribute's value as a child
+		racine.appendChild(this.valeur.toXML2(doc));
+
+		return racine;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(org.w3c.dom.Element p) throws Exception {
+		// TODO Auto-generated method stub
+		this.oid = new Oid(p.getAttribute("idkmad"));
+
+		this.setObjConcDe((ObjetConcret) InterfaceExpressJava.bdd
+				.prendre(new Oid(p.getAttribute("id-concreteattribut-concreteobject"))));
+
+		this.setAttributDe((AttributAbstrait) InterfaceExpressJava.bdd
+				.prendre(new Oid(p.getAttribute("id-concreteattribut-abstractattribut"))));
+		this.name = this.attributAbsDe.getName();
+
+		this.valeur = (ValeurType) InterfaceExpressJava.bdd
+				.prendre(new Oid(p.getAttribute("id-concreteattribut-value")));
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) throws Exception {
+		String userValue = p.getAttribute("id-concreteattribut-concreteobject");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+			return true;
+		}
+
+		userValue = p.getAttribute("id-concreteattribut-abstractattribut");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+			return true;
+		}
+
+		userValue = p.getAttribute("id-concreteattribut-value");
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null) {
+			return true;
+		}
+		return false;
+	}
 }

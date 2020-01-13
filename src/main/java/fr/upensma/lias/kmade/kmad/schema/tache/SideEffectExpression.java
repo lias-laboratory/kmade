@@ -24,18 +24,18 @@ import fr.upensma.lias.kmade.kmad.schema.expression.VoidConstant;
  */
 public class SideEffectExpression extends Expression {
 
-    private static final long serialVersionUID = 1083101442297410483L;
+	private static final long serialVersionUID = 1083101442297410483L;
 
-    public SideEffectExpression() {
-	refNode = new VoidConstant();
-	value = refNode.getName();
-    }
-
-    public SideEffectExpression(String pre) {
-	this.value = pre;
-	if (this.value.equals("")) {
-	    refNode = new VoidConstant();
-	    value = refNode.getName();
+	public SideEffectExpression() {
+		refNode = new VoidConstant();
+		value = refNode.getName();
 	}
-    }
+
+	public SideEffectExpression(String pre) {
+		this.value = pre;
+		if (this.value.equals("")) {
+			refNode = new VoidConstant();
+			value = refNode.getName();
+		}
+	}
 }

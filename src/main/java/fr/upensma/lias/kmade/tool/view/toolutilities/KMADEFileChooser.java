@@ -32,378 +32,330 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
  */
 public final class KMADEFileChooser {
 
-    private static File lastParentFile = null;
+	private static File lastParentFile = null;
 
-    public static String saveKMADModelSimpleFile() {
-	final JFileChooser fc = new JFileChooser();
-	File file = null;
-	fc.setCurrentDirectory(lastParentFile);
-	fc.addChoosableFileFilter(new KMADEFileChooser.SimpleTxtSaveFilter());
-	fc.setAcceptAllFileFilterUsed(false);
+	public static String saveKMADModelSimpleFile() {
+		final JFileChooser fc = new JFileChooser();
+		File file = null;
+		fc.setCurrentDirectory(lastParentFile);
+		fc.addChoosableFileFilter(new KMADEFileChooser.SimpleTxtSaveFilter());
+		fc.setAcceptAllFileFilterUsed(false);
 
-	int returnVal = fc.showSaveDialog(fc);
-	if (returnVal == JFileChooser.APPROVE_OPTION) {
-	    file = fc.getSelectedFile();
+		int returnVal = fc.showSaveDialog(fc);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fc.getSelectedFile();
 
-	    if (file == null) {
-		KMADEHistoryMessageManager.printlnMessage("kmc error");
-		return null;
-	    } else {
-		if (file.exists()) {
-		    int response = JOptionPane
-			    .showConfirmDialog(
-				    null,
-				    KMADEConstant.OVERWRITE_FILE_MESSAGE,
-				    KMADEConstant.SAVE_AS_MESSAGE,
-				    JOptionPane.OK_CANCEL_OPTION,
-				    JOptionPane.QUESTION_MESSAGE,
-				    new ImageIcon(
-					    KMADEFileChooser.class
-						    .getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
-		    if (response == JOptionPane.CANCEL_OPTION)
+			if (file == null) {
+				KMADEHistoryMessageManager.printlnMessage("kmc error");
+				return null;
+			} else {
+				if (file.exists()) {
+					int response = JOptionPane.showConfirmDialog(null, KMADEConstant.OVERWRITE_FILE_MESSAGE,
+							KMADEConstant.SAVE_AS_MESSAGE, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+							new ImageIcon(KMADEFileChooser.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
+					if (response == JOptionPane.CANCEL_OPTION)
+						return null;
+				}
+
+				if (!file.getAbsolutePath().endsWith(".txt")) {
+					file = new File(fc.getSelectedFile().getAbsolutePath() + ".txt");
+				}
+			}
+		} else {
+			KMADEHistoryMessageManager.printlnMessage("KMC Message");
 			return null;
 		}
-
-		if (!file.getAbsolutePath().endsWith(".txt")) {
-		    file = new File(fc.getSelectedFile().getAbsolutePath()
-			    + ".txt");
-		}
-	    }
-	} else {
-	    KMADEHistoryMessageManager.printlnMessage("KMC Message");
-	    return null;
+		lastParentFile = file.getParentFile();
+		return file.getAbsolutePath();
 	}
-	lastParentFile = file.getParentFile();
-	return file.getAbsolutePath();
-    }
 
-    public static File openKMADModelXMLFile() {
-	final JFileChooser fc = new JFileChooser();
-	File file = null;
-	fc.setCurrentDirectory(lastParentFile);
-	fc.addChoosableFileFilter(new KMADEFileChooser.KMADModelXMLOpenFilter());
-	fc.setAcceptAllFileFilterUsed(false);
+	public static File openKMADModelXMLFile() {
+		final JFileChooser fc = new JFileChooser();
+		File file = null;
+		fc.setCurrentDirectory(lastParentFile);
+		fc.addChoosableFileFilter(new KMADEFileChooser.KMADModelXMLOpenFilter());
+		fc.setAcceptAllFileFilterUsed(false);
 
-	int returnVal = fc.showOpenDialog(fc);
-	if (returnVal == JFileChooser.APPROVE_OPTION) {
-	    file = fc.getSelectedFile();
-	    if (file == null || file == lastParentFile) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
-		return null;
-	    } else {
-		if (!file.exists()) {
-		    KMADEHistoryMessageManager
-			    .printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
-		    return null;
-		}
-	    }
-	} else
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
+		int returnVal = fc.showOpenDialog(fc);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fc.getSelectedFile();
+			if (file == null || file == lastParentFile) {
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
+				return null;
+			} else {
+				if (!file.exists()) {
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
+					return null;
+				}
+			}
+		} else
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
 
-	if (file != null)
-	    lastParentFile = file.getParentFile();
-	return file;
-    }
+		if (file != null)
+			lastParentFile = file.getParentFile();
+		return file;
+	}
 
-    public static String saveKMADModelXMLFile() {
-	final JFileChooser fc = new JFileChooser();
-	File file = null;
-	fc.setCurrentDirectory(lastParentFile);
-	fc.addChoosableFileFilter(new KMADEFileChooser.KMADModelXMLSaveFilter());
-	fc.setAcceptAllFileFilterUsed(false);
+	public static String saveKMADModelXMLFile() {
+		final JFileChooser fc = new JFileChooser();
+		File file = null;
+		fc.setCurrentDirectory(lastParentFile);
+		fc.addChoosableFileFilter(new KMADEFileChooser.KMADModelXMLSaveFilter());
+		fc.setAcceptAllFileFilterUsed(false);
 
-	int returnVal = fc.showSaveDialog(fc);
-	if (returnVal == JFileChooser.APPROVE_OPTION) {
-	    file = fc.getSelectedFile();
+		int returnVal = fc.showSaveDialog(fc);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fc.getSelectedFile();
 
-	    if (file == null) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.WRITE_ERROR_FILE);
-		return null;
-	    } else {
-		if (file.exists()) {
-		    int response = JOptionPane
-			    .showConfirmDialog(
-				    null,
-				    KMADEConstant.OVERWRITE_FILE_MESSAGE,
-				    KMADEConstant.SAVE_AS_MESSAGE,
-				    JOptionPane.OK_CANCEL_OPTION,
-				    JOptionPane.QUESTION_MESSAGE,
-				    new ImageIcon(
-					    KMADEFileChooser.class
-						    .getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
-		    if (response == JOptionPane.CANCEL_OPTION)
+			if (file == null) {
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_ERROR_FILE);
+				return null;
+			} else {
+				if (file.exists()) {
+					int response = JOptionPane.showConfirmDialog(null, KMADEConstant.OVERWRITE_FILE_MESSAGE,
+							KMADEConstant.SAVE_AS_MESSAGE, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+							new ImageIcon(KMADEFileChooser.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
+					if (response == JOptionPane.CANCEL_OPTION)
+						return null;
+				}
+
+				if (!file.getAbsolutePath().endsWith(KMADEConstant.KMADE_MODEL_EXTENSION_FILE)) {
+					file = new File(fc.getSelectedFile().getAbsolutePath() + KMADEConstant.KMADE_MODEL_EXTENSION_FILE);
+				}
+			}
+		} else {
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SAVE_CANCELLED_EXPRESS_FILECHOOSER_NAME);
 			return null;
 		}
-
-		if (!file.getAbsolutePath().endsWith(
-			KMADEConstant.KMADE_MODEL_EXTENSION_FILE)) {
-		    file = new File(fc.getSelectedFile().getAbsolutePath()
-			    + KMADEConstant.KMADE_MODEL_EXTENSION_FILE);
-		}
-	    }
-	} else {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.SAVE_CANCELLED_EXPRESS_FILECHOOSER_NAME);
-	    return null;
+		lastParentFile = file.getParentFile();
+		return file.getAbsolutePath();
 	}
-	lastParentFile = file.getParentFile();
-	return file.getAbsolutePath();
-    }
 
-    /**
-     * Méthode qui ouvre un JFileChooser pour le chargement d'un scénario
-     * 
-     * @return
-     */
-    public static File openKMADScenarioFile() {
-	final JFileChooser fc = new JFileChooser();
-	File file = null;
+	/**
+	 * Méthode qui ouvre un JFileChooser pour le chargement d'un scénario
+	 * 
+	 * @return
+	 */
+	public static File openKMADScenarioFile() {
+		final JFileChooser fc = new JFileChooser();
+		File file = null;
 
-	fc.setCurrentDirectory(lastParentFile);
-	fc.addChoosableFileFilter(new KMADEFileChooser.ScenarioOpenFilter());
-	fc.setAcceptAllFileFilterUsed(false);
+		fc.setCurrentDirectory(lastParentFile);
+		fc.addChoosableFileFilter(new KMADEFileChooser.ScenarioOpenFilter());
+		fc.setAcceptAllFileFilterUsed(false);
 
-	int returnVal = fc.showOpenDialog(fc);
-	if (returnVal == JFileChooser.APPROVE_OPTION) {
-	    file = fc.getSelectedFile();
-	    if (file == null || file == lastParentFile) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
-		return null;
-	    }
-	} else
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.OPEN_CANCELLED_SCENARIO_FILECHOOSER_NAME);
-	lastParentFile = file.getParentFile();
-	return file;
-    }
+		int returnVal = fc.showOpenDialog(fc);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fc.getSelectedFile();
+			if (file == null || file == lastParentFile) {
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
+				return null;
+			}
+		} else
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_CANCELLED_SCENARIO_FILECHOOSER_NAME);
+		lastParentFile = file.getParentFile();
+		return file;
+	}
 
-    /**
-     * Méthode qui enregistre le modèle de tâches.
-     * 
-     * @return
-     */
-    public static String saveKMADScenarioFile() {
-	final JFileChooser fc = new JFileChooser();
-	File file = null;
+	/**
+	 * Méthode qui enregistre le modèle de tâches.
+	 * 
+	 * @return
+	 */
+	public static String saveKMADScenarioFile() {
+		final JFileChooser fc = new JFileChooser();
+		File file = null;
 
-	fc.setCurrentDirectory(lastParentFile);
-	fc.addChoosableFileFilter(new KMADEFileChooser.ScenarioSaveFilter());
-	fc.setAcceptAllFileFilterUsed(false);
+		fc.setCurrentDirectory(lastParentFile);
+		fc.addChoosableFileFilter(new KMADEFileChooser.ScenarioSaveFilter());
+		fc.setAcceptAllFileFilterUsed(false);
 
-	int returnVal = fc.showSaveDialog(fc);
-	if (returnVal == JFileChooser.APPROVE_OPTION) {
-	    file = fc.getSelectedFile();
+		int returnVal = fc.showSaveDialog(fc);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fc.getSelectedFile();
 
-	    if (file == null) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.WRITE_ERROR_FILE);
-		return null;
-	    } else {
-		if (file.exists()) {
-		    int response = JOptionPane
-			    .showConfirmDialog(
-				    null,
-				    KMADEConstant.OVERWRITE_FILE_MESSAGE,
-				    KMADEConstant.SAVE_AS_MESSAGE,
-				    JOptionPane.OK_CANCEL_OPTION,
-				    JOptionPane.QUESTION_MESSAGE,
-				    new ImageIcon(
-					    KMADEFileChooser.class
-						    .getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
-		    if (response == JOptionPane.CANCEL_OPTION)
+			if (file == null) {
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_ERROR_FILE);
+				return null;
+			} else {
+				if (file.exists()) {
+					int response = JOptionPane.showConfirmDialog(null, KMADEConstant.OVERWRITE_FILE_MESSAGE,
+							KMADEConstant.SAVE_AS_MESSAGE, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+							new ImageIcon(KMADEFileChooser.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
+					if (response == JOptionPane.CANCEL_OPTION)
+						return null;
+				}
+
+				if (!file.getAbsolutePath().endsWith(KMADEConstant.KMADE_SCENARIO_EXTENSION_FILE)) {
+					file = new File(
+							fc.getSelectedFile().getAbsolutePath() + KMADEConstant.KMADE_SCENARIO_EXTENSION_FILE);
+				}
+			}
+		} else {
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SAVE_CANCELLED_SCENARIO_FILECHOOSER_NAME);
 			return null;
 		}
+		lastParentFile = file.getParentFile();
+		return file.getAbsolutePath();
+	}
 
-		if (!file.getAbsolutePath().endsWith(
-			KMADEConstant.KMADE_SCENARIO_EXTENSION_FILE)) {
-		    file = new File(fc.getSelectedFile().getAbsolutePath()
-			    + KMADEConstant.KMADE_SCENARIO_EXTENSION_FILE);
+	/**
+	 * Méthode qui ouvre un JFileChooser pour le chargement d'un fichier SPF.
+	 * 
+	 * @return
+	 */
+	public static File openSPFFile() {
+		final JFileChooser fc = new JFileChooser();
+		File file = null;
+
+		fc.setCurrentDirectory(lastParentFile);
+		fc.addChoosableFileFilter(new KMADEFileChooser.SPFOpenFilter());
+		fc.setAcceptAllFileFilterUsed(false);
+
+		int returnVal = fc.showOpenDialog(fc);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			file = fc.getSelectedFile();
+			if (file == null) {
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
+				return null;
+			}
+		} else
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
+		lastParentFile = file.getParentFile();
+		return file;
+	}
+
+	public static File saveTxtFile(Window searchWindow) {
+		final JFileChooser fc = new JFileChooser();
+		File file = null;
+
+		fc.setCurrentDirectory(lastParentFile);
+		fc.addChoosableFileFilter(new KMADEFileChooser.TXTSaveFilter());
+		fc.setAcceptAllFileFilterUsed(false);
+
+		int returnVal = fc.showSaveDialog(searchWindow);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			// V�rifie si le nom du fichier contient l'extension "txt".
+			file = fc.getSelectedFile();
+
+			if (file == null) {
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.WRITE_TXT_FILE_ERROR);
+				return null;
+			} else {
+				if (file.exists()) {
+					/* int response = */
+					JOptionPane.showConfirmDialog(fc, KMADEConstant.OVERWRITE_FILE_MESSAGE,
+							KMADEConstant.SAVE_AS_MESSAGE, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+							new ImageIcon(KMADEFileChooser.class.getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
+				}
+
+				if (!file.getAbsolutePath().endsWith(".txt")) {
+					file = new File(fc.getSelectedFile().getAbsolutePath() + ".txt");
+				}
+			}
+		} else {
+			KMADEHistoryMessageManager.printlnMessage(KMADEConstant.SAVE_CANCELLED_TEXT_FILECHOOSER_NAME);
 		}
-	    }
-	} else {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.SAVE_CANCELLED_SCENARIO_FILECHOOSER_NAME);
-	    return null;
+		lastParentFile = file.getParentFile();
+		return file;
 	}
-	lastParentFile = file.getParentFile();
-	return file.getAbsolutePath();
-    }
 
-    /**
-     * Méthode qui ouvre un JFileChooser pour le chargement d'un fichier SPF.
-     * 
-     * @return
-     */
-    public static File openSPFFile() {
-	final JFileChooser fc = new JFileChooser();
-	File file = null;
-
-	fc.setCurrentDirectory(lastParentFile);
-	fc.addChoosableFileFilter(new KMADEFileChooser.SPFOpenFilter());
-	fc.setAcceptAllFileFilterUsed(false);
-
-	int returnVal = fc.showOpenDialog(fc);
-	if (returnVal == JFileChooser.APPROVE_OPTION) {
-	    file = fc.getSelectedFile();
-	    if (file == null) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.OPEN_ERROR_FILE);
-		return null;
-	    }
-	} else
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.OPEN_CANCELLED_EXPRESS_FILECHOOSER_NAME);
-	lastParentFile = file.getParentFile();
-	return file;
-    }
-
-    public static File saveTxtFile(Window searchWindow) {
-	final JFileChooser fc = new JFileChooser();
-	File file = null;
-
-	fc.setCurrentDirectory(lastParentFile);
-	fc.addChoosableFileFilter(new KMADEFileChooser.TXTSaveFilter());
-	fc.setAcceptAllFileFilterUsed(false);
-
-	int returnVal = fc.showSaveDialog(searchWindow);
-	if (returnVal == JFileChooser.APPROVE_OPTION) {
-	    // V�rifie si le nom du fichier contient l'extension "txt".
-	    file = fc.getSelectedFile();
-
-	    if (file == null) {
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.WRITE_TXT_FILE_ERROR);
-		return null;
-	    } else {
-		if (file.exists()) {
-		    /* int response = */
-		    JOptionPane
-			    .showConfirmDialog(
-				    fc,
-				    KMADEConstant.OVERWRITE_FILE_MESSAGE,
-				    KMADEConstant.SAVE_AS_MESSAGE,
-				    JOptionPane.OK_CANCEL_OPTION,
-				    JOptionPane.QUESTION_MESSAGE,
-				    new ImageIcon(
-					    KMADEFileChooser.class
-						    .getResource(KMADEConstant.ASK_DIALOG_IMAGE)));
+	private static class KMADModelXMLOpenFilter extends FileFilter {
+		public boolean accept(File f) {
+			if (f != null) {
+				if (f.isDirectory()) {
+					return f.getName().equals("CVS") ? false : true;
+				} else
+					return (f.getName().endsWith(KMADEConstant.KMADE_MODEL_EXTENSION_FILE));
+			}
+			return false;
 		}
 
-		if (!file.getAbsolutePath().endsWith(".txt")) {
-		    file = new File(fc.getSelectedFile().getAbsolutePath()
-			    + ".txt");
+		public String getDescription() {
+			return KMADEConstant.EXTENSION_KMADE_FILTER_NAME;
 		}
-	    }
-	} else {
-	    KMADEHistoryMessageManager
-		    .printlnMessage(KMADEConstant.SAVE_CANCELLED_TEXT_FILECHOOSER_NAME);
-	}
-	lastParentFile = file.getParentFile();
-	return file;
-    }
-
-    private static class KMADModelXMLOpenFilter extends FileFilter {
-	public boolean accept(File f) {
-	    if (f != null) {
-		if (f.isDirectory()) {
-		    return f.getName().equals("CVS") ? false : true;
-		} else
-		    return (f.getName()
-			    .endsWith(KMADEConstant.KMADE_MODEL_EXTENSION_FILE));
-	    }
-	    return false;
 	}
 
-	public String getDescription() {
-	    return KMADEConstant.EXTENSION_KMADE_FILTER_NAME;
-	}
-    }
+	private static class KMADModelXMLSaveFilter extends FileFilter {
+		public boolean accept(File f) {
+			return true;
+		}
 
-    private static class KMADModelXMLSaveFilter extends FileFilter {
-	public boolean accept(File f) {
-	    return true;
-	}
-
-	public String getDescription() {
-	    return KMADEConstant.EXTENSION_KMADE_FILTER_NAME;
-	}
-    }
-
-    private static class ScenarioSaveFilter extends FileFilter {
-	public boolean accept(File f) {
-	    return true;
+		public String getDescription() {
+			return KMADEConstant.EXTENSION_KMADE_FILTER_NAME;
+		}
 	}
 
-	public String getDescription() {
-	    return KMADEConstant.SCENARIO_FILTER_NAME;
-	}
-    }
+	private static class ScenarioSaveFilter extends FileFilter {
+		public boolean accept(File f) {
+			return true;
+		}
 
-    private static class ScenarioOpenFilter extends FileFilter {
-	public boolean accept(File f) {
-	    if (f != null) {
-		if (f.isDirectory()) {
-		    return f.getName().equals("CVS") ? false : true;
-		} else
-		    return (f.getName()
-			    .endsWith(KMADEConstant.KMADE_SCENARIO_EXTENSION_FILE));
-	    }
-	    return false;
+		public String getDescription() {
+			return KMADEConstant.SCENARIO_FILTER_NAME;
+		}
 	}
 
-	public String getDescription() {
-	    return KMADEConstant.SCENARIO_FILTER_NAME;
-	}
-    }
+	private static class ScenarioOpenFilter extends FileFilter {
+		public boolean accept(File f) {
+			if (f != null) {
+				if (f.isDirectory()) {
+					return f.getName().equals("CVS") ? false : true;
+				} else
+					return (f.getName().endsWith(KMADEConstant.KMADE_SCENARIO_EXTENSION_FILE));
+			}
+			return false;
+		}
 
-    private static class SPFOpenFilter extends FileFilter {
-	public boolean accept(File f) {
-	    if (f != null) {
-		if (f.isDirectory()) {
-		    return f.getName().equals("CVS") ? false : true;
-		} else
-		    return (f.getName().endsWith(".spf"));
-	    }
-	    return false;
-	}
-
-	public String getDescription() {
-	    return KMADEConstant.EXTENSION_EXPRESS_FILTER_NAME;
-	}
-    }
-
-    private static class TXTSaveFilter extends FileFilter {
-	public boolean accept(File f) {
-	    return true;
+		public String getDescription() {
+			return KMADEConstant.SCENARIO_FILTER_NAME;
+		}
 	}
 
-	public String getDescription() {
-	    return KMADEConstant.EXTENSION_TEXT_FILTER_SEARCH_NAME;
-	}
-    }
+	private static class SPFOpenFilter extends FileFilter {
+		public boolean accept(File f) {
+			if (f != null) {
+				if (f.isDirectory()) {
+					return f.getName().equals("CVS") ? false : true;
+				} else
+					return (f.getName().endsWith(".spf"));
+			}
+			return false;
+		}
 
-    private static class SimpleTxtSaveFilter extends FileFilter {
-
-	@Override
-	public boolean accept(File f) {
-	    if (f != null) {
-		if (f.isDirectory()) {
-		    return f.getName().equals("CVS") ? false : true;
-		} else
-		    return (f.getName().endsWith(".txt"));
-	    }
-	    return false;
-
+		public String getDescription() {
+			return KMADEConstant.EXTENSION_EXPRESS_FILTER_NAME;
+		}
 	}
 
-	@Override
-	public String getDescription() {
-	    return KMADEConstant.EXTENSION_TEXT_FILTER_SEARCH_NAME;
+	private static class TXTSaveFilter extends FileFilter {
+		public boolean accept(File f) {
+			return true;
+		}
+
+		public String getDescription() {
+			return KMADEConstant.EXTENSION_TEXT_FILTER_SEARCH_NAME;
+		}
 	}
 
-    }
+	private static class SimpleTxtSaveFilter extends FileFilter {
+
+		@Override
+		public boolean accept(File f) {
+			if (f != null) {
+				if (f.isDirectory()) {
+					return f.getName().equals("CVS") ? false : true;
+				} else
+					return (f.getName().endsWith(".txt"));
+			}
+			return false;
+
+		}
+
+		@Override
+		public String getDescription() {
+			return KMADEConstant.EXTENSION_TEXT_FILTER_SEARCH_NAME;
+		}
+
+	}
 }

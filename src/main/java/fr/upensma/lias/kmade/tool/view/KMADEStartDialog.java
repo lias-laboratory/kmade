@@ -41,74 +41,70 @@ import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
  */
 public class KMADEStartDialog extends JDialog implements LanguageFactory {
 
-    private static final long serialVersionUID = 7999269478676543553L;
+	private static final long serialVersionUID = 7999269478676543553L;
 
-    private JEditorPane editor_pane;
+	private JEditorPane editor_pane;
 
-    protected JButton ok_button;
+	protected JButton ok_button;
 
-    /**
-     * Constructeur de la classe InfoDebugAbout.
-     * 
-     * @param param_instance_dialog
-     *            Instance du contr�leur de dialogue de la partie Builder.
-     **/
-    public KMADEStartDialog() {
-	super(GraphicEditorAdaptator.getMainFrame(), true);
-	Container content_pane = getContentPane();
-	content_pane.setLayout(new BorderLayout());
+	/**
+	 * Constructeur de la classe InfoDebugAbout.
+	 * 
+	 * @param param_instance_dialog Instance du contr�leur de dialogue de la partie
+	 *                              Builder.
+	 **/
+	public KMADEStartDialog() {
+		super(GraphicEditorAdaptator.getMainFrame(), true);
+		Container content_pane = getContentPane();
+		content_pane.setLayout(new BorderLayout());
 
-	editor_pane = new JEditorPane();
-	editor_pane.setEditable(false);
-	editor_pane.setContentType("text/html");
-	JScrollPane area_scroll_pane = new JScrollPane(editor_pane);
-	area_scroll_pane
-		.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-	area_scroll_pane
-		.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	area_scroll_pane.setPreferredSize(new Dimension(400, 200));
+		editor_pane = new JEditorPane();
+		editor_pane.setEditable(false);
+		editor_pane.setContentType("text/html");
+		JScrollPane area_scroll_pane = new JScrollPane(editor_pane);
+		area_scroll_pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		area_scroll_pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		area_scroll_pane.setPreferredSize(new Dimension(400, 200));
 
-	JPanel panel_button = new JPanel();
-	panel_button.setLayout(new FlowLayout(FlowLayout.RIGHT));
-	ok_button = new JButton(KMADEConstant.GO_BACK_MESSAGE);
-	ok_button.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		KMADEStartDialog.this.setVisible(false);
-	    }
-	});
-	panel_button.add(ok_button);
+		JPanel panel_button = new JPanel();
+		panel_button.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		ok_button = new JButton(KMADEConstant.GO_BACK_MESSAGE);
+		ok_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				KMADEStartDialog.this.setVisible(false);
+			}
+		});
+		panel_button.add(ok_button);
 
-	content_pane.add(area_scroll_pane, BorderLayout.CENTER);
-	content_pane.add(panel_button, BorderLayout.SOUTH);
-	this.setPreferredSize(new Dimension(700, 500));
-	this.pack();
-	KMADEToolUtilities.setCenteredInScreen(this);
-	this.setModal(true);
-	this.setVisible(false);
-    }
-
-    /**
-     * Affiche cette boite de dialogue et modifie son contenu.
-     * 
-     * @param title
-     *            Titre de la boite de dialogue.
-     * @param content
-     *            Adresse de la page web contenant les informations. C'est une
-     *            adresse qui pointe sur un fichier.
-     **/
-    public void showInfoAbout(String title, String content) {
-	this.setTitle(title);
-	try {
-	    editor_pane.setPage(this.getClass().getResource(content));
-	    this.pack();
-	    KMADEToolUtilities.setCenteredInScreen(this);
-	    this.setVisible(true);
-	} catch (IOException e) {
-
+		content_pane.add(area_scroll_pane, BorderLayout.CENTER);
+		content_pane.add(panel_button, BorderLayout.SOUTH);
+		this.setPreferredSize(new Dimension(700, 500));
+		this.pack();
+		KMADEToolUtilities.setCenteredInScreen(this);
+		this.setModal(true);
+		this.setVisible(false);
 	}
-    }
 
-    public void notifLocalisationModification() {
-	ok_button.setText(KMADEConstant.VALID_MESSAGE);
-    }
+	/**
+	 * Affiche cette boite de dialogue et modifie son contenu.
+	 * 
+	 * @param title   Titre de la boite de dialogue.
+	 * @param content Adresse de la page web contenant les informations. C'est une
+	 *                adresse qui pointe sur un fichier.
+	 **/
+	public void showInfoAbout(String title, String content) {
+		this.setTitle(title);
+		try {
+			editor_pane.setPage(this.getClass().getResource(content));
+			this.pack();
+			KMADEToolUtilities.setCenteredInScreen(this);
+			this.setVisible(true);
+		} catch (IOException e) {
+
+		}
+	}
+
+	public void notifLocalisationModification() {
+		ok_button.setText(KMADEConstant.VALID_MESSAGE);
+	}
 }

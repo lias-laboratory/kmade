@@ -27,24 +27,23 @@ import fr.upensma.lias.kmade.tool.view.worldobject.abstractobject.KMADEReadWrite
  */
 public final class AbstractObjectPanelAdaptator {
 
-    private static String oidClaseActive = Oid.OID_NULL;
+	private static String oidClaseActive = Oid.OID_NULL;
 
-    public static void setActiveAbstractObject(String name, String oid) {
-	oidClaseActive = oid;
-	KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor()
-		.setActiveAbstractObject(name, oidClaseActive);
-    }
+	public static void setActiveAbstractObject(String name, String oid) {
+		oidClaseActive = oid;
+		KMADEReadWriteAbstractTypeObjectPanel.getAbstractObjectEditor().setActiveAbstractObject(name, oidClaseActive);
+	}
 
-    public static String getActiveAbstractObject() {
-	return oidClaseActive;
-    }
+	public static String getActiveAbstractObject() {
+		return oidClaseActive;
+	}
 
-    public static Object[][] getGroupesIntoTab(String oidObj) {
-	return ExpressGroup.getArrayGroups(oidObj);
-    }
+	public static Object[][] getGroupesIntoTab(String oidObj) {
+		return ExpressGroup.getArrayGroups(oidObj);
+	}
 
-    public static Object[][] getAttributesIntoTab(String oidA) {
-	return ExpressAbstractObject.getAttributes(oidA);
-    }
+	public static Object[][] getAttributesIntoTab(String oidA) {
+		return ExpressAbstractObject.getAttributes(oidA);
+	}
 
 }

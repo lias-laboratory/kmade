@@ -29,87 +29,79 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.TableauAg;
  */
 public class SetFunction extends BinaryFunction implements ConcreteObjectType {
 
-    private static final long serialVersionUID = -3249866164189644951L;
+	private static final long serialVersionUID = -3249866164189644951L;
 
-    private ObjetConcret refUserObjetConcret;
+	private ObjetConcret refUserObjetConcret;
 
-    public SetFunction(GroupExpressExpression left, AssignmentOperator right) {
-	super(new Object(), left, right);
-	this.name = "set";
-    }
-
-    // V�rifie si le groupe a un type set
-    public boolean isGroupSetType() {
-	return (((GroupExpressExpression) this.leftNode).getGroup()
-		.getEnsemble() instanceof EnsembleAg);
-    }
-
-    public boolean isGroupArrayType() {
-	return (((GroupExpressExpression) this.leftNode).getGroup()
-		.getEnsemble() instanceof TableauAg);
-    }
-
-    // R�cup�re la liste compl�te des objets concrets
-    public ArrayList<ObjetConcret> getConcreteObjects() {
-	return (((GroupExpressExpression) this.leftNode).getGroup()
-		.getEnsemble().getLstObjConcrets());
-    }
-
-    // Retourne null si il n'y en a pas ou s'il s'agit d'un ensemble avec plus
-    // d'un objet concret
-    public ObjetConcret getConcreteObject() {
-	return ((GroupExpressExpression) this.leftNode).getGroup()
-		.getEnsemble().get();
-    }
-
-    public void setUserConcreteObject(ObjetConcret p) {
-	this.refUserObjetConcret = p;
-    }
-
-    public ObjetConcret getUserConcreteObject() {
-	return this.refUserObjetConcret;
-    }
-
-    public boolean isEmptyUserConcreteObject() {
-	return this.refUserObjetConcret == null;
-    }
-
-    public ArrayList<Object> getLinearExpression() {
-	ArrayList<Object> myLinearList = new ArrayList<Object>();
-	myLinearList.add(this);
-	myLinearList.add("(");
-	for (Object current : leftNode.getLinearExpression()) {
-	    myLinearList.add(current);
-	}
-	myLinearList.add(",");
-	for (Object current : rightNode.getLinearExpression()) {
-	    myLinearList.add(current);
-	}
-	myLinearList.add(")");
-	return myLinearList;
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-	InterfaceExpressJava
-		.getCurrentObject()
-		.setCurrentCheckGroup(
-			((AttributExpressExpression) ((AssignmentOperator) this.rightNode)
-				.getLeftNode()).getGroupExpressExpression()
-				.getGroup());
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-
-	if (!this.isGroupSetType() && !this.isGroupArrayType()) {
-	    refUserObjetConcret = this.getConcreteObject();
+	public SetFunction(GroupExpressExpression left, AssignmentOperator right) {
+		super(new Object(), left, right);
+		this.name = "set";
 	}
 
-	super.evaluateNode(refUserObjetConcret);
-	if (this.isValueState()) {
-	    InterfaceExpressJava.appendHistoryMessage(this.name);
-	    InterfaceExpressJava.getCurrentObject()
-		    .setCurrentEvaluateConcreteObject(refUserObjetConcret);
+	// V�rifie si le groupe a un type set
+	public boolean isGroupSetType() {
+		return (((GroupExpressExpression) this.leftNode).getGroup().getEnsemble() instanceof EnsembleAg);
 	}
-    }
+
+	public boolean isGroupArrayType() {
+		return (((GroupExpressExpression) this.leftNode).getGroup().getEnsemble() instanceof TableauAg);
+	}
+
+	// R�cup�re la liste compl�te des objets concrets
+	public ArrayList<ObjetConcret> getConcreteObjects() {
+		return (((GroupExpressExpression) this.leftNode).getGroup().getEnsemble().getLstObjConcrets());
+	}
+
+	// Retourne null si il n'y en a pas ou s'il s'agit d'un ensemble avec plus
+	// d'un objet concret
+	public ObjetConcret getConcreteObject() {
+		return ((GroupExpressExpression) this.leftNode).getGroup().getEnsemble().get();
+	}
+
+	public void setUserConcreteObject(ObjetConcret p) {
+		this.refUserObjetConcret = p;
+	}
+
+	public ObjetConcret getUserConcreteObject() {
+		return this.refUserObjetConcret;
+	}
+
+	public boolean isEmptyUserConcreteObject() {
+		return this.refUserObjetConcret == null;
+	}
+
+	public ArrayList<Object> getLinearExpression() {
+		ArrayList<Object> myLinearList = new ArrayList<Object>();
+		myLinearList.add(this);
+		myLinearList.add("(");
+		for (Object current : leftNode.getLinearExpression()) {
+			myLinearList.add(current);
+		}
+		myLinearList.add(",");
+		for (Object current : rightNode.getLinearExpression()) {
+			myLinearList.add(current);
+		}
+		myLinearList.add(")");
+		return myLinearList;
+	}
+
+	public void checkNode() throws SemanticException {
+		super.checkNode();
+		InterfaceExpressJava.getCurrentObject()
+				.setCurrentCheckGroup(((AttributExpressExpression) ((AssignmentOperator) this.rightNode).getLeftNode())
+						.getGroupExpressExpression().getGroup());
+	}
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+
+		if (!this.isGroupSetType() && !this.isGroupArrayType()) {
+			refUserObjetConcret = this.getConcreteObject();
+		}
+
+		super.evaluateNode(refUserObjetConcret);
+		if (this.isValueState()) {
+			InterfaceExpressJava.appendHistoryMessage(this.name);
+			InterfaceExpressJava.getCurrentObject().setCurrentEvaluateConcreteObject(refUserObjetConcret);
+		}
+	}
 }

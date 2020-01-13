@@ -22,9 +22,9 @@ package fr.upensma.lias.kmade.kmad.schema;
  */
 public class KMADXMLParserException extends Exception {
 
-    private static final long serialVersionUID = 1382986446896415999L;
+	private static final long serialVersionUID = 1382986446896415999L;
 
-    public KMADXMLParserException(String m) {
-	super(m);
-    }
+	public KMADXMLParserException(String m) {
+		super(m);
+	}
 }

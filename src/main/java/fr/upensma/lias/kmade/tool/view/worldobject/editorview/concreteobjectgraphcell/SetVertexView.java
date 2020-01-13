@@ -40,53 +40,48 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  */
 public class SetVertexView extends GroupDefaultVertexView {
 
-    private static final long serialVersionUID = 750292847166129896L;
+	private static final long serialVersionUID = 750292847166129896L;
 
-    public SetVertexView(SetCell cell, JGraph graph) {
-	super(cell, graph);
-    }
+	public SetVertexView(SetCell cell, JGraph graph) {
+		super(cell, graph);
+	}
 
-    /**
-     * Call of the renderer
-     */
-    public Component getRendererComponent(JGraph graph, boolean selected,
-	    boolean focus, boolean preview) {
+	/**
+	 * Call of the renderer
+	 */
+	public Component getRendererComponent(JGraph graph, boolean selected, boolean focus, boolean preview) {
 
-	panel = (JPanel) super.getRendererComponent(graph, selected, focus,
-		preview);
-	panel.setLayout(new BorderLayout());
+		panel = (JPanel) super.getRendererComponent(graph, selected, focus, preview);
+		panel.setLayout(new BorderLayout());
 
-	listPanel = new JScrollPane(objects);
-	listPanel.setOpaque(false);
+		listPanel = new JScrollPane(objects);
+		listPanel.setOpaque(false);
 
-	panel.add(listPanel, BorderLayout.CENTER);
+		panel.add(listPanel, BorderLayout.CENTER);
 
-	objects.setCellRenderer(new ListCellRenderer() {
+		objects.setCellRenderer(new ListCellRenderer() {
 
-	    public Component getListCellRendererComponent(JList list,
-		    Object value, int index, boolean isSelected,
-		    boolean cellHasFocus) {
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
 
-		JPanel panel = new JPanel(new BorderLayout());
+				JPanel panel = new JPanel(new BorderLayout());
 
-		if (!((ConcreteObjectCell) value).getName().equals(
-			KMADEConstant.EMPTY_CELL_NAME)) {
-		    JLabel label = new JLabel(((ConcreteObjectCell) value)
-			    .getName());
-		    label.setOpaque(true);
-		    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		    label.setBackground(KMADEConstant.ACTIVE_OBJECT);
-		    panel.add(label);
-		} else
-		    panel = drawEmpty();
+				if (!((ConcreteObjectCell) value).getName().equals(KMADEConstant.EMPTY_CELL_NAME)) {
+					JLabel label = new JLabel(((ConcreteObjectCell) value).getName());
+					label.setOpaque(true);
+					label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					label.setBackground(KMADEConstant.ACTIVE_OBJECT);
+					panel.add(label);
+				} else
+					panel = drawEmpty();
+
+				return panel;
+			}
+		});
+
+		this.autoSize();
 
 		return panel;
-	    }
-	});
-
-	this.autoSize();
-
-	return panel;
-    }
+	}
 
 }

@@ -22,15 +22,15 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public class VoidConstant extends ConstantExpression {
 
-    private static final long serialVersionUID = -7877008223230358591L;
+	private static final long serialVersionUID = -7877008223230358591L;
 
-    public VoidConstant() {
-	super(false);
-	this.setStateToValue();
-	this.name = "void";
-    }
+	public VoidConstant() {
+		super(false);
+		this.setStateToValue();
+		this.name = "void";
+	}
 
-    public String getName() {
-	return this.name;
-    }
+	public String getName() {
+		return this.name;
+	}
 }

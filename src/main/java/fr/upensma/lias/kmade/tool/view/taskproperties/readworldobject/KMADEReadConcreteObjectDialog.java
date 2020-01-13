@@ -34,33 +34,33 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEToolUtilities;
  */
 public class KMADEReadConcreteObjectDialog extends JDialog {
 
-    private static final long serialVersionUID = -4495133696562074076L;
+	private static final long serialVersionUID = -4495133696562074076L;
 
-    private final KMADEReadConcreteObjectTable objAbstrait = new KMADEReadConcreteObjectTable();
+	private final KMADEReadConcreteObjectTable objAbstrait = new KMADEReadConcreteObjectTable();
 
-    private JButton myOkButton;
+	private JButton myOkButton;
 
-    public KMADEReadConcreteObjectDialog() {
-	this.getContentPane().add(BorderLayout.CENTER, objAbstrait);
-	myOkButton = new JButton(KMADEConstant.GO_BACK_MESSAGE);
-	JPanel panelSouth = new JPanel();
-	panelSouth.add(myOkButton);
-	this.setAlwaysOnTop(true);
+	public KMADEReadConcreteObjectDialog() {
+		this.getContentPane().add(BorderLayout.CENTER, objAbstrait);
+		myOkButton = new JButton(KMADEConstant.GO_BACK_MESSAGE);
+		JPanel panelSouth = new JPanel();
+		panelSouth.add(myOkButton);
+		this.setAlwaysOnTop(true);
 
-	myOkButton.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		KMADEReadConcreteObjectDialog.this.setVisible(false);
-	    }
-	});
-	this.getContentPane().add(BorderLayout.SOUTH, panelSouth);
+		myOkButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				KMADEReadConcreteObjectDialog.this.setVisible(false);
+			}
+		});
+		this.getContentPane().add(BorderLayout.SOUTH, panelSouth);
 
-	InDevelopmentGlassPanel.plugDialogUnderDevelopmentGlassPanel(this);
-	this.setVisible(false);
-	this.pack();
-	KMADEToolUtilities.setCenteredInScreen(this);
-    }
+		InDevelopmentGlassPanel.plugDialogUnderDevelopmentGlassPanel(this);
+		this.setVisible(false);
+		this.pack();
+		KMADEToolUtilities.setCenteredInScreen(this);
+	}
 
-    public KMADEReadConcreteObjectTable getAbstractObjectTable() {
-	return objAbstrait;
-    }
+	public KMADEReadConcreteObjectTable getAbstractObjectTable() {
+		return objAbstrait;
+	}
 }

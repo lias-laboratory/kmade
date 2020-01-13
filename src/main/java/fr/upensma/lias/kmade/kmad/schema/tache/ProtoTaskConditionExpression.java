@@ -26,27 +26,27 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ProtoTaskCondition;
  */
 public class ProtoTaskConditionExpression implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
-    private static final long serialVersionUID = 347909019435362985L;
+	private static final long serialVersionUID = 347909019435362985L;
 
-    private ProtoTaskCondition value = new ProtoTaskCondition();
+	private ProtoTaskCondition value = new ProtoTaskCondition();
 
-    public ProtoTaskConditionExpression() {
+	public ProtoTaskConditionExpression() {
 
-    }
+	}
 
-    public ProtoTaskCondition getValue() {
-	return value;
-    }
+	public ProtoTaskCondition getValue() {
+		return value;
+	}
 
-    public void setValue(ProtoTaskCondition value) {
-	this.value = value;
-    }
+	public void setValue(ProtoTaskCondition value) {
+		this.value = value;
+	}
 
-    public void removeCondition() {
-	this.value = new ProtoTaskCondition();
-    }
+	public void removeCondition() {
+		this.value = new ProtoTaskCondition();
+	}
 
 }

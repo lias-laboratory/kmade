@@ -31,79 +31,76 @@ import fr.upensma.lias.kmade.kmad.schema.tache.ParkMachines;
  */
 public class ExpressUserSystem {
 
-    public static String[] getUserSystemName() {
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.MACHINE_CLASS);
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE,
-		ExpressConstant.MACHINE_PARK_CLASS);
-	int length = objs1.length + objs2.length;
-	String[] lst = new String[length];
-	for (int i = 0; i < objs1.length; i++) {
-	    ParkMachines obj = (ParkMachines) objs1[i];
-	    lst[i] = obj.getName();
+	public static String[] getUserSystemName() {
+		Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.MACHINE_CLASS);
+		Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.MACHINE_PARK_CLASS);
+		int length = objs1.length + objs2.length;
+		String[] lst = new String[length];
+		for (int i = 0; i < objs1.length; i++) {
+			ParkMachines obj = (ParkMachines) objs1[i];
+			lst[i] = obj.getName();
+		}
+		for (int i = objs1.length; i < length; i++) {
+			Machine obj = (Machine) objs2[i - objs1.length];
+			lst[i] = obj.getName();
+		}
+		return lst;
 	}
-	for (int i = objs1.length; i < length; i++) {
-	    Machine obj = (Machine) objs2[i - objs1.length];
-	    lst[i] = obj.getName();
-	}
-	return lst;
-    }
 
-    public static ArrayList<Material> getUserSystem() {
-	ArrayList<Material> lst = new ArrayList<Material>();
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.MACHINE_CLASS);
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE,
-		ExpressConstant.MACHINE_PARK_CLASS);
-	int length = objs1.length + objs2.length;
-	for (int i = 0; i < objs1.length; i++) {
-	    ParkMachines obj = (ParkMachines) objs1[i];
-	    lst.add(obj);
+	public static ArrayList<Material> getUserSystem() {
+		ArrayList<Material> lst = new ArrayList<Material>();
+		Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.MACHINE_CLASS);
+		Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.MACHINE_PARK_CLASS);
+		int length = objs1.length + objs2.length;
+		for (int i = 0; i < objs1.length; i++) {
+			ParkMachines obj = (ParkMachines) objs1[i];
+			lst.add(obj);
+		}
+		for (int i = objs1.length; i < length; i++) {
+			Machine obj = (Machine) objs2[i - objs1.length];
+			lst.add(obj);
+		}
+		return lst;
 	}
-	for (int i = objs1.length; i < length; i++) {
-	    Machine obj = (Machine) objs2[i - objs1.length];
-	    lst.add(obj);
+
+	public static Material getUserSystemWithName(String name) {
+		Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.MACHINE_CLASS);
+		Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.MACHINE_PARK_CLASS);
+		int length = objs1.length + objs2.length;
+		for (int i = 0; i < objs1.length; i++) {
+			ParkMachines obj = (ParkMachines) objs1[i];
+			if (obj.getName().equals(name)) {
+				return obj;
+			}
+		}
+		for (int i = objs1.length; i < length; i++) {
+			Machine obj = (Machine) objs2[i - objs1.length];
+			if (obj.getName().equals(name)) {
+				return obj;
+			}
+		}
+		return null;
 	}
-	return lst;
-    }
 
-    public static Material getUserSystemWithName(String name) {
-	Object[] objs2 = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.MACHINE_CLASS);
-	Object[] objs1 = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE,
-		ExpressConstant.MACHINE_PARK_CLASS);
-	int length = objs1.length + objs2.length;
-	for (int i = 0; i < objs1.length; i++) {
-	    ParkMachines obj = (ParkMachines) objs1[i];
-	    if (obj.getName().equals(name)) {
-		return obj;
-	    }
+	public static String setUserSystemName(String oid, String name) {
+		Material m = (Material) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setName(name);
+		return m.getName();
 	}
-	for (int i = objs1.length; i < length; i++) {
-	    Machine obj = (Machine) objs2[i - objs1.length];
-	    if (obj.getName().equals(name)) {
-		return obj;
-	    }
+
+	public static void setUserSystemDescription(String oid, String st) {
+		Material m = (Material) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setDescription(st);
 	}
-	return null;
-    }
 
-    public static String setUserSystemName(String oid, String name) {
-	Material m = (Material) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setName(name);
-	return m.getName();
-    }
-
-    public static void setUserSystemDescription(String oid, String st) {
-	Material m = (Material) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setDescription(st);
-    }
-
-    public static void setUserSystemImage(String oid, String r) {
-	Material m = (Material) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setImage(r);
-    }
+	public static void setUserSystemImage(String oid, String r) {
+		Material m = (Material) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setImage(r);
+	}
 }

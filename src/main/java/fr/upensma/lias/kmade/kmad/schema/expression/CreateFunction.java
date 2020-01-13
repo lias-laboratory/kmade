@@ -31,51 +31,43 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class CreateFunction extends BinaryFunction {
 
-    private static final long serialVersionUID = 6628594676613676862L;
+	private static final long serialVersionUID = 6628594676613676862L;
 
-    public CreateFunction(GroupExpressExpression left, NodeExpression right) {
-	super(false, left, right);
-	this.name = ExpressConstant.CREATE_FUNCTION_EXPRESSION;
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	super.evaluateNode(ref);
-
-	ObjetConcret myRef = null;
-	Oid oidObjConc = InterfaceExpressJava.createEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.CONCRETE_OBJECT_CLASS);
-	ObjetConcret concreteObject = (ObjetConcret) InterfaceExpressJava
-		.prendre(oidObjConc);
-	concreteObject.setName(this.rightNode.getNodeValue().toString());
-	// Le même objet abstrait
-	concreteObject.setUtiliseParClass(((GroupExpressExpression) leftNode)
-		.getGroup().getContientObj());
-	// Le groupe spécifié par cette fonction
-	concreteObject.setAppartientGroupe(((GroupExpressExpression) leftNode)
-		.getGroup());
-
-	ArrayList<AttributAbstrait> listattributabs = concreteObject
-		.getUtiliseParClass().getInverseAttributsAbs();
-	for (int i = 0; i < listattributabs.size(); i++) {
-	    Oid oidAttribut = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
-	    AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava
-		    .prendre(oidAttribut);
-	    AttributAbstrait abstractAttribut = listattributabs.get(i);
-	    concreteAttribut.setObjConcDe(concreteObject);
-	    concreteAttribut.setAttributDe(abstractAttribut);
-	    concreteAttribut.setName(abstractAttribut.getName());
-	    concreteAttribut.setInitValeur();
+	public CreateFunction(GroupExpressExpression left, NodeExpression right) {
+		super(false, left, right);
+		this.name = ExpressConstant.CREATE_FUNCTION_EXPRESSION;
 	}
-	myRef = concreteObject;
-	this.setStateToValue();
 
-	if (this.isValueState()) {
-	    InterfaceExpressJava.appendHistoryMessage(this.name);
-	    InterfaceExpressJava.getCurrentObject()
-		    .setCurrentEvaluateConcreteObject(myRef);
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		super.evaluateNode(ref);
+
+		ObjetConcret myRef = null;
+		Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.CONCRETE_OBJECT_CLASS);
+		ObjetConcret concreteObject = (ObjetConcret) InterfaceExpressJava.prendre(oidObjConc);
+		concreteObject.setName(this.rightNode.getNodeValue().toString());
+		// Le même objet abstrait
+		concreteObject.setUtiliseParClass(((GroupExpressExpression) leftNode).getGroup().getContientObj());
+		// Le groupe spécifié par cette fonction
+		concreteObject.setAppartientGroupe(((GroupExpressExpression) leftNode).getGroup());
+
+		ArrayList<AttributAbstrait> listattributabs = concreteObject.getUtiliseParClass().getInverseAttributsAbs();
+		for (int i = 0; i < listattributabs.size(); i++) {
+			Oid oidAttribut = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
+			AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava.prendre(oidAttribut);
+			AttributAbstrait abstractAttribut = listattributabs.get(i);
+			concreteAttribut.setObjConcDe(concreteObject);
+			concreteAttribut.setAttributDe(abstractAttribut);
+			concreteAttribut.setName(abstractAttribut.getName());
+			concreteAttribut.setInitValeur();
+		}
+		myRef = concreteObject;
+		this.setStateToValue();
+
+		if (this.isValueState()) {
+			InterfaceExpressJava.appendHistoryMessage(this.name);
+			InterfaceExpressJava.getCurrentObject().setCurrentEvaluateConcreteObject(myRef);
+		}
 	}
-    }
 }

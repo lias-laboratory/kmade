@@ -20,10 +20,8 @@ package fr.upensma.lias.kmade.tool.view.prototask;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -83,37 +81,50 @@ import fr.upensma.lias.kmade.tool.coreadaptator.prototask.ProtoTaskException;
 import fr.upensma.lias.kmade.tool.coreadaptator.prototask.UndoProtoTask;
 import fr.upensma.lias.kmade.tool.view.taskmodel.KMADETaskModelToolBar;
 import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEFileChooser;
-import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
 import fr.upensma.lias.kmade.tool.viewadaptator.GraphicEditorAdaptator;
 
 /**
  * @author Thomas LACHAUME
  */
 public class KMADEProtoTaskMainPanel extends JFrame {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2184765933287357646L;
-	int gap = 0;
-	int maxGap = 7;
-	String fontsize = "5";
-	private LinkedHashMap<String, JInternalFrame> myframes = new LinkedHashMap<String, JInternalFrame>();
-	private JDesktopPane desktop;
-	private KMADEProtoTaskHistoricPanel historique;
-	private KMADEProtoTaskSaveScenarioPanel save = new KMADEProtoTaskSaveScenarioPanel();
-	private JPanel conditions = new JPanel();
-	private Oid last;
-	private String condiID = "condition154212&#";
-	private String histoID = "historique3213R5438122312&#";
-	private int pttWitdh = 0;
-	private int pttHeight = 0;
-	private String activeS = "active";
-	private String waitend = "waitend";
-	private String waitEndKO = "waitEndKO";
-	final JToolBar taskMenu = new JToolBar();
-	JMenuBar menuBar = new JMenuBar();
 
-	// final JMenu menu = new JMenu("Tâches");
+	private static final long serialVersionUID = -2184765933287357646L;
+	
+	int gap = 0;
+	
+	int maxGap = 7;
+	
+	String fontsize = "5";
+	
+	private LinkedHashMap<String, JInternalFrame> myframes = new LinkedHashMap<String, JInternalFrame>();
+	
+	private JDesktopPane desktop;
+	
+	private KMADEProtoTaskHistoricPanel historique;
+	
+	private KMADEProtoTaskSaveScenarioPanel save = new KMADEProtoTaskSaveScenarioPanel();
+	
+	private JPanel conditions = new JPanel();
+	
+	private Oid last;
+	
+	private String condiID = "condition154212&#";
+	
+	private String histoID = "historique3213R5438122312&#";
+	
+	private int pttWitdh = 0;
+	
+	private int pttHeight = 0;
+	
+	private String activeS = "active";
+	
+	private String waitend = "waitend";
+	
+	private String waitEndKO = "waitEndKO";
+	
+	final JToolBar taskMenu = new JToolBar();
+	
+	JMenuBar menuBar = new JMenuBar();
 
 	public KMADEProtoTaskMainPanel() {
 		super(KMADEConstant.PROTOTYPING_TOOL_TITLE_NAME);

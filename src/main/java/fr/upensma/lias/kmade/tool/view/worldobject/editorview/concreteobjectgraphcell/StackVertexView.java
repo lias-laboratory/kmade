@@ -41,78 +41,70 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  */
 public class StackVertexView extends GroupDefaultVertexView {
 
-    private static final long serialVersionUID = 750292847166129896L;
+	private static final long serialVersionUID = 750292847166129896L;
 
-    public StackVertexView(StackCell cell, JGraph graph) {
-	super(cell, graph);
-    }
-
-    /**
-     * Call of the renderer
-     */
-    public Component getRendererComponent(JGraph graph, boolean selected,
-	    boolean focus, boolean preview) {
-
-	panel = (JPanel) super.getRendererComponent(graph, selected, focus,
-		preview);
-	panel.setLayout(new BorderLayout());
-
-	listModel.clear();
-	ConcreteObjectCell emptyCell = new ConcreteObjectCell(
-		new ObjetConcret(), 0, 0);
-	emptyCell.setName(KMADEConstant.EMPTY_CELL_NAME);
-	listModel.addElement(emptyCell);
-	if (!this.cell.getCellsInGroup().isEmpty()) {
-	    for (ConcreteObjectCell Ocell : this.cell.getCellsInGroup()) {
-		listModel.addElement(Ocell);
-	    }
+	public StackVertexView(StackCell cell, JGraph graph) {
+		super(cell, graph);
 	}
 
-	objects = new JList(listModel);
+	/**
+	 * Call of the renderer
+	 */
+	public Component getRendererComponent(JGraph graph, boolean selected, boolean focus, boolean preview) {
 
-	// The first cell is represented as it is possible to select it
-	objects.setCellRenderer(new ListCellRenderer() {
-	    public Component getListCellRendererComponent(JList list,
-		    Object value, int index, boolean isSelected,
-		    boolean cellHasFocus) {
+		panel = (JPanel) super.getRendererComponent(graph, selected, focus, preview);
+		panel.setLayout(new BorderLayout());
 
-		if (!((ConcreteObjectCell) value).getName().equals(
-			KMADEConstant.EMPTY_CELL_NAME)) {
-		    JLabel label = new JLabel(((ConcreteObjectCell) value)
-			    .getName());
-		    label.setOpaque(true);
-		    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		    if (index == 1)
-			label.setBackground(KMADEConstant.ACTIVE_OBJECT);
+		listModel.clear();
+		ConcreteObjectCell emptyCell = new ConcreteObjectCell(new ObjetConcret(), 0, 0);
+		emptyCell.setName(KMADEConstant.EMPTY_CELL_NAME);
+		listModel.addElement(emptyCell);
+		if (!this.cell.getCellsInGroup().isEmpty()) {
+			for (ConcreteObjectCell Ocell : this.cell.getCellsInGroup()) {
+				listModel.addElement(Ocell);
+			}
+		}
 
-		    else
-			label.setBackground(KMADEConstant.INACTIVE_OBJECT);
+		objects = new JList(listModel);
 
-		    return label;
-		} else
-		    return drawEmpty();
+		// The first cell is represented as it is possible to select it
+		objects.setCellRenderer(new ListCellRenderer() {
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
 
-	    }
-	});
+				if (!((ConcreteObjectCell) value).getName().equals(KMADEConstant.EMPTY_CELL_NAME)) {
+					JLabel label = new JLabel(((ConcreteObjectCell) value).getName());
+					label.setOpaque(true);
+					label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					if (index == 1)
+						label.setBackground(KMADEConstant.ACTIVE_OBJECT);
 
-	JPanel empty = new JPanel();
-	empty.setBorder(BorderFactory
-		.createMatteBorder(0, 1, 0, 1, Color.BLACK));
+					else
+						label.setBackground(KMADEConstant.INACTIVE_OBJECT);
 
-	listPanel = new JScrollPane(objects);
-	listPanel.invalidate();
-	listPanel.validate();
-	listPanel.setOpaque(false);
-	listPanel.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1,
-		Color.BLACK));
+					return label;
+				} else
+					return drawEmpty();
 
-	empty.setOpaque(false);
+			}
+		});
 
-	panel.add(empty, BorderLayout.NORTH);
-	panel.add(listPanel, BorderLayout.CENTER);
+		JPanel empty = new JPanel();
+		empty.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, Color.BLACK));
 
-	this.autoSize();
+		listPanel = new JScrollPane(objects);
+		listPanel.invalidate();
+		listPanel.validate();
+		listPanel.setOpaque(false);
+		listPanel.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.BLACK));
 
-	return panel;
-    }
+		empty.setOpaque(false);
+
+		panel.add(empty, BorderLayout.NORTH);
+		panel.add(listPanel, BorderLayout.CENTER);
+
+		this.autoSize();
+
+		return panel;
+	}
 }

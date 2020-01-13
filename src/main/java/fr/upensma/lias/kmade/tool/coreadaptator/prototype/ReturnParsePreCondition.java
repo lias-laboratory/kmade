@@ -23,11 +23,11 @@ import java.util.List;
  * @author Mickael BARON
  */
 public class ReturnParsePreCondition {
-    
-    public boolean negat;
 
-    public List<String> list;
+	public boolean negat;
 
-    public ReturnParsePreCondition() {
-    }
+	public List<String> list;
+
+	public ReturnParsePreCondition() {
+	}
 }

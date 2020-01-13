@@ -24,13 +24,13 @@ import java.util.Observable;
  */
 public class KMADEObservable extends Observable {
 
-    public void notifyKMADEObserver() {
-	this.setChanged();
-	this.notifyObservers();
-    }
+	public void notifyKMADEObserver() {
+		this.setChanged();
+		this.notifyObservers();
+	}
 
-    public void notifyKMADEObserver(Object argv) {
-	this.setChanged();
-	this.notifyObservers(argv);
-    }
+	public void notifyKMADEObserver(Object argv) {
+		this.setChanged();
+		this.notifyObservers(argv);
+	}
 }

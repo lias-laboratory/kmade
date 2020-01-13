@@ -31,101 +31,101 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEHistoryMessageManager;
  */
 public class ExpressDB extends TreeMap<Oid, Object> implements Serializable {
 
-    private static final long serialVersionUID = 1254529829201249621L;
+	private static final long serialVersionUID = 1254529829201249621L;
 
-    private static Oid oid = new Oid(1);
+	private static Oid oid = new Oid(1);
 
-    private static boolean isSet;
+	private static boolean isSet;
 
-    public ExpressDB() {
-	super();
-	// Bdd est propre.
-	ExpressDB.isSet = false;
-    }
-
-    public Oid put(Object value) {
-	Oid leoid = new Oid(oid);
-	put(leoid, value);
-	oid.plus();
-
-	ExpressDB.isSet = true;
-
-	return leoid;
-    }
-
-    public void mettre(Oid key, Object value) {
-	put(new Oid(key), value);
-
-	ExpressDB.isSet = true;
-    }
-
-    public int getMax() {
-	Set<Oid> set = this.keySet();
-	Iterator<Oid> i;
-	int max = 0;
-	for (i = set.iterator(); i.hasNext();) {
-	    Oid oid = (Oid) i.next();
-	    if (oid.getValue() > max)
-		max = oid.getValue();
+	public ExpressDB() {
+		super();
+		// Bdd est propre.
+		ExpressDB.isSet = false;
 	}
 
-	return max;
-    }
+	public Oid put(Object value) {
+		Oid leoid = new Oid(oid);
+		put(leoid, value);
+		oid.plus();
 
-    public Object prendre(Oid key) {
-	return get(key);
-    }
+		ExpressDB.isSet = true;
 
-    /**
-     * Supprime l'intégralité de la BDD.
-     */
-    public void clear() {
-	// L'oid principale est mise à 1.
-	ExpressDB.oid = new Oid(1);
-	super.clear();
-
-	ExpressDB.isSet = false;
-    }
-
-    public void supprimer(Oid key) {
-	this.remove(key);
-
-	ExpressDB.isSet = true;
-    }
-
-    public Oid getLastOid() {
-	return oid;
-    }
-
-    public void loadSPFFinished() {
-	oid = new Oid(((Oid) super.lastKey()).get()).plus();
-    }
-
-    /**
-     * Permet de savoir si la base a �t� modifi� ou pas.
-     * 
-     * @return Returns the isSet.
-     */
-    public static boolean isSet() {
-	return isSet;
-    }
-
-    public static void setSetOn() {
-	isSet = true;
-    }
-
-    public static void setSetOff() {
-	isSet = false;
-    }
-
-    public void out() {
-	Set<Oid> set = this.keySet();
-	Iterator<Oid> i;
-	for (i = set.iterator(); i.hasNext();) {
-	    Oid oid = (Oid) i.next();
-	    Object o = this.prendre(oid);
-	    KMADEHistoryMessageManager.printlnMessage(((Entity) o).toSPF());
+		return leoid;
 	}
-    }
+
+	public void mettre(Oid key, Object value) {
+		put(new Oid(key), value);
+
+		ExpressDB.isSet = true;
+	}
+
+	public int getMax() {
+		Set<Oid> set = this.keySet();
+		Iterator<Oid> i;
+		int max = 0;
+		for (i = set.iterator(); i.hasNext();) {
+			Oid oid = (Oid) i.next();
+			if (oid.getValue() > max)
+				max = oid.getValue();
+		}
+
+		return max;
+	}
+
+	public Object prendre(Oid key) {
+		return get(key);
+	}
+
+	/**
+	 * Supprime l'intégralité de la BDD.
+	 */
+	public void clear() {
+		// L'oid principale est mise à 1.
+		ExpressDB.oid = new Oid(1);
+		super.clear();
+
+		ExpressDB.isSet = false;
+	}
+
+	public void supprimer(Oid key) {
+		this.remove(key);
+
+		ExpressDB.isSet = true;
+	}
+
+	public Oid getLastOid() {
+		return oid;
+	}
+
+	public void loadSPFFinished() {
+		oid = new Oid(((Oid) super.lastKey()).get()).plus();
+	}
+
+	/**
+	 * Permet de savoir si la base a �t� modifi� ou pas.
+	 * 
+	 * @return Returns the isSet.
+	 */
+	public static boolean isSet() {
+		return isSet;
+	}
+
+	public static void setSetOn() {
+		isSet = true;
+	}
+
+	public static void setSetOff() {
+		isSet = false;
+	}
+
+	public void out() {
+		Set<Oid> set = this.keySet();
+		Iterator<Oid> i;
+		for (i = set.iterator(); i.hasNext();) {
+			Oid oid = (Oid) i.next();
+			Object o = this.prendre(oid);
+			KMADEHistoryMessageManager.printlnMessage(((Entity) o).toSPF());
+		}
+	}
 
 }

@@ -29,43 +29,40 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.Enumeration;
  * @author Mickael BARON
  */
 public class ExpressEnumElement {
-    public static String creerElement(Oid oidEnumeration) {
-	Oid oidElement = InterfaceExpressJava.createEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ELEMENT_CLASS);
-	Enumeration enumeration = (Enumeration) InterfaceExpressJava
-		.prendre(oidEnumeration);
-	Element element = (Element) InterfaceExpressJava.prendre(oidElement);
-	element.setUtiliseParEnum(enumeration);
-	return (oidElement.get());
-    }
-
-    public static void deleteElement(String oid) {
-	Element m = (Element) InterfaceExpressJava.prendre(new Oid(oid));
-	m.delete();
-    }
-
-    public static void affDeleteElement(String oid) {
-	Element m = (Element) InterfaceExpressJava.prendre(new Oid(oid));
-	m.affDelete();
-    }
-
-    public static Object[][] getElementIntoTab(String oid) {
-	Enumeration g = (Enumeration) InterfaceExpressJava
-		.prendre(new Oid(oid));
-	ArrayList<Element> elem = g.getInverseElementDe();
-	Object[][] tabObj = new Object[elem.size()][2];
-	for (int i = 0; i < elem.size(); i++) {
-	    Element a = elem.get(i);
-	    tabObj[i][0] = a.getName();
-	    tabObj[i][1] = a.getOid().get();
+	public static String creerElement(Oid oidEnumeration) {
+		Oid oidElement = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.ELEMENT_CLASS);
+		Enumeration enumeration = (Enumeration) InterfaceExpressJava.prendre(oidEnumeration);
+		Element element = (Element) InterfaceExpressJava.prendre(oidElement);
+		element.setUtiliseParEnum(enumeration);
+		return (oidElement.get());
 	}
-	return tabObj;
-    }
 
-    public static String setElementName(String oid, String name) {
-	Element m = (Element) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setName(name);
-	return m.getName();
-    }
+	public static void deleteElement(String oid) {
+		Element m = (Element) InterfaceExpressJava.prendre(new Oid(oid));
+		m.delete();
+	}
+
+	public static void affDeleteElement(String oid) {
+		Element m = (Element) InterfaceExpressJava.prendre(new Oid(oid));
+		m.affDelete();
+	}
+
+	public static Object[][] getElementIntoTab(String oid) {
+		Enumeration g = (Enumeration) InterfaceExpressJava.prendre(new Oid(oid));
+		ArrayList<Element> elem = g.getInverseElementDe();
+		Object[][] tabObj = new Object[elem.size()][2];
+		for (int i = 0; i < elem.size(); i++) {
+			Element a = elem.get(i);
+			tabObj[i][0] = a.getName();
+			tabObj[i][1] = a.getOid().get();
+		}
+		return tabObj;
+	}
+
+	public static String setElementName(String oid, String name) {
+		Element m = (Element) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setName(name);
+		return m.getName();
+	}
 }

@@ -40,96 +40,87 @@ import fr.upensma.lias.kmade.tool.viewadaptator.PrePostIterExpressionAdaptator;
  */
 public class KMADEEditorEventDecl extends JPropertiesEditorDialog {
 
-    private static final long serialVersionUID = -6348137983085333000L;
+	private static final long serialVersionUID = -6348137983085333000L;
 
-    private ArrayList<String> listOfEvent = new ArrayList<String>();
+	private ArrayList<String> listOfEvent = new ArrayList<String>();
 
-    private JComboBox myComboBox;
+	private JComboBox myComboBox;
 
-    public KMADEEditorEventDecl() {
-	super();
-	this.setModal(false);
-	this.setTitle(KMADEConstant.EVENT_TASK_LINKED_TITLE_NAME);
+	public KMADEEditorEventDecl() {
+		super();
+		this.setModal(false);
+		this.setTitle(KMADEConstant.EVENT_TASK_LINKED_TITLE_NAME);
 
-	/* Liste déroulante pour la sélection de l'événement */
+		/* Liste déroulante pour la sélection de l'événement */
 
-	String[] temp = new String[listOfEvent.size()];
-	myComboBox = new JComboBox(listOfEvent.toArray(temp));
+		String[] temp = new String[listOfEvent.size()];
+		myComboBox = new JComboBox(listOfEvent.toArray(temp));
 
-	JPanel comboPanel = new JPanel();
-	comboPanel.setLayout(new BoxLayout(comboPanel, BoxLayout.PAGE_AXIS));
-	comboPanel.setBorder(javax.swing.BorderFactory
-		.createTitledBorder(KMADEConstant.EVENT_TRIGGER));
-	comboPanel.add(myComboBox);
+		JPanel comboPanel = new JPanel();
+		comboPanel.setLayout(new BoxLayout(comboPanel, BoxLayout.PAGE_AXIS));
+		comboPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(KMADEConstant.EVENT_TRIGGER));
+		comboPanel.add(myComboBox);
 
-	/* Liste des événements disponibles */
-	JPanel listPanel = new JPanel(new BorderLayout());
-	listPanel.setBorder(javax.swing.BorderFactory
-		.createTitledBorder(KMADEConstant.EVENT_ENABLE));
-	KMADEReadEventObjectTable obj = new KMADEReadEventObjectTable(
-		EventAdaptator.getEventReadPanel(), false);
-	listPanel.add(obj);
+		/* Liste des événements disponibles */
+		JPanel listPanel = new JPanel(new BorderLayout());
+		listPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(KMADEConstant.EVENT_ENABLE));
+		KMADEReadEventObjectTable obj = new KMADEReadEventObjectTable(EventAdaptator.getEventReadPanel(), false);
+		listPanel.add(obj);
 
-	/* Panel principal */
-	JPanel panelCenter = new JPanel(new BorderLayout());
-	panelCenter.add(comboPanel, BorderLayout.PAGE_START);
-	panelCenter.add(listPanel, BorderLayout.CENTER);
+		/* Panel principal */
+		JPanel panelCenter = new JPanel(new BorderLayout());
+		panelCenter.add(comboPanel, BorderLayout.PAGE_START);
+		panelCenter.add(listPanel, BorderLayout.CENTER);
 
-	this.getContentPane().add(BorderLayout.CENTER, panelCenter);
-	this.setPreferredSize(new Dimension(400, 300));
-	this.pack();
-	KMADEToolUtilities.setCenteredInScreen(this);
+		this.getContentPane().add(BorderLayout.CENTER, panelCenter);
+		this.setPreferredSize(new Dimension(400, 300));
+		this.pack();
+		KMADEToolUtilities.setCenteredInScreen(this);
 
-	/* Listener sur la liste déroulante, pour prendre en compte la sélection */
-	this.myComboBox.addActionListener(new java.awt.event.ActionListener() {
-	    public void actionPerformed(java.awt.event.ActionEvent evt) {
-		KMADEMainFrame
-			.getProjectPanel()
-			.getPanelProprieteTache()
-			.setDeclenchement((String) myComboBox.getSelectedItem());
-	    }
-	});
+		/* Listener sur la liste déroulante, pour prendre en compte la sélection */
+		this.myComboBox.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
+						.setDeclenchement((String) myComboBox.getSelectedItem());
+			}
+		});
 
-    }
-
-    protected void stopEditorDialog() {
-	EventAdaptator.enabledFrame();
-	super.stopEditorDialog();
-    }
-
-    public void showPropertiesEditor(DefaultPropertiesTableModel refModel,
-	    int row) {
-	EventAdaptator.refreshReadEventTable();
-
-	/*
-	 * Récupération des événements disponibles et ajout de la chaîne vide
-	 * (pas d'événement)
-	 */
-	listOfEvent = EventAdaptator.getEventsName();
-	listOfEvent.add(0, "");
-	String[] temp = new String[listOfEvent.size()];
-
-	/* Insertion de la liste récupérée dans la liste déroulante */
-	myComboBox.setModel(new javax.swing.DefaultComboBoxModel(listOfEvent
-		.toArray(temp)));
-	String evt = "null";
-	if (row == KMADETaskPropertiesPanel.DECLENCHEMENT_TITLE_ELEMENT) {
-	    if (GraphicEditorAdaptator.getSelectedExpressTask()
-		    .getRaisingEvent() != null)
-		evt = GraphicEditorAdaptator.getSelectedExpressTask()
-			.getRaisingEvent().getName();
 	}
-	if (!evt.equals("null")) {
-	    myComboBox.setSelectedItem(evt);
+
+	protected void stopEditorDialog() {
+		EventAdaptator.enabledFrame();
+		super.stopEditorDialog();
 	}
-	PrePostIterExpressionAdaptator.disabledFrame();
-	super.showPropertiesEditor(refModel, row);
-    }
 
-    public void notifLocalisationModification() {
-	super.notifLocalisationModification();
+	public void showPropertiesEditor(DefaultPropertiesTableModel refModel, int row) {
+		EventAdaptator.refreshReadEventTable();
 
-	// NMDAEditorEventDialog
-	this.setTitle(KMADEConstant.EVENT_TASK_LINKED_TITLE_NAME);
-    }
+		/*
+		 * Récupération des événements disponibles et ajout de la chaîne vide (pas
+		 * d'événement)
+		 */
+		listOfEvent = EventAdaptator.getEventsName();
+		listOfEvent.add(0, "");
+		String[] temp = new String[listOfEvent.size()];
+
+		/* Insertion de la liste récupérée dans la liste déroulante */
+		myComboBox.setModel(new javax.swing.DefaultComboBoxModel(listOfEvent.toArray(temp)));
+		String evt = "null";
+		if (row == KMADETaskPropertiesPanel.DECLENCHEMENT_TITLE_ELEMENT) {
+			if (GraphicEditorAdaptator.getSelectedExpressTask().getRaisingEvent() != null)
+				evt = GraphicEditorAdaptator.getSelectedExpressTask().getRaisingEvent().getName();
+		}
+		if (!evt.equals("null")) {
+			myComboBox.setSelectedItem(evt);
+		}
+		PrePostIterExpressionAdaptator.disabledFrame();
+		super.showPropertiesEditor(refModel, row);
+	}
+
+	public void notifLocalisationModification() {
+		super.notifLocalisationModification();
+
+		// NMDAEditorEventDialog
+		this.setTitle(KMADEConstant.EVENT_TASK_LINKED_TITLE_NAME);
+	}
 }

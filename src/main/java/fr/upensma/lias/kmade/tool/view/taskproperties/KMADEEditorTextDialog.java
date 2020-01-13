@@ -34,36 +34,33 @@ import fr.upensma.lias.kmade.tool.viewadaptator.PrePostIterExpressionAdaptator;
  */
 public class KMADEEditorTextDialog extends JPropertiesEditorDialog {
 
-    private static final long serialVersionUID = -6348137983085333000L;
+	private static final long serialVersionUID = -6348137983085333000L;
 
-    public JEditorPane myTextArea;
+	public JEditorPane myTextArea;
 
-    public KMADEEditorTextDialog() {
-	super();
-	this.setModal(false);
-	myTextArea = new JEditorPane();
-	this.setModal(true);
-	this.getContentPane().add(BorderLayout.CENTER,
-		new JScrollPane(myTextArea));
+	public KMADEEditorTextDialog() {
+		super();
+		this.setModal(false);
+		myTextArea = new JEditorPane();
+		this.setModal(true);
+		this.getContentPane().add(BorderLayout.CENTER, new JScrollPane(myTextArea));
 
-	this.setPreferredSize(new Dimension(400, 300));
-	this.pack();
-	KMADEToolUtilities.setCenteredInScreen(this);
-    }
+		this.setPreferredSize(new Dimension(400, 300));
+		this.pack();
+		KMADEToolUtilities.setCenteredInScreen(this);
+	}
 
-    public void showPropertiesEditor(DefaultPropertiesTableModel refModel,
-	    int row) {
-	myTextArea.setText((String) refModel.getValueAt(row, 1));
-	// Modification du titre.
-	this.setTitle(KMADEConstant.EDITOR_TEXT_TITLE_NAME + " : "
-		+ refModel.getValueAt(row, 0));
-	PrePostIterExpressionAdaptator.disabledFrame();
-	super.showPropertiesEditor(refModel, row);
-    }
+	public void showPropertiesEditor(DefaultPropertiesTableModel refModel, int row) {
+		myTextArea.setText((String) refModel.getValueAt(row, 1));
+		// Modification du titre.
+		this.setTitle(KMADEConstant.EDITOR_TEXT_TITLE_NAME + " : " + refModel.getValueAt(row, 0));
+		PrePostIterExpressionAdaptator.disabledFrame();
+		super.showPropertiesEditor(refModel, row);
+	}
 
-    protected void stopEditorDialog() {
-	PrePostIterExpressionAdaptator.enabledFrame();
-	model.setValueAt(myTextArea.getText(), row, 1);
-	super.stopEditorDialog();
-    }
+	protected void stopEditorDialog() {
+		PrePostIterExpressionAdaptator.enabledFrame();
+		model.setValueAt(myTextArea.getText(), row, 1);
+		super.stopEditorDialog();
+	}
 }

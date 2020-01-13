@@ -23,17 +23,17 @@ import javax.swing.tree.TreeModel;
  * @author Mickael BARON
  */
 public interface TreeTableModel extends TreeModel {
-    Class getColumnClass(int column);
+	Class getColumnClass(int column);
 
-    int getColumnCount();
+	int getColumnCount();
 
-    String getColumnName(int column);
+	String getColumnName(int column);
 
-    Object getValueAt(Object node, int column);
+	Object getValueAt(Object node, int column);
 
-    boolean isCellEditable(Object node, int column);
+	boolean isCellEditable(Object node, int column);
 
-    void setValueAt(Object value, Object node, int column);
+	void setValueAt(Object value, Object node, int column);
 
-    boolean isCellTreeEditable(Object value);
+	boolean isCellTreeEditable(Object value);
 }

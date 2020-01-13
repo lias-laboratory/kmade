@@ -40,265 +40,236 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public class Organization extends User {
 
-    private static final long serialVersionUID = -4187152840289735872L;
+	private static final long serialVersionUID = -4187152840289735872L;
 
-    /**
-     * List of individuals who are member of the organization
-     */
-    private ArrayList<Person> reverseMember = new ArrayList<Person>();
-
-    /**
-     * Empty constructor
-     */
-    public Organization() {
-	super();
-    }
-
-    /**
-     * Constructor with only a name and an oid
-     * 
-     * @param name
-     *            name of the individual
-     * @param oid
-     *            unique Express identifier
-     */
-    public Organization(String name, Oid oid) {
-	super(name, "", "", "", oid);
-    }
-
-    /**
-     * Constructor with an empty image path
-     * 
-     * @param name
-     *            name of the individual
-     * @param st
-     *            status
-     * @param r
-     *            role
-     * @param oid
-     *            unique Express identifier
-     */
-    public Organization(String name, String st, String r, Oid oid) {
-	super(name, st, r, "", oid);
-    }
-
-    /**
-     * Complete constructor
-     * 
-     * @param name
-     *            name of the individual
-     * @param st
-     *            status
-     * @param r
-     *            role
-     * @param pi
-     *            image path
-     * @param oid
-     *            unique Express identifier
-     */
-    public Organization(String name, String st, String r, String pi, Oid oid) {
-	super(name, st, r, pi, oid);
-    }
-
-    @Override
-    /**
-     * removes the organization from all individuals who are members
-     * CommentPG: Seems redundant with the equivalent method in Individu
-     * @see fr.upensma.lias.kmade.kmad.schema.tache.User#delete()
-     */
-    public void delete() {
-	// supprimer l'individu des organisations
-	for (int i = 0; i < reverseMember.size(); i++) {
-	    reverseMember.get(i).removeOrganisation(this);
-	}
-	super.delete();
-    }
-
-    /**
-     * Registers an individual into the organization A verification is made for
-     * avoiding duplication Warning: the reverse registering is not done at this
-     * step
-     * 
-     * @param ind
-     *            Individu -> the individual to add to the organization
-     */
-    public void addMember(Person ind) {
-	if (!reverseMember.contains(ind)) {
-	    reverseMember.add(ind);
-	}
-    }
-
-    /**
-     * Removes the individual from the organization Warning: no verification is
-     * done to verify if it where already a member
-     * 
-     * @param ind
-     *            : Individu -> The inidividual to remove
-     */
-    public void removeIndividu(Person ind) {
-	reverseMember.remove(ind);
-    }
-
-    /**
-     * Gives the list of individual who are member of the organization Warning:
-     * it is a reference on the list itself. Be careful not to modify it
-     * 
-     * @return an ArrayList which contains all individuals who are members
-     */
-    public ArrayList<Person> getMembers() {
-	return reverseMember;
-    }
-
-    /**
-     * Returns an array containing all characteristics of an organization
-     * 
-     * @return an array of Object, which contains all attributes of superclass,
-     *         plus a list of name of individual who are member of the
-     *         prganization
-     */
-    public Object[] toArray() {
-	String s = "";
-	for (int i = 0; i < reverseMember.size(); i++) {
-	    s += reverseMember.get(i).getName();
-	    if (i != reverseMember.size() - 1) {
-		s += ", ";
-	    }
-	}
-
-	Object[] res = { super.oid.get(), super.getName(), super.getStatus(),
-		super.getRole(), super.getImage(), s };
-	return res;
-    }
-
-    /**
-     * This function is supposed to give the size of the array returned by the
-     * "toArray" method It returns always 5 ! Warning: Very dangerous
-     * implementation
-     * 
-     * @return 5
-     */
-    public static int toArrayLenght() {
-	return 5;
-    }
-
-    public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
-	return false;
-    }
-
-    public void createObjectFromXMLElement(org.w3c.dom.Element p) {
-	this.oid = new Oid(p.getAttribute("idkmad"));
-	reverseMember.clear();
-	NodeList kmadOrganisationName = p
-		.getElementsByTagName("organisation-name");
-	if (kmadOrganisationName.item(0) != null)
-	    super.setName(kmadOrganisationName.item(0).getTextContent());
-
-	NodeList kmadOrganisationStatut = p
-		.getElementsByTagName("organisation-statut");
-	if (kmadOrganisationStatut.item(0) != null)
-	    super.setStatus(kmadOrganisationStatut.item(0).getTextContent());
-
-	NodeList kmadOrganisationRole = p
-		.getElementsByTagName("organisation-role");
-	if (kmadOrganisationRole.item(0) != null)
-	    super.setRole(kmadOrganisationRole.item(0).getTextContent());
-
-	NodeList kmadOrganisationImagePath = p
-		.getElementsByTagName("organisation-imagepath");
-	if (kmadOrganisationImagePath.item(0) != null)
-	    super.setImage(kmadOrganisationImagePath.item(0).getTextContent());
-    }
-
-    public String toSPF() {
-
-	String s = new String("");
-	/*
-	 * affichage des oid des membres desactives s += "','("; for(int i =
-	 * 0;i<inverseMember.size();i++){ s = s +
-	 * inverseMember.get(i).getOid().toString(); if(i!=
-	 * inverseMember.size()-1) s += ","; } s += ")";
+	/**
+	 * List of individuals who are member of the organization
 	 */
-	return oid.get() + "=Organisation('" + super.getName() + "','"
-		+ super.getStatus() + "','" + super.getRole() + "','"
-		+ super.getImage() + s + "');";
-    }
+	private ArrayList<Person> reverseMember = new ArrayList<Person>();
 
-    public Element toXML2(Document doc) throws Exception {
-	Element racine = doc.createElement("Organisation");
-	racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "."
-		+ ExpressConstant.ORGANIZATION_CLASS);
-	racine.setAttribute("idkmad", oid.get());
-
-	Element kmadOrganisationName = doc.createElement("organisation-name");
-	kmadOrganisationName.setTextContent(this.getName());
-	racine.appendChild(kmadOrganisationName);
-
-	if (!this.getStatus().equals("")) {
-	    Element kmadOrganisationStatut = doc
-		    .createElement("organisation-statut");
-	    kmadOrganisationStatut.setTextContent(this.getStatus());
-	    racine.appendChild(kmadOrganisationStatut);
-	}
-
-	if (!this.getRole().equals("")) {
-	    Element kmadOrganisationRole = doc
-		    .createElement("organisation-role");
-	    kmadOrganisationRole.setTextContent(this.getRole());
-	    racine.appendChild(kmadOrganisationRole);
-	}
-
-	if (!this.getImage().equals("")) {
-	    Element kmadOrganisationImagePath = doc
-		    .createElement("organisation-imagepath");
-	    kmadOrganisationImagePath.setTextContent(this.getImage());
-	    racine.appendChild(kmadOrganisationImagePath);
-	}
-
-	/*
-	 * seul les individus stocks les organisations dans le fichier XML
-	 * if(this.inverseMember.size()!=0){ for(int i =0;
-	 * i<inverseMember.size();i++){ Element idOrganisation =
-	 * doc.createElement("id-Organisation");
-	 * idOrganisation.setTextContent(inverseMember.get(i).getOid().get());
-	 * racine.appendChild(idOrganisation); } }
+	/**
+	 * Empty constructor
 	 */
-	return racine;
-    }
-
-    public void createObjectFromXMLElement2(Element p) throws Exception {
-	this.oid = new Oid(p.getAttribute("idkmad"));
-	reverseMember.clear();
-	NodeList kmadOrganisationName = p
-		.getElementsByTagName("organisation-name");
-	if (kmadOrganisationName.item(0).getParentNode() != p) {
-	    kmadOrganisationName = null;
+	public Organization() {
+		super();
 	}
-	if (kmadOrganisationName.item(0) != null)
-	    super.setName(kmadOrganisationName.item(0).getTextContent());
 
-	NodeList kmadOrganisationStatut = p
-		.getElementsByTagName("organisation-statut");
-	if (kmadOrganisationStatut.item(0).getParentNode() != p) {
-	    kmadOrganisationStatut = null;
+	/**
+	 * Constructor with only a name and an oid
+	 * 
+	 * @param name name of the individual
+	 * @param oid  unique Express identifier
+	 */
+	public Organization(String name, Oid oid) {
+		super(name, "", "", "", oid);
 	}
-	if (kmadOrganisationStatut.item(0) != null)
-	    super.setStatus(kmadOrganisationStatut.item(0).getTextContent());
 
-	NodeList kmadOrganisationRole = p
-		.getElementsByTagName("organisation-role");
-	if (kmadOrganisationRole.item(0).getParentNode() != p) {
-	    kmadOrganisationRole = null;
+	/**
+	 * Constructor with an empty image path
+	 * 
+	 * @param name name of the individual
+	 * @param st   status
+	 * @param r    role
+	 * @param oid  unique Express identifier
+	 */
+	public Organization(String name, String st, String r, Oid oid) {
+		super(name, st, r, "", oid);
 	}
-	if (kmadOrganisationRole.item(0) != null)
-	    super.setRole(kmadOrganisationRole.item(0).getTextContent());
 
-	NodeList kmadOrganisationImagePath = p
-		.getElementsByTagName("organisation-imagepath");
-	if (kmadOrganisationImagePath.item(0).getParentNode() != p) {
-	    kmadOrganisationImagePath = null;
+	/**
+	 * Complete constructor
+	 * 
+	 * @param name name of the individual
+	 * @param st   status
+	 * @param r    role
+	 * @param pi   image path
+	 * @param oid  unique Express identifier
+	 */
+	public Organization(String name, String st, String r, String pi, Oid oid) {
+		super(name, st, r, pi, oid);
 	}
-	if (kmadOrganisationImagePath.item(0) != null)
-	    super.setImage(kmadOrganisationImagePath.item(0).getTextContent());
-    }
+
+	@Override
+	/**
+	 * removes the organization from all individuals who are members CommentPG:
+	 * Seems redundant with the equivalent method in Individu
+	 * 
+	 * @see fr.upensma.lias.kmade.kmad.schema.tache.User#delete()
+	 */
+	public void delete() {
+		// supprimer l'individu des organisations
+		for (int i = 0; i < reverseMember.size(); i++) {
+			reverseMember.get(i).removeOrganisation(this);
+		}
+		super.delete();
+	}
+
+	/**
+	 * Registers an individual into the organization A verification is made for
+	 * avoiding duplication Warning: the reverse registering is not done at this
+	 * step
+	 * 
+	 * @param ind Individu -> the individual to add to the organization
+	 */
+	public void addMember(Person ind) {
+		if (!reverseMember.contains(ind)) {
+			reverseMember.add(ind);
+		}
+	}
+
+	/**
+	 * Removes the individual from the organization Warning: no verification is done
+	 * to verify if it where already a member
+	 * 
+	 * @param ind : Individu -> The inidividual to remove
+	 */
+	public void removeIndividu(Person ind) {
+		reverseMember.remove(ind);
+	}
+
+	/**
+	 * Gives the list of individual who are member of the organization Warning: it
+	 * is a reference on the list itself. Be careful not to modify it
+	 * 
+	 * @return an ArrayList which contains all individuals who are members
+	 */
+	public ArrayList<Person> getMembers() {
+		return reverseMember;
+	}
+
+	/**
+	 * Returns an array containing all characteristics of an organization
+	 * 
+	 * @return an array of Object, which contains all attributes of superclass, plus
+	 *         a list of name of individual who are member of the prganization
+	 */
+	public Object[] toArray() {
+		String s = "";
+		for (int i = 0; i < reverseMember.size(); i++) {
+			s += reverseMember.get(i).getName();
+			if (i != reverseMember.size() - 1) {
+				s += ", ";
+			}
+		}
+
+		Object[] res = { super.oid.get(), super.getName(), super.getStatus(), super.getRole(), super.getImage(), s };
+		return res;
+	}
+
+	/**
+	 * This function is supposed to give the size of the array returned by the
+	 * "toArray" method It returns always 5 ! Warning: Very dangerous implementation
+	 * 
+	 * @return 5
+	 */
+	public static int toArrayLenght() {
+		return 5;
+	}
+
+	public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
+		return false;
+	}
+
+	public void createObjectFromXMLElement(org.w3c.dom.Element p) {
+		this.oid = new Oid(p.getAttribute("idkmad"));
+		reverseMember.clear();
+		NodeList kmadOrganisationName = p.getElementsByTagName("organisation-name");
+		if (kmadOrganisationName.item(0) != null)
+			super.setName(kmadOrganisationName.item(0).getTextContent());
+
+		NodeList kmadOrganisationStatut = p.getElementsByTagName("organisation-statut");
+		if (kmadOrganisationStatut.item(0) != null)
+			super.setStatus(kmadOrganisationStatut.item(0).getTextContent());
+
+		NodeList kmadOrganisationRole = p.getElementsByTagName("organisation-role");
+		if (kmadOrganisationRole.item(0) != null)
+			super.setRole(kmadOrganisationRole.item(0).getTextContent());
+
+		NodeList kmadOrganisationImagePath = p.getElementsByTagName("organisation-imagepath");
+		if (kmadOrganisationImagePath.item(0) != null)
+			super.setImage(kmadOrganisationImagePath.item(0).getTextContent());
+	}
+
+	public String toSPF() {
+
+		String s = new String("");
+		/*
+		 * affichage des oid des membres desactives s += "','("; for(int i =
+		 * 0;i<inverseMember.size();i++){ s = s +
+		 * inverseMember.get(i).getOid().toString(); if(i!= inverseMember.size()-1) s +=
+		 * ","; } s += ")";
+		 */
+		return oid.get() + "=Organisation('" + super.getName() + "','" + super.getStatus() + "','" + super.getRole()
+				+ "','" + super.getImage() + s + "');";
+	}
+
+	public Element toXML2(Document doc) throws Exception {
+		Element racine = doc.createElement("Organisation");
+		racine.setAttribute("classkmad", ExpressConstant.CORE_PACKAGE + "." + ExpressConstant.ORGANIZATION_CLASS);
+		racine.setAttribute("idkmad", oid.get());
+
+		Element kmadOrganisationName = doc.createElement("organisation-name");
+		kmadOrganisationName.setTextContent(this.getName());
+		racine.appendChild(kmadOrganisationName);
+
+		if (!this.getStatus().equals("")) {
+			Element kmadOrganisationStatut = doc.createElement("organisation-statut");
+			kmadOrganisationStatut.setTextContent(this.getStatus());
+			racine.appendChild(kmadOrganisationStatut);
+		}
+
+		if (!this.getRole().equals("")) {
+			Element kmadOrganisationRole = doc.createElement("organisation-role");
+			kmadOrganisationRole.setTextContent(this.getRole());
+			racine.appendChild(kmadOrganisationRole);
+		}
+
+		if (!this.getImage().equals("")) {
+			Element kmadOrganisationImagePath = doc.createElement("organisation-imagepath");
+			kmadOrganisationImagePath.setTextContent(this.getImage());
+			racine.appendChild(kmadOrganisationImagePath);
+		}
+
+		/*
+		 * seul les individus stocks les organisations dans le fichier XML
+		 * if(this.inverseMember.size()!=0){ for(int i =0; i<inverseMember.size();i++){
+		 * Element idOrganisation = doc.createElement("id-Organisation");
+		 * idOrganisation.setTextContent(inverseMember.get(i).getOid().get());
+		 * racine.appendChild(idOrganisation); } }
+		 */
+		return racine;
+	}
+
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		this.oid = new Oid(p.getAttribute("idkmad"));
+		reverseMember.clear();
+		NodeList kmadOrganisationName = p.getElementsByTagName("organisation-name");
+		if (kmadOrganisationName.item(0).getParentNode() != p) {
+			kmadOrganisationName = null;
+		}
+		if (kmadOrganisationName.item(0) != null)
+			super.setName(kmadOrganisationName.item(0).getTextContent());
+
+		NodeList kmadOrganisationStatut = p.getElementsByTagName("organisation-statut");
+		if (kmadOrganisationStatut.item(0).getParentNode() != p) {
+			kmadOrganisationStatut = null;
+		}
+		if (kmadOrganisationStatut.item(0) != null)
+			super.setStatus(kmadOrganisationStatut.item(0).getTextContent());
+
+		NodeList kmadOrganisationRole = p.getElementsByTagName("organisation-role");
+		if (kmadOrganisationRole.item(0).getParentNode() != p) {
+			kmadOrganisationRole = null;
+		}
+		if (kmadOrganisationRole.item(0) != null)
+			super.setRole(kmadOrganisationRole.item(0).getTextContent());
+
+		NodeList kmadOrganisationImagePath = p.getElementsByTagName("organisation-imagepath");
+		if (kmadOrganisationImagePath.item(0).getParentNode() != p) {
+			kmadOrganisationImagePath = null;
+		}
+		if (kmadOrganisationImagePath.item(0) != null)
+			super.setImage(kmadOrganisationImagePath.item(0).getTextContent());
+	}
 
 }

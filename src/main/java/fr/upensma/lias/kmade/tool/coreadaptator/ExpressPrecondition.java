@@ -36,175 +36,136 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.SwingWorker;
  */
 public final class ExpressPrecondition {
 
-    private static boolean done = false;
+	private static boolean done = false;
 
-    private static boolean canceled = false;
+	private static boolean canceled = false;
 
-    private static boolean begining = false;
+	private static boolean begining = false;
 
-    private static KMADEObservable expressTaskObservable = new KMADEObservable();
+	private static KMADEObservable expressTaskObservable = new KMADEObservable();
 
-    public static void addObserver(Observer o) {
-	expressTaskObservable.addObserver(o);
-    }
+	public static void addObserver(Observer o) {
+		expressTaskObservable.addObserver(o);
+	}
 
-    public static void notifyObservers() {
-	expressTaskObservable.notifyKMADEObserver();
-    }
+	public static void notifyObservers() {
+		expressTaskObservable.notifyKMADEObserver();
+	}
 
-    public static void notifyObservers(Object argv) {
-	expressTaskObservable.notifyKMADEObserver(argv);
-    }
+	public static void notifyObservers(Object argv) {
+		expressTaskObservable.notifyKMADEObserver(argv);
+	}
 
-    public static void setPreconditionDescription(Task pTache, String p) {
-	pTache.getPreExpression().setDescription(p);
-    }
+	public static void setPreconditionDescription(Task pTache, String p) {
+		pTache.getPreExpression().setDescription(p);
+	}
 
-    public static String getPreconditionDescription(Task pTache) {
-	return pTache.getPreExpression().getDescription();
-    }
+	public static String getPreconditionDescription(Task pTache) {
+		return pTache.getPreExpression().getDescription();
+	}
 
-    public static void setPrecondition(Task pTache, NodeExpression node) {
-	pTache.getPreExpression().setNodeExpression(node);
-	notifyObservers();
-    }
+	public static void setPrecondition(Task pTache, NodeExpression node) {
+		pTache.getPreExpression().setNodeExpression(node);
+		notifyObservers();
+	}
 
-    public static NodeExpression getPrecondition(Task pTache) {
-	return pTache.getPreExpression().getNodeExpression();
-    }
+	public static NodeExpression getPrecondition(Task pTache) {
+		return pTache.getPreExpression().getNodeExpression();
+	}
 
-    public static void makeAndCheckPreconditionOpenSPFFile() {
-	SwingWorker worker = new SwingWorker() {
-	    public Object construct() {
-		Task[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
-		KMADEHistoryMessageManager
-			.printlnMessage(KMADEConstant.CHECK_ALL_PRECONDITIONS);
-		for (int i = 0; i < tacheToBeCreated.length
-			&& !ExpressPrecondition.isCanceled(); i++) {
-		    String precondtion = tacheToBeCreated[i].getPreExpression()
-			    .getFormalText();
-		    // Transformation de la cha�ne de caract�res en flux de
-		    // caract�res.
-		    java.io.StringReader sr = new java.io.StringReader(
-			    precondtion);
-		    java.io.Reader r = new java.io.BufferedReader(sr);
-		    Precondition parser = new MyPrecondition(r);
-		    try {
-			NodeExpression ref = parser.expression();
-			if (ref == null) {
-			    KMADEHistoryMessageManager
-				    .printlnMessage(KMADEConstant.PARSER_PROBLEM_MESSAGE);
-			    ExpressPrecondition.setPrecondition(
-				    tacheToBeCreated[i], null);
-			} else {
-			    ref.checkNode();
-			    ExpressPrecondition.setPrecondition(
-				    tacheToBeCreated[i], ref);
+	public static void makeAndCheckPreconditionOpenSPFFile() {
+		SwingWorker worker = new SwingWorker() {
+			public Object construct() {
+				Task[] tacheToBeCreated = ExpressTask.getAllTaskFromExpress();
+				KMADEHistoryMessageManager.printlnMessage(KMADEConstant.CHECK_ALL_PRECONDITIONS);
+				for (int i = 0; i < tacheToBeCreated.length && !ExpressPrecondition.isCanceled(); i++) {
+					String precondtion = tacheToBeCreated[i].getPreExpression().getFormalText();
+					// Transformation de la cha�ne de caract�res en flux de
+					// caract�res.
+					java.io.StringReader sr = new java.io.StringReader(precondtion);
+					java.io.Reader r = new java.io.BufferedReader(sr);
+					Precondition parser = new MyPrecondition(r);
+					try {
+						NodeExpression ref = parser.expression();
+						if (ref == null) {
+							KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PARSER_PROBLEM_MESSAGE);
+							ExpressPrecondition.setPrecondition(tacheToBeCreated[i], null);
+						} else {
+							ref.checkNode();
+							ExpressPrecondition.setPrecondition(tacheToBeCreated[i], ref);
+						}
+					} catch (SemanticException e) {
+						KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
+								+ " : " + tacheToBeCreated[i].getName() + ". " + KMADEConstant.CAUSE_MESSAGE + " : "
+								+ KMADEConstant.SEMANTICAL_ERROR_MESSAGE + " : " + e.getMessage());
+						ExpressPrecondition.setPrecondition(tacheToBeCreated[i], null);
+					} catch (ParseException e) {
+						KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
+								+ " : " + tacheToBeCreated[i].getName() + ". " + KMADEConstant.CAUSE_MESSAGE + " : "
+								+ KMADEConstant.SYNTAXICAL_ERROR_MESSAGE + " : " + e.getMessage());
+						ExpressPrecondition.setPrecondition(tacheToBeCreated[i], null);
+					} catch (TokenMgrError e) {
+						KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
+								+ " : " + tacheToBeCreated[i].getName() + ". " + KMADEConstant.CAUSE_MESSAGE + " : "
+								+ KMADEConstant.LEXICAL_ERROR_MESSAGE + " : " + e.getMessage());
+						ExpressPrecondition.setPrecondition(tacheToBeCreated[i], null);
+					} catch (Error e) {
+						KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
+								+ " : " + tacheToBeCreated[i].getName() + ". " + KMADEConstant.CAUSE_MESSAGE + " : "
+								+ KMADEConstant.LEXICAL_ERROR_MESSAGE + " : " + e.getMessage());
+						ExpressPrecondition.setPrecondition(tacheToBeCreated[i], null);
+					}
+				}
+
+				if (!ExpressPrecondition.isCanceled()) {
+					KMADEHistoryMessageManager.printlnMessage(KMADEConstant.PRECONDITION_CHECKED_AND_BUILT_MESSAGE);
+					ExpressPrecondition.done = true;
+				}
+				return null;
 			}
-		    } catch (SemanticException e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
-					+ " : "
-					+ tacheToBeCreated[i].getName()
-					+ ". "
-					+ KMADEConstant.CAUSE_MESSAGE
-					+ " : "
-					+ KMADEConstant.SEMANTICAL_ERROR_MESSAGE
-					+ " : " + e.getMessage());
-			ExpressPrecondition.setPrecondition(
-				tacheToBeCreated[i], null);
-		    } catch (ParseException e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
-					+ " : "
-					+ tacheToBeCreated[i].getName()
-					+ ". "
-					+ KMADEConstant.CAUSE_MESSAGE
-					+ " : "
-					+ KMADEConstant.SYNTAXICAL_ERROR_MESSAGE
-					+ " : " + e.getMessage());
-			ExpressPrecondition.setPrecondition(
-				tacheToBeCreated[i], null);
-		    } catch (TokenMgrError e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
-					+ " : "
-					+ tacheToBeCreated[i].getName()
-					+ ". "
-					+ KMADEConstant.CAUSE_MESSAGE
-					+ " : "
-					+ KMADEConstant.LEXICAL_ERROR_MESSAGE
-					+ " : " + e.getMessage());
-			ExpressPrecondition.setPrecondition(
-				tacheToBeCreated[i], null);
-		    } catch (Error e) {
-			KMADEHistoryMessageManager
-				.printlnMessage(KMADEConstant.PRECONDITION_OF_TASK_NO_OK_MESSAGE
-					+ " : "
-					+ tacheToBeCreated[i].getName()
-					+ ". "
-					+ KMADEConstant.CAUSE_MESSAGE
-					+ " : "
-					+ KMADEConstant.LEXICAL_ERROR_MESSAGE
-					+ " : " + e.getMessage());
-			ExpressPrecondition.setPrecondition(
-				tacheToBeCreated[i], null);
-		    }
-		}
+		};
+		worker.start();
+	}
 
-		if (!ExpressPrecondition.isCanceled()) {
-		    KMADEHistoryMessageManager
-			    .printlnMessage(KMADEConstant.PRECONDITION_CHECKED_AND_BUILT_MESSAGE);
-		    ExpressPrecondition.done = true;
-		}
-		return null;
-	    }
-	};
-	worker.start();
-    }
+	/**
+	 * @return Returns the begining.
+	 */
+	public static boolean isBegining() {
+		return begining;
+	}
 
-    /**
-     * @return Returns the begining.
-     */
-    public static boolean isBegining() {
-	return begining;
-    }
+	/**
+	 * @param begining The begining to set.
+	 */
+	public static void setBegining(boolean begining) {
+		ExpressPrecondition.begining = begining;
+	}
 
-    /**
-     * @param begining
-     *            The begining to set.
-     */
-    public static void setBegining(boolean begining) {
-	ExpressPrecondition.begining = begining;
-    }
+	/**
+	 * @return Returns the canceled.
+	 */
+	public static boolean isCanceled() {
+		return canceled;
+	}
 
-    /**
-     * @return Returns the canceled.
-     */
-    public static boolean isCanceled() {
-	return canceled;
-    }
+	/**
+	 * @param canceled The canceled to set.
+	 */
+	public static void setCanceled(boolean canceled) {
+		ExpressPrecondition.canceled = canceled;
+	}
 
-    /**
-     * @param canceled
-     *            The canceled to set.
-     */
-    public static void setCanceled(boolean canceled) {
-	ExpressPrecondition.canceled = canceled;
-    }
+	/**
+	 * @return Returns the done.
+	 */
+	public static boolean isDone() {
+		return done;
+	}
 
-    /**
-     * @return Returns the done.
-     */
-    public static boolean isDone() {
-	return done;
-    }
-
-    /**
-     * @param done
-     *            The done to set.
-     */
-    public static void setDone(boolean done) {
-	ExpressPrecondition.done = done;
-    }
+	/**
+	 * @param done The done to set.
+	 */
+	public static void setDone(boolean done) {
+		ExpressPrecondition.done = done;
+	}
 }

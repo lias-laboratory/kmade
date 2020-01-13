@@ -28,87 +28,78 @@ import fr.upensma.lias.kmade.tool.view.taskproperties.readworldobject.KMADEReadM
  * @author Mickael BARON
  */
 public final class MachineAdaptator {
-    private static final KMADEReadMachineObjectTable machinePanel = new KMADEReadMachineObjectTable();
+	private static final KMADEReadMachineObjectTable machinePanel = new KMADEReadMachineObjectTable();
 
-    public static String addMachine() {
-	return ExpressMachine.createMachine();
-    }
-
-    public static String[] getMachinesName() {
-	return ExpressMachine.getMachinesName();
-    }
-
-    public static void removeMachine(String oid) {
-	ExpressMachine.deleteMachine(oid);
-    }
-
-    public static void affRemoveMachine(String oid) {
-	ExpressMachine.affRemoveMachine(oid);
-    }
-
-    public static void removeAllMachine() {
-	KMADEMainFrame.getProjectPanel().getMachinePanel()
-		.getMachineObjectTable().removeAllMachine();
-    }
-
-    public static String setMachineName(String oid, String name) {
-	return ExpressMachine.setMachineName(oid, name);
-
-    }
-
-    public static void setMachineDescription(String oid, String desc) {
-	ExpressMachine.setMachineDescription(oid, desc);
-
-    }
-
-    public static void setMachineIsComputer(String oid, String iscomp) {
-	ExpressMachine.setMachineIsComputer(oid, iscomp);
-
-    }
-
-    public static void setMachineImage(String oid, String path) {
-	ExpressMachine.setMachineImage(oid, path);
-    }
-
-    public static void refreshReadIndividuTable() {
-	Object[][] temp = new Object[KMADEMainFrame.getProjectPanel()
-		.getMachinePanel().getMachineObjectTable().getModel()
-		.getRowCount() - 1][6];
-	for (int i = 0; i < KMADEMainFrame.getProjectPanel().getMachinePanel()
-		.getMachineObjectTable().getModel().getRowCount() - 1; i++) {
-	    temp[i][0] = KMADEMainFrame.getProjectPanel().getMachinePanel()
-		    .getMachineObjectTable().getModel().getValueAt(i, 0);
-	    temp[i][1] = KMADEMainFrame.getProjectPanel().getMachinePanel()
-		    .getMachineObjectTable().getModel().getValueAt(i, 1);
-	    temp[i][2] = KMADEMainFrame.getProjectPanel().getMachinePanel()
-		    .getMachineObjectTable().getModel().getValueAt(i, 2);
-	    temp[i][3] = KMADEMainFrame.getProjectPanel().getMachinePanel()
-		    .getMachineObjectTable().getModel().getValueAt(i, 3);
-	    temp[i][4] = KMADEMainFrame.getProjectPanel().getMachinePanel()
-		    .getMachineObjectTable().getModel().getValueAt(i, 4);
-	    temp[i][5] = KMADEMainFrame.getProjectPanel().getMachinePanel()
-		    .getMachineObjectTable().getModel().getValueAt(i, 5);
+	public static String addMachine() {
+		return ExpressMachine.createMachine();
 	}
-	machinePanel.setData(temp);
-    }
 
-    public static void updateMachineView() {
-	ArrayList<Machine> myList = ExpressMachine.getMachines();
-	for (int i = 0; i < myList.size(); i++) {
-	    KMADEMainFrame
-		    .getProjectPanel()
-		    .getMachinePanel()
-		    .getMachineObjectTable()
-		    .addMachine(myList.get(i).getName(),
-			    myList.get(i).getDescription(),
-			    myList.get(i).getIsComputer().toString(),
-			    myList.get(i).getImage(),
-			    myList.get(i).getMemberOf(),
-			    myList.get(i).getOid().get());
+	public static String[] getMachinesName() {
+		return ExpressMachine.getMachinesName();
 	}
-    }
 
-    public static KMADEReadMachineObjectTable getIndividuPanel() {
-	return machinePanel;
-    }
+	public static void removeMachine(String oid) {
+		ExpressMachine.deleteMachine(oid);
+	}
+
+	public static void affRemoveMachine(String oid) {
+		ExpressMachine.affRemoveMachine(oid);
+	}
+
+	public static void removeAllMachine() {
+		KMADEMainFrame.getProjectPanel().getMachinePanel().getMachineObjectTable().removeAllMachine();
+	}
+
+	public static String setMachineName(String oid, String name) {
+		return ExpressMachine.setMachineName(oid, name);
+
+	}
+
+	public static void setMachineDescription(String oid, String desc) {
+		ExpressMachine.setMachineDescription(oid, desc);
+
+	}
+
+	public static void setMachineIsComputer(String oid, String iscomp) {
+		ExpressMachine.setMachineIsComputer(oid, iscomp);
+
+	}
+
+	public static void setMachineImage(String oid, String path) {
+		ExpressMachine.setMachineImage(oid, path);
+	}
+
+	public static void refreshReadIndividuTable() {
+		Object[][] temp = new Object[KMADEMainFrame.getProjectPanel().getMachinePanel().getMachineObjectTable()
+				.getModel().getRowCount() - 1][6];
+		for (int i = 0; i < KMADEMainFrame.getProjectPanel().getMachinePanel().getMachineObjectTable().getModel()
+				.getRowCount() - 1; i++) {
+			temp[i][0] = KMADEMainFrame.getProjectPanel().getMachinePanel().getMachineObjectTable().getModel()
+					.getValueAt(i, 0);
+			temp[i][1] = KMADEMainFrame.getProjectPanel().getMachinePanel().getMachineObjectTable().getModel()
+					.getValueAt(i, 1);
+			temp[i][2] = KMADEMainFrame.getProjectPanel().getMachinePanel().getMachineObjectTable().getModel()
+					.getValueAt(i, 2);
+			temp[i][3] = KMADEMainFrame.getProjectPanel().getMachinePanel().getMachineObjectTable().getModel()
+					.getValueAt(i, 3);
+			temp[i][4] = KMADEMainFrame.getProjectPanel().getMachinePanel().getMachineObjectTable().getModel()
+					.getValueAt(i, 4);
+			temp[i][5] = KMADEMainFrame.getProjectPanel().getMachinePanel().getMachineObjectTable().getModel()
+					.getValueAt(i, 5);
+		}
+		machinePanel.setData(temp);
+	}
+
+	public static void updateMachineView() {
+		ArrayList<Machine> myList = ExpressMachine.getMachines();
+		for (int i = 0; i < myList.size(); i++) {
+			KMADEMainFrame.getProjectPanel().getMachinePanel().getMachineObjectTable().addMachine(
+					myList.get(i).getName(), myList.get(i).getDescription(), myList.get(i).getIsComputer().toString(),
+					myList.get(i).getImage(), myList.get(i).getMemberOf(), myList.get(i).getOid().get());
+		}
+	}
+
+	public static KMADEReadMachineObjectTable getIndividuPanel() {
+		return machinePanel;
+	}
 }

@@ -23,13 +23,13 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
  * @author Thomas LACHAUME
  */
 public enum StateCondition {
-    TRUE, FALSE, INDETERMINATE;
+	TRUE, FALSE, INDETERMINATE;
 
-    public static String[] getNameStateCondition() {
-	String[] myEnumereIntervalStruct = new String[3];
-	myEnumereIntervalStruct[0] = ExpressConstant.TRUE;
-	myEnumereIntervalStruct[1] = ExpressConstant.FALSE;
-	myEnumereIntervalStruct[2] = ExpressConstant.INDETERMINATE;
-	return myEnumereIntervalStruct;
-    }
+	public static String[] getNameStateCondition() {
+		String[] myEnumereIntervalStruct = new String[3];
+		myEnumereIntervalStruct[0] = ExpressConstant.TRUE;
+		myEnumereIntervalStruct[1] = ExpressConstant.FALSE;
+		myEnumereIntervalStruct[2] = ExpressConstant.INDETERMINATE;
+		return myEnumereIntervalStruct;
+	}
 }

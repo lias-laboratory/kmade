@@ -35,61 +35,61 @@ import fr.upensma.lias.kmade.tool.viewadaptator.ConcreteObjectPanelAdaptator;
  */
 public class KMADEIterationPanel extends JPanel implements LanguageFactory {
 
-    private static final long serialVersionUID = -6251751576712160692L;
+	private static final long serialVersionUID = -6251751576712160692L;
 
-    private final KMADEProtoTaskIterationPanel proto = new KMADEProtoTaskIterationPanel();
+	private final KMADEProtoTaskIterationPanel proto = new KMADEProtoTaskIterationPanel();
 
-    private final KMADEBaseIterationPanel base = new KMADEBaseIterationPanel();
+	private final KMADEBaseIterationPanel base = new KMADEBaseIterationPanel();
 
-    public KMADEProtoTaskIterationPanel getProtoTaskIterationPanel() {
-	return proto;
-    }
+	public KMADEProtoTaskIterationPanel getProtoTaskIterationPanel() {
+		return proto;
+	}
 
-    public KMADEBaseIterationPanel getBaseIterationPanel() {
-	return base;
-    }
+	public KMADEBaseIterationPanel getBaseIterationPanel() {
+		return base;
+	}
 
-    private final JTabbedPane tabpanePre;
+	private final JTabbedPane tabpanePre;
 
-    public Object textArea;
+	public Object textArea;
 
-    public KMADEIterationPanel() {
-	tabpanePre = new JTabbedPane();
-	tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_FORMAL, base);
-	tabpanePre.setPreferredSize(new Dimension(600, 700));
-	tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_PROTOTASK,proto);
+	public KMADEIterationPanel() {
+		tabpanePre = new JTabbedPane();
+		tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_FORMAL, base);
+		tabpanePre.setPreferredSize(new Dimension(600, 700));
+		tabpanePre.addTab(KMADEConstant.PRECONDITION_TAB_PROTOTASK, proto);
 
-	tabpanePre.addChangeListener(new ChangeListener() {
-	    public void stateChanged(ChangeEvent e) {
-		if (tabpanePre.getSelectedIndex() == 0) {
-		    ConcreteObjectPanelAdaptator.updateConcreteObjectView();
-		} else if (tabpanePre.getSelectedIndex() == 1) {
+		tabpanePre.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				if (tabpanePre.getSelectedIndex() == 0) {
+					ConcreteObjectPanelAdaptator.updateConcreteObjectView();
+				} else if (tabpanePre.getSelectedIndex() == 1) {
 
-		    proto.updateDataModel();
-		}
-	    }
-	});
-	this.add(tabpanePre, BorderLayout.CENTER);
-	this.setPreferredSize(new Dimension(700, 700));
-    }
+					proto.updateDataModel();
+				}
+			}
+		});
+		this.add(tabpanePre, BorderLayout.CENTER);
+		this.setPreferredSize(new Dimension(700, 700));
+	}
 
-    @Override
-    public void notifLocalisationModification() {
-	// TODO Auto-generated method stub
-    }
+	@Override
+	public void notifLocalisationModification() {
+		// TODO Auto-generated method stub
+	}
 
-    public void setOutputMessage() {
-	base.setOutputMessage();
+	public void setOutputMessage() {
+		base.setOutputMessage();
 
-    }
+	}
 
-    public void setDescriptionArea(String description) {
-	base.setDescriptionArea(description);
+	public void setDescriptionArea(String description) {
+		base.setDescriptionArea(description);
 
-    }
+	}
 
-    public JTextComponent getTextArea() {
-	return base.textArea;
-    }
+	public JTextComponent getTextArea() {
+		return base.textArea;
+	}
 
 }

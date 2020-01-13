@@ -21,15 +21,5 @@ package fr.upensma.lias.kmade.kmad.schema.tache;
  * @author Thomas LACHAUME
  */
 public enum StateExecution {
-    INACTIVE,
-    PASSIVE,
-    ACTIVE,
-    WAITEND,
-    FINISHED,
-    INACTIVABLE,
-    ACTIVABLE,
-    ATTENTEFIN,
-    ATTENTEFINKO,
-    ATTENTETASK,
-    PASSEE,
+	INACTIVE, PASSIVE, ACTIVE, WAITEND, FINISHED, INACTIVABLE, ACTIVABLE, ATTENTEFIN, ATTENTEFINKO, ATTENTETASK, PASSEE,
 }

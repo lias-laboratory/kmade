@@ -22,20 +22,20 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public abstract class ExpressExpression extends UnaryExpression {
 
-    private static final long serialVersionUID = 7446474724360755466L;
+	private static final long serialVersionUID = 7446474724360755466L;
 
-    protected String identExpress;
+	protected String identExpress;
 
-    public ExpressExpression(String pie) {
-	super(new Object());
-	this.identExpress = pie;
-	this.name = "$" + identExpress;
-    }
+	public ExpressExpression(String pie) {
+		super(new Object());
+		this.identExpress = pie;
+		this.name = "$" + identExpress;
+	}
 
-    public void checkNode() throws SemanticException {
-    }
+	public void checkNode() throws SemanticException {
+	}
 
-    public String toString() {
-	return super.toString();
-    }
+	public String toString() {
+		return super.toString();
+	}
 }

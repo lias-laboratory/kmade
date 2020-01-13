@@ -40,129 +40,124 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.KMADEEnhancedSplitPane;
  */
 public class KMADETaskDescriptionPanel extends JPanel {
 
-    private static final long serialVersionUID = 4329498250171579508L;
+	private static final long serialVersionUID = 4329498250171579508L;
 
-    private static final KMADETaskModelPanel jgraphTaskPanel = new KMADETaskModelPanel();
+	private static final KMADETaskModelPanel jgraphTaskPanel = new KMADETaskModelPanel();
 
-    private static final KMADETaskPropertiesPanel panelProprieteTache = new KMADETaskPropertiesPanel();
+	private static final KMADETaskPropertiesPanel panelProprieteTache = new KMADETaskPropertiesPanel();
 
-    private KMADERule columnView;
+	private KMADERule columnView;
 
-    private KMADERule rowView;
+	private KMADERule rowView;
 
-    private JScrollPane scrollerPanelGraphTache;
+	private JScrollPane scrollerPanelGraphTache;
 
-    private TitledBorder myTitledBorder;
+	private TitledBorder myTitledBorder;
 
-    private JSplitPane jSplitPaneV;
+	private JSplitPane jSplitPaneV;
 
-    public KMADETaskDescriptionPanel() {
-	columnView = new KMADERule(KMADERule.HORIZONTAL, true);
-	columnView.setPreferredWidth(30);
+	public KMADETaskDescriptionPanel() {
+		columnView = new KMADERule(KMADERule.HORIZONTAL, true);
+		columnView.setPreferredWidth(30);
 
-	rowView = new KMADERule(KMADERule.VERTICAL, true);
-	rowView.setPreferredWidth(30);
+		rowView = new KMADERule(KMADERule.VERTICAL, true);
+		rowView.setPreferredWidth(30);
 
-	JPanel buttonCorner = new JPanel();
-	buttonCorner.setBackground(new Color(165, 163, 151));
-	JToggleButton isMetric = new JToggleButton("cm", true);
-	isMetric.setFont(new Font("SansSerif", Font.PLAIN, 11));
-	isMetric.setMargin(new Insets(2, 2, 2, 2));
-	isMetric.addItemListener(new UnitsListener());
-	buttonCorner.add(isMetric);
+		JPanel buttonCorner = new JPanel();
+		buttonCorner.setBackground(new Color(165, 163, 151));
+		JToggleButton isMetric = new JToggleButton("cm", true);
+		isMetric.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		isMetric.setMargin(new Insets(2, 2, 2, 2));
+		isMetric.addItemListener(new UnitsListener());
+		buttonCorner.add(isMetric);
 
-	KMADECorner lowerLeft = new KMADECorner();
-	KMADECorner upperRight = new KMADECorner();
+		KMADECorner lowerLeft = new KMADECorner();
+		KMADECorner upperRight = new KMADECorner();
 
-	this.setLayout(new BorderLayout());
+		this.setLayout(new BorderLayout());
 
-	// Ajout des composants avec JSplitPane
+		// Ajout des composants avec JSplitPane
 
-	scrollerPanelGraphTache = new JScrollPane(jgraphTaskPanel);
+		scrollerPanelGraphTache = new JScrollPane(jgraphTaskPanel);
 
-	scrollerPanelGraphTache.setColumnHeaderView(columnView);
-	scrollerPanelGraphTache.setRowHeaderView(rowView);
+		scrollerPanelGraphTache.setColumnHeaderView(columnView);
+		scrollerPanelGraphTache.setRowHeaderView(rowView);
 
-	scrollerPanelGraphTache.setCorner(JScrollPane.UPPER_LEFT_CORNER,
-		buttonCorner);
-	scrollerPanelGraphTache.setCorner(JScrollPane.LOWER_LEFT_CORNER,
-		lowerLeft);
-	scrollerPanelGraphTache.setCorner(JScrollPane.UPPER_RIGHT_CORNER,
-		upperRight);
+		scrollerPanelGraphTache.setCorner(JScrollPane.UPPER_LEFT_CORNER, buttonCorner);
+		scrollerPanelGraphTache.setCorner(JScrollPane.LOWER_LEFT_CORNER, lowerLeft);
+		scrollerPanelGraphTache.setCorner(JScrollPane.UPPER_RIGHT_CORNER, upperRight);
 
-	JPanel my_panel_central = new JPanel(new BorderLayout());
-	my_panel_central.setMinimumSize(new Dimension(600, 600));
-	myTitledBorder = new TitledBorder(null,
-		KMADEConstant.TASK_MODEL_TITLE_NAME, TitledBorder.CENTER,
-		TitledBorder.TOP);
-	my_panel_central.add(BorderLayout.CENTER, scrollerPanelGraphTache);
+		JPanel my_panel_central = new JPanel(new BorderLayout());
+		my_panel_central.setMinimumSize(new Dimension(600, 600));
+		myTitledBorder = new TitledBorder(null, KMADEConstant.TASK_MODEL_TITLE_NAME, TitledBorder.CENTER,
+				TitledBorder.TOP);
+		my_panel_central.add(BorderLayout.CENTER, scrollerPanelGraphTache);
 
-	// Initialisation des JSplitPane
-	jSplitPaneV = KMADEEnhancedSplitPane.createStrippedSplitPane(
-		JSplitPane.HORIZONTAL_SPLIT, my_panel_central,
-		panelProprieteTache);
-	jSplitPaneV.setOneTouchExpandable(true);
-	jSplitPaneV.setContinuousLayout(true);
-	jSplitPaneV.setResizeWeight(0.3);
+		// Initialisation des JSplitPane
+		jSplitPaneV = KMADEEnhancedSplitPane.createStrippedSplitPane(JSplitPane.HORIZONTAL_SPLIT, my_panel_central,
+				panelProprieteTache);
+		jSplitPaneV.setOneTouchExpandable(true);
+		jSplitPaneV.setContinuousLayout(true);
+		jSplitPaneV.setResizeWeight(0.3);
 
-	this.setLayout(new BorderLayout());
-	this.add(jSplitPaneV, BorderLayout.CENTER);
-    }
-
-    public KMADETaskModelPanel getTaskModelPanel() {
-	return jgraphTaskPanel;
-    }
-
-    public KMADETaskPropertiesPanel getProprieteTache() {
-	return panelProprieteTache;
-    }
-
-    public JScrollPane getScrollerPanelGraphTache() {
-	return scrollerPanelGraphTache;
-    }
-
-    public void showOrHideRule() {
-	boolean state = scrollerPanelGraphTache.getColumnHeader().isVisible();
-	scrollerPanelGraphTache.getColumnHeader().setVisible(!state);
-	scrollerPanelGraphTache.getRowHeader().setVisible(!state);
-    }
-
-    public void hideRule() {
-	scrollerPanelGraphTache.getColumnHeader().setVisible(false);
-	scrollerPanelGraphTache.getRowHeader().setVisible(false);
-    }
-
-    public boolean isRuleVisible() {
-	return scrollerPanelGraphTache.getColumnHeader().isVisible();
-    }
-
-    class UnitsListener implements ItemListener {
-	public void itemStateChanged(ItemEvent e) {
-	    if (e.getStateChange() == ItemEvent.SELECTED) {
-		// turn it to metric
-		rowView.setIsMetric(true);
-		columnView.setIsMetric(true);
-	    } else {
-		// turn it to inches
-		rowView.setIsMetric(false);
-		columnView.setIsMetric(false);
-	    }
+		this.setLayout(new BorderLayout());
+		this.add(jSplitPaneV, BorderLayout.CENTER);
 	}
-    }
 
-    public void notifLocalisationModification() {
-	// NMDATaskDescriptionPanel
-	myTitledBorder.setTitle(KMADEConstant.TASK_MODEL_TITLE_NAME);
+	public KMADETaskModelPanel getTaskModelPanel() {
+		return jgraphTaskPanel;
+	}
 
-	jgraphTaskPanel.notifLocalisationModification(); // Aucune modification
-	panelProprieteTache.notifLocalisationModification();
-    }
+	public KMADETaskPropertiesPanel getProprieteTache() {
+		return panelProprieteTache;
+	}
 
-    public JSplitPane getJSplitPaneV() {
-	return jSplitPaneV;
-    }
+	public JScrollPane getScrollerPanelGraphTache() {
+		return scrollerPanelGraphTache;
+	}
 
-    public void setJSplitPaneV(JSplitPane splitPaneV) {
-	jSplitPaneV = splitPaneV;
-    }
+	public void showOrHideRule() {
+		boolean state = scrollerPanelGraphTache.getColumnHeader().isVisible();
+		scrollerPanelGraphTache.getColumnHeader().setVisible(!state);
+		scrollerPanelGraphTache.getRowHeader().setVisible(!state);
+	}
+
+	public void hideRule() {
+		scrollerPanelGraphTache.getColumnHeader().setVisible(false);
+		scrollerPanelGraphTache.getRowHeader().setVisible(false);
+	}
+
+	public boolean isRuleVisible() {
+		return scrollerPanelGraphTache.getColumnHeader().isVisible();
+	}
+
+	class UnitsListener implements ItemListener {
+		public void itemStateChanged(ItemEvent e) {
+			if (e.getStateChange() == ItemEvent.SELECTED) {
+				// turn it to metric
+				rowView.setIsMetric(true);
+				columnView.setIsMetric(true);
+			} else {
+				// turn it to inches
+				rowView.setIsMetric(false);
+				columnView.setIsMetric(false);
+			}
+		}
+	}
+
+	public void notifLocalisationModification() {
+		// NMDATaskDescriptionPanel
+		myTitledBorder.setTitle(KMADEConstant.TASK_MODEL_TITLE_NAME);
+
+		jgraphTaskPanel.notifLocalisationModification(); // Aucune modification
+		panelProprieteTache.notifLocalisationModification();
+	}
+
+	public JSplitPane getJSplitPaneV() {
+		return jSplitPaneV;
+	}
+
+	public void setJSplitPaneV(JSplitPane splitPaneV) {
+		jSplitPaneV = splitPaneV;
+	}
 }

@@ -27,55 +27,52 @@ import javax.swing.JTextArea;
  */
 public class JTextAreaOutputStream extends OutputStream {
 
-    private JTextArea m_text_area = null;
+	private JTextArea m_text_area = null;
 
-    /**
-     * Method JTextAreaOutputStream.
-     * 
-     * @param p_text_area
-     *            le JTextArea qui recevra les caract�res.
-     */
-    public JTextAreaOutputStream(JTextArea p_text_area) {
-	m_text_area = p_text_area;
-    }
-
-    /**
-     * �crit un caract�re dans le JTextArea. Si le caract�re est un retour
-     * chariot, scrolling.
-     * 
-     * @see java.io.OutputStream#write(int)
-     */
-    public void write(int b) throws IOException {
-	byte[] bytes = new byte[1];
-	bytes[0] = (byte) b;
-	// String new_text = new String(bytes);
-	String new_text = String.valueOf((char) b);
-	m_text_area.append(new_text);
-
-	if (new_text.indexOf('\n') > -1) {
-	    try {
-		m_text_area.scrollRectToVisible(m_text_area
-			.modelToView(m_text_area.getDocument().getLength()));
-	    } catch (javax.swing.text.BadLocationException err) {
-		err.printStackTrace();
-	    }
+	/**
+	 * Method JTextAreaOutputStream.
+	 * 
+	 * @param p_text_area le JTextArea qui recevra les caract�res.
+	 */
+	public JTextAreaOutputStream(JTextArea p_text_area) {
+		m_text_area = p_text_area;
 	}
-    }
 
-    /**
-     * Ecrit un tableau de bytes dans le JTextArea. Scrolling du JTextArea à la
-     * fin du texte ajouté.
-     * 
-     * @see java.io.OutputStream#write(byte[])
-     */
-    public final void write(byte[] arg0) throws IOException {
-	String txt = new String(arg0);
-	m_text_area.append(txt);
-	try {
-	    m_text_area.scrollRectToVisible(m_text_area.modelToView(m_text_area
-		    .getDocument().getLength()));
-	} catch (javax.swing.text.BadLocationException err) {
-	    err.printStackTrace();
+	/**
+	 * �crit un caract�re dans le JTextArea. Si le caract�re est un retour chariot,
+	 * scrolling.
+	 * 
+	 * @see java.io.OutputStream#write(int)
+	 */
+	public void write(int b) throws IOException {
+		byte[] bytes = new byte[1];
+		bytes[0] = (byte) b;
+		// String new_text = new String(bytes);
+		String new_text = String.valueOf((char) b);
+		m_text_area.append(new_text);
+
+		if (new_text.indexOf('\n') > -1) {
+			try {
+				m_text_area.scrollRectToVisible(m_text_area.modelToView(m_text_area.getDocument().getLength()));
+			} catch (javax.swing.text.BadLocationException err) {
+				err.printStackTrace();
+			}
+		}
 	}
-    }
+
+	/**
+	 * Ecrit un tableau de bytes dans le JTextArea. Scrolling du JTextArea à la fin
+	 * du texte ajouté.
+	 * 
+	 * @see java.io.OutputStream#write(byte[])
+	 */
+	public final void write(byte[] arg0) throws IOException {
+		String txt = new String(arg0);
+		m_text_area.append(txt);
+		try {
+			m_text_area.scrollRectToVisible(m_text_area.modelToView(m_text_area.getDocument().getLength()));
+		} catch (javax.swing.text.BadLocationException err) {
+			err.printStackTrace();
+		}
+	}
 }

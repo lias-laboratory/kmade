@@ -30,71 +30,70 @@ import fr.upensma.lias.kmade.kmad.schema.tache.User;
  * @author Mickael BARON
  */
 public class ExpressActeur {
-    public static String getActorList(Task myRefTask) {
-	String toDisplay = "";
-	for (int i = 0; i < myRefTask.getActors().size(); i++) {
-	    toDisplay += ((Actor) myRefTask.getActors().get(i)).getName();
-	    if (i < myRefTask.getActors().size() - 1) {
-		toDisplay += ";";
-	    }
-	}
-	return toDisplay;
-    }
-
-    public static Oid createActor(Oid oidUser) {
-	Oid oidActor = InterfaceExpressJava.createEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.ACTOR_CLASS);
-	Actor a = (Actor) InterfaceExpressJava.prendre(oidActor);
-	User u = (User) InterfaceExpressJava.prendre(oidUser);
-	a.setUserRef(u);
-	u.addReverseActor(a);
-	return (oidActor);
-    }
-
-    public static String[] getActorFromOid(Oid actor) {
-	String[] myTable = new String[4];
-	Actor a = (Actor) InterfaceExpressJava.prendre(actor);
-	myTable[0] = a.getName();
-	myTable[1] = a.getExperience().getValue();
-	myTable[2] = a.getCompetence();
-	myTable[3] = actor.get();
-	return myTable;
-    }
-
-    /**
-     * Cette méthode permet de retourner toutes les instances Acteurs d'une
-     * tâche donnée.
-     * 
-     * @param oidTacheSel
-     * @return
-     */
-    public static ArrayList<Actor> extractActorFromTask(Task current) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.ACTOR_CLASS);
-
-	ArrayList<Actor> empilActeur = new ArrayList<Actor>();
-	for (int i = 0; i < objs.length; i++) {
-	    Actor acteur = (Actor) objs[i];
-	    // Le Oid de la tache qui contient l'acteur i.
-	    Task a = acteur.getInverseTache();
-	    if (a != null) {
-		String oidActeurTache = a.getOid().get();
-		if (oidActeurTache.equals(current.getOid().get())) {
-		    empilActeur.add(acteur);
+	public static String getActorList(Task myRefTask) {
+		String toDisplay = "";
+		for (int i = 0; i < myRefTask.getActors().size(); i++) {
+			toDisplay += ((Actor) myRefTask.getActors().get(i)).getName();
+			if (i < myRefTask.getActors().size() - 1) {
+				toDisplay += ";";
+			}
 		}
-	    }
-
+		return toDisplay;
 	}
-	return empilActeur;
-    }
 
-    public static void setActorExperience(String oid, String exp) {
-	Actor m = (Actor) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setExperience(exp);
-    }
+	public static Oid createActor(Oid oidUser) {
+		Oid oidActor = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE, ExpressConstant.ACTOR_CLASS);
+		Actor a = (Actor) InterfaceExpressJava.prendre(oidActor);
+		User u = (User) InterfaceExpressJava.prendre(oidUser);
+		a.setUserRef(u);
+		u.addReverseActor(a);
+		return (oidActor);
+	}
 
-    public static void setActorCompetence(String oid, String name) {
-	Actor m = (Actor) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setCompetence(name);
-    }
+	public static String[] getActorFromOid(Oid actor) {
+		String[] myTable = new String[4];
+		Actor a = (Actor) InterfaceExpressJava.prendre(actor);
+		myTable[0] = a.getName();
+		myTable[1] = a.getExperience().getValue();
+		myTable[2] = a.getCompetence();
+		myTable[3] = actor.get();
+		return myTable;
+	}
+
+	/**
+	 * Cette méthode permet de retourner toutes les instances Acteurs d'une tâche
+	 * donnée.
+	 * 
+	 * @param oidTacheSel
+	 * @return
+	 */
+	public static ArrayList<Actor> extractActorFromTask(Task current) {
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.ACTOR_CLASS);
+
+		ArrayList<Actor> empilActeur = new ArrayList<Actor>();
+		for (int i = 0; i < objs.length; i++) {
+			Actor acteur = (Actor) objs[i];
+			// Le Oid de la tache qui contient l'acteur i.
+			Task a = acteur.getInverseTache();
+			if (a != null) {
+				String oidActeurTache = a.getOid().get();
+				if (oidActeurTache.equals(current.getOid().get())) {
+					empilActeur.add(acteur);
+				}
+			}
+
+		}
+		return empilActeur;
+	}
+
+	public static void setActorExperience(String oid, String exp) {
+		Actor m = (Actor) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setExperience(exp);
+	}
+
+	public static void setActorCompetence(String oid, String name) {
+		Actor m = (Actor) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setCompetence(name);
+	}
 }

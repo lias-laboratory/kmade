@@ -33,114 +33,94 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class AddUnaryFunction extends UnaryFunction {
 
-    private static final long serialVersionUID = 7194395202228059922L;
+	private static final long serialVersionUID = 7194395202228059922L;
 
-    public AddUnaryFunction(GroupExpressExpression pnode) {
-	super(false, pnode);
-	this.name = ExpressConstant.ADD_UNARY_FUNCTION_EXPRESSION;
-    }
-
-    public void checkNode() throws SemanticException {
-	try {
-	    ObjetAbstrait groupeStored = InterfaceExpressJava
-		    .getCurrentObject()
-
-		    .getCurrentCheckGroup().getContientObj();
-	    ObjetAbstrait groupeAttributed = ((GroupExpressExpression) myAloneExpression)
-		    .getGroup().getContientObj();
-
-	    if (!groupeStored.getName().equals(groupeAttributed.getName())) {
-		throw new SemanticException(
-			ExpressConstant.NO_SAME_ABSTRACT_OBJECT + " : \""
-				+ groupeStored.getName() + "\" et " + "\""
-				+ groupeAttributed.getName() + "\"");
-	    }
-	} catch (Exception e) {
-	    System.err.println("KMC");
-	    e.printStackTrace();
-	}
-    }
-
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-
-	ObjetConcret myRef = ref;
-	if (InterfaceExpressJava.getCurrentObject()
-		.isExistCurrentEvaluateConcreteObject()) {
-	    myRef = InterfaceExpressJava.getCurrentObject()
-		    .getCurrentEvaluateConcreteObject();
-	} else {
-	    myRef = null;
+	public AddUnaryFunction(GroupExpressExpression pnode) {
+		super(false, pnode);
+		this.name = ExpressConstant.ADD_UNARY_FUNCTION_EXPRESSION;
 	}
 
-	if (myRef == null) {
-	    this.setStateToError();
-	    throw new SemanticErrorException();
+	public void checkNode() throws SemanticException {
+		try {
+			ObjetAbstrait groupeStored = InterfaceExpressJava.getCurrentObject()
+
+					.getCurrentCheckGroup().getContientObj();
+			ObjetAbstrait groupeAttributed = ((GroupExpressExpression) myAloneExpression).getGroup().getContientObj();
+
+			if (!groupeStored.getName().equals(groupeAttributed.getName())) {
+				throw new SemanticException(ExpressConstant.NO_SAME_ABSTRACT_OBJECT + " : \"" + groupeStored.getName()
+						+ "\" et " + "\"" + groupeAttributed.getName() + "\"");
+			}
+		} catch (Exception e) {
+			System.err.println("KMC");
+			e.printStackTrace();
+		}
 	}
 
-	ObjetAbstrait groupeStored = InterfaceExpressJava.getCurrentObject()
-		.getCurrentCheckGroup().getContientObj();
-	ObjetAbstrait groupeAttributed = ((GroupExpressExpression) myAloneExpression)
-		.getGroup().getContientObj();
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
 
-	if (groupeStored.getName().equals(groupeAttributed.getName())) {
-	    // Création de l'objet concret
-	    Oid oidObjConc = InterfaceExpressJava.createEntity(
-		    ExpressConstant.METAOBJECT_PACKAGE,
-		    ExpressConstant.CONCRETE_OBJECT_CLASS);
-	    // Récupère l'objet Abstrait
-	    ObjetAbstrait abstractObject = (ObjetAbstrait) InterfaceExpressJava
-		    .prendre(groupeStored.getOid());
-	    // Récupère l'instance de l'objet concret
-	    ObjetConcret concreteObject = (ObjetConcret) InterfaceExpressJava
-		    .prendre(oidObjConc);
-	    concreteObject.setName(InterfaceExpressJava.getCurrentObject()
-		    .getCurrentEvaluateConcreteObject().getName());
-	    // Récupère le groupe
-	    Groupe g = (Groupe) InterfaceExpressJava
-		    .prendre(((GroupExpressExpression) myAloneExpression)
-			    .getGroup().getOid());
-	    // Le même objet abstrait
-	    concreteObject.setUtiliseParClass(abstractObject);
-	    // Le groupe spécifié par cette fonction
-	    concreteObject.setAppartientGroupe(g);
-	    // La partie liée aux objets concrets
-	    ArrayList<AttributAbstrait> listattributabs = abstractObject
-		    .getInverseAttributsAbs();
-	    boolean etat = false;
-	    for (int i = 0; i < listattributabs.size(); i++) {
-		Oid oidAttribut = InterfaceExpressJava.createEntity(
-			ExpressConstant.METAOBJECT_PACKAGE,
-			ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
-		AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava
-			.prendre(oidAttribut);
-		AttributAbstrait abstractAttribut = listattributabs.get(i);
-		concreteAttribut.setObjConcDe(concreteObject);
-		concreteAttribut.setAttributDe(abstractAttribut);
-		concreteAttribut.setName(abstractAttribut.getName());
-		etat = etat
-			| concreteAttribut.setValeur(InterfaceExpressJava
-				.getCurrentObject()
-				.getCurrentEvaluateConcreteObject()
-				.getInverseListAttribut().get(i).getValue()
-				.toString());
-	    }
+		ObjetConcret myRef = ref;
+		if (InterfaceExpressJava.getCurrentObject().isExistCurrentEvaluateConcreteObject()) {
+			myRef = InterfaceExpressJava.getCurrentObject().getCurrentEvaluateConcreteObject();
+		} else {
+			myRef = null;
+		}
 
-	    if (etat) {
-		this.setStateToError();
-		throw new SemanticErrorException();
-	    } else {
-		myRef = concreteObject;
-		this.setStateToValue();
-	    }
-	} else {
-	    this.setStateToError();
-	    throw new SemanticErrorException();
+		if (myRef == null) {
+			this.setStateToError();
+			throw new SemanticErrorException();
+		}
+
+		ObjetAbstrait groupeStored = InterfaceExpressJava.getCurrentObject().getCurrentCheckGroup().getContientObj();
+		ObjetAbstrait groupeAttributed = ((GroupExpressExpression) myAloneExpression).getGroup().getContientObj();
+
+		if (groupeStored.getName().equals(groupeAttributed.getName())) {
+			// Création de l'objet concret
+			Oid oidObjConc = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+					ExpressConstant.CONCRETE_OBJECT_CLASS);
+			// Récupère l'objet Abstrait
+			ObjetAbstrait abstractObject = (ObjetAbstrait) InterfaceExpressJava.prendre(groupeStored.getOid());
+			// Récupère l'instance de l'objet concret
+			ObjetConcret concreteObject = (ObjetConcret) InterfaceExpressJava.prendre(oidObjConc);
+			concreteObject
+					.setName(InterfaceExpressJava.getCurrentObject().getCurrentEvaluateConcreteObject().getName());
+			// Récupère le groupe
+			Groupe g = (Groupe) InterfaceExpressJava
+					.prendre(((GroupExpressExpression) myAloneExpression).getGroup().getOid());
+			// Le même objet abstrait
+			concreteObject.setUtiliseParClass(abstractObject);
+			// Le groupe spécifié par cette fonction
+			concreteObject.setAppartientGroupe(g);
+			// La partie liée aux objets concrets
+			ArrayList<AttributAbstrait> listattributabs = abstractObject.getInverseAttributsAbs();
+			boolean etat = false;
+			for (int i = 0; i < listattributabs.size(); i++) {
+				Oid oidAttribut = InterfaceExpressJava.createEntity(ExpressConstant.METAOBJECT_PACKAGE,
+						ExpressConstant.CONCRETE_ATTRIBUTE_CLASS);
+				AttributConcret concreteAttribut = (AttributConcret) InterfaceExpressJava.prendre(oidAttribut);
+				AttributAbstrait abstractAttribut = listattributabs.get(i);
+				concreteAttribut.setObjConcDe(concreteObject);
+				concreteAttribut.setAttributDe(abstractAttribut);
+				concreteAttribut.setName(abstractAttribut.getName());
+				etat = etat | concreteAttribut.setValeur(InterfaceExpressJava.getCurrentObject()
+						.getCurrentEvaluateConcreteObject().getInverseListAttribut().get(i).getValue().toString());
+			}
+
+			if (etat) {
+				this.setStateToError();
+				throw new SemanticErrorException();
+			} else {
+				myRef = concreteObject;
+				this.setStateToValue();
+			}
+		} else {
+			this.setStateToError();
+			throw new SemanticErrorException();
+		}
+
+		if (this.isValueState()) {
+			InterfaceExpressJava.appendHistoryMessage(this.name);
+			InterfaceExpressJava.getCurrentObject().setCurrentEvaluateConcreteObject(myRef);
+		}
 	}
-
-	if (this.isValueState()) {
-	    InterfaceExpressJava.appendHistoryMessage(this.name);
-	    InterfaceExpressJava.getCurrentObject()
-		    .setCurrentEvaluateConcreteObject(myRef);
-	}
-    }
 }

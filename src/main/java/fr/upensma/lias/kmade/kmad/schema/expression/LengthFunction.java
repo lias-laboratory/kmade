@@ -27,45 +27,44 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class LengthFunction extends BinaryFunction {
 
-    private static final long serialVersionUID = -891728359658195164L;
+	private static final long serialVersionUID = -891728359658195164L;
 
-    public LengthFunction(GroupExpressExpression left, NodeExpression right) {
-	super(new Integer(0), left, right);
-	this.name = ExpressConstant.LENGTH_FUNCTION_EXPRESSION;
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-
-	if (this.rightNode.isBoolean()) {
-	    this.setStateToUnknown();
-	    return;
+	public LengthFunction(GroupExpressExpression left, NodeExpression right) {
+		super(new Integer(0), left, right);
+		this.name = ExpressConstant.LENGTH_FUNCTION_EXPRESSION;
 	}
-	this.setStateToError();
-	throw new SemanticException(ExpressConstant.BOOLEAN_IS_NEEDED_ERROR
-		+ " : " + this.getName());
-    }
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	ArrayList<ObjetConcret> list = ((GroupExpressExpression) this
-		.getLeftNode()).getGroup().getEnsemble().getLstObjConcrets();
+	public void checkNode() throws SemanticException {
+		super.checkNode();
 
-	int compteur = 0;
-	for (ObjetConcret current : list) {
-	    super.evaluateNode(current);
-
-	    if (this.isValueState()) {
 		if (this.rightNode.isBoolean()) {
-		    if ((Boolean) this.rightNode.getNodeValue()) {
-			compteur++;
-		    }
+			this.setStateToUnknown();
+			return;
 		}
-	    } else {
-		throw new SemanticErrorException();
-	    }
+		this.setStateToError();
+		throw new SemanticException(ExpressConstant.BOOLEAN_IS_NEEDED_ERROR + " : " + this.getName());
 	}
-	if (this.isValueState()) {
-	    this.setNodeValue(compteur);
+
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		ArrayList<ObjetConcret> list = ((GroupExpressExpression) this.getLeftNode()).getGroup().getEnsemble()
+				.getLstObjConcrets();
+
+		int compteur = 0;
+		for (ObjetConcret current : list) {
+			super.evaluateNode(current);
+
+			if (this.isValueState()) {
+				if (this.rightNode.isBoolean()) {
+					if ((Boolean) this.rightNode.getNodeValue()) {
+						compteur++;
+					}
+				}
+			} else {
+				throw new SemanticErrorException();
+			}
+		}
+		if (this.isValueState()) {
+			this.setNodeValue(compteur);
+		}
 	}
-    }
 }

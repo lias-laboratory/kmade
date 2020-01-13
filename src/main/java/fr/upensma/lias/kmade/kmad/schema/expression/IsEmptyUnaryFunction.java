@@ -25,15 +25,14 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class IsEmptyUnaryFunction extends UnaryFunction {
 
-    private static final long serialVersionUID = 2040793276663813914L;
+	private static final long serialVersionUID = 2040793276663813914L;
 
-    public IsEmptyUnaryFunction(GroupExpressExpression pee) {
-	super(false, pee);
-	this.name = ExpressConstant.IS_EMPTY_UNARY_FUNCTION_EXPRESSION;
-    }
+	public IsEmptyUnaryFunction(GroupExpressExpression pee) {
+		super(false, pee);
+		this.name = ExpressConstant.IS_EMPTY_UNARY_FUNCTION_EXPRESSION;
+	}
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	this.setNodeValue(((GroupExpressExpression) myAloneExpression)
-		.getGroup().getEnsemble().isEmpty());
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		this.setNodeValue(((GroupExpressExpression) myAloneExpression).getGroup().getEnsemble().isEmpty());
+	}
 }

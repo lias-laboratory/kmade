@@ -29,62 +29,60 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public class TableauAg extends Agregat {
 
-    private static final long serialVersionUID = -1957369154765575357L;
+	private static final long serialVersionUID = -1957369154765575357L;
 
-    public TableauAg() {
-	this.lstObjConcrets = new ArrayList<ObjetConcret>();
-	this.agregatStruct = AgregatStructure.ARRAY_AGREGAT;
-    }
-
-    public TableauAg(Oid oid) {
-	this.lstObjConcrets = new ArrayList<ObjetConcret>();
-	this.agregatStruct = AgregatStructure.ARRAY_AGREGAT;
-	this.oid = oid;
-    }
-
-    public TableauAg(ArrayList<ObjetConcret> lst, Oid oid) {
-	this.lstObjConcrets = lst;
-	this.oid = oid;
-	this.agregatStruct = AgregatStructure.ARRAY_AGREGAT;
-    }
-
-    public void setOid(Oid oid) {
-	this.oid = oid;
-    }
-
-    public boolean put(ObjetConcret i) {
-	this.lstObjConcrets.add(i);
-	return true;
-    }
-
-    public ObjetConcret get() {
-	try {
-	    return this.lstObjConcrets.get(0);
-	} catch (java.lang.IndexOutOfBoundsException e) {
-	    return null;
+	public TableauAg() {
+		this.lstObjConcrets = new ArrayList<ObjetConcret>();
+		this.agregatStruct = AgregatStructure.ARRAY_AGREGAT;
 	}
-    }
 
-    public String toSPF() {
-	String SPF = this.oid.get() + "=TableauAg();";
-	return SPF;
-    }
+	public TableauAg(Oid oid) {
+		this.lstObjConcrets = new ArrayList<ObjetConcret>();
+		this.agregatStruct = AgregatStructure.ARRAY_AGREGAT;
+		this.oid = oid;
+	}
 
-    public org.w3c.dom.Element toXML(Document doc) {
-	org.w3c.dom.Element racine = super.toXML(doc);
-	racine.setAttribute("classkmad", "metaobjet.TableauAg");
-	return racine;
-    }
+	public TableauAg(ArrayList<ObjetConcret> lst, Oid oid) {
+		this.lstObjConcrets = lst;
+		this.oid = oid;
+		this.agregatStruct = AgregatStructure.ARRAY_AGREGAT;
+	}
 
-    public org.w3c.dom.Element toXML2(Document doc) {
-	org.w3c.dom.Element racine = super.toXML2(doc);
-	racine.setAttribute("classkmad", "metaobjet.TableauAg");
-	return racine;
-    }
+	public void setOid(Oid oid) {
+		this.oid = oid;
+	}
 
-    public String getName() {
-	return AgregatStructure
-		.getEnumereIntoLocaleAgregatStructure(AgregatStructure.ARRAY_AGREGAT
-			.getValue());
-    }
+	public boolean put(ObjetConcret i) {
+		this.lstObjConcrets.add(i);
+		return true;
+	}
+
+	public ObjetConcret get() {
+		try {
+			return this.lstObjConcrets.get(0);
+		} catch (java.lang.IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
+	public String toSPF() {
+		String SPF = this.oid.get() + "=TableauAg();";
+		return SPF;
+	}
+
+	public org.w3c.dom.Element toXML(Document doc) {
+		org.w3c.dom.Element racine = super.toXML(doc);
+		racine.setAttribute("classkmad", "metaobjet.TableauAg");
+		return racine;
+	}
+
+	public org.w3c.dom.Element toXML2(Document doc) {
+		org.w3c.dom.Element racine = super.toXML2(doc);
+		racine.setAttribute("classkmad", "metaobjet.TableauAg");
+		return racine;
+	}
+
+	public String getName() {
+		return AgregatStructure.getEnumereIntoLocaleAgregatStructure(AgregatStructure.ARRAY_AGREGAT.getValue());
+	}
 }

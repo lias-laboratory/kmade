@@ -32,232 +32,215 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public class Project implements Entity {
 
-    private static final long serialVersionUID = -473392542373483656L;
+	private static final long serialVersionUID = -473392542373483656L;
 
-    public Oid oid = null;
+	public Oid oid = null;
 
-    private GeneralInformation myGenInfo;
+	private GeneralInformation myGenInfo;
 
-    private ArrayList<InterviewIndex> myIntIndex = new ArrayList<InterviewIndex>();
+	private ArrayList<InterviewIndex> myIntIndex = new ArrayList<InterviewIndex>();
 
-    public Project() {
-	myGenInfo = null;
-    }
-
-    public void removeGeneralInformationAndInterviewIndexAttributes() {
-	this.myGenInfo = null;
-	myIntIndex = new ArrayList<InterviewIndex>();
-    }
-
-    public Project(GeneralInformation pgenInfo,
-	    ArrayList<InterviewIndex> pmyIntIndex, Oid o) {
-	this.myGenInfo = pgenInfo;
-	this.myGenInfo.setInverseProject(this);
-
-	this.myIntIndex = pmyIntIndex;
-	for (int i = 0; i < pmyIntIndex.size(); i++) {
-	    this.myIntIndex.get(i).setInverseProject(this);
+	public Project() {
+		myGenInfo = null;
 	}
 
-	this.oid = o;
-    }
-
-    @Override
-    public Element toXML2(Document doc) throws Exception {
-	Element racine = doc.createElement("project");
-	racine.setAttribute("classkmad", "project.Project");
-	racine.setAttribute("idkmad", oid.get());
-
-	if (this.myGenInfo != null && !this.myGenInfo.isEmpty()) {
-	    racine.setAttribute("id-project-information", myGenInfo.getOid()
-		    .get());
-	    racine.appendChild(this.myGenInfo.toXML2(doc));
+	public void removeGeneralInformationAndInterviewIndexAttributes() {
+		this.myGenInfo = null;
+		myIntIndex = new ArrayList<InterviewIndex>();
 	}
-	if (!myIntIndex.isEmpty()) {
-	    String list = new String("");
-	    for (int i = 0; i < myIntIndex.size(); i++) {
-		list += myIntIndex.get(i).getOid().get() + " ";
-		racine.appendChild(this.myIntIndex.get(i).toXML2(doc));
-	    }
-	    racine.setAttribute("id-project-interviews-list", list);
-	}
-	return racine;
-    }
 
-    public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
-	String userValue;
-	if (p.hasAttribute("id-project-information")) {
-	    userValue = p.getAttribute("id-project-information");
-	    if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null)
-		return true;
-	}
-	if (p.hasAttribute("id-project-interviews-list")) {
-	    String[] values = p.getAttribute("id-project-interviews-list")
-		    .split(" ");
-	    for (int i = 0; i < values.length; i++) {
-		if (InterfaceExpressJava.bdd.prendre(new Oid((values[i]))) == null) {
-		    return true;
+	public Project(GeneralInformation pgenInfo, ArrayList<InterviewIndex> pmyIntIndex, Oid o) {
+		this.myGenInfo = pgenInfo;
+		this.myGenInfo.setInverseProject(this);
+
+		this.myIntIndex = pmyIntIndex;
+		for (int i = 0; i < pmyIntIndex.size(); i++) {
+			this.myIntIndex.get(i).setInverseProject(this);
 		}
-	    }
+
+		this.oid = o;
 	}
 
-	return false;
-    }
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		Element racine = doc.createElement("project");
+		racine.setAttribute("classkmad", "project.Project");
+		racine.setAttribute("idkmad", oid.get());
 
-    @Override
-    public void createObjectFromXMLElement2(Element p) throws Exception {
-	// TODO Auto-generated method stub
-	this.oid = new Oid(p.getAttribute("idkmad"));
-	// General Information
-	if (p.hasAttribute("id-project-information")) {
-	    this.myGenInfo = (GeneralInformation) InterfaceExpressJava.bdd
-		    .prendre(new Oid(p.getAttribute("id-project-information")));
+		if (this.myGenInfo != null && !this.myGenInfo.isEmpty()) {
+			racine.setAttribute("id-project-information", myGenInfo.getOid().get());
+			racine.appendChild(this.myGenInfo.toXML2(doc));
+		}
+		if (!myIntIndex.isEmpty()) {
+			String list = new String("");
+			for (int i = 0; i < myIntIndex.size(); i++) {
+				list += myIntIndex.get(i).getOid().get() + " ";
+				racine.appendChild(this.myIntIndex.get(i).toXML2(doc));
+			}
+			racine.setAttribute("id-project-interviews-list", list);
+		}
+		return racine;
 	}
-	// else{
-	// this.myGenInfo = new GeneralInformation();
-	// KMADEHistoryMessageManager.printMessage("ah ba si");
-	// }
-	// Interviews
-	if (p.hasAttribute("id-project-interview-list")) {
-	    String[] interviews = p.getAttribute("id-project-interviews-list")
-		    .split(" ");
-	    for (int i = 0; i < interviews.length; i++) {
-		this.myIntIndex.add((InterviewIndex) InterfaceExpressJava.bdd
-			.prendre(new Oid(interviews[i])));
-	    }
-	}
-    }
 
-    public void addInterviewIndex(InterviewIndex pInterviewIndex) {
-	myIntIndex.add(pInterviewIndex);
-    }
+	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) {
+		String userValue;
+		if (p.hasAttribute("id-project-information")) {
+			userValue = p.getAttribute("id-project-information");
+			if (InterfaceExpressJava.bdd.prendre(new Oid(userValue)) == null)
+				return true;
+		}
+		if (p.hasAttribute("id-project-interviews-list")) {
+			String[] values = p.getAttribute("id-project-interviews-list").split(" ");
+			for (int i = 0; i < values.length; i++) {
+				if (InterfaceExpressJava.bdd.prendre(new Oid((values[i]))) == null) {
+					return true;
+				}
+			}
+		}
 
-    public Element toXML(Document doc) {
-	Element racine = doc.createElement("project");
-	racine.setAttribute("classkmad", "project.Project");
-	racine.setAttribute("idkmad", oid.get());
+		return false;
+	}
 
-	Element idprojectGeneralInfo = doc
-		.createElement("id-project-information");
-	idprojectGeneralInfo.setTextContent(myGenInfo.getOid().get());
-	racine.appendChild(idprojectGeneralInfo);
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		// TODO Auto-generated method stub
+		this.oid = new Oid(p.getAttribute("idkmad"));
+		// General Information
+		if (p.hasAttribute("id-project-information")) {
+			this.myGenInfo = (GeneralInformation) InterfaceExpressJava.bdd
+					.prendre(new Oid(p.getAttribute("id-project-information")));
+		}
+		// else{
+		// this.myGenInfo = new GeneralInformation();
+		// KMADEHistoryMessageManager.printMessage("ah ba si");
+		// }
+		// Interviews
+		if (p.hasAttribute("id-project-interview-list")) {
+			String[] interviews = p.getAttribute("id-project-interviews-list").split(" ");
+			for (int i = 0; i < interviews.length; i++) {
+				this.myIntIndex.add((InterviewIndex) InterfaceExpressJava.bdd.prendre(new Oid(interviews[i])));
+			}
+		}
+	}
 
-	if (myIntIndex.size() != 0) {
-	    Element idProjectInterviewsList = doc
-		    .createElement("id-project-interviews-list");
-	    for (int i = 0; i < myIntIndex.size(); i++) {
-		Element idProjectInterviews = doc
-			.createElement("id-project-interview");
-		idProjectInterviews.setTextContent(myIntIndex.get(i).getOid()
-			.get());
-		idProjectInterviewsList.appendChild(idProjectInterviews);
-	    }
-	    racine.appendChild(idProjectInterviewsList);
+	public void addInterviewIndex(InterviewIndex pInterviewIndex) {
+		myIntIndex.add(pInterviewIndex);
 	}
-	return racine;
-    }
 
-    public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
-	NodeList userValue = p.getElementsByTagName("id-project-information");
-	if (userValue != null && userValue.item(0) != null
-		&& userValue.item(0).getParentNode() != p) {
-	    userValue = null;
+	public Element toXML(Document doc) {
+		Element racine = doc.createElement("project");
+		racine.setAttribute("classkmad", "project.Project");
+		racine.setAttribute("idkmad", oid.get());
+
+		Element idprojectGeneralInfo = doc.createElement("id-project-information");
+		idprojectGeneralInfo.setTextContent(myGenInfo.getOid().get());
+		racine.appendChild(idprojectGeneralInfo);
+
+		if (myIntIndex.size() != 0) {
+			Element idProjectInterviewsList = doc.createElement("id-project-interviews-list");
+			for (int i = 0; i < myIntIndex.size(); i++) {
+				Element idProjectInterviews = doc.createElement("id-project-interview");
+				idProjectInterviews.setTextContent(myIntIndex.get(i).getOid().get());
+				idProjectInterviewsList.appendChild(idProjectInterviews);
+			}
+			racine.appendChild(idProjectInterviewsList);
+		}
+		return racine;
 	}
-	if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0)
-		.getTextContent())) == null) {
-	    return true;
-	}
-	userValue = p.getElementsByTagName("id-project-interviews-list");
-	if (userValue != null && userValue.item(0) != null
-		&& userValue.item(0).getParentNode() != p) {
-	    userValue = null;
-	}
-	if (userValue.getLength() != 0) {
-	    NodeList nodeListInterview = userValue.item(0).getChildNodes();
-	    for (int i = 0; i < nodeListInterview.getLength(); i++) {
-		if (nodeListInterview.item(i).getNodeType() == Element.ELEMENT_NODE) {
-		    if (InterfaceExpressJava.bdd.prendre(new Oid(
-			    ((Element) nodeListInterview.item(i))
-				    .getTextContent())) == null) {
+
+	public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
+		NodeList userValue = p.getElementsByTagName("id-project-information");
+		if (userValue != null && userValue.item(0) != null && userValue.item(0).getParentNode() != p) {
+			userValue = null;
+		}
+		if (InterfaceExpressJava.bdd.prendre(new Oid(userValue.item(0).getTextContent())) == null) {
 			return true;
-		    }
 		}
-	    }
-	}
-	return false;
-    }
-
-    public void createObjectFromXMLElement(org.w3c.dom.Element p) {
-	this.oid = new Oid(p.getAttribute("idkmad"));
-	myIntIndex.clear();
-	NodeList nodeList = p.getElementsByTagName("id-project-information");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	myGenInfo = (GeneralInformation) InterfaceExpressJava.bdd
-		.prendre(new Oid(nodeList.item(0).getTextContent()));
-
-	nodeList = p.getElementsByTagName("id-project-interviews-list");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
-	}
-	if (nodeList.getLength() != 0) {
-	    NodeList nodeListInterview = nodeList.item(0).getChildNodes();
-	    for (int i = 0; i < nodeListInterview.getLength(); i++) {
-		if (nodeListInterview.item(i).getNodeType() == Element.ELEMENT_NODE) {
-		    myIntIndex.add((InterviewIndex) InterfaceExpressJava.bdd
-			    .prendre(new Oid(nodeListInterview.item(i)
-				    .getTextContent())));
+		userValue = p.getElementsByTagName("id-project-interviews-list");
+		if (userValue != null && userValue.item(0) != null && userValue.item(0).getParentNode() != p) {
+			userValue = null;
 		}
-	    }
-	}
-    }
-
-    public String toSPF() {
-	String spfString = oid.get() + "=" + "Project" + "(";
-
-	if (myGenInfo != null)
-	    spfString = spfString + myGenInfo.getOid().get();
-
-	spfString = spfString + ",(";
-
-	for (int i = 0; i < myIntIndex.size(); i++) {
-	    spfString = spfString + myIntIndex.get(i).getOid().get();
-	    if (i < (myIntIndex.size() - 1))
-		spfString = spfString + ",";
+		if (userValue.getLength() != 0) {
+			NodeList nodeListInterview = userValue.item(0).getChildNodes();
+			for (int i = 0; i < nodeListInterview.getLength(); i++) {
+				if (nodeListInterview.item(i).getNodeType() == Element.ELEMENT_NODE) {
+					if (InterfaceExpressJava.bdd
+							.prendre(new Oid(((Element) nodeListInterview.item(i)).getTextContent())) == null) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
-	spfString = spfString + "));";
-	return spfString;
-    }
+	public void createObjectFromXMLElement(org.w3c.dom.Element p) {
+		this.oid = new Oid(p.getAttribute("idkmad"));
+		myIntIndex.clear();
+		NodeList nodeList = p.getElementsByTagName("id-project-information");
+		if (nodeList != null && nodeList.item(0) != null && nodeList.item(0).getParentNode() != p) {
+			nodeList = null;
+		}
+		myGenInfo = (GeneralInformation) InterfaceExpressJava.bdd.prendre(new Oid(nodeList.item(0).getTextContent()));
 
-    public void setOid(Oid oid) {
-	this.oid = oid;
-    }
+		nodeList = p.getElementsByTagName("id-project-interviews-list");
+		if (nodeList != null && nodeList.item(0) != null && nodeList.item(0).getParentNode() != p) {
+			nodeList = null;
+		}
+		if (nodeList.getLength() != 0) {
+			NodeList nodeListInterview = nodeList.item(0).getChildNodes();
+			for (int i = 0; i < nodeListInterview.getLength(); i++) {
+				if (nodeListInterview.item(i).getNodeType() == Element.ELEMENT_NODE) {
+					myIntIndex.add((InterviewIndex) InterfaceExpressJava.bdd
+							.prendre(new Oid(nodeListInterview.item(i).getTextContent())));
+				}
+			}
+		}
+	}
 
-    public Oid getOid() {
-	return oid;
-    }
+	public String toSPF() {
+		String spfString = oid.get() + "=" + "Project" + "(";
 
-    public String getName() {
-	return "";
-    }
+		if (myGenInfo != null)
+			spfString = spfString + myGenInfo.getOid().get();
 
-    public GeneralInformation getGeneralInformation() {
-	return myGenInfo;
-    }
+		spfString = spfString + ",(";
 
-    public void setGeneralInformation(GeneralInformation myGenInfo) {
-	this.myGenInfo = myGenInfo;
-    }
+		for (int i = 0; i < myIntIndex.size(); i++) {
+			spfString = spfString + myIntIndex.get(i).getOid().get();
+			if (i < (myIntIndex.size() - 1))
+				spfString = spfString + ",";
+		}
 
-    public ArrayList<InterviewIndex> getInterviewIndex() {
-	return myIntIndex;
-    }
+		spfString = spfString + "));";
+		return spfString;
+	}
 
-    public void setInterviewIndex(ArrayList<InterviewIndex> myIntIndex) {
-	this.myIntIndex = myIntIndex;
-    }
+	public void setOid(Oid oid) {
+		this.oid = oid;
+	}
+
+	public Oid getOid() {
+		return oid;
+	}
+
+	public String getName() {
+		return "";
+	}
+
+	public GeneralInformation getGeneralInformation() {
+		return myGenInfo;
+	}
+
+	public void setGeneralInformation(GeneralInformation myGenInfo) {
+		this.myGenInfo = myGenInfo;
+	}
+
+	public ArrayList<InterviewIndex> getInterviewIndex() {
+		return myIntIndex;
+	}
+
+	public void setInterviewIndex(ArrayList<InterviewIndex> myIntIndex) {
+		this.myIntIndex = myIntIndex;
+	}
 }

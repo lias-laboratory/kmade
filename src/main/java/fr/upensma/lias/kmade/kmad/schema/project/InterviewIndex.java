@@ -29,394 +29,374 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public class InterviewIndex implements Entity {
 
-    private static final long serialVersionUID = -3876650976240756349L;
+	private static final long serialVersionUID = -3876650976240756349L;
 
-    public Oid oid = null;
+	public Oid oid = null;
 
-    private String interviewedName;
+	private String interviewedName;
 
-    private String placeInformation;
+	private String placeInformation;
 
-    private String statut;
+	private String statut;
 
-    private String seniority;
+	private String seniority;
 
-    private String date;
+	private String date;
 
-    private String type;
+	private String type;
 
-    private String searchedInformations;
+	private String searchedInformations;
 
-    private String interviewerName;
+	private String interviewerName;
 
-    private Project inverseProject;
+	private Project inverseProject;
 
-    public InterviewIndex() {
-	this.interviewedName = "";
-	this.placeInformation = "";
-	this.statut = "";
-	this.seniority = "";
-	this.date = "";
-	this.type = "";
-	this.searchedInformations = "";
-	this.interviewerName = "";
-    }
-
-    public InterviewIndex(String pinterviewedName, String pplaceInformation,
-	    String pStatut, String pSeniority, String pDate,
-	    String pInterviewType, String psearchedInformations,
-	    String pinterviewerName, Oid o) {
-	this.interviewedName = pinterviewedName;
-	this.placeInformation = pplaceInformation;
-	this.statut = pStatut;
-	this.seniority = pSeniority;
-	this.date = pDate;
-	this.type = pInterviewType;
-	this.searchedInformations = psearchedInformations;
-	this.interviewerName = pinterviewerName;
-	this.oid = o;
-    }
-
-    public Element toXML(Document doc) {
-	Element racine = doc.createElement("projectinterview");
-	racine.setAttribute("idkmad", oid.get());
-	racine.setAttribute("classkmad", "project.InterviewIndex");
-
-	Element interviewActor = doc.createElement("projectinterview-actor");
-	interviewActor.setTextContent(interviewedName);
-
-	if (!placeInformation.equals("")) {
-	    Element interviewPlace = doc
-		    .createElement("projectinterview-place");
-	    interviewPlace.setTextContent(placeInformation);
-	    racine.appendChild(interviewPlace);
+	public InterviewIndex() {
+		this.interviewedName = "";
+		this.placeInformation = "";
+		this.statut = "";
+		this.seniority = "";
+		this.date = "";
+		this.type = "";
+		this.searchedInformations = "";
+		this.interviewerName = "";
 	}
 
-	if (!statut.equals("")) {
-	    Element interviewStatut = doc
-		    .createElement("projectinterview-statut");
-	    interviewStatut.setTextContent(statut);
-	    racine.appendChild(interviewStatut);
+	public InterviewIndex(String pinterviewedName, String pplaceInformation, String pStatut, String pSeniority,
+			String pDate, String pInterviewType, String psearchedInformations, String pinterviewerName, Oid o) {
+		this.interviewedName = pinterviewedName;
+		this.placeInformation = pplaceInformation;
+		this.statut = pStatut;
+		this.seniority = pSeniority;
+		this.date = pDate;
+		this.type = pInterviewType;
+		this.searchedInformations = psearchedInformations;
+		this.interviewerName = pinterviewerName;
+		this.oid = o;
 	}
 
-	if (!seniority.equals("")) {
-	    Element interviewSeniority = doc
-		    .createElement("projectinterview-seniority");
-	    interviewSeniority.setTextContent(seniority);
-	    racine.appendChild(interviewSeniority);
+	public Element toXML(Document doc) {
+		Element racine = doc.createElement("projectinterview");
+		racine.setAttribute("idkmad", oid.get());
+		racine.setAttribute("classkmad", "project.InterviewIndex");
+
+		Element interviewActor = doc.createElement("projectinterview-actor");
+		interviewActor.setTextContent(interviewedName);
+
+		if (!placeInformation.equals("")) {
+			Element interviewPlace = doc.createElement("projectinterview-place");
+			interviewPlace.setTextContent(placeInformation);
+			racine.appendChild(interviewPlace);
+		}
+
+		if (!statut.equals("")) {
+			Element interviewStatut = doc.createElement("projectinterview-statut");
+			interviewStatut.setTextContent(statut);
+			racine.appendChild(interviewStatut);
+		}
+
+		if (!seniority.equals("")) {
+			Element interviewSeniority = doc.createElement("projectinterview-seniority");
+			interviewSeniority.setTextContent(seniority);
+			racine.appendChild(interviewSeniority);
+		}
+
+		if (!date.equals("")) {
+			Element interviewDate = doc.createElement("projectinterview-date");
+			interviewDate.setTextContent(date);
+			racine.appendChild(interviewDate);
+		}
+
+		if (!type.equals("")) {
+			Element interviewType = doc.createElement("projectinterview-type");
+			interviewType.setTextContent(type);
+			racine.appendChild(interviewType);
+		}
+
+		if (!searchedInformations.equals("")) {
+			Element interviewInfo = doc.createElement("projectinterview-info");
+			interviewInfo.setTextContent(searchedInformations);
+			racine.appendChild(interviewInfo);
+		}
+
+		if (!interviewerName.equals("")) {
+			Element interviewDirector = doc.createElement("projectinterview-director");
+			interviewDirector.setTextContent(interviewerName);
+			racine.appendChild(interviewDirector);
+		}
+
+		racine.appendChild(interviewActor);
+		return racine;
 	}
 
-	if (!date.equals("")) {
-	    Element interviewDate = doc.createElement("projectinterview-date");
-	    interviewDate.setTextContent(date);
-	    racine.appendChild(interviewDate);
+	public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
+		return false;
 	}
 
-	if (!type.equals("")) {
-	    Element interviewType = doc.createElement("projectinterview-type");
-	    interviewType.setTextContent(type);
-	    racine.appendChild(interviewType);
+	public void createObjectFromXMLElement(org.w3c.dom.Element p) {
+		this.oid = new Oid(p.getAttribute("idkmad"));
+
+		NodeList userPreValue = p.getElementsByTagName("projectinterview-actor");
+		interviewedName = userPreValue.item(0).getTextContent();
+
+		userPreValue = p.getElementsByTagName("projectinterview-place");
+		if (userPreValue.item(0) != null) {
+			placeInformation = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-statut");
+		if (userPreValue.item(0) != null) {
+			statut = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-seniority");
+		if (userPreValue.item(0) != null) {
+			seniority = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-date");
+		if (userPreValue.item(0) != null) {
+			date = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-type");
+		if (userPreValue.item(0) != null) {
+			type = userPreValue.item(0).getTextContent();
+		}
+
+		if (userPreValue.item(0) != null) {
+			searchedInformations = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-director");
+		if (userPreValue.item(0) != null) {
+			interviewerName = userPreValue.item(0).getTextContent();
+		}
 	}
 
-	if (!searchedInformations.equals("")) {
-	    Element interviewInfo = doc.createElement("projectinterview-info");
-	    interviewInfo.setTextContent(searchedInformations);
-	    racine.appendChild(interviewInfo);
+	public String toSPF() {
+		String spfString = oid.get() + "=" + "InterviewIndex" + "(" + "'" + this.interviewedName + "'" + "," + "'"
+				+ this.placeInformation + "'" + "," + "'" + this.statut + "'" + "," + "'" + this.seniority + "'" + ","
+				+ "'" + this.date + "'" + "," + "'" + this.type + "'" + "," + "'" + this.searchedInformations + "'"
+				+ "," + "'" + this.interviewerName + "'" + ")";
+		return spfString;
 	}
 
-	if (!interviewerName.equals("")) {
-	    Element interviewDirector = doc
-		    .createElement("projectinterview-director");
-	    interviewDirector.setTextContent(interviewerName);
-	    racine.appendChild(interviewDirector);
+	public void setOid(Oid oid) {
+		this.oid = oid;
 	}
 
-	racine.appendChild(interviewActor);
-	return racine;
-    }
-
-    public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
-	return false;
-    }
-
-    public void createObjectFromXMLElement(org.w3c.dom.Element p) {
-	this.oid = new Oid(p.getAttribute("idkmad"));
-
-	NodeList userPreValue = p
-		.getElementsByTagName("projectinterview-actor");
-	interviewedName = userPreValue.item(0).getTextContent();
-
-	userPreValue = p.getElementsByTagName("projectinterview-place");
-	if (userPreValue.item(0) != null) {
-	    placeInformation = userPreValue.item(0).getTextContent();
+	public Oid getOid() {
+		return oid;
 	}
 
-	userPreValue = p.getElementsByTagName("projectinterview-statut");
-	if (userPreValue.item(0) != null) {
-	    statut = userPreValue.item(0).getTextContent();
+	public String getName() {
+		return "temp";
 	}
 
-	userPreValue = p.getElementsByTagName("projectinterview-seniority");
-	if (userPreValue.item(0) != null) {
-	    seniority = userPreValue.item(0).getTextContent();
+	/**
+	 * @return Returns the date.
+	 */
+	public String getDate() {
+		return date;
 	}
 
-	userPreValue = p.getElementsByTagName("projectinterview-date");
-	if (userPreValue.item(0) != null) {
-	    date = userPreValue.item(0).getTextContent();
+	/**
+	 * @param date The date to set.
+	 */
+	public void setDate(String date) {
+		this.date = date;
 	}
 
-	userPreValue = p.getElementsByTagName("projectinterview-type");
-	if (userPreValue.item(0) != null) {
-	    type = userPreValue.item(0).getTextContent();
+	/**
+	 * @return Returns the interviewedName.
+	 */
+	public String getInterviewedName() {
+		return interviewedName;
 	}
 
-	if (userPreValue.item(0) != null) {
-	    searchedInformations = userPreValue.item(0).getTextContent();
+	/**
+	 * @param interviewedName The interviewedName to set.
+	 */
+	public void setInterviewedName(String interviewedName) {
+		this.interviewedName = interviewedName;
 	}
 
-	userPreValue = p.getElementsByTagName("projectinterview-director");
-	if (userPreValue.item(0) != null) {
-	    interviewerName = userPreValue.item(0).getTextContent();
-	}
-    }
-
-    public String toSPF() {
-	String spfString = oid.get() + "=" + "InterviewIndex" + "(" + "'"
-		+ this.interviewedName + "'" + "," + "'"
-		+ this.placeInformation + "'" + "," + "'" + this.statut + "'"
-		+ "," + "'" + this.seniority + "'" + "," + "'" + this.date
-		+ "'" + "," + "'" + this.type + "'" + "," + "'"
-		+ this.searchedInformations + "'" + "," + "'"
-		+ this.interviewerName + "'" + ")";
-	return spfString;
-    }
-
-    public void setOid(Oid oid) {
-	this.oid = oid;
-    }
-
-    public Oid getOid() {
-	return oid;
-    }
-
-    public String getName() {
-	return "temp";
-    }
-
-    /**
-     * @return Returns the date.
-     */
-    public String getDate() {
-	return date;
-    }
-
-    /**
-     * @param date
-     *            The date to set.
-     */
-    public void setDate(String date) {
-	this.date = date;
-    }
-
-    /**
-     * @return Returns the interviewedName.
-     */
-    public String getInterviewedName() {
-	return interviewedName;
-    }
-
-    /**
-     * @param interviewedName
-     *            The interviewedName to set.
-     */
-    public void setInterviewedName(String interviewedName) {
-	this.interviewedName = interviewedName;
-    }
-
-    /**
-     * @return Returns the interviewerName.
-     */
-    public String getInterviewerName() {
-	return interviewerName;
-    }
-
-    /**
-     * @param interviewerName
-     *            The interviewerName to set.
-     */
-    public void setInterviewerName(String interviewerName) {
-	this.interviewerName = interviewerName;
-    }
-
-    /**
-     * @return Returns the interviewType.
-     */
-    public String getType() {
-	return type;
-    }
-
-    /**
-     * @param interviewType
-     *            The interviewType to set.
-     */
-    public void setType(String interviewType) {
-	this.type = interviewType;
-    }
-
-    /**
-     * @return Returns the placeInformation.
-     */
-    public String getPlaceInformation() {
-	return placeInformation;
-    }
-
-    /**
-     * @param placeInformation
-     *            The placeInformation to set.
-     */
-    public void setPlaceInformation(String placeInformation) {
-	this.placeInformation = placeInformation;
-    }
-
-    /**
-     * @return Returns the searchedInformations.
-     */
-    public String getSearchedInformations() {
-	return searchedInformations;
-    }
-
-    /**
-     * @param searchedInformations
-     *            The searchedInformations to set.
-     */
-    public void setSearchedInformations(String searchedInformations) {
-	this.searchedInformations = searchedInformations;
-    }
-
-    /**
-     * @return Returns the seniority.
-     */
-    public String getSeniority() {
-	return seniority;
-    }
-
-    /**
-     * @param seniority
-     *            The seniority to set.
-     */
-    public void setSeniority(String seniority) {
-	this.seniority = seniority;
-    }
-
-    /**
-     * @return Returns the statut.
-     */
-    public String getStatut() {
-	return statut;
-    }
-
-    /**
-     * @param statut
-     *            The statut to set.
-     */
-    public void setStatut(String statut) {
-	this.statut = statut;
-    }
-
-    /**
-     * @return Returns the inverseProject.
-     */
-    public Project getInverseProject() {
-	return inverseProject;
-    }
-
-    /**
-     * @param inverseProject
-     *            The inverseProject to set.
-     */
-    public void setInverseProject(Project inverseProject) {
-	this.inverseProject = inverseProject;
-    }
-
-    @Override
-    public Element toXML2(Document doc) throws Exception {
-	// TODO Auto-generated method stub
-	return toXML(doc);
-    }
-
-    @Override
-    public void createObjectFromXMLElement2(Element p) throws Exception {
-	this.oid = new Oid(p.getAttribute("idkmad"));
-
-	NodeList userPreValue = p
-		.getElementsByTagName("projectinterview-actor");
-	if (userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	interviewedName = userPreValue.item(0).getTextContent();
-
-	userPreValue = p.getElementsByTagName("projectinterview-place");
-	if (userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    placeInformation = userPreValue.item(0).getTextContent();
+	/**
+	 * @return Returns the interviewerName.
+	 */
+	public String getInterviewerName() {
+		return interviewerName;
 	}
 
-	userPreValue = p.getElementsByTagName("projectinterview-statut");
-	if (userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    statut = userPreValue.item(0).getTextContent();
-	}
-
-	userPreValue = p.getElementsByTagName("projectinterview-seniority");
-	if (userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    seniority = userPreValue.item(0).getTextContent();
+	/**
+	 * @param interviewerName The interviewerName to set.
+	 */
+	public void setInterviewerName(String interviewerName) {
+		this.interviewerName = interviewerName;
 	}
 
-	userPreValue = p.getElementsByTagName("projectinterview-date");
-	if (userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    date = userPreValue.item(0).getTextContent();
-	}
-
-	userPreValue = p.getElementsByTagName("projectinterview-type");
-	if (userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    type = userPreValue.item(0).getTextContent();
+	/**
+	 * @return Returns the interviewType.
+	 */
+	public String getType() {
+		return type;
 	}
 
-	userPreValue = p.getElementsByTagName("projectinterview-info");
-	if (userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    searchedInformations = userPreValue.item(0).getTextContent();
-	}
-
-	userPreValue = p.getElementsByTagName("projectinterview-director");
-	if (userPreValue.item(0).getParentNode() != p) {
-	    userPreValue = null;
-	}
-	if (userPreValue.item(0) != null) {
-	    interviewerName = userPreValue.item(0).getTextContent();
+	/**
+	 * @param interviewType The interviewType to set.
+	 */
+	public void setType(String interviewType) {
+		this.type = interviewType;
 	}
 
-    }
+	/**
+	 * @return Returns the placeInformation.
+	 */
+	public String getPlaceInformation() {
+		return placeInformation;
+	}
 
-    @Override
-    public boolean oidIsAnyMissing2(Element p) throws Exception {
+	/**
+	 * @param placeInformation The placeInformation to set.
+	 */
+	public void setPlaceInformation(String placeInformation) {
+		this.placeInformation = placeInformation;
+	}
 
-	return false;
-    }
+	/**
+	 * @return Returns the searchedInformations.
+	 */
+	public String getSearchedInformations() {
+		return searchedInformations;
+	}
+
+	/**
+	 * @param searchedInformations The searchedInformations to set.
+	 */
+	public void setSearchedInformations(String searchedInformations) {
+		this.searchedInformations = searchedInformations;
+	}
+
+	/**
+	 * @return Returns the seniority.
+	 */
+	public String getSeniority() {
+		return seniority;
+	}
+
+	/**
+	 * @param seniority The seniority to set.
+	 */
+	public void setSeniority(String seniority) {
+		this.seniority = seniority;
+	}
+
+	/**
+	 * @return Returns the statut.
+	 */
+	public String getStatut() {
+		return statut;
+	}
+
+	/**
+	 * @param statut The statut to set.
+	 */
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
+	/**
+	 * @return Returns the inverseProject.
+	 */
+	public Project getInverseProject() {
+		return inverseProject;
+	}
+
+	/**
+	 * @param inverseProject The inverseProject to set.
+	 */
+	public void setInverseProject(Project inverseProject) {
+		this.inverseProject = inverseProject;
+	}
+
+	@Override
+	public Element toXML2(Document doc) throws Exception {
+		// TODO Auto-generated method stub
+		return toXML(doc);
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(Element p) throws Exception {
+		this.oid = new Oid(p.getAttribute("idkmad"));
+
+		NodeList userPreValue = p.getElementsByTagName("projectinterview-actor");
+		if (userPreValue.item(0).getParentNode() != p) {
+			userPreValue = null;
+		}
+		interviewedName = userPreValue.item(0).getTextContent();
+
+		userPreValue = p.getElementsByTagName("projectinterview-place");
+		if (userPreValue.item(0).getParentNode() != p) {
+			userPreValue = null;
+		}
+		if (userPreValue.item(0) != null) {
+			placeInformation = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-statut");
+		if (userPreValue.item(0).getParentNode() != p) {
+			userPreValue = null;
+		}
+		if (userPreValue.item(0) != null) {
+			statut = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-seniority");
+		if (userPreValue.item(0).getParentNode() != p) {
+			userPreValue = null;
+		}
+		if (userPreValue.item(0) != null) {
+			seniority = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-date");
+		if (userPreValue.item(0).getParentNode() != p) {
+			userPreValue = null;
+		}
+		if (userPreValue.item(0) != null) {
+			date = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-type");
+		if (userPreValue.item(0).getParentNode() != p) {
+			userPreValue = null;
+		}
+		if (userPreValue.item(0) != null) {
+			type = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-info");
+		if (userPreValue.item(0).getParentNode() != p) {
+			userPreValue = null;
+		}
+		if (userPreValue.item(0) != null) {
+			searchedInformations = userPreValue.item(0).getTextContent();
+		}
+
+		userPreValue = p.getElementsByTagName("projectinterview-director");
+		if (userPreValue.item(0).getParentNode() != p) {
+			userPreValue = null;
+		}
+		if (userPreValue.item(0) != null) {
+			interviewerName = userPreValue.item(0).getTextContent();
+		}
+
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(Element p) throws Exception {
+
+		return false;
+	}
 }

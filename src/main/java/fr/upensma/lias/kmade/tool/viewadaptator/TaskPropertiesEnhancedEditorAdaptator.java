@@ -35,449 +35,414 @@ import fr.upensma.lias.kmade.tool.view.toolutilities.InDevelopmentGlassPanel;
  * @author Mickael BARON
  */
 public final class TaskPropertiesEnhancedEditorAdaptator {
-    private static KMADEEnhancedTaskEditor myRefTaskEditor = new KMADEEnhancedTaskEditor();
+	private static KMADEEnhancedTaskEditor myRefTaskEditor = new KMADEEnhancedTaskEditor();
 
-    private static Task motherTask;
+	private static Task motherTask;
 
-    private static Task oldSisterTask;
+	private static Task oldSisterTask;
 
-    private static Task youngSisterTask;
+	private static Task youngSisterTask;
 
-    private static Task firstSonTask;
+	private static Task firstSonTask;
 
-    private static Task currentEditedTask;
+	private static Task currentEditedTask;
 
-    public static KMADEEnhancedTaskEditor getEnhancedTaskEditorFrame() {
-	return myRefTaskEditor;
-    }
-
-    public static void showNMDAEnhancedTaskEditor() {
-	if (GraphicEditorAdaptator.getSelectedGraphicTask() == null) {
-	    KMADEMainFrame.getProjectPanel().getPanelProprieteTache()
-		    .showEmptyCard();
-	    return;
+	public static KMADEEnhancedTaskEditor getEnhancedTaskEditorFrame() {
+		return myRefTaskEditor;
 	}
 
-	currentEditedTask = GraphicEditorAdaptator.getSelectedGraphicTask()
-		.getTask();
-	setSelectedTaskAttributes(currentEditedTask);
-	myRefTaskEditor.setVisible(true);
-    }
+	public static void showNMDAEnhancedTaskEditor() {
+		if (GraphicEditorAdaptator.getSelectedGraphicTask() == null) {
+			KMADEMainFrame.getProjectPanel().getPanelProprieteTache().showEmptyCard();
+			return;
+		}
 
-    public static void requestFocus() {
-	myRefTaskEditor.requestFocus();
-    }
-
-    public static boolean isVisible() {
-	return myRefTaskEditor.isVisible();
-    }
-
-    public static void enabledMainFrameAfterEdition() {
-	myRefTaskEditor.setEnabled(true);
-	InDevelopmentGlassPanel.unPlugWindowInDisabled(myRefTaskEditor);
-    }
-
-    public static void disabledMainFrameBeforeEdition() {
-	myRefTaskEditor.setEnabled(false);
-	InDevelopmentGlassPanel.plugWindowInDisabled(myRefTaskEditor);
-    }
-
-    public static void closeNMDAEnhancedTaskEditor() {
-	myRefTaskEditor.setVisible(false);
-    }
-
-    public static void setSelectedTaskAttributes(Task current) {
-	currentEditedTask = current;
-	myRefTaskEditor.displayTaskProperties(currentEditedTask.getNumber(),
-		currentEditedTask.getMotherTaskName(), currentEditedTask
-			.getName(), currentEditedTask.getGoal(),
-		currentEditedTask.getFeedback(), currentEditedTask
-			.getDuration(), currentEditedTask.getDescription(),
-		currentEditedTask.getExecutor(), currentEditedTask
-			.getModality(), currentEditedTask.getFrequency(),
-		currentEditedTask.getFrequencyValue(), currentEditedTask
-			.getImportance(), TaskPropertiesAdaptator
-			.getFiredEvents(), currentEditedTask.getFacultatif(),
-		currentEditedTask.isInterruptible(), TaskPropertiesAdaptator
-			.getAllEvents(), currentEditedTask
-			.getRaisingEventName(),
-		TaskPropertiesEnhancedEditorAdaptator.getActorTable(),
-		TaskPropertiesEnhancedEditorAdaptator.getActorSystemTable(),
-		currentEditedTask.getPreExpression().getFormalText(),
-		currentEditedTask.getEffetsDeBordExpression().getFormalText(),
-		currentEditedTask.getOrdering(), currentEditedTask
-			.getIterExpression().getFormalText());
-
-	motherTask = currentEditedTask.getMother();
-	oldSisterTask = currentEditedTask.getNextChildTask();
-	youngSisterTask = currentEditedTask.getPreviousChildTask();
-	firstSonTask = currentEditedTask.getFirstChildTask();
-
-	if (motherTask == null) {
-	    myRefTaskEditor.setUpButton(false,
-		    KMADEConstant.NO_MOTHER_TASK_MESSAGE,
-		    KMADEConstant.NO_NUMERO_TASK);
-	} else {
-	    myRefTaskEditor.setUpButton(true, motherTask.getName(),
-		    motherTask.getNumber());
+		currentEditedTask = GraphicEditorAdaptator.getSelectedGraphicTask().getTask();
+		setSelectedTaskAttributes(currentEditedTask);
+		myRefTaskEditor.setVisible(true);
 	}
 
-	if (oldSisterTask == null) {
-	    myRefTaskEditor.setLeftButton(false,
-		    KMADEConstant.NO_LEFT_TASK_MESSAGE,
-		    KMADEConstant.NO_NUMERO_TASK);
-	} else {
-	    myRefTaskEditor.setLeftButton(true, oldSisterTask.getName(),
-		    oldSisterTask.getNumber());
+	public static void requestFocus() {
+		myRefTaskEditor.requestFocus();
 	}
 
-	if (youngSisterTask == null) {
-	    myRefTaskEditor.setRightButton(false,
-		    KMADEConstant.NO_RIGHT_TASK_MESSAGE,
-		    KMADEConstant.NO_NUMERO_TASK);
-	} else {
-	    myRefTaskEditor.setRightButton(true, youngSisterTask.getName(),
-		    youngSisterTask.getNumber());
+	public static boolean isVisible() {
+		return myRefTaskEditor.isVisible();
 	}
 
-	if (firstSonTask == null) {
-	    myRefTaskEditor.setDownButton(false,
-		    KMADEConstant.NO_SUB_TASK_MESSAGE,
-		    KMADEConstant.NO_NUMERO_TASK);
-	} else {
-	    myRefTaskEditor.setDownButton(true, firstSonTask.getName(),
-		    firstSonTask.getNumber());
+	public static void enabledMainFrameAfterEdition() {
+		myRefTaskEditor.setEnabled(true);
+		InDevelopmentGlassPanel.unPlugWindowInDisabled(myRefTaskEditor);
 	}
 
-	// Mise à jour des activations des JRadioButton's
-	if ((currentEditedTask.getExecutor() == Executor.USER)
-		|| (currentEditedTask.getExecutor() == Executor.ABS)) {
-	    myRefTaskEditor.setEnabledModalityGroup();
-	} else {
-	    myRefTaskEditor.setDisabledModalityGroup();
+	public static void disabledMainFrameBeforeEdition() {
+		myRefTaskEditor.setEnabled(false);
+		InDevelopmentGlassPanel.plugWindowInDisabled(myRefTaskEditor);
 	}
 
-	if ((currentEditedTask.getExecutor() == Executor.SYS)) {
-	    myRefTaskEditor.setDisabledNecessityGroup();
-	} else {
-	    myRefTaskEditor.setEnabledNecessityGroup();
+	public static void closeNMDAEnhancedTaskEditor() {
+		myRefTaskEditor.setVisible(false);
 	}
 
-	if (currentEditedTask.getFrequency() == Frequence.INCONNU) {
-	    myRefTaskEditor.setDisabledFrequenceValue();
-	} else {
-	    myRefTaskEditor.setEnabledFrequenceValue();
+	public static void setSelectedTaskAttributes(Task current) {
+		currentEditedTask = current;
+		myRefTaskEditor.displayTaskProperties(currentEditedTask.getNumber(), currentEditedTask.getMotherTaskName(),
+				currentEditedTask.getName(), currentEditedTask.getGoal(), currentEditedTask.getFeedback(),
+				currentEditedTask.getDuration(), currentEditedTask.getDescription(), currentEditedTask.getExecutor(),
+				currentEditedTask.getModality(), currentEditedTask.getFrequency(),
+				currentEditedTask.getFrequencyValue(), currentEditedTask.getImportance(),
+				TaskPropertiesAdaptator.getFiredEvents(), currentEditedTask.getFacultatif(),
+				currentEditedTask.isInterruptible(), TaskPropertiesAdaptator.getAllEvents(),
+				currentEditedTask.getRaisingEventName(), TaskPropertiesEnhancedEditorAdaptator.getActorTable(),
+				TaskPropertiesEnhancedEditorAdaptator.getActorSystemTable(),
+				currentEditedTask.getPreExpression().getFormalText(),
+				currentEditedTask.getEffetsDeBordExpression().getFormalText(), currentEditedTask.getOrdering(),
+				currentEditedTask.getIterExpression().getFormalText());
+
+		motherTask = currentEditedTask.getMother();
+		oldSisterTask = currentEditedTask.getNextChildTask();
+		youngSisterTask = currentEditedTask.getPreviousChildTask();
+		firstSonTask = currentEditedTask.getFirstChildTask();
+
+		if (motherTask == null) {
+			myRefTaskEditor.setUpButton(false, KMADEConstant.NO_MOTHER_TASK_MESSAGE, KMADEConstant.NO_NUMERO_TASK);
+		} else {
+			myRefTaskEditor.setUpButton(true, motherTask.getName(), motherTask.getNumber());
+		}
+
+		if (oldSisterTask == null) {
+			myRefTaskEditor.setLeftButton(false, KMADEConstant.NO_LEFT_TASK_MESSAGE, KMADEConstant.NO_NUMERO_TASK);
+		} else {
+			myRefTaskEditor.setLeftButton(true, oldSisterTask.getName(), oldSisterTask.getNumber());
+		}
+
+		if (youngSisterTask == null) {
+			myRefTaskEditor.setRightButton(false, KMADEConstant.NO_RIGHT_TASK_MESSAGE, KMADEConstant.NO_NUMERO_TASK);
+		} else {
+			myRefTaskEditor.setRightButton(true, youngSisterTask.getName(), youngSisterTask.getNumber());
+		}
+
+		if (firstSonTask == null) {
+			myRefTaskEditor.setDownButton(false, KMADEConstant.NO_SUB_TASK_MESSAGE, KMADEConstant.NO_NUMERO_TASK);
+		} else {
+			myRefTaskEditor.setDownButton(true, firstSonTask.getName(), firstSonTask.getNumber());
+		}
+
+		// Mise à jour des activations des JRadioButton's
+		if ((currentEditedTask.getExecutor() == Executor.USER) || (currentEditedTask.getExecutor() == Executor.ABS)) {
+			myRefTaskEditor.setEnabledModalityGroup();
+		} else {
+			myRefTaskEditor.setDisabledModalityGroup();
+		}
+
+		if ((currentEditedTask.getExecutor() == Executor.SYS)) {
+			myRefTaskEditor.setDisabledNecessityGroup();
+		} else {
+			myRefTaskEditor.setEnabledNecessityGroup();
+		}
+
+		if (currentEditedTask.getFrequency() == Frequence.INCONNU) {
+			myRefTaskEditor.setDisabledFrequenceValue();
+		} else {
+			myRefTaskEditor.setEnabledFrequenceValue();
+		}
+		myRefTaskEditor.stopAnimation();
 	}
-	myRefTaskEditor.stopAnimation();
-    }
 
-    public static void setSelectedTaskAttributes() {
-	GraphicEditorAdaptator.setSelectionTask(currentEditedTask);
-    }
-
-    private static ArrayList<String[]> getActorTable() {
-	ArrayList<?> myActorList = TaskPropertiesAdaptator.getActorList();
-	ArrayList<String[]> myStringActeurList = new ArrayList<String[]>();
-
-	for (int i = 0; i < myActorList.size(); i++) {
-	    Actor myActeur = (Actor) (myActorList.get(i));
-	    String[] myTab = new String[3];
-	    myTab[0] = myActeur.getName();
-	    myTab[1] = Experience.getEnumereIntoLocaleExperience(myActeur
-		    .getExperience().getValue());
-	    myTab[2] = myActeur.getCompetence();
-	    myStringActeurList.add(myTab);
+	public static void setSelectedTaskAttributes() {
+		GraphicEditorAdaptator.setSelectionTask(currentEditedTask);
 	}
-	return myStringActeurList;
-    }
 
-    private static ArrayList<String[]> getActorSystemTable() {
-	ArrayList<?> myActorSystemList = TaskPropertiesAdaptator
-		.getActorSystemList();
-	ArrayList<String[]> myStringActeurSystemList = new ArrayList<String[]>();
+	private static ArrayList<String[]> getActorTable() {
+		ArrayList<?> myActorList = TaskPropertiesAdaptator.getActorList();
+		ArrayList<String[]> myStringActeurList = new ArrayList<String[]>();
 
-	for (int i = 0; i < myActorSystemList.size(); i++) {
-	    ActorSystem myActeurSysteme = (ActorSystem) (myActorSystemList
-		    .get(i));
-	    String[] myTab = new String[3];
-	    myTab[0] = myActeurSysteme.getName();
-	    myTab[1] = Experience
-		    .getEnumereIntoLocaleExperience(myActeurSysteme
-			    .getExperience().getValue());
-	    myTab[2] = myActeurSysteme.getCompetence();
-	    myStringActeurSystemList.add(myTab);
+		for (int i = 0; i < myActorList.size(); i++) {
+			Actor myActeur = (Actor) (myActorList.get(i));
+			String[] myTab = new String[3];
+			myTab[0] = myActeur.getName();
+			myTab[1] = Experience.getEnumereIntoLocaleExperience(myActeur.getExperience().getValue());
+			myTab[2] = myActeur.getCompetence();
+			myStringActeurList.add(myTab);
+		}
+		return myStringActeurList;
 	}
-	return myStringActeurSystemList;
-    }
 
-    public static void switchToOtherTask(int position) {
-	switch (position) {
-	case KMADEEnhancedTaskLabel.LEFT: {
-	    currentEditedTask = oldSisterTask;
-	    break;
+	private static ArrayList<String[]> getActorSystemTable() {
+		ArrayList<?> myActorSystemList = TaskPropertiesAdaptator.getActorSystemList();
+		ArrayList<String[]> myStringActeurSystemList = new ArrayList<String[]>();
+
+		for (int i = 0; i < myActorSystemList.size(); i++) {
+			ActorSystem myActeurSysteme = (ActorSystem) (myActorSystemList.get(i));
+			String[] myTab = new String[3];
+			myTab[0] = myActeurSysteme.getName();
+			myTab[1] = Experience.getEnumereIntoLocaleExperience(myActeurSysteme.getExperience().getValue());
+			myTab[2] = myActeurSysteme.getCompetence();
+			myStringActeurSystemList.add(myTab);
+		}
+		return myStringActeurSystemList;
 	}
-	case KMADEEnhancedTaskLabel.RIGHT: {
-	    currentEditedTask = youngSisterTask;
-	    break;
+
+	public static void switchToOtherTask(int position) {
+		switch (position) {
+		case KMADEEnhancedTaskLabel.LEFT: {
+			currentEditedTask = oldSisterTask;
+			break;
+		}
+		case KMADEEnhancedTaskLabel.RIGHT: {
+			currentEditedTask = youngSisterTask;
+			break;
+		}
+		case KMADEEnhancedTaskLabel.TOP: {
+			currentEditedTask = motherTask;
+			break;
+		}
+		case KMADEEnhancedTaskLabel.BOTTOM: {
+			currentEditedTask = firstSonTask;
+			break;
+		}
+		}
 	}
-	case KMADEEnhancedTaskLabel.TOP: {
-	    currentEditedTask = motherTask;
-	    break;
+
+	public static void startAnimation() {
+		myRefTaskEditor.launchAnimation(currentEditedTask.getName());
 	}
-	case KMADEEnhancedTaskLabel.BOTTOM: {
-	    currentEditedTask = firstSonTask;
-	    break;
+
+	public static void stopAnimation() {
+		myRefTaskEditor.stopAnimation();
 	}
+
+	public static void setNameInTaskProperties(String value) {
+		TaskPropertiesAdaptator.updateNameRealTime(value);
 	}
-    }
 
-    public static void startAnimation() {
-	myRefTaskEditor.launchAnimation(currentEditedTask.getName());
-    }
-
-    public static void stopAnimation() {
-	myRefTaskEditor.stopAnimation();
-    }
-
-    public static void setNameInTaskProperties(String value) {
-	TaskPropertiesAdaptator.updateNameRealTime(value);
-    }
-
-    public static void setPurposeInTaskProperties(String value) {
-	TaskPropertiesAdaptator.updatePurposeRealTime(value);
-    }
-
-    public static void setObservationInTaskProperties(String value) {
-	TaskPropertiesAdaptator.updateObservationRealTime(value);
-    }
-
-    public static void setDureeInTaskProperties(String text) {
-	TaskPropertiesAdaptator.updateDurationRealTime(text);
-    }
-
-    public static void setPurpose() {
-	TaskPropertiesAdaptator.setPurpose();
-	myRefTaskEditor.setPurposeField(TaskPropertiesAdaptator.getPurpose());
-    }
-
-    /*
-     * public static void setFeedBack() { TaskPropertiesAdaptator.setFeedback();
-     * myRefTaskEditor.setFeedbackField(TaskPropertiesAdaptator.getFeedback());
-     * }
-     */
-
-    public static void setObservation() {
-	TaskPropertiesAdaptator.setObservation();
-	myRefTaskEditor.setObservationArea(TaskPropertiesAdaptator
-		.getObservation());
-    }
-
-    public static void setUnknownExecutant() {
-	TaskPropertiesAdaptator.setUnknownExecutant();
-	myRefTaskEditor.setEnabledModalityGroup();
-	if (TaskPropertiesAdaptator.isNecessityEnabled()) {
-	    myRefTaskEditor.setEnabledNecessityGroup();
-	} else {
-	    myRefTaskEditor.setDisabledNecessityGroup();
+	public static void setPurposeInTaskProperties(String value) {
+		TaskPropertiesAdaptator.updatePurposeRealTime(value);
 	}
-    }
 
-    public static void setUserExecutant() {
-	TaskPropertiesAdaptator.setUserExecutant();
-	myRefTaskEditor.setEnabledModalityGroup();
-	if (TaskPropertiesAdaptator.isNecessityEnabled()) {
-	    myRefTaskEditor.setEnabledNecessityGroup();
-	} else {
-	    myRefTaskEditor.setDisabledNecessityGroup();
+	public static void setObservationInTaskProperties(String value) {
+		TaskPropertiesAdaptator.updateObservationRealTime(value);
 	}
-    }
 
-    public static void setSystemExecutant() {
-	TaskPropertiesAdaptator.setSystemExecutant();
-	myRefTaskEditor.setDisabledModalityGroup();
-	myRefTaskEditor.setDisabledNecessityGroup();
-    }
-
-    public static void setInteractifExecutant() {
-	TaskPropertiesAdaptator.setInteractifExecutant();
-	myRefTaskEditor.setDisabledModalityGroup();
-	if (TaskPropertiesAdaptator.isNecessityEnabled()) {
-	    myRefTaskEditor.setEnabledNecessityGroup();
-	} else {
-	    myRefTaskEditor.setDisabledNecessityGroup();
+	public static void setDureeInTaskProperties(String text) {
+		TaskPropertiesAdaptator.updateDurationRealTime(text);
 	}
-    }
 
-    public static void setAbstractExecutant() {
-	TaskPropertiesAdaptator.setAbstractExecutant();
-	myRefTaskEditor.setDisabledModalityGroup();
-	if (TaskPropertiesAdaptator.isNecessityEnabled()) {
-	    myRefTaskEditor.setEnabledNecessityGroup();
-	} else {
-	    myRefTaskEditor.setDisabledNecessityGroup();
+	public static void setPurpose() {
+		TaskPropertiesAdaptator.setPurpose();
+		myRefTaskEditor.setPurposeField(TaskPropertiesAdaptator.getPurpose());
 	}
-    }
 
-    public static void setUnknownModalite() {
-	TaskPropertiesAdaptator.setUnknownModalite();
-    }
+	/*
+	 * public static void setFeedBack() { TaskPropertiesAdaptator.setFeedback();
+	 * myRefTaskEditor.setFeedbackField(TaskPropertiesAdaptator.getFeedback()); }
+	 */
 
-    public static void setSensoriMotriceModalite() {
-	TaskPropertiesAdaptator.setSensoriMotriceModalite();
-    }
-
-    public static void setCognitiveModalite() {
-	TaskPropertiesAdaptator.setCognitiveModalite();
-    }
-
-    public static void setUnknownImportance() {
-	TaskPropertiesAdaptator.setUnknownImportance();
-    }
-
-    public static void setLowImportance() {
-	TaskPropertiesAdaptator.setLowImportance();
-    }
-
-    public static void setMiddleImportance() {
-	TaskPropertiesAdaptator.setMiddleImportance();
-    }
-
-    public static void setHighImportance() {
-	TaskPropertiesAdaptator.setHighImportance();
-    }
-
-    public static void setUnknownFrequence() {
-	TaskPropertiesAdaptator.setUnknownFrequence();
-	myRefTaskEditor.setDisabledFrequenceValue();
-    }
-
-    public static void setHeighFrequence() {
-	TaskPropertiesAdaptator.setHeighFrequence();
-	myRefTaskEditor.setEnabledFrequenceValue();
-    }
-
-    public static void setAverageFrequence() {
-	TaskPropertiesAdaptator.setAverageFrequence();
-	myRefTaskEditor.setEnabledFrequenceValue();
-    }
-
-    public static void setLowFrequence() {
-	TaskPropertiesAdaptator.setLowFrequence();
-	myRefTaskEditor.setEnabledFrequenceValue();
-    }
-
-    public static void setFrequencyValueInTaskProperties(String text) {
-	TaskPropertiesAdaptator.updateFrequencyRealTime(text);
-    }
-
-    public static void setUnknownOperator() {
-	TaskPropertiesAdaptator.setUnknownOperator();
-	if (TaskPropertiesAdaptator.isNecessityEnabled()) {
-	    myRefTaskEditor.setEnabledNecessityGroup();
-	} else {
-	    myRefTaskEditor.setDisabledNecessityGroup();
+	public static void setObservation() {
+		TaskPropertiesAdaptator.setObservation();
+		myRefTaskEditor.setObservationArea(TaskPropertiesAdaptator.getObservation());
 	}
-    }
 
-    public static void setEnablingOperator() {
-	TaskPropertiesAdaptator.setEnablingOperator();
-	if (TaskPropertiesAdaptator.isNecessityEnabled()) {
-	    myRefTaskEditor.setEnabledNecessityGroup();
-	} else {
-	    myRefTaskEditor.setDisabledNecessityGroup();
+	public static void setUnknownExecutant() {
+		TaskPropertiesAdaptator.setUnknownExecutant();
+		myRefTaskEditor.setEnabledModalityGroup();
+		if (TaskPropertiesAdaptator.isNecessityEnabled()) {
+			myRefTaskEditor.setEnabledNecessityGroup();
+		} else {
+			myRefTaskEditor.setDisabledNecessityGroup();
+		}
 	}
-    }
 
-    public static void setConcurrentOperator() {
-	TaskPropertiesAdaptator.setConcurrentOperator();
-	if (TaskPropertiesAdaptator.isNecessityEnabled()) {
-	    myRefTaskEditor.setEnabledNecessityGroup();
-	} else {
-	    myRefTaskEditor.setDisabledNecessityGroup();
+	public static void setUserExecutant() {
+		TaskPropertiesAdaptator.setUserExecutant();
+		myRefTaskEditor.setEnabledModalityGroup();
+		if (TaskPropertiesAdaptator.isNecessityEnabled()) {
+			myRefTaskEditor.setEnabledNecessityGroup();
+		} else {
+			myRefTaskEditor.setDisabledNecessityGroup();
+		}
 	}
-    }
 
-    public static void setChoiceOperator() {
-	TaskPropertiesAdaptator.setChoiceOperator();
-	myRefTaskEditor.setDisabledNecessityGroup();
-    }
-
-    public static void setLeafOperator() {
-	TaskPropertiesAdaptator.setLeafOperator();
-	if (TaskPropertiesAdaptator.isNecessityEnabled()) {
-	    myRefTaskEditor.setEnabledNecessityGroup();
-	} else {
-	    myRefTaskEditor.setDisabledNecessityGroup();
+	public static void setSystemExecutant() {
+		TaskPropertiesAdaptator.setSystemExecutant();
+		myRefTaskEditor.setDisabledModalityGroup();
+		myRefTaskEditor.setDisabledNecessityGroup();
 	}
-    }
 
-    public static void setOrderIndependencyOperator() {
-	TaskPropertiesAdaptator.setOrderIndependencyOperator();
-	if (TaskPropertiesAdaptator.isNecessityEnabled()) {
-	    myRefTaskEditor.setEnabledNecessityGroup();
-	} else {
-	    myRefTaskEditor.setDisabledNecessityGroup();
+	public static void setInteractifExecutant() {
+		TaskPropertiesAdaptator.setInteractifExecutant();
+		myRefTaskEditor.setDisabledModalityGroup();
+		if (TaskPropertiesAdaptator.isNecessityEnabled()) {
+			myRefTaskEditor.setEnabledNecessityGroup();
+		} else {
+			myRefTaskEditor.setDisabledNecessityGroup();
+		}
 	}
-    }
 
-    public static void setOptionnelleNecessite() {
-	TaskPropertiesAdaptator.updateOptionalCharacRealTime(true);
-    }
+	public static void setAbstractExecutant() {
+		TaskPropertiesAdaptator.setAbstractExecutant();
+		myRefTaskEditor.setDisabledModalityGroup();
+		if (TaskPropertiesAdaptator.isNecessityEnabled()) {
+			myRefTaskEditor.setEnabledNecessityGroup();
+		} else {
+			myRefTaskEditor.setDisabledNecessityGroup();
+		}
+	}
 
-    public static void setObligatoireNecessite() {
-	TaskPropertiesAdaptator.updateOptionalCharacRealTime(false);
-    }
+	public static void setUnknownModalite() {
+		TaskPropertiesAdaptator.setUnknownModalite();
+	}
 
-    public static void setInterruptibilite() {
-	TaskPropertiesAdaptator.updateInterruptibleCharacRealTime(true);
-    }
+	public static void setSensoriMotriceModalite() {
+		TaskPropertiesAdaptator.setSensoriMotriceModalite();
+	}
 
-    public static void setNoInterruptibilite() {
-	TaskPropertiesAdaptator.updateInterruptibleCharacRealTime(false);
-    }
+	public static void setCognitiveModalite() {
+		TaskPropertiesAdaptator.setCognitiveModalite();
+	}
 
-    public static void setFiredEvents() {
-	TaskPropertiesAdaptator.setFiredEvents();
-	myRefTaskEditor.setFiredEventsField(TaskPropertiesAdaptator
-		.getFiredEvents());
-    }
+	public static void setUnknownImportance() {
+		TaskPropertiesAdaptator.setUnknownImportance();
+	}
 
-    public static void setEffetsDeBord() {
-	TaskPropertiesAdaptator.setEffetsDeBord();
-	myRefTaskEditor.setEffetsDeBord(TaskPropertiesAdaptator
-		.getEffetsDeBord());
-    }
+	public static void setLowImportance() {
+		TaskPropertiesAdaptator.setLowImportance();
+	}
 
-    public static void setActeur() {
-	TaskPropertiesAdaptator.setActorList();
-	myRefTaskEditor.setActorList(TaskPropertiesEnhancedEditorAdaptator
-		.getActorTable());
-    }
+	public static void setMiddleImportance() {
+		TaskPropertiesAdaptator.setMiddleImportance();
+	}
 
-    public static void setActeurSysteme() {
-	TaskPropertiesAdaptator.setActorSystemList();
-	myRefTaskEditor
-		.setActorSystemList(TaskPropertiesEnhancedEditorAdaptator
-			.getActorSystemTable());
-    }
+	public static void setHighImportance() {
+		TaskPropertiesAdaptator.setHighImportance();
+	}
 
-    public static void setIteration() {
-	TaskPropertiesAdaptator.setIteration();
-	myRefTaskEditor.setIteration(TaskPropertiesAdaptator.getIteration());
-    }
+	public static void setUnknownFrequence() {
+		TaskPropertiesAdaptator.setUnknownFrequence();
+		myRefTaskEditor.setDisabledFrequenceValue();
+	}
 
-    public static void setPrecondition() {
-	TaskPropertiesAdaptator.setPrecondition();
-	myRefTaskEditor.setPrecondition(TaskPropertiesAdaptator
-		.getPrecondition());
-    }
+	public static void setHeighFrequence() {
+		TaskPropertiesAdaptator.setHeighFrequence();
+		myRefTaskEditor.setEnabledFrequenceValue();
+	}
 
-    public static void setDeclenchement(String selectedItem) {
-	TaskPropertiesAdaptator.setDeclenchementEvent(selectedItem);
+	public static void setAverageFrequence() {
+		TaskPropertiesAdaptator.setAverageFrequence();
+		myRefTaskEditor.setEnabledFrequenceValue();
+	}
 
-    }
+	public static void setLowFrequence() {
+		TaskPropertiesAdaptator.setLowFrequence();
+		myRefTaskEditor.setEnabledFrequenceValue();
+	}
 
-    public static void notifLocalisationModification() {
-	myRefTaskEditor.notifLocalisationModification();
-    }
+	public static void setFrequencyValueInTaskProperties(String text) {
+		TaskPropertiesAdaptator.updateFrequencyRealTime(text);
+	}
+
+	public static void setUnknownOperator() {
+		TaskPropertiesAdaptator.setUnknownOperator();
+		if (TaskPropertiesAdaptator.isNecessityEnabled()) {
+			myRefTaskEditor.setEnabledNecessityGroup();
+		} else {
+			myRefTaskEditor.setDisabledNecessityGroup();
+		}
+	}
+
+	public static void setEnablingOperator() {
+		TaskPropertiesAdaptator.setEnablingOperator();
+		if (TaskPropertiesAdaptator.isNecessityEnabled()) {
+			myRefTaskEditor.setEnabledNecessityGroup();
+		} else {
+			myRefTaskEditor.setDisabledNecessityGroup();
+		}
+	}
+
+	public static void setConcurrentOperator() {
+		TaskPropertiesAdaptator.setConcurrentOperator();
+		if (TaskPropertiesAdaptator.isNecessityEnabled()) {
+			myRefTaskEditor.setEnabledNecessityGroup();
+		} else {
+			myRefTaskEditor.setDisabledNecessityGroup();
+		}
+	}
+
+	public static void setChoiceOperator() {
+		TaskPropertiesAdaptator.setChoiceOperator();
+		myRefTaskEditor.setDisabledNecessityGroup();
+	}
+
+	public static void setLeafOperator() {
+		TaskPropertiesAdaptator.setLeafOperator();
+		if (TaskPropertiesAdaptator.isNecessityEnabled()) {
+			myRefTaskEditor.setEnabledNecessityGroup();
+		} else {
+			myRefTaskEditor.setDisabledNecessityGroup();
+		}
+	}
+
+	public static void setOrderIndependencyOperator() {
+		TaskPropertiesAdaptator.setOrderIndependencyOperator();
+		if (TaskPropertiesAdaptator.isNecessityEnabled()) {
+			myRefTaskEditor.setEnabledNecessityGroup();
+		} else {
+			myRefTaskEditor.setDisabledNecessityGroup();
+		}
+	}
+
+	public static void setOptionnelleNecessite() {
+		TaskPropertiesAdaptator.updateOptionalCharacRealTime(true);
+	}
+
+	public static void setObligatoireNecessite() {
+		TaskPropertiesAdaptator.updateOptionalCharacRealTime(false);
+	}
+
+	public static void setInterruptibilite() {
+		TaskPropertiesAdaptator.updateInterruptibleCharacRealTime(true);
+	}
+
+	public static void setNoInterruptibilite() {
+		TaskPropertiesAdaptator.updateInterruptibleCharacRealTime(false);
+	}
+
+	public static void setFiredEvents() {
+		TaskPropertiesAdaptator.setFiredEvents();
+		myRefTaskEditor.setFiredEventsField(TaskPropertiesAdaptator.getFiredEvents());
+	}
+
+	public static void setEffetsDeBord() {
+		TaskPropertiesAdaptator.setEffetsDeBord();
+		myRefTaskEditor.setEffetsDeBord(TaskPropertiesAdaptator.getEffetsDeBord());
+	}
+
+	public static void setActeur() {
+		TaskPropertiesAdaptator.setActorList();
+		myRefTaskEditor.setActorList(TaskPropertiesEnhancedEditorAdaptator.getActorTable());
+	}
+
+	public static void setActeurSysteme() {
+		TaskPropertiesAdaptator.setActorSystemList();
+		myRefTaskEditor.setActorSystemList(TaskPropertiesEnhancedEditorAdaptator.getActorSystemTable());
+	}
+
+	public static void setIteration() {
+		TaskPropertiesAdaptator.setIteration();
+		myRefTaskEditor.setIteration(TaskPropertiesAdaptator.getIteration());
+	}
+
+	public static void setPrecondition() {
+		TaskPropertiesAdaptator.setPrecondition();
+		myRefTaskEditor.setPrecondition(TaskPropertiesAdaptator.getPrecondition());
+	}
+
+	public static void setDeclenchement(String selectedItem) {
+		TaskPropertiesAdaptator.setDeclenchementEvent(selectedItem);
+
+	}
+
+	public static void notifLocalisationModification() {
+		myRefTaskEditor.notifLocalisationModification();
+	}
 }

@@ -21,9 +21,9 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  * @author Mickael BARON
  */
 public interface ExpressionConstant {
-    static final int UNKNOWN = 0;
+	static final int UNKNOWN = 0;
 
-    static final int VALUE = 1;
+	static final int VALUE = 1;
 
-    static final int ERROR = 2;
+	static final int ERROR = 2;
 }

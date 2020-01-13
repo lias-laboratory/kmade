@@ -22,17 +22,17 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public class ExpressException extends Exception {
 
-    private static final long serialVersionUID = -4402540239899072310L;
+	private static final long serialVersionUID = -4402540239899072310L;
 
-    public ExpressException(String message) {
-	super(message);
-    }
+	public ExpressException(String message) {
+		super(message);
+	}
 
-    public ExpressException() {
-	super();
-    }
+	public ExpressException() {
+		super();
+	}
 
-    public String toString() {
-	return this.getMessage();
-    }
+	public String toString() {
+		return this.getMessage();
+	}
 }

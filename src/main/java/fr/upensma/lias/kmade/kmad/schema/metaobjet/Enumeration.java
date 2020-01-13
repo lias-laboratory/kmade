@@ -32,178 +32,171 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  */
 public final class Enumeration extends TypeAbs {
 
-    private static final long serialVersionUID = -5667088185950172365L;
+	private static final long serialVersionUID = -5667088185950172365L;
 
-    private ArrayList<Element> inverseElementDe = null;
+	private ArrayList<Element> inverseElementDe = null;
 
-    public Enumeration() {
-	this.name = "";
-	this.description = "";
-	this.inverseElementDe = new ArrayList<Element>();
-    }
-
-    public Enumeration(String name, String description, Oid oid) {
-	this.name = name;
-	this.description = description;
-	this.inverseElementDe = new ArrayList<Element>();
-	this.oid = oid;
-    }
-
-    public Enumeration(String name) {
-	this.name = name;
-	this.description = "";
-	this.inverseElementDe = new ArrayList<Element>();
-    }
-
-    public void addInverseElementDe(Element element) {
-	inverseElementDe.add(element);
-    }
-
-    public void removeInverseElementDe(Element element) {
-	inverseElementDe.remove(element);
-    }
-
-    public ArrayList<Element> getInverseElementDe() {
-	return this.inverseElementDe;
-    }
-
-    public Element getElement(String n) {
-	for (int i = 0; i < inverseElementDe.size(); i++) {
-	    Element e = inverseElementDe.get(i);
-	    if (e.getName().equals(n)) {
-		return e;
-	    }
+	public Enumeration() {
+		this.name = "";
+		this.description = "";
+		this.inverseElementDe = new ArrayList<Element>();
 	}
-	return null;
-    }
 
-    public void delete() {
-	for (int i = 0; i < this.inverseElementDe.size(); i++) {
-	    Element g = this.inverseElementDe.get(i);
-	    g.delete();
+	public Enumeration(String name, String description, Oid oid) {
+		this.name = name;
+		this.description = description;
+		this.inverseElementDe = new ArrayList<Element>();
+		this.oid = oid;
 	}
-	this.inverseElementDe.clear();
 
-	for (int j = 0; j < this.inverseAttributAbs.size(); j++) {
-	    AttributAbstrait attr = this.inverseAttributAbs.get(j);
-	    attr.setTypeRef(null);
+	public Enumeration(String name) {
+		this.name = name;
+		this.description = "";
+		this.inverseElementDe = new ArrayList<Element>();
 	}
-	this.inverseAttributAbs.clear();
-	InterfaceExpressJava.remove(oid);
-    }
 
-    public void affDelete() {
-	InterfaceExpressJava.getGestionWarning().addMessage(oid, 10);
-	Iterator<Element> i = inverseElementDe.iterator();
-	while (i.hasNext()) {
-	    Element g = (Element) i.next();
-	    g.affDelete();
+	public void addInverseElementDe(Element element) {
+		inverseElementDe.add(element);
 	}
-	Iterator<AttributAbstrait> j = this.inverseAttributAbs.iterator();
-	while (j.hasNext()) {
-	    AttributAbstrait attr = j.next();
-	    InterfaceExpressJava.getGestionWarning().addMessage(
-		    oid,
-		    10,
-		    ExpressConstant.REMOVE_OF_THE_ABSTRACT_ATTRIBUT_MESSAGE
-			    + " \"" + attr.getName() + "\"");
+
+	public void removeInverseElementDe(Element element) {
+		inverseElementDe.remove(element);
 	}
-    }
 
-    public String toSPF() {
-	return (oid.get() + "=" + "Enumeration" + "(" + "'" + name + "'" + ","
-		+ "'" + description + "'" + ");");
-    }
+	public ArrayList<Element> getInverseElementDe() {
+		return this.inverseElementDe;
+	}
 
-    public static String[] getInverseElementDe(Enumeration en) {
-	String[] s = new String[en.inverseElementDe.size()];
-	Iterator<Element> i = en.inverseElementDe.iterator();
-	int j = 0;
-	while (i.hasNext())
-	    s[j++] = i.next().getName();
-	return s;
-    }
-
-    public void setName(String n) {
-	boolean ok = false;
-	int cpt = 0;
-	n = n.replace(" ", "_");
-	while (!ok) {
-	    if (cpt != 0) {
-		if (cpt == 1) {
-		    n = n + "_" + String.valueOf(cpt);
-		} else {
-		    n = n.substring(0, n.length() - 1) + String.valueOf(cpt);
+	public Element getElement(String n) {
+		for (int i = 0; i < inverseElementDe.size(); i++) {
+			Element e = inverseElementDe.get(i);
+			if (e.getName().equals(n)) {
+				return e;
+			}
 		}
-	    }
-	    ok = isUniqueName(n);
-	    cpt++;
+		return null;
 	}
-	name = n;
-    }
 
-    public ArrayList<String> getValues() {
-	ArrayList<String> values = new ArrayList<String>();
-	for (int i = 0; i < inverseElementDe.size(); i++) {
-	    values.add(inverseElementDe.get(i).getName());
+	public void delete() {
+		for (int i = 0; i < this.inverseElementDe.size(); i++) {
+			Element g = this.inverseElementDe.get(i);
+			g.delete();
+		}
+		this.inverseElementDe.clear();
+
+		for (int j = 0; j < this.inverseAttributAbs.size(); j++) {
+			AttributAbstrait attr = this.inverseAttributAbs.get(j);
+			attr.setTypeRef(null);
+		}
+		this.inverseAttributAbs.clear();
+		InterfaceExpressJava.remove(oid);
 	}
-	return values;
-    }
 
-    public static boolean isUniqueName(String s) {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ENUMERATION_CLASS);
-	for (int i = 0; i < objAbs.length; i++) {
-	    Enumeration obj = (Enumeration) objAbs[i];
-	    if (s.equalsIgnoreCase(obj.name)) {
+	public void affDelete() {
+		InterfaceExpressJava.getGestionWarning().addMessage(oid, 10);
+		Iterator<Element> i = inverseElementDe.iterator();
+		while (i.hasNext()) {
+			Element g = (Element) i.next();
+			g.affDelete();
+		}
+		Iterator<AttributAbstrait> j = this.inverseAttributAbs.iterator();
+		while (j.hasNext()) {
+			AttributAbstrait attr = j.next();
+			InterfaceExpressJava.getGestionWarning().addMessage(oid, 10,
+					ExpressConstant.REMOVE_OF_THE_ABSTRACT_ATTRIBUT_MESSAGE + " \"" + attr.getName() + "\"");
+		}
+	}
+
+	public String toSPF() {
+		return (oid.get() + "=" + "Enumeration" + "(" + "'" + name + "'" + "," + "'" + description + "'" + ");");
+	}
+
+	public static String[] getInverseElementDe(Enumeration en) {
+		String[] s = new String[en.inverseElementDe.size()];
+		Iterator<Element> i = en.inverseElementDe.iterator();
+		int j = 0;
+		while (i.hasNext())
+			s[j++] = i.next().getName();
+		return s;
+	}
+
+	public void setName(String n) {
+		boolean ok = false;
+		int cpt = 0;
+		n = n.replace(" ", "_");
+		while (!ok) {
+			if (cpt != 0) {
+				if (cpt == 1) {
+					n = n + "_" + String.valueOf(cpt);
+				} else {
+					n = n.substring(0, n.length() - 1) + String.valueOf(cpt);
+				}
+			}
+			ok = isUniqueName(n);
+			cpt++;
+		}
+		name = n;
+	}
+
+	public ArrayList<String> getValues() {
+		ArrayList<String> values = new ArrayList<String>();
+		for (int i = 0; i < inverseElementDe.size(); i++) {
+			values.add(inverseElementDe.get(i).getName());
+		}
+		return values;
+	}
+
+	public static boolean isUniqueName(String s) {
+		Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.ENUMERATION_CLASS);
+		for (int i = 0; i < objAbs.length; i++) {
+			Enumeration obj = (Enumeration) objAbs[i];
+			if (s.equalsIgnoreCase(obj.name)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean isUnique() {
+		Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.METAOBJECT_PACKAGE,
+				ExpressConstant.ENUMERATION_CLASS);
+		for (int i = 0; i < objAbs.length; i++) {
+			Enumeration obj = (Enumeration) objAbs[i];
+			if (!isUniqueName(obj.name))
+				return false;
+		}
+		return true;
+	}
+
+	public boolean noSpace() {
+		return ((name.indexOf(" ")) != 1);
+	}
+
+	public org.w3c.dom.Element toXML(Document doc) {
+		return null;
+	}
+
+	public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
 		return false;
-	    }
 	}
-	return true;
-    }
 
-    public static boolean isUnique() {
-	Object[] objAbs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.METAOBJECT_PACKAGE,
-		ExpressConstant.ENUMERATION_CLASS);
-	for (int i = 0; i < objAbs.length; i++) {
-	    Enumeration obj = (Enumeration) objAbs[i];
-	    if (!isUniqueName(obj.name))
+	public void createObjectFromXMLElement(org.w3c.dom.Element p) {
+
+	}
+
+	@Override
+	public org.w3c.dom.Element toXML2(Document doc) throws Exception {
+		return null;
+	}
+
+	@Override
+	public void createObjectFromXMLElement2(org.w3c.dom.Element p) throws Exception {
+
+	}
+
+	@Override
+	public boolean oidIsAnyMissing2(org.w3c.dom.Element p) throws Exception {
 		return false;
 	}
-	return true;
-    }
-
-    public boolean noSpace() {
-	return ((name.indexOf(" ")) != 1);
-    }
-
-    public org.w3c.dom.Element toXML(Document doc) {
-	return null;
-    }
-
-    public boolean oidIsAnyMissing(org.w3c.dom.Element p) {
-	return false;
-    }
-
-    public void createObjectFromXMLElement(org.w3c.dom.Element p) {
-
-    }
-
-    @Override
-    public org.w3c.dom.Element toXML2(Document doc) throws Exception {
-	return null;
-    }
-
-    @Override
-    public void createObjectFromXMLElement2(org.w3c.dom.Element p)
-	    throws Exception {
-
-    }
-
-    @Override
-    public boolean oidIsAnyMissing2(org.w3c.dom.Element p) throws Exception {
-	return false;
-    }
 }

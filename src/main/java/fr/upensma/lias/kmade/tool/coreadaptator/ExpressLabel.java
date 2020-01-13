@@ -29,99 +29,98 @@ import fr.upensma.lias.kmade.kmad.schema.tache.Label;
  * @author Mickael BARON
  */
 public final class ExpressLabel {
-    public static String createLabel() {
-	Oid oidEvent = InterfaceExpressJava.createEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.LABEL_CLASS);
-	return (oidEvent.get());
-    }
-
-    public static void setLabelDescription(String oid, String description) {
-	Label m = (Label) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setDescription(description);
-    }
-
-    public static void setLabelColor(String oid, Color myColor) {
-	Label m = (Label) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setColor(myColor);
-    }
-
-    public static void setLabelVisible(String oid, boolean isVisible) {
-	Label m = (Label) InterfaceExpressJava.prendre(new Oid(oid));
-	m.setVisible(isVisible);
-    }
-
-    /**
-     * @param newLabelObject
-     * @param value
-     * @return
-     */
-    public static String setLabelName(String newLabelObject, String value) {
-	Label m = (Label) InterfaceExpressJava.prendre(new Oid(newLabelObject));
-	m.setName(value);
-	return m.getName();
-    }
-
-    public static ArrayList<Label> getLabels() {
-	ArrayList<Label> lst = new ArrayList<Label>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.LABEL_CLASS);
-	for (int i = 0; i < objs.length; i++) {
-	    Label obj = (Label) objs[i];
-	    lst.add(obj);
+	public static String createLabel() {
+		Oid oidEvent = InterfaceExpressJava.createEntity(ExpressConstant.CORE_PACKAGE, ExpressConstant.LABEL_CLASS);
+		return (oidEvent.get());
 	}
-	return lst;
-    }
 
-    public static ArrayList<String> getLabelsNameList() {
-	ArrayList<String> lst = new ArrayList<String>();
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.LABEL_CLASS);
-	for (int i = 0; i < objs.length; i++) {
-	    Label obj = (Label) objs[i];
-	    lst.add(obj.getName());
+	public static void setLabelDescription(String oid, String description) {
+		Label m = (Label) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setDescription(description);
 	}
-	return lst;
-    }
 
-    public static String[] getLabelsNameArray() {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.LABEL_CLASS);
-	String[] array = new String[objs.length];
-	for (int i = 0; i < objs.length; i++) {
-	    Label obj = (Label) objs[i];
-	    array[i] = obj.getName();
+	public static void setLabelColor(String oid, Color myColor) {
+		Label m = (Label) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setColor(myColor);
 	}
-	return array;
-    }
 
-    public static Label stringToLabel(String s) {
-	Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(
-		ExpressConstant.CORE_PACKAGE, ExpressConstant.LABEL_CLASS);
-	for (int i = 0; i < objs.length; i++) {
-	    Label obj = (Label) objs[i];
-	    if (obj.getName().equals(s)) {
-		return obj;
-	    }
+	public static void setLabelVisible(String oid, boolean isVisible) {
+		Label m = (Label) InterfaceExpressJava.prendre(new Oid(oid));
+		m.setVisible(isVisible);
 	}
-	return null;
-    }
 
-    public static void affRemoveLabel(String oid) {
-	Label m = (Label) InterfaceExpressJava.prendre(new Oid(oid));
-	m.affDelete();
-    }
+	/**
+	 * @param newLabelObject
+	 * @param value
+	 * @return
+	 */
+	public static String setLabelName(String newLabelObject, String value) {
+		Label m = (Label) InterfaceExpressJava.prendre(new Oid(newLabelObject));
+		m.setName(value);
+		return m.getName();
+	}
 
-    public static void removeLabel(String oidAct) {
-	Label a = (Label) InterfaceExpressJava.prendre(new Oid(oidAct));
-	a.delete();
-    }
+	public static ArrayList<Label> getLabels() {
+		ArrayList<Label> lst = new ArrayList<Label>();
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.LABEL_CLASS);
+		for (int i = 0; i < objs.length; i++) {
+			Label obj = (Label) objs[i];
+			lst.add(obj);
+		}
+		return lst;
+	}
 
-    /**
-     * @param oidRow
-     * @param boolean1
-     */
-    public static void setLabelColorVisible(String oidRow, boolean boolean1) {
-	Label m = (Label) InterfaceExpressJava.prendre(new Oid(oidRow));
-	m.setColorVisible(boolean1);
-    }
+	public static ArrayList<String> getLabelsNameList() {
+		ArrayList<String> lst = new ArrayList<String>();
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.LABEL_CLASS);
+		for (int i = 0; i < objs.length; i++) {
+			Label obj = (Label) objs[i];
+			lst.add(obj.getName());
+		}
+		return lst;
+	}
+
+	public static String[] getLabelsNameArray() {
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.LABEL_CLASS);
+		String[] array = new String[objs.length];
+		for (int i = 0; i < objs.length; i++) {
+			Label obj = (Label) objs[i];
+			array[i] = obj.getName();
+		}
+		return array;
+	}
+
+	public static Label stringToLabel(String s) {
+		Object[] objs = InterfaceExpressJava.prendreAllOidOfEntity(ExpressConstant.CORE_PACKAGE,
+				ExpressConstant.LABEL_CLASS);
+		for (int i = 0; i < objs.length; i++) {
+			Label obj = (Label) objs[i];
+			if (obj.getName().equals(s)) {
+				return obj;
+			}
+		}
+		return null;
+	}
+
+	public static void affRemoveLabel(String oid) {
+		Label m = (Label) InterfaceExpressJava.prendre(new Oid(oid));
+		m.affDelete();
+	}
+
+	public static void removeLabel(String oidAct) {
+		Label a = (Label) InterfaceExpressJava.prendre(new Oid(oidAct));
+		a.delete();
+	}
+
+	/**
+	 * @param oidRow
+	 * @param boolean1
+	 */
+	public static void setLabelColorVisible(String oidRow, boolean boolean1) {
+		Label m = (Label) InterfaceExpressJava.prendre(new Oid(oidRow));
+		m.setColorVisible(boolean1);
+	}
 }

@@ -27,54 +27,49 @@ import fr.upensma.lias.kmade.tool.view.worldobject.abstractobject.KMADEReadWrite
  * @author Mickael BARON
  */
 public final class IntervalAdaptator {
-    public static void removeAllInterval() {
-	KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor()
-		.getIntervalPanel().removeAllInterval();
-    }
-
-    public static void removeInterval(String oid) {
-	ExpressInterval.removeInterval(oid);
-	ReadConcreteObjectAdaptator.updateReadConcreteObject();
-    }
-
-    public static void affRemoveIntervalle(String oid) {
-	ExpressInterval.affRemoveInterval(oid);
-    }
-
-    public static String addInterval() {
-	String interval = ExpressInterval.createInterval();
-	ReadConcreteObjectAdaptator.updateReadConcreteObject();
-	return interval;
-    }
-
-    public static String setIntervalName(String oid, String name) {
-	String n = ExpressInterval.setIntervalName(oid, name);
-	AbstractAttributeAdaptator.updateIntervalList();
-	return n;
-    }
-
-    public static void setIntervalDescription(String oid, String description) {
-	ExpressInterval.setIntervalDescription(oid, description);
-    }
-
-    public static void setIntervalMin(String oid, Integer min) {
-	ExpressInterval.setIntervalMin(oid, min);
-    }
-
-    public static void setIntervalMax(String oid, Integer max) {
-	ExpressInterval.setIntervalMax(oid, max);
-    }
-
-    public static void updateIntervalView() {
-	ArrayList<Intervalle> myList = ExpressInterval.getIntervals();
-	for (int i = 0; i < myList.size(); i++) {
-	    KMADEReadWriteAbstractTypeObjectPanel
-		    .getEnumIntervalEditor()
-		    .getIntervalPanel()
-		    .addInterval(myList.get(i).getName(),
-			    myList.get(i).getDescription(),
-			    myList.get(i).getMin(), myList.get(i).getMax(),
-			    myList.get(i).getOid().get());
+	public static void removeAllInterval() {
+		KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().getIntervalPanel().removeAllInterval();
 	}
-    }
+
+	public static void removeInterval(String oid) {
+		ExpressInterval.removeInterval(oid);
+		ReadConcreteObjectAdaptator.updateReadConcreteObject();
+	}
+
+	public static void affRemoveIntervalle(String oid) {
+		ExpressInterval.affRemoveInterval(oid);
+	}
+
+	public static String addInterval() {
+		String interval = ExpressInterval.createInterval();
+		ReadConcreteObjectAdaptator.updateReadConcreteObject();
+		return interval;
+	}
+
+	public static String setIntervalName(String oid, String name) {
+		String n = ExpressInterval.setIntervalName(oid, name);
+		AbstractAttributeAdaptator.updateIntervalList();
+		return n;
+	}
+
+	public static void setIntervalDescription(String oid, String description) {
+		ExpressInterval.setIntervalDescription(oid, description);
+	}
+
+	public static void setIntervalMin(String oid, Integer min) {
+		ExpressInterval.setIntervalMin(oid, min);
+	}
+
+	public static void setIntervalMax(String oid, Integer max) {
+		ExpressInterval.setIntervalMax(oid, max);
+	}
+
+	public static void updateIntervalView() {
+		ArrayList<Intervalle> myList = ExpressInterval.getIntervals();
+		for (int i = 0; i < myList.size(); i++) {
+			KMADEReadWriteAbstractTypeObjectPanel.getEnumIntervalEditor().getIntervalPanel().addInterval(
+					myList.get(i).getName(), myList.get(i).getDescription(), myList.get(i).getMin(),
+					myList.get(i).getMax(), myList.get(i).getOid().get());
+		}
+	}
 }

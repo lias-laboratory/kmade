@@ -28,53 +28,50 @@ import org.jgraph.graph.GraphConstants;
  */
 public class KMADEDefaultEdge extends DefaultEdge {
 
-    private static final long serialVersionUID = 2073946250698010718L;
+	private static final long serialVersionUID = 2073946250698010718L;
 
-    private boolean isExpanded = true;
+	private boolean isExpanded = true;
 
-    private boolean isSimulationExpanded = true;
+	private boolean isSimulationExpanded = true;
 
-    public KMADEDefaultEdge() {
-	super();
-	Map<Object, Object> map = new Hashtable<Object, Object>();
-	GraphConstants.setLineEnd(map, GraphConstants.ARROW_NONE);
-	GraphConstants.setLabelAlongEdge(map, false);
-	GraphConstants.setRouting(map, new KMADEEdgeView.NMDAEdgeRouting());
-	GraphConstants.setBendable(map, false);
-	GraphConstants.setMoveable(map, false);
-	this.getAttributes().applyMap(map);
-    }
+	public KMADEDefaultEdge() {
+		super();
+		Map<Object, Object> map = new Hashtable<Object, Object>();
+		GraphConstants.setLineEnd(map, GraphConstants.ARROW_NONE);
+		GraphConstants.setLabelAlongEdge(map, false);
+		GraphConstants.setRouting(map, new KMADEEdgeView.NMDAEdgeRouting());
+		GraphConstants.setBendable(map, false);
+		GraphConstants.setMoveable(map, false);
+		this.getAttributes().applyMap(map);
+	}
 
-    public KMADEDefaultGraphCell getMotherCell() {
-	return (this.source == null ? null : ((KMADEDefaultPort) this.source)
-		.getTaskOwner());
-    }
+	public KMADEDefaultGraphCell getMotherCell() {
+		return (this.source == null ? null : ((KMADEDefaultPort) this.source).getTaskOwner());
+	}
 
-    public KMADEDefaultGraphCell getSonCell() {
-	return (this.target == null ? null : ((KMADEDefaultPort) this.target)
-		.getTaskOwner());
-    }
+	public KMADEDefaultGraphCell getSonCell() {
+		return (this.target == null ? null : ((KMADEDefaultPort) this.target).getTaskOwner());
+	}
 
-    public boolean isExpanded() {
-	return isExpanded;
-    }
+	public boolean isExpanded() {
+		return isExpanded;
+	}
 
-    public boolean isSimulationExpanded() {
-	return this.isSimulationExpanded;
-    }
+	public boolean isSimulationExpanded() {
+		return this.isSimulationExpanded;
+	}
 
-    public void setExpanded(boolean isExpanded) {
-	this.isExpanded = isExpanded;
-	((KMADEDefaultPort) this.getTarget()).setExpanded(isExpanded);
-    }
+	public void setExpanded(boolean isExpanded) {
+		this.isExpanded = isExpanded;
+		((KMADEDefaultPort) this.getTarget()).setExpanded(isExpanded);
+	}
 
-    public void setSimulationExpanded(boolean pIsSimulationExpanded) {
-	this.isSimulationExpanded = pIsSimulationExpanded;
-	((KMADEDefaultPort) this.getTarget())
-		.setSimulationExpanded(pIsSimulationExpanded);
-    }
+	public void setSimulationExpanded(boolean pIsSimulationExpanded) {
+		this.isSimulationExpanded = pIsSimulationExpanded;
+		((KMADEDefaultPort) this.getTarget()).setSimulationExpanded(pIsSimulationExpanded);
+	}
 
-    public void setPoint(int dx, int dy) {
-	((KMADEDefaultPort) this.getTarget()).setPoint(dx, dy);
-    }
+	public void setPoint(int dx, int dy) {
+		((KMADEDefaultPort) this.getTarget()).setPoint(dx, dy);
+	}
 }

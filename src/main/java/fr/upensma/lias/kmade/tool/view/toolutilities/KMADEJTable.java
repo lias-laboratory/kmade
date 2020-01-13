@@ -27,19 +27,19 @@ import fr.upensma.lias.kmade.tool.KMADEConstant;
  */
 public class KMADEJTable extends JTable {
 
-    private static final long serialVersionUID = 5310655349676770773L;
+	private static final long serialVersionUID = 5310655349676770773L;
 
-    public KMADEJTable() {
-	this(null);
-    }
+	public KMADEJTable() {
+		this(null);
+	}
 
-    public KMADEJTable(TableModel dm) {
-	super(dm);
-	this.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-	this.setSelectionBackground(KMADEConstant.ACTIVE_SELECTION);
+	public KMADEJTable(TableModel dm) {
+		super(dm);
+		this.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+		this.setSelectionBackground(KMADEConstant.ACTIVE_SELECTION);
 
-	this.setSelectionForeground(KMADEConstant.ACTIVE_SELECTION_FONT_COLOR);
-	this.setRowHeight(KMADEConstant.ROW_HEIGHT);
-	this.setRowSelectionAllowed(true);
-    }
+		this.setSelectionForeground(KMADEConstant.ACTIVE_SELECTION_FONT_COLOR);
+		this.setRowHeight(KMADEConstant.ROW_HEIGHT);
+		this.setRowSelectionAllowed(true);
+	}
 }

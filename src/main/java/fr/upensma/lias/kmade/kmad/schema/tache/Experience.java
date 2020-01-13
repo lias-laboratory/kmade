@@ -29,108 +29,105 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
  * INCONNU("UNK") est prevu pour l'absence de definition L'ordre croissant des
  * valeurs est INCONNU-EXPERT-MOYEN-NOVICE
  * 
- * @author Delphine AUTARD 
+ * @author Delphine AUTARD
  * @author Mickaël BARON
  */
 public enum Experience implements Enumerated {
-    INCONNU("UNK"), EXPERT("HIGH"), MOYEN("MIDDLE"), NOVICE("LOW");
+	INCONNU("UNK"), EXPERT("HIGH"), MOYEN("MIDDLE"), NOVICE("LOW");
 
-    private final String value;
+	private final String value;
 
-    /**
-     * Constructeur de la classe Aucune verification n'est faite a la creation !
-     * 
-     * @param s
-     *            chaine de caractere supposee representer l'enumere
-     */
-    private Experience(String s) {
-	value = s;
-    }
-
-    /**
-     * @param s
-     *            String chaine de caractere supposee representer un element de
-     *            l'enumere
-     * @return la valeur de l'enumere si la conversion est ok, null sinon
-     */
-    public static Experience getValue(String s) {
-	for (Experience i : Experience.values()) {
-	    if (s.equalsIgnoreCase(i.value)) {
-		return i;
-	    }
+	/**
+	 * Constructeur de la classe Aucune verification n'est faite a la creation !
+	 * 
+	 * @param s chaine de caractere supposee representer l'enumere
+	 */
+	private Experience(String s) {
+		value = s;
 	}
-	return null;
-    }
 
-    /**
-     * @return tableau de chaines contenant les valeurs localisees
-     */
-    public static String[] getNameLocaleExperience() {
-	String[] myExperienceArray = new String[4];
-	myExperienceArray[0] = ExpressConstant.UNKNOWN_EXPERIENCE_NAME;
-	myExperienceArray[1] = ExpressConstant.HIGH_EXPERIENCE_NAME;
-	myExperienceArray[2] = ExpressConstant.AVERAGE_EXPERIENCE_NAME;
-	myExperienceArray[3] = ExpressConstant.LOW_EXPERIENCE_NAME;
-	return myExperienceArray;
-    }
-
-    public static String getEnumereIntoLocaleExperience(String exp) {
-	if (exp.equals("UNK"))
-	    return ExpressConstant.UNKNOWN_EXPERIENCE_NAME;
-	else if (exp.equals("HIGH"))
-	    return ExpressConstant.HIGH_EXPERIENCE_NAME;
-	else if (exp.equals("MIDDLE"))
-	    return ExpressConstant.AVERAGE_EXPERIENCE_NAME;
-	else if (exp.equals("LOW"))
-	    return ExpressConstant.LOW_EXPERIENCE_NAME;
-	else
-	    return ExpressConstant.UNKNOWN_EXPERIENCE_NAME;
-    }
-
-    public static String getLocaleExperienceIntoEnumerate(String experience) {
-	if (experience.equals(ExpressConstant.UNKNOWN_EXPERIENCE_NAME)) {
-	    return "UNK";
-	} else if (experience.equals(ExpressConstant.HIGH_EXPERIENCE_NAME)) {
-	    return "HIGH";
-	} else if (experience.equals(ExpressConstant.AVERAGE_EXPERIENCE_NAME)) {
-	    return "MIDDLE";
-	} else if (experience.equals(ExpressConstant.LOW_EXPERIENCE_NAME)) {
-	    return "LOW";
+	/**
+	 * @param s String chaine de caractere supposee representer un element de
+	 *          l'enumere
+	 * @return la valeur de l'enumere si la conversion est ok, null sinon
+	 */
+	public static Experience getValue(String s) {
+		for (Experience i : Experience.values()) {
+			if (s.equalsIgnoreCase(i.value)) {
+				return i;
+			}
+		}
+		return null;
 	}
-	return "UNK";
-    }
 
-    public org.w3c.dom.Element toXML2(Document doc) {
-	Element kmadActorExperience = doc.createElement("actor-experience");
-	kmadActorExperience.setTextContent(this.value);
-	return kmadActorExperience;
-    }
-
-    public static Experience getXMLExperienceValue(org.w3c.dom.Element p) {
-	NodeList nodeList = p.getElementsByTagName("actor-experience");
-	if (nodeList != null && nodeList.item(0) != null
-		&& nodeList.item(0).getParentNode() != p) {
-	    nodeList = null;
+	/**
+	 * @return tableau de chaines contenant les valeurs localisees
+	 */
+	public static String[] getNameLocaleExperience() {
+		String[] myExperienceArray = new String[4];
+		myExperienceArray[0] = ExpressConstant.UNKNOWN_EXPERIENCE_NAME;
+		myExperienceArray[1] = ExpressConstant.HIGH_EXPERIENCE_NAME;
+		myExperienceArray[2] = ExpressConstant.AVERAGE_EXPERIENCE_NAME;
+		myExperienceArray[3] = ExpressConstant.LOW_EXPERIENCE_NAME;
+		return myExperienceArray;
 	}
-	if (nodeList.item(0) == null) {
-	    return INCONNU;
+
+	public static String getEnumereIntoLocaleExperience(String exp) {
+		if (exp.equals("UNK"))
+			return ExpressConstant.UNKNOWN_EXPERIENCE_NAME;
+		else if (exp.equals("HIGH"))
+			return ExpressConstant.HIGH_EXPERIENCE_NAME;
+		else if (exp.equals("MIDDLE"))
+			return ExpressConstant.AVERAGE_EXPERIENCE_NAME;
+		else if (exp.equals("LOW"))
+			return ExpressConstant.LOW_EXPERIENCE_NAME;
+		else
+			return ExpressConstant.UNKNOWN_EXPERIENCE_NAME;
 	}
-	String value = (String) nodeList.item(0).getTextContent();
 
-	for (Experience i : Experience.values()) {
-	    if (value.equalsIgnoreCase(i.value)) {
-		return i;
-	    }
+	public static String getLocaleExperienceIntoEnumerate(String experience) {
+		if (experience.equals(ExpressConstant.UNKNOWN_EXPERIENCE_NAME)) {
+			return "UNK";
+		} else if (experience.equals(ExpressConstant.HIGH_EXPERIENCE_NAME)) {
+			return "HIGH";
+		} else if (experience.equals(ExpressConstant.AVERAGE_EXPERIENCE_NAME)) {
+			return "MIDDLE";
+		} else if (experience.equals(ExpressConstant.LOW_EXPERIENCE_NAME)) {
+			return "LOW";
+		}
+		return "UNK";
 	}
-	return INCONNU;
-    }
 
-    public String toSPF() {
-	return "." + value + ".";
-    }
+	public org.w3c.dom.Element toXML2(Document doc) {
+		Element kmadActorExperience = doc.createElement("actor-experience");
+		kmadActorExperience.setTextContent(this.value);
+		return kmadActorExperience;
+	}
 
-    public String getValue() {
-	return value;
-    }
+	public static Experience getXMLExperienceValue(org.w3c.dom.Element p) {
+		NodeList nodeList = p.getElementsByTagName("actor-experience");
+		if (nodeList != null && nodeList.item(0) != null && nodeList.item(0).getParentNode() != p) {
+			nodeList = null;
+		}
+		if (nodeList.item(0) == null) {
+			return INCONNU;
+		}
+		String value = (String) nodeList.item(0).getTextContent();
+
+		for (Experience i : Experience.values()) {
+			if (value.equalsIgnoreCase(i.value)) {
+				return i;
+			}
+		}
+		return INCONNU;
+	}
+
+	public String toSPF() {
+		return "." + value + ".";
+	}
+
+	public String getValue() {
+		return value;
+	}
 
 }

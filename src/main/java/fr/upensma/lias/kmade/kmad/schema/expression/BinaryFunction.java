@@ -26,35 +26,34 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public class BinaryFunction extends BinaryExpression {
 
-    private static final long serialVersionUID = -3402788153213192714L;
+	private static final long serialVersionUID = -3402788153213192714L;
 
-    public BinaryFunction(Object value, GroupExpressExpression left,
-	    NodeExpression right) {
-	super(value, left, right);
-    }
-
-    public ArrayList<Object> getLinearExpression() {
-	ArrayList<Object> myLinearList = new ArrayList<Object>();
-	myLinearList.add(this.getName());
-	myLinearList.add("(");
-	for (Object current : leftNode.getLinearExpression()) {
-	    myLinearList.add(current);
+	public BinaryFunction(Object value, GroupExpressExpression left, NodeExpression right) {
+		super(value, left, right);
 	}
-	myLinearList.add(",");
-	for (Object current : rightNode.getLinearExpression()) {
-	    myLinearList.add(current);
+
+	public ArrayList<Object> getLinearExpression() {
+		ArrayList<Object> myLinearList = new ArrayList<Object>();
+		myLinearList.add(this.getName());
+		myLinearList.add("(");
+		for (Object current : leftNode.getLinearExpression()) {
+			myLinearList.add(current);
+		}
+		myLinearList.add(",");
+		for (Object current : rightNode.getLinearExpression()) {
+			myLinearList.add(current);
+		}
+		myLinearList.add(")");
+		return myLinearList;
 	}
-	myLinearList.add(")");
-	return myLinearList;
-    }
 
-    public void evaluateNode(ObjetConcret ref) throws SemanticException {
-	this.rightNode.evaluateNode(ref);
-	// Plus simple qu'opérateur car seul le membre de droite est consid�r�.
-	this.setObjectValueState(this.getRightNode().getObjectValueState());
-    }
+	public void evaluateNode(ObjetConcret ref) throws SemanticException {
+		this.rightNode.evaluateNode(ref);
+		// Plus simple qu'opérateur car seul le membre de droite est consid�r�.
+		this.setObjectValueState(this.getRightNode().getObjectValueState());
+	}
 
-    public void checkNode() throws SemanticException {
-	this.rightNode.checkNode();
-    }
+	public void checkNode() throws SemanticException {
+		this.rightNode.checkNode();
+	}
 }

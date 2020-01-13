@@ -38,101 +38,97 @@ import fr.upensma.lias.kmade.tool.viewadaptator.ActorSystemAdaptator;
  * @author Mickael BARON
  */
 public class KMADEReadMaterielObjectTable extends JScrollPane {
-    private static final long serialVersionUID = 4688187958637137151L;
+	private static final long serialVersionUID = 4688187958637137151L;
 
-    private myModel modele;
+	private myModel modele;
 
-    private JTable table;
+	private JTable table;
 
-    static class MyImageColumn implements TableCellRenderer {
+	static class MyImageColumn implements TableCellRenderer {
 
-	private ImageIcon refImageIcon;
+		private ImageIcon refImageIcon;
 
-	public Component getTableCellRendererComponent(JTable table,
-		Object value, boolean isSelected, boolean hasFocus, int row,
-		int column) {
-	    JLabel myLabel;
-	    if (value != null && value instanceof Object[]) {
-		Object[] toto = (Object[]) value;
-		refImageIcon = (ImageIcon) toto[1];
-		myLabel = new JLabel(refImageIcon, JLabel.CENTER);
-	    } else {
-		myLabel = new JLabel("");
-	    }
-	    myLabel.setOpaque(true);
-	    if (isSelected) {
-		myLabel.setBackground(table.getSelectionBackground());
-		myLabel.setForeground(table.getSelectionForeground());
-	    } else {
-		myLabel.setBackground(table.getBackground());
-		myLabel.setForeground(table.getForeground());
-	    }
-	    return myLabel;
-	}
-    }
-
-    public KMADEReadMaterielObjectTable() {
-	modele = new myModel();
-	table = new KMADEJTable(modele);
-	table.getSelectionModel().setSelectionMode(
-		ListSelectionModel.SINGLE_SELECTION);
-	this.setViewportView(table);
-	table.addMouseListener(new mouseHelpListener());
-	table.getColumnModel().getColumn(3)
-		.setCellRenderer(new MyImageColumn());
-    }
-
-    public void setData(Object[][] tab) {
-	modele.setData(tab);
-	modele.fireTableDataChanged();
-    }
-
-    static class myModel extends AbstractTableModel {
-	static final long serialVersionUID = 132585986L;
-
-	private Object[][] data = new Object[0][];
-
-	public int getColumnCount() {
-	    return 5;
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			JLabel myLabel;
+			if (value != null && value instanceof Object[]) {
+				Object[] toto = (Object[]) value;
+				refImageIcon = (ImageIcon) toto[1];
+				myLabel = new JLabel(refImageIcon, JLabel.CENTER);
+			} else {
+				myLabel = new JLabel("");
+			}
+			myLabel.setOpaque(true);
+			if (isSelected) {
+				myLabel.setBackground(table.getSelectionBackground());
+				myLabel.setForeground(table.getSelectionForeground());
+			} else {
+				myLabel.setBackground(table.getBackground());
+				myLabel.setForeground(table.getForeground());
+			}
+			return myLabel;
+		}
 	}
 
-	public int getRowCount() {
-	    return (data == null ? 0 : data.length);
+	public KMADEReadMaterielObjectTable() {
+		modele = new myModel();
+		table = new KMADEJTable(modele);
+		table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.setViewportView(table);
+		table.addMouseListener(new mouseHelpListener());
+		table.getColumnModel().getColumn(3).setCellRenderer(new MyImageColumn());
 	}
 
-	public Object getValueAt(int param, int param1) {
-	    return data[param][param1];
+	public void setData(Object[][] tab) {
+		modele.setData(tab);
+		modele.fireTableDataChanged();
 	}
 
-	public String getColumnName(int i) {
-	    switch (i) {
-	    case 0:
-		return KMADEConstant.MACHINE_NAME_TABLE;
-	    case 1:
-		return KMADEConstant.MACHINE_DESCRIPTION_TABLE;
-	    case 2:
-		return KMADEConstant.MACHINE_ISCOMPUTER_TABLE;
-	    case 3:
-		return KMADEConstant.MACHINE_IMAGE_TABLE;
-	    case 4:
-		return KMADEConstant.MACHINE_PARCS_TABLE;
-	    default:
-		return "";
-	    }
+	static class myModel extends AbstractTableModel {
+		static final long serialVersionUID = 132585986L;
+
+		private Object[][] data = new Object[0][];
+
+		public int getColumnCount() {
+			return 5;
+		}
+
+		public int getRowCount() {
+			return (data == null ? 0 : data.length);
+		}
+
+		public Object getValueAt(int param, int param1) {
+			return data[param][param1];
+		}
+
+		public String getColumnName(int i) {
+			switch (i) {
+			case 0:
+				return KMADEConstant.MACHINE_NAME_TABLE;
+			case 1:
+				return KMADEConstant.MACHINE_DESCRIPTION_TABLE;
+			case 2:
+				return KMADEConstant.MACHINE_ISCOMPUTER_TABLE;
+			case 3:
+				return KMADEConstant.MACHINE_IMAGE_TABLE;
+			case 4:
+				return KMADEConstant.MACHINE_PARCS_TABLE;
+			default:
+				return "";
+			}
+		}
+
+		public void setData(Object[][] data) {
+			this.data = data;
+		}
 	}
 
-	public void setData(Object[][] data) {
-	    this.data = data;
+	class mouseHelpListener extends MouseAdapter {
+		public void mouseClicked(MouseEvent mouseEvent) {
+			if (mouseEvent.getClickCount() == 2) {
+				String select = (String) table.getModel().getValueAt(table.getSelectedRow(), 5);
+				ActorSystemAdaptator.addNewActorSystem(new Oid(select));
+			}
+		}
 	}
-    }
-
-    class mouseHelpListener extends MouseAdapter {
-	public void mouseClicked(MouseEvent mouseEvent) {
-	    if (mouseEvent.getClickCount() == 2) {
-		String select = (String) table.getModel().getValueAt(
-			table.getSelectedRow(), 5);
-		ActorSystemAdaptator.addNewActorSystem(new Oid(select));
-	    }
-	}
-    }
 }

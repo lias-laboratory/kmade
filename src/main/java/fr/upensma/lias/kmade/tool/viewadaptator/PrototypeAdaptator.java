@@ -21,16 +21,13 @@ package fr.upensma.lias.kmade.tool.viewadaptator;
  * @author Mickael BARON
  */
 public class PrototypeAdaptator {
-   
-    public static void openPrototypeDialog(){
-	//TODO utilisatition d'une fonction de la simulation
-	//GraphicEditorAdaptator.disabledMainFrameBeforeSimulation();
-//	GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().enableSimulationDialog();
-	GraphicEditorAdaptator.getMainFrame().getSimulationDialog().enableSimulationDialog();
-	GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().openPrototypeDialog();
-    }
-    
-    public static void closePrototypeDialog(){
-	
-    }
+
+	public static void openPrototypeDialog() {
+		GraphicEditorAdaptator.getMainFrame().getSimulationDialog().enableSimulationDialog();
+		GraphicEditorAdaptator.getMainFrame().getPrototypeDialog().openPrototypeDialog();
+	}
+
+	public static void closePrototypeDialog() {
+
+	}
 }

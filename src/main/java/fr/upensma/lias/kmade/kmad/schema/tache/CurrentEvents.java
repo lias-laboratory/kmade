@@ -28,65 +28,64 @@ import java.util.HashMap;
  */
 public class CurrentEvents {
 
-    private HashMap<String, CurrentEvent> events;
+	private HashMap<String, CurrentEvent> events;
 
-    public CurrentEvents() {
-	events = new HashMap<String, CurrentEvent>();
-    }
-
-    public CurrentEvent[] getAllCurrentEvents() {
-	CurrentEvent[] toto = new CurrentEvent[events.values().size()];
-	Collection<CurrentEvent> teoto = events.values();
-	toto = teoto.toArray(toto);
-	ArrayList<CurrentEvent> temp = new ArrayList<CurrentEvent>(
-		events.values());
-	for (int i = 0; i < events.values().size(); i++) {
-	    toto[i] = temp.get(i);
-	}
-	return toto;
-    }
-
-    public void addEvent(Event p, Task t) {
-	if (p == null) {
-	    return;
-	}
-	events.put(p.getOid().get(), new CurrentEvent(t, p));
-    }
-
-    public boolean extractEvent(Event p) {
-	if (p == null) {
-	    return false;
-	}
-	events.remove(p.getOid().get());
-	return true;
-    }
-
-    public boolean isExistingEvent(Event p) {
-	if (p == null) {
-	    return false;
-	}
-	return (events.get(p.getOid().get()) != null);
-    }
-
-    public void clearAllEvents() {
-	events.clear();
-    }
-
-    public class CurrentEvent {
-	private Task firingTask;
-	private Event firableEvent;
-
-	public CurrentEvent(Task t, Event e) {
-	    this.firableEvent = e;
-	    this.firingTask = t;
+	public CurrentEvents() {
+		events = new HashMap<String, CurrentEvent>();
 	}
 
-	public Event getFirableEvent() {
-	    return firableEvent;
+	public CurrentEvent[] getAllCurrentEvents() {
+		CurrentEvent[] toto = new CurrentEvent[events.values().size()];
+		Collection<CurrentEvent> teoto = events.values();
+		toto = teoto.toArray(toto);
+		ArrayList<CurrentEvent> temp = new ArrayList<CurrentEvent>(events.values());
+		for (int i = 0; i < events.values().size(); i++) {
+			toto[i] = temp.get(i);
+		}
+		return toto;
 	}
 
-	public Task getFiringTask() {
-	    return firingTask;
+	public void addEvent(Event p, Task t) {
+		if (p == null) {
+			return;
+		}
+		events.put(p.getOid().get(), new CurrentEvent(t, p));
 	}
-    }
+
+	public boolean extractEvent(Event p) {
+		if (p == null) {
+			return false;
+		}
+		events.remove(p.getOid().get());
+		return true;
+	}
+
+	public boolean isExistingEvent(Event p) {
+		if (p == null) {
+			return false;
+		}
+		return (events.get(p.getOid().get()) != null);
+	}
+
+	public void clearAllEvents() {
+		events.clear();
+	}
+
+	public class CurrentEvent {
+		private Task firingTask;
+		private Event firableEvent;
+
+		public CurrentEvent(Task t, Event e) {
+			this.firableEvent = e;
+			this.firingTask = t;
+		}
+
+		public Event getFirableEvent() {
+			return firableEvent;
+		}
+
+		public Task getFiringTask() {
+			return firingTask;
+		}
+	}
 }

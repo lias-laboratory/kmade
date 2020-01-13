@@ -26,33 +26,33 @@ import fr.upensma.lias.kmade.kmad.schema.metaobjet.ObjetConcret;
  */
 public interface ConcreteObjectType {
 
-    /**
-     * Vérifie si le groupe a un type set
-     * 
-     * @return
-     */
-    boolean isGroupSetType();
+	/**
+	 * Vérifie si le groupe a un type set
+	 * 
+	 * @return
+	 */
+	boolean isGroupSetType();
 
-    boolean isGroupArrayType();
+	boolean isGroupArrayType();
 
-    /**
-     * Retourne null si il n'y en a pas ou s'il s'agit d'un ensemble avec plus
-     * d'un objet concret
-     * 
-     * @return
-     */
-    ObjetConcret getConcreteObject();
+	/**
+	 * Retourne null si il n'y en a pas ou s'il s'agit d'un ensemble avec plus d'un
+	 * objet concret
+	 * 
+	 * @return
+	 */
+	ObjetConcret getConcreteObject();
 
-    /**
-     * Récupère la liste complète des objets concrets.
-     * 
-     * @return
-     */
-    ArrayList<ObjetConcret> getConcreteObjects();
+	/**
+	 * Récupère la liste complète des objets concrets.
+	 * 
+	 * @return
+	 */
+	ArrayList<ObjetConcret> getConcreteObjects();
 
-    void setUserConcreteObject(ObjetConcret p);
+	void setUserConcreteObject(ObjetConcret p);
 
-    ObjetConcret getUserConcreteObject();
+	ObjetConcret getUserConcreteObject();
 
-    boolean isEmptyUserConcreteObject();
+	boolean isEmptyUserConcreteObject();
 }

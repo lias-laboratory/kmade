@@ -24,15 +24,15 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
  */
 public class BooleanConstant extends ConstantExpression {
 
-    private static final long serialVersionUID = 4013413779335559967L;
+	private static final long serialVersionUID = 4013413779335559967L;
 
-    public BooleanConstant() {
-	this(true);
-    }
+	public BooleanConstant() {
+		this(true);
+	}
 
-    public BooleanConstant(Object myValue) {
-	super(myValue);
-	this.setStateToValue();
-	this.name = ExpressConstant.BOOLEAN_CONSTANT_EXPRESSION;
-    }
+	public BooleanConstant(Object myValue) {
+		super(myValue);
+		this.setStateToValue();
+		this.name = ExpressConstant.BOOLEAN_CONSTANT_EXPRESSION;
+	}
 }

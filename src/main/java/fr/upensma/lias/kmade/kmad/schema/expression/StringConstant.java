@@ -22,15 +22,15 @@ package fr.upensma.lias.kmade.kmad.schema.expression;
  */
 public class StringConstant extends ConstantExpression {
 
-    private static final long serialVersionUID = 677643852990268033L;
+	private static final long serialVersionUID = 677643852990268033L;
 
-    public StringConstant(Object myValue) {
-	super(myValue);
-	this.setStateToValue();
-	this.name = "SCst";
-    }
+	public StringConstant(Object myValue) {
+		super(myValue);
+		this.setStateToValue();
+		this.name = "SCst";
+	}
 
-    public String getName() {
-	return "'" + this.getNodeValue().toString() + "'";
-    }
+	public String getName() {
+		return "'" + this.getNodeValue().toString() + "'";
+	}
 }

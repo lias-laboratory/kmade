@@ -28,84 +28,68 @@ import fr.upensma.lias.kmade.tool.coreadaptator.ExpressProjectManager;
  */
 public final class ProjectManagerAdaptator {
 
-    private static String oidProject;
+	private static String oidProject;
 
-    private static boolean newState;
+	private static boolean newState;
 
-    public static void setOidProject(String oid) {
-	ProjectManagerAdaptator.oidProject = oid;
-    }
-
-    public static void createNewProject() {
-	GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
-	ProjectManagerAdaptator.oidProject = ExpressProjectManager
-		.createProjectManager();
-	GraphicEditorAdaptator.getMainFrame().getProjectDialog()
-		.showToCreateProjectData();
-	newState = true;
-    }
-
-    public static void setProject() {
-	// R�cup�re le projet.
-	ProjectManagerAdaptator.oidProject = ExpressProjectManager
-		.getProjectManager();
-	String[] generalInfo = ExpressProjectManager
-		.getAllGeneralInformation(new Oid(oidProject));
-	ArrayList<Object[]> interview = ExpressProjectManager
-		.getAllInterviewIndex(new Oid(oidProject));
-	GraphicEditorAdaptator.getMainFrame().getProjectDialog()
-		.showToModifyProjectData(generalInfo, interview);
-	GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
-	TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
-	newState = false;
-    }
-
-    public static void confirmModification(String[] generalInformation,
-	    ArrayList<Object[]> interviewIndex) {
-	if (newState) {
-	} else {
-	    ExpressProjectManager
-		    .removeAllGeneralInformationAndInterviewIndexEntity(new Oid(
-			    oidProject));
+	public static void setOidProject(String oid) {
+		ProjectManagerAdaptator.oidProject = oid;
 	}
 
-	ExpressProjectManager.createGeneralInformation(new Oid(oidProject),
-		generalInformation[0], generalInformation[1],
-		generalInformation[2], generalInformation[3],
-		generalInformation[4], generalInformation[5]);
-
-	for (int i = 0; i < interviewIndex.size(); i++) {
-	    ExpressProjectManager.createInterviewIndex(new Oid(oidProject),
-		    (String) interviewIndex.get(i)[0],
-		    (String) interviewIndex.get(i)[1],
-		    (String) interviewIndex.get(i)[2],
-		    (String) interviewIndex.get(i)[3],
-		    (String) interviewIndex.get(i)[4],
-		    (String) interviewIndex.get(i)[5],
-		    (String) interviewIndex.get(i)[6],
-		    (String) interviewIndex.get(i)[7]);
+	public static void createNewProject() {
+		GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
+		ProjectManagerAdaptator.oidProject = ExpressProjectManager.createProjectManager();
+		GraphicEditorAdaptator.getMainFrame().getProjectDialog().showToCreateProjectData();
+		newState = true;
 	}
 
-	if (newState)
-	    KMADeAdaptator.noToExistProject();
-	GraphicEditorAdaptator.enabledMainFrameAfterEdition();
-	TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
-	GraphicEditorAdaptator.getMainFrame().getProjectDialog()
-		.closeProjectDialog();
-    }
-
-    /**
-     * 
-     */
-    public static void cancelModification() {
-	if (newState) {
-	    InterfaceExpressJava.clearCurrentProject();
-	} else {
-	    // Ne rien faire normalement.
+	public static void setProject() {
+		// R�cup�re le projet.
+		ProjectManagerAdaptator.oidProject = ExpressProjectManager.getProjectManager();
+		String[] generalInfo = ExpressProjectManager.getAllGeneralInformation(new Oid(oidProject));
+		ArrayList<Object[]> interview = ExpressProjectManager.getAllInterviewIndex(new Oid(oidProject));
+		GraphicEditorAdaptator.getMainFrame().getProjectDialog().showToModifyProjectData(generalInfo, interview);
+		GraphicEditorAdaptator.disabledMainFrameBeforeEdition();
+		TaskPropertiesEnhancedEditorAdaptator.disabledMainFrameBeforeEdition();
+		newState = false;
 	}
-	GraphicEditorAdaptator.enabledMainFrameAfterEdition();
-	TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
-	GraphicEditorAdaptator.getMainFrame().getProjectDialog()
-		.closeProjectDialog();
-    }
+
+	public static void confirmModification(String[] generalInformation, ArrayList<Object[]> interviewIndex) {
+		if (newState) {
+		} else {
+			ExpressProjectManager.removeAllGeneralInformationAndInterviewIndexEntity(new Oid(oidProject));
+		}
+
+		ExpressProjectManager.createGeneralInformation(new Oid(oidProject), generalInformation[0],
+				generalInformation[1], generalInformation[2], generalInformation[3], generalInformation[4],
+				generalInformation[5]);
+
+		for (int i = 0; i < interviewIndex.size(); i++) {
+			ExpressProjectManager.createInterviewIndex(new Oid(oidProject), (String) interviewIndex.get(i)[0],
+					(String) interviewIndex.get(i)[1], (String) interviewIndex.get(i)[2],
+					(String) interviewIndex.get(i)[3], (String) interviewIndex.get(i)[4],
+					(String) interviewIndex.get(i)[5], (String) interviewIndex.get(i)[6],
+					(String) interviewIndex.get(i)[7]);
+		}
+
+		if (newState)
+			KMADeAdaptator.noToExistProject();
+		GraphicEditorAdaptator.enabledMainFrameAfterEdition();
+		TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
+		GraphicEditorAdaptator.getMainFrame().getProjectDialog().closeProjectDialog();
+	}
+
+	/**
+	 * 
+	 */
+	public static void cancelModification() {
+		if (newState) {
+			InterfaceExpressJava.clearCurrentProject();
+		} else {
+			// Ne rien faire normalement.
+		}
+		GraphicEditorAdaptator.enabledMainFrameAfterEdition();
+		TaskPropertiesEnhancedEditorAdaptator.enabledMainFrameAfterEdition();
+		GraphicEditorAdaptator.getMainFrame().getProjectDialog().closeProjectDialog();
+	}
 }

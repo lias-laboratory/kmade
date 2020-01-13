@@ -29,37 +29,32 @@ import fr.upensma.lias.kmade.tool.view.worldobject.editorview.defaultgraphcells.
  */
 public class SetCell extends GroupDefaultGraphCell {
 
-    private static final long serialVersionUID = 2028720001387402470L;
+	private static final long serialVersionUID = 2028720001387402470L;
 
-    @SuppressWarnings("unused")
-    private EnsembleAg set;
+	@SuppressWarnings("unused")
+	private EnsembleAg set;
 
-    /**
-     * First constructor for the cell (the point is not created yet)
-     * 
-     * @param set
-     *            represented by the cell
-     * @param point
-     *            x in the graph
-     * @param point
-     *            y in the graph
-     */
-    public SetCell(Groupe object, int x, int y) {
-	super(object, x, y);
-	this.set = (EnsembleAg) object.getEnsemble();
-    }
+	/**
+	 * First constructor for the cell (the point is not created yet)
+	 * 
+	 * @param set   represented by the cell
+	 * @param point x in the graph
+	 * @param point y in the graph
+	 */
+	public SetCell(Groupe object, int x, int y) {
+		super(object, x, y);
+		this.set = (EnsembleAg) object.getEnsemble();
+	}
 
-    /**
-     * Second constructor for the cell (the point is already yet)
-     * 
-     * @param set
-     *            represented by the cell
-     * @param point
-     *            in the graph
-     */
-    public SetCell(Groupe object, Point p) {
-	super(object, p);
-	this.set = (EnsembleAg) object.getEnsemble();
-    }
+	/**
+	 * Second constructor for the cell (the point is already yet)
+	 * 
+	 * @param set   represented by the cell
+	 * @param point in the graph
+	 */
+	public SetCell(Groupe object, Point p) {
+		super(object, p);
+		this.set = (EnsembleAg) object.getEnsemble();
+	}
 
 }

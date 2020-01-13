@@ -24,29 +24,28 @@ import fr.upensma.lias.kmade.kmad.ExpressConstant;
  */
 public class RelationalOperator extends ComparisonOperator {
 
-    private static final long serialVersionUID = -8878786394525528235L;
+	private static final long serialVersionUID = -8878786394525528235L;
 
-    public RelationalOperator(NodeExpression left) {
-	super(false, left);
-    }
-
-    public void checkNode() throws SemanticException {
-	super.checkNode();
-
-	if (getLeftNode().isString() && getRightNode().isString()) {
-	    this.setNodeValue(true);
-	    this.setStateToUnknown();
-	    return;
+	public RelationalOperator(NodeExpression left) {
+		super(false, left);
 	}
 
-	if (getLeftNode().isNumber() && getRightNode().isNumber()) {
-	    this.setNodeValue(true);
-	    this.setStateToUnknown();
-	    return;
-	}
+	public void checkNode() throws SemanticException {
+		super.checkNode();
 
-	this.setStateToError();
-	throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR
-		+ " : " + this.name);
-    }
+		if (getLeftNode().isString() && getRightNode().isString()) {
+			this.setNodeValue(true);
+			this.setStateToUnknown();
+			return;
+		}
+
+		if (getLeftNode().isNumber() && getRightNode().isNumber()) {
+			this.setNodeValue(true);
+			this.setStateToUnknown();
+			return;
+		}
+
+		this.setStateToError();
+		throw new SemanticException(ExpressConstant.COMPARISON_OPERATOR_ERROR + " : " + this.name);
+	}
 }

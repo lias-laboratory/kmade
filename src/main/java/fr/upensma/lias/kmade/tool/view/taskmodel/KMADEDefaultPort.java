@@ -26,99 +26,95 @@ import org.jgraph.graph.DefaultPort;
  */
 public class KMADEDefaultPort extends DefaultPort {
 
-    private static final long serialVersionUID = 188384865875540612L;
+	private static final long serialVersionUID = 188384865875540612L;
 
-    private boolean isExpanded = true;
+	private boolean isExpanded = true;
 
-    private boolean isSimulationExpanded = true;
+	private boolean isSimulationExpanded = true;
 
-    // Mother port du bas et Son port du haut.
-    private String identification;
+	// Mother port du bas et Son port du haut.
+	private String identification;
 
-    public KMADEDefaultPort(String p) {
-	identification = p;
-    }
-
-    public boolean isMotherPort() {
-	return identification.equals("mother");
-    }
-
-    public boolean isSonPort() {
-	return identification.equals("son");
-    }
-
-    public KMADEDefaultGraphCell getTaskOwner() {
-	return (KMADEDefaultGraphCell) this.getParent();
-    }
-
-    /**
-     * @return Returns the isExpanded.
-     */
-    public boolean isExpanded() {
-	return isExpanded;
-    }
-
-    public boolean isSimulationExpanded() {
-	return isSimulationExpanded;
-    }
-
-    /**
-     * @param isExpanded
-     *            The isExpanded to set.
-     */
-    public void setSimulationExpanded(boolean pIsSimulationExpanded) {
-	this.isSimulationExpanded = pIsSimulationExpanded;
-
-	if (isMotherPort()) {
-	    Iterator<?> i = this.edges();
-	    while (i.hasNext()) {
-		Object myObject = i.next();
-		if (myObject instanceof KMADEDefaultEdge) {
-		    ((KMADEDefaultEdge) myObject)
-			    .setSimulationExpanded(pIsSimulationExpanded);
-		}
-	    }
-	} else {
-	    ((KMADEDefaultGraphCell) this.getParent())
-		    .setSimulationExpanded(pIsSimulationExpanded);
+	public KMADEDefaultPort(String p) {
+		identification = p;
 	}
-    }
 
-    /**
-     * @param isExpanded
-     *            The isExpanded to set.
-     */
-    public void setExpanded(boolean isExpanded) {
-	this.isExpanded = isExpanded;
-
-	if (isMotherPort()) {
-	    Iterator<?> i = this.edges();
-	    while (i.hasNext()) {
-		Object myObject = i.next();
-		if (myObject instanceof KMADEDefaultEdge) {
-		    ((KMADEDefaultEdge) myObject).setExpanded(isExpanded);
-		}
-	    }
-	} else {
-	    ((KMADEDefaultGraphCell) this.getParent()).setExpanded(isExpanded);
+	public boolean isMotherPort() {
+		return identification.equals("mother");
 	}
-    }
 
-    /**
-     * @param dx
-     * @param dy
-     */
-    public void setPoint(int dx, int dy) {
-	if (isMotherPort()) {
-	    Iterator<?> i = this.edges();
-	    while (i.hasNext()) {
-		Object myObject = i.next();
-		if (myObject instanceof KMADEDefaultEdge) {
-		    ((KMADEDefaultEdge) myObject).setPoint(dx, dy);
-		}
-	    }
-	} else {
-	    ((KMADEDefaultGraphCell) this.getParent()).setDeltaPoint(dx, dy);
+	public boolean isSonPort() {
+		return identification.equals("son");
 	}
-    }
+
+	public KMADEDefaultGraphCell getTaskOwner() {
+		return (KMADEDefaultGraphCell) this.getParent();
+	}
+
+	/**
+	 * @return Returns the isExpanded.
+	 */
+	public boolean isExpanded() {
+		return isExpanded;
+	}
+
+	public boolean isSimulationExpanded() {
+		return isSimulationExpanded;
+	}
+
+	/**
+	 * @param isExpanded The isExpanded to set.
+	 */
+	public void setSimulationExpanded(boolean pIsSimulationExpanded) {
+		this.isSimulationExpanded = pIsSimulationExpanded;
+
+		if (isMotherPort()) {
+			Iterator<?> i = this.edges();
+			while (i.hasNext()) {
+				Object myObject = i.next();
+				if (myObject instanceof KMADEDefaultEdge) {
+					((KMADEDefaultEdge) myObject).setSimulationExpanded(pIsSimulationExpanded);
+				}
+			}
+		} else {
+			((KMADEDefaultGraphCell) this.getParent()).setSimulationExpanded(pIsSimulationExpanded);
+		}
+	}
+
+	/**
+	 * @param isExpanded The isExpanded to set.
+	 */
+	public void setExpanded(boolean isExpanded) {
+		this.isExpanded = isExpanded;
+
+		if (isMotherPort()) {
+			Iterator<?> i = this.edges();
+			while (i.hasNext()) {
+				Object myObject = i.next();
+				if (myObject instanceof KMADEDefaultEdge) {
+					((KMADEDefaultEdge) myObject).setExpanded(isExpanded);
+				}
+			}
+		} else {
+			((KMADEDefaultGraphCell) this.getParent()).setExpanded(isExpanded);
+		}
+	}
+
+	/**
+	 * @param dx
+	 * @param dy
+	 */
+	public void setPoint(int dx, int dy) {
+		if (isMotherPort()) {
+			Iterator<?> i = this.edges();
+			while (i.hasNext()) {
+				Object myObject = i.next();
+				if (myObject instanceof KMADEDefaultEdge) {
+					((KMADEDefaultEdge) myObject).setPoint(dx, dy);
+				}
+			}
+		} else {
+			((KMADEDefaultGraphCell) this.getParent()).setDeltaPoint(dx, dy);
+		}
+	}
 }

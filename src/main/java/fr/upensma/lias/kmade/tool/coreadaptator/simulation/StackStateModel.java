@@ -25,26 +25,24 @@ import fr.upensma.lias.kmade.kmad.schema.Oid;
  * @author Mickael BARON
  */
 public class StackStateModel {
-    private TreeMap<Oid, StackState> myStateSimulationCollection = new TreeMap<Oid, StackState>();
+	private TreeMap<Oid, StackState> myStateSimulationCollection = new TreeMap<Oid, StackState>();
 
-    private TokenSimulation refTokenSimulation;
+	private TokenSimulation refTokenSimulation;
 
-    public StackStateModel(TreeMap<Oid, StackState> pStateSimulationCollection,
-	    TokenSimulation pts) {
-	myStateSimulationCollection = pStateSimulationCollection;
-	this.refTokenSimulation = pts;
-    }
+	public StackStateModel(TreeMap<Oid, StackState> pStateSimulationCollection, TokenSimulation pts) {
+		myStateSimulationCollection = pStateSimulationCollection;
+		this.refTokenSimulation = pts;
+	}
 
-    public void setStateSimulationList(
-	    TreeMap<Oid, StackState> pStateSimulationCollection) {
-	myStateSimulationCollection = pStateSimulationCollection;
-    }
+	public void setStateSimulationList(TreeMap<Oid, StackState> pStateSimulationCollection) {
+		myStateSimulationCollection = pStateSimulationCollection;
+	}
 
-    public TreeMap<Oid, StackState> getStateSimulationList() {
-	return myStateSimulationCollection;
-    }
+	public TreeMap<Oid, StackState> getStateSimulationList() {
+		return myStateSimulationCollection;
+	}
 
-    public TokenSimulation getTokenSimulation() {
-	return refTokenSimulation;
-    }
+	public TokenSimulation getTokenSimulation() {
+		return refTokenSimulation;
+	}
 }

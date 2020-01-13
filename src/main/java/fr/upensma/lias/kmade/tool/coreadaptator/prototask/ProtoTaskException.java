@@ -22,8 +22,8 @@ package fr.upensma.lias.kmade.tool.coreadaptator.prototask;
  */
 public class ProtoTaskException extends Exception {
 
-    private static final long serialVersionUID = -1847263384985658321L;
+	private static final long serialVersionUID = -1847263384985658321L;
 
-    public ProtoTaskException() {
-    }
+	public ProtoTaskException() {
+	}
 }
