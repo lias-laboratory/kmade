@@ -130,7 +130,7 @@
 	</build>
 	<ciManagement>
 		<system>Jenkins</system>
-		<url>https://ci-lias.ensma.fr/job/KMADe/</url>
+		<url>https://ci-lias.ensma.fr/job/kmade/</url>
 	</ciManagement>
 	<developers>
 		<developer>
