@@ -15,7 +15,7 @@
 	<files>
 		<file>
 			<source>${project.build.directory}/${project.artifactId}-${project.version}-jar.jar</source>
-			<destName>kmade.jar</destName>
+			<destName>kmade-app.jar</destName>
 		</file>
 		<file>
 			<source>${project.basedir}/src/main/license/lgpl.txt</source>

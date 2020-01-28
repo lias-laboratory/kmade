@@ -14,11 +14,6 @@ pipeline {
                 sh 'mvn -B -s ${MAVEN_SETTINGS} -Dmaven.test.skip=true clean package'
             }
         }
-        stage('Deploy') {
-            steps {
-                sh 'mvn -B -s ${MAVEN_SETTINGS} -Dmaven.test.skip=true clean deploy'
-            }
-        }
         stage('Test') {
         	steps {
         		sh 'mvn -B -s ${MAVEN_SETTINGS} clean test'
@@ -28,6 +23,18 @@ pipeline {
         			junit 'target/surefire-reports/*.xml'
         		}
         	}
+        }
+        stage('Deploy') {
+            steps {
+                sh 'mvn -B -s ${MAVEN_SETTINGS} -Dmaven.test.skip=true clean package'
+            } 
+            post {
+            	success {
+                	dir('target') {
+                    	sh 'cp *.zip /var/forge_repository'
+                	}
+            	}
+            }
         }
         stage('SonarQube analysis') {
             steps {
