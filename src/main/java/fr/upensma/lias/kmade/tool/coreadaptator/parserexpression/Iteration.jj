@@ -1,0 +1,125 @@
+/*********************************************************************************
+* This file is part of KMADe Project.
+* Copyright (C) 2006  INRIA - MErLIn Project and LISI - ENSMA
+* 
+* KMADe is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* KMADe is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+* 
+* You should have received a copy of the GNU Lesser General Public License
+* along with KMADe.  If not, see <http://www.gnu.org/licenses/>.
+**********************************************************************************/
+
+options {
+	LOOKAHEAD=2;
+  	JAVA_UNICODE_ESCAPE = true;
+  	ERROR_REPORTING = false;
+  	STATIC = false;
+	JDK_VERSION = "1.5";
+}
+
+PARSER_BEGIN(Iteration)
+
+package kmade.kmade.adaptatorFC.parserExpression;
+
+import kmade.kmade.KMADEConstant;
+import kmade.nmda.schema.expression.NodeExpression;
+import kmade.nmda.schema.expression.NotWhileUnaryFunction;
+import kmade.nmda.schema.expression.NumberVariant;
+import kmade.nmda.schema.expression.WhileUnaryFunction;
+import kmade.nmda.schema.metaobjet.NumberValue;
+
+@SuppressWarnings({"all"})
+public class Iteration {
+}
+
+PARSER_END(Iteration)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+}
+
+
+TOKEN :
+{
+	< WHILE : "while" >
+|	< NOTWHILE : "notWhile" >
+}
+
+TOKEN:
+{
+	< CROO : "[" >
+|	< CROF : "]" >
+}
+
+TOKEN:
+{
+< #DIGIT : ["0"-"9"] >	
+|	< #LETTER : ["A"-"Z","a"-"z"," ","�","�", "-", "_", "�", "�", "@", "$","*","�","�","�","%", "~", "#","{","}","|","`","�"] >
+|	< NUMBER : ("-")* ((<DIGIT>)+ | (<DIGIT>)+ "."(<DIGIT>)*) >
+|   < STRING_LITERAL : "(" ( < LETTER > 
+	| < DIGIT > 
+	| "'" 
+	| "$" 
+	| "?"
+	| ">"
+	| "<"
+	| ","
+	| "!"
+	| "="
+	| "("
+	| ")"
+	| " " )+ ")" > 
+}
+
+NodeExpression expression() : { 
+	NodeExpression node;
+} {
+ 	node = iterationExpression() <EOF> { return node; }
+|   <EOF> { throw new ParseException(KMADEConstant.NO_EXPRESSION_MESSAGE); }
+}
+
+NodeExpression iterationExpression() : {
+	NodeExpression node;
+} {
+	node = iterationNatural() { return node; }
+|   node = iterationFunction() { return node; }
+}
+
+NodeExpression iterationNatural() : {
+	Token myToken;
+} {
+	< CROO > myToken = < NUMBER > < CROF > {
+		return new NumberVariant(new NumberValue(myToken.image));
+	}
+}
+
+NodeExpression iterationFunction() : {
+	Token myString;
+} {
+	< WHILE > myString = < STRING_LITERAL > {
+		String momo = myString.image.substring(1,myString.image.length() - 1);
+		java.io.StringReader sr = new java.io.StringReader(momo);
+	    java.io.Reader r = new java.io.BufferedReader(sr);
+    	Precondition parser = new Precondition(r);
+    	NodeExpression toto = parser.expression();
+		return new WhileUnaryFunction(toto);
+	}
+|	< NOTWHILE > myString = < STRING_LITERAL > {
+		String momo = myString.image.substring(1,myString.image.length() - 1);
+		java.io.StringReader sr = new java.io.StringReader(momo);
+	    java.io.Reader r = new java.io.BufferedReader(sr);
+    	Precondition parser = new Precondition(r);
+    	NodeExpression toto = parser.expression();
+		return new NotWhileUnaryFunction(toto);
+	}	
+}

@@ -1,0 +1,1 @@
+Main-Class: fr.upensma.lias.kmade.KMADeMain

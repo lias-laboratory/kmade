@@ -1,0 +1,8 @@
+<html>
+    <head>
+        <title>Template for User Cards</title>
+    </head>
+    <body>
+	Nom de la tache : ${TASKNAME}
+    </body>
+</html>
