@@ -161,7 +161,7 @@ Part of the K-MAD project, it leads on the K-MAD formalism, and allows users to 
 
 * Vincent Lucquiaud, Dominique Scapin and Francis Jambon, Outils de modélisation des tâches utilisateurs : exigences du point de vue utilisation, 14ème Conférence Francophone sur l'Interaction Homme-Machine (IHM'2002), edited by ACM Press, Poitiers, 27-29 novembre, 2002, pp. 243-246 [link](https://www.lias-lab.fr/publications/7630/2002-IHM-Lucquiaud.pdf)
 
-## Thesis
+### Thesis
 
 * Sybille Caffiau, Approche dirigée par les modèles pour la conception et la validation des applications interactives : une démarche basée sur la modelisation des taches, Thesis, Ecole Nationale Superieure de Mecanique et d'Aerotechnique, 2009 [link](https://tel.archives-ouvertes.fr/tel-00461497/file/theseCAFFIAUSybille.pdf)
 
