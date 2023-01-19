@@ -173,15 +173,15 @@ Details the license agreement of KMADe: [LICENCE](LICENCE)
 
 ## Historic Contributors
 
+* [Mickael BARON(core developer)](https://www.lias-lab.fr/members/mickaelbaron)
+* [Vincent LUCQUIAUD(core developer)](https://www.lias-lab.fr/members/vincentlucquiaud)
 * Delphine AUTARD
-* [Mickael BARON](https://www.lias-lab.fr/members/mickaelbaron)
 * [Sybille CAFFIAU](https://www.lias-lab.fr/members/sybillecaffiau)
 * [Allan FOUSSE](https://www.lias-lab.fr/members/sybillecaffiau)
 * [Patrick GIRARD](https://www.lias-lab.fr/members/patrickgirard)
 * [Laurent GUITTET](https://www.lias-lab.fr/members/laurentguittet)
 * [Francis JAMBON](https://www.lias-lab.fr/members/francisjambon)
 * [Thomas LACHAUME](https://www.lias-lab.fr/members/thomaslachaume)
-* [Vincent LUCQUIAUD](https://www.lias-lab.fr/members/vincentlucquiaud)
 * Dominique SCAPIN
 
 ## Code analysis
