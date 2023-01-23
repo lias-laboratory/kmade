@@ -171,7 +171,7 @@ Part of the K-MAD project, it leads on the K-MAD formalism, and allows users to 
 
 Details the license agreement of KMADe: [LICENCE](LICENCE)
 
-## Historic Contributors
+## Historic Contributors (core developers first followed by alphabetical order)
 
 * [Mickael BARON(core developer)](https://www.lias-lab.fr/members/mickaelbaron)
 * [Vincent LUCQUIAUD(core developer)](https://www.lias-lab.fr/members/vincentlucquiaud)
