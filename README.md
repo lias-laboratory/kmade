@@ -169,7 +169,7 @@ Part of the K-MAD project, it leads on the K-MAD formalism, and allows users to 
 
 ## Software licence agreement
 
-Details the license agreement of KMADe: [LICENCE](LICENCE)
+Details the license agreement of KMADe: [LICENSE](LICENSE)
 
 ## Historic Contributors (core developers first followed by alphabetical order)
 
