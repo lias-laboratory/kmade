@@ -167,7 +167,7 @@ Part of the K-MAD project, it leads on the K-MAD formalism, and allows users to 
 
 * Vincent Lucquiaud, Sémantique et outil pour la modélisation des tâches utilisateur : N-MDA, Thesis, Université de Poitiers / ENSMA / INRIA, Décembre, 2005
 
-## Software licence agreement
+## Software license agreement
 
 Details the license agreement of KMADe: [LICENSE](LICENSE)
 
